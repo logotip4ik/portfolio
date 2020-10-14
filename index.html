@@ -51,14 +51,10 @@
       </div>
       <main>
         <div id="headline">
-          <h1 ref="logoName">Bogdan Kostyuk</h1>
-          <h4 ref="logoDesc">Full Stack Developer</h4>
-          <span
-            ><i
-              ref="logoButton"
-              @click="scroll('#projects')"
-              class="fas fa-chevron-down"
-            ></i
+          <h1 class="logoAnime">Bogdan Kostyuk</h1>
+          <h4 class="logoAnime">Full Stack Developer</h4>
+          <span class="logoAnime"
+            ><i @click="scroll('#projects')" class="fas fa-chevron-down"></i
           ></span>
         </div>
         <div id="projects">
@@ -207,7 +203,9 @@
       <footer>
         &copy; BogdanKostyuk
         <div class="icons">
-          <span><i class="fa fa-github"></i></span>
+          <span @click="openURL('https://github.com/logotip4ik')"
+            ><i class="fa fa-github"></i
+          ></span>
         </div>
       </footer>
       <div v-if="true" ref="warningBreadcrumb" class="warning-breadcrumb">

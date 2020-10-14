@@ -6,9 +6,6 @@ const vm = Vue.createApp({
     const line2 = ref(null);
     const line3 = ref(null);
     const unleash = ref(null);
-    const logoName = ref(null);
-    const logoDesc = ref(null);
-    const logoButton = ref(null);
     const submitBtn = ref(null);
     const warningBreadcrumb = ref(null);
     const successBreadcrumb = ref(null);
@@ -96,28 +93,17 @@ const vm = Vue.createApp({
           delay: 1.5,
         })
         .pause();
-      gsap
-        .timeline()
-        .from(logoButton.value, {
-          y: -100,
-          // rotateZ: 100,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'back.out(2)',
-          delay: 0.5,
-        })
-        .from(logoDesc.value, {
-          y: -100,
-          opacity: 0,
-          ease: 'back.out(2)',
-          duration: 0.8,
-        })
-        .from(logoName.value, {
-          y: -100,
-          opacity: 0,
-          ease: 'back.out(2)',
-          duration: 0.8,
-        });
+      gsap.from('.logoAnime', {
+        y: -100,
+        opacity: 0,
+        delay: 0.7,
+        stagger: {
+          each: 0.3,
+          from: 'end',
+        },
+        ease: 'back.out(2)',
+        duration: 0.8,
+      });
     });
 
     const openURL = (url) => {
@@ -218,9 +204,6 @@ const vm = Vue.createApp({
       scroll,
       warningBreadcrumb,
       successBreadcrumb,
-      logoName,
-      logoDesc,
-      logoButton,
       submitBtn,
       name,
       errorText,
