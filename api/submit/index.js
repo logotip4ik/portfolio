@@ -6,7 +6,7 @@ const Handlebars = require('handlebars');
 const winston = require('winston');
 
 const html =
-  '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Document</title></head><body style=" font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, Ubuntu, Cantarell, \'Open Sans\', \'Helvetica Neue\', sans-serif; min-height: 100vh; margin: 0; padding: 0; " ><h1 align="center">New Message from Website</h1><table style=" padding: 10px 20px; background-color: antiquewhite; border-radius: 10px; width: 400px; margin: 0 auto; " ><tr style="text-align: left"><th style="padding-right: 10px">Name:</th><td>{{name}}</td></tr><tr style="text-align: left"><th style="padding-right: 10px">Email:</th><td>{{email}}</td></tr><tr style="text-align: left"><th style="padding-right: 10px">Message:</th><td>{{message}}</td></tr></table></body></html>';
+  '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Document</title></head><body style=" font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, Ubuntu, Cantarell, \'Open Sans\', \'Helvetica Neue\', sans-serif; min-height: 100vh; margin: 0; padding: 0; " ><h1 align="center">New Message from Website</h1><table style=" padding: 10px 20px; background-color: antiquewhite; border-radius: 10px; width: 400px; margin: 0 auto; " ><tr style="text-align: left"><th style="padding-right: 10px">Name:</th><td>{{name}}</td></tr><tr style="text-align: left"><th style="padding-right: 10px">Email:</th><td>{{email}}</td></tr><tr style="text-align: left"><th style="padding-right: 10px">Message:</th><td>{{message}}</td></tr></table><h3 style="text-align: center; margin-top: 20px">Time: {{time}}</h3></body></html>';
 
 const template = Handlebars.compile(html);
 
@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
       from: `Web Site <${process.env.EMAIL}>`,
       to: process.env.RECEIVER,
       subject: 'New Message!',
-      html: template(body).toString(),
+      html: template({ ...body, time: new Date().toUTCString() }).toString(),
     };
     transporter.sendMail(MailOpt, (err, info) => {
       if (err) {
@@ -68,7 +68,6 @@ module.exports = async (req, res) => {
       logger.error({
         log: 'Error while validating user inputs',
         error: err,
-        user_message: JSON.stringify(body),
         date: new Date().toUTCString(),
       });
       res.status(400).send({ message: 'User  Error', error: err.message });

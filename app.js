@@ -160,6 +160,9 @@ const vm = Vue.createApp({
         scroll('#top', 1);
         successBreadcrumbTL.play();
         setTimeout(() => successBreadcrumbTL.reverse(), 3500);
+        name.value = '';
+        email.value = '';
+        message.value = '';
       } else {
         const { error } = await res.json();
         showError(error);
