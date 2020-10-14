@@ -94,7 +94,8 @@ const vm = Vue.createApp({
         })
         .pause();
       gsap.from('.logoAnime', {
-        y: -100,
+        // y: -100,
+        y: 'random(200, -200)',
         opacity: 0,
         delay: 0.7,
         stagger: {
