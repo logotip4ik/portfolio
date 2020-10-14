@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta
+      name="description"
+      content="This is a portfolio(bogdan kostyuk, python)"
+    />
+    <meta name="keywords" content="HTML, CSS, JavaScript, python, node" />
+    <link
+      rel="shortcut icon"
+      href="./img/icon-152x152.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/c20edef353.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>BogdanKostyuk</title>
+  </head>
+  <body>
+    <div id="root">
+      <transition name="fade">
+        <div class="loader" v-show="loading"><img src="./img/puff.svg" /></div>
+      </transition>
+      <div id="top" v-show="false"></div>
+      <nav>
+        <h2 class="nav--logo" @click="scroll('#top')">BogdanKostyuk</h2>
+        <ul class="nav--navigation">
+          <li @click="scroll('#projects')">Projects</li>
+          <li @click="scroll('#aboutme')">About Me</li>
+          <li @click="scroll('#contact')">Contact</li>
+        </ul>
+        <div class="burger" @click="toggleMenu">
+          <div ref="line1" class="line"></div>
+          <div ref="line2" class="line"></div>
+          <div ref="line3" class="line"></div>
+        </div>
+      </nav>
+      <div ref="unleash" class="nav--navigation--unleash">
+        <div @click="scroll('#projects')">Projects</div>
+        <div @click="scroll('#aboutme')">About Me</div>
+        <div @click="scroll('#contact')">Contact</div>
+      </div>
+      <main>
+        <div id="headline">
+          <h1 ref="logoName">Bogdan Kostyuk</h1>
+          <h4 ref="logoDesc">Full Stack Developer</h4>
+          <span
+            ><i
+              ref="logoButton"
+              @click="scroll('#projects')"
+              class="fas fa-chevron-down"
+            ></i
+          ></span>
+        </div>
+        <div id="projects">
+          <h1>Projects</h1>
+          <div class="d-flex">
+            <div
+              class="projects--card"
+              v-for="item in falseData"
+              :key="item.name"
+            >
+              <img :src="item.img" />
+              <div class="card--content">
+                <h2>{{item.name}}</h2>
+                <p class="card__description">{{item.desc}}</p>
+                <div>
+                  <ul>
+                    <li class="ul--heading">Tech I used:</li>
+                    <li v-for="tech in item.techUsed" :key="tech.id">
+                      {{tech.content}}
+                    </li>
+                  </ul>
+                </div>
+                <div class="card__actions">
+                  <button @click="openURL(item.live)">View Live</button>
+                  <button @click="openURL(item.source)" class="outlined">
+                    Source
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="aboutme">
+          <h1>About Me</h1>
+          <div class="container">
+            <h2>My name is Bogdan Kostyuk</h2>
+            <p>
+              I am self-taught young developer, who have about a year of
+              experience. I know JavaScript, Python, Html, Css. Of course I can
+              work with Linux .
+            </p>
+          </div>
+          <h2>Some Tech I Use</h2>
+          <div class="d-flex">
+            <!-- TODO: change this icons to related -->
+            <span
+              ><i
+                @click="openURL('https://www.python.org/')"
+                class="fab fa-python fa-4x"
+              ></i
+            ></span>
+            <span
+              ><i
+                @click="openURL('https://www.w3.org/TR/html52/')"
+                class="fab fa-html5 fa-4x"
+              ></i
+            ></span>
+            <span
+              ><i
+                @click="openURL('https://www.w3.org/Style/CSS/Overview.en.html')"
+                class="fab fa-css3-alt fa-4x"
+              ></i
+            ></span>
+            <span
+              ><i
+                @click="openURL('https://www.ecma-international.org/publications/standards/Ecma-262.htm')"
+                class="fab fa-js fa-4x"
+              ></i
+            ></span>
+            <span
+              ><i
+                @click="openURL('https://www.microsoft.com/en-us/windows')"
+                class="fab fa-windows fa-4x"
+              ></i
+            ></span>
+            <span
+              ><i
+                @click="openURL('https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git')"
+                class="fab fa-linux fa-4x"
+              ></i
+            ></span>
+            <span
+              ><i
+                @click="openURL('https://nodejs.org/en/')"
+                class="fab fa-node fa-4x"
+              ></i
+            ></span>
+            <span
+              ><i
+                @click="openURL('https://v3.vuejs.org/')"
+                class="fab fa-vue fa-4x"
+              ></i
+            ></span>
+            <span
+              ><i
+                @click="openURL('https://git-scm.com/')"
+                class="fa fa-git fa-4x"
+              ></i
+            ></span>
+          </div>
+        </div>
+        <div id="contact">
+          <h1>Contact</h1>
+          <p>I will answer as soon as possible.</p>
+          <form @submit.prevent>
+            <div class="form-inputs">
+              <label>Name</label>
+              <input
+                placeholder="Your Name..."
+                v-model="name"
+                type="text"
+                @keypress.enter.prevent="this.$refs.emailIn.focus()"
+              />
+            </div>
+            <div class="form-inputs">
+              <label>Email</label>
+              <input
+                ref="emailIn"
+                placeholder="Your Email..."
+                @keypress.enter.prevent="this.$refs.messageIn.focus()"
+                v-model="email"
+                type="email"
+              />
+            </div>
+            <div class="form-inputs">
+              <label>Message</label>
+              <textarea
+                v-model="message"
+                ref="messageIn"
+                placeholder="Your Message..."
+                rows="4"
+                @keypress.enter="submit"
+              ></textarea>
+            </div>
+            <button
+              @mouseover="hover"
+              @mouseleave="hover($event, true)"
+              type="submit"
+              @click="submit"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </main>
+      <footer>
+        &copy; BogdanKostyuk
+        <div class="icons">
+          <span><i class="fa fa-github"></i></span>
+        </div>
+      </footer>
+      <div v-if="true" ref="warningBreadcrumb" class="warning-breadcrumb">
+        {{errorText}}
+      </div>
+      <div v-if="true" ref="successBreadcrumb" class="success-breadcrumb">
+        Your Message is Send
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

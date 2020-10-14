@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap')
+  
+$primary-color: #18181E
+  
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body
+  min-height: 100vh
+  text-align: center
+  font-family: -apple-system,BlinkMacSystemFont, "Montserrat","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"
+  -webkit-tap-highlight-color: transparent
+  font-size: 1rem
+  font-weight: 400
+  line-height: 1.5
+  color: #212529
+  text-align: left
+  scroll-behavior: smooth
+
+h1, h2, h3, h4, h5
+  font-weight: 300
+
+.loader
+  transition: .2s all ease-in
+  position: fixed
+  width: 100%
+  height: 100vh
+  top: 0
+  left: 0
+  background-color: $primary-color
+  z-index: 200
+
+  & img
+    position: fixed
+    transition: .2s all ease-in
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+nav
+  width: 100%
+  position: fixed
+  z-index: 2
+  background-color: $primary-color
+  color: white
+  display: flex
+  justify-content: space-between
+  align-content: center
+  padding: 10px 12px
+
+  & .burger
+    display: none
+    flex-direction: column
+    cursor: pointer
+    margin: auto 0
+    & .line
+      transition: .2s all ease-in
+      width: 25px
+      height: 3px
+      background-color: white
+    & :nth-child(2)
+      margin: 5px 0
+
+.nav--navigation--unleash
+  position: fixed
+  background-color: $primary-color
+  color: white
+  z-index: 1
+  top: 3rem
+  left: 0
+  width: 100%
+  padding: 0 12px 5px
+  padding-bottom: 15px
+  transform: translateY(-7.5rem)
+  & *
+    transition: .2s all ease-out
+    cursor: pointer
+    &:hover
+      color: rgb(190, 190, 190)
+      transform: translateX(10px)
+
+.nav--logo
+  transition: all .2s ease-out
+  text-transform: uppercase
+  font-weight: bold
+  letter-spacing: 3px
+  display: inline-block
+  cursor: pointer
+  color: #fff
+  font-family: "Montserrat", sans-serif
+  white-space: nowrap
+  font-size: 1.25rem
+  padding-top: .3125rem
+  padding-bottom: .3125rem
+  &:hover
+    color: rgb(190, 190, 190)
+
+.warning-breadcrumb
+  position: fixed
+  bottom: -3rem
+  left: 50%
+  transform: translateX(-50%)
+  background-color: rgba(255, 230, 0, 0.849)
+  border-radius: 5px
+  margin: 0 auto
+  color: black
+  padding: 10px 15px
+  max-width: 300px
+
+.success-breadcrumb
+  position: fixed
+  top: -3rem
+  left: 50%
+  transform: translateX(-50%)
+  background-color: rgba(56, 231, 56, 0.8)
+  border-radius: 5px
+  margin: 0 auto
+  color: black
+  padding: 10px 15px
+  max-width: 300px
+
+.d-flex
+  padding: 10px 15px
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-evenly
+  flex-basis: 250px
+  flex-shrink: 50px
+  flex-grow: 0
+
+.nav--navigation
+  list-style: none
+  display: flex
+
+  & li
+    margin: auto 0 auto 0.75rem
+    transition: all .2s ease-out
+    font-size: 16px
+    cursor: pointer
+    &:hover
+      color: rgb(195, 195, 195)
+      margin-right: 0.5rem
+      // transform: scale(1.08)
+      // background-color: rgba(255, 255, 255, 0.1)
+
+main
+  // padding-top: 3rem
+  margin-bottom: 1rem
+
+  & #headline
+    min-height: 100vh
+    display: flex
+    flex-direction: column
+    justify-content: center
+    background: -webkit-radial-gradient(circle, #5E5E5E 0%, #000000 100%)
+    background: -moz-radial-gradient(circle, #5E5E5E 0%, #000000 100%)
+    background: -ms-radial-gradient(circle, #5E5E5E 0%, #000000 100%)
+    background: radial-gradient(circle, #5E5E5E 0%, #000000 100%)
+
+    & h1
+      font-family: "Montserrat", sans-serif
+      font-size: 4rem
+      font-style: normal
+      font-weight: 500
+      text-shadow: 1px 2px 10px #000
+    
+    & h4
+      margin-top: -10px
+      font-weight: 500
+      font-size: 1.75rem
+      font-weight: 200
+
+    & i
+      margin-top: 5px
+      font-size: 2.5rem
+      transition: .2s all ease-out
+      cursor: pointer
+      &:hover
+        color: $primary-color
+
+    & *
+      color: white
+      text-align: center
+      letter-spacing: 1px
+
+  & #projects
+    min-height: 100vh
+    padding-top: 3rem
+    & > h1
+      text-align: center
+      margin-top: 10px
+      margin-bottom: 3rem
+
+    & .projects--card
+      margin: 0 10px 10px
+      border: 1px solid rgba(112, 112, 112, .4)
+      border-radius: 5px
+      max-width: 300px
+
+      & h2
+        margin-bottom: 0.75rem
+
+      & img
+        width: 100%
+        height: auto
+
+      & .card--content
+        padding: 5px 7px
+
+        & .card__description
+          margin-bottom: 1rem
+        
+        & ul
+          list-style: none
+          background-color: rgba(140, 140, 140, 0.05)
+          border-radius: 0.25rem
+          margin-bottom: 1rem
+          & .ul--heading
+            padding: 10px 7px
+            font-size: 1.1rem
+            border-radius: 0.25rem 0.25rem 0 0
+            background-color: rgba(140, 140, 140, 0.1)
+          & li
+            position: relative
+            padding: 10px 14px
+            display: flex
+            flex-direction: column
+            justify-content: flex-start
+            &:not(:last-child)::after
+              content: ' '
+              position: absolute
+              bottom: 0
+              left: 0
+              width: 100%
+              height: 1px
+              background-color: rgba(0, 0, 0, .2)
+        & .card__actions
+          display: flex
+          justify-content: flex-end
+
+          & button
+            border: 1px solid black
+            outline: none
+            padding: 5px 10px
+            font-size: 1rem
+            margin-left: 0.25rem
+            background-color: $primary-color
+            color: white
+            border-radius: 5px
+            transition: .2s margin-right ease-out
+            &:hover
+              margin-right: 10px
+            &.outlined
+              background-color: rgba(0, 0, 0, 0.1)
+              color: black
+
+  & #aboutme
+    min-height: 100vh
+    background-color: $primary-color
+    color: whitesmoke
+    text-align: center
+    padding: 3rem 15px 1rem
+    & h1
+      padding-top: 15px
+      margin-bottom: 3rem
+    & h2
+      margin-bottom: 1rem
+    & .container
+      margin: 0 auto 1rem
+      max-width: 60%
+      line-height: 40px
+    & span
+      font-size: 20px
+      margin: 0 10px 10px
+      cursor: pointer
+      transition: .3s all ease
+
+  & #contact
+    min-height: 100vh
+    padding: 3rem 15px 1rem
+    text-align: center
+    & h1
+      padding-top: 15px
+    & p
+      margin-bottom: 3rem
+    & form
+      max-width: 60%
+      margin: 0 auto 1rem
+      padding: 10px 15px 
+      & .form-inputs
+        display: flex
+        flex-direction: column
+        justify-content: flex-start
+        margin-bottom: 20px
+        text-align: left
+        & label
+          font-size: 1.2rem
+          margin-bottom: 5px
+        & input, textarea
+          -webkit-appearance: none
+          -moz-appearance: none
+          outline: none
+          border: 1px solid rgba(0, 0, 0, 0.4)
+          border-radius: 5px
+          font-size: 1.2rem
+          padding: 5px 10px
+          font-family: Montserrat, sans-serif
+        & textarea
+          resize: vertical
+      & button[type="submit"]
+        background-color: $primary-color
+        float: right
+        padding: 10px 20px
+        border: 1px solid $primary-color
+        color: whitesmoke
+        border-radius: 5px
+        outline: none
+        font-size: 1.2rem
+        cursor: pointer
+
+footer
+  width: 100%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  background-color: $primary-color
+  color: whitesmoke
+  padding: 10px 15px
+  & i
+    font-size: 30px
+    cursor: pointer
+    
+
+
+@media (max-width: 525px)
+  .nav--navigation
+    display: none
+  .nav--logo
+    font-size: 1rem
+  .container
+    max-width: 95%!important
+  form
+    max-width: 95%!important
+  main > #headline > h1
+    font-size: 3rem
+  nav > .burger
+    display: flex
+    margin: auto 5px auto 0
+
+.fade-enter-active,
+.fade-leave-active
+  transition: opacity 0.5s ease
+
+.fade-enter-from,
+.fade-leave-to
+  opacity: 0

@@ -1,0 +1,9 @@
+.vercel
+.env
+.vscode
+main_log.log
+sendEmail.html
+
+node_modules
+
+img/darr.svg

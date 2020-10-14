@@ -1,0 +1,19 @@
+{
+  "name": "mysyte",
+  "version": "1.0.0",
+  "description": "My own Web Site hosted on Vercel",
+  "main": "./",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@sendgrid/mail": "^7.2.6",
+    "dotenv": "^8.2.0",
+    "handlebars": "^4.7.6",
+    "joi": "^17.2.1",
+    "nodemailer": "^6.4.13",
+    "winston": "^3.3.3"
+  }
+}
