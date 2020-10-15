@@ -97,6 +97,7 @@ const vm = Vue.createApp({
         // y: -100,
         y: 'random(200, -200)',
         opacity: 0,
+        scale: 1.5,
         delay: 0.7,
         stagger: {
           each: 0.3,
