@@ -2,20 +2,20 @@
   <nav>
     <h1>BogdanKostyuk</h1>
     <div class="routing">
-      <p>Projects</p>
-      <p>About Me</p>
-      <p>Contact</p>
+      <p @click="scroll('projects')">Projects</p>
+      <p @click="scroll('about-me')">About Me</p>
+      <p @click="scroll('contact')">Contact</p>
     </div>
-    <div class="burger" ref="burger" @click="showNavigation">
+    <div class="burger" ref="burger" @click="toggleNav">
       <div class="line"></div>
       <div class="line"></div>
       <div class="line"></div>
     </div>
   </nav>
   <div class="navigation" ref="navigation">
-    <p>Projects</p>
-    <p>About Me</p>
-    <p>Contact</p>
+    <p @click="scroll('projects', true)">Projects</p>
+    <p @click="scroll('about-me', true)">About Me</p>
+    <p @click="scroll('contact', true)">Contact</p>
   </div>
 </template>
 
@@ -24,19 +24,24 @@ import { ref } from 'vue';
 
 export default {
   name: 'Navbar',
-  setup() {
+  setup(_, { emit }) {
     const burger = ref(null);
     const navigation = ref(null);
 
-    const showNavigation = () => {
+    const toggleNav = () => {
       burger.value.classList.toggle('close');
       navigation.value.classList.toggle('show');
+    };
+    const scroll = (target, isOpenNav = false) => {
+      emit('scroll-to', target);
+      if (isOpenNav) toggleNav();
     };
 
     return {
       burger,
       navigation,
-      showNavigation,
+      scroll,
+      toggleNav,
     };
   },
 };
@@ -52,6 +57,8 @@ nav {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.3);
+  z-index: 100;
+  height: 76px;
 
   h1 {
     text-transform: uppercase;
@@ -118,6 +125,7 @@ p {
 }
 .navigation {
   transform: translateY(-15rem);
+  position: absolute;
   background: #18181e;
   display: none;
   justify-content: flex-start;

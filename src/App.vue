@@ -1,14 +1,17 @@
 <template>
   <v-navbar></v-navbar>
+  <v-heading></v-heading>
 </template>
 
 <script>
+import VHeading from './components/V-Heading.vue';
 import VNavbar from './components/V-Navbar.vue';
 
 export default {
   name: 'App',
   components: {
     VNavbar,
+    VHeading,
   },
 };
 </script>
