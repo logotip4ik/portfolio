@@ -1,17 +1,33 @@
 <template>
-  <v-navbar></v-navbar>
-  <v-heading></v-heading>
+  <v-navbar @scroll-to="scroll"></v-navbar>
+  <div class="top"></div>
+  <v-heading @scroll-to="scroll"></v-heading>
+  <v-projects></v-projects>
 </template>
 
 <script>
+import VueScrollTo from 'vue-scrollto';
+
 import VHeading from './components/V-Heading.vue';
 import VNavbar from './components/V-Navbar.vue';
+import VProjects from './components/V-Projects.vue';
 
 export default {
   name: 'App',
+  setup() {
+    function scroll(target) {
+      VueScrollTo.scrollTo(`.${target}`, 1000, {
+        offset: -60,
+        cancelable: true,
+      });
+    }
+
+    return { scroll };
+  },
   components: {
     VNavbar,
     VHeading,
+    VProjects,
   },
 };
 </script>

@@ -11,7 +11,8 @@
     "core-js": "^3.6.5",
     "gsap": "^3.5.1",
     "register-service-worker": "^1.7.1",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

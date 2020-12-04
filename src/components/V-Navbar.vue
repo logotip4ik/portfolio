@@ -1,22 +1,22 @@
 <template>
   <nav>
-    <h1>BogdanKostyuk</h1>
-    <div class="routing">
-      <p @click="scroll('projects')">Projects</p>
-      <p @click="scroll('about-me')">About Me</p>
-      <p @click="scroll('contact')">Contact</p>
-    </div>
+    <h1 @click="scroll('top')">BogdanKostyuk</h1>
+    <ul class="routing">
+      <li @click="scroll('projects')">Projects</li>
+      <li @click="scroll('about-me')">About Me</li>
+      <li @click="scroll('contact')">Contact</li>
+    </ul>
     <div class="burger" ref="burger" @click="toggleNav">
       <div class="line"></div>
       <div class="line"></div>
       <div class="line"></div>
     </div>
+    <ul class="navigation" ref="navigation">
+      <li @click="scroll('projects', true)">Projects</li>
+      <li @click="scroll('about-me', true)">About Me</li>
+      <li @click="scroll('contact', true)">Contact</li>
+    </ul>
   </nav>
-  <div class="navigation" ref="navigation">
-    <p @click="scroll('projects', true)">Projects</p>
-    <p @click="scroll('about-me', true)">About Me</p>
-    <p @click="scroll('contact', true)">Contact</p>
-  </div>
 </template>
 
 <script>
@@ -44,6 +44,7 @@ export default {
       toggleNav,
     };
   },
+  emits: ['scroll-to'],
 };
 </script>
 
@@ -56,11 +57,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.3);
-  z-index: 100;
-  height: 76px;
+  box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.3);
+  z-index: 10;
+  // height: 76px;
+  position: fixed;
 
   h1 {
+    cursor: pointer;
     text-transform: uppercase;
     font-weight: 200;
     letter-spacing: 2px;
@@ -68,8 +71,9 @@ nav {
 
   .routing {
     display: flex;
+    list-style-type: none;
 
-    p:nth-child(2) {
+    li:nth-child(2) {
       margin: 0 2rem;
     }
 
@@ -84,7 +88,7 @@ nav {
     background: #9b9b9b;
   }
 }
-p {
+li {
   cursor: pointer;
   padding: 0.75rem;
   transition: color 150ms ease-out;
@@ -117,7 +121,7 @@ p {
   }
 
   .line {
-    transition: background 150ms ease-out, transform 150ms ease-in-out;
+    transition: background 150ms ease-out, transform 200ms ease-in-out;
     width: 100%;
     height: 3px;
     border-radius: 0.25rem;
@@ -126,6 +130,7 @@ p {
 .navigation {
   transform: translateY(-15rem);
   position: absolute;
+  left: 0;
   background: #18181e;
   display: none;
   justify-content: flex-start;
@@ -134,13 +139,15 @@ p {
   color: white;
   padding: 0.75rem;
   transition: transform 500ms ease-in-out;
+  list-style-type: none;
+  z-index: 10;
 
   &:hover {
     color: #9b9b9b;
   }
 
   &.show {
-    transform: translateY(0);
+    transform: translateY(115px);
   }
 }
 
