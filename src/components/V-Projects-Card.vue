@@ -61,7 +61,9 @@ export default {
       margin-bottom: 0.75rem;
     }
     p {
-      margin-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+      color: rgb(63, 63, 63);
+      line-height: 1.8;
     }
     .table {
       list-style-type: none;

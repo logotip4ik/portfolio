@@ -1,5 +1,5 @@
 <template>
-  <div class="projects">
+  <section class="projects">
     <h2>Projects</h2>
     <div class="container">
       <v-projects-card
@@ -8,7 +8,7 @@
         :project="project"
       ></v-projects-card>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

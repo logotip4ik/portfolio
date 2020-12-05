@@ -1,17 +1,17 @@
 <template>
-  <nav>
+  <nav ref="navbar">
     <h1 @click="scroll('top')">BogdanKostyuk</h1>
     <ul class="routing">
       <li @click="scroll('projects')">Projects</li>
       <li @click="scroll('about-me')">About Me</li>
       <li @click="scroll('contact')">Contact</li>
     </ul>
-    <div class="burger" ref="burger" @click="toggleNav">
+    <div class="burger" @click="toggleNav">
       <div class="line"></div>
       <div class="line"></div>
       <div class="line"></div>
     </div>
-    <ul class="navigation" ref="navigation">
+    <ul class="navigation">
       <li @click="scroll('projects', true)">Projects</li>
       <li @click="scroll('about-me', true)">About Me</li>
       <li @click="scroll('contact', true)">Contact</li>
@@ -25,12 +25,10 @@ import { ref } from 'vue';
 export default {
   name: 'Navbar',
   setup(_, { emit }) {
-    const burger = ref(null);
-    const navigation = ref(null);
+    const navbar = ref(null);
 
     const toggleNav = () => {
-      burger.value.classList.toggle('close');
-      navigation.value.classList.toggle('show');
+      navbar.value.classList.toggle('show-menu');
     };
     const scroll = (target, isOpenNav = false) => {
       emit('scroll-to', target);
@@ -38,8 +36,7 @@ export default {
     };
 
     return {
-      burger,
-      navigation,
+      navbar,
       scroll,
       toggleNav,
     };
@@ -87,6 +84,21 @@ nav {
   &:hover .line {
     background: #9b9b9b;
   }
+
+  &.show-menu > .burger {
+    .line:first-child {
+      transform: translateY(10px) rotate(45deg);
+    }
+    .line:nth-child(2) {
+      background: transparent;
+    }
+    .line:last-child {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+  }
+  &.show-menu > .navigation {
+    transform: translateY(115px);
+  }
 }
 li {
   cursor: pointer;
@@ -106,18 +118,6 @@ li {
 
   &:hover > .line {
     background: whitesmoke;
-  }
-
-  &.close {
-    .line:first-child {
-      transform: translateY(10px) rotate(45deg);
-    }
-    .line:nth-child(2) {
-      background: transparent;
-    }
-    .line:last-child {
-      transform: translateY(-9px) rotate(-45deg);
-    }
   }
 
   .line {
@@ -144,10 +144,6 @@ li {
 
   &:hover {
     color: #9b9b9b;
-  }
-
-  &.show {
-    transform: translateY(115px);
   }
 }
 

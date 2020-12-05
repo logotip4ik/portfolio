@@ -1,13 +1,20 @@
 <template>
-  <div class="heading">
+  <header class="heading">
     <!-- TODO: Some thing add, becouse it is to empty  -->
     <div class="container">
       <div class="logo-line"></div>
-      <h1 class="anim-text text-1">Bogdan Kostyuk</h1>
-      <h2 class="anim-text">Full Stack Dev</h2>
+      <h1 class="anim-text">
+        Bogdan Kostyuk
+        <div class="box"></div>
+      </h1>
+      <br />
+      <h2 class="anim-text">
+        Full Stack Dev
+        <div class="box"></div>
+      </h2>
     </div>
     <p @click="$emit('scroll-to', 'projects')" ref="bottomText" class="heading__bottom"></p>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -21,16 +28,12 @@ export default {
     gsap.registerPlugin(ScrollTrigger);
     const bottomText = ref(null);
 
-    const leftArr = '&#x2039;';
-    const rightArr = '&#x203A;';
-    const text = 'Scroll down';
+    const text = '‹‹ Scroll down ››';
 
     function setText() {
-      bottomText.value.innerHTML += `<span class="text-to-anim">${leftArr}</span><span class="text-to-anim">${leftArr}</span> `;
       text.split('').forEach((char) => {
         bottomText.value.innerHTML += `<span class="text-to-anim">${char}</span>`;
       });
-      bottomText.value.innerHTML += ` <span class="text-to-anim">${rightArr}</span><span class="text-to-anim">${rightArr}</span>`;
     }
 
     function toggleViewText() {
@@ -39,13 +42,23 @@ export default {
 
     onMounted(() => {
       setText();
-      gsap.from('.logo-line', { x: 100, duration: 0.8 });
-      gsap.from('.anim-text', {
+      const TL = gsap.timeline();
+      TL.from('.logo-line', { x: 100, duration: 0.8, delay: 0.2 });
+      // prettier-ignore
+      TL.from('.anim-text', {
+        stagger: 0.2,
         opacity: 0,
-        x: 100,
+        y: 100,
         duration: 1,
         delay: 0.2,
-      });
+      }, '-=0.8');
+      // prettier-ignore
+      TL.to('.box', {
+        stagger: 0.1,
+        height: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      }, '-=0.9');
       ScrollTrigger.create({
         trigger: '.heading__bottom',
         start: 'center center',
@@ -62,7 +75,7 @@ export default {
         },
         x: 5,
         opacity: 0.3,
-        duration: 1,
+        duration: 1.2,
       });
     });
 
@@ -84,18 +97,33 @@ export default {
   .container {
     top: 55%;
     left: 10%;
-    max-width: 80vw;
+    max-width: 85vw;
     transform: translateY(-50%);
     color: white;
     position: relative;
     text-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.2);
+    line-height: 1.2;
+
     h1 {
+      display: inline-block;
       font-size: 3rem;
+      position: relative;
     }
 
     h2 {
+      display: inline-block;
       font-weight: 200;
+      position: relative;
       font-size: 2rem;
+    }
+
+    .box {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: #303944;
     }
 
     .logo-line {
