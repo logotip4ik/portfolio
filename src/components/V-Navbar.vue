@@ -1,10 +1,18 @@
 <template>
   <nav ref="navbar">
-    <h1 @click="scroll('top')">BogdanKostyuk</h1>
+    <h1 @click="scroll('top')" @mouseover="hovering = true" @mouseleave="hovering = false">
+      BogdanKostyuk
+    </h1>
     <ul class="routing">
-      <li @click="scroll('projects')">Projects</li>
-      <li @click="scroll('about-me')">About Me</li>
-      <li @click="scroll('contact')">Contact</li>
+      <li
+        v-for="(item, idx) in links"
+        :key="idx"
+        @click="scroll(item.emits)"
+        @mouseover="hovering = true"
+        @mouseleave="hovering = false"
+      >
+        {{ item.name }}
+      </li>
     </ul>
     <div class="burger" @click="toggleNav">
       <div class="line"></div>
@@ -12,15 +20,21 @@
       <div class="line"></div>
     </div>
     <ul class="navigation">
-      <li @click="scroll('projects', true)">Projects</li>
-      <li @click="scroll('about-me', true)">About Me</li>
-      <li @click="scroll('contact', true)">Contact</li>
+      <li
+        v-for="(item, idx) in links"
+        :key="idx"
+        @click="scroll(item.emits, true)"
+        @mouseover="hovering = true"
+        @mouseleave="hovering = false"
+      >
+        {{ item.name }}
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
 
 export default {
   name: 'Navbar',
@@ -35,7 +49,26 @@ export default {
       if (isOpenNav) toggleNav();
     };
 
+    const hovering = inject('hovering');
+
+    const links = [
+      {
+        name: 'Projects',
+        emits: 'projects',
+      },
+      {
+        name: 'About Me',
+        emits: 'about-me',
+      },
+      {
+        name: 'Contact',
+        emits: 'contact',
+      },
+    ];
+
     return {
+      hovering,
+      links,
       navbar,
       scroll,
       toggleNav,

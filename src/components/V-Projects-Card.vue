@@ -10,21 +10,38 @@
       </ul>
     </div>
     <div class="card__actions">
-      <button @click="openURL(project.source)">Source</button>
-      <button @click="openURL(project.live)">Live</button>
+      <button
+        @mouseover="hovering = true"
+        @mouseleave="hovering = false"
+        @click="openURL(project.source)"
+      >
+        Source
+      </button>
+      <button
+        @mouseover="hovering = true"
+        @mouseleave="hovering = false"
+        @click="openURL(project.live)"
+      >
+        Live
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import { inject } from 'vue';
+
 export default {
   name: 'Projects-Card',
   setup() {
+    const hovering = inject('hovering');
+
     function openURL(url) {
       window.open(url);
     }
 
     return {
+      hovering,
       openURL,
     };
   },

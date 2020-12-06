@@ -2,7 +2,16 @@
   <header class="heading">
     <!-- TODO: Some thing add, becouse it is to empty  -->
     <div class="container">
-      <div class="logo-line"></div>
+      <div class="logo-line">
+        <font-awesome-icon
+          class="logo-icon"
+          @click="openURL('https://github.com/logotip4ik')"
+          @mouseover="hovering = true"
+          @mouseleave="hovering = false"
+          size="lg"
+          :icon="['fab', 'github']"
+        ></font-awesome-icon>
+      </div>
       <h1 class="anim-text">
         Bogdan Kostyuk
         <div class="box"></div>
@@ -13,12 +22,18 @@
         <div class="box"></div>
       </h2>
     </div>
-    <p @click="$emit('scroll-to', 'projects')" ref="bottomText" class="heading__bottom"></p>
+    <p
+      @mouseover="hovering = true"
+      @mouseleave="hovering = false"
+      @click="$emit('scroll-to', 'projects')"
+      ref="bottomText"
+      class="heading__bottom"
+    ></p>
   </header>
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -40,6 +55,10 @@ export default {
       bottomText.value.classList.toggle('opacity-0');
     }
 
+    function openURL(url) {
+      window.open(url);
+    }
+
     onMounted(() => {
       setText();
       const TL = gsap.timeline();
@@ -59,6 +78,7 @@ export default {
         duration: 0.8,
         ease: 'power2.out',
       }, '-=0.9');
+      TL.to('.logo-icon', { opacity: 1 });
       ScrollTrigger.create({
         trigger: '.heading__bottom',
         start: 'center center',
@@ -79,10 +99,15 @@ export default {
       });
     });
 
+    const hovering = inject('hovering');
+
     return {
+      hovering,
       bottomText,
+      openURL,
     };
   },
+  emits: ['scroll-to'],
 };
 </script>
 
@@ -96,7 +121,7 @@ export default {
 
   .container {
     top: 55%;
-    left: 10%;
+    left: 15%;
     max-width: 85vw;
     transform: translateY(-50%);
     color: white;
@@ -135,6 +160,13 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       left: -1rem;
+
+      * {
+        opacity: 0;
+        position: absolute;
+        left: -2rem;
+        top: 10%;
+      }
     }
   }
   .heading__bottom {
