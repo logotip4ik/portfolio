@@ -149,7 +149,7 @@ export default {
       };
       await v.value.$validate();
       if (!data.name || !data.email || !data.message || v.value.$invalid) return;
-      loading.value = false;
+      loading.value = true;
       reset();
       emit('scroll-to', 'top');
       fetch('/api/submit', {
