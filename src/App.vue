@@ -65,21 +65,8 @@ export default {
     const showingPopup = ref(false);
     const popupSuccess = ref(true);
 
-    onMounted(() => {
-      loading.value = false;
-      if (isMobile) {
-        gsap.set(pointer.value, { opacity: 0 });
-      } else {
-        gsap.set(pointer.value, { xPercent: -50, yPercent: -50 });
-
-        window.addEventListener('mousemove', (e) => {
-          gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY });
-        });
-      }
-    });
-
-    function scroll(target) {
-      VueScrollTo.scrollTo(`.${target}`, 1000, {
+    function scroll(target, duration = 1000) {
+      VueScrollTo.scrollTo(`.${target}`, duration, {
         offset: -60,
         cancelable: true,
       });
@@ -110,6 +97,20 @@ export default {
         ease: 'power1.in',
       });
     }
+
+    onMounted(() => {
+      scroll('top', 0);
+      loading.value = false;
+      if (isMobile) {
+        gsap.set(pointer.value, { opacity: 0 });
+      } else {
+        gsap.set(pointer.value, { xPercent: -50, yPercent: -50 });
+
+        window.addEventListener('mousemove', (e) => {
+          gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY });
+        });
+      }
+    });
 
     return {
       scroll,

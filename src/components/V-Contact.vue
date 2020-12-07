@@ -147,8 +147,7 @@ export default {
         email: emailForm.value.trim(),
         message: messageForm.value.trim(),
       };
-      await v.value.$validate();
-      if (!data.name || !data.email || !data.message) return;
+      if (!data.name || !data.email || !data.message || v.value.$invalid) return;
       loading.value = true;
       reset();
       emit('scroll-to', 'top');
