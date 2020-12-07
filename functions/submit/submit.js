@@ -52,11 +52,11 @@ const handler = async (event, _, callback) => {
           user_message: JSON.stringify(body),
           date: new Date().toUTCString(),
         });
-        await callback(null, {
+        console.log({
           statusCode: 500,
           body: JSON.stringify({ message: 'Error', err: err.message }),
         });
-        console.log({
+        await callback(null, {
           statusCode: 500,
           body: JSON.stringify({ message: 'Error', err: err.message }),
         });
@@ -67,11 +67,11 @@ const handler = async (event, _, callback) => {
         user_message: JSON.stringify(body),
         date: new Date().toUTCString(),
       });
-      await callback(null, {
+      console.log({
         statusCode: 201,
         body: JSON.stringify({ message: 'Message was successful', info }),
       });
-      console.log({
+      await callback(null, {
         statusCode: 201,
         body: JSON.stringify({ message: 'Message was successful', info }),
       });
@@ -94,8 +94,8 @@ const handler = async (event, _, callback) => {
       user_message: JSON.stringify(error),
       date: new Date().toUTCString(),
     });
-    await callback(null, { statusCode: 500, body: error.toString() });
     console.log({ statusCode: 500, body: error.toString() });
+    await callback(null, { statusCode: 500, body: error.toString() });
   }
   return { statusCode: 200, body: JSON.stringify({ message: 'Your Message is Send!' }) };
 };
