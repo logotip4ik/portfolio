@@ -1,6 +1,10 @@
 <template>
   <div :class="{ popup: true, error: !success }" @click="$emit('close')">
-    Your message is send Successfully!
+    {{
+      success
+        ? 'Your message is send Successfully!'
+        : 'Something went wrong. Please try again later.'
+    }}
   </div>
 </template>
 
@@ -31,5 +35,10 @@ export default {
   z-index: 15;
   border-radius: 0.25rem;
   box-shadow: 0 0 5px rgba(#000, 0.3);
+
+  &.error {
+    background: rgba($color: #ff0000, $alpha: 0.3);
+    color: white;
+  }
 }
 </style>

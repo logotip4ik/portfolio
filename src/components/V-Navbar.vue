@@ -1,7 +1,7 @@
 <template>
   <nav ref="navbar">
     <h1 @click="scroll('top')" @mouseover="hovering = true" @mouseleave="hovering = false">
-      BogdanKostyuk
+      Bogdan<i class="logo-box"></i>Kostyuk
     </h1>
     <ul class="routing">
       <li
@@ -34,7 +34,8 @@
 </template>
 
 <script>
-import { inject, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue';
+import gsap from 'gsap';
 
 export default {
   name: 'Navbar',
@@ -65,6 +66,13 @@ export default {
         emits: 'contact',
       },
     ];
+
+    onMounted(() => {
+      gsap.to('.logo-box', {
+        clipPath: 'polygon(50% 0, 50% 0, 50% 100%, 50% 100%)',
+        delay: 2,
+      });
+    });
 
     return {
       hovering,
@@ -97,6 +105,18 @@ nav {
     text-transform: uppercase;
     font-weight: 200;
     letter-spacing: 2px;
+    position: relative;
+  }
+
+  .logo-box {
+    display: inline;
+    width: 100%;
+    height: 100%;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 
   .routing {

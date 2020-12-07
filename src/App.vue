@@ -8,7 +8,12 @@
   <v-footer></v-footer>
   <div ref="pointer" class="pointer"></div>
   <!-- TODO: Add gsap animation!! -->
-  <transition mode="out-in">
+  <transition
+    mode="out-in"
+    @enter="enterAnim"
+    @leave="leaveAnim"
+    :duration="{ enter: 500, leave: 500 }"
+  >
     <v-popup v-if="showingPopup" @close="showingPopup = false" :success="popupSuccess"></v-popup>
   </transition>
   <transition mode="out-in" name="fade">
@@ -89,7 +94,21 @@ export default {
       popupSuccess.value = success;
       setTimeout(() => {
         showingPopup.value = false;
-      }, 2000);
+      }, 2500);
+    }
+
+    function enterAnim(el) {
+      gsap.from(el, {
+        y: -300,
+        duration: 0.5,
+      });
+    }
+    function leaveAnim(el) {
+      gsap.to(el, {
+        y: -300,
+        duration: 0.5,
+        ease: 'power1.in',
+      });
     }
 
     return {
@@ -100,6 +119,8 @@ export default {
       pointer,
       showPopup,
       toggleCursor,
+      enterAnim,
+      leaveAnim,
     };
   },
   components: {

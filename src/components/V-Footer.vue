@@ -44,6 +44,7 @@ footer {
     font-size: 1.3rem;
     text-transform: uppercase;
     font-weight: 200;
+    letter-spacing: 2px;
     // line-height: 1.4;
   }
 }

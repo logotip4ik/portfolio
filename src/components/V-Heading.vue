@@ -22,13 +22,7 @@
         <div class="box"></div>
       </h2>
     </div>
-    <p
-      @mouseover="hovering = true"
-      @mouseleave="hovering = false"
-      @click="$emit('scroll-to', 'projects')"
-      ref="bottomText"
-      class="heading__bottom"
-    ></p>
+    <p @click="$emit('scroll-to', 'projects')" ref="bottomText" class="heading__bottom"></p>
   </header>
 </template>
 
@@ -42,6 +36,8 @@ export default {
   setup() {
     gsap.registerPlugin(ScrollTrigger);
     const bottomText = ref(null);
+    const isShowingBottomText = ref(true);
+    const hovering = inject('hovering');
 
     const text = '‹‹ Scroll down ››';
 
@@ -51,8 +47,23 @@ export default {
       });
     }
 
+    function setHoveringTrue() {
+      hovering.value = true;
+    }
+    function setHoveringFalse() {
+      hovering.value = false;
+    }
+
     function toggleViewText() {
       bottomText.value.classList.toggle('opacity-0');
+      if (isShowingBottomText.value) {
+        bottomText.value.removeEventListener('mouseover', setHoveringTrue);
+        bottomText.value.removeEventListener('mouseout', setHoveringFalse);
+      } else {
+        bottomText.value.addEventListener('mouseover', setHoveringTrue);
+        bottomText.value.addEventListener('mouseout', setHoveringFalse);
+      }
+      isShowingBottomText.value = !isShowingBottomText.value;
     }
 
     function openURL(url) {
@@ -60,24 +71,32 @@ export default {
     }
 
     onMounted(() => {
+      bottomText.value.addEventListener('mouseover', setHoveringTrue);
+      bottomText.value.addEventListener('mouseout', setHoveringFalse);
       setText();
       const TL = gsap.timeline();
-      TL.from('.logo-line', { x: 100, duration: 0.8, delay: 0.2 });
-      // prettier-ignore
-      TL.from('.anim-text', {
-        stagger: 0.2,
-        opacity: 0,
-        y: 100,
-        duration: 1,
-        delay: 0.2,
-      }, '-=0.8');
-      // prettier-ignore
-      TL.to('.box', {
-        stagger: 0.1,
-        height: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-      }, '-=0.9');
+      TL.from('.logo-line', { x: 100, duration: 0.8, delay: 0.3 });
+      TL.from(
+        '.anim-text',
+        {
+          stagger: 0.2,
+          opacity: 0,
+          y: 100,
+          duration: 1,
+          delay: 0.2,
+        },
+        '-=0.8',
+      );
+      TL.to(
+        '.box',
+        {
+          stagger: 0.1,
+          height: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+        },
+        '-=0.9',
+      );
       TL.to('.logo-icon', { opacity: 1 });
       ScrollTrigger.create({
         trigger: '.heading__bottom',
@@ -98,8 +117,6 @@ export default {
         duration: 1.2,
       });
     });
-
-    const hovering = inject('hovering');
 
     return {
       hovering,
@@ -166,6 +183,7 @@ export default {
         position: absolute;
         left: -2rem;
         top: 10%;
+        cursor: pointer;
       }
     }
   }
@@ -180,6 +198,7 @@ export default {
     &.opacity-0 {
       transition: opacity 300ms ease-out;
       opacity: 0;
+      cursor: default;
     }
   }
 }
