@@ -23,19 +23,20 @@ const schema = Joi.object({
 });
 
 // prettier-ignore
-// eslint-disable-next-line
-exports.handler = function (event, _, callback) {
+exports.handler = (event, _, callback) => {
   const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.DOMAIN_NAME });
 
   if (event.httpMethod !== 'POST' || !event.body) {
-    return callback(new Error('An error occurred!'));
+    callback(new Error('An error occurred!'));
+    return;
   }
 
   const body = JSON.parse(event.body);
   const { value, error } = schema.validate(body);
 
   if (error) {
-    return callback(new Error(error.message));
+    callback(new Error(error.message));
+    return;
   }
 
   const mailOpt = {
@@ -47,9 +48,10 @@ exports.handler = function (event, _, callback) {
 
   mg.messages().send(mailOpt, (err) => {
     if (err) {
-      return callback(err);
+      callback(err);
+      return;
     }
-    return callback(null, {
+    callback(null, {
       statusCode: 200,
       body: 'success',
     });
