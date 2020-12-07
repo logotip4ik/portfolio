@@ -199,6 +199,7 @@ export default {
       transition: opacity 300ms ease-out;
       opacity: 0;
       cursor: default;
+      pointer-events: none;
     }
   }
 }
