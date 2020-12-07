@@ -13,7 +13,6 @@ import {
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
-import './registerServiceWorker';
 
 library.add(faPython, faCss3, faJs, faHtml5, faGit, faGithub, faWindows, faLinux, faVuejs);
 
