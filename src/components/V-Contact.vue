@@ -147,8 +147,9 @@ export default {
         email: emailForm.value.trim(),
         message: messageForm.value.trim(),
       };
+      await v.value.$validate();
       if (!data.name || !data.email || !data.message || v.value.$invalid) return;
-      loading.value = true;
+      loading.value = false;
       reset();
       emit('scroll-to', 'top');
       fetch('/api/submit', {
