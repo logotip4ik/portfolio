@@ -22,42 +22,32 @@ const schema = Joi.object({
     .required(),
 });
 
-const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.DOMAIN_NAME });
-
 // prettier-ignore
 // eslint-disable-next-line func-names
-exports.handler = async function (event, context, callback) {
-  if (event.httpMethod !== 'POST') {
-    callback(null, { statusCode: 405, body: 'Method Not Allowed' });
+exports.handler = function (event, context, callback) {
+  const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.DOMAIN_NAME });
+  const body = JSON.parse(event.body);
+  const { value, error } = schema.validate(body);
+
+  if (error) {
+    callback(null, { body: JSON.stringify(error) });
+    return;
   }
-  try {
-    const body = JSON.parse(event.body);
-    const data = await schema.validateAsync(body);
 
-    const mailOpt = {
-      from: `Web Site <${process.env.EMAIL}>`,
-      to: process.env.RECEIVER,
-      subject: 'New Message!',
-      html: template({ ...data, time: new Date().toUTCString() }).toString(),
-    };
+  const mailOpt = {
+    from: `Web Site <${process.env.EMAIL}>`,
+    to: process.env.RECEIVER,
+    subject: 'New Message!',
+    html: template({ ...value, time: new Date().toUTCString() }).toString(),
+  };
 
-    await mg.messages().send(mailOpt, (error) => {
-      if (error) {
-        console.log(error);
-      }
-    });
+  mg.messages().send(mailOpt, (err, mail) => {
+    if (err) {
+      console.log(err);
+    }
     callback(null, {
       statusCode: 200,
-      body: JSON.stringify('Your message is probably send!'),
+      body: JSON.stringify({ mail }),
     });
-  } catch (error) {
-    if (error.message.match('valid')) {
-      callback(null, {
-        statusCode: 400,
-        body: JSON.stringify({ message: 'User  Error', error: error.message }),
-      });
-    }
-    console.log('ERROR: ', error.toString());
-    callback(null, { statusCode: 500, body: error.toString() });
-  }
+  });
 };
