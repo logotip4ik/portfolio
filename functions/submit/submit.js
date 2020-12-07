@@ -35,10 +35,7 @@ exports.handler = function (event, _, callback) {
   const { value, error } = schema.validate(body);
 
   if (error) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify(error),
-    };
+    return callback(new Error(error.message));
   }
 
   const mailOpt = {
