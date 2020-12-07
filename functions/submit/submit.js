@@ -27,6 +27,9 @@ const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.DOMAIN_NAM
 // prettier-ignore
 // eslint-disable-next-line func-names
 exports.handler = async function (event, context, callback) {
+  if (event.httpMethod !== 'POST') {
+    callback(null, { statusCode: 405, body: 'Method Not Allowed' });
+  }
   try {
     const body = JSON.parse(event.body);
     const data = await schema.validateAsync(body);
