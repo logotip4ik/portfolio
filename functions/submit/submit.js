@@ -23,7 +23,7 @@ const schema = Joi.object({
 });
 
 exports.handler = async (event, _, callback) => {
-  const mailgunAuth = {
+  const auth = {
     host: 'smtp.mailgun.org',
     port: 587,
     auth: {
@@ -31,7 +31,7 @@ exports.handler = async (event, _, callback) => {
       pass: process.env.PASSWORD,
     },
   };
-  const smtpTransport = nodemailer.createTransport(mailgunAuth);
+  const smtpTransport = nodemailer.createTransport(auth);
 
   if (!event.body) {
     callback(new Error('An error occurred!'));
