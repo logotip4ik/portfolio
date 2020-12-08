@@ -10,7 +10,6 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/vue-fontawesome": "^3.0.0-2",
     "@vuelidate/core": "^2.0.0-alpha.8",
     "@vuelidate/validators": "^2.0.0-alpha.5",
@@ -24,8 +23,7 @@
     "nodemailer-mailgun-transport": "^2.0.2",
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.0",
-    "vue-scrollto": "^2.20.0",
-    "winston": "^3.3.3"
+    "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

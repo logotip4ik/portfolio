@@ -25,5 +25,9 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+.vercelignore
 
 main_log.log
+
+.vercel
+api
