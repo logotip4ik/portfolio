@@ -1,6 +1,7 @@
 require('dotenv').config();
 
-const mailgun = require('mailgun-js');
+const nodemailer = require('nodemailer');
+const mg = require('nodemailer-mailgun-transport');
 const Joi = require('joi');
 const Handlebars = require('handlebars');
 
@@ -22,11 +23,16 @@ const schema = Joi.object({
     .required(),
 });
 
-// prettier-ignore
-exports.handler = (event, _, callback) => {
-  const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.DOMAIN_NAME });
+exports.handler = async (event, _, callback) => {
+  const mailgunAuth = {
+    auth: {
+      api_key: process.env.API_KEY,
+      domain: process.env.DOMAIN_NAME,
+    },
+  };
+  const smtpTransport = nodemailer.createTransport(mg(mailgunAuth));
 
-  if (event.httpMethod !== 'POST' || !event.body) {
+  if (!event.body) {
     callback(new Error('An error occurred!'));
     return;
   }
@@ -46,14 +52,7 @@ exports.handler = (event, _, callback) => {
     html: template({ ...value, time: new Date().toUTCString() }).toString(),
   };
 
-  mg.messages().send(mailOpt, (err) => {
-    if (err) {
-      callback(err);
-      return;
-    }
-    callback(null, {
-      statusCode: 200,
-      body: 'success',
-    });
-  });
+  const res = await smtpTransport.sendMail(mailOpt);
+
+  callback(null, { statusCode: 201, body: res.message });
 };
