@@ -88,7 +88,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.3);
-  z-index: 10;
+  z-index: 100;
   // height: 76px;
   position: fixed;
 
