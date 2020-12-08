@@ -107,7 +107,7 @@ export default {
         gsap.set(pointer.value, { xPercent: -50, yPercent: -50 });
 
         window.addEventListener('mousemove', (e) => {
-          gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY });
+          gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY, opacity: 1 });
         });
       }
     });
@@ -160,6 +160,7 @@ export default {
 
   .pointer {
     position: fixed;
+    opacity: 0;
     top: 0;
     left: 0;
     width: 20px;
