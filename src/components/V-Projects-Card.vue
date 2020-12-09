@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="project.img" />
+    <img :src="project.img" loading="lazy" :alt="`Logo-Image for '${project.name}'`" />
     <div class="card__content">
       <h3>{{ project.name }}</h3>
       <p>{{ project.desc }}</p>
