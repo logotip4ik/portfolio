@@ -5,8 +5,8 @@
     <p>
       I am self thought young developer. My known languages are: JavaScript, Node.js, Vue.js,
       Python, TypeScript, Html and Css. My main place to develop is Linux, so I have a good
-      experience with bash. Of course I am using git and Github. I love create useful or just funny
-      things and I do it with passion.
+      experience with bash. Of course I am using git and Github. I love creating useful or just
+      funny things and I do it with passion.
     </p>
     <h3 class="tech">Tech I am using</h3>
     <div class="container">

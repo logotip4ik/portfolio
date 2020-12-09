@@ -2,7 +2,7 @@
   <section class="contact">
     <h2>Contact</h2>
     <h3>I will answer as soon as posible</h3>
-    <form @submit.prevent>
+    <form @submit.prevent="submit">
       <div class="form-item">
         <label>Name</label>
         <div class="input-wrapper">
@@ -53,7 +53,7 @@
       </div>
       <div class="form-item">
         <label>Message</label>
-        <div class="input-wrapper">
+        <div :class="{ 'input-wrapper': true, 'bottom-5': isIOS }">
           <textarea
             v-model="v.messageForm.$model"
             @mouseover="hovering = true"
@@ -167,6 +167,17 @@ export default {
         });
     }
 
+    function iOS() {
+      // prettier-ignore
+      return (
+        ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(
+          navigator.platform,
+        ) || (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+      );
+    }
+
+    const isIOS = computed(() => iOS());
+
     return {
       hovering,
       nameForm,
@@ -178,6 +189,7 @@ export default {
       toggleFocus,
       reset,
       submit,
+      isIOS,
       v,
     };
   },
@@ -238,6 +250,7 @@ export default {
           background: transparent;
           font: inherit;
           outline: none;
+          border-radius: 0;
           border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
           transition: border-bottom-color 200ms ease-in;
           resize: vertical;
@@ -261,6 +274,9 @@ export default {
           bottom: 0;
           clip-path: circle(0% at 50% 0%);
           transition: clip-path 300ms ease-in-out;
+        }
+        &.bottom-5::after {
+          bottom: 6px;
         }
       }
       .details {

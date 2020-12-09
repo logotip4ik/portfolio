@@ -170,8 +170,8 @@ export default {
     z-index: 999;
     user-select: none;
     pointer-events: none;
-    transition: width 200ms ease-in-out, height 200ms ease-in-out,
-      background-color 200ms ease-in-out, border 200ms ease-in-out;
+    transition: width 200ms linear, height 200ms linear, background-color 200ms linear,
+      border 200ms linear;
 
     &.active {
       width: 50px;
