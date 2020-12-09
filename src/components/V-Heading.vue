@@ -36,7 +36,6 @@ export default {
   setup() {
     gsap.registerPlugin(ScrollTrigger);
     const bottomText = ref(null);
-    const isShowingBottomText = ref(true);
     const hovering = inject('hovering');
 
     const text = '‹‹ Scroll down ››';
@@ -52,18 +51,6 @@ export default {
     }
     function setHoveringFalse() {
       hovering.value = false;
-    }
-
-    function toggleViewText() {
-      bottomText.value.classList.toggle('opacity-0');
-      if (isShowingBottomText.value) {
-        bottomText.value.removeEventListener('mouseover', setHoveringTrue);
-        bottomText.value.removeEventListener('mouseout', setHoveringFalse);
-      } else {
-        bottomText.value.addEventListener('mouseover', setHoveringTrue);
-        bottomText.value.addEventListener('mouseout', setHoveringFalse);
-      }
-      isShowingBottomText.value = !isShowingBottomText.value;
     }
 
     function openURL(url) {
@@ -101,8 +88,8 @@ export default {
       ScrollTrigger.create({
         trigger: '.heading__bottom',
         start: 'center center',
-        invalidateOnRefresh: true,
-        onToggle: () => toggleViewText(),
+        onEnter: () => bottomText.value.classList.add('opacity-0'),
+        onLeaveBack: () => bottomText.value.classList.remove('opacity-0'),
       });
       gsap.to('.text-to-anim', {
         stagger: {
@@ -194,9 +181,9 @@ export default {
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
+    transition: opacity 300ms ease-out;
 
     &.opacity-0 {
-      transition: opacity 300ms ease-out;
       opacity: 0;
       cursor: default;
       pointer-events: none;
