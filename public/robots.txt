@@ -1,2 +1,3 @@
 User-agent: *
 Disallow:
+sitemap: http://bogdankostyuk.vercel.app/sitemap.xml
