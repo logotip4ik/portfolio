@@ -7,7 +7,6 @@
   <v-contact @scroll-to="scroll" @success="showPopup" @hover="toggleCursor"></v-contact>
   <v-footer></v-footer>
   <div ref="pointer" class="pointer"></div>
-  <!-- TODO: Add gsap animation!! -->
   <transition
     mode="out-in"
     @enter="enterAnim"
