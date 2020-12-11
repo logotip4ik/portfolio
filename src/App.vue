@@ -100,7 +100,7 @@ export default {
     let timeout;
 
     onMounted(() => {
-      scroll('top', 0);
+      // scroll('top', 0);
       loading.value = false;
       if (isMobile) {
         gsap.set(pointer.value, { opacity: 0 });
