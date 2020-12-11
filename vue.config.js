@@ -2,12 +2,13 @@ module.exports = {
   pwa: {
     name: 'BogdanKostyuk',
     themeColor: '#18181e',
-    msTileColor: '#000000',
+    msTileColor: '#18181e',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
-    assetsVersion: '1',
+    assetsVersion: '2',
     manifestOptions: {
       display: 'fullscreen',
+      background_color: '#18181e',
     },
     iconPaths: {
       favicon32: 'img/icons/favicon-32x32.png',

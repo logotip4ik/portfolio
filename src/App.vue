@@ -97,6 +97,8 @@ export default {
       });
     }
 
+    let timeout;
+
     onMounted(() => {
       scroll('top', 0);
       loading.value = false;
@@ -107,6 +109,9 @@ export default {
 
         window.addEventListener('mousemove', (e) => {
           gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY, opacity: 1 });
+          pointer.value.classList.remove('animate');
+          clearTimeout(timeout);
+          timeout = setTimeout(() => pointer.value.classList.add('animate'), 5000);
         });
       }
     });
@@ -166,7 +171,8 @@ export default {
     height: 20px;
     border-radius: 50%;
     background-color: rgba($color: #79ffe1, $alpha: 0.7);
-    z-index: 999;
+    backdrop-filter: blur(40px);
+    z-index: 9999;
     user-select: none;
     pointer-events: none;
     transition: width 200ms linear, height 200ms linear, background-color 200ms linear,
@@ -178,8 +184,38 @@ export default {
       background-color: rgba($color: #79ffe1, $alpha: 0.2);
       border: 2px solid #79ffe1;
     }
+    &::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background-color: rgba($color: #79ffe1, $alpha: 0.7);
+      opacity: 0;
+      z-index: -1;
+      border-radius: 50%;
+      transition: transform 200ms linear;
+    }
+    &.animate {
+      opacity: 0.5;
+      &::after {
+        animation: pulse 3s infinite;
+        animation-delay: 1;
+      }
+    }
   }
 }
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
