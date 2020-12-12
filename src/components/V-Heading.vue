@@ -22,7 +22,13 @@
         <div class="box"></div>
       </h2>
     </div>
-    <p @click="$emit('scroll-to', 'projects')" ref="bottomText" class="heading__bottom"></p>
+    <p
+      @click="$emit('scroll-to', 'projects')"
+      @mouseover="hovering = true"
+      @mouseleave="hovering = false"
+      ref="bottomText"
+      class="heading__bottom"
+    ></p>
   </header>
 </template>
 
@@ -46,21 +52,11 @@ export default {
       });
     }
 
-    function setHoveringTrue() {
-      hovering.value = true;
-    }
-    function setHoveringFalse() {
-      hovering.value = false;
-    }
-
     function openURL(url) {
       window.open(url);
     }
 
-    onMounted(() => {
-      bottomText.value.addEventListener('mouseover', setHoveringTrue);
-      bottomText.value.addEventListener('mouseout', setHoveringFalse);
-      setText();
+    function setupAnimations() {
       const TL = gsap.timeline();
       TL.from('.logo-line', { x: 100, duration: 0.8, delay: 0.3 });
       TL.from(
@@ -85,6 +81,12 @@ export default {
         '-=0.9',
       );
       TL.to('.logo-icon', { opacity: 1 });
+    }
+
+    onMounted(() => {
+      setText();
+      setupAnimations();
+
       ScrollTrigger.create({
         trigger: '.heading__bottom',
         start: 'center center',
@@ -127,7 +129,6 @@ export default {
     top: 55%;
     left: 15%;
     max-width: 85vw;
-    transform: translateY(-50%);
     color: white;
     position: relative;
     text-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.2);
@@ -152,7 +153,8 @@ export default {
       right: 0;
       bottom: 0;
       left: 0;
-      background: #303944;
+      // background: #303944;
+      background: #242a33;
     }
 
     .logo-line {
@@ -164,6 +166,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       left: -1rem;
+      z-index: 10000;
 
       * {
         opacity: 0;
