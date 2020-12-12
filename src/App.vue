@@ -113,6 +113,11 @@ export default {
           clearTimeout(timeout);
           timeout = setTimeout(() => pointer.value.classList.add('animate'), 7000);
         });
+        window.addEventListener('scroll', () => {
+          pointer.value.classList.remove('animate');
+          clearTimeout(timeout);
+          timeout = setTimeout(() => pointer.value.classList.add('animate'), 7000);
+        });
       }
     });
 

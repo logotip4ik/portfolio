@@ -177,6 +177,16 @@ export default {
       }
     }
   }
+
+  .item {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba($color: rebeccapurple, $alpha: 1);
+    transform: translate(-50%, -50%);
+  }
+
   .heading__bottom {
     cursor: pointer;
     color: white;
