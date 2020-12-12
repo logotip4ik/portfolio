@@ -111,7 +111,7 @@ export default {
           gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY, opacity: 1 });
           pointer.value.classList.remove('animate');
           clearTimeout(timeout);
-          timeout = setTimeout(() => pointer.value.classList.add('animate'), 5000);
+          timeout = setTimeout(() => pointer.value.classList.add('animate'), 7000);
         });
       }
     });
