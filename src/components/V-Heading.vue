@@ -166,7 +166,6 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       left: -1rem;
-      z-index: 10000;
 
       * {
         opacity: 0;
