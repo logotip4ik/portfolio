@@ -32,7 +32,7 @@ export default {
   padding: 1.5rem 2rem;
   color: #18181e;
   background: rgba(#79ffe1, 0.4);
-  z-index: 15;
+  z-index: 200;
   border-radius: 0.25rem;
   box-shadow: 0 0 5px rgba(#000, 0.3);
 
