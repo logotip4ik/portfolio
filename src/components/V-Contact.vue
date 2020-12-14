@@ -4,8 +4,8 @@
     <h3>I will answer as soon as posible</h3>
     <form @submit.prevent="submit">
       <div class="form-item">
-        <label>Name</label>
         <div class="input-wrapper">
+          <label>Name</label>
           <input
             v-model="v.nameForm.$model"
             @mouseover="hovering = true"
@@ -25,8 +25,8 @@
         </div>
       </div>
       <div class="form-item">
-        <label>Email</label>
         <div class="input-wrapper">
+          <label>Email</label>
           <input
             v-model="v.emailForm.$model"
             @mouseover="hovering = true"
@@ -52,8 +52,8 @@
         </div>
       </div>
       <div class="form-item">
-        <label>Message</label>
         <div :class="{ 'input-wrapper': true, 'bottom-5': isIOS }">
+          <label>Message</label>
           <textarea
             v-model="v.messageForm.$model"
             @mouseover="hovering = true"
@@ -233,11 +233,14 @@ export default {
     .form-item {
       margin-bottom: 1.2rem;
       position: relative;
+
       label {
         color: rgb(54, 54, 54);
         display: block;
         font-size: 1.2rem;
+        transition: color 200ms ease-out;
       }
+
       .input-wrapper {
         width: 100%;
         position: relative;
@@ -259,6 +262,9 @@ export default {
           &:hover {
             border-bottom-color: black;
           }
+        }
+        &.focus label {
+          color: #000;
         }
         &.focus::after {
           clip-path: circle(100% at 50% 0%);
