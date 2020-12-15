@@ -6,7 +6,7 @@
   <v-about-me @hover="toggleCursor"></v-about-me>
   <v-contact @scroll-to="scroll" @success="showPopup" @hover="toggleCursor"></v-contact>
   <v-footer></v-footer>
-  <div ref="pointer" class="pointer"></div>
+  <div ref="pointer" class="pointer"><i class="pointer--wave"></i></div>
   <transition
     mode="out-in"
     @enter="enterAnim"
@@ -109,14 +109,14 @@ export default {
 
         window.addEventListener('mousemove', (e) => {
           gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY, opacity: 1 });
-          pointer.value.classList.remove('animate');
+          pointer.value.children[0].classList.remove('animate');
           clearTimeout(timeout);
-          timeout = setTimeout(() => pointer.value.classList.add('animate'), 7000);
+          timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
         });
         window.addEventListener('scroll', () => {
-          pointer.value.classList.remove('animate');
+          pointer.value.children[0].classList.remove('animate');
           clearTimeout(timeout);
-          timeout = setTimeout(() => pointer.value.classList.add('animate'), 7000);
+          timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
         });
       }
     });
@@ -158,8 +158,6 @@ export default {
 #app {
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
   // cursor: none;
 
@@ -182,6 +180,9 @@ export default {
     pointer-events: none;
     transition: width 200ms linear, height 200ms linear, background-color 200ms linear,
       border 200ms linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &.active {
       width: 50px;
@@ -189,20 +190,15 @@ export default {
       background-color: rgba($color: #79ffe1, $alpha: 0.2);
       border: 2px solid #79ffe1;
     }
-    &::after {
-      content: '';
+    &--wave {
       width: 20px;
       height: 20px;
-      position: absolute;
       background-color: rgba($color: #79ffe1, $alpha: 0.7);
       opacity: 0;
-      z-index: -1;
       border-radius: 50%;
       transition: transform 200ms linear;
-    }
-    &.animate {
-      opacity: 0.5;
-      &::after {
+
+      &.animate {
         animation: pulse 3s infinite;
         animation-delay: 1;
       }
@@ -213,6 +209,9 @@ export default {
 @keyframes pulse {
   0% {
     transform: scale(1);
+    opacity: 0;
+  }
+  50% {
     opacity: 0.5;
   }
   100% {
