@@ -9,13 +9,18 @@
       funny things and I do it with passion.
     </p>
     <h3 class="tech">Tech I am using</h3>
-    <div class="container">
+    <div class="container" aria-hidden="true">
       <font-awesome-icon
         v-for="(icon, idx) in icons"
         :icon="['fab', icon]"
         :key="idx"
         size="6x"
       ></font-awesome-icon>
+    </div>
+    <div class="container aria" aria-hidden="false">
+      <ul>
+        <li v-for="(item, key) in icons" :key="key">{{ item }}</li>
+      </ul>
     </div>
   </section>
 </template>
@@ -92,6 +97,9 @@ export default {
 
     * {
       margin: 1rem;
+    }
+    &.aria {
+      display: none;
     }
   }
 }
