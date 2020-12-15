@@ -216,7 +216,7 @@ export default {
     opacity: 0.5;
   }
   100% {
-    transform: scale(5);
+    transform: scale(7);
     opacity: 0;
   }
 }
