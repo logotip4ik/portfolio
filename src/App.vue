@@ -176,7 +176,7 @@ export default {
     height: 20px;
     border-radius: 50%;
     background-color: rgba($color: #79ffe1, $alpha: 0.7);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(1px);
     z-index: 9999;
     user-select: none;
     pointer-events: none;
