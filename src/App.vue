@@ -2,9 +2,9 @@
   <v-navbar @scroll-to="scroll"></v-navbar>
   <div class="top"></div>
   <v-heading @scroll-to="scroll"></v-heading>
-  <v-projects @hover="toggleCursor"></v-projects>
-  <v-about-me @hover="toggleCursor"></v-about-me>
-  <v-contact @scroll-to="scroll" @success="showPopup" @hover="toggleCursor"></v-contact>
+  <v-projects></v-projects>
+  <v-about-me></v-about-me>
+  <v-contact @scroll-to="scroll" @success="showPopup"></v-contact>
   <v-footer></v-footer>
   <div ref="pointer" class="pointer"><i class="pointer--wave"></i></div>
   <transition
@@ -71,10 +71,6 @@ export default {
       });
     }
 
-    function toggleCursor() {
-      pointer.value.classList.toggle('active');
-    }
-
     function showPopup(success = true) {
       showingPopup.value = true;
       popupSuccess.value = success;
@@ -128,7 +124,6 @@ export default {
       showingPopup,
       pointer,
       showPopup,
-      toggleCursor,
       enterAnim,
       leaveAnim,
     };

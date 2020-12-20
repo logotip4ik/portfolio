@@ -12,7 +12,6 @@
             @mouseleave="hovering = false"
             @focus="toggleFocus"
             @blur="toggleFocus"
-            @input="v.nameForm.$touch"
             @keypress.enter.prevent="$refs.input2.focus()"
             maxlength="50"
           />
@@ -33,7 +32,6 @@
             @mouseleave="hovering = false"
             @focus="toggleFocus"
             @blur="toggleFocus"
-            @input="v.emailForm.$touch"
             @keypress.enter.prevent="$refs.input3.focus()"
             ref="input2"
             maxlength="100"
@@ -60,7 +58,6 @@
             @mouseleave="hovering = false"
             @focus="toggleFocus"
             @blur="toggleFocus"
-            @input="v.messageForm.$touch"
             ref="input3"
             maxlength="300"
           />
@@ -75,20 +72,10 @@
         </div>
       </div>
       <div class="buttons">
-        <button
-          @mouseover="hovering = true"
-          @mouseleave="hovering = false"
-          @click="submit"
-          type="submit"
-        >
+        <button @mouseover="hovering = true" @mouseleave="hovering = false" @click="submit">
           Submit
         </button>
-        <button
-          @mouseover="hovering = true"
-          @mouseleave="hovering = false"
-          @click="reset"
-          type="reset"
-        >
+        <button @mouseover="hovering = true" @mouseleave="hovering = false" @click="resetForm">
           Reset
         </button>
       </div>
@@ -134,11 +121,14 @@ export default {
       target.offsetParent.classList.toggle('focus');
     }
 
-    function reset() {
+    function resetForm() {
       v.value.$reset();
       nameForm.value = '';
       emailForm.value = '';
       messageForm.value = '';
+      v.value.$reset();
+      v.value.$reset();
+      console.log(v.value);
     }
 
     async function submit() {
@@ -147,10 +137,9 @@ export default {
         email: emailForm.value.trim(),
         message: messageForm.value.trim(),
       };
-      await v.value.$validate();
-      if (!data.name || !data.email || !data.message || v.value.$invalid) return;
+      if (!data.name || !data.email || !data.message || !(await v.value.$validate())) return;
       loading.value = true;
-      reset();
+      resetForm();
       emit('scroll-to', 'top');
       fetch('/api/submit', {
         method: 'POST',
@@ -187,7 +176,7 @@ export default {
       emailCounter,
       messageCounter,
       toggleFocus,
-      reset,
+      resetForm,
       submit,
       isIOS,
       v,
