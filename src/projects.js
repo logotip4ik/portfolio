@@ -61,7 +61,7 @@ export default [
       { id: Math.random() * 100, content: 'Vue' },
       { id: Math.random() * 100, content: 'Scss' },
     ],
-    source: 'https://github.com/logotip4ik/Pixel-Drawer',
-    live: 'https://pixel-drawer.vercel.app',
+    source: 'https://github.com/logotip4ik/typist',
+    live: 'https://logotip4ik.github.io/typist/',
   },
 ];
