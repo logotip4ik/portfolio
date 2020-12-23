@@ -43,7 +43,7 @@ export default {
     padding: 0.5rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
 }
 </style>

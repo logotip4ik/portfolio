@@ -93,7 +93,7 @@ export default {
     margin-bottom: 4rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 
     * {
       margin: 1rem;
