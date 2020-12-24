@@ -176,14 +176,17 @@ export default {
     left: 0;
     width: 20px;
     height: 20px;
+    border: 0 solid transparent;
     border-radius: 50%;
     background-color: rgba($color: #79ffe1, $alpha: 0.7);
     backdrop-filter: blur(1px);
     z-index: 9999;
     user-select: none;
     pointer-events: none;
-    transition: width 200ms linear, height 200ms linear, background-color 200ms linear,
-      border 200ms linear;
+    transition: width 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      height 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      border 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
     justify-content: center;
     align-items: center;
