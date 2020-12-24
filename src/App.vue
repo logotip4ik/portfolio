@@ -123,7 +123,7 @@ export default {
           timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
         });
       }
-      checkForURLParams();
+      setTimeout(() => checkForURLParams(), 500);
     });
 
     return {
