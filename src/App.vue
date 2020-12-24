@@ -93,10 +93,14 @@ export default {
       });
     }
 
+    function checkForURLParams() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('q')) scroll(params.get('q'));
+    }
+
     let timeout;
 
     onMounted(() => {
-      // scroll('top', 0);
       loading.value = false;
       if (isMobile) {
         gsap.set(pointer.value, { opacity: 0 });
@@ -115,6 +119,7 @@ export default {
           timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
         });
       }
+      checkForURLParams();
     });
 
     return {
