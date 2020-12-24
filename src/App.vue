@@ -64,6 +64,10 @@ export default {
     const showingPopup = ref(false);
     const popupSuccess = ref(true);
 
+    /**
+     * @param {String} target
+     * @param {Number} duration
+     */
     function scroll(target, duration = 1000) {
       VueScrollTo.scrollTo(`.${target}`, duration, {
         offset: -60,
