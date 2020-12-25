@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="form-item">
-        <div :class="{ 'input-wrapper': true, 'bottom-5': isIOS }">
+        <div :class="{ 'input-wrapper': true, 'bottom-5': isIOS || isOpera }">
           <label>Message</label>
           <textarea
             v-model="v.messageForm.$model"
@@ -122,13 +122,10 @@ export default {
     }
 
     function resetForm() {
-      v.value.$reset();
       nameForm.value = '';
       emailForm.value = '';
       messageForm.value = '';
       v.value.$reset();
-      v.value.$reset();
-      console.log(v.value);
     }
 
     async function submit() {
@@ -156,7 +153,7 @@ export default {
         });
     }
 
-    function iOS() {
+    function checkIfIOS() {
       // prettier-ignore
       return (
         ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(
@@ -164,8 +161,13 @@ export default {
         ) || (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
       );
     }
+    function checkIfOpera() {
+      console.log(navigator.userAgent.indexOf('Opera'));
+      return navigator.userAgent.indexOf('Opera');
+    }
 
-    const isIOS = computed(() => iOS());
+    const isIOS = computed(() => checkIfIOS());
+    const isOpera = computed(() => checkIfOpera());
 
     return {
       hovering,
@@ -179,6 +181,7 @@ export default {
       resetForm,
       submit,
       isIOS,
+      isOpera,
       v,
     };
   },
