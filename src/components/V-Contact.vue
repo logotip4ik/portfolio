@@ -162,7 +162,6 @@ export default {
       );
     }
     function checkIfOpera() {
-      console.log(navigator.userAgent.indexOf('Opera'));
       return navigator.userAgent.indexOf('Opera');
     }
 
