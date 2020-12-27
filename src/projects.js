@@ -64,4 +64,18 @@ export default [
     source: 'https://github.com/logotip4ik/typist',
     live: 'https://logotip4ik.github.io/typist/',
   },
+  {
+    name: 'Countries',
+    img: require('./assets/LogoCountries-min.jpg'),
+    desc: 'Search, filter and see detailed info about each country in the World.',
+    techUsed: [
+      { id: Math.random() * 100, content: 'Javascript' },
+      { id: Math.random() * 100, content: 'Nuxt' },
+      { id: Math.random() * 100, content: 'Scss' },
+      { id: Math.random() * 100, content: 'Frontend Mentor' },
+      { id: Math.random() * 100, content: 'REST Countries API' },
+    ],
+    source: 'https://github.com/logotip4ik/countries',
+    live: 'https://countries.bogdankostyuk.vercel.app/',
+  },
 ];
