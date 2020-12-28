@@ -145,10 +145,7 @@ export default {
     line-height: 1.2;
     z-index: 10;
     display: inline-block;
-<<<<<<< HEAD
-=======
     max-width: 82vw;
->>>>>>> header-feature
 
     h1 {
       display: inline-block;
