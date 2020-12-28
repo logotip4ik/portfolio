@@ -1,5 +1,5 @@
 <template>
-  <header class="heading">
+  <header id="heading" class="heading">
     <!-- TODO: Some thing add, becouse it is to empty  -->
     <div class="container">
       <div class="logo-line">
@@ -36,6 +36,8 @@
 import { inject, onMounted, ref } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import 'particles.js';
+import particlesJSON from '@/assets/particles.json';
 
 export default {
   name: 'Heading',
@@ -54,6 +56,14 @@ export default {
 
     function openURL(url) {
       window.open(url);
+    }
+
+    function setupParticlesJS() {
+      window.particlesJS('heading', particlesJSON);
+      gsap.set('.particles-js-canvas-el', {
+        transform: 'translateY(-75px)',
+        zIndex: -1,
+      });
     }
 
     function setupAnimations() {
@@ -86,6 +96,7 @@ export default {
     onMounted(() => {
       setText();
       setupAnimations();
+      setupParticlesJS();
 
       ScrollTrigger.create({
         trigger: '.heading__bottom',
@@ -128,11 +139,12 @@ export default {
   .container {
     top: 55%;
     left: 15%;
-    max-width: 85vw;
     color: white;
     position: relative;
     text-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.2);
     line-height: 1.2;
+    z-index: 10;
+    display: inline-block;
 
     h1 {
       display: inline-block;
@@ -177,6 +189,10 @@ export default {
     }
   }
 
+  .particles-js-canvas-el {
+    transform: translateY(-75px);
+  }
+
   .item {
     position: absolute;
     width: 10px;
@@ -194,6 +210,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     transition: opacity 300ms ease-out;
+    z-index: 10;
 
     &.opacity-0 {
       opacity: 0;
