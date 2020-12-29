@@ -72,6 +72,7 @@ export default {
       VueScrollTo.scrollTo(`.${target}`, duration, {
         offset: -60,
         cancelable: true,
+        easing: [0.25, 0, 0.25, 1],
       });
     }
 
