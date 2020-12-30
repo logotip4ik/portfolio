@@ -16,6 +16,7 @@
     "@vuelidate/validators": "^2.0.0-alpha.5",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
+    "fullpage.js": "^3.0.9",
     "gsap": "^3.5.1",
     "handlebars": "^4.7.6",
     "joi": "^17.3.0",
