@@ -4,12 +4,14 @@
     <div class="container">
       <div class="logo-line">
         <font-awesome-icon
+          v-for="(icon, key) in icons"
+          :key="key"
           class="logo-icon"
           @click="openURL('https://github.com/logotip4ik')"
           @mouseover="hovering = true"
           @mouseleave="hovering = false"
           size="lg"
-          :icon="['fab', 'github']"
+          :icon="['fab', icon]"
         ></font-awesome-icon>
       </div>
       <h1 class="anim-text">
@@ -91,7 +93,7 @@ export default {
         },
         '-=0.9',
       );
-      TL.to('.logo-icon', { opacity: 1 });
+      TL.to('.logo-icon', { opacity: 1, stagger: 0.2 });
     }
 
     onMounted(() => {
@@ -120,6 +122,7 @@ export default {
     });
 
     return {
+      icons: ['github'],
       hovering,
       bottomText,
       openURL,
