@@ -10,11 +10,23 @@ import {
   faVuejs,
   faWindows,
 } from '@fortawesome/free-brands-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 
-library.add(faPython, faCss3, faJs, faHtml5, faGit, faGithub, faWindows, faLinux, faVuejs);
+library.add(
+  faPython,
+  faCss3,
+  faJs,
+  faHtml5,
+  faGit,
+  faGithub,
+  faWindows,
+  faLinux,
+  faVuejs,
+  faPaperPlane,
+);
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
