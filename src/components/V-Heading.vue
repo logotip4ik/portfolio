@@ -3,16 +3,18 @@
     <!-- TODO: Some thing add, becouse it is to empty  -->
     <div class="container">
       <div class="logo-line">
-        <font-awesome-icon
-          v-for="(icon, key) in icons"
-          :key="key"
-          class="logo-icon"
-          @click="openURL('https://github.com/logotip4ik')"
-          @mouseover="hovering = true"
-          @mouseleave="hovering = false"
-          size="lg"
-          :icon="['fab', icon]"
-        ></font-awesome-icon>
+        <div class="logo-icons">
+          <font-awesome-icon
+            v-for="(icon, key) in icons"
+            :key="key"
+            class="logo-icons--icon"
+            @click="icon.click"
+            @mouseover="hovering = true"
+            @mouseleave="hovering = false"
+            size="lg"
+            :icon="[icon.prefix, icon.name]"
+          ></font-awesome-icon>
+        </div>
       </div>
       <h1 class="anim-text">
         Bogdan Kostyuk
@@ -43,7 +45,7 @@ import particlesJSON from '@/assets/particles.json';
 
 export default {
   name: 'Heading',
-  setup() {
+  setup(_, { emit }) {
     gsap.registerPlugin(ScrollTrigger);
     const bottomText = ref(null);
     const hovering = inject('hovering');
@@ -93,7 +95,7 @@ export default {
         },
         '-=0.9',
       );
-      TL.to('.logo-icon', { opacity: 1, stagger: 0.2 });
+      TL.to('.logo-icons--icon', { opacity: 1, stagger: 0.3 });
     }
 
     onMounted(() => {
@@ -122,7 +124,10 @@ export default {
     });
 
     return {
-      icons: ['github'],
+      icons: [
+        { prefix: 'fab', name: 'github', click: () => openURL('https://github.com/logotip4ik') },
+        { prefix: 'fas', name: 'paper-plane', click: () => emit('scroll-to', 'contact') },
+      ],
       hovering,
       bottomText,
       openURL,
@@ -184,18 +189,23 @@ export default {
       transform: translateY(-50%);
       left: -1rem;
 
-      * {
-        opacity: 0;
+      .logo-icons {
         position: absolute;
         left: -2rem;
         top: 10%;
-        cursor: pointer;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+
+        &--icon {
+          opacity: 0;
+          &:first-child {
+            margin-bottom: 1rem;
+          }
+        }
       }
     }
-  }
-
-  .particles-js-canvas-el {
-    transform: translateY(-75px);
   }
 
   .item {
