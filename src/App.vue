@@ -1,11 +1,16 @@
 <template>
   <v-navbar @scroll-to="scroll"></v-navbar>
-  <div class="top"></div>
-  <v-heading @scroll-to="scroll"></v-heading>
-  <v-projects></v-projects>
-  <v-about-me></v-about-me>
-  <v-contact @scroll-to="scroll" @success="showPopup"></v-contact>
-  <v-footer></v-footer>
+  <div id="laxy-scroll">
+    <div class="top"></div>
+    <v-heading @scroll-to="scroll"></v-heading>
+    <v-projects></v-projects>
+    <v-about-me></v-about-me>
+    <v-contact @scroll-to="scroll" @success="showPopup"></v-contact>
+    <v-footer></v-footer>
+    <transition mode="out-in" name="fade">
+      <v-loading-overlay v-if="loading"></v-loading-overlay>
+    </transition>
+  </div>
   <div ref="pointer" class="pointer"><i class="pointer--wave"></i></div>
   <transition
     mode="out-in"
@@ -15,9 +20,6 @@
   >
     <v-popup v-if="showingPopup" @close="showingPopup = false" :success="popupSuccess"></v-popup>
   </transition>
-  <transition mode="out-in" name="fade">
-    <v-loading-overlay v-if="loading"></v-loading-overlay>
-  </transition>
 </template>
 
 <script>
@@ -25,6 +27,7 @@
 import { onMounted, provide, ref, watch } from 'vue';
 import VueScrollTo from 'vue-scrollto';
 import gsap from 'gsap';
+import luxy from 'luxy.js';
 
 import VHeading from './components/V-Heading.vue';
 import VNavbar from './components/V-Navbar.vue';
@@ -105,26 +108,34 @@ export default {
 
     let timeout;
 
+    function setupPointer() {
+      if (isMobile) return;
+      gsap.set(pointer.value, { xPercent: -50, yPercent: -50 });
+
+      window.addEventListener('mousemove', (e) => {
+        gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY, opacity: 1 });
+        pointer.value.children[0].classList.remove('animate');
+        clearTimeout(timeout);
+        timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
+      });
+      window.addEventListener('scroll', () => {
+        pointer.value.children[0].classList.remove('animate');
+        clearTimeout(timeout);
+        timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
+      });
+    }
+    function setupLuxy() {
+      luxy.init({
+        wrapper: '#laxy-scroll',
+        wrapperSpeed: 0.05,
+      });
+    }
+
     onMounted(() => {
       loading.value = false;
-      if (isMobile) {
-        gsap.set(pointer.value, { opacity: 0 });
-      } else {
-        gsap.set(pointer.value, { xPercent: -50, yPercent: -50 });
-
-        window.addEventListener('mousemove', (e) => {
-          gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY, opacity: 1 });
-          pointer.value.children[0].classList.remove('animate');
-          clearTimeout(timeout);
-          timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
-        });
-        window.addEventListener('scroll', () => {
-          pointer.value.children[0].classList.remove('animate');
-          clearTimeout(timeout);
-          timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
-        });
-      }
       setTimeout(() => checkForURLParams(), 500);
+      setupPointer();
+      setupLuxy();
     });
 
     return {
@@ -169,47 +180,46 @@ export default {
   *::selection {
     background-color: rgba($color: #79ffe1, $alpha: 0.7);
   }
+}
+.pointer {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 0 solid transparent;
+  border-radius: 50%;
+  background-color: rgba($color: #79ffe1, $alpha: 0.7);
+  backdrop-filter: blur(1px);
+  z-index: 9999;
+  user-select: none;
+  pointer-events: none;
+  transition: width 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    border 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .pointer {
-    position: fixed;
-    opacity: 0;
-    top: 0;
-    left: 0;
+  &.active {
+    width: 50px;
+    height: 50px;
+    background-color: rgba($color: #79ffe1, $alpha: 0.2);
+    border: 2px solid #79ffe1;
+  }
+  &--wave {
     width: 20px;
     height: 20px;
-    border: 0 solid transparent;
-    border-radius: 50%;
     background-color: rgba($color: #79ffe1, $alpha: 0.7);
-    backdrop-filter: blur(1px);
-    z-index: 9999;
-    user-select: none;
-    pointer-events: none;
-    transition: width 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      height 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      background-color 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      border 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    opacity: 0;
+    border-radius: 50%;
+    transition: transform 200ms linear;
 
-    &.active {
-      width: 50px;
-      height: 50px;
-      background-color: rgba($color: #79ffe1, $alpha: 0.2);
-      border: 2px solid #79ffe1;
-    }
-    &--wave {
-      width: 20px;
-      height: 20px;
-      background-color: rgba($color: #79ffe1, $alpha: 0.7);
-      opacity: 0;
-      border-radius: 50%;
-      transition: transform 200ms linear;
-
-      &.animate {
-        animation: pulse 3s infinite;
-        animation-delay: 1;
-      }
+    &.animate {
+      animation: pulse 3s infinite;
+      animation-delay: 1;
     }
   }
 }
