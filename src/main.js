@@ -29,5 +29,5 @@ library.add(
 );
 
 createApp(App)
-  .component('font-awesome-icon', FontAwesomeIcon)
+  .component('FontAwesomeIcon', FontAwesomeIcon)
   .mount('#app');
