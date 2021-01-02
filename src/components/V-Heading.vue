@@ -1,10 +1,9 @@
 <template>
   <header id="heading" class="heading">
-    <!-- TODO: Some thing add, becouse it is to empty  -->
-    <div class="container">
+    <div class="heading__container">
       <div class="logo-line">
         <div class="logo-icons">
-          <font-awesome-icon
+          <FontAwesomeIcon
             v-for="(icon, key) in icons"
             :key="key"
             class="logo-icons--icon"
@@ -13,7 +12,7 @@
             @mouseleave="hovering = false"
             size="lg"
             :icon="[icon.prefix, icon.name]"
-          ></font-awesome-icon>
+          ></FontAwesomeIcon>
         </div>
       </div>
       <h1 class="anim-text">
@@ -145,7 +144,7 @@ export default {
   position: relative;
   overflow: hidden;
 
-  .container {
+  &__container {
     top: 55%;
     left: 15%;
     color: white;
