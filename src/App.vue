@@ -1,14 +1,14 @@
 <template>
-  <v-navbar @scroll-to="scroll"></v-navbar>
+  <VNavbar @scroll-to="scroll"></VNavbar>
   <div id="laxy-scroll">
     <div class="top"></div>
-    <v-heading @scroll-to="scroll"></v-heading>
-    <v-projects></v-projects>
-    <v-about-me></v-about-me>
-    <v-contact @scroll-to="scroll" @success="showPopup"></v-contact>
-    <v-footer></v-footer>
+    <VHeading @scroll-to="scroll"></VHeading>
+    <VProjects></VProjects>
+    <VAboutMe></VAboutMe>
+    <VContact @scroll-to="scroll" @success="showPopup"></VContact>
+    <VFooter></VFooter>
     <transition mode="out-in" name="fade">
-      <v-loading-overlay v-if="loading"></v-loading-overlay>
+      <VLoadingOverlay v-if="loading"></VLoadingOverlay>
     </transition>
   </div>
   <div ref="pointer" class="pointer"><i class="pointer--wave"></i></div>
@@ -18,7 +18,7 @@
     @leave="leaveAnim"
     :duration="{ enter: 500, leave: 500 }"
   >
-    <v-popup v-if="showingPopup" @close="showingPopup = false" :success="popupSuccess"></v-popup>
+    <VPopup v-if="showingPopup" @close="showingPopup = false" :success="popupSuccess"></VPopup>
   </transition>
 </template>
 
