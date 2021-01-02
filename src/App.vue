@@ -2,7 +2,7 @@
   <VNavbar @scroll-to="scroll"></VNavbar>
   <div id="laxy-scroll">
     <div class="top"></div>
-    <VHeading @scroll-to="scroll"></VHeading>
+    <VHeading :isMobile="isMobile" @scroll-to="scroll"></VHeading>
     <VProjects></VProjects>
     <VAboutMe></VAboutMe>
     <VContact @scroll-to="scroll" @success="showPopup"></VContact>
@@ -141,6 +141,7 @@ export default {
     return {
       scroll,
       loading,
+      isMobile,
       popupSuccess,
       showingPopup,
       pointer,

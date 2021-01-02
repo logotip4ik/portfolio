@@ -30,7 +30,7 @@
       @mouseover="hovering = true"
       @mouseleave="hovering = false"
       ref="bottomText"
-      class="heading__bottom"
+      :class="{ heading__bottom: true, 'heading__bottom--phone': isMobile }"
     ></p>
   </header>
 </template>
@@ -53,8 +53,10 @@ export default {
 
     function setText() {
       text.split('').forEach((char) => {
-        bottomText.value.innerHTML += `<span class="text-to-anim">${char}</span>`;
+        const isEmpty = char === ' ' ? 'empty' : '';
+        bottomText.value.innerHTML += `<span class="text-to-anim ${isEmpty}">${char}</span>`;
       });
+      gsap.set('.empty', { width: '0.4ch' });
     }
 
     function openURL(url) {
@@ -115,8 +117,9 @@ export default {
           from: 'center',
           yoyo: true,
           repeatDelay: 0.4,
+          ease: 'power1.inOut',
         },
-        x: 5,
+        y: 1.0,
         opacity: 0.3,
         duration: 1.2,
       });
@@ -133,6 +136,13 @@ export default {
     };
   },
   emits: ['scroll-to'],
+  props: {
+    isMobile: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
 };
 </script>
 
@@ -145,7 +155,7 @@ export default {
   overflow: hidden;
 
   &__container {
-    top: 55%;
+    top: 50%;
     left: 15%;
     color: white;
     position: relative;
@@ -207,16 +217,7 @@ export default {
     }
   }
 
-  .item {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba($color: rebeccapurple, $alpha: 1);
-    transform: translate(-50%, -50%);
-  }
-
-  .heading__bottom {
+  &__bottom {
     cursor: pointer;
     color: white;
     position: absolute;
@@ -225,6 +226,14 @@ export default {
     transform: translateX(-50%);
     transition: opacity 300ms ease-out;
     z-index: 10;
+
+    &--phone {
+      display: flex;
+
+      .text-to-anim {
+        display: inline-block;
+      }
+    }
 
     &.opacity-0 {
       opacity: 0;
