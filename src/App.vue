@@ -127,7 +127,7 @@ export default {
     function setupLuxy() {
       luxy.init({
         wrapper: '#laxy-scroll',
-        wrapperSpeed: 0.05,
+        wrapperSpeed: 0.085,
       });
     }
 
