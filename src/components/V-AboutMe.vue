@@ -10,12 +10,12 @@
     </p>
     <h3 class="tech">Tech I am using</h3>
     <div class="container" aria-hidden="true">
-      <font-awesome-icon
+      <FontAwesomeIcon
         v-for="(icon, idx) in icons"
         :icon="['fab', icon]"
         :key="idx"
         size="6x"
-      ></font-awesome-icon>
+      ></FontAwesomeIcon>
     </div>
     <div class="container aria" aria-hidden="false">
       <ul>
