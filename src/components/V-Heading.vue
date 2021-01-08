@@ -1,7 +1,7 @@
 <template>
   <header id="heading" class="heading">
     <div class="heading__container">
-      <div class="logo-line">
+      <div class="logo-line" ref="logoLine">
         <div class="logo-icons">
           <FontAwesomeIcon
             v-for="(icon, key) in icons"
@@ -15,12 +15,12 @@
           ></FontAwesomeIcon>
         </div>
       </div>
-      <h1 class="anim-text">
+      <h1 class="anim-text" data-rellax-speed="2">
         Bogdan Kostyuk
         <div class="box"></div>
       </h1>
       <br />
-      <h2 class="anim-text">
+      <h2 class="anim-text" data-rellax-speed="1">
         Full Stack Dev
         <div class="box"></div>
       </h2>
@@ -37,6 +37,7 @@
 
 <script>
 import { inject, onMounted, ref } from 'vue';
+import Rellax from 'rellax';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import 'particles.js';
@@ -47,6 +48,8 @@ export default {
   setup(_, { emit }) {
     gsap.registerPlugin(ScrollTrigger);
     const bottomText = ref(null);
+    const logoLine = ref(null);
+
     const hovering = inject('hovering');
 
     const text = '‹‹ Scroll down ››';
@@ -72,6 +75,11 @@ export default {
       });
     }
 
+    function setupRellax() {
+      // eslint-disable-next-line
+      new Rellax('.anim-text');
+    }
+
     function setupAnimations() {
       const TL = gsap.timeline();
       TL.from('.logo-line', { x: 100, duration: 0.8, delay: 0.4 });
@@ -93,6 +101,7 @@ export default {
           height: 0,
           duration: 0.8,
           ease: 'power2.out',
+          onComplete: setupRellax,
         },
         '-=0.9',
       );
@@ -107,8 +116,14 @@ export default {
       ScrollTrigger.create({
         trigger: '.heading__bottom',
         start: 'center center',
-        onEnter: () => bottomText.value.classList.add('opacity-0'),
-        onLeaveBack: () => bottomText.value.classList.remove('opacity-0'),
+        onEnter: () => {
+          bottomText.value.classList.add('opacity-0');
+          logoLine.value.classList.add('opacity-0');
+        },
+        onLeaveBack: () => {
+          bottomText.value.classList.remove('opacity-0');
+          logoLine.value.classList.remove('opacity-0');
+        },
       });
       gsap.to('.text-to-anim', {
         stagger: {
@@ -131,6 +146,7 @@ export default {
         { prefix: 'fas', name: 'paper-plane', click: () => emit('scroll-to', 'contact') },
       ],
       hovering,
+      logoLine,
       bottomText,
       openURL,
     };
@@ -197,6 +213,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       left: -1rem;
+      transition: opacity 300ms ease-out;
 
       .logo-icons {
         position: absolute;
@@ -234,12 +251,12 @@ export default {
         display: inline-block;
       }
     }
-
-    &.opacity-0 {
-      opacity: 0;
-      cursor: default;
-      pointer-events: none;
-    }
   }
+}
+
+.opacity-0 {
+  opacity: 0;
+  cursor: default;
+  pointer-events: none;
 }
 </style>
