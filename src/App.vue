@@ -7,9 +7,6 @@
     <VAboutMe></VAboutMe>
     <VContact @scroll-to="scroll" @success="showPopup"></VContact>
     <VFooter></VFooter>
-    <transition mode="out-in" name="fade">
-      <VLoadingOverlay v-if="loading"></VLoadingOverlay>
-    </transition>
   </div>
   <div ref="pointer" class="pointer"><i class="pointer--wave"></i></div>
   <transition
@@ -35,7 +32,6 @@ import VProjects from './components/V-Projects.vue';
 import VAboutMe from './components/V-AboutMe.vue';
 import VContact from './components/V-Contact.vue';
 import VFooter from './components/V-Footer.vue';
-import VLoadingOverlay from './components/V-Loading-Overlay.vue';
 import VPopup from './components/V-Popup.vue';
 
 export default {
@@ -63,6 +59,11 @@ export default {
 
     const loading = ref(true);
     provide('loading', loading);
+    watch(loading, () => {
+      gsap.to('#loader', {
+        clipPath: loading.value ? 'inset(100% 0 100% 0)' : 'inset(100% 0 0 0)',
+      });
+    });
 
     const showingPopup = ref(false);
     const popupSuccess = ref(true);
@@ -157,7 +158,6 @@ export default {
     VAboutMe,
     VContact,
     VFooter,
-    VLoadingOverlay,
     VPopup,
   },
 };
