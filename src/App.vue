@@ -132,8 +132,19 @@ export default {
       });
     }
 
+    function sayHay() {
+      console.log(
+        '▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n██ ▄▄▀█▀▄▄▀█ ▄▄▄█ ▄▀█ ▄▄▀█ ▄▄▀████ █▀▄█▀▄▄▀█ ▄▄█▄ ▄█ ██ █ ██ █ █▀\n██ ▄▄▀█ ██ █ █▄▀█ █ █ ▀▀ █ ██ ████ ▄▀██ ██ █▄▄▀██ ██ ▀▀ █ ██ █ ▄▀\n██ ▀▀ ██▄▄██▄▄▄▄█▄▄██▄██▄█▄██▄████ ██ ██▄▄██▄▄▄██▄██▀▀▀▄██▄▄▄█▄█▄\n▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀',
+      );
+      console.log(
+        '%c Did you forget something here?',
+        'font-size: 15px; font-weight: bold; color: #65C6B5; border-radius: 5px; background-color: #333',
+      );
+    }
+
     onMounted(() => {
       loading.value = false;
+      sayHay();
       setTimeout(() => checkForURLParams(), 500);
       setupPointer();
       setupLuxy();
