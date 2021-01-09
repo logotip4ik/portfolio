@@ -15,12 +15,12 @@
           ></FontAwesomeIcon>
         </div>
       </div>
-      <h1 class="anim-text" data-rellax-speed="2">
+      <h1 class="anim-text rellax" data-rellax-speed="2">
         Bogdan Kostyuk
         <div class="box"></div>
       </h1>
       <br />
-      <h2 class="anim-text" data-rellax-speed="1">
+      <h2 class="anim-text rellax" data-rellax-speed="1">
         Full Stack Dev
         <div class="box"></div>
       </h2>
@@ -77,7 +77,7 @@ export default {
 
     function setupRellax() {
       // eslint-disable-next-line
-      new Rellax('.anim-text');
+      new Rellax('.rellax');
     }
 
     function setupAnimations() {

@@ -65,6 +65,7 @@ export default {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: white;
 
   img {
     width: 100%;
