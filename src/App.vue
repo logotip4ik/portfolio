@@ -138,7 +138,7 @@ export default {
       );
       console.log(
         '%c Did you forget something here?',
-        'font-size: 15px; font-weight: bold; color: #65C6B5; border-radius: 5px; background-color: #333',
+        'font-size: 16px; color: #65C6B5; border-radius: 5px; background-color: #333',
       );
     }
 
@@ -175,7 +175,24 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
+/* poppins-200 - latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Poppins'), url('./assets/fonts/poppins-v15-latin-200.woff2') format('woff2'),
+    url('./assets/fonts/poppins-v15-latin-200.woff') format('woff');
+}
+
+/* poppins-regular - latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poppins'), url('./assets/fonts/poppins-v15-latin-regular.woff2') format('woff2'),
+    url('./assets/fonts/poppins-v15-latin-regular.woff') format('woff');
+}
+
 *,
 :before,
 :after {
