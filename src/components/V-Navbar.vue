@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { inject, ref } from 'vue';
+import { inject, ref, watch } from 'vue';
 
 export default {
   name: 'Navbar',
@@ -55,12 +55,7 @@ export default {
       showingNavigation.value = !showingNavigation.value;
       setTimeout(() => {
         triggerClickOutside.value = showingNavigation.value;
-      }, 500);
-      if (showingNavigation.value) {
-        window.addEventListener('scroll', toggleNav);
-      } else {
-        window.removeEventListener('scroll', toggleNav);
-      }
+      }, 300);
     };
     const handleClickOutside = () => {
       if (triggerClickOutside.value === false) return;
@@ -88,6 +83,11 @@ export default {
         emits: 'contact',
       },
     ];
+
+    watch(showingNavigation, (val) => {
+      if (val === true) window.addEventListener('scroll', toggleNav);
+      else if (val === false) window.removeEventListener('scroll', toggleNav);
+    });
 
     return {
       showingNavigation,
