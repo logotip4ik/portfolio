@@ -82,7 +82,7 @@ export default {
 
     function setupAnimations() {
       const TL = gsap.timeline();
-      TL.from('.logo-line', { x: 100, duration: 0.8, delay: 0.4 });
+      TL.from('.logo-line', { x: 100, duration: 0.8, delay: 0.7 });
       TL.from(
         '.anim-text',
         {
@@ -90,7 +90,7 @@ export default {
           opacity: 0,
           y: 100,
           duration: 1,
-          delay: 0.2,
+          delay: 0.5,
         },
         '-=0.8',
       );
