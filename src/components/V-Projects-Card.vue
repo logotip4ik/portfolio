@@ -1,6 +1,6 @@
 <template>
   <div class="card" data-nosnippet>
-    <img :src="project.img" loading="lazy" :alt="`Logo-Image for '${project.name}'`" />
+    <img :src="project.img" loading="lazy" :alt="`Logo-Image for '${project.name}' project`" />
     <div class="card__content">
       <h3>{{ project.name }}</h3>
       <p>{{ project.desc }}</p>
