@@ -126,6 +126,7 @@ export default {
     text-align: right;
 
     button {
+      position: relative;
       text-transform: uppercase;
       font-size: 1rem;
       font-family: inherit;
@@ -134,32 +135,26 @@ export default {
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 0.25rem;
-      transition: background-color 150ms ease-out, box-shadow 150ms ease-out;
+      transition: background-color 150ms ease-out;
       outline: none;
 
       &:first-child {
         color: white;
         background-color: #18181e;
-        box-shadow: 0 0 2px rgba($color: #000000, $alpha: 1);
+        box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.25);
 
         &:hover,
         &:focus {
           background-color: lighten($color: #18181e, $amount: 10);
         }
-        &:active {
-          box-shadow: 0 0 1px rgba($color: #000000, $alpha: 0.1);
-        }
       }
       &:last-child {
         background-color: #f3f4f6;
-        box-shadow: 0 0 1px rgba($color: #18181e, $alpha: 1);
-
+        border: 1px solid #bbbbbb;
+        box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.15);
         &:hover,
         &:focus {
           background-color: darken($color: #f3f4f6, $amount: 10);
-        }
-        &:active {
-          box-shadow: 0 0 1px rgba($color: #000000, $alpha: 0.1);
         }
       }
     }
