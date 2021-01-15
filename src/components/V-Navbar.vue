@@ -16,7 +16,7 @@
     </ul>
     <div
       :class="{ burger: true, 'burger--active': showingNavigation }"
-      @click="showingNavigation = !showingNavigation"
+      @click="toggleNav"
       @mouseover="hovering = true"
       @mouseleave="hovering = false"
     >
@@ -25,7 +25,7 @@
       <div class="line"></div>
     </div>
     <transition name="slide" mode="out-in">
-      <ul class="navigation" v-show="showingNavigation">
+      <ul class="navigation" v-show="showingNavigation" v-click-outside="handleClickOutside">
         <li
           v-for="(item, idx) in links"
           :key="idx"
@@ -49,15 +49,27 @@ export default {
     const navbar = ref(null);
 
     const showingNavigation = ref(false);
+    const triggerClickOutside = ref(false);
 
     const toggleNav = () => {
-      navbar.value.classList.toggle('show-menu');
+      showingNavigation.value = !showingNavigation.value;
+      setTimeout(() => {
+        triggerClickOutside.value = showingNavigation.value;
+      }, 500);
+      if (showingNavigation.value) {
+        window.addEventListener('scroll', toggleNav);
+      } else {
+        window.removeEventListener('scroll', toggleNav);
+      }
+    };
+    const handleClickOutside = () => {
+      if (triggerClickOutside.value === false) return;
+      showingNavigation.value = false;
+      triggerClickOutside.value = false;
     };
     const scroll = (target, isOpenNav = false) => {
       emit('scroll-to', target);
-      if (isOpenNav) {
-        showingNavigation.value = false;
-      }
+      if (isOpenNav) toggleNav();
     };
 
     const hovering = inject('hovering');
@@ -84,6 +96,7 @@ export default {
       navbar,
       scroll,
       toggleNav,
+      handleClickOutside,
     };
   },
   emits: ['scroll-to'],
