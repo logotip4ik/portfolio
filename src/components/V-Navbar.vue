@@ -185,7 +185,6 @@ li {
 }
 .navigation {
   position: absolute;
-  // z-index: -9999999;
   left: 0;
   top: 100%;
   background: #18181e;
@@ -196,6 +195,7 @@ li {
   color: white;
   padding: 0.75rem;
   list-style-type: none;
+  border-top: 2px solid #373746;
 
   &:hover {
     color: #9b9b9b;
