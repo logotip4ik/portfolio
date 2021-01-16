@@ -51,6 +51,7 @@ export default {
     const logoLine = ref(null);
 
     const hovering = inject('hovering');
+    const openURL = inject('openURL');
 
     const text = '‹‹ Scroll down ››';
 
@@ -60,10 +61,6 @@ export default {
         bottomText.value.innerHTML += `<span class="text-to-anim ${isEmpty}">${char}</span>`;
       });
       gsap.set('.empty', { width: '0.4ch' });
-    }
-
-    function openURL(url) {
-      window.open(url);
     }
 
     function setupParticlesJS() {
@@ -148,7 +145,6 @@ export default {
       hovering,
       logoLine,
       bottomText,
-      openURL,
     };
   },
   emits: ['scroll-to'],

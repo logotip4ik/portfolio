@@ -35,10 +35,7 @@ export default {
   name: 'Projects-Card',
   setup() {
     const hovering = inject('hovering');
-
-    function openURL(url) {
-      window.open(url);
-    }
+    const openURL = inject('openURL');
 
     return {
       hovering,

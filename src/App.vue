@@ -69,6 +69,11 @@ export default {
     const showingPopup = ref(false);
     const popupSuccess = ref(true);
 
+    function openURL(url) {
+      window.open(url);
+    }
+    provide('openURL', openURL);
+
     /**
      * @param {String} target
      * @param {Number} duration
