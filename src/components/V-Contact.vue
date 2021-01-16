@@ -162,7 +162,7 @@ export default {
       );
     }
     function checkIfOpera() {
-      return navigator.userAgent.indexOf('Opera');
+      return navigator.userAgent.includes('Opera');
     }
 
     const isIOS = computed(() => checkIfIOS());
