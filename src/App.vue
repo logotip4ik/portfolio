@@ -57,13 +57,21 @@ export default {
     provide('hovering', hovering);
     watch(hovering, () => pointer.value.classList.toggle('active'));
 
+    let initialLoading = true;
     const loading = ref(true);
     provide('loading', loading);
     watch(loading, () => {
-      gsap.to('#loader', {
-        delay: 0.3,
-        clipPath: loading.value ? 'inset(100% 0 100% 0)' : 'inset(100% 0 0 0)',
-      });
+      if (CSS.supports('clip-path: inset(100% 0 100% 0)')) {
+        gsap.to('#loader', {
+          delay: initialLoading ? 0.3 : 0,
+          clipPath: loading.value ? 'inset(100% 0 100% 0)' : 'inset(100% 0 0 0)',
+          onComplete: () => {
+            initialLoading = false;
+          },
+        });
+      } else {
+        gsap.set('#loader', { display: loading.value ? 'flex' : 'none' });
+      }
     });
 
     const showingPopup = ref(false);
