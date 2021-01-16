@@ -66,9 +66,9 @@ export default {
     function setupParticlesJS() {
       window.particlesJS('heading', particlesJSON);
       gsap.set('.particles-js-canvas-el', {
-        transform: 'translateY(-110px)',
         height: '105vh',
-        zIndex: -1,
+        width: '105vw',
+        transform: 'translate(-2.5vw, -110px)',
       });
     }
 

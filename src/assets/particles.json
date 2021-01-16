@@ -56,7 +56,7 @@
       "out_mode": "out",
       "bounce": false,
       "attract": {
-        "enable": false,
+        "enable": true,
         "rotateX": 600,
         "rotateY": 1200
       }
@@ -66,19 +66,20 @@
     "detect_on": "canvas",
     "events": {
       "onhover": {
-        "enable": false
+        "enable": true,
+        "mode": "grab"
       },
       "onclick": {
-        "enable": true,
+        "enable": false,
         "mode": "push"
       },
       "resize": true
     },
     "modes": {
       "grab": {
-        "distance": 800,
+        "distance": 200,
         "line_linked": {
-          "opacity": 1
+          "opacity": 0.2
         }
       },
       "bubble": {
