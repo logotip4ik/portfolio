@@ -21,7 +21,7 @@
 
 <script>
 // eslint-disable-next-line
-import { onMounted, provide, ref, watch } from 'vue';
+import { computed, onMounted, provide, ref, watch } from 'vue';
 import VueScrollTo from 'vue-scrollto';
 import gsap from 'gsap';
 import luxy from 'luxy.js';
@@ -57,6 +57,7 @@ export default {
     provide('hovering', hovering);
     watch(hovering, () => pointer.value.classList.toggle('active'));
 
+    // LOADER stuff
     let initialLoading = true;
     const loading = ref(true);
     provide('loading', loading);

@@ -1,7 +1,7 @@
 <template>
   <section class="projects">
     <h2 data-nosnippet>Projects</h2>
-    <div class="container">
+    <div :class="{ container: true, 'justify-space-around': !supportJustifyEvenly }">
       <VProjectsCard
         v-for="(project, idx) in projects"
         :key="idx"
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { computed } from 'vue';
 import projects from '../projects';
 
 import VProjectsCard from './V-Projects-Card.vue';
@@ -19,8 +20,11 @@ import VProjectsCard from './V-Projects-Card.vue';
 export default {
   name: 'Projects',
   setup() {
+    const supportJustifyEvenly = computed(() => CSS.supports('justify-content: space-evenly'));
+
     return {
       projects,
+      supportJustifyEvenly,
     };
   },
   components: { VProjectsCard },
@@ -44,6 +48,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
+    &.justify-space-around {
+      justify-content: space-around;
+    }
   }
 }
 </style>

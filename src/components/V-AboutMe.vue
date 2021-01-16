@@ -9,7 +9,10 @@
       funny things and I do it with passion.
     </p>
     <h3 class="tech">Tech I am using</h3>
-    <div class="container" aria-hidden="true">
+    <div
+      :class="{ container: true, 'justify-space-around': !supportJustifyEvenly }"
+      aria-hidden="true"
+    >
       <FontAwesomeIcon
         v-for="(icon, idx) in icons"
         :icon="['fab', icon]"
@@ -26,7 +29,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 export default {
   name: 'About Me',
@@ -43,8 +46,11 @@ export default {
       'github',
     ]);
 
+    const supportJustifyEvenly = computed(() => CSS.supports('justify-content: space-evenly'));
+
     return {
       icons,
+      supportJustifyEvenly,
     };
   },
 };
@@ -94,6 +100,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
+    &.justify-space-around {
+      justify-content: space-around;
+    }
 
     * {
       margin: 1rem;
