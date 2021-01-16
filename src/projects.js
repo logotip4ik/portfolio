@@ -27,6 +27,20 @@ export default [
     live: 'https://my-journal.vercel.app/',
   },
   {
+    name: 'Nuxt Store',
+    img: require('./assets/Nuxt-Store-Logo-min.png'),
+    desc:
+      'E-Commerce store build with Nuxt. Content is fetching from Netlify CMS. Inspired from JolyBell.com',
+    techUsed: [
+      { id: Math.random() * 100, content: 'Javascript' },
+      { id: Math.random() * 100, content: 'Nuxt' },
+      { id: Math.random() * 100, content: 'Scss' },
+      { id: Math.random() * 100, content: 'Netlify CMS' },
+    ],
+    source: 'https://github.com/logotip4ik/typist',
+    live: 'https://logotip4ik.github.io/typist/',
+  },
+  {
     name: 'Todo Web App',
     img: require('./assets/TodoWebAppLogo-min.png'),
     desc: 'Your todos in browser. Synced between all devices.',
@@ -51,18 +65,6 @@ export default [
     ],
     source: 'https://github.com/logotip4ik/Pixel-Drawer',
     live: 'https://pixel-drawer.vercel.app',
-  },
-  {
-    name: 'Typist',
-    img: require('./assets/TypistLogo-min.png'),
-    desc: 'Project website build for practicing touch typing.',
-    techUsed: [
-      { id: Math.random() * 100, content: 'Javascript' },
-      { id: Math.random() * 100, content: 'Vue' },
-      { id: Math.random() * 100, content: 'Scss' },
-    ],
-    source: 'https://github.com/logotip4ik/typist',
-    live: 'https://logotip4ik.github.io/typist/',
   },
   {
     name: 'Countries',
