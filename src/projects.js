@@ -37,8 +37,8 @@ export default [
       { id: Math.random() * 100, content: 'Scss' },
       { id: Math.random() * 100, content: 'Netlify CMS' },
     ],
-    source: 'https://github.com/logotip4ik/typist',
-    live: 'https://logotip4ik.github.io/typist/',
+    source: 'https://github.com/logotip4ik/nuxt-store',
+    live: 'https://nuxt-store-cms.netlify.app/',
   },
   {
     name: 'Todo Web App',
