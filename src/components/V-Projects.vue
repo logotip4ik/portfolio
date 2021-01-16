@@ -2,11 +2,11 @@
   <section class="projects">
     <h2 data-nosnippet>Projects</h2>
     <div class="container">
-      <v-projects-card
+      <VProjectsCard
         v-for="(project, idx) in projects"
         :key="idx"
         :project="project"
-      ></v-projects-card>
+      ></VProjectsCard>
     </div>
   </section>
 </template>
