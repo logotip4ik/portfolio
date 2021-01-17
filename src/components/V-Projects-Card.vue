@@ -62,7 +62,7 @@ export default {
     height: auto;
   }
 
-  .card__content {
+  &__content {
     padding: 0.75rem;
     h3 {
       font-size: 1.5rem;
@@ -110,7 +110,7 @@ export default {
       }
     }
   }
-  .card__actions {
+  &__actions {
     margin-top: auto;
     padding: 1rem;
     text-align: right;
