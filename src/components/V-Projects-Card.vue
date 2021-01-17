@@ -10,26 +10,16 @@
       </ul>
     </div>
     <div class="card__actions">
-      <button
-        @mouseover="hovering = true"
-        @mouseleave="hovering = false"
-        @click="openURL(project.source)"
-      >
-        Source
-      </button>
-      <button
-        @mouseover="hovering = true"
-        @mouseleave="hovering = false"
-        @click="openURL(project.live)"
-      >
-        Live
-      </button>
+      <VButton dark @click="openURL(project.source)">Source</VButton>
+      <VButton @click="openURL(project.live)">Live</VButton>
     </div>
   </div>
 </template>
 
 <script>
 import { inject } from 'vue';
+
+import VButton from '@/components/V-Button.vue';
 
 export default {
   name: 'Projects-Card',
@@ -48,6 +38,9 @@ export default {
       requried: true,
       default: () => ({}),
     },
+  },
+  components: {
+    VButton,
   },
 };
 </script>

@@ -72,12 +72,8 @@
         </div>
       </div>
       <div class="buttons">
-        <button @mouseover="hovering = true" @mouseleave="hovering = false" @click="submit">
-          Submit
-        </button>
-        <button @mouseover="hovering = true" @mouseleave="hovering = false" @click="resetForm">
-          Reset
-        </button>
+        <VButton dark @click="submit">Submit</VButton>
+        <VButton @click="resetForm">Reset</VButton>
       </div>
     </form>
   </section>
@@ -87,6 +83,8 @@
 import { computed, inject, ref } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
+
+import VButton from '@/components/V-Button.vue';
 
 export default {
   name: 'Contact',
@@ -185,6 +183,7 @@ export default {
     };
   },
   emits: ['scroll-to', 'success'],
+  components: { VButton },
 };
 </script>
 
@@ -292,44 +291,6 @@ export default {
     .buttons {
       display: flex;
       justify-content: flex-end;
-      button {
-        font: inherit;
-        margin: 1rem 0.5rem;
-        text-transform: uppercase;
-        font-size: 1rem;
-        letter-spacing: 2px;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 0.25rem;
-        outline: none;
-
-        &:first-child {
-          background: #18181e;
-          color: white;
-          box-shadow: 0 0 2px rgba($color: #000000, $alpha: 1);
-          transition: background-color 150ms ease-out, box-shadow 150ms ease-out;
-
-          &:hover,
-          &:focus {
-            background-color: lighten($color: #18181e, $amount: 10);
-          }
-          &:active {
-            box-shadow: 0 0 1px rgba($color: #000000, $alpha: 0.1);
-          }
-        }
-        &:last-child {
-          background-color: #f3f4f6;
-          box-shadow: 0 0 1px rgba($color: #18181e, $alpha: 1);
-
-          &:hover,
-          &:focus {
-            background-color: darken($color: #f3f4f6, $amount: 10);
-          }
-          &:active {
-            box-shadow: 0 0 1px rgba($color: #000000, $alpha: 0.1);
-          }
-        }
-      }
     }
   }
 }
