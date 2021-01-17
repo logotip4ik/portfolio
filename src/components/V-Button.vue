@@ -56,10 +56,11 @@ export default {
     color: white;
     background-color: #18181e;
     box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.25);
+    border: none;
 
     &:hover,
     &:focus {
-      background-color: lighten($color: #18181e, $amount: 10);
+      background-color: lighten($color: #18181e, $amount: 15);
     }
   }
 }
