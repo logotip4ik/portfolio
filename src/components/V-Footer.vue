@@ -1,8 +1,8 @@
 <template>
   <footer>
     <div class="text">
-      <h3>&copy;2019-{{ currYear }}</h3>
-      <h2>BogdanKostyuk</h2>
+      <h3>&copy;BogdanKostyuk</h3>
+      <h2>2019 - {{ currYear }}</h2>
     </div>
     <div class="icons">
       <font-awesome-icon
@@ -44,15 +44,15 @@ footer {
 
   .text {
     * {
-      font-size: 1.4rem;
+      font-size: 1rem;
       text-transform: uppercase;
       font-weight: 200;
-      letter-spacing: 2.75px;
+      letter-spacing: 0.5px;
       line-height: 1.15;
     }
     *:last-child {
       font-size: 1rem;
-      letter-spacing: 1px;
+      letter-spacing: 7px;
     }
   }
 }
