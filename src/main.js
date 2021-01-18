@@ -12,6 +12,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import VueClickAway from 'vue3-click-away';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 
@@ -29,19 +30,6 @@ library.add(
 );
 
 createApp(App)
-  .directive('click-outside', {
-    beforeMount(el, binding) {
-      // eslint-disable-next-line
-      el.clickOutsideEvent = (event) => {
-        if (!(el === event.target || el.contains(event.target))) {
-          binding.value(event, el);
-        }
-      };
-      document.body.addEventListener('click', el.clickOutsideEvent);
-    },
-    unmounted(el) {
-      document.body.removeEventListener('click', el.clickOutsideEvent);
-    },
-  })
+  .use(VueClickAway)
   .component('FontAwesomeIcon', FontAwesomeIcon)
   .mount('#app');

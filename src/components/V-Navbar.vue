@@ -25,7 +25,7 @@
       <div class="line"></div>
     </div>
     <transition name="slide" mode="out-in">
-      <ul class="navigation" v-show="showingNavigation" v-click-outside="handleClickOutside">
+      <ul class="navigation" v-show="showingNavigation" v-click-away="handleClickOutside">
         <li
           v-for="(item, idx) in links"
           :key="idx"
@@ -49,22 +49,25 @@ export default {
     const navbar = ref(null);
 
     const showingNavigation = ref(false);
-    const triggerClickOutside = ref(false);
+    const triggerClickAway = ref(false);
 
     const toggleNav = () => {
       showingNavigation.value = !showingNavigation.value;
       setTimeout(() => {
-        triggerClickOutside.value = showingNavigation.value;
-      }, 300);
+        triggerClickAway.value = !triggerClickAway.value;
+      }, 400);
     };
     const handleClickOutside = () => {
-      if (triggerClickOutside.value === false) return;
+      if (triggerClickAway.value === false) return;
       showingNavigation.value = false;
-      triggerClickOutside.value = false;
+      triggerClickAway.value = false;
     };
     const scroll = (target, isOpenNav = false) => {
       emit('scroll-to', target);
-      if (isOpenNav) toggleNav();
+      if (isOpenNav) {
+        showingNavigation.value = false;
+        triggerClickAway.value = false;
+      }
     };
 
     const hovering = inject('hovering');
