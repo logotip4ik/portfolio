@@ -1,5 +1,5 @@
 <template>
-  <nav ref="navbar">
+  <nav ref="navbar" v-click-away="handleClickOutside">
     <h1 @click="scroll('top', true)" @mouseover="hovering = true" @mouseleave="hovering = false">
       BogdanKostyuk
     </h1>
@@ -25,7 +25,7 @@
       <div class="line"></div>
     </div>
     <transition name="slide" mode="out-in">
-      <ul class="navigation" v-show="showingNavigation" v-click-away="handleClickOutside">
+      <ul class="navigation" v-show="showingNavigation">
         <li
           v-for="(item, idx) in links"
           :key="idx"
@@ -55,9 +55,10 @@ export default {
       showingNavigation.value = !showingNavigation.value;
       setTimeout(() => {
         triggerClickAway.value = !triggerClickAway.value;
-      }, 400);
+      }, 500);
     };
     const handleClickOutside = () => {
+      console.log('handling click outside');
       if (triggerClickAway.value === false) return;
       showingNavigation.value = false;
       triggerClickAway.value = false;
