@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { inject, ref, watch } from 'vue';
+import { inject, ref } from 'vue';
 
 export default {
   name: 'Navbar',
@@ -87,11 +87,6 @@ export default {
         emits: 'contact',
       },
     ];
-
-    watch(showingNavigation, (val) => {
-      if (val === true) window.addEventListener('scroll', toggleNav);
-      else if (val === false) window.removeEventListener('scroll', toggleNav);
-    });
 
     return {
       showingNavigation,
