@@ -58,7 +58,6 @@ export default {
       }, 500);
     };
     const handleClickOutside = () => {
-      console.log('handling click outside');
       if (triggerClickAway.value === false) return;
       showingNavigation.value = false;
       triggerClickAway.value = false;
