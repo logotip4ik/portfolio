@@ -13,6 +13,7 @@
             @focus="toggleFocus"
             @blur="toggleFocus"
             @keypress.enter.prevent="$refs.input2.focus()"
+            name="name"
             maxlength="50"
           />
         </div>
@@ -34,6 +35,7 @@
             @blur="toggleFocus"
             @keypress.enter.prevent="$refs.input3.focus()"
             ref="input2"
+            name="email"
             maxlength="100"
           />
         </div>
@@ -59,6 +61,7 @@
             @focus="toggleFocus"
             @blur="toggleFocus"
             ref="input3"
+            name="message"
             maxlength="300"
           />
         </div>
@@ -72,8 +75,8 @@
         </div>
       </div>
       <div class="buttons">
-        <VButton dark @click="submit">Submit</VButton>
-        <VButton @click="resetForm">Reset</VButton>
+        <VButton type="submit" dark @click="submit">Submit</VButton>
+        <VButton type="reset" @click="resetForm">Reset</VButton>
       </div>
     </form>
   </section>
@@ -136,9 +139,10 @@ export default {
       loading.value = true;
       resetForm();
       emit('scroll-to', 'top');
-      fetch('/api/submit', {
+      fetch('https://send.pageclip.co/aWxaZHtPDs5VsaMfEkKV9DSIcULrKSM7', {
         method: 'POST',
         body: JSON.stringify(data),
+        redirect: 'manual',
       })
         .then(() => {
           loading.value = false;

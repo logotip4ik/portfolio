@@ -21,7 +21,7 @@
 
 <script>
 // eslint-disable-next-line
-import { computed, onMounted, provide, ref, watch } from 'vue';
+import { onMounted, provide, ref, watch } from 'vue';
 import VueScrollTo from 'vue-scrollto';
 import gsap from 'gsap';
 import luxy from 'luxy.js';
@@ -66,6 +66,7 @@ export default {
         gsap.to('#loader', {
           delay: initialLoading ? 0.3 : 0,
           clipPath: loading.value ? 'inset(100% 0 100% 0)' : 'inset(100% 0 0 0)',
+          ease: 'linear',
           onComplete: () => {
             initialLoading = false;
           },
@@ -96,8 +97,8 @@ export default {
     }
 
     function showPopup(success = true) {
-      showingPopup.value = true;
       popupSuccess.value = success;
+      showingPopup.value = true;
       setTimeout(() => {
         showingPopup.value = false;
       }, 2500);
@@ -172,6 +173,12 @@ export default {
       popupSuccess,
       showingPopup,
       pointer,
+      testLoading: () => {
+        loading.value = !loading.value;
+        setTimeout(() => {
+          loading.value = false;
+        }, 2000);
+      },
       showPopup,
       enterAnim,
       leaveAnim,
