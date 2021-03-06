@@ -56,6 +56,7 @@
           <label>Message</label>
           <textarea
             v-model="v.messageForm.$model"
+            @input.prevent="resize"
             @mouseover="hovering = true"
             @mouseleave="hovering = false"
             @focus="toggleFocus"
@@ -155,6 +156,11 @@ export default {
         });
     }
 
+    function resize(ev) {
+      const { target } = ev;
+      target.style.height = `${target.scrollHeight}px`;
+    }
+
     function checkIfIOS() {
       // prettier-ignore
       return (
@@ -181,6 +187,7 @@ export default {
       toggleFocus,
       resetForm,
       submit,
+      resize,
       isIOS,
       isOpera,
       v,
@@ -252,10 +259,15 @@ export default {
           transition: border-bottom-color 200ms ease-in;
           resize: vertical;
           padding: 0.25rem 0;
+          overflow-y: hidden;
+          height: auto;
 
           &:hover {
             border-bottom-color: black;
           }
+        }
+        textarea {
+          min-height: 59px;
         }
         &.focus label {
           color: #000;
