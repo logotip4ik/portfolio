@@ -1,6 +1,6 @@
 <template>
   <div class="popup__container">
-    <div :class="{ popup: true, error: !success }" @click="$emit('close')">
+    <div ref="popup" :class="{ popup: true, error: !success }" @click="$emit('close')">
       {{
         success
           ? 'Your message is send successfully!'
@@ -11,8 +11,34 @@
 </template>
 
 <script>
+import { onMounted, ref } from 'vue';
+import Hammer from 'hammerjs';
+import gsap from 'gsap';
+
 export default {
   name: 'Popup',
+  setup(_, { emit }) {
+    const popup = ref(null);
+    const hammertime = ref(null);
+
+    onMounted(() => {
+      hammertime.value = new Hammer(popup.value);
+      hammertime.value.get('swipe').set({ direction: Hammer.DIRECTION_UP });
+      hammertime.value.on('swipe', () => {
+        emit('close');
+      });
+      hammertime.value.on('panstart panmove', ({ deltaY }) => {
+        gsap.to(popup.value, { translateY: deltaY > 200 ? 200 : deltaY });
+      });
+      hammertime.value.on('hammer.input', ({ isFinal }) => {
+        if (isFinal) {
+          gsap.to(popup.value, { translateY: 0 });
+        }
+      });
+    });
+
+    return { popup };
+  },
   props: {
     success: {
       type: Boolean,

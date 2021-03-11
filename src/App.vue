@@ -32,7 +32,7 @@ import VAboutMe from './components/V-AboutMe.vue';
 import VContact from './components/V-Contact.vue';
 import VFooter from './components/V-Footer.vue';
 import VPopup from './components/V-Popup.vue';
-// TODO: This pointer don't work becouse of opacity is also apllying to wave, need to be rediseined
+
 export default {
   name: 'App',
   setup() {
