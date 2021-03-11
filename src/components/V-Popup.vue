@@ -28,6 +28,7 @@ export default {
         emit('close');
       });
       hammertime.value.on('panstart panmove', ({ deltaY }) => {
+        if (deltaY < -80) emit('close');
         gsap.to(popup.value, { translateY: deltaY > 200 ? 200 : deltaY });
       });
       hammertime.value.on('hammer.input', ({ isFinal }) => {
