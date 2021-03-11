@@ -1,14 +1,13 @@
 <template>
   <VNavbar @scroll-to="scroll"></VNavbar>
   <div id="laxy-scroll">
-    <div class="top"></div>
     <VHeading :isMobile="isMobile" @scroll-to="scroll"></VHeading>
     <VProjects></VProjects>
     <VAboutMe></VAboutMe>
     <VContact @scroll-to="scroll" @success="showPopup"></VContact>
     <VFooter></VFooter>
   </div>
-  <div ref="pointer" class="pointer"><i class="pointer--wave"></i></div>
+  <div ref="pointer" class="pointer"></div>
   <transition
     mode="out-in"
     @enter="enterAnim"
@@ -33,7 +32,7 @@ import VAboutMe from './components/V-AboutMe.vue';
 import VContact from './components/V-Contact.vue';
 import VFooter from './components/V-Footer.vue';
 import VPopup from './components/V-Popup.vue';
-
+// TODO: This pointer don't work becouse of opacity is also apllying to wave, need to be rediseined
 export default {
   name: 'App',
   setup() {
@@ -53,9 +52,11 @@ export default {
       isMobile = true;
     }
 
+    const showWave = ref(false);
+
     const hovering = ref(false);
     provide('hovering', hovering);
-    watch(hovering, () => pointer.value.classList.toggle('active'));
+    watch(hovering, () => pointer.value.classList.toggle('pointer--active'));
 
     // LOADER stuff
     let initialLoading = true;
@@ -89,7 +90,7 @@ export default {
      * @param {Number} duration
      */
     function scroll(target, duration = 1000) {
-      VueScrollTo.scrollTo(`.${target}`, duration, {
+      VueScrollTo.scrollTo(target !== 'top' ? `.${target}` : 'body', duration, {
         offset: -60,
         cancelable: true,
         easing: [0.25, 0, 0.25, 1],
@@ -131,14 +132,18 @@ export default {
 
       window.addEventListener('mousemove', (e) => {
         gsap.to(pointer.value, 0.2, { x: e.clientX, y: e.clientY, opacity: 1 });
-        pointer.value.children[0].classList.remove('animate');
+        pointer.value.classList.remove('pointer--animate');
         clearTimeout(timeout);
-        timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
+        timeout = setTimeout(() => {
+          pointer.value.classList.add('pointer--animate');
+        }, 7000);
       });
       window.addEventListener('scroll', () => {
-        pointer.value.children[0].classList.remove('animate');
+        pointer.value.classList.remove('pointer--animate');
         clearTimeout(timeout);
-        timeout = setTimeout(() => pointer.value.children[0].classList.add('animate'), 7000);
+        timeout = setTimeout(() => {
+          pointer.value.classList.add('pointer--animate');
+        }, 7000);
       });
     }
     function setupLuxy() {
@@ -172,13 +177,8 @@ export default {
       isMobile,
       popupSuccess,
       showingPopup,
+      showWave,
       pointer,
-      testLoading: () => {
-        loading.value = !loading.value;
-        setTimeout(() => {
-          loading.value = false;
-        }, 2000);
-      },
       showPopup,
       enterAnim,
       leaveAnim,
@@ -250,43 +250,24 @@ export default {
   transition: width 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
     height 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
     background-color 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    border 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    border 200ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   justify-content: center;
   align-items: center;
 
-  &.active {
+  &--animate {
+    height: 100px !important;
+    width: 100px !important;
+    border: none !important;
+    filter: invert(1);
+    background-color: transparent;
+  }
+
+  &--active {
     width: 50px;
     height: 50px;
     background-color: rgba($color: #79ffe1, $alpha: 0.2);
     border: 2px solid #79ffe1;
-  }
-  &--wave {
-    width: 20px;
-    height: 20px;
-    background-color: rgba($color: #79ffe1, $alpha: 0.7);
-    opacity: 0;
-    border-radius: 50%;
-    transition: transform 200ms linear;
-
-    &.animate {
-      animation: pulse 3s infinite;
-      animation-delay: 1;
-    }
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(7);
-    opacity: 0;
   }
 }
 
