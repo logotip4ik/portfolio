@@ -202,7 +202,7 @@ export default {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 200;
-  src: local('Poppins'), url('./assets/fonts/poppins-v15-latin-200.woff2') format('woff2'),
+  src: local(''), url('./assets/fonts/poppins-v15-latin-200.woff2') format('woff2'),
     url('./assets/fonts/poppins-v15-latin-200.woff') format('woff');
 }
 
@@ -211,8 +211,16 @@ export default {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  src: local('Poppins'), url('./assets/fonts/poppins-v15-latin-regular.woff2') format('woff2'),
+  src: local(''), url('./assets/fonts/poppins-v15-latin-regular.woff2') format('woff2'),
     url('./assets/fonts/poppins-v15-latin-regular.woff') format('woff');
+}
+/* poppins-600 - latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: local(''), url('./assets/fonts/poppins-v15-latin-500.woff2') format('woff2'),
+    url('./assets/fonts/poppins-v15-latin-500.woff') format('woff');
 }
 
 *,
@@ -222,6 +230,9 @@ export default {
   padding: 0;
   box-sizing: border-box;
   scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 #app {
   font-family: 'Poppins', sans-serif;
