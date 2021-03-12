@@ -181,6 +181,7 @@ export default {
       display: inline-block;
       font-size: 3rem;
       position: relative;
+      font-weight: 500;
     }
 
     h2 {

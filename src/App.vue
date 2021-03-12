@@ -234,6 +234,9 @@ export default {
 ::-webkit-scrollbar {
   display: none;
 }
+h2 {
+  font-weight: 500;
+}
 #app {
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
