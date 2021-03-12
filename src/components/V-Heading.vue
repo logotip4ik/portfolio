@@ -222,6 +222,7 @@ export default {
         flex-direction: column;
 
         &--icon {
+          cursor: pointer;
           opacity: 0;
           &:first-child {
             margin-bottom: 1rem;
