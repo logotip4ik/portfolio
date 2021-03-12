@@ -270,8 +270,9 @@ h2 {
   align-items: center;
 
   &--animate {
-    height: 100px !important;
-    width: 100px !important;
+    transition-duration: 1s;
+    height: 250px !important;
+    width: 250px !important;
     border: none !important;
     filter: invert(1);
     background-color: transparent;
