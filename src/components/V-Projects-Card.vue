@@ -65,6 +65,7 @@ export default {
   &__content {
     padding: 0.75rem;
     h3 {
+      font-weight: 500;
       font-size: 1.5rem;
       margin-bottom: 0.75rem;
     }
