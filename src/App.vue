@@ -225,6 +225,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   scrollbar-width: none;
+  -webkit-tap-highlight-color: transparent;
 }
 ::-webkit-scrollbar {
   display: none;
