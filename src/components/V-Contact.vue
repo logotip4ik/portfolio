@@ -44,15 +44,17 @@
             <small class="error" v-if="v.emailForm.email.$invalid">{{
               v.emailForm.email.$message
             }}</small>
-            <small class="error" v-else-if="v.emailForm.required.$invalid">{{
-              v.emailForm.required.$message
-            }}</small>
+            <small
+              class="error"
+              v-else-if="v.emailForm.required.$invalid && v.emailForm.$errors[0]"
+              >{{ v.emailForm.required.$message }}</small
+            >
           </transition>
           <small class="counter">{{ emailCounter }}/100</small>
         </div>
       </div>
       <div class="form-item">
-        <div :class="{ 'input-wrapper': true, 'bottom-5': isIOS || isOpera }">
+        <div :class="{ 'input-wrapper': true, 'bottom-5': isIOS || isOpera || isChrome }">
           <label>Message</label>
           <textarea
             v-model="v.messageForm.$model"
@@ -68,15 +70,15 @@
         </div>
         <div class="details">
           <transition mode="out-in" name="fade">
-            <small class="error" v-if="v.messageForm.$error">{{
-              v.nameForm.required.$message
-            }}</small>
+            <small class="error" v-if="v.messageForm.$error">
+              {{ v.nameForm.required.$message }}
+            </small>
           </transition>
           <small class="counter">{{ messageCounter }}/300</small>
         </div>
       </div>
       <div class="buttons">
-        <VButton type="submit" dark @click="submit">Submit</VButton>
+        <VButton dark type="submit" @click="submit">Submit</VButton>
         <VButton type="reset" @click="resetForm">Reset</VButton>
       </div>
     </form>
@@ -172,9 +174,13 @@ export default {
     function checkIfOpera() {
       return navigator.userAgent.includes('Opera');
     }
+    function checkIfChrome() {
+      return /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    }
 
     const isIOS = computed(() => checkIfIOS());
     const isOpera = computed(() => checkIfOpera());
+    const isChrome = computed(() => checkIfChrome());
 
     return {
       hovering,
@@ -190,6 +196,7 @@ export default {
       resize,
       isIOS,
       isOpera,
+      isChrome,
       v,
     };
   },

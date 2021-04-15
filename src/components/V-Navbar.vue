@@ -113,7 +113,7 @@ nav {
   box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.3);
   // height: 76px;
   position: fixed;
-  z-index: 1;
+  z-index: 9999;
 
   h1 {
     cursor: pointer;
