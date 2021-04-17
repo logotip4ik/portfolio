@@ -28,8 +28,8 @@ export default {
     let timeout;
 
     function timeoutCallback() {
-      const div = 60;
-      if (currTime / div === timeToShow) {
+      const div = 57.4;
+      if (Math.floor(currTime / div) === timeToShow) {
         emit('close');
         return;
       }

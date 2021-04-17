@@ -67,7 +67,7 @@ export default {
     });
 
     const showingPopup = ref(true);
-    const popupSuccess = ref(false);
+    const popupSuccess = ref(true);
 
     function openURL(url) {
       window.open(url);
