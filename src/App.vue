@@ -8,12 +8,7 @@
     <VFooter></VFooter>
   </div>
   <div ref="pointer" class="pointer"></div>
-  <transition
-    mode="out-in"
-    @enter="enterAnim"
-    @leave="leaveAnim"
-    :duration="{ enter: 500, leave: 500 }"
-  >
+  <transition name="slide-left">
     <VPopup v-if="showingPopup" @close="showingPopup = false" :success="popupSuccess"></VPopup>
   </transition>
 </template>
@@ -71,8 +66,8 @@ export default {
       }
     });
 
-    const showingPopup = ref(false);
-    const popupSuccess = ref(true);
+    const showingPopup = ref(true);
+    const popupSuccess = ref(false);
 
     function openURL(url) {
       window.open(url);
@@ -94,24 +89,8 @@ export default {
     function showPopup(success = true) {
       popupSuccess.value = success;
       showingPopup.value = true;
-      setTimeout(() => {
-        showingPopup.value = false;
-      }, 2500);
     }
-
-    function enterAnim(el) {
-      gsap.from(el, {
-        y: -300,
-        duration: 0.5,
-      });
-    }
-    function leaveAnim(el) {
-      gsap.to(el, {
-        y: -300,
-        duration: 0.5,
-        ease: 'power1.in',
-      });
-    }
+    window.showPopup = showPopup;
 
     function checkForURLParams() {
       const params = new URLSearchParams(window.location.search);
@@ -175,8 +154,6 @@ export default {
       showWave,
       pointer,
       showPopup,
-      enterAnim,
-      leaveAnim,
     };
   },
   components: {
@@ -290,5 +267,16 @@ h2 {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+.slide-left-enter-active {
+  transition: transform 0.8s cubic-bezier(0.61, 1, 0.88, 1);
+}
+.slide-left-leave-active {
+  transition: transform 0.8s cubic-bezier(0.12, 0, 0.39, 0);
+}
+
+.slide-left-enter-from,
+.slide-left-leave-to {
+  transform: translateX(120%);
 }
 </style>
