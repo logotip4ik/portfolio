@@ -55,16 +55,18 @@ export default [
     live: 'https://todo-web-app.vercel.app',
   },
   {
-    name: 'Pixel Drawer',
-    img: require('./assets/PixelDrawerLogo-min.png'),
-    desc: 'Website were you can draw your staff in pixel theme.',
+    name: 'HackerNews',
+    img: require('./assets/HackerNews-min.jpg'),
+    desc:
+      'HackerNews clone, modernized version of original HackerNews website, also have dark mode',
     techUsed: [
       { id: Math.random() * 100, content: 'Javascript' },
-      { id: Math.random() * 100, content: 'Vue' },
-      { id: Math.random() * 100, content: 'Vuetify' },
+      { id: Math.random() * 100, content: 'Nuxt' },
+      { id: Math.random() * 100, content: 'Scss' },
+      { id: Math.random() * 100, content: 'HackerNews API' },
     ],
-    source: 'https://github.com/logotip4ik/Pixel-Drawer',
-    live: 'https://pixel-drawer.vercel.app',
+    source: 'https://github.com/logotip4ik/nuxt-hackernews',
+    live: 'https://nuxt-hackernews.vercel.app',
   },
   {
     name: 'Countries',
