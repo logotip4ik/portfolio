@@ -24,7 +24,7 @@ export default [
       { id: Math.random() * 100, content: 'IndexDB' },
     ],
     source: 'https://github.com/logotip4ik/My-journal',
-    live: 'https://my-journal.vercel.app/',
+    live: 'https://logotip4ik.github.io/my-journal/',
   },
   {
     name: 'Nuxt Store',
