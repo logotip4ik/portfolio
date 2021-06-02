@@ -105,7 +105,7 @@ export default {
 }
 .popup {
   width: 100%;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   color: #18181e;
   text-align: center;
   background: rgba(#79ffe1, 0.7);

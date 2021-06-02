@@ -8,7 +8,7 @@
     <VFooter></VFooter>
   </div>
   <div ref="pointer" class="pointer"></div>
-  <transition name="slide-left">
+  <transition name="slide-left" @enter="playSoundTransition">
     <VPopup v-if="showingPopup" @close="showingPopup = false" :success="popupSuccess"></VPopup>
   </transition>
 </template>
@@ -28,7 +28,9 @@ import VContact from './components/V-Contact.vue';
 import VFooter from './components/V-Footer.vue';
 import VPopup from './components/V-Popup.vue';
 
-import soundFile from './assets/sounds/ui_tap-variant-03.ogg';
+import soundFileClick from './assets/sounds/ui_tap-variant-03.ogg';
+import soundFileSuccess from './assets/sounds/notification_decorative-02.ogg';
+import soundFileError from './assets/sounds/alert_error-01.ogg';
 
 export default {
   name: 'App',
@@ -44,7 +46,9 @@ export default {
     }
 
     const showWave = ref(false);
-    const sound = new Audio(soundFile);
+    const soundClick = new Audio(soundFileClick);
+    const soundSuccess = new Audio(soundFileSuccess);
+    const soundError = new Audio(soundFileError);
 
     const hovering = ref(false);
     provide('hovering', hovering);
@@ -90,7 +94,7 @@ export default {
     }
 
     function interact() {
-      if (sound.readyState) sound.play();
+      if (soundClick.readyState) soundClick.play();
       if ('vibrate' in window.navigator) window.navigator.vibrate(10);
     }
     provide('interact', interact);
@@ -100,6 +104,11 @@ export default {
       showingPopup.value = true;
     }
     window.showPopup = showPopup;
+
+    function playSoundTransition() {
+      if (popupSuccess.value) return soundSuccess.play();
+      return soundError.play();
+    }
 
     function checkForURLParams() {
       const params = new URLSearchParams(window.location.search);
@@ -163,6 +172,7 @@ export default {
       showWave,
       pointer,
       showPopup,
+      playSoundTransition,
     };
   },
   components: {
