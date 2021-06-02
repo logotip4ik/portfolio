@@ -1,13 +1,17 @@
 <template>
   <nav ref="navbar" v-click-away="handleClickOutside">
-    <h1 @click="scroll('top', true)" @mouseover="hovering = true" @mouseleave="hovering = false">
+    <h1
+      @click="scroll('top', true), interact()"
+      @mouseover="hovering = true"
+      @mouseleave="hovering = false"
+    >
       BogdanKostyuk
     </h1>
     <ul class="routing">
       <li
         v-for="(item, idx) in links"
         :key="idx"
-        @click="scroll(item.emits)"
+        @click="scroll(item.emits), interact()"
         @mouseover="hovering = true"
         @mouseleave="hovering = false"
       >
@@ -16,7 +20,7 @@
     </ul>
     <div
       :class="{ burger: true, 'burger--active': showingNavigation }"
-      @click="toggleNav"
+      @click="toggleNav(), interact()"
       @mouseover="hovering = true"
       @mouseleave="hovering = false"
     >
@@ -29,7 +33,7 @@
         <li
           v-for="(item, idx) in links"
           :key="idx"
-          @click="scroll(item.emits, true)"
+          @click="scroll(item.emits, true), interact()"
           @mouseover="hovering = true"
           @mouseleave="hovering = false"
         >
@@ -51,26 +55,27 @@ export default {
     const showingNavigation = ref(false);
     const triggerClickAway = ref(false);
 
-    const toggleNav = () => {
+    const hovering = inject('hovering');
+    const interact = inject('interact');
+
+    function toggleNav() {
       showingNavigation.value = !showingNavigation.value;
       setTimeout(() => {
         triggerClickAway.value = !triggerClickAway.value;
       }, 500);
-    };
-    const handleClickOutside = () => {
+    }
+    function handleClickOutside() {
       if (triggerClickAway.value === false) return;
       showingNavigation.value = false;
       triggerClickAway.value = false;
-    };
-    const scroll = (target, isOpenNav = false) => {
+    }
+    function scroll(target, isOpenNav = false) {
       emit('scroll-to', target);
       if (isOpenNav) {
         showingNavigation.value = false;
         triggerClickAway.value = false;
       }
-    };
-
-    const hovering = inject('hovering');
+    }
 
     const links = [
       {
@@ -95,6 +100,7 @@ export default {
       scroll,
       toggleNav,
       handleClickOutside,
+      interact,
     };
   },
   emits: ['scroll-to'],

@@ -7,7 +7,7 @@
             v-for="(icon, key) in icons"
             :key="key"
             class="logo-icons--icon"
-            @click="icon.click"
+            @click="icon.click.call(), interact()"
             @mouseover="hovering = true"
             @mouseleave="hovering = false"
             size="lg"
@@ -26,7 +26,7 @@
       </h2>
     </div>
     <p
-      @click="$emit('scroll-to', 'projects')"
+      @click="$emit('scroll-to', 'projects'), interact()"
       @mouseover="hovering = true"
       @mouseleave="hovering = false"
       ref="bottomText"
@@ -52,6 +52,7 @@ export default {
 
     const hovering = inject('hovering');
     const openURL = inject('openURL');
+    const interact = inject('interact');
 
     const text = '‹‹ Scroll down ››';
 
@@ -145,6 +146,7 @@ export default {
       hovering,
       logoLine,
       bottomText,
+      interact,
     };
   },
   emits: ['scroll-to'],

@@ -28,6 +28,8 @@ import VContact from './components/V-Contact.vue';
 import VFooter from './components/V-Footer.vue';
 import VPopup from './components/V-Popup.vue';
 
+import soundFile from './assets/sounds/ui_tap-variant-03.ogg';
+
 export default {
   name: 'App',
   setup() {
@@ -42,6 +44,7 @@ export default {
     }
 
     const showWave = ref(false);
+    const sound = new Audio(soundFile);
 
     const hovering = ref(false);
     provide('hovering', hovering);
@@ -85,6 +88,12 @@ export default {
         easing: [0.25, 0, 0.25, 1],
       });
     }
+
+    function interact() {
+      if (sound.readyState) sound.play();
+      if ('vibrate' in window.navigator) window.navigator.vibrate(10);
+    }
+    provide('interact', interact);
 
     function showPopup(success = true) {
       popupSuccess.value = success;

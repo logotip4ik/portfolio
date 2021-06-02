@@ -1,6 +1,7 @@
 <template>
   <button
     :class="{ button: true, 'button--dark': dark }"
+    @click="interact"
     @mouseover="hovering = true"
     @mouseleave="hovering = false"
   >
@@ -14,10 +15,12 @@ import { inject } from 'vue';
 export default {
   name: 'CustomButton',
   setup() {
+    const interact = inject('interact');
     const hovering = inject('hovering');
 
     return {
       hovering,
+      interact,
     };
   },
   props: {
