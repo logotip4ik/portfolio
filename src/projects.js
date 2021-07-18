@@ -1,17 +1,17 @@
 /* eslint-disable global-require */
 export default [
   {
-    name: 'Color Game',
-    img: require('./assets/ColorGameLogo-min.png'),
-    desc: "This is simple game in web. You need to guess color by it's hex.",
+    name: 'Easy Bank',
+    img: require('./assets/EasyBankLogo-min.png'),
+    desc: 'Challenge from frontend mentor. I tried to make it as simple as possible',
     techUsed: [
+      { id: Math.random() * 100, content: 'HTML' },
       { id: Math.random() * 100, content: 'Javascript' },
-      { id: Math.random() * 100, content: 'Vue' },
-      { id: Math.random() * 100, content: 'Vuetify' },
-      { id: Math.random() * 100, content: 'IndexDB' },
+      { id: Math.random() * 100, content: 'Scss' },
+      { id: Math.random() * 100, content: 'Parcel' },
     ],
-    source: 'https://github.com/logotip4ik/ColorGame',
-    live: 'https://color-game-virid.vercel.app/',
+    source: 'https://github.com/logotip4ik/frontend-mentor-easybank',
+    live: 'https://logotip4ik.github.io/frontend-mentor-easybank/',
   },
   {
     name: 'My journal',
