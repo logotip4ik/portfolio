@@ -80,7 +80,16 @@ export default {
 
     function setupAnimations() {
       const TL = gsap.timeline();
-      TL.from('.logo-line', { x: 100, duration: 0.8, delay: 0.7 });
+      TL.fromTo(
+        '.logo-line',
+        { x: 200, yPercent: -50 },
+        {
+          x: 0,
+          yPercent: -50,
+          duration: 1,
+          delay: 0.7,
+        },
+      );
       TL.from(
         '.anim-text',
         {
@@ -90,7 +99,7 @@ export default {
           duration: 1,
           delay: 0.5,
         },
-        '-=0.8',
+        '-=1',
       );
       TL.to(
         '.box',
@@ -209,7 +218,7 @@ export default {
       border-radius: 0.25rem;
       background: white;
       top: 50%;
-      transform: translateY(-50%);
+      // transform: translate(0, -50%);
       left: -1rem;
       transition: opacity 300ms ease-out;
 
