@@ -18,7 +18,7 @@
 import { onMounted, provide, ref, watch } from 'vue';
 import VueScrollTo from 'vue-scrollto';
 import gsap from 'gsap';
-import luxy from 'luxy.js';
+// import luxy from 'luxy.js';
 
 import VHeading from './components/V-Heading.vue';
 import VNavbar from './components/V-Navbar.vue';
@@ -137,11 +137,11 @@ export default {
         }, 7000);
       });
     }
-    function setupLuxy() {
-      if (isMobile) return;
-      luxy.init({
-        wrapper: '#laxy-scroll',
-        wrapperSpeed: 0.045,
+    function setupButter() {
+      window.butter.init({
+        wrapperId: 'laxy-scroll',
+        wrapperDamper: 0.04,
+        cancelOnTouch: true,
       });
     }
 
@@ -160,7 +160,7 @@ export default {
       sayHay();
       setTimeout(() => checkForURLParams(), 500);
       setupPointer();
-      setupLuxy();
+      setupButter();
     });
 
     return {
