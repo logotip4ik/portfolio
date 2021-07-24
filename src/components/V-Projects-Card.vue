@@ -1,9 +1,16 @@
 <template>
   <div class="card" data-nosnippet>
-    <img :src="project.img" loading="lazy" :alt="`Logo-Image for '${project.name}' project`" />
+    <img
+      :src="project.img"
+      loading="lazy"
+      width="350"
+      height="350"
+      :alt="`Logo-Image for '${project.name}' project`"
+      class="card__image"
+    />
     <div class="card__content">
-      <h3>{{ project.name }}</h3>
-      <p>{{ project.desc }}</p>
+      <h3 class="card__content__title">{{ project.name }}</h3>
+      <p class="card__content__desc">{{ project.desc }}</p>
       <ul class="table">
         <li class="table__heading">Thech i Used:</li>
         <li v-for="item in project.techUsed" :key="item.id" class="table__item">
@@ -68,19 +75,25 @@ export default {
     0 100px 80px rgba(0, 0, 0, 0.04)
   ;
 
-  img {
+  &__image {
+    display: block;
     width: 100%;
     height: auto;
+    background-image: linear-gradient(
+      to bottom,
+      rgba($color: #000, $alpha: 0.1),
+      rgba($color: #000, $alpha: 0.2)
+    );
   }
 
   &__content {
     padding: 0.75rem;
-    h3 {
+    &__title {
       font-weight: 500;
       font-size: 1.5rem;
       margin-bottom: 0.75rem;
     }
-    p {
+    &__desc {
       margin-bottom: 1.5rem;
       color: rgb(63, 63, 63);
       line-height: 1.8;
