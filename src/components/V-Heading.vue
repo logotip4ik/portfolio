@@ -216,7 +216,7 @@ export default {
       .logo-icons {
         position: absolute;
         left: -2rem;
-        top: 10%;
+        top: 13%;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
