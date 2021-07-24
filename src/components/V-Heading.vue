@@ -132,7 +132,6 @@ export default {
           repeatDelay: 0.4,
           ease: 'power1.inOut',
         },
-        y: 1.0,
         opacity: 0.3,
         duration: 1.2,
       });
