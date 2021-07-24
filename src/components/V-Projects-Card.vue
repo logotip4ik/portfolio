@@ -5,8 +5,10 @@
       <h3>{{ project.name }}</h3>
       <p>{{ project.desc }}</p>
       <ul class="table">
-        <th>Thech i Used:</th>
-        <li v-for="item in project.techUsed" :key="item.id">{{ item.content }}</li>
+        <li class="table__heading">Thech i Used:</li>
+        <li v-for="item in project.techUsed" :key="item.id" class="table__item">
+          {{ item.content }}
+        </li>
       </ul>
     </div>
     <div class="card__actions">
@@ -89,7 +91,7 @@ export default {
       padding: 0.5rem;
       border-radius: 0.25rem;
       box-shadow: 0 0 3px rgba($color: #000000, $alpha: 0.2);
-      th {
+      &__heading {
         font-weight: normal;
         position: relative;
         display: block;
@@ -104,7 +106,7 @@ export default {
           background: rgba($color: #000000, $alpha: 0.2);
         }
       }
-      li {
+      &__item {
         padding: 0.5rem;
         font-size: 0.9rem;
 
