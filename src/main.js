@@ -8,6 +8,7 @@ import {
   faLinux,
   faPython,
   faVuejs,
+  faReact,
   faWindows,
 } from '@fortawesome/free-brands-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -26,6 +27,7 @@ library.add(
   faWindows,
   faLinux,
   faVuejs,
+  faReact,
   faPaperPlane,
 );
 

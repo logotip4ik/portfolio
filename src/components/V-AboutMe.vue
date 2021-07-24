@@ -3,10 +3,10 @@
     <h2>About Me</h2>
     <h3 class="name">My Name <span class="thin">Bogdan Kostyuk</span></h3>
     <p>
-      I am self thought young developer. My known languages are: JavaScript, Node.js, Vue.js,
-      Python, TypeScript, Html and Css. My main place to develop is Linux, so I have a good
-      experience with bash. Of course I am using git and Github. I love creating useful or just
-      funny things and I do it with passion.
+      I am self thought young developer. I known: JavaScript, Node.js, Vue.js, React.js, Python,
+      TypeScript, Html and Css. My main place to develop is Linux, so I have a good experience with
+      bash. Of course I am using git and Github. I love creating useful or just funny things and I
+      do it with passion.
     </p>
     <h3 class="tech">Tech I am using</h3>
     <div
@@ -39,6 +39,7 @@ export default {
       'html5',
       'css3',
       'vuejs',
+      'react',
       'python',
       'linux',
       'windows',
