@@ -50,12 +50,21 @@ export default {
   max-width: 350px;
   word-wrap: break-word;
   border-radius: 0.5rem;
-  box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.2);
   margin: 1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   background: white;
+  // Shadows from https://shadows.brumm.af/
+  // prettier-ignore
+  box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.011),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.016),
+    0 12.5px 10px rgba(0, 0, 0, 0.02),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.024),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.029),
+    0 100px 80px rgba(0, 0, 0, 0.04)
+  ;
 
   img {
     width: 100%;
