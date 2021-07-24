@@ -242,14 +242,6 @@ export default {
     transform: translateX(-50%);
     transition: opacity 300ms ease-out;
     z-index: 10;
-
-    &--phone {
-      display: flex;
-
-      .text-to-anim {
-        display: inline-block;
-      }
-    }
   }
 }
 
