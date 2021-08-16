@@ -95,7 +95,7 @@ export default {
 
     function interact() {
       if (soundClick.readyState) soundClick.play();
-      if ('vibrate' in window.navigator) window.navigator.vibrate(10);
+      // if ('vibrate' in window.navigator) window.navigator.vibrate(10);
     }
     provide('interact', interact);
 
