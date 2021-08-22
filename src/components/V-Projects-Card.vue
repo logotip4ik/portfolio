@@ -12,7 +12,7 @@
       <h3 class="card__content__title">{{ project.name }}</h3>
       <p class="card__content__desc">{{ project.desc }}</p>
       <ul class="table">
-        <li class="table__heading">Thech i Used:</li>
+        <li class="table__heading">Tech i Used:</li>
         <li v-for="item in project.techUsed" :key="item.id" class="table__item">
           {{ item.content }}
         </li>
