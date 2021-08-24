@@ -267,6 +267,7 @@ h2 {
     width: 250px !important;
     border: none !important;
     filter: invert(1);
+    mix-blend-mode: difference;
     background-color: transparent;
   }
 
