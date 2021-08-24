@@ -5,7 +5,7 @@
     <form @submit.prevent="submit">
       <div class="form-item">
         <div class="input-wrapper">
-          <label>Name</label>
+          <label for="name">Name</label>
           <input
             v-model="v.nameForm.$model"
             @mouseover="hovering = true"
@@ -26,7 +26,7 @@
       </div>
       <div class="form-item">
         <div class="input-wrapper">
-          <label>Email</label>
+          <label for="email">Email</label>
           <input
             v-model="v.emailForm.$model"
             @mouseover="hovering = true"
@@ -55,7 +55,7 @@
       </div>
       <div class="form-item">
         <div :class="{ 'input-wrapper': true, 'bottom-5': isIOS || isOpera || isChrome }">
-          <label>Message</label>
+          <label for="message">Message</label>
           <textarea
             v-model="v.messageForm.$model"
             @input.prevent="resize"
