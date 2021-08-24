@@ -1,5 +1,6 @@
 <template>
   <header id="heading" class="heading">
+    <canvas id="canvas" class="heading__canvas"></canvas>
     <div class="heading__container">
       <div class="logo-line" ref="logoLine">
         <div class="logo-icons">
@@ -40,8 +41,9 @@ import { inject, onMounted, ref } from 'vue';
 import Rellax from 'rellax';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import 'particles.js';
-import particlesJSON from '@/assets/particles.json';
+// import 'particles.js';
+// import particlesJSON from '@/assets/particles.json';
+import initMetaballs from 'metaballs-js';
 
 export default {
   name: 'Heading',
@@ -64,13 +66,17 @@ export default {
       gsap.set('.empty', { width: '0.4ch' });
     }
 
-    function setupParticlesJS() {
-      window.particlesJS('heading', particlesJSON);
-      gsap.set('.particles-js-canvas-el', {
-        height: '105vh',
-        width: '105vw',
-        transform: 'translate(-2.5vw, -110px)',
-      });
+    function setupMetaballs() {
+      const options = {
+        numMetaballs: 10,
+        minRadius: 30,
+        maxRadius: 10,
+        speed: 3,
+        useDevicePixelRatio: true,
+        color: '#28282d',
+        backgroundColor: '#00000000',
+      };
+      initMetaballs('#canvas', options);
     }
 
     function setupRellax() {
@@ -118,7 +124,7 @@ export default {
     onMounted(() => {
       setText();
       setupAnimations();
-      setupParticlesJS();
+      setupMetaballs();
 
       ScrollTrigger.create({
         trigger: '.heading__bottom',
@@ -216,7 +222,7 @@ export default {
       height: 110%;
       width: 2px;
       border-radius: 0.25rem;
-      background: white;
+      background-color: white;
       top: 50%;
       // transform: translate(0, -50%);
       left: -1rem;
@@ -250,6 +256,15 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     transition: opacity 300ms ease-out;
+    z-index: 10;
+  }
+
+  &__canvas {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
     z-index: 10;
   }
 }

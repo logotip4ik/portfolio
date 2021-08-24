@@ -20,6 +20,7 @@
     "hammerjs": "^2.0.8",
     "handlebars": "^4.7.6",
     "joi": "^17.3.0",
+    "metaballs-js": "^2.0.0",
     "particles.js": "^2.0.0",
     "register-service-worker": "^1.7.1",
     "rellax": "^1.12.1",
