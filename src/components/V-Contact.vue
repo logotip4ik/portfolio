@@ -142,10 +142,9 @@ export default {
       loading.value = true;
       resetForm();
       emit('scroll-to', 'top');
-      fetch('https://send.pageclip.co/aWxaZHtPDs5VsaMfEkKV9DSIcULrKSM7', {
+      fetch('/api/send-email', {
         method: 'POST',
         body: JSON.stringify(data),
-        redirect: 'manual',
       })
         .then(() => {
           loading.value = false;
