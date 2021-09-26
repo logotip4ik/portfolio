@@ -59,6 +59,12 @@ module.exports.handler = async (event) => {
     text: validBody.value.message,
     subject: 'New form submission',
     from: `server@${process.env.API_DOMAIN}`,
+    template: 'from-my-website',
+    'h:X-Mailgun-Variables': JSON.stringify({
+      name: validBody.value.name,
+      email: validBody.value.email,
+      message: validBody.value.message,
+    }),
   });
 
   return { statusCode: 200, body: JSON.stringify({ msg: 'successfully sent email' }) };
