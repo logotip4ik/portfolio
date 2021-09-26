@@ -146,14 +146,13 @@ export default {
         method: 'POST',
         body: JSON.stringify(data),
       })
-        .then(() => {
-          loading.value = false;
-          emit('success', true);
-        })
+        .then(() => emit('success', true))
         .catch((err) => {
-          loading.value = false;
           emit('success', false);
           console.warn(err);
+        })
+        .finally(() => {
+          loading.value = false;
         });
     }
 
