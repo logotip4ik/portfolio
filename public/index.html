@@ -53,49 +53,48 @@
       id="loader"
       style="position:fixed;background:#18181e;top:0;right:0;bottom:0;left:0;z-index:99999;display:flex;justify-content:center;align-items:center;transition: clip-path 500ms linear;"
     >
-      <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
       <svg
-        width="76"
-        height="76"
-        viewBox="0 0 38 38"
+        width="125"
+        height="125"
+        viewBox="0 0 125 125"
+        fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <defs>
-          <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
-            <stop stop-color="#fff" stop-opacity="0" offset="0%" />
-            <stop stop-color="#fff" stop-opacity=".631" offset="63.146%" />
-            <stop stop-color="#fff" offset="100%" />
-          </linearGradient>
-        </defs>
-        <g fill="none" fill-rule="evenodd">
-          <g transform="translate(1 1)">
-            <path
-              d="M36 18c0-9.94-8.06-18-18-18"
-              id="Oval-2"
-              stroke="url(#a)"
-              stroke-width="2"
-            >
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from="0 18 18"
-                to="360 18 18"
-                dur="0.9s"
-                repeatCount="indefinite"
-              />
-            </path>
-            <circle fill="#fff" cx="36" cy="18" r="1">
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from="0 18 18"
-                to="360 18 18"
-                dur="0.9s"
-                repeatCount="indefinite"
-              />
-            </circle>
-          </g>
-        </g>
+        <style>
+          .animation {
+            animation: 3s ease 0.75s infinite alternate stroke-animation;
+          }
+          .animation.animation-delay {
+            animation-delay: 1.25s;
+          }
+          @keyframes stroke-animation {
+            from {
+              stroke-dashoffset: 0;
+            }
+            to {
+              stroke-dashoffset: 393;
+            }
+          }
+        </style>
+        <rect width="125" height="125" rx="20" fill="#FAFAFA" />
+        <path
+          d="M47.0824 58.335L47.552 66.0807C50.2811 66.5916 52.4796 67.9197 54.2806 70.2042C56.1012 72.5135 57 75.1051 57 78.1289C57 80.9611 56.306 83.3109 55.0073 85.3137L55.001 85.3235L54.9947 85.3333C53.7672 87.2507 51.9183 88.8614 49.2427 90.1015C46.6158 91.319 43.354 92 39.3427 92H15V34H38.1186C42.154 34 45.3925 34.6575 47.9563 35.8186L47.9695 35.8245L47.9827 35.8304C50.6482 37.0143 52.4271 38.5539 53.569 40.3622L53.5873 40.3912L53.6061 40.4199C54.8472 42.3124 55.4934 44.4719 55.4934 47.0201C55.4934 50.1091 54.6786 52.3993 53.2649 54.1631L53.2462 54.1864L53.2278 54.2101C51.7601 56.0984 49.7685 57.4859 47.0824 58.335ZM20.1827 57.2321V61.2321H24.1827H36.2354C39.9064 61.2321 43.356 60.4264 46.0189 58.2476L46.0528 58.2199L46.086 58.1915C48.8374 55.8379 50.0282 52.5814 50.0282 49.0057C50.0282 45.43 48.8374 42.1736 46.086 39.82C43.4199 37.5393 39.9431 36.6848 36.2354 36.6848H24.1827H20.1827V40.6848V57.2321ZM47.401 66.86C44.6077 64.4435 41.0506 63.4441 37.177 63.4441H24.1827H20.1827V67.4441V85.2206V89.2206H24.1827H37.4595C41.2427 89.2206 44.7665 88.3286 47.4814 86.0055C50.359 83.6001 51.629 80.2456 51.629 76.5215C51.629 72.7185 50.3178 69.3164 47.401 66.86Z"
+          stroke="#18181E"
+          stroke-dasharray="195"
+          stroke-linecap="round"
+          stroke-linejoin="unset"
+          stroke-width="8"
+          class="animation"
+        />
+        <path
+          d="M88.3284 64.9691L111.483 92.5H103.921L80.9505 64.379L79.9048 63.0987L80.9575 61.8016L103.928 33.5H110.776L88.3171 60.477L86.4433 62.7278L88.3284 64.9691ZM74.7399 66.5931V69.4622V92.5H68.5V33.5H74.7399V56.7758V59.596V66.5931Z"
+          stroke="#18181E"
+          stroke-dasharray="195"
+          stroke-linecap="round"
+          stroke-linejoin="unset"
+          stroke-width="7"
+          class="animation animation-delay"
+        />
       </svg>
     </div>
     <script src="https://cdn.jsdelivr.net/gh/BCJdevelopment/butter.js@master/src/butter.js"></script>
