@@ -7,13 +7,13 @@
         <div class="input-wrapper">
           <label for="name">Name</label>
           <input
+            id="name"
             v-model="v.nameForm.$model"
             @mouseover="hovering = true"
             @mouseleave="hovering = false"
             @focus="toggleFocus"
             @blur="toggleFocus"
             @keypress.enter.prevent="$refs.input2.focus()"
-            name="name"
             maxlength="50"
           />
         </div>
@@ -28,6 +28,7 @@
         <div class="input-wrapper">
           <label for="email">Email</label>
           <input
+            id="email"
             v-model="v.emailForm.$model"
             @mouseover="hovering = true"
             @mouseleave="hovering = false"
@@ -35,7 +36,6 @@
             @blur="toggleFocus"
             @keypress.enter.prevent="$refs.input3.focus()"
             ref="input2"
-            name="email"
             maxlength="100"
           />
         </div>
@@ -57,6 +57,7 @@
         <div :class="{ 'input-wrapper': true, 'bottom-5': isIOS || isOpera || isChrome }">
           <label for="message">Message</label>
           <textarea
+            id="message"
             v-model="v.messageForm.$model"
             @input.prevent="resize"
             @mouseover="hovering = true"
@@ -64,7 +65,6 @@
             @focus="toggleFocus"
             @blur="toggleFocus"
             ref="input3"
-            name="message"
             maxlength="300"
           />
         </div>
