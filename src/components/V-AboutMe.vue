@@ -17,7 +17,10 @@
         v-for="(icon, idx) in icons"
         :icon="['fab', icon]"
         :key="idx"
+        :title="icon"
         size="6x"
+        :ref="setIconRef"
+        tabindex="0"
       ></FontAwesomeIcon>
     </div>
     <div class="container aria" aria-hidden="false">
@@ -29,11 +32,16 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import tippy, { animateFill } from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/dist/backdrop.css';
+import 'tippy.js/animations/shift-away.css';
 
 export default {
   name: 'About Me',
   setup() {
+    const iconsRefs = [];
     const icons = ref([
       'js',
       'html5',
@@ -48,10 +56,29 @@ export default {
     ]);
 
     const supportJustifyEvenly = computed(() => CSS.supports('justify-content: space-evenly'));
+    const setIconRef = (el) => iconsRefs.push(el);
+    // prettier-ignore
+    const toTitleCase = (str) => str.split('').reduce((acc, char, i) => `${acc}${i === 0 ? char.toUpperCase() : char}`, '');
+
+    onMounted(() => {
+      for (let i = 0; i < iconsRefs.length; i += 1) {
+        tippy(iconsRefs[i].$el, {
+          content: `<span style="font-family: 'Poppins', sans-serif">${toTitleCase(
+            iconsRefs[i].$props.icon[1],
+          )}</span>`,
+          allowHTML: true,
+          animateFill: true,
+          arrow: false,
+          plugins: [animateFill],
+          touch: 'hold',
+        });
+      }
+    });
 
     return {
       icons,
       supportJustifyEvenly,
+      setIconRef,
     };
   },
 };
@@ -108,6 +135,7 @@ export default {
 
     * {
       margin: 1rem;
+      outline: none;
     }
     &.aria {
       display: none;
