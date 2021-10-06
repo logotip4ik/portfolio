@@ -56,12 +56,14 @@ export default {
 
     // LOADER stuff
     let initialLoading = true;
+    const initialDelay = 0.75;
     const loading = ref(true);
     provide('loading', loading);
+    provide('initialDelay', initialDelay);
     watch(loading, () => {
       if (CSS.supports('clip-path: inset(100% 0 100% 0)')) {
         gsap.to('#loader', {
-          delay: initialLoading ? 0.3 : 0,
+          delay: initialLoading ? initialDelay : 0,
           clipPath: loading.value ? 'inset(100% 0 100% 0)' : 'inset(100% 0 0 0)',
           ease: 'linear',
           onComplete: () => {

@@ -55,6 +55,7 @@ export default {
     const hovering = inject('hovering');
     const openURL = inject('openURL');
     const interact = inject('interact');
+    const initialDelay = inject('initialDelay');
 
     const text = '‹‹ Scroll down ››';
 
@@ -85,7 +86,7 @@ export default {
     }
 
     function setupAnimations() {
-      const TL = gsap.timeline();
+      const TL = gsap.timeline({ delay: initialDelay });
       TL.fromTo(
         '.logo-line',
         { x: 200, yPercent: -50 },
