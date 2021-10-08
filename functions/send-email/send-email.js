@@ -65,7 +65,7 @@ module.exports.handler = async (event) => {
       email: validBody.value.email,
       message: validBody.value.message,
     }),
-  });
+  }).catch((err) => console.log({ err, msg: 'something went wrong when sending mail' }));
 
   return { statusCode: 200, body: JSON.stringify({ msg: 'successfully sent email' }) };
 };
