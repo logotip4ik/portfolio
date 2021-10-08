@@ -142,11 +142,15 @@ export default {
       loading.value = true;
       resetForm();
       emit('scroll-to', 'top');
-      fetch('/api/send-email', {
+      fetch('https://formcarry.com/s/_T7ia-nV9ic', {
         method: 'POST',
         body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
       })
-        .then(() => emit('success', true))
+        .then(({ ok }) => emit('success', ok))
         .catch((err) => {
           emit('success', false);
           console.warn(err);
