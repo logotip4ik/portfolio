@@ -91,7 +91,7 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
 
 import VButton from '@/components/V-Button.vue';
-
+// [ ] add aria invaid for input
 export default {
   name: 'Contact',
   setup(_, { emit }) {
@@ -153,6 +153,7 @@ export default {
         })
         .finally(() => {
           loading.value = false;
+          v.value.$reset();
         });
     }
 
