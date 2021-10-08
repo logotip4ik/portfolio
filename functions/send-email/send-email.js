@@ -56,7 +56,11 @@ module.exports.handler = (event, _, callback) => {
       }),
     });
 
-  const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.API_DOMAIN });
+  const mg = mailgun({
+    apiKey: process.env.API_KEY,
+    domain: process.env.API_DOMAIN,
+    host: 'api.eu.mailgun.net',
+  });
   mg.messages().send(
     {
       to: 'bogdankostyuk12@gmail.com',
