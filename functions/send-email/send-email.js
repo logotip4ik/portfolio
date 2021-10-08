@@ -18,6 +18,7 @@ const schema = Joi.object({
 });
 
 async function sendEmail(data) {
+  console.log({ API_DOMAIN: process.env.API_DOMAIN, API_KEY: process.env.API_KEY });
   return new Promise((resolve, reject) => {
     const mg = mailgun({ domain: process.env.API_DOMAIN, apiKey: process.env.API_KEY });
     mg.messages().send(data, (err) => (err ? reject(err) : resolve()));
