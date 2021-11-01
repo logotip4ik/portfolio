@@ -71,17 +71,17 @@ export default [
     live: 'https://nuxt-hackernews.vercel.app',
   },
   {
-    name: 'Countries',
-    img: require('./assets/LogoCountries-min.jpg'),
-    desc: 'Search, filter and see detailed info about each country in the World.',
+    name: 'NuxtForecast',
+    img: require('./assets/NuxtForecast-min.png'),
+    desc:
+      'Modern looking forecast web app. If you want it could auto determine your geolocation by ip',
     techUsed: [
       { id: Math.random() * 100, content: 'Javascript' },
       { id: Math.random() * 100, content: 'Nuxt' },
       { id: Math.random() * 100, content: 'Scss' },
-      { id: Math.random() * 100, content: 'Frontend Mentor' },
-      { id: Math.random() * 100, content: 'REST Countries API' },
+      { id: Math.random() * 100, content: 'OpenWeatherApi' },
     ],
-    source: 'https://github.com/logotip4ik/countries',
-    live: 'https://countries.bogdankostyuk.vercel.app/',
+    source: 'https://github.com/logotip4ik/nuxt-weather',
+    live: 'https://forecast.bogdankostyuk.xyz',
   },
 ];
