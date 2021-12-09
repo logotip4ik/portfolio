@@ -1,0 +1,57 @@
+:root {
+  --transition-function: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-time: 400ms;
+  --theme-color: 40;
+
+  --surface-color: hsl(var(--theme-color), 10%, 95%);
+  --ff-color: hsl(var(--theme-color), 15%, 10%);
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html.dark-mode {
+  --ff-color: hsl(var(--theme-color), 10%, 95%);
+  --surface-color: hsl(var(--theme-color), 15%, 10%);
+}
+
+body,
+html {
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  height: 100%;
+
+  color: var(--ff-color);
+  background: var(--surface-color);
+
+  transition: background-color var(--transition-time) var(--transition-function),
+    color var(--transition-time) var(--transition-function);
+}
+
+html.dark-mode svg {
+  color: var(--ff-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Merriweather', serif;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s var(--transition-function);
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
