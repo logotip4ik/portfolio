@@ -1,7 +1,9 @@
 :root {
   --transition-function: cubic-bezier(0.65, 0, 0.35, 1);
   --transition-time: 400ms;
-  --theme-color: 40;
+  --theme-color: 20;
+
+  --primary-color: hsl(var(--theme-color), 90%, 50%);
 
   --surface-color: hsl(var(--theme-color), 10%, 95%);
   --ff-color: hsl(var(--theme-color), 15%, 10%);
@@ -23,6 +25,7 @@ html.dark-mode {
 body,
 html {
   font-family: 'Lato', sans-serif;
+  font-size: calc(11px + 0.33vw);
   -webkit-font-smoothing: antialiased;
 
   height: 100%;
@@ -47,9 +50,38 @@ h6 {
   font-family: 'Merriweather', serif;
 }
 
+a {
+  position: relative;
+  text-decoration: none;
+  color: currentColor;
+
+  isolation: isolate;
+}
+
+a::after {
+  --pd-x: -0.1rem;
+  content: '';
+
+  position: absolute;
+  z-index: -1;
+  top: 75%;
+  left: var(--pd-x);
+  right: var(--pd-x);
+  bottom: 0;
+
+  background-color: var(--primary-color);
+  opacity: 0.5;
+
+  transition: 200ms cubic-bezier(0, 0.8, 0.13, 1);
+}
+
+a:hover::after {
+  top: 0;
+}
+
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.4s var(--transition-function);
+  transition: opacity var(--transition-time) var(--transition-function);
 }
 .fade-enter,
 .fade-leave-to {
