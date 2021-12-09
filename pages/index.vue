@@ -20,8 +20,9 @@
       <a href="https://github.com/logotip4ik" target="_blank">GitHub</a>. I am
       able to create complicated ui's as well as the design and program back-end
       of web apps.
-      <br />
-      <br />
+    </p>
+
+    <p class="main__about">
       Most of the time I spend programing with
       <a href="https://v3.vuejs.org/" target="_blank">Vue.js</a>, but also I
       know <a href="https://reactjs.org/" target="_blank">React.js</a>.&nbsp;
@@ -29,8 +30,9 @@
       around with frameworks called
       <a href="https://nextjs.org" target="_blank">Next.js</a> and
       <a href="https://nuxtjs.org" target="_blank">Nuxt.js</a>
-      <br />
-      <br />
+    </p>
+
+    <p class="main__about">
       Outside of the programing world, I am learning in
       <a href="https://lpnu.ua/en" target="_blank">Lviv Polytechnic</a>. I like
       listening to music, watching
@@ -66,7 +68,7 @@ export default {
 
 <style lang="scss">
 .main {
-  padding: 8rem 5vw 2rem;
+  padding: 6rem 6vw 1.5rem;
 
   &__theme-toggle {
     --btn-size: 2.5rem;
@@ -76,7 +78,7 @@ export default {
     place-items: center;
 
     position: absolute;
-    top: 4rem;
+    top: 3rem;
     right: 4vw;
 
     width: var(--btn-size);
@@ -127,19 +129,20 @@ export default {
   }
 
   &__heading {
-    font-size: 3.5rem;
+    font-size: 4.4rem;
     margin-bottom: 0.125rem;
   }
 
   &__name {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 3rem;
   }
 
   &__about {
-    font-size: 1.125rem;
-    line-height: 1.75;
+    font-size: 1.35rem;
+    line-height: 1.5;
     max-width: 36rem;
+    margin-bottom: 1rem;
   }
 }
 </style>
