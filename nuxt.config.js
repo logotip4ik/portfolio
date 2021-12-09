@@ -45,4 +45,19 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  googleFonts: {
+    families: {
+      Merriweather: {
+        wght: [300, 400, 700],
+      },
+      Lato: {
+        wght: [300, 400],
+      },
+    },
+    display: 'swap',
+    prefetch: true,
+    preconnect: true,
+    preload: true,
+  },
 }
