@@ -1,14 +1,28 @@
 <template>
   <nav class="nav">
-    <NuxtLink to="/projects">Projects</NuxtLink>
-    <NuxtLink to="/posts">Blog</NuxtLink>
-    <NuxtLink to="#">Contact</NuxtLink>
+    <NuxtLink v-for="(route, i) in routes" :key="i" :to="getHref(route.path)">
+      {{ route.label }}
+    </NuxtLink>
     <ColorThemeToggle />
   </nav>
 </template>
 
 <script>
-export default {}
+export default {
+  data: () => ({
+    routes: [
+      { label: 'Projects', path: 'projects' },
+      { label: 'Blog', path: 'posts' },
+      { label: 'Contact', path: 'contact' },
+    ],
+  }),
+  methods: {
+    getHref(routeName) {
+      if (this.$route.name === routeName) return '/'
+      return `/${routeName}`
+    },
+  },
+}
 </script>
 
 <style lang="scss">
