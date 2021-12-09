@@ -1,4 +1,43 @@
 ---
 label: Project Post
 hide_body: false
-fields: []
+fields:
+- name: image
+  type: file
+  config:
+    maxSize: 64
+  label: Image
+- name: name
+  type: text
+  config:
+    required: true
+  label: Name
+- name: description
+  type: text
+  config:
+    required: true
+  label: Description
+- name: techUsed
+  type: tag_list
+  default: []
+  label: Tech Used
+- name: soure
+  type: text
+  config:
+    required: false
+  label: Soure Code
+- name: live
+  type: text
+  config:
+    required: false
+  label: Live
+- name: publishedAt
+  type: datetime
+  label: Published At
+  description: ''
+  config:
+    required: true
+    date_format: DD/MM/YYYY
+    time_format: 
+    display_utc: false
+  default: now
