@@ -100,7 +100,8 @@ export default {
 
       opacity: 0;
       border-radius: var(--br-radius);
-      box-shadow: 0 0 30px rgba($color: hsl(0, 0%, 20%), $alpha: 0.25);
+      box-shadow: 0 0 30px rgba($color: hsl(0, 0%, 20%), $alpha: 0.25),
+        inset 0 0 5px rgba($color: hsl(0, 0%, 20%), $alpha: 0.05);
 
       transition: opacity var(--transition-time) var(--transition-function);
     }
