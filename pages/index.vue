@@ -32,26 +32,12 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    colorModeIdx: 0,
-    colorModes: ['system', 'light', 'dark'],
-  }),
-  mounted() {
-    this.colorModeIdx = this.colorModes.indexOf(this.$colorMode.value)
-  },
-  methods: {
-    toggleColorTheme() {
-      this.colorModeIdx = (this.colorModeIdx + 1) % this.colorModes.length
-      this.$colorMode.preference = this.colorModes[this.colorModeIdx]
-    },
-  },
-}
+export default {}
 </script>
 
 <style lang="scss">
 .main {
-  padding: 6rem 6vw 1.5rem;
+  padding: 0 6vw 1.5rem;
 
   &__heading {
     font-size: 4.4rem;
