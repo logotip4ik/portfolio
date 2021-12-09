@@ -45,7 +45,13 @@ export default {
   ],
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
-  content: {},
+  content: {
+    markdown: {
+      prism: {
+        theme: 'prism-themes/themes/prism-one-dark.min.css',
+      },
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
@@ -57,6 +63,9 @@ export default {
       },
       Lato: {
         wght: [300, 400],
+      },
+      'IBM+Plex+Mono': {
+        wght: [400, 600],
       },
     },
     display: 'swap',
