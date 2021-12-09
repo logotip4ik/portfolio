@@ -13,9 +13,13 @@ fields:
     required: true
   label: Name
 - name: description
-  type: text
+  type: textarea
+  default: ''
   config:
     required: true
+    wysiwyg: true
+    schema:
+      format: markdown
   label: Description
 - name: techUsed
   type: tag_list
