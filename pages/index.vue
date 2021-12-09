@@ -34,7 +34,7 @@
 
     <p class="main__about">
       Outside of the programing world, I am learning in
-      <a href="https://lpnu.ua/en" target="_blank">Lviv Polytechnic</a>. I like
+      <a href="https://lpnu.ua/en" target="_blank">university</a>. I like
       listening to music, watching
       <a href="https://www.formula1.com/" target="_blank">Formula 1</a> and
       films, playing chess. Also, I enjoy collecting watches and reading
