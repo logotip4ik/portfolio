@@ -41,6 +41,10 @@ html.dark-mode svg {
   color: var(--ff-color);
 }
 
+*::selection {
+  background-color: var(--primary-color);
+}
+
 h1,
 h2,
 h3,
