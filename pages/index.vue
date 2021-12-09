@@ -139,9 +139,9 @@ export default {
   }
 
   &__about {
-    font-size: 1.35rem;
-    line-height: 1.5;
-    max-width: 36rem;
+    font-size: 1.4rem;
+    line-height: 1.75;
+    max-width: 47rem;
     margin-bottom: 1rem;
   }
 }
