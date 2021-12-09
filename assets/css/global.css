@@ -19,7 +19,7 @@
 
 html.dark-mode {
   --ff-color: hsl(var(--theme-color), 10%, 95%);
-  --surface-color: hsl(var(--theme-color), 15%, 10%);
+  --surface-color: hsl(var(--theme-color), 15%, 8%);
 }
 
 body,
