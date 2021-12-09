@@ -6,7 +6,8 @@
       "@/*": ["./*"],
       "~~/*": ["./*"],
       "@@/*": ["./*"]
-    }
+    },
+    "types": ["@nuxt/types", "@nuxtjs/color-mode", "@nuxt/content"]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
