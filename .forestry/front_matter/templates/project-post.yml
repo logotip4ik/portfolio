@@ -25,11 +25,11 @@ fields:
   type: tag_list
   default: []
   label: Tech Used
-- name: soure
+- name: source
   type: text
   config:
     required: false
-  label: Soure Code
+  label: Source Code
 - name: live
   type: text
   config:
