@@ -32,6 +32,8 @@ export default {
     '@nuxtjs/eslint-module',
     // https://google-fonts.nuxtjs.org
     '@nuxtjs/google-fonts',
+    // https://github.com/nuxt-community
+    '@nuxtjs/svg',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
