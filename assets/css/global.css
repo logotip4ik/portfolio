@@ -83,6 +83,19 @@ a:hover::after {
   top: 0;
 }
 
+.nuxt-link-active::after {
+  top: 0;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity var(--transition-time) cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity var(--transition-time) var(--transition-function);
