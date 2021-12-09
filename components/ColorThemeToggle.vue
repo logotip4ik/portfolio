@@ -20,6 +20,19 @@ import SystemSvg from '~/assets/img/system.svg?inline'
 
 export default {
   components: { SunSvg, MoonSvg, SystemSvg },
+  data: () => ({
+    colorModeIdx: 0,
+    colorModes: ['system', 'light', 'dark'],
+  }),
+  mounted() {
+    this.colorModeIdx = this.colorModes.indexOf(this.$colorMode.value)
+  },
+  methods: {
+    toggleColorTheme() {
+      this.colorModeIdx = (this.colorModeIdx + 1) % this.colorModes.length
+      this.$colorMode.preference = this.colorModes[this.colorModeIdx]
+    },
+  },
 }
 </script>
 
@@ -28,12 +41,11 @@ export default {
   --btn-size: 2.5rem;
   --br-radius: 0.25rem;
 
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
-  position: absolute;
-  top: 3rem;
-  right: 4vw;
+  position: relative;
 
   width: var(--btn-size);
   height: var(--btn-size);
@@ -42,7 +54,6 @@ export default {
   border-radius: var(--br-radius);
   background-color: transparent;
 
-  transform: translateY(-50%);
   cursor: pointer;
 
   &::after {
@@ -63,6 +74,9 @@ export default {
   }
 
   svg {
+    height: 75%;
+    width: auto;
+
     transform: scale(1);
     transition: opacity var(--transition-time) var(--transition-function),
       transform var(--transition-time) var(--transition-function);
