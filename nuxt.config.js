@@ -34,6 +34,8 @@ export default {
     '@nuxtjs/google-fonts',
     // https://github.com/nuxt-community
     '@nuxtjs/svg',
+    // https://color-mode.nuxtjs.org
+    '@nuxtjs/color-mode',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
