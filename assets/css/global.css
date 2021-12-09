@@ -1,7 +1,7 @@
 :root {
   --transition-function: cubic-bezier(0.65, 0, 0.35, 1);
   --transition-time: 400ms;
-  --theme-color: 20;
+  --theme-color: 300;
 
   --primary-color: hsl(var(--theme-color), 90%, 50%);
 
