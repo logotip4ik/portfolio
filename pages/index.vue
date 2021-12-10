@@ -37,13 +37,6 @@ export default {}
 
 <style lang="scss">
 .main {
-  padding: 0 6vw 1.5rem;
-
-  &__heading {
-    font-size: 4.4rem;
-    margin-bottom: 0.125rem;
-  }
-
   &__name {
     font-size: 2.5rem;
     margin-bottom: 3rem;
