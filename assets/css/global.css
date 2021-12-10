@@ -9,9 +9,9 @@
   --ff-color: hsl(var(--theme-color), 15%, 10%);
 }
 
-*,
-*::after,
-*::before {
+*:not(.nuxt-content-container *),
+*:not(.nuxt-content-container *)::after,
+*:not(.nuxt-content-container *)::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
