@@ -27,3 +27,5 @@ fields:
     time_format: 
     display_utc: false
   default: now
+pages:
+- content/posts/testing.md
