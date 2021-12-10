@@ -61,6 +61,47 @@ export default {
     .icon.icon-link::before {
       content: '#';
     }
+
+    // blockquote
+    --accent-color: hsla(var(--theme-color), 15%, 50%, 0.125);
+    blockquote {
+      background: hsla(var(--theme-color), 10%, 50%, 0.125);
+      border-left: 10px solid var(--accent-color);
+      margin: 1.5em 10px;
+      padding: 0.5em 10px;
+      quotes: '\201C''\201D''\2018''\2019';
+    }
+    blockquote::before {
+      color: var(--accent-color);
+      content: open-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-right: 0.25em;
+      vertical-align: -0.4em;
+    }
+    blockquote p {
+      display: inline;
+    }
+
+    // tables
+    table {
+      width: 100%;
+
+      border-radius: 0.3rem;
+      background-color: var(--accent-color);
+
+      td,
+      th {
+        text-align: left;
+        padding: 0.25rem 1rem;
+      }
+      th {
+        border-bottom: 1px solid rgba($color: #ccc, $alpha: 0.125);
+      }
+      tbody tr:nth-child(even) {
+        background-color: var(--accent-color);
+      }
+    }
   }
 }
 </style>
