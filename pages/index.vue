@@ -28,15 +28,71 @@
       films, playing chess. Also, I enjoy collecting watches and reading
       dystopian books.
     </p>
+
+    <div
+      ref="blob"
+      class="blob"
+      :style="{ ...getBlobVariables(blobVariables) }"
+    ></div>
   </main>
 </template>
 
 <script>
-export default {}
+import { gsap } from 'gsap'
+// import { random } from 'gsap/'
+
+export default {
+  data() {
+    return {
+      blobVariables: [
+        { name: 'bottom', value: `${this.getRandomNumber(10, 15)}%` },
+        { name: 'right', value: `${this.getRandomNumber(10, 15)}%` },
+        { name: 'height', value: `${this.getRandomNumber(15, 25)}rem` },
+        { name: 'width', value: `${this.getRandomNumber(16, 25)}rem` },
+        { name: 'br-lt', value: `${this.getRandomNumber(5, 15)}rem` },
+        { name: 'br-rt', value: `${this.getRandomNumber(5, 15)}rem` },
+        { name: 'br-lb', value: `${this.getRandomNumber(5, 15)}rem` },
+        { name: 'br-rb', value: `${this.getRandomNumber(5, 15)}rem` },
+      ],
+    }
+  },
+  mounted() {
+    gsap.to(this.$refs.blob, {
+      ...this.blobVariables.reduce(
+        (acc, variable) => ({
+          ...acc,
+          [`--blob-${variable.name}`]: `random(10, 25)`,
+        }),
+        {}
+      ),
+
+      repeat: -1,
+      repeatRefresh: true,
+      duration: 5,
+    })
+  },
+  methods: {
+    getBlobVariables(variables) {
+      return variables.reduce(
+        (acc, variable) => ({
+          ...acc,
+          [`--blob-${variable.name}`]: variable.value,
+        }),
+        {}
+      )
+    },
+    getRandomNumber(from, to) {
+      return Math.floor(Math.random() * (from - to) + to)
+    },
+  },
+}
 </script>
 
 <style lang="scss">
 .main {
+  position: relative;
+  isolation: isolate;
+
   &__name {
     font-size: 2.5rem;
     margin-bottom: 3rem;
@@ -48,5 +104,23 @@ export default {}
     max-width: 47rem;
     margin-bottom: 1rem;
   }
+}
+
+.blob {
+  position: absolute;
+  z-index: -1;
+  bottom: var(--blob-bottom);
+  right: var(--blob-right);
+
+  width: var(--blob-width);
+  height: var(--blob-height);
+
+  border-radius: var(--blob-br-lt) var(--blob-br-rt) var(--blob-br-rb)
+    var(--blob-br-lb);
+
+  filter: blur(45px);
+
+  background-color: var(--primary-color);
+  opacity: 0.175;
 }
 </style>
