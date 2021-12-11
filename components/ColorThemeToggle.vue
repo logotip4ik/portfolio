@@ -38,19 +38,20 @@ export default {
 
 <style lang="scss">
 .theme-toggle {
-  --btn-size: 2.5rem;
-  --br-radius: 0.25rem;
+  --btn-size: 3rem;
+  --br-radius: 0.3rem;
 
   display: inline-flex;
   justify-content: center;
   align-items: center;
 
   position: relative;
+  isolation: isolate;
 
   width: var(--btn-size);
   height: var(--btn-size);
 
-  border: none;
+  border: 1px solid hsla(var(--primary-color-values), 0.05);
   border-radius: var(--br-radius);
   background-color: transparent;
 
@@ -60,38 +61,29 @@ export default {
     content: '';
 
     position: absolute;
+    z-index: 10;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
 
-    opacity: 0;
     border-radius: var(--br-radius);
-    box-shadow: 0 0 30px rgba($color: hsl(0, 0%, 20%), $alpha: 0.25),
-      inset 0 0 5px rgba($color: hsl(0, 0%, 20%), $alpha: 0.05);
+    mix-blend-mode: lighten;
+    background-color: hsla(var(--theme-color), 10%, 50%, 0.125);
+    opacity: 0;
 
-    transition: opacity var(--transition-time) var(--transition-function);
+    transition: opacity 300ms var(--transition-function-ease-out);
   }
 
   svg {
-    height: 75%;
+    height: 65%;
     width: auto;
-
-    transform: scale(1);
-    transition: opacity var(--transition-time) var(--transition-function),
-      transform var(--transition-time) var(--transition-function);
   }
 
   &:hover {
+    border-color: hsla(var(--primary-color-values), 0.1);
     &::after {
       opacity: 1;
-      transition: opacity 200ms var(--transition-function);
-    }
-
-    svg {
-      transform: scale(1.05);
-      transition: opacity var(--transition-time) var(--transition-function),
-        transform 100ms var(--transition-function);
     }
   }
 }
