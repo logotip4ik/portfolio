@@ -8986,7 +8986,7 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-smooth-scrollbar@^8.6.3, smooth-scrollbar@^8.7.0:
+smooth-scrollbar@^8.7.0:
   version "8.7.0"
   resolved "https://registry.yarnpkg.com/smooth-scrollbar/-/smooth-scrollbar-8.7.0.tgz#3fda1ab87f8348e0c69742cb22be51fd0f6cfa13"
   integrity sha512-ckjRYfdDY6qrYh8X9rr4dfl60YALX11dzQfoQhiqhEGSEVMfEB2HMBW7mw8/j3lrkw1gml4A9HVvz/8qLfo44Q==
@@ -10135,13 +10135,6 @@ vue-server-renderer@^2.6.12:
     resolve "^1.2.0"
     serialize-javascript "^3.1.0"
     source-map "0.5.6"
-
-vue-smooth-scrollbar@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/vue-smooth-scrollbar/-/vue-smooth-scrollbar-1.0.3.tgz#151ef46be938e1d9308681cf12c9b26c2c8c9cfd"
-  integrity sha512-X+rZjyXM9RhfJszZSbz0amRUDVKVxs/u5KZCbakx/q22MW977J4pBvwy/12W6qVkvyL0c5c4uiV6i2yoX59ZQQ==
-  dependencies:
-    smooth-scrollbar "^8.6.3"
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.3:
   version "4.1.3"
