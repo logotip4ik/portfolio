@@ -30,7 +30,7 @@ html.dark-mode {
 body,
 html {
   font-family: 'Lato', sans-serif;
-  font-size: calc(10px + 0.33vw);
+  font-size: calc(12px + 0.175vw);
   -webkit-font-smoothing: antialiased;
 
   height: 100%;
