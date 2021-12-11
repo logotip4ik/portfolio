@@ -15,7 +15,9 @@
     "core-js": "^3.15.1",
     "gsap": "^3.8.0",
     "nuxt": "^2.15.7",
-    "prism-themes": "^1.9.0"
+    "prism-themes": "^1.9.0",
+    "smooth-scrollbar": "^8.7.0",
+    "vue-smooth-scrollbar": "^1.0.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
