@@ -1,17 +1,16 @@
 <template>
-  <smooth-scrollbar id="scroll-area">
+  <div>
     <Navbar />
-    <Nuxt id="scroll-content" />
-  </smooth-scrollbar>
+    <Nuxt id="content-element" />
+  </div>
 </template>
 
 <style>
-#scroll-area.is-pc {
+#__layout.is-pc {
   width: 100%;
   height: 100vh;
 }
-
-#scroll-content.is-pc {
+#content-element.is-pc {
   width: 100%;
   height: max-content;
 }
