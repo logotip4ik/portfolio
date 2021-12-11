@@ -1,50 +1,50 @@
-import Vue from 'vue'
-import VueSmoothScrollbar from 'vue-smooth-scrollbar'
-
-Vue.use(VueSmoothScrollbar, {
-  renderByPixels: true,
-  continuousScrolling: false,
-  damping: 0.125,
-})
+// import Vue from 'vue'
+import Scrollbar from 'smooth-scrollbar'
 
 const mixinName = '___never_guess_Mixin_name'
+let scrollbarInstance
 
-const toggleClassesFactory = (
-  widthBreakPoint,
-  classToToggle,
-  ...elementsSelectors
-) => {
-  const elements = []
-  for (const selector of elementsSelectors) {
-    const element = document.querySelector(selector)
-    if (element) elements.push(element)
-  }
+function registerScrollbar() {
+  const containerEl = document.querySelector('#__layout')
+  const contentEl = document.querySelector('#content-element')
 
-  return (windowWidth) => {
-    if (windowWidth > widthBreakPoint) {
-      for (const element of elements) element.classList.add(classToToggle)
-    } else {
-      for (const element of elements) element.classList.remove(classToToggle)
-    }
-  }
-}
+  containerEl.classList.add('is-pc')
+  contentEl.classList.add('is-pc')
 
-function registerListener() {
-  Vue[mixinName] = true
-
-  Vue.mixin({
-    mounted() {
-      const classesToggle = toggleClassesFactory(
-        1100,
-        'is-pc',
-        '#scroll-content',
-        '#scroll-area'
-      )
-
-      window.addEventListener('resize', () => classesToggle(window.innerWidth))
-      classesToggle(window.innerWidth)
-    },
+  scrollbarInstance = Scrollbar.init(containerEl, {
+    damping: 0.05,
+    continuousScrolling: false,
+    renderByPixels: false,
   })
 }
 
-if (!Vue[mixinName]) registerListener()
+function unregisterScrollbar() {
+  const containerEl = document.querySelector('#__layout')
+  const contentEl = document.querySelector('#content-element')
+
+  containerEl.classList.remove('is-pc')
+  contentEl.classList.remove('is-pc')
+
+  if (!scrollbarInstance) return
+
+  scrollbarInstance.destroy()
+  scrollbarInstance = null
+}
+
+function toggleScrollbarFactory(breakpointWidth) {
+  return () =>
+    window.innerWidth > breakpointWidth
+      ? registerScrollbar()
+      : unregisterScrollbar()
+}
+
+function main() {
+  window[mixinName] = true
+
+  const toggleScrollbar = toggleScrollbarFactory(1000)
+  toggleScrollbar()
+
+  window.addEventListener('resize', toggleScrollbar)
+}
+
+if (!window[mixinName]) document.addEventListener('DOMContentLoaded', main)
