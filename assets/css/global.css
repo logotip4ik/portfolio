@@ -1,9 +1,14 @@
 :root {
   --transition-function: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-function-ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
   --transition-time: 400ms;
   --theme-color: 300;
 
   --primary-color: hsl(var(--theme-color), 90%, 50%);
+  --primary-color-75: hsla(var(--theme-color), 90%, 50%, 75%);
+  --primary-color-50: hsla(var(--theme-color), 90%, 50%, 50%);
+  --primary-color-25: hsla(var(--theme-color), 90%, 50%, 25%);
+  --primary-color-values: var(--theme-color), 90%, 50%;
 
   --surface-color: hsl(var(--theme-color), 10%, 95%);
   --ff-color: hsl(var(--theme-color), 15%, 10%);
@@ -89,7 +94,7 @@ a:hover::after {
 
 .page-enter-active,
 .page-leave-active {
-  transition: opacity var(--transition-time) cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: opacity var(--transition-time) var(--transition-function-ease-out);
 }
 .page-enter,
 .page-leave-to {
