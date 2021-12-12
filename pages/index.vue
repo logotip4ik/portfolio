@@ -32,57 +32,67 @@
     <div
       ref="blob"
       class="blob"
-      :style="{ ...getBlobVariables(blobVariables) }"
+      :style="{ ...getBlobStyles(blobSettings) }"
     ></div>
   </main>
 </template>
 
 <script>
 import { gsap } from 'gsap'
-// import { random } from 'gsap/'
 
 export default {
   data() {
     return {
-      blobVariables: [
-        { name: 'bottom', value: `${this.getRandomNumber(10, 15)}%` },
-        { name: 'right', value: `${this.getRandomNumber(10, 15)}%` },
-        { name: 'height', value: `${this.getRandomNumber(15, 25)}rem` },
-        { name: 'width', value: `${this.getRandomNumber(16, 25)}rem` },
-        { name: 'br-lt', value: `${this.getRandomNumber(5, 15)}rem` },
-        { name: 'br-rt', value: `${this.getRandomNumber(5, 15)}rem` },
-        { name: 'br-lb', value: `${this.getRandomNumber(5, 15)}rem` },
-        { name: 'br-rb', value: `${this.getRandomNumber(5, 15)}rem` },
+      blobSettings: [
+        { name: 'bottom', value: { from: 10, to: 15, postfix: '%' } },
+        { name: 'right', value: { from: 10, to: 15, postfix: '%' } },
+        { name: 'height', value: { from: 15, to: 25, postfix: 'rem' } },
+        { name: 'width', value: { from: 16, to: 25, postfix: 'rem' } },
+        {
+          name: 'borderTopLeftRadius',
+          value: { from: 5, to: 15, postfix: 'rem' },
+        },
+        {
+          name: 'borderTopRightRadius',
+          value: { from: 5, to: 15, postfix: 'rem' },
+        },
+        {
+          name: 'borderBottomLeftRadius',
+          value: { from: 5, to: 15, postfix: 'rem' },
+        },
+        {
+          name: 'borderBottomRightRadius',
+          value: { from: 5, to: 15, postfix: 'rem' },
+        },
       ],
     }
   },
   mounted() {
-    gsap.to(this.$refs.blob, {
-      ...this.blobVariables.reduce(
-        (acc, variable) => ({
-          ...acc,
-          [`--blob-${variable.name}`]: `random(10, 25)`,
-        }),
-        {}
-      ),
+    const stylesObj = {}
 
+    for (const style of this.blobSettings)
+      stylesObj[style.name] =
+        `random(${style.value.from}, ${style.value.to})` + style.value.postfix
+
+    gsap.to(this.$refs.blob, {
+      ...stylesObj,
       repeat: -1,
       repeatRefresh: true,
       duration: 5,
     })
   },
   methods: {
-    getBlobVariables(variables) {
-      return variables.reduce(
-        (acc, variable) => ({
-          ...acc,
-          [`--blob-${variable.name}`]: variable.value,
-        }),
-        {}
-      )
-    },
-    getRandomNumber(from, to) {
-      return Math.floor(Math.random() * (from - to) + to)
+    getBlobStyles(styles) {
+      const stylesObj = {}
+
+      // yeah, i know, everything could be done with reduce,
+      // but try to read that reduce after 3 month of doing other project
+      for (const style of styles)
+        stylesObj[style.name] =
+          gsap.utils.random(style.value.from, style.value.to) +
+          style.value.postfix
+
+      return stylesObj
     },
   },
 }
@@ -109,16 +119,8 @@ export default {
 .blob {
   position: absolute;
   z-index: -1;
-  bottom: var(--blob-bottom);
-  right: var(--blob-right);
 
-  width: var(--blob-width);
-  height: var(--blob-height);
-
-  border-radius: var(--blob-br-lt) var(--blob-br-rt) var(--blob-br-rb)
-    var(--blob-br-lb);
-
-  filter: blur(45px);
+  filter: blur(50px);
 
   background-color: var(--primary-color);
   opacity: 0.175;
