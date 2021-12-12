@@ -7,7 +7,7 @@
     <ul ref="projects" class="main__projects">
       <ProjectItem
         v-for="project in projects"
-        :key="project"
+        :key="project.slug"
         :project="project"
         class="main__projects__project"
       />
