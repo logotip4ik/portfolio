@@ -5,33 +5,12 @@
     <hr class="main__hr" />
 
     <ul class="main__projects">
-      <li
-        v-for="project in projects"
-        :key="project.slug"
+      <ProjectItem
+        v-for="i in 4"
+        :key="i"
+        :project="projects[0]"
         class="main__projects__project"
-        tabindex="0"
-      >
-        <NuxtLink
-          :to="project.path"
-          tag="h2"
-          class="main__projects__project__name"
-          tabindex="0"
-        >
-          {{ project.name }}
-        </NuxtLink>
-        <p class="main__projects__project__description">
-          {{ project.description }}
-        </p>
-
-        <ul class="main__projects__project__links">
-          <a :href="project.live" target="_blank" rel="noopener noreferrer">
-            Live
-          </a>
-          <a :href="project.source" target="_blank" rel="noopener noreferrer">
-            Source
-          </a>
-        </ul>
-      </li>
+      />
     </ul>
   </div>
 </template>
@@ -58,8 +37,18 @@ export default {
   }
 
   &__hr {
-    width: 100%;
-    margin: 0 auto;
+    margin-bottom: 2rem;
+  }
+
+  &__projects {
+    display: flex;
+    flex-direction: column;
+
+    list-style-type: none;
+
+    &__project:not(:first-of-type) {
+      border-top: 1px solid rgba($color: #ccc, $alpha: 0.25);
+    }
   }
 }
 </style>
