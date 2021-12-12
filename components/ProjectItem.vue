@@ -1,13 +1,6 @@
 <template>
   <li>
-    <NuxtLink
-      ref="project"
-      :to="project.path"
-      class="project"
-      tabindex="0"
-      @mouseenter="stretchSvgLine"
-      @mouseleave="undoStretchSvgLine"
-    >
+    <NuxtLink ref="project" :to="project.path" class="project">
       <div class="project__inner">
         <h2 class="project__inner__name">{{ project.name }}</h2>
         <p class="project__inner__description">
@@ -20,35 +13,11 @@
 </template>
 
 <script>
-import { gsap } from 'gsap'
-
 import ArrowRight from '~/assets/img/arrow-right.svg?inline'
 
 export default {
   components: { ArrowRight },
   props: { project: { type: Object, required: true, default: () => {} } },
-  data: () => ({
-    lineToStretch: null,
-  }),
-  methods: {
-    stretchSvgLine() {
-      if (!this.lineToStretch)
-        this.lineToStretch = this.$refs.project.querySelector('rect')
-
-      gsap.to(this.lineToStretch, {
-        scaleX: 1.5,
-      })
-    },
-    undoStretchSvgLine() {
-      if (!this.lineToStretch)
-        this.lineToStretch = this.$refs.project.querySelector('rect')
-
-      gsap.to(this.lineToStretch, {
-        scaleX: 1,
-        // transformOrigin: 'right center',
-      })
-    },
-  },
 }
 </script>
 
