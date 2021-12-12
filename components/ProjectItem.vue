@@ -53,7 +53,7 @@ export default {
 
     &__description {
       font-size: 1.1rem;
-      color: hsl(var(--theme-color), 10%, 50%);
+      color: hsl(var(--theme-color), 5%, 50%);
     }
   }
 
@@ -64,13 +64,15 @@ export default {
 
   &__arrow {
     --active-lightness: 20%;
-    height: 4rem;
+    --arrow-saturation: 5%;
+
+    height: clamp(3rem, 4vw, 4rem);
     width: auto;
 
-    fill: hsl(var(--theme-color), 10%, 50%);
+    fill: hsl(var(--theme-color), var(--arrow-saturation), 50%);
 
     path:last-of-type {
-      stroke: hsl(var(--theme-color), 10%, 50%);
+      stroke: hsl(var(--theme-color), var(--arrow-saturation), 50%);
       stroke-dasharray: 45;
       stroke-dashoffset: -17;
       transition: stroke var(--transition-time)
@@ -84,17 +86,25 @@ export default {
 
   &:hover &__arrow,
   &:focus &__arrow {
-    fill: hsl(var(--theme-color), 10%, var(--active-lightness));
+    fill: hsl(
+      var(--theme-color),
+      var(--arrow-saturation),
+      var(--active-lightness)
+    );
 
     path:last-of-type {
       stroke-dashoffset: 0;
-      stroke: hsl(var(--theme-color), 10%, var(--active-lightness));
+      stroke: hsl(
+        var(--theme-color),
+        var(--arrow-saturation),
+        var(--active-lightness)
+      );
     }
   }
 }
 
 .dark-mode .project__arrow {
   --active-lightness: 85%;
-  fill: hsl(var(--theme-color), 10%, 50%);
+  fill: hsl(var(--theme-color), var(--arrow-saturation), 50%);
 }
 </style>
