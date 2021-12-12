@@ -31,7 +31,6 @@ export default {
   width: 100%;
 
   padding: 2rem 1.5rem;
-  margin-bottom: 1rem;
 
   &::after {
     content: none;

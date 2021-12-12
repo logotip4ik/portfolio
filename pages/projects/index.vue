@@ -67,6 +67,7 @@ export default {
 
     &__project:not(:first-of-type) {
       border-top: 1px solid rgba($color: #ccc, $alpha: 0.25);
+      margin-top: 1rem;
     }
   }
 }
