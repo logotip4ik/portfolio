@@ -4,7 +4,7 @@
 
     <hr class="main__hr" />
 
-    <ul class="main__projects">
+    <ul ref="projects" class="main__projects">
       <ProjectItem
         v-for="i in 4"
         :key="i"
@@ -26,6 +26,12 @@ export default {
   },
   mounted() {
     gsap.fromTo(this.$refs.heading, { y: 20, opacity: 0 }, { y: 0, opacity: 1 })
+
+    gsap.fromTo(
+      this.$refs.projects.children,
+      { opacity: 0 },
+      { opacity: 1, stagger: 0.05, delay: 0.15 }
+    )
   },
 }
 </script>
