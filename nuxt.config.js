@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'blog',
+    title: 'Bogdan Kostyuk | Fullstack developer',
     htmlAttrs: {
       lang: 'en',
     },

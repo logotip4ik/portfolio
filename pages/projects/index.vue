@@ -6,9 +6,9 @@
 
     <ul ref="projects" class="main__projects">
       <ProjectItem
-        v-for="i in 4"
-        :key="i"
-        :project="projects[0]"
+        v-for="project in projects"
+        :key="project"
+        :project="project"
         class="main__projects__project"
       />
     </ul>
@@ -23,6 +23,17 @@ export default {
     const projects = await $content('projects').fetch()
 
     return { projects }
+  },
+  head: {
+    title: 'Projects | Bogdan Kostyuk',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Here you can find all my projects that I am proud of, learned something or was just fun to create',
+      },
+    ],
   },
   mounted() {
     gsap.fromTo(this.$refs.heading, { y: 20, opacity: 0 }, { y: 0, opacity: 1 })
