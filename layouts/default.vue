@@ -1,17 +1,24 @@
 <template>
   <div>
     <Navbar />
-    <Nuxt id="content-element" />
+    <Nuxt />
   </div>
 </template>
 
 <style>
-#__layout.is-pc {
+#__nuxt.is-pc {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
   width: 100%;
-  height: 100vh;
+  overflow: hidden;
 }
-#content-element.is-pc {
+#layout.is-pc {
+  position: absolute;
+  overflow: hidden;
   width: 100%;
-  height: max-content;
 }
 </style>
