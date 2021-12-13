@@ -20,9 +20,7 @@ import { gsap } from 'gsap'
 
 export default {
   async asyncData({ $content }) {
-    const projects = await $content('projects')
-      .only(['name', 'description'])
-      .fetch()
+    const projects = await $content('projects').fetch()
 
     return { projects }
   },
