@@ -17,7 +17,6 @@
   overflow: hidden;
 }
 #layout.is-pc {
-  position: absolute;
   overflow: hidden;
   width: 100%;
 }
