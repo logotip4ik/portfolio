@@ -39,6 +39,7 @@ export default {
 
   a {
     font-size: 1.5rem;
+    margin: 0;
   }
 }
 </style>

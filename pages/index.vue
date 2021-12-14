@@ -112,14 +112,13 @@ export default {
 
   &__name {
     font-size: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 0 0 3rem;
   }
 
   &__about {
     font-size: 1.4rem;
     line-height: 1.75;
     max-width: 47rem;
-    margin-bottom: 1rem;
   }
 }
 

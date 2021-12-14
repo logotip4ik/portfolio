@@ -45,7 +45,7 @@ export default {
 
     &__name {
       font-size: 3rem;
-      margin-bottom: 1rem;
+      margin: 0 0 1rem;
 
       cursor: pointer;
     }
@@ -53,6 +53,8 @@ export default {
     &__description {
       font-size: 1.1rem;
       color: hsl(var(--theme-color), 5%, 50%);
+
+      margin: 0;
     }
   }
 
