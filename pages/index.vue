@@ -68,14 +68,21 @@ export default {
     }
   },
   mounted() {
-    const stylesObj = {}
+    const blobStylesObj = {}
 
     for (const style of this.blobSettings)
-      stylesObj[style.name] =
+      blobStylesObj[style.name] =
         `random(${style.value.from}, ${style.value.to})` + style.value.postfix
 
-    gsap.to(this.$refs.blob, {
-      ...stylesObj,
+    const blobTimeline = gsap.timeline()
+
+    blobTimeline.fromTo(
+      this.$refs.blob,
+      { opacity: 0 },
+      { opacity: 0.25, duration: 1, delay: 0.5 }
+    )
+    blobTimeline.to(this.$refs.blob, {
+      ...blobStylesObj,
       repeat: -1,
       repeatRefresh: true,
       duration: 5,
