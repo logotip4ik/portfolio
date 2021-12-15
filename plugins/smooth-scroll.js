@@ -2,59 +2,60 @@ import Vue from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const mixinName = '__never_guess_THis_name_smooth_scroll'
-
 gsap.registerPlugin(ScrollTrigger)
+
+const mixinName = '__you_Will_NEVER_Guess_mixin_name_SMOOOOTH_Scroll'
+export const smoothScroll = createSmoothScroll('#__layout', '#__nuxt', 0.75)
+const breakpoint = 1000
+const calculateHeight = calculateHeightFactory(
+  '#__layout',
+  () => window.innerWidth < breakpoint
+)
+const isPcClassToggle = classToggleFactory(
+  'is-pc',
+  breakpoint,
+  '#__nuxt',
+  '#__layout'
+)
 
 function registerMixin() {
   Vue[mixinName] = true
+
   Vue.mixin({
-    data: () => ({
-      smoothScroll: null,
-      calculateHeight: calculateHeightFactory('#__layout'),
-    }),
     watch: {
       $route() {
-        setTimeout(() => this.calculateHeight(this.smoothScroll), 500)
+        setTimeout(() => {
+          calculateHeight()
+          smoothScroll.refresh()
+        }, 500)
       },
-    },
-    mounted() {
-      const widthBreakpoint = 1000
-      const isPcClassToggle = classToggleFactory(
-        'is-pc',
-        widthBreakpoint,
-        '#__nuxt',
-        '#__layout'
-      )
-
-      isPcClassToggle(window.innerWidth)
-
-      if (window.innerWidth > widthBreakpoint)
-        this.smoothScroll = createSmoothScroll('#__layout', '#__nuxt', 0.75)
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth < widthBreakpoint) {
-          this.smoothScroll && this.smoothScroll.instance.kill()
-          this.smoothScroll = null
-        } else if (window.innerWidth > widthBreakpoint && !this.smoothScroll)
-          this.smoothScroll = createSmoothScroll('#__layout', '#__nuxt', 0.75)
-
-        isPcClassToggle(window.innerWidth)
-        this.calculateHeight(this.smoothScroll)
-      })
     },
   })
 }
 
+window.addEventListener('resize', () => {
+  if (window.innerWidth < breakpoint) smoothScroll.disable()
+  else smoothScroll.enable()
+
+  isPcClassToggle(window.innerWidth)
+  calculateHeight()
+})
+
+window.addEventListener('DOMContentLoaded', () => {
+  calculateHeight()
+  isPcClassToggle(window.innerWidth)
+
+  if (window.innerWidth < breakpoint) smoothScroll.disable()
+})
+
 if (!Vue[mixinName]) registerMixin()
 
-function calculateHeightFactory(selector) {
-  return (smoothScrollInstance) => {
+function calculateHeightFactory(selector, setToAuto) {
+  return () => {
     const el = document.querySelector(selector)
 
-    if (smoothScrollInstance)
-      document.body.style.height = el.clientHeight + 'px'
-    else document.body.style.height = 'auto'
+    if (setToAuto()) document.body.style.height = 'auto'
+    else document.body.style.height = el.clientHeight + 'px'
   }
 }
 
@@ -118,32 +119,28 @@ function createSmoothScroll(content, viewport, smoothness = 1) {
     },
   })
 
-  return {
-    killScrub,
-    refreshHeight,
-    instance: ScrollTrigger.create({
-      animation: gsap.fromTo(
-        content,
-        { y: 0 },
-        {
-          y: () => document.documentElement.clientHeight - height,
-          ease: 'none',
-          onUpdate: ScrollTrigger.update,
-        }
-      ),
-      scroller: window,
-      invalidateOnRefresh: true,
-      start: 0,
-      end: refreshHeight,
-      refreshPriority: -999,
-      scrub: smoothness,
-      onUpdate: (self) => {
-        if (isProxyScrolling) {
-          killScrub(self)
-          isProxyScrolling = false
-        }
-      },
-      onRefresh: killScrub, // when the screen resizes, we just want the animation to immediately go to the appropriate spot rather than animating there, so basically kill the scrub.
-    }),
-  }
+  return ScrollTrigger.create({
+    animation: gsap.fromTo(
+      content,
+      { y: 0 },
+      {
+        y: () => document.documentElement.clientHeight - height,
+        ease: 'none',
+        onUpdate: ScrollTrigger.update,
+      }
+    ),
+    scroller: window,
+    invalidateOnRefresh: true,
+    start: 0,
+    end: refreshHeight,
+    refreshPriority: -999,
+    scrub: smoothness,
+    onUpdate: (self) => {
+      if (isProxyScrolling) {
+        killScrub(self)
+        isProxyScrolling = false
+      }
+    },
+    onRefresh: killScrub, // when the screen resizes, we just want the animation to immediately go to the appropriate spot rather than animating there, so basically kill the scrub.
+  })
 }
