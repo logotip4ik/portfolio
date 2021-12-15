@@ -47,3 +47,4 @@ fields:
   default: now
 pages:
 - content/projects/easy-bank.md
+- content/projects/student-recruiting.md
