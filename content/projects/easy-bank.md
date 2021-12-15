@@ -4,7 +4,7 @@ techUsed:
 - Scss
 - Parcel
 publishedAt: 2021-12-09T19:44:45Z
-image: "/images/2021-12-09-21-50-17.png"
+image: "/images/easybank.png"
 name: Easy Bank
 description: Challenge from frontend mentor. I tried to make it as simple as possible
 source: https://github.com/logotip4ik/frontend-mentor-easybank
