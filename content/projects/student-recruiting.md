@@ -1,7 +1,7 @@
 ---
 techUsed:
 - Next.js
-- " Scss"
+- Scss
 - Gsap
 publishedAt: 2021-12-15T15:35:19+02:00
 image: ''
