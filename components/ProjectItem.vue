@@ -4,7 +4,7 @@
       <div class="project__inner">
         <h2 class="project__inner__name">{{ project.name }}</h2>
         <p class="project__inner__description">
-          {{ project.description }}
+          {{ chopStringByWords(project.description) }}
         </p>
       </div>
       <ArrowRight class="project__arrow" />
@@ -18,6 +18,20 @@ import ArrowRight from '~/assets/img/arrow-right.svg?inline'
 export default {
   components: { ArrowRight },
   props: { project: { type: Object, required: true, default: () => {} } },
+  methods: {
+    /**
+     * @param {String} string
+     * @param {Number?} wordsToChop
+     * @returns {String}
+     */
+    chopStringByWords(string, wordsToChop = 12) {
+      const words = string.split(' ')
+
+      return words.length < wordsToChop
+        ? string
+        : words.slice(0, wordsToChop).join(' ') + '...'
+    },
+  },
 }
 </script>
 
