@@ -60,6 +60,7 @@ export default {
   &__projects {
     display: flex;
     flex-direction: column;
+    padding-left: 0;
 
     list-style-type: none;
 
