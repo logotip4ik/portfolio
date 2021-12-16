@@ -18,6 +18,11 @@
 *::after,
 *::before {
   box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 html.dark-mode {
