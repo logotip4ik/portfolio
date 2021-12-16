@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import { gsap } from 'gsap'
-
 export default {
   async asyncData({ $content }) {
     const posts = await $content('posts').fetch()
@@ -24,6 +22,7 @@ export default {
     return { posts }
   },
   mounted() {
+    const gsap = this.$gsap
     gsap.fromTo(this.$refs.heading, { y: 20, opacity: 0 }, { y: 0, opacity: 1 })
   },
 }
@@ -33,11 +32,6 @@ export default {
 .main {
   &__heading {
     margin-bottom: 0.5rem;
-  }
-
-  &__hr {
-    width: 100%;
-    margin: 0 auto;
   }
 }
 </style>
