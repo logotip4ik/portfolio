@@ -1,13 +1,13 @@
 <template>
-  <li>
-    <NuxtLink ref="project" :to="project.path" class="project">
-      <div class="project__inner">
-        <h2 class="project__inner__name">{{ project.name }}</h2>
-        <p class="project__inner__description">
+  <li ref="link" class="link">
+    <NuxtLink :to="project.path" class="link__project">
+      <div class="link__project__inner">
+        <h2 class="link__project__inner__name">{{ project.name }}</h2>
+        <p class="link__project__inner__description">
           {{ chopStringByWords(project.description) }}
         </p>
       </div>
-      <ArrowRight class="project__arrow" />
+      <ArrowRight class="link__project__arrow" />
     </NuxtLink>
   </li>
 </template>
@@ -36,89 +36,105 @@ export default {
 </script>
 
 <style lang="scss">
-.project {
-  display: flex;
-  align-items: center;
-
+.link {
   position: relative;
 
-  width: 100%;
+  &__project {
+    display: flex;
+    align-items: center;
 
-  padding: 2rem 1.5rem;
+    width: 100%;
 
-  &::after {
-    content: none;
-  }
+    padding: 2rem 1.5rem;
 
-  &__inner {
-    flex: 1;
-
-    transform-origin: left center;
-    transition: transform var(--transition-time)
-      var(--transition-function-ease-out);
-
-    &__name {
-      font-size: 3rem;
-      margin: 0 0 1rem;
-
-      cursor: pointer;
+    &::after {
+      content: none;
     }
 
-    &__description {
-      font-size: 1.1rem;
-      color: hsl(var(--theme-color), 5%, 50%);
+    &__inner {
+      flex: 1;
 
-      margin: 0;
-    }
-  }
+      transform-origin: left center;
+      transition: transform var(--transition-time)
+        var(--transition-function-ease-out);
 
-  &:hover &__inner,
-  &:focus &__inner {
-    transform: scale(0.95);
-  }
+      &__name {
+        font-size: 3rem;
+        margin: 0 0 1rem;
 
-  &__arrow {
-    --active-lightness: 20%;
-    --arrow-saturation: 5%;
+        cursor: pointer;
+      }
 
-    height: clamp(3rem, 4vw, 4rem);
-    width: auto;
+      &__description {
+        font-size: 1.1rem;
+        color: hsl(var(--theme-color), 5%, 50%);
 
-    fill: hsl(var(--theme-color), var(--arrow-saturation), 50%);
-
-    path:last-of-type {
-      stroke: hsl(var(--theme-color), var(--arrow-saturation), 50%);
-      stroke-dasharray: 45;
-      stroke-dashoffset: -17;
-      transition: stroke var(--transition-time)
-          var(--transition-function-ease-out),
-        stroke-dashoffset var(--transition-time)
-          var(--transition-function-ease-out);
+        margin: 0;
+      }
     }
 
-    transition: fill var(--transition-time) var(--transition-function-ease-out);
-  }
+    &:hover &__inner,
+    &:focus &__inner {
+      transform: scale(0.95);
+    }
 
-  &:hover &__arrow,
-  &:focus &__arrow {
-    fill: hsl(
-      var(--theme-color),
-      var(--arrow-saturation),
-      var(--active-lightness)
-    );
+    &__arrow {
+      --active-lightness: 20%;
+      --arrow-saturation: 5%;
 
-    path:last-of-type {
-      stroke-dashoffset: 0;
-      stroke: hsl(
+      height: clamp(3rem, 4vw, 4rem);
+      width: auto;
+
+      fill: hsl(var(--theme-color), var(--arrow-saturation), 50%);
+
+      path:last-of-type {
+        stroke: hsl(var(--theme-color), var(--arrow-saturation), 50%);
+        stroke-dasharray: 45;
+        stroke-dashoffset: -17;
+        transition: stroke var(--transition-time)
+            var(--transition-function-ease-out),
+          stroke-dashoffset var(--transition-time)
+            var(--transition-function-ease-out);
+      }
+
+      transition: fill var(--transition-time)
+        var(--transition-function-ease-out);
+    }
+
+    &:hover &__arrow,
+    &:focus &__arrow {
+      fill: hsl(
         var(--theme-color),
         var(--arrow-saturation),
         var(--active-lightness)
       );
+
+      path:last-of-type {
+        stroke-dashoffset: 0;
+        stroke: hsl(
+          var(--theme-color),
+          var(--arrow-saturation),
+          var(--active-lightness)
+        );
+      }
     }
+  }
+
+  &__image {
+    position: absolute;
+    z-index: -1;
+
+    width: 100%;
+    max-width: 20vw;
+    height: auto;
+
+    filter: grayscale(0.5);
+
+    opacity: 0;
   }
 }
 
-.dark-mode .project__arrow {
+.dark-mode .link__project__arrow {
   --active-lightness: 85%;
   fill: hsl(var(--theme-color), var(--arrow-saturation), 50%);
 }
