@@ -16,6 +16,7 @@
     "gsap": "^3.8.0",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.15.7",
+    "nuxt-gsap-module": "^1.5.0",
     "prism-themes": "^1.9.0"
   },
   "devDependencies": {
