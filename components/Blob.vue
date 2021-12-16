@@ -83,5 +83,8 @@ export default {
 
   background-color: var(--primary-color);
   opacity: 0;
+
+  pointer-events: none;
+  user-select: none;
 }
 </style>
