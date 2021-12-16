@@ -1,6 +1,7 @@
 <template>
   <section ref="section" class="section">
     <p class="section__description">
+      <!-- eslint-disable -->
       <span
         v-for="(char, key) in projectDescriptionChars"
         :key="key"
@@ -8,6 +9,7 @@
         class="section__description__char"
         v-html="char"
       ></span>
+      <!-- eslint-enable -->
     </p>
   </section>
 </template>
