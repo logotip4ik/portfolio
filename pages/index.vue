@@ -29,80 +29,12 @@
       dystopian books.
     </p>
 
-    <div
-      ref="blob"
-      class="blob"
-      :style="{ ...getBlobStyles(blobSettings) }"
-    ></div>
+    <Blob :max-right-pos="25" :max-bottom-pos="25" />
   </main>
 </template>
 
 <script>
-import { gsap } from 'gsap'
-
-export default {
-  data() {
-    return {
-      blobSettings: [
-        { name: 'bottom', value: { from: 10, to: 15, postfix: '%' } },
-        { name: 'right', value: { from: 10, to: 15, postfix: '%' } },
-        { name: 'height', value: { from: 15, to: 25, postfix: 'rem' } },
-        { name: 'width', value: { from: 16, to: 25, postfix: 'rem' } },
-        {
-          name: 'borderTopLeftRadius',
-          value: { from: 5, to: 15, postfix: 'rem' },
-        },
-        {
-          name: 'borderTopRightRadius',
-          value: { from: 5, to: 15, postfix: 'rem' },
-        },
-        {
-          name: 'borderBottomLeftRadius',
-          value: { from: 5, to: 15, postfix: 'rem' },
-        },
-        {
-          name: 'borderBottomRightRadius',
-          value: { from: 5, to: 15, postfix: 'rem' },
-        },
-      ],
-    }
-  },
-  mounted() {
-    const blobStylesObj = {}
-
-    for (const style of this.blobSettings)
-      blobStylesObj[style.name] =
-        `random(${style.value.from}, ${style.value.to})` + style.value.postfix
-
-    const blobTimeline = gsap.timeline()
-
-    blobTimeline.fromTo(
-      this.$refs.blob,
-      { opacity: 0 },
-      { opacity: 0.25, duration: 1, delay: 0.5 }
-    )
-    blobTimeline.to(this.$refs.blob, {
-      ...blobStylesObj,
-      repeat: -1,
-      repeatRefresh: true,
-      duration: 5,
-    })
-  },
-  methods: {
-    getBlobStyles(styles) {
-      const stylesObj = {}
-
-      // yeah, i know, everything could be done with reduce,
-      // but try to read that reduce after 3 month of doing other project
-      for (const style of styles)
-        stylesObj[style.name] =
-          gsap.utils.random(style.value.from, style.value.to) +
-          style.value.postfix
-
-      return stylesObj
-    },
-  },
-}
+export default {}
 </script>
 
 <style lang="scss">
@@ -120,15 +52,5 @@ export default {
     line-height: 1.75;
     max-width: 47rem;
   }
-}
-
-.blob {
-  position: absolute;
-  z-index: -1;
-
-  filter: blur(50px);
-
-  background-color: var(--primary-color);
-  opacity: 0.175;
 }
 </style>
