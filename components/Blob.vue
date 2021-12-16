@@ -10,6 +10,7 @@ export default {
     maxBottomPos: { type: Number, required: false, default: 95 },
     maxRightPos: { type: Number, required: false, default: 95 },
     delayToAppear: { type: Number, required: false, default: 0.5 },
+    repeatDuration: { type: Number, required: false, default: 5 },
   },
   data: () => ({
     blobSettings: [
@@ -46,7 +47,12 @@ export default {
 
     const tl = gsap.timeline({ delay: this.delayToAppear })
     tl.fromTo(blob, { opacity: 0 }, { opacity: 0.25, duration: 1 })
-    tl.to(blob, { ...blobStyles, repeat: -1, repeatRefresh: true, duration: 5 })
+    tl.to(blob, {
+      ...blobStyles,
+      repeat: -1,
+      repeatRefresh: true,
+      duration: this.repeatDuration,
+    })
   },
   methods: {
     getBlobStyles() {
