@@ -83,6 +83,6 @@ export default {
   },
 
   gsap: {
-    extraPlugins: { ScrollTrigger: true },
+    extraPlugins: { scrollTrigger: true },
   },
 }
