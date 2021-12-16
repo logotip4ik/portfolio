@@ -42,6 +42,8 @@ export default {
     '@nuxtjs/svg',
     // https://color-mode.nuxtjs.org
     '@nuxtjs/color-mode',
+    // https://github.com/ivodolenc/nuxt-gsap-module
+    'nuxt-gsap-module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -78,5 +80,9 @@ export default {
     prefetch: true,
     preconnect: true,
     preload: true,
+  },
+
+  gsap: {
+    extraPlugins: { ScrollTrigger: true },
   },
 }
