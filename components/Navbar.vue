@@ -33,6 +33,9 @@ export default {
   align-items: center;
   gap: 3rem;
 
+  position: relative;
+  z-index: 999999;
+
   width: 100%;
 
   padding: 2.5rem 2rem;

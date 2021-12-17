@@ -77,7 +77,7 @@ export default {
 <style>
 .blob {
   position: absolute;
-  z-index: -1;
+  z-index: -99999;
 
   filter: blur(50px);
 
