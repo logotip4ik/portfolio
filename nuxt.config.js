@@ -87,4 +87,8 @@ export default {
   gsap: {
     extraPlugins: { scrollTrigger: true },
   },
+
+  images: {
+    dir: 'static/images',
+  },
 }
