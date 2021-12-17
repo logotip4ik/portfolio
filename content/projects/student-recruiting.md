@@ -2,8 +2,8 @@
 techUsed:
 - Next.js
 - Scss
-- Gsap
-publishedAt: 2021-12-15T15:35:19+02:00
+- Framer Motion
+publishedAt: 2021-12-15T15:35:19.000+02:00
 image: "/images/studrecruit.png"
 name: LPNU Student Recruiting
 description: Project was created for Lviv Polytechincs. Everything you see there was
@@ -11,5 +11,15 @@ description: Project was created for Lviv Polytechincs. Everything you see there
   up a bit, cuz of our backend.
 source: ''
 live: https://studrecruit.lpnu.ua
+images:
+- "/images/studrecruit.png"
+typography: |-
+  - Gilroy
+  - $ e-Ukraine Head
+themeColors: |-
+  - #efd000
+  - #80f1a6
+  - #3e3e3e
+  - css: linear-gradient(135deg, #80f1a6, #efd000)
 
 ---
