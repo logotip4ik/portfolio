@@ -37,8 +37,8 @@ export default {
     const { mainHeader, mainName, mainAboutMeTexts } = this.$refs
 
     const tl = gsap.timeline({
-      delay: 0.125,
-      defaults: { transitionOrigin: 'left top' },
+      delay: 0.15,
+      defaults: { transformOrigin: 'left top' },
     })
 
     tl.fromTo(
