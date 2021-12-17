@@ -36,6 +36,7 @@
         :repeat-duration="15"
       />
     </header>
+
     <component
       :is="`section${sectionType}`"
       v-for="(sectionType, key) in sections"
@@ -55,7 +56,7 @@ export default {
     return { project }
   },
   data: () => ({
-    sections: ['Description'],
+    sections: ['Description', 'Gallery', 'Description'],
   }),
   computed: {
     projectNameWords() {
@@ -108,6 +109,7 @@ export default {
 <style lang="scss">
 .project {
   position: relative;
+  z-index: 10;
   isolation: isolate;
 
   &__header {
