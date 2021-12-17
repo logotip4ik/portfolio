@@ -44,6 +44,8 @@ export default {
     '@nuxtjs/color-mode',
     // https://github.com/ivodolenc/nuxt-gsap-module
     'nuxt-gsap-module',
+    // https://images.nuxtjs.org
+    '@nuxt/image',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
