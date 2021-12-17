@@ -2,11 +2,10 @@
 label: Project Post
 hide_body: true
 fields:
-- name: image
-  type: file
-  config:
-    maxSize: 64
-  label: Image
+- name: images
+  type: image_gallery
+  config: {}
+  label: Images
 - name: name
   type: text
   config:
@@ -25,6 +24,24 @@ fields:
   type: tag_list
   default: []
   label: Tech Used
+- name: typography
+  type: textarea
+  default: ''
+  config:
+    required: true
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Typography
+- name: themeColors
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Theme Colors
 - name: source
   type: text
   config:
