@@ -13,6 +13,11 @@ source: ''
 live: https://studrecruit.lpnu.ua
 images:
 - "/images/studrecruit.png"
+- "/images/studrecruit.png"
+- "/images/studrecruit.png"
+- "/images/studrecruit.png"
+- "/images/studrecruit.png"
+- "/images/studrecruit.png"
 typography: |-
   - Gilroy
   - $ e-Ukraine Head
