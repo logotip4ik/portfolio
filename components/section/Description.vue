@@ -51,6 +51,8 @@ export default {
 
 <style lang="scss" scoped>
 .section {
+  background-color: var(--ff-color);
+
   &__description {
     font-size: calc(2rem + 2vw);
     line-height: 1.75;
