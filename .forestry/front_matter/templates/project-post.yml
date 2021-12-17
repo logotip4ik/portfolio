@@ -33,6 +33,15 @@ fields:
     schema:
       format: markdown
   label: Typography
+- name: themeColors
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Theme Colors
 - name: source
   type: text
   config:
