@@ -36,25 +36,14 @@
         :repeat-duration="15"
       />
     </header>
-    <sectionDescription
+    <component
+      :is="`section${sectionType}`"
+      v-for="(sectionType, key) in sections"
       ref="projectSections"
+      :key="key"
       :project="project"
       class="project__section"
     />
-    <sectionDescription
-      ref="projectSections"
-      :project="project"
-      class="project__section"
-    />
-    <!-- <section ref="projectSections" :key="i + 1" class="project__section">
-        {{ project.description }}
-      </section>
-      <section ref="projectSections" :key="i + 2" class="project__section">
-        {{ project.description }}
-      </section>
-      <section ref="projectSections" :key="i + 3" class="project__section">
-        {{ project.description }}
-      </section> -->
   </div>
 </template>
 
@@ -65,6 +54,9 @@ export default {
 
     return { project }
   },
+  data: () => ({
+    sections: ['Description'],
+  }),
   computed: {
     projectNameWords() {
       return this.project.name.split(' ')
@@ -73,8 +65,7 @@ export default {
   mounted() {
     const gsap = this.$gsap
 
-    const { projectHeaderName, projectHeader } = this.$refs
-    const projectSections = gsap.utils.toArray('.project__section')
+    const { projectHeaderName, projectHeader, projectSections } = this.$refs
 
     gsap.fromTo(
       projectHeaderName.children,
@@ -99,16 +90,17 @@ export default {
     )
 
     projectSections.forEach((section, i) => {
-      gsap.set(section, {
+      const { $el } = section
+      gsap.set($el, {
         backgroundColor:
           (i + 1) % 2 ? 'var(--ff-color)' : 'var(--surface-color)',
         color: (i + 1) % 2 ? 'var(--surface-color)' : 'var(--ff-color)',
       })
 
-      gsap.to(section, {
+      gsap.to($el, {
         scrollTrigger: {
           id: 'scrollbar-for-section-' + i,
-          trigger: section,
+          trigger: $el,
           start: 'top top',
           pin: true,
           invalidateOnRefresh: true,
