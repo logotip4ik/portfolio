@@ -13,7 +13,6 @@ fields:
   label: Name
 - name: description
   type: textarea
-  default: ''
   config:
     required: true
     wysiwyg: true
@@ -26,7 +25,6 @@ fields:
   label: Tech Used
 - name: typography
   type: textarea
-  default: ''
   config:
     required: true
     wysiwyg: false
@@ -35,7 +33,6 @@ fields:
   label: Typography
 - name: themeColors
   type: textarea
-  default: ''
   config:
     required: false
     wysiwyg: false
