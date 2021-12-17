@@ -63,50 +63,44 @@ export default {
     },
   },
   mounted() {
-    const gsap = this.$gsap
+    setTimeout(() => {
+      const gsap = this.$gsap
 
-    const { projectHeaderName, projectHeader, projectSections } = this.$refs
+      const { projectHeaderName, projectHeader, projectSections } = this.$refs
 
-    gsap.fromTo(
-      projectHeaderName.children,
-      { yPercent: 100, opacity: 0 },
-      { yPercent: 0, opacity: 1, delay: 0.25, duration: 0.75, stagger: 0.05 }
-    )
+      gsap.fromTo(
+        projectHeaderName.children,
+        { yPercent: 100, opacity: 0 },
+        { yPercent: 0, opacity: 1, delay: 0.25, duration: 0.75, stagger: 0.05 }
+      )
 
-    gsap.fromTo(
-      projectHeaderName,
-      { y: -50 },
-      {
-        y: 400,
-        scrollTrigger: {
-          id: 1,
-          scrub: 1.25,
-          trigger: projectHeader,
-          start: 'top top',
-          end: 'bottom top',
-          invalidateOnRefresh: true,
-        },
+      gsap.fromTo(
+        projectHeaderName,
+        { y: -50 },
+        {
+          y: 400,
+          scrollTrigger: {
+            id: 1,
+            scrub: 1.25,
+            trigger: projectHeader,
+            start: 'top top',
+            end: 'bottom top',
+            invalidateOnRefresh: true,
+          },
+        }
+      )
+
+      for (const { $el } of projectSections) {
+        gsap.to($el, {
+          scrollTrigger: {
+            trigger: $el,
+            start: 'top top',
+            pin: true,
+            invalidateOnRefresh: true,
+          },
+        })
       }
-    )
-
-    projectSections.forEach((section, i) => {
-      const { $el } = section
-      gsap.set($el, {
-        backgroundColor:
-          (i + 1) % 2 ? 'var(--ff-color)' : 'var(--surface-color)',
-        color: (i + 1) % 2 ? 'var(--surface-color)' : 'var(--ff-color)',
-      })
-
-      gsap.to($el, {
-        scrollTrigger: {
-          id: 'scrollbar-for-section-' + i,
-          trigger: $el,
-          start: 'top top',
-          pin: true,
-          invalidateOnRefresh: true,
-        },
-      })
-    })
+    }, 10)
   },
 }
 </script>
