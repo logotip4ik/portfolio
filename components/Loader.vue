@@ -35,7 +35,7 @@ export default {
     tl.set(loader, {
       duration: 0,
       display: 'none',
-      onEnd: () => (document.body.dataset.initialLoad = false),
+      onComplete: () => (document.body.dataset.initialLoaded = true),
     })
   },
 }
