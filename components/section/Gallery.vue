@@ -7,7 +7,7 @@
         :key="key"
         class="section__list__item"
       >
-        <nuxt-img :src="image" />
+        <nuxt-img :src="image" width="600" height="600" />
       </li>
     </ul>
   </section>
@@ -21,8 +21,8 @@ export default {
 
     const { sectionList, section } = this.$refs
 
-    const x = sectionList.scrollWidth - 1250
-    const xEnd = (sectionList.scrollWidth - section.offsetWidth) * -1 + 250
+    const x = '100%'
+    const xEnd = (sectionList.scrollWidth - section.offsetWidth) * -1 + 175
 
     gsap.fromTo(
       sectionList,
@@ -31,8 +31,9 @@ export default {
         x: xEnd,
         scrollTrigger: {
           trigger: section,
-          start: 'bottom top+=100px',
+          start: 'bottom-=35% top+=100px',
           end: 'bottom+=150% top+=100px',
+          markers: true,
           scrub: 1.25,
         },
       }
@@ -57,7 +58,6 @@ export default {
     &__item {
       flex-shrink: 0;
       width: clamp(500px, 60vw, 800px);
-      padding-right: 1rem;
 
       &:not(:last-child) {
         margin-right: 1rem;
@@ -67,9 +67,12 @@ export default {
 
   img {
     display: block;
-    max-width: 600px;
-    width: 90vw;
+
+    width: 100%;
     height: auto;
+    object-fit: contain;
+
+    max-height: 90vh;
   }
 }
 </style>
