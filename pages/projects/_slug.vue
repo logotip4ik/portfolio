@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { getInitialDelay } from '~/utils'
+
 export default {
   async asyncData({ $content, params }) {
     const project = await $content('projects/' + params.slug).fetch()
@@ -66,19 +68,21 @@ export default {
   mounted() {
     setTimeout(() => {
       const gsap = this.$gsap
+      const delay = getInitialDelay()
 
       const { projectHeaderName, projectHeader, projectSections } = this.$refs
 
       gsap.fromTo(
         projectHeaderName.children,
         { yPercent: 100, opacity: 0 },
-        { yPercent: 0, opacity: 1, delay: 0.25, duration: 0.75, stagger: 0.05 }
+        { yPercent: 0, opacity: 1, delay, duration: 0.75, stagger: 0.05 }
       )
 
       gsap.fromTo(
         projectHeaderName,
         { y: -50 },
         {
+          delay,
           y: 400,
           scrollTrigger: {
             id: 1,
@@ -93,6 +97,7 @@ export default {
 
       for (const { $el } of projectSections) {
         gsap.to($el, {
+          delay,
           scrollTrigger: {
             trigger: $el,
             start: 'top top',

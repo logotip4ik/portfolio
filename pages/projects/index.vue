@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { getInitialDelay } from '~/utils'
 export default {
   async asyncData({ $content }) {
     const projects = await $content('projects').fetch()
@@ -36,12 +37,14 @@ export default {
   mounted() {
     const gsap = this.$gsap
 
-    gsap.fromTo(this.$refs.heading, { y: 20, opacity: 0 }, { y: 0, opacity: 1 })
+    const tl = gsap.timeline({ delay: getInitialDelay() })
 
-    gsap.fromTo(
+    tl.fromTo(this.$refs.heading, { y: 20, opacity: 0 }, { y: 0, opacity: 1 })
+    tl.fromTo(
       this.$refs.projects.children,
       { opacity: 0 },
-      { opacity: 1, stagger: 0.05, delay: 0.15 }
+      { opacity: 1, stagger: 0.05, delay: 0.15 },
+      '-=0.5'
     )
   },
 }
