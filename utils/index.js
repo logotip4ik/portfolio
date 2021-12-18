@@ -3,5 +3,5 @@
  * @returns {Number} Seconds as initial delay
  */
 export function getInitialDelay() {
-  return document.body.dataset.initialLoaded ? 0.125 : 1.125
+  return document.body.dataset.initialLoaded ? 0.125 : 1.25
 }
