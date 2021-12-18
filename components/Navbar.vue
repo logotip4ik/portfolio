@@ -34,7 +34,7 @@ export default {
   gap: 3rem;
 
   position: relative;
-  z-index: 999999;
+  z-index: 9;
 
   width: 100%;
 
