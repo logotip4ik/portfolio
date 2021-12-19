@@ -4,7 +4,6 @@ techUsed:
 - Scss
 - Framer Motion
 publishedAt: 2021-12-15T15:35:19.000+02:00
-image: "/images/studrecruit.png"
 name: LPNU Student Recruiting
 description: Project was created for Lviv Polytechincs. Everything you see there was
   creted by students, photos, design and of course the website. We are kinda backing
@@ -19,7 +18,7 @@ images:
 - "/images/studrecruit.png"
 - "/images/studrecruit.png"
 typography: |-
-  - Gilroy
+  - $ Gilroy
   - $ e-Ukraine Head
 themeColors: |-
   - #efd000
