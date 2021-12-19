@@ -20,9 +20,9 @@ images:
 typography: |-
   - $ Gilroy
   - $ e-Ukraine Head
-themeColors: |-
-  - #efd000
-  - #80f1a6
-  - #3e3e3e
+themeColors:
+- "#efd000"
+- "#80f1a6"
+- "#3e3e3e"
 
 ---
