@@ -24,6 +24,6 @@ themeColors: |-
   - #efd000
   - #80f1a6
   - #3e3e3e
-  - css: linear-gradient(135deg, #80f1a6, #efd000)
+  - gradient: linear-gradient(135deg, #80f1a6, #efd000)
 
 ---
