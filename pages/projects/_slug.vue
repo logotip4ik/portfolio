@@ -70,7 +70,10 @@ export default {
       const gsap = this.$gsap
       const delay = getInitialDelay()
 
-      const { projectHeaderName, projectHeader, projectSections } = this.$refs
+      // const { projectHeaderName, projectHeader, projectSections } = this.$refs
+      const projectHeader = document.querySelector('.project__header')
+      const projectHeaderName = document.querySelector('.project__header__name')
+      const projectSections = document.querySelectorAll('.project__section')
 
       gsap.fromTo(
         projectHeaderName.children,
@@ -95,7 +98,7 @@ export default {
         }
       )
 
-      for (const { $el } of projectSections) {
+      for (const $el of projectSections) {
         gsap.to($el, {
           delay,
           scrollTrigger: {
@@ -106,7 +109,7 @@ export default {
           },
         })
       }
-    }, 50)
+    }, 10)
   },
 }
 </script>
@@ -114,7 +117,7 @@ export default {
 <style lang="scss">
 .project {
   position: relative;
-  z-index: 10;
+  z-index: 1;
   isolation: isolate;
 
   &__header {
