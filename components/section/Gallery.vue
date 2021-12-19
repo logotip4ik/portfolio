@@ -33,7 +33,6 @@ export default {
           trigger: section,
           start: 'bottom-=35% top+=100px',
           end: 'bottom+=150% top+=100px',
-          markers: true,
           scrub: 1.25,
         },
       }
