@@ -28,8 +28,6 @@ export default {
         start: 'bottom+=50%',
         end: 'bottom+=200%',
         scrub: true,
-        markers: true,
-        ease: 'back.out',
       },
     })
 
