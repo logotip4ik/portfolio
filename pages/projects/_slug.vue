@@ -45,6 +45,8 @@
       :project="project"
       class="project__section"
     />
+
+    <SectionFooter :project="project" />
   </div>
 </template>
 
@@ -68,6 +70,7 @@ export default {
   mounted() {
     setTimeout(() => {
       const gsap = this.$gsap
+      const ScrollTrigger = this.$ScrollTrigger
       const delay = getInitialDelay()
 
       // const { projectHeaderName, projectHeader, projectSections } = this.$refs
@@ -98,15 +101,11 @@ export default {
         }
       )
 
-      for (const $el of projectSections) {
-        gsap.to($el, {
-          delay,
-          scrollTrigger: {
-            trigger: $el,
-            start: 'top top',
-            pin: true,
-            invalidateOnRefresh: true,
-          },
+      for (const section of projectSections) {
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          pin: true,
         })
       }
     }, 10)
