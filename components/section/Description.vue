@@ -51,6 +51,7 @@ export default {
 
 <style lang="scss" scoped>
 .section {
+  padding: 2vw 5vw;
   background-color: var(--ff-color);
 
   &__description {

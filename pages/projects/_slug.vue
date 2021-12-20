@@ -58,7 +58,7 @@ export default {
     return { project }
   },
   data: () => ({
-    sections: ['Description', 'Gallery', 'Description'],
+    sections: ['Description', 'Gallery', 'Theme'],
   }),
   computed: {
     projectNameWords() {
@@ -182,7 +182,6 @@ export default {
 
     width: 100%;
     height: 100vh;
-    padding: 2vw 5vw;
   }
 }
 </style>
