@@ -1,7 +1,12 @@
 <template>
   <footer ref="footer" class="footer">
     <div class="footer__content">
-      <p class="footer__content__year">©{{ getCurrentYear() }}</p>
+      <p class="footer__content__name">Bogdan Kostyuk</p>
+      <p class="footer__content__copyright">
+        © {{ getCurrentYear() }}<br />
+        Made in Ukraine with
+        <nuxt-img src="images/heart.png" width="20" height="20" />
+      </p>
     </div>
     <div class="footer__scroll-top">
       <ArrowRight class="footer__scroll-top__arrow" />
@@ -25,9 +30,9 @@ export default {
 
     gsap.fromTo(
       footer,
-      { y: -200, opacity: 0.25 },
+      { yPercent: -70, opacity: 0.25 },
       {
-        y: 0,
+        yPercent: 0,
         opacity: 1,
         scrollTrigger: {
           trigger: footer,
@@ -60,8 +65,15 @@ export default {
 
     padding: 5vh 5vw;
 
-    &__year {
+    &__name {
+      font-family: 'Merriweather', serif;
       font-size: calc(2.5rem + 0.33vw);
+    }
+
+    &__copyright {
+      img {
+        transform: translateY(25%);
+      }
     }
   }
 
