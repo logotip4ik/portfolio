@@ -50,6 +50,7 @@ export default {
     tl.to(blob, {
       ...blobStyles,
       repeat: -1,
+      ease: 'power1.inOut',
       repeatRefresh: true,
       duration: this.repeatDuration,
     })
