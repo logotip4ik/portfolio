@@ -1,5 +1,6 @@
 <template>
   <section ref="section" class="section">
+    <h2 ref="sectionHeader" class="section__header">Theme Colors</h2>
     <div
       v-for="(color, key) in project.themeColors"
       :key="key"
@@ -39,9 +40,19 @@ export default {
 
 <style lang="scss">
 .section {
+  position: relative;
+
   width: 100%;
   padding: 0;
   background-color: var(--surface-color);
+
+  &__header {
+    position: absolute;
+    top: 1.75rem;
+    left: 5vw;
+
+    font-size: calc(3rem + 0.33vw);
+  }
 
   &__color {
     flex: 1;
