@@ -31,7 +31,7 @@ export default {
   grid-template-columns: repeat(4, min-content);
   justify-content: end;
   align-items: center;
-  gap: 3rem;
+  gap: clamp(1.75rem, 7vw, 3rem);
 
   position: relative;
   z-index: 9;
