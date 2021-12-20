@@ -33,8 +33,7 @@ export default {
           trigger: footer,
           start: () => `top+=${getOffset()} bottom`,
           end: () => `bottom+=${getOffset()} bottom`,
-          scrub: true,
-          markers: true,
+          scrub: 1.25,
           invalidateOnRefresh: true,
         },
       }
