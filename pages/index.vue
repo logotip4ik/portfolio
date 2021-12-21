@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Just testing</h1>
-    hello world
+    <Navbar />
   </div>
 </template>
 
