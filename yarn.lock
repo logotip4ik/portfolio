@@ -4709,6 +4709,11 @@ gray-matter@^4.0.2:
     section-matter "^1.0.0"
     strip-bom-string "^1.0.0"
 
+gsap@^3.8.0, gsap@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.9.0.tgz#c5cf85b686ccfe530bb9f309f1b42efde6cf9841"
+  integrity sha512-YfIBNHJu4UHES1Vj780+sXtQuiD78QQwgJqktaXE9PO9OuXz5l4ETz05pnhxUfJcxJy4SUINXJxT9ZZhuYwU2g==
+
 gzip-size@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-6.0.0.tgz#065367fd50c239c0671cbcbad5be3e2eeb10e462"
@@ -6615,6 +6620,13 @@ nuxt-font-loader@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/nuxt-font-loader/-/nuxt-font-loader-1.1.3.tgz#060c7f54fe154ff3dcbf472c443912749322208b"
   integrity sha512-3IoyWe/S1+YbLGoQ7GQ2pV5MerJH2yBJlTtXZPbKSk+XrchcRGTGrXvUecC/W1OKoZE+uLn+EMGb/eUr53o3eA==
+
+nuxt-gsap-module@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/nuxt-gsap-module/-/nuxt-gsap-module-1.5.0.tgz#a4a27e5e5c7db11e84f829d85a575b08e67f05c0"
+  integrity sha512-/rtD6XEJ31fSEGEuL7x9Yajznp8WUHJ4GmbxJ+66abj0B8ZB+xa0whmI6N/Ih8ene09WBojHiWuBzXdMPw8FJQ==
+  dependencies:
+    gsap "^3.8.0"
 
 nuxt@^2.15.8:
   version "2.15.8"
