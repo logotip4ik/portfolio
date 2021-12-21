@@ -1,4 +1,11 @@
 :root {
+  --surface-color: #121212;
+
+  --ff-primary-color: #ffffff;
+  --ff-secondary-color: #c7c7c7;
+
+  --primary-color: #ede52f;
+  /* --secondary-color: ; */
 }
 
 * {
@@ -11,6 +18,9 @@ body {
 
   font-family: 'Satoshi', sans-serif;
   font-size: calc(1.125rem + 0.33vw);
+  color: var(--ff-primary-color);
+
+  background-color: var(--surface-color);
 }
 
 h1,
