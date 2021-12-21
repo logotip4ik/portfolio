@@ -17,7 +17,14 @@
         I am Frontend Developer<br />
         My name is <span class="bold">Bogdan Kostyuk</span>
       </h1>
+
+      <img src="/img/blob-1.png" alt="floating blob 1" class="header__blob" />
     </header>
+    <!-- <main>
+      <section class="projects">
+        <h2 class="projects__title">/ Projects</h2>
+      </section>
+    </main> -->
   </div>
 </template>
 
@@ -61,6 +68,9 @@ export default {
   justify-content: flex-start;
   align-content: center;
 
+  position: relative;
+  isolation: isolate;
+
   min-height: 80vh;
 
   padding: 0 var(--pd-x);
@@ -90,6 +100,20 @@ export default {
     //     }
     //   }
     // }
+  }
+
+  &__blob {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: -1;
+    transform: translateY(-50%);
+
+    width: auto;
+    height: auto;
+
+    filter: blur(35px);
+    pointer-events: none;
   }
 }
 </style>
