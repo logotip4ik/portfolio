@@ -32,6 +32,8 @@ export default {
     '@nuxtjs/eslint-module',
     // https://github.com/ivodolenc/nuxt-font-loader
     'nuxt-font-loader',
+    // https://github.com/ivodolenc/nuxt-gsap-module
+    'nuxt-gsap-module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
