@@ -6,6 +6,8 @@
 
   --primary-color: #ede52f;
   /* --secondary-color: ; */
+
+  --pd-x: clamp(1.25rem, 7vw, 5rem);
 }
 
 * {
@@ -17,7 +19,7 @@ body {
   min-height: 100%;
 
   font-family: 'Satoshi', sans-serif;
-  font-size: calc(1.125rem + 0.33vw);
+  font-size: calc(1rem + 0.33vw);
   color: var(--ff-primary-color);
 
   background-color: var(--surface-color);
