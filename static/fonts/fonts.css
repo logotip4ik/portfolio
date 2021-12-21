@@ -1,0 +1,103 @@
+/**
+ * @license
+ *
+ * Font Family: Boska
+ * Designed by: Barbara Bigosinska
+ * URL: https://www.fontshare.com/fonts/boska
+ * © 2021 Indian Type Foundry
+ *
+*/
+
+/**
+* This is a variable font
+* You can controll variable axes as shown below:
+* font-variation-settings: 'wght' 200.0;
+*
+* available axes:
+
+* 'wght' (range from 200.0 to 900.0)
+
+*/
+
+@font-face {
+  font-family: 'Boska-Variable';
+  src: url('./Boska/Boska-Variable.woff2') format('woff2'),
+    url('./Boska/Boska-Variable.woff') format('woff'),
+    url('./Boska/Boska-Variable.ttf') format('truetype');
+  font-weight: 200 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+/**
+* This is a variable font
+* You can controll variable axes as shown below:
+* font-variation-settings: 'wght' 200.0;
+*
+* available axes:
+
+* 'wght' (range from 200.0 to 900.0)
+
+*/
+
+@font-face {
+  font-family: 'Boska-VariableItalic';
+  src: url('./Boska/Boska-VariableItalic.woff2') format('woff2'),
+    url('./Boska/Boska-VariableItalic.woff') format('woff'),
+    url('./Boska/Boska-VariableItalic.ttf') format('truetype');
+  font-weight: 200 900;
+  font-display: swap;
+  font-style: italic;
+}
+
+/**
+ * @license
+ *
+ * Font Family: Satoshi
+ * Designed by: Deni Anggara
+ * URL: https://www.fontshare.com/fonts/satoshi
+ * © 2021 Indian Type Foundry
+ *
+*/
+
+/**
+* This is a variable font
+* You can controll variable axes as shown below:
+* font-variation-settings: 'wght' 900.0;
+*
+* available axes:
+
+* 'wght' (range from 300.0 to 900.0)
+
+*/
+
+@font-face {
+  font-family: 'Satoshi-Variable';
+  src: url('./Satoshi/Satoshi-Variable.woff2') format('woff2'),
+    url('./Satoshi/Satoshi-Variable.woff') format('woff'),
+    url('./Satoshi/Satoshi-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+/**
+* This is a variable font
+* You can controll variable axes as shown below:
+* font-variation-settings: 'wght' 900.0;
+*
+* available axes:
+
+* 'wght' (range from 300.0 to 900.0)
+
+*/
+
+@font-face {
+  font-family: 'Satoshi-VariableItalic';
+  src: url('./Satoshi/Satoshi-VariableItalic.woff2') format('woff2'),
+    url('./Satoshi/Satoshi-VariableItalic.woff') format('woff'),
+    url('./Satoshi/Satoshi-VariableItalic.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
