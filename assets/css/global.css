@@ -1,0 +1,23 @@
+:root {
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+
+  font-family: 'Satoshi', sans-serif;
+  font-size: calc(1.125rem + 0.33vw);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Boska', serif;
+}
