@@ -4,6 +4,7 @@
     <SectionHeader />
     <main>
       <SectionProjects />
+      <SectionAbout />
     </main>
   </div>
 </template>
@@ -16,7 +17,7 @@ export default {
     const gsap = this.$gsap
 
     gsap.to(blobs, {
-      y: 'random(-500, -200)',
+      y: (i) => gsap.utils.random(-300, -100) * (i + 1),
       invalidateOnRefresh: true,
       scrollTrigger: { scrub: 2, start: 'top top', end: 'bottom top' },
     })
