@@ -20,18 +20,19 @@ export default {
     links: [{ label: 'Projects' }, { label: 'About' }, { label: 'Contact' }],
   }),
   mounted() {
-    const toggleNavbar = this.toggleNavbarFactory()
-    this.$nuxt.$on('scroll', toggleNavbar)
+    const toggleNavbar = this.toggleNavbarFactory('isNavbarHidden')
+
+    window.addEventListener('scroll', () => toggleNavbar(window.scrollY))
   },
   methods: {
-    toggleNavbarFactory() {
+    toggleNavbarFactory(property) {
       let prevYPos = 0
 
-      return ({ scroll }) => {
-        if (scroll.y - prevYPos > 0) this.isNavbarHidden = true
-        else this.isNavbarHidden = false
+      return (yPos) => {
+        if (yPos - prevYPos > 0) this[property] = true
+        else this[property] = false
 
-        prevYPos = scroll.y
+        prevYPos = yPos
       }
     },
   },
@@ -43,6 +44,10 @@ export default {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
+  position: sticky;
+  top: 0;
+  left: 0;
 
   width: 100%;
   padding: 1rem var(--pd-x) 0;
