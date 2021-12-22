@@ -24,7 +24,7 @@ export default {
   position: relative;
   isolation: isolate;
 
-  padding: 0 var(--pd-x);
+  padding: 0 var(--pd-x) 6rem;
 
   &__title {
     font-weight: 500;
