@@ -3,9 +3,7 @@
     <Navbar />
     <SectionHeader />
     <main>
-      <section class="projects">
-        <h2 class="projects__title">/ Projects</h2>
-      </section>
+      <SectionProjects />
     </main>
   </div>
 </template>
@@ -25,8 +23,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.projects {
-  min-height: 100vh;
-}
-</style>
+<style lang="scss"></style>
