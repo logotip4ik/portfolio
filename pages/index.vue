@@ -19,7 +19,6 @@ export default {
 
     gsap.to(blobs, {
       y: 'random(-500, -200)',
-      // ease: 'power1.easeInOut',
       scrollTrigger: { scrub: 1.75, start: 'top top', end: 'bottom top' },
     })
   },
