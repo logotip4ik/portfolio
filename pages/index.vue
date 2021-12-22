@@ -19,7 +19,7 @@ export default {
 
     gsap.to(blobs, {
       y: 'random(-500, -200)',
-      scrollTrigger: { scrub: 1.75, start: 'top top', end: 'bottom top' },
+      scrollTrigger: { scrub: 2, start: 'top top', end: 'bottom top' },
     })
   },
 }
