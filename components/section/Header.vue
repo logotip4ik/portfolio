@@ -44,8 +44,10 @@ export default {
     tl.fromTo(
       loader,
       { opacity: 1, filter: 'blur(0px)' },
-      { opacity: 0, filter: 'blur(100px)' }
+      { opacity: 0, delay: 0.25, filter: 'blur(100px)' }
     )
+
+    tl.set(loader, { display: 'none', duration: 0 })
 
     tl.fromTo(
       headerLines,
