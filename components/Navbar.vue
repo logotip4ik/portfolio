@@ -45,7 +45,7 @@ export default {
   justify-content: flex-end;
   align-items: center;
 
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
 
@@ -74,7 +74,7 @@ export default {
     opacity: 0;
     pointer-events: none;
 
-    transition: opacity 400ms ease-out;
+    transition: opacity 800ms ease-out;
   }
 }
 </style>

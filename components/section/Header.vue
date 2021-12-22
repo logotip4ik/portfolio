@@ -29,7 +29,7 @@ export default {
   position: relative;
   isolation: isolate;
 
-  min-height: 85vh;
+  min-height: 100vh;
 
   padding: 0 var(--pd-x);
 
