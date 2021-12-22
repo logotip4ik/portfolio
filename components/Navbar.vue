@@ -61,10 +61,12 @@ export default {
 
     list-style-type: none;
 
-    &__item + &__item {
-      margin-left: 3vw;
-
+    &__item {
       cursor: pointer;
+
+      & + & {
+        margin-left: 3vw;
+      }
     }
   }
 
