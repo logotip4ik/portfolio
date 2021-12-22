@@ -48,6 +48,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
 
   width: 100%;
   padding: 1rem var(--pd-x) 0;
@@ -60,6 +61,7 @@ export default {
     align-items: center;
 
     list-style-type: none;
+    padding: 0;
 
     &__item {
       cursor: pointer;
