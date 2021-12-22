@@ -1,9 +1,17 @@
 <template>
   <header class="header">
     <h1 ref="headerTitle" class="header__title">
-      Hello. <br />
-      I am Frontend Developer<br />
-      My name is <span class="bold">Bogdan Kostyuk</span>
+      <div class="header__title__line header__title__line--1">
+        <span>I am a Front end</span>
+      </div>
+      <br />
+      <div class="header__title__line header__title__line--2">
+        <span>Developer. My name is</span>
+      </div>
+      <br />
+      <div class="header__title__line header__title__line--3 bold">
+        <span>Bogdan Kostyuk</span>
+      </div>
     </h1>
 
     <img
@@ -17,6 +25,41 @@
 <script>
 export default {
   name: 'SectionHeader',
+  mounted() {
+    const gsap = this.$gsap
+
+    const loader = document.querySelectorAll('.loader')
+    const loaderTextChars = document.querySelectorAll('.loader__content__char')
+    const headerLines = document.querySelectorAll('.header__title__line span')
+    const blobs = document.querySelectorAll('.parallax-blob')
+
+    const tl = gsap.timeline({ delay: 0.15, default: { duration: 0.5 } })
+
+    tl.fromTo(
+      loaderTextChars,
+      { opacity: 1, yPercent: 100 },
+      { yPercent: 0, stagger: 0.025 }
+    )
+
+    tl.fromTo(
+      loader,
+      { opacity: 1, filter: 'blur(0px)' },
+      { opacity: 0, filter: 'blur(100px)' }
+    )
+
+    tl.fromTo(
+      headerLines,
+      { yPercent: 105, opacity: 1 },
+      { yPercent: 0, opacity: 1, duration: 0.75, stagger: 0.25 }
+    )
+
+    tl.fromTo(
+      blobs,
+      { opacity: 0 },
+      { opacity: 1, delay: 0.5, stagger: 0.05 },
+      '-=0.75'
+    )
+  },
 }
 </script>
 
@@ -38,6 +81,26 @@ export default {
 
     font-size: clamp(1.5rem, 6vw, 4.5rem);
     font-weight: 300;
+    line-height: 1.25;
+
+    &__line {
+      display: inline-block;
+
+      overflow: hidden;
+
+      &--1 {
+        margin-bottom: -1.5rem;
+      }
+      &--2 {
+        margin-bottom: -1.25rem;
+      }
+
+      span {
+        display: inline-block;
+
+        opacity: 0;
+      }
+    }
 
     .bold {
       font-weight: 500;
