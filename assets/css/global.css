@@ -23,6 +23,17 @@ body {
   color: var(--ff-primary-color);
 
   background-color: var(--surface-color);
+  opacity: 1;
+  background-image: radial-gradient(
+      hsla(57, 84%, 56%, 0.125) 0.45px,
+      transparent 0.45px
+    ),
+    radial-gradient(
+      hsla(57, 84%, 56%, 0.125) 0.45px,
+      var(--surface-color) 0.45px
+    );
+  background-size: 18px 18px;
+  background-position: 0 0, 9px 9px;
 }
 
 h1,
