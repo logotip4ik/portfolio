@@ -33,7 +33,8 @@ export default {
 
     const loader = document.querySelectorAll('.loader')
     const loaderTextChars = document.querySelectorAll('.loader__content__char')
-    const headerTextLines = document.querySelectorAll(
+    const loaderTextLines = document.querySelectorAll('.header__title__line')
+    const headerTextLinesContent = document.querySelectorAll(
       '.header__title__line .content'
     )
     const headerTextUnderlines = document.querySelectorAll(
@@ -64,11 +65,16 @@ export default {
     )
 
     tl.fromTo(
-      headerTextLines,
+      headerTextLinesContent,
       { yPercent: 105, rotate: -5, opacity: 1 },
       { yPercent: 0, rotate: 0, opacity: 1, duration: 0.75, stagger: 0.25 },
       '-=0.75'
     )
+
+    tl.to(loaderTextLines, {
+      y: (i) => (loaderTextLines.length - i) * -10,
+      scrollTrigger: { scrub: 0.75, start: 'top top' },
+    })
 
     tl.fromTo(
       headerTextUnderlines,
