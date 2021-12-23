@@ -31,6 +31,7 @@ export default {
         start: 'top bottom-=100px',
       },
     })
+
     gsap.fromTo(
       projectTitleCover.parentElement,
       { y: -20 },

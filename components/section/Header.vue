@@ -2,15 +2,18 @@
   <header class="header">
     <h1 ref="headerTitle" class="header__title">
       <div class="header__title__line header__title__line--1">
-        <span>I am a Front end</span>
+        <span class="content">I am a Front end</span>
+        <span class="underline" />
       </div>
       <br />
       <div class="header__title__line header__title__line--2">
-        <span>Developer. My name is</span>
+        <span class="content">Developer. My name is</span>
+        <span class="underline" />
       </div>
       <br />
       <div class="header__title__line header__title__line--3 bold">
-        <span>Bogdan Kostyuk</span>
+        <span class="content">Bogdan Kostyuk</span>
+        <span class="underline" />
       </div>
     </h1>
 
@@ -30,7 +33,12 @@ export default {
 
     const loader = document.querySelectorAll('.loader')
     const loaderTextChars = document.querySelectorAll('.loader__content__char')
-    const headerLines = document.querySelectorAll('.header__title__line span')
+    const headerTextLines = document.querySelectorAll(
+      '.header__title__line .content'
+    )
+    const headerTextUnderlines = document.querySelectorAll(
+      '.header__title__line .underline'
+    )
     const blobs = document.querySelectorAll('.parallax-blob')
 
     const tl = gsap.timeline({ delay: 0.15, default: { duration: 0.5 } })
@@ -50,16 +58,30 @@ export default {
     tl.set(loader, { display: 'none', duration: 0 })
 
     tl.fromTo(
-      headerLines,
-      { yPercent: 105, opacity: 1 },
-      { yPercent: 0, opacity: 1, duration: 0.75, stagger: 0.25 }
+      headerTextUnderlines,
+      { right: '100%', opacity: 1 },
+      { right: '0%', opacity: 1, stagger: 0.25 }
+    )
+
+    tl.fromTo(
+      headerTextLines,
+      { yPercent: 105, rotate: -5, opacity: 1 },
+      { yPercent: 0, rotate: 0, opacity: 1, duration: 0.75, stagger: 0.25 },
+      '-=0.75'
+    )
+
+    tl.fromTo(
+      headerTextUnderlines,
+      { left: '0%' },
+      { left: '100%', stagger: 0.25 },
+      '-=0.75'
     )
 
     tl.fromTo(
       blobs,
       { opacity: 0 },
       { opacity: 1, delay: 0.5, stagger: 0.05 },
-      '-=0.75'
+      '-=1.5'
     )
   },
 }
@@ -88,6 +110,8 @@ export default {
     &__line {
       display: inline-block;
 
+      position: relative;
+
       overflow: hidden;
 
       &--1 {
@@ -97,10 +121,23 @@ export default {
         margin-bottom: -1.25rem;
       }
 
-      span {
+      .content {
         display: inline-block;
 
         opacity: 0;
+      }
+
+      .underline {
+        display: inline-block;
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        height: 1px;
+        opacity: 0;
+        background-color: var(--ff-secondary-color);
       }
     }
 
