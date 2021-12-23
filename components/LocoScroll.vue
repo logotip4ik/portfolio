@@ -1,4 +1,3 @@
-<!-- https://github.com/DidoMarchet/starter-kit-nuxt-locomotive-scroll -->
 <template>
   <div v-locomotive="{ options }" class="js-locomotive">
     <slot />
@@ -55,7 +54,6 @@ export default {
   },
   methods: {
     onScroll(e) {
-      this.$nuxt.$emit('scroll', e)
       // if (typeof this.$store._mutations['app/setScroll'] !== 'undefined') {
       //   this.$store.commit('app/setScroll', {
       //     isScrolling: this.locomotive.scroll.isScrolling,
@@ -67,7 +65,8 @@ export default {
   },
 }
 </script>
-<style lang="scss">
+
+<style>
 .has-scroll-smooth body {
   overflow: hidden;
 }

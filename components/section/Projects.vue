@@ -27,8 +27,10 @@ export default {
       top: '100%',
       duration: 0.65,
       scrollTrigger: {
+        scroller: '.js-locomotive',
+        markers: true,
         trigger: projectTitleCover.parentElement,
-        start: 'top bottom-=100px',
+        start: 'top bottom-=500px',
       },
     })
 
@@ -39,6 +41,8 @@ export default {
         y: 20,
         duration: 0.65,
         scrollTrigger: {
+          scroller: '.js-locomotive',
+          markers: true,
           trigger: project,
           scrub: 1,
         },
