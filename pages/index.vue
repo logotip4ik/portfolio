@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <SectionHeader />
     <main>
       <SectionProjects />
@@ -18,8 +17,12 @@ export default {
 
     gsap.to(blobs, {
       y: (i) => gsap.utils.random(-300, -100) * (i + 1),
-      invalidateOnRefresh: true,
-      scrollTrigger: { scrub: 2, start: 'top top', end: 'bottom top' },
+      scrollTrigger: {
+        scrub: 2,
+        start: 'top top',
+        end: 'bottom top',
+        invalidateOnRefresh: true,
+      },
     })
   },
 }
