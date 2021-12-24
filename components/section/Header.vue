@@ -64,7 +64,7 @@ export default {
 
     tl.fromTo(
       headerTextLinesContent,
-      { yPercent: 110, rotate: -5, opacity: 1 },
+      { yPercent: 120, rotate: -5, opacity: 1 },
       { yPercent: 0, rotate: 0, opacity: 1, duration: 0.75, stagger: 0.25 },
       '-=0.75'
     )
