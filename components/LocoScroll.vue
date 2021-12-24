@@ -1,5 +1,5 @@
 <template>
-  <div v-locomotive="{ options }" class="js-locomotive">
+  <div class="smooth-scroll">
     <slot />
   </div>
 </template>
@@ -7,25 +7,6 @@
 <script>
 export default {
   name: 'LocomotiveScroll',
-  directives: {
-    locomotive: {
-      inserted(el, binding, vnode) {
-        vnode.context.locomotive = new vnode.context.LocomotiveScroll({
-          el,
-          ...binding.value.options,
-        })
-        vnode.context.locomotive.on('scroll', (e) => {
-          vnode.context.onScroll(e)
-          vnode.context.$emit('scroll')
-        })
-        vnode.context.$emit('init')
-      },
-      unbind(el, binding, vnode) {
-        vnode.context.locomotive.destroy()
-        vnode.context.locomotive = undefined
-      },
-    },
-  },
   props: {
     gettedOptions: {
       type: Object,
@@ -36,6 +17,7 @@ export default {
     locomotive: undefined,
     defaultOptions: {
       smooth: true,
+      direction: 'vertical',
     },
   }),
   computed: {
@@ -43,36 +25,48 @@ export default {
       return { ...this.defaultOptions, ...this.gettedOptions }
     },
   },
-  /**
-   *  You can remove mounted hook if you don't needs custom updates
-   *  Call this.$nuxt.$emit('update-locomotive') wherever you want
-   */
+  beforeMount() {
+    const locoScroll = new this.LocomotiveScroll({
+      el: document.querySelector('.smooth-scroll'),
+      smooth: true,
+    })
+
+    locoScroll.on('scroll', this.$ScrollTrigger.update)
+
+    this.$ScrollTrigger.defaults({
+      scroller: locoScroll.el,
+    })
+
+    this.$ScrollTrigger.scrollerProxy('.smooth-scroll', {
+      scrollTop(value) {
+        return arguments.length
+          ? locoScroll.scrollTo(value, 0, 0)
+          : locoScroll.scroll.instance.scroll.y
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        }
+      },
+      pinType: document.querySelector('.smooth-scroll').style.transform
+        ? 'transform'
+        : 'fixed',
+    })
+
+    this.$ScrollTrigger.addEventListener('refresh', () => locoScroll.update())
+    this.$nextTick(() => this.$ScrollTrigger.refresh())
+
+    this.locomotive = locoScroll
+  },
   mounted() {
     this.$nuxt.$on('update-locomotive', () => {
       this?.locomotive?.update()
     })
   },
-  methods: {
-    onScroll(e) {
-      // if (typeof this.$store._mutations['app/setScroll'] !== 'undefined') {
-      //   this.$store.commit('app/setScroll', {
-      //     isScrolling: this.locomotive.scroll.isScrolling,
-      //     limit: { ...e.limit },
-      //     ...e.scroll, // x, y
-      //   })
-      // }
-    },
-  },
 }
 </script>
 
-<style>
-.has-scroll-smooth body {
-  overflow: hidden;
-}
-
-.has-scroll-smooth .js-locomotive {
-  min-height: 100%;
-  width: 100%;
-}
-</style>
+<style></style>
