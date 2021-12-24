@@ -20,12 +20,15 @@ export default {
     links: [{ label: 'Projects' }, { label: 'About' }, { label: 'Contact' }],
   }),
   mounted() {
-    const toggleNavbar = this.toggleNavbarFactory('isNavbarHidden')
+    const ScrollTrigger = this.$ScrollTrigger
+    const toggleNavbarProp = this.toggleDataPropFactory('isNavbarHidden')
 
-    window.addEventListener('scroll', () => toggleNavbar(window.scrollY))
+    ScrollTrigger.create({
+      onUpdate: ({ progress }) => toggleNavbarProp(progress * 100),
+    })
   },
   methods: {
-    toggleNavbarFactory(property) {
+    toggleDataPropFactory(property) {
       let prevYPos = 0
 
       return (yPos) => {
