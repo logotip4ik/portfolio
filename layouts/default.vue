@@ -2,7 +2,9 @@
   <div>
     <Loader />
     <Navbar />
-    <Nuxt />
+    <LocoScroll>
+      <Nuxt />
+    </LocoScroll>
   </div>
 </template>
 
