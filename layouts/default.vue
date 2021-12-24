@@ -1,7 +1,10 @@
 <template>
   <div>
     <Loader />
-    <Nuxt />
+    <Navbar />
+    <ASScroll>
+      <Nuxt />
+    </ASScroll>
   </div>
 </template>
 
