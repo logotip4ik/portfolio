@@ -70,7 +70,7 @@ export default {
       cursor: pointer;
 
       & + & {
-        margin-left: 3vw;
+        margin-left: clamp(1.5rem, 4vw, 5rem);
       }
     }
   }
