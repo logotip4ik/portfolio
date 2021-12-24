@@ -5,6 +5,7 @@
     <ASScroll>
       <Nuxt />
     </ASScroll>
+    <Pointer />
   </div>
 </template>
 
