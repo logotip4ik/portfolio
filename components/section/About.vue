@@ -1,6 +1,6 @@
 <template>
   <section class="about">
-    <h2 class="about__title">/ About</h2>
+    <V-H2 class="about__title">/ About</V-H2>
     <p class="about__content">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Tortor vitae purus
