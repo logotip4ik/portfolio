@@ -21,10 +21,7 @@ export default {
   css: ['@/assets/css/global.css', 'normalize.css/normalize.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    // '@/plugins/loco-scroll.client.js'
-    '@/plugins/asscroll.client.js',
-  ],
+  plugins: ['@/plugins/loco-scroll.client.js', '@/plugins/asscroll.client.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
