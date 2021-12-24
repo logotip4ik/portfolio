@@ -5,12 +5,10 @@
         <span class="content">I am a Front end</span>
         <span class="underline" />
       </div>
-      <br />
       <div class="header__title__line header__title__line--2">
         <span class="content">Developer. My name is</span>
         <span class="underline" />
       </div>
-      <br />
       <div class="header__title__line header__title__line--3 bold">
         <span class="content">Bogdan Kostyuk</span>
         <span class="underline" />
@@ -66,7 +64,7 @@ export default {
 
     tl.fromTo(
       headerTextLinesContent,
-      { yPercent: 105, rotate: -5, opacity: 1 },
+      { yPercent: 110, rotate: -5, opacity: 1 },
       { yPercent: 0, rotate: 0, opacity: 1, duration: 0.75, stagger: 0.25 },
       '-=0.75'
     )
@@ -109,23 +107,18 @@ export default {
   &__title {
     margin: auto 0;
 
-    font-size: clamp(1.5rem, 6vw, 4.5rem);
-    font-weight: 300;
-    line-height: 1.25;
-
     &__line {
       display: inline-block;
 
       position: relative;
 
-      overflow: hidden;
+      font-size: clamp(1.5rem, 7vw, 4.75rem);
+      font-weight: 300;
+      line-height: 1.175;
 
-      &--1 {
-        margin-bottom: -1.5rem;
-      }
-      &--2 {
-        margin-bottom: -1.25rem;
-      }
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
 
       .content {
         display: inline-block;
