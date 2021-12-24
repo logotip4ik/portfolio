@@ -29,6 +29,7 @@ export default {
     const locoScroll = new this.LocomotiveScroll({
       el: document.querySelector('.smooth-scroll'),
       smooth: true,
+      direction: 'vertical',
     })
 
     locoScroll.on('scroll', this.$ScrollTrigger.update)
@@ -37,7 +38,7 @@ export default {
       scroller: locoScroll.el,
     })
 
-    this.$ScrollTrigger.scrollerProxy('.smooth-scroll', {
+    this.$ScrollTrigger.scrollerProxy(locoScroll.el, {
       scrollTop(value) {
         return arguments.length
           ? locoScroll.scrollTo(value, 0, 0)
@@ -51,9 +52,7 @@ export default {
           height: window.innerHeight,
         }
       },
-      pinType: document.querySelector('.smooth-scroll').style.transform
-        ? 'transform'
-        : 'fixed',
+      pinType: locoScroll.el.style.transform ? 'transform' : 'fixed',
     })
 
     this.$ScrollTrigger.addEventListener('refresh', () => locoScroll.update())
