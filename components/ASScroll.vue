@@ -11,10 +11,6 @@ export default {
   }),
   beforeMount() {
     this.initSmoothScroll()
-
-    // this.$nuxt.on('asscroll:scroll-to', (number) =>
-    //   this.asscroll?.scrollTo(number)
-    // )
   },
   beforeUpdate() {
     this.$gsap.ticker.remove(this.asscroll.update)
@@ -25,6 +21,7 @@ export default {
 
       const asscroll = new ASScroll({
         disableRaf: true,
+        ease: 0.065,
       })
 
       this.$gsap.ticker.add(asscroll.update)
