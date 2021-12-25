@@ -1,10 +1,22 @@
 <template>
-  <li class="project">
+  <li ref="project" class="project">
     <div class="project__content">
-      <h3 class="project__content__title">LPNU StudRecruit</h3>
+      <h3 ref="projectTitle" class="project__content__title">
+        LPNU StudRecruit
+      </h3>
+      <span
+        ref="projectCover"
+        class="project__content__cover"
+        aria-hidden="true"
+      ></span>
       <hr class="project__content__hr" />
       <ul class="project__content__desc-list">
-        <li v-for="j in 5" :key="j" class="project__content__desc-list__item">
+        <li
+          v-for="j in 5"
+          :key="j"
+          ref="projectDescItems"
+          class="project__content__desc-list__item"
+        >
           Next.js,
         </li>
       </ul>
@@ -13,7 +25,41 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    const { project, projectTitle, projectCover, projectDescItems } = this.$refs
+    const gsap = this.$gsap
+
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: project, start: 'top bottom-=25px' },
+    })
+
+    tl.fromTo(
+      projectCover,
+      { clipPath: 'inset(0% 0% 0% 0%)' },
+      {
+        clipPath: 'inset(49% 0% 49% 0%)',
+        duration: 1,
+      }
+    )
+
+    tl.fromTo(
+      projectCover,
+      { clipPath: 'inset(49% 0% 49% 0%)' },
+      { clipPath: 'inset(49% 0% 49% 100%)', duration: 1 }
+    )
+
+    tl.set(projectCover, { display: 'none', duration: 0 })
+
+    tl.fromTo(projectTitle, { opacity: 0 }, { opacity: 1 }, '<-0.5')
+    tl.fromTo(
+      projectDescItems,
+      { opacity: 0 },
+      { opacity: 1, stagger: { amount: 0.5, from: 'end' } },
+      '<-0.5'
+    )
+  },
+}
 </script>
 
 <style lang="scss">
@@ -32,10 +78,25 @@ export default {}
 
     position: relative;
 
+    transition: transform 0.4s ease;
+
     &__title {
       display: inline-block;
       font-size: calc(1.5rem + 0.33vw);
       font-weight: 500;
+    }
+
+    &__cover {
+      display: inline-block;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+
+      background-color: var(--surface-color);
     }
 
     &__hr {
@@ -70,6 +131,10 @@ export default {}
           margin-left: 0.5rem;
         }
       }
+    }
+
+    &:hover {
+      transform: scale(1.01);
     }
   }
 }
