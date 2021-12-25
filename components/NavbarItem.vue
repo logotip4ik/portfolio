@@ -28,22 +28,13 @@ export default {
 
     tl.to(normalText.children, {
       yPercent: -110,
-      stagger: {
-        each: 0.01,
-        from: 'start',
-      },
+      stagger: 0.01,
     })
 
     tl.fromTo(
       hoverText.children,
       { yPercent: 120 },
-      {
-        yPercent: 0,
-        stagger: {
-          each: 0.01,
-          from: 'start',
-        },
-      },
+      { yPercent: 0, stagger: 0.01 },
       '<'
     )
 
