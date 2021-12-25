@@ -51,7 +51,7 @@ export default {
 
     tl.set(projectCover, { display: 'none', duration: 0 })
 
-    tl.fromTo(projectTitle, { opacity: 0 }, { opacity: 1 }, '<-0.5')
+    tl.fromTo(projectTitle, { opacity: 0 }, { opacity: 1 }, '<-0.75')
     tl.fromTo(
       projectDescItems,
       { opacity: 0 },
