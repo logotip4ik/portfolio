@@ -16,9 +16,9 @@ export default {
     const gsap = this.$gsap
 
     gsap.to(blobs, {
-      y: (i) => gsap.utils.random(-300, -100) * (i + 1),
+      yPercent: (i) => gsap.utils.random(-50, -20) * (i + 1),
       scrollTrigger: {
-        scrub: 2,
+        scrub: 1,
         start: 'top top',
         end: 'bottom top',
         invalidateOnRefresh: true,
