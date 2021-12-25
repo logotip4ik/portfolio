@@ -15,6 +15,8 @@
       </div>
     </h1>
 
+    <p ref="headerTime" class="header__time">Київ {{ ukraineTime }}</p>
+
     <img
       src="/img/blob-1.png"
       alt="floating blob 1"
@@ -26,18 +28,24 @@
 <script>
 export default {
   name: 'SectionHeader',
+  data() {
+    return {
+      ukraineTime: this.getDate(),
+    }
+  },
   mounted() {
     const gsap = this.$gsap
 
     const loader = document.querySelectorAll('.loader')
     const loaderTextChars = document.querySelectorAll('.loader__content__char')
-    const loaderTextLines = document.querySelectorAll('.header__title__line')
+    const headerTextLines = document.querySelectorAll('.header__title__line')
     const headerTextLinesContent = document.querySelectorAll(
       '.header__title__line .content'
     )
     const headerTextUnderlines = document.querySelectorAll(
       '.header__title__line .underline'
     )
+    const headerTime = document.querySelectorAll('.header__time')
     const blobs = document.querySelectorAll('.parallax-blob')
 
     const tl = gsap.timeline({ delay: 0.15, default: { duration: 0.5 } })
@@ -49,9 +57,16 @@ export default {
     )
 
     tl.fromTo(
+      loaderTextChars[0].parentElement,
+      { opacity: 1, scale: 1 },
+      { opacity: 0, scale: 0.5, ease: 'power4.in' }
+    )
+
+    tl.fromTo(
       loader,
       { opacity: 1, filter: 'blur(0px)' },
-      { opacity: 0, delay: 0.25, filter: 'blur(100px)' }
+      { opacity: 0, delay: 0.25, filter: 'blur(100px)' },
+      '<+0.1'
     )
 
     tl.set(loader, { display: 'none', duration: 0 })
@@ -66,11 +81,11 @@ export default {
       headerTextLinesContent,
       { yPercent: 120, rotate: -5, opacity: 1 },
       { yPercent: 0, rotate: 0, opacity: 1, duration: 0.75, stagger: 0.25 },
-      '-=0.75'
+      '<+0.25'
     )
 
-    tl.to(loaderTextLines, {
-      y: (i) => (loaderTextLines.length - i) * -10,
+    tl.to(headerTextLines, {
+      y: (i) => (headerTextLines.length - i) * -10,
       scrollTrigger: { scrub: 0.75, start: 'top top' },
     })
 
@@ -78,15 +93,24 @@ export default {
       headerTextUnderlines,
       { left: '0%' },
       { left: '100%', stagger: 0.25 },
-      '-=0.75'
+      '<-0.625'
     )
 
-    tl.fromTo(
-      blobs,
-      { opacity: 0 },
-      { opacity: 1, delay: 0.5, stagger: 0.05 },
-      '-=1.5'
-    )
+    tl.fromTo(blobs, { opacity: 0 }, { opacity: 1, stagger: 0.05 }, '<+0.25')
+
+    tl.fromTo(headerTime, { opacity: 0 }, { opacity: 1 }, '<+0.25')
+
+    setInterval(() => (this.ukraineTime = this.getDate()), 1000)
+  },
+  methods: {
+    getDate() {
+      const currentTime = new Date()
+      return Intl.DateTimeFormat('uk-ua', {
+        timeZone: 'Europe/Kiev',
+        hour: '2-digit',
+        minute: '2-digit',
+      }).format(currentTime)
+    },
   },
 }
 </script>
@@ -143,6 +167,16 @@ export default {
     .bold {
       font-weight: 500;
     }
+  }
+
+  &__time {
+    position: absolute;
+    bottom: 2rem;
+    left: var(--pd-x);
+
+    font-size: 0.825rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ff-secondary-color);
   }
 
   &__blob {
