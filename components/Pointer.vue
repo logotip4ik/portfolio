@@ -34,7 +34,7 @@ export default {
           isPointerHidden = true
         }
 
-        this.$gsap.to(el, { x, y, ease: 'sine.out' })
+        this.$gsap.to(el, { x, y, duration: 0.4, ease: 'back.out(1.5)' })
       }
     },
   },
