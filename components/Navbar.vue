@@ -1,13 +1,13 @@
 <template>
   <nav :class="{ navbar: true, 'navbar--hidden': isNavbarHidden }">
     <ul class="navbar__navigation">
-      <li
+      <NavbarItem
         v-for="(link, key) in links"
         :key="key"
         class="navbar__navigation__item"
       >
         {{ link.label }}
-      </li>
+      </NavbarItem>
     </ul>
   </nav>
 </template>
@@ -67,8 +67,6 @@ export default {
     padding: 0;
 
     &__item {
-      cursor: pointer;
-
       & + & {
         margin-left: clamp(1.5rem, 4vw, 5rem);
       }
