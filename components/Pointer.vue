@@ -15,7 +15,11 @@ export default {
 
     const { pointer } = this.$refs
 
-    this.$gsap.set(pointer, { x: window.innerWidth / 2, y: innerHeight / 2 })
+    this.$gsap.set(pointer, {
+      x: window.innerWidth / 2,
+      y: innerHeight / 2,
+      transformOrigin: 'right bottom',
+    })
 
     this.pointerMover = this.pointerMoverFactory(pointer)
 
