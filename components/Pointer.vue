@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss">
 .pointer {
-  --pointer-size: 4rem;
+  --pointer-size: 4.5rem;
 
   position: fixed;
   z-index: 9;
