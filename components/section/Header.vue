@@ -193,6 +193,7 @@ export default {
   min-height: calc(var(--vh, 1vh) * 100);
 
   padding: 0 var(--pd-x);
+  margin-bottom: 1rem;
 
   &__title {
     margin: auto 0;
