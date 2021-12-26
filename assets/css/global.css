@@ -23,6 +23,8 @@ body {
   color: var(--ff-primary-color);
 
   background-color: var(--surface-color);
+
+  background-image: url('/img/background-noise.gif');
 }
 
 h1,
