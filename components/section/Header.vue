@@ -39,6 +39,15 @@ export default {
       ukraineTime: this.getDate(),
     }
   },
+  beforeMount() {
+    const vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+
+    window.addEventListener('resize', () => {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    })
+  },
   mounted() {
     const gsap = this.$gsap
 
@@ -157,6 +166,7 @@ export default {
   isolation: isolate;
 
   min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
 
   padding: 0 var(--pd-x);
 
