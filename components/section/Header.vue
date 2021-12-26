@@ -45,7 +45,7 @@ export default {
     const headerTextUnderlines = document.querySelectorAll(
       '.header__title__line .underline'
     )
-    const headerTime = document.querySelectorAll('.header__time')
+    const headerTime = document.querySelector('.header__time')
     const blobs = document.querySelectorAll('.parallax-blob')
 
     const tl = gsap.timeline({ delay: 0.15, default: { duration: 0.5 } })
@@ -98,7 +98,30 @@ export default {
 
     tl.fromTo(blobs, { opacity: 0 }, { opacity: 1, stagger: 0.05 }, '<+0.25')
 
-    tl.fromTo(headerTime, { opacity: 0 }, { opacity: 1 }, '<+0.25')
+    tl.fromTo(
+      headerTime,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        onComplete: () => {
+          gsap.fromTo(
+            headerTime,
+            { opacity: 1, pointerEvents: 'all' },
+            {
+              opacity: 0,
+              pointerEvents: 'none',
+              scrollTrigger: {
+                trigger: headerTime.parentElement,
+                scrub: true,
+                start: 'top top',
+                end: 'bottom bottom-=25%',
+              },
+            }
+          )
+        },
+      },
+      '<+0.25'
+    )
 
     setInterval(() => (this.ukraineTime = this.getDate()), 1000)
   },
@@ -174,7 +197,8 @@ export default {
     bottom: 2rem;
     left: var(--pd-x);
 
-    font-size: 0.825rem;
+    font-size: 0.9rem;
+    font-weight: 200;
     color: var(--ff-secondary-color);
   }
 
