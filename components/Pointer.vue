@@ -18,6 +18,7 @@ export default {
     this.$gsap.set(pointer, {
       x: window.innerWidth / 2,
       y: innerHeight / 2,
+      transform: 'translate(-50%, -50%)',
       transformOrigin: 'right bottom',
     })
 
@@ -38,7 +39,13 @@ export default {
           isPointerHidden = true
         }
 
-        this.$gsap.to(el, { x, y, duration: 0.4, ease: 'back.out(1.5)' })
+        this.$gsap.to(el, {
+          x,
+          y,
+          transform: 'translate(-50%, -50%)',
+          duration: 0.4,
+          ease: 'back.out(1.5)',
+        })
       }
     },
   },
