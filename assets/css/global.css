@@ -17,14 +17,28 @@
 html,
 body {
   min-height: 100%;
+  isolation: isolate;
 
   font-family: 'Satoshi', sans-serif;
   font-size: calc(1rem + 0.33vw);
   color: var(--ff-primary-color);
 
   background-color: var(--surface-color);
+}
+
+body::after {
+  content: '';
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+
+  width: 100%;
+  height: 100vh;
 
   background-image: url('/img/background-noise.gif');
+  opacity: 0.15;
 }
 
 h1,
