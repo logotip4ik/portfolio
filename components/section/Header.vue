@@ -139,7 +139,31 @@ export default {
       '<+0.25'
     )
 
-    tl.fromTo(headerScrollImg, { opacity: 0 }, { opacity: 1 }, '<+0.25')
+    tl.fromTo(
+      headerScrollImg,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        onComplete: () => {
+          gsap.fromTo(
+            headerScrollImg,
+            { opacity: 1, yPercent: 0, pointerEvents: 'all' },
+            {
+              opacity: 0,
+              yPercent: 125,
+              pointerEvents: 'none',
+              scrollTrigger: {
+                trigger: headerScrollImg.parentElement,
+                scrub: true,
+                start: 'top top',
+                end: 'bottom bottom-=50%',
+              },
+            }
+          )
+        },
+      },
+      '<+0.45'
+    )
 
     setInterval(() => (this.ukraineTime = this.getDate()), 1000)
   },
