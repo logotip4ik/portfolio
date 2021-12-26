@@ -203,7 +203,7 @@ export default {
 
       position: relative;
 
-      font-size: clamp(1.5rem, 7vw, 4.75rem);
+      font-size: clamp(1.5rem, 9vw, 4.75rem);
       font-weight: 300;
       line-height: 1.175;
 
