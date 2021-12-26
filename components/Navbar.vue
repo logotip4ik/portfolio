@@ -4,6 +4,7 @@
       <NavbarItem
         v-for="(link, key) in links"
         :key="key"
+        ref="navbarItems"
         class="navbar__navigation__item"
       >
         {{ link.label }}
@@ -20,8 +21,17 @@ export default {
     links: [{ label: 'Projects' }, { label: 'About' }, { label: 'Contact' }],
   }),
   mounted() {
+    const gsap = this.$gsap
     const ScrollTrigger = this.$ScrollTrigger
+
     const toggleNavbarProp = this.toggleDataPropFactory('isNavbarHidden')
+    const { navbarItems } = this.$refs
+
+    gsap.fromTo(
+      navbarItems.map((item) => item.$el),
+      { opacity: 0 },
+      { opacity: 1, stagger: { amount: 0.1, from: 'end' }, delay: 2.75 }
+    )
 
     ScrollTrigger.create({
       onUpdate: ({ progress }) => toggleNavbarProp(progress * 100),
