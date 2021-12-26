@@ -28,14 +28,14 @@ export default {
 
     tl.to(normalText.children, {
       yPercent: -110,
-      stagger: 0.01,
+      stagger: { amount: 0.1 },
     })
 
     tl.fromTo(
       hoverText.children,
-      { yPercent: 120 },
-      { yPercent: 0, stagger: 0.01 },
-      '<'
+      { yPercent: 100 },
+      { yPercent: 0, stagger: { amount: 0.1 } },
+      '<-0.05'
     )
 
     item.addEventListener('mouseenter', () => tl.play())
