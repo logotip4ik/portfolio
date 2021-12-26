@@ -18,6 +18,12 @@
     <p ref="headerTime" class="header__time">Kyiv {{ ukraineTime }}</p>
 
     <img
+      src="/img/arrow_scroll.png"
+      alt="down arrow"
+      class="header__scroll-img"
+    />
+
+    <img
       src="/img/blob-1.png"
       alt="floating blob 1"
       class="header__blob parallax-blob"
@@ -46,6 +52,7 @@ export default {
       '.header__title__line .underline'
     )
     const headerTime = document.querySelector('.header__time')
+    const headerScrollImg = document.querySelector('.header__scroll-img')
     const blobs = document.querySelectorAll('.parallax-blob')
 
     const tl = gsap.timeline({ delay: 0.15, default: { duration: 0.5 } })
@@ -122,6 +129,8 @@ export default {
       },
       '<+0.25'
     )
+
+    tl.fromTo(headerScrollImg, { opacity: 0 }, { opacity: 1 }, '<+0.25')
 
     setInterval(() => (this.ukraineTime = this.getDate()), 1000)
   },
@@ -200,6 +209,18 @@ export default {
     font-size: 0.9rem;
     font-weight: 200;
     color: var(--ff-secondary-color);
+  }
+
+  &__scroll-img {
+    display: block;
+
+    position: absolute;
+    bottom: 3rem;
+    right: var(--pd-x);
+
+    width: 100%;
+    height: auto;
+    max-width: 1rem;
   }
 
   &__blob {
