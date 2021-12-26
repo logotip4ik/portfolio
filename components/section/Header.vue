@@ -150,7 +150,7 @@ export default {
             { opacity: 1, yPercent: 0, pointerEvents: 'all' },
             {
               opacity: 0,
-              yPercent: 125,
+              yPercent: 175,
               pointerEvents: 'none',
               scrollTrigger: {
                 trigger: headerScrollImg.parentElement,
