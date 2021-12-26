@@ -15,7 +15,7 @@
       </div>
     </h1>
 
-    <p ref="headerTime" class="header__time">Київ {{ ukraineTime }}</p>
+    <p ref="headerTime" class="header__time">Kyiv {{ ukraineTime }}</p>
 
     <img
       src="/img/blob-1.png"
@@ -175,7 +175,6 @@ export default {
     left: var(--pd-x);
 
     font-size: 0.825rem;
-    font-variant-numeric: tabular-nums;
     color: var(--ff-secondary-color);
   }
 
