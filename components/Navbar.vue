@@ -1,6 +1,7 @@
 <template>
   <nav :class="{ navbar: true, 'navbar--hidden': isNavbarHidden }">
     <ul class="navbar__navigation">
+      <!-- TODO: add click handler and scroll down to that section -->
       <NavbarItem
         v-for="(link, key) in links"
         :key="key"

@@ -17,6 +17,8 @@
 
     <p ref="headerTime" class="header__time">Kyiv {{ ukraineTime }}</p>
 
+    <!-- TODO: add click handler -->
+    <!-- TODO(later): add some kind of animation, like hover or make initial animation a bit more complex ? -->
     <img
       src="/img/arrow_scroll.png"
       alt="down arrow"
