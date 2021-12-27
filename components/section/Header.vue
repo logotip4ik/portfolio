@@ -63,6 +63,7 @@ export default {
     const headerTime = document.querySelector('.header__time')
     const headerScrollImg = document.querySelector('.header__scroll-img')
     const blobs = document.querySelectorAll('.parallax-blob')
+    const pointer = document.querySelectorAll('.pointer')
 
     const tl = gsap.timeline({ delay: 0.15, default: { duration: 0.5 } })
 
@@ -164,6 +165,8 @@ export default {
       },
       '<+0.45'
     )
+
+    tl.to(pointer, { opacity: 1 }, '<')
 
     setInterval(() => (this.ukraineTime = this.getDate()), 1000)
   },

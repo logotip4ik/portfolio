@@ -15,11 +15,14 @@ export default {
 
     const { pointer } = this.$refs
 
+    const centerX = window.innerWidth / 2
+    const centerY = window.innerHeight / 2
+
     this.$gsap.set(pointer, {
-      x: window.innerWidth / 2,
-      y: innerHeight / 2,
-      transform: 'translate(-50%, -50%)',
-      transformOrigin: 'right bottom',
+      x: centerX,
+      y: centerY,
+      xPercent: -50,
+      yPercent: -50,
     })
 
     this.pointerMover = this.pointerMoverFactory(pointer)
@@ -42,9 +45,10 @@ export default {
         this.$gsap.to(el, {
           x,
           y,
-          transform: 'translate(-50%, -50%)',
+          xPercent: -50,
+          yPercent: -50,
           duration: 0.4,
-          ease: 'back.out(1.5)',
+          ease: 'power2.out(1.5)',
         })
       }
     },
@@ -62,15 +66,12 @@ export default {
   height: var(--pointer-size);
   width: var(--pointer-size);
 
-  background-color: var(--surface-color);
+  background-color: var(--ff-primary-color);
   border-radius: 50%;
   opacity: 0;
 
   pointer-events: none;
-  filter: invert(1);
   mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
-  transition: opacity 500ms ease-out;
 
   &.shown {
     opacity: 1;
