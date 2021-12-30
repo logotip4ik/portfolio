@@ -23,7 +23,6 @@ export default {
   }),
   mounted() {
     const gsap = this.$gsap
-    const ScrollTrigger = this.$ScrollTrigger
 
     const toggleNavbarProp = this.toggleDataPropFactory('isNavbarHidden')
     const { navbarItems } = this.$refs
@@ -34,9 +33,11 @@ export default {
       { opacity: 1, stagger: { amount: 0.1, from: 'end' }, delay: 2.75 }
     )
 
-    ScrollTrigger.create({
-      onUpdate: ({ progress }) => toggleNavbarProp(progress * 100),
-    })
+    // Was forced to remove scroll trigger, cuz on phones asscroll does something weirdo
+    // It is not registering the scroll box, or something else. The main idea is
+    //  ScrollTrigger was not updating the scrub on phones, where as said earlier,
+    // asscroll was doing something weirdo.
+    this.$nuxt.$asScroll.on('scroll', (progress) => toggleNavbarProp(progress))
   },
   methods: {
     toggleDataPropFactory(property) {
