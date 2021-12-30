@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// TODO: idk if this will work on computer, but on phones when user clicks navbar item, the pointer is being showed somehow
 export default {
   name: 'PointerComponent',
   data: () => ({
