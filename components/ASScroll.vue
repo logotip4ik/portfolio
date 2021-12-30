@@ -52,13 +52,15 @@ export default {
       asscroll.on('update', this.$ScrollTrigger.update)
       this.$ScrollTrigger.addEventListener('refresh', asscroll.resize)
 
-      this.$nextTick(() => {
-        asscroll.enable({
-          newScrollElements: document.querySelectorAll(
-            '.gsap-marker-start, .gsap-marker-end, [asscroll]'
-          ),
-        })
+      asscroll.enable({
+        newScrollElements: document.querySelectorAll(
+          '.gsap-marker-start, .gsap-marker-end, [asscroll]'
+        ),
       })
+
+      this.$nextTick(() => asscroll.update())
+
+      this.$nuxt.$asScroll = asscroll
 
       this.asscroll = asscroll
     },
