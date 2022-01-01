@@ -51,6 +51,7 @@ export default {
     })
   },
   mounted() {
+    const isMobile = 'ontouchstart' in document.documentElement
     const gsap = this.$gsap
 
     const loader = document.querySelectorAll('.loader')
@@ -168,7 +169,7 @@ export default {
       '<+0.45'
     )
 
-    tl.to(pointer, { opacity: 1 }, '<')
+    if (!isMobile) tl.to(pointer, { opacity: 1 }, '<')
 
     setInterval(() => (this.ukraineTime = this.getDate()), 1000)
   },
