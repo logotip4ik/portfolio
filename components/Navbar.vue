@@ -40,9 +40,17 @@ export default {
     this.$nuxt.$asScroll.on('scroll', (progress) => toggleNavbarProp(progress))
   },
   methods: {
+    /**
+     * @param {String} property Key of Vue data prop to toggle
+     */
     toggleDataPropFactory(property) {
       let prevYPos = 0
 
+      /**
+       * @function
+       * @desc If current window scroll offset is bigger than previous it will toggle {property} to true, if it is small it will be toggled to false
+       * @param {Number} yPos Current window scroll offset
+       */
       return (yPos) => {
         if (yPos - prevYPos > 0) this[property] = true
         else this[property] = false
