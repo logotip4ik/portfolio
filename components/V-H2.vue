@@ -26,9 +26,9 @@ export default {
 
     gsap.fromTo(
       header,
-      { y: '-random(10, 30)' },
+      { y: '-random(-50, 50)' },
       {
-        y: 'random(10, 30)',
+        y: 'random(-50, 50)',
         duration: 0.65,
         scrollTrigger: {
           trigger: section,
