@@ -28,6 +28,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^3.1.0",
     "eslint-plugin-vue": "^8.2.0",
+    "nuxt-gsap-module": "^1.6.0",
     "nuxt-vite": "^0.3.5",
     "prettier": "^2.5.1",
     "sass": "^1.45.2",

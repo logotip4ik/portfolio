@@ -4847,6 +4847,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
 
+gsap@^3.9.1:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.9.1.tgz#d4c7443540497afee9ddc0824fd0180224e33360"
+  integrity sha512-JSGVYoC6da4pIjdF/yxFU6Rz8OojOIDkbooveZlfNg0+JIoFoRruyfWAEi6R/gUeNcuOiTqUIb0gi1nCNrHf8w==
+
 gzip-size@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-6.0.0.tgz#065367fd50c239c0671cbcbad5be3e2eeb10e462"
@@ -6395,6 +6400,13 @@ num2fraction@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
   integrity sha1-b2gragJ6Tp3fpFZM0lidHU5mnt4=
+
+nuxt-gsap-module@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/nuxt-gsap-module/-/nuxt-gsap-module-1.6.0.tgz#37be3cf807933b45a746a0bb67a1f7107dc8bb5e"
+  integrity sha512-KaH2gALeHASo/eSkH4Fh/DREjXwdmpAeY53xUAjvNZccDevJO8+7b6uZjPHPfDe397rl3vCzJOf/lwZJW1e3Jg==
+  dependencies:
+    gsap "^3.9.1"
 
 nuxt-vite@^0.3.5:
   version "0.3.5"
