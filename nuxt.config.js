@@ -35,6 +35,8 @@ export default {
     '@nuxtjs/eslint-module',
     // https://vite.nuxtjs.org
     'nuxt-vite',
+    // https://github.com/ivodolenc/nuxt-gsap-module
+    'nuxt-gsap-module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -42,4 +44,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // https://github.com/ivodolenc/nuxt-gsap-module#multiple-plugins
+  gsap: {
+    extraPlugins: {
+      scrollTo: true,
+      scrollTrigger: true,
+    },
+  },
 }
