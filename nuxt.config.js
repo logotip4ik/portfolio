@@ -45,7 +45,17 @@ export default {
   modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    postcss: {
+      plugins: {
+        // NOTE: this is an issue with postcss-values-parser
+        // here is an issue: https://github.com/shellscape/postcss-values-parser/issues/136
+        'postcss-custom-properties': false,
+        'postcss-values-parser': false,
+        'postcss-preset-env': false,
+      },
+    },
+  },
 
   // https://github.com/ivodolenc/nuxt-gsap-module#multiple-plugins
   gsap: {
