@@ -34,7 +34,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://vite.nuxtjs.org
-    'nuxt-vite',
+    // 'nuxt-vite',
     // https://github.com/ivodolenc/nuxt-gsap-module
     'nuxt-gsap-module',
     // https://google-fonts.nuxtjs.org
