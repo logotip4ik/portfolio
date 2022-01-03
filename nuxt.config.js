@@ -59,6 +59,15 @@ export default {
         'postcss-preset-env': false,
       },
     },
+    extend(config) {
+      // This enables to import .glsl, .frag, .vert, as modules
+      // example: import vertexShader from '~/assets/shaders/vertex.glsl'
+      config.module.rules.push({
+        test: /\.(glsl|frag|vert)$/,
+        exclude: /node_modules/,
+        use: ['raw-loader', 'glslify-loader'],
+      })
+    },
   },
 
   // https://github.com/ivodolenc/nuxt-gsap-module#multiple-plugins
