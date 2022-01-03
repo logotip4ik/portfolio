@@ -33,6 +33,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    // https://vite.nuxtjs.org
+    'nuxt-vite',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
