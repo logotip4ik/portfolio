@@ -37,6 +37,8 @@ export default {
     'nuxt-vite',
     // https://github.com/ivodolenc/nuxt-gsap-module
     'nuxt-gsap-module',
+    // https://google-fonts.nuxtjs.org
+    '@nuxtjs/google-fonts',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -51,5 +53,15 @@ export default {
       scrollTo: true,
       scrollTrigger: true,
     },
+  },
+
+  googleFonts: {
+    families: {
+      'Nunito+Sans': {
+        wght: [400],
+      },
+    },
+    display: 'swap',
+    download: true,
   },
 }
