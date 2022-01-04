@@ -30,7 +30,6 @@ export default {
       trigger: '.header',
       start: 'bottom top+=75px',
       end: 'bottom top+=75px',
-      markers: true,
       onEnter: () =>
         gsap.to([navTitle, navNavigationItems], { color: '#303030' }),
       onEnterBack: () =>

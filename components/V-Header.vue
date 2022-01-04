@@ -7,11 +7,20 @@
       </h1>
       <p class="header__container__subtitle">Front End Developer</p>
     </div>
+    <p class="header__clock">
+      <span class="long">Kyiv</span>
+      <span class="time">{{ localTime }}</span>
+    </p>
   </header>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      localTime: this.getLocalTime(),
+    }
+  },
   mounted() {
     const { headerContainer } = this.$refs
 
@@ -33,6 +42,17 @@ export default {
         },
       }
     )
+
+    setInterval(() => (this.localTime = this.getLocalTime()), 1000)
+  },
+  methods: {
+    getLocalTime() {
+      return Intl.DateTimeFormat('ua', {
+        timeZone: 'Europe/Kiev',
+        hour: '2-digit',
+        minute: '2-digit',
+      }).format(new Date())
+    },
   },
 }
 </script>
@@ -71,7 +91,21 @@ export default {
     }
 
     &__subtitle {
+      font-size: var(--step--1);
       text-align: center;
+    }
+  }
+
+  &__clock {
+    position: absolute;
+    bottom: clamp(2rem, 7vw, 5rem);
+    left: clamp(1rem, 5vw, 2rem);
+
+    color: #fdfdfd;
+
+    .time {
+      font-family: serif;
+      font-variant-numeric: proportional-nums;
     }
   }
 }
