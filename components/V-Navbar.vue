@@ -28,8 +28,8 @@ export default {
 
     ScrollTrigger.create({
       trigger: '.header',
-      start: 'bottom top+=75px',
-      end: 'bottom top+=75px',
+      start: 'bottom top+=70px',
+      end: 'bottom top+=70px',
       onEnter: () =>
         gsap.to([navTitle, navNavigationItems], { color: '#303030' }),
       onEnterBack: () =>
@@ -43,7 +43,7 @@ export default {
         opacity: 1,
         scrollTrigger: {
           trigger: '.header',
-          start: 'top+=0.75rem top',
+          start: 'top+=25% top',
           end: 'bottom top',
           scrub: 0.75,
         },
@@ -67,7 +67,7 @@ export default {
   width: 100%;
 
   color: #dfdfdf;
-  padding: 3rem clamp(1rem, 10vw, 7rem);
+  padding: 2.5rem clamp(1rem, 10vw, 7rem);
 
   &__title {
     font-size: var(--step-2);
