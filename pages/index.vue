@@ -1,5 +1,6 @@
 <template>
   <div>
+    <V-Navbar></V-Navbar>
     <V-Header></V-Header>
   </div>
 </template>
