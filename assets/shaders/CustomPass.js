@@ -1,5 +1,3 @@
-import { Vector2 } from 'three';
-
 export const AberrationShader = {
   uniforms: {
     tDiffuse: { value: null },
@@ -71,4 +69,4 @@ export const AberrationShader = {
       gl_FragColor = sumcol / sumw;
     }
   `,
-};
+}
