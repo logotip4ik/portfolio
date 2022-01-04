@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     getLocalTime() {
-      return Intl.DateTimeFormat('ua', {
+      return Intl.DateTimeFormat('uk-UA', {
         timeZone: 'Europe/Kiev',
         hour: '2-digit',
         minute: '2-digit',
