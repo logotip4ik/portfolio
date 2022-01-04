@@ -44,7 +44,9 @@ export default {}
     transform: translate(-50%, -50%);
 
     &__title {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+
+      line-height: 1;
     }
     &__subtitle {
       text-align: center;
