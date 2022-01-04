@@ -1,0 +1,59 @@
+<template>
+  <nav class="nav">
+    <p ref="navTitle" class="nav__title serif">BK</p>
+
+    <ul class="nav__navigation">
+      <li v-for="(item, key) in links" :key="key" class="nav__navigation__item">
+        {{ item.label }}
+      </li>
+    </ul>
+  </nav>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    links: [{ label: 'Projects' }, { label: 'About' }, { label: 'Contact' }],
+  }),
+}
+</script>
+
+<style lang="scss">
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  width: 100%;
+
+  color: #dfdfdf;
+  padding: 0.5rem clamp(1rem, 10vw, 7rem);
+
+  &__title {
+    font-size: var(--step-2);
+    // TODO: add scroll trigger for showing the title
+    opacity: 0;
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--step-2);
+
+    font-size: var(--step--1);
+    list-style-type: none;
+
+    &__item {
+      letter-spacing: 0.25px;
+
+      cursor: pointer;
+    }
+  }
+}
+</style>
