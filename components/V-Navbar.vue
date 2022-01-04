@@ -15,6 +15,24 @@ export default {
   data: () => ({
     links: [{ label: 'Projects' }, { label: 'About' }, { label: 'Contact' }],
   }),
+  mounted() {
+    const { navTitle } = this.$refs
+    const gsap = this.$gsap
+
+    gsap.fromTo(
+      navTitle,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: '.header',
+          start: 'top+=25% top',
+          end: 'bottom top',
+          scrub: 0.75,
+        },
+      }
+    )
+  },
 }
 </script>
 
@@ -36,7 +54,6 @@ export default {
 
   &__title {
     font-size: var(--step-2);
-    // TODO: add scroll trigger for showing the title
     opacity: 0;
   }
 

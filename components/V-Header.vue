@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <V-Header-Background class="header__canvas" />
-    <div class="header__container">
+    <div ref="headerContainer" class="header__container">
       <h1 class="header__container__title">
         Bogdan<br /><span class="ml-responsive serif">Kostyuk</span>
       </h1>
@@ -11,11 +11,38 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    const { headerContainer } = this.$refs
+
+    const gsap = this.$gsap
+
+    gsap.fromTo(
+      headerContainer,
+      { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
+      {
+        opacity: 0,
+        scale: 1.125,
+        yPercent: -10,
+        filter: 'blur(10px)',
+        scrollTrigger: {
+          scrub: 0.75,
+          trigger: headerContainer.parentElement,
+          start: 'top+=15% top',
+          end: 'bottom-=35%, top',
+        },
+      }
+    )
+  },
+}
 </script>
 
 <style lang="scss">
 .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: relative;
   isolation: isolate;
 
@@ -34,20 +61,15 @@ export default {}
   }
 
   &__container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
     color: white;
     mix-blend-mode: difference;
-
-    transform: translate(-50%, -50%);
 
     &__title {
       margin-bottom: 1.5rem;
 
       line-height: 1;
     }
+
     &__subtitle {
       text-align: center;
     }
