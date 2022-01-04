@@ -19,9 +19,11 @@ html,
 body {
   height: 100%;
   font-family: 'Nunito Sans', sans-serif;
-  font-size: var(--ff-size-0);
 }
 
+p {
+  font-size: var(--step--2);
+}
 h1 {
   font-size: var(--step-5);
 }
