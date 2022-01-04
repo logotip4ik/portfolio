@@ -3,7 +3,12 @@
     <p ref="navTitle" class="nav__title serif">BK</p>
 
     <ul class="nav__navigation">
-      <li v-for="(item, key) in links" :key="key" class="nav__navigation__item">
+      <li
+        v-for="(item, key) in links"
+        :key="key"
+        ref="navNavigationItems"
+        class="nav__navigation__item"
+      >
         {{ item.label }}
       </li>
     </ul>
@@ -16,8 +21,21 @@ export default {
     links: [{ label: 'Projects' }, { label: 'About' }, { label: 'Contact' }],
   }),
   mounted() {
-    const { navTitle } = this.$refs
+    const { navTitle, navNavigationItems } = this.$refs
+
     const gsap = this.$gsap
+    const ScrollTrigger = this.$ScrollTrigger
+
+    ScrollTrigger.create({
+      trigger: '.header',
+      start: 'bottom top+=75px',
+      end: 'bottom top+=75px',
+      markers: true,
+      onEnter: () =>
+        gsap.to([navTitle, navNavigationItems], { color: '#303030' }),
+      onEnterBack: () =>
+        gsap.to([navTitle, navNavigationItems], { color: '#dfdfdf' }),
+    })
 
     gsap.fromTo(
       navTitle,
@@ -26,7 +44,7 @@ export default {
         opacity: 1,
         scrollTrigger: {
           trigger: '.header',
-          start: 'top+=25% top',
+          start: 'top+=0.75rem top',
           end: 'bottom top',
           scrub: 0.75,
         },
@@ -50,11 +68,13 @@ export default {
   width: 100%;
 
   color: #dfdfdf;
-  padding: 0.5rem clamp(1rem, 10vw, 7rem);
+  padding: 3rem clamp(1rem, 10vw, 7rem);
 
   &__title {
     font-size: var(--step-2);
     opacity: 0;
+
+    margin: 0;
   }
 
   &__navigation {
@@ -69,6 +89,9 @@ export default {
     &__item {
       letter-spacing: 0.25px;
 
+      mix-blend-mode: difference;
+
+      margin: 0;
       cursor: pointer;
     }
   }
