@@ -152,9 +152,6 @@ export default {
       fetch('https://smartforms.dev/submit/61d60b027a195017922dc5e7', {
         method: 'POST',
         body: formData,
-        headers: {
-          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        },
       })
         .then(({ ok }) => emit('success', ok))
         .catch((err) => {
