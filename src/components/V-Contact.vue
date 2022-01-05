@@ -142,7 +142,7 @@ export default {
       loading.value = true;
       resetForm();
       emit('scroll-to', 'top');
-      fetch('https://formcarry.com/s/_T7ia-nV9ic', {
+      fetch('https://cors-anywhere.herokuapp.com/https://form.taxi/s/rea3zm0i', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
