@@ -3,6 +3,7 @@
     <V-Navbar></V-Navbar>
     <V-Header></V-Header>
     <div class="spacer"></div>
+    <!-- TODO: add loader, also need to track the three js loaded state or somehow to wait for scene to load -->
     <!-- TODO: add project section -->
     <!-- NOTE: project section should probably scroll horizontally -->
     <!-- TODO: add about section -->
@@ -16,6 +17,16 @@
 <script>
 export default {
   name: 'IndexPage',
+  beforeMount() {
+    this.setVH()
+    window.addEventListener('resize', this.setVH)
+  },
+  methods: {
+    setVH() {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    },
+  },
 }
 </script>
 
