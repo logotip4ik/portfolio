@@ -138,16 +138,22 @@ export default {
         email: emailForm.value.trim(),
         message: messageForm.value.trim(),
       };
+
       if (!(await v.value.$validate())) return;
+
       loading.value = true;
+
       resetForm();
       emit('scroll-to', 'top');
-      fetch('https://form.taxi/s/rea3zm0i', {
+
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => formData.append(key, value));
+
+      fetch('https://smartforms.dev/submit/61d60b027a195017922dc5e7', {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
         },
       })
         .then(({ ok }) => emit('success', ok))
