@@ -11,7 +11,10 @@ void main() {
 
   vec4 newPos = modelViewMatrix * vec4( position, 1.0 );
 
-  newPos.xy += vec2(sin(time * 2. + newPos.y * 3.) / 50.);
+  // newPos.xy += vec2(sin(time * 2. + newPos.y * 3.) / 50.);
+
+  newPos.x += cos(time * 2. + newPos.y * 3.) / 50.;
+  newPos.y -= sin(time * 2. + newPos.x * 3.) / 50.;
 
   gl_Position = projectionMatrix * newPos;
 }
