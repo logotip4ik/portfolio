@@ -18,7 +18,7 @@
 <script>
 export default {
   data: () => ({
-    links: [{ label: 'Projects' }, { label: 'About' }, { label: 'Contact' }],
+    links: [{ label: 'Work' }, { label: 'About' }, { label: 'Contact' }],
   }),
   mounted() {
     const { navTitle, navNavigationItems } = this.$refs
