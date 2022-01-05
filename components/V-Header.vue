@@ -55,7 +55,6 @@ export default {
           trigger: headerClock.parentElement,
           start: 'top+=25% top',
           end: 'bottom-=25% top',
-          markers: true,
         },
       }
     )
