@@ -7,10 +7,12 @@
       </h1>
       <p class="header__container__subtitle">Front End Developer</p>
     </div>
-    <p class="header__clock">
-      <span class="long">Kyiv</span>
-      <span class="time">{{ localTime }}</span>
+    <p ref="headerClock" class="header__clock">
+      <span>Kyiv</span>
+      <span>{{ localTime }}</span>
     </p>
+    <!-- TODO: add 100vw fix, (css tricks) -->
+    <!-- TODO: add some sort of "scroll down" indication, see monopo.nyc -->
   </header>
 </template>
 
@@ -22,7 +24,7 @@ export default {
     }
   },
   mounted() {
-    const { headerContainer } = this.$refs
+    const { headerContainer, headerClock } = this.$refs
 
     const gsap = this.$gsap
 
@@ -39,6 +41,21 @@ export default {
           trigger: headerContainer.parentElement,
           start: 'top+=15% top',
           end: 'bottom-=35%, top',
+        },
+      }
+    )
+
+    gsap.fromTo(
+      headerClock,
+      { opacity: 1 },
+      {
+        opacity: 0,
+        scrollTrigger: {
+          scrub: 0.75,
+          trigger: headerClock.parentElement,
+          start: 'top+=25% top',
+          end: 'bottom-=25% top',
+          markers: true,
         },
       }
     )
@@ -98,15 +115,10 @@ export default {
 
   &__clock {
     position: absolute;
-    bottom: clamp(2rem, 7vw, 5rem);
+    bottom: clamp(1rem, 5vw, 2rem);
     left: clamp(1rem, 5vw, 2rem);
 
-    color: #fdfdfd;
-
-    .time {
-      font-family: serif;
-      font-variant-numeric: proportional-nums;
-    }
+    color: grey;
   }
 }
 </style>
