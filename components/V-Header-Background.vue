@@ -22,7 +22,7 @@ if (process.browser) {
   RenderPass =
     require('three/examples/jsm/postprocessing/RenderPass.js').RenderPass
   UnrealBloomPass =
-    require('three/examples/jsm/postprocessing/UnrealBloomPass.js').UnrealBloomPass
+    require('three/examples/jsm/postprocessing/UnrealBloomPass').UnrealBloomPass
   ShaderPass =
     require('three/examples/jsm/postprocessing/ShaderPass.js').ShaderPass
 }
@@ -43,7 +43,12 @@ export default {
     this.scene = new THREE.Scene()
 
     // THREE: Renderer
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+    this.renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: false,
+      stencil: false,
+      depth: false,
+    })
     this.renderer.setPixelRatio(window.devicePixelRatio || 2)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     this.renderer.setClearColor(0x000000, 1)
@@ -54,15 +59,14 @@ export default {
     this.camera = new THREE.PerspectiveCamera(
       70,
       window.innerWidth / window.innerHeight,
-      0.001,
-      1000
+      1,
+      2
     )
 
     this.camera.position.set(0, 0, 2)
 
     // THREE: Composer
     const renderPass = new RenderPass(this.scene, this.camera)
-
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
       0.75,
@@ -70,6 +74,7 @@ export default {
       0.125
     )
     const AberrationShaderPass = new ShaderPass(AberrationShader)
+    AberrationShaderPass.renderToScreen = true
 
     this.composer = new EffectComposer(this.renderer)
     this.composer.addPass(renderPass)
@@ -79,7 +84,7 @@ export default {
     // THREE: Object
     const geometry = new THREE.CircleBufferGeometry(
       // 1.25 / window.devicePixelRatio,
-      (window.innerWidth / 1500) * (window.devicePixelRatio || 2),
+      (window.innerWidth / 1600) * (window.devicePixelRatio || 2),
       // window.innerWidth / 1500,
       128
     )

@@ -2,7 +2,6 @@ export const AberrationShader = {
   uniforms: {
     tDiffuse: { value: null },
     distort: { value: 0.25 },
-    time: { value: 0 },
   },
   vertexShader: `
     varying vec2 vUv;
@@ -15,11 +14,10 @@ export const AberrationShader = {
   fragmentShader: `
     uniform sampler2D tDiffuse;
     uniform float distort;
-    uniform float time;
     
     varying vec2 vUv;
 
-    const float max_distort = 0.65;
+    const float max_distort = 0.5;
     const int num_iter = 10;
     const float reci_num_iter_f = 1.0 / float(num_iter);
 
@@ -54,7 +52,7 @@ export const AberrationShader = {
 
     void main()
     {	
-      vec2 zUV = (vUv - vec2(0.5)) * 0.95 + vec2(0.5);
+      vec2 zUV = (vUv - vec2(0.5)) + vec2(0.5);
       vec4 sumcol = vec4(0.0);
       vec4 sumw = vec4(0.0);
 
@@ -63,7 +61,7 @@ export const AberrationShader = {
         float t = float(i) * reci_num_iter_f;
         vec4 w = spectrum_offset( t );
         sumw += w;
-        sumcol += w * texture2D( tDiffuse, barrelDistortion(zUV, .2 * max_distort*t ) );
+        sumcol += w * texture2D( tDiffuse, barrelDistortion(zUV, .6 * max_distort*t ) );
       }
         
       gl_FragColor = sumcol / sumw;
