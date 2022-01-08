@@ -8,4 +8,5 @@ tags:
   - Scss
   - Three.js
 desc: Just some really dumb description, cuz my imagination is not working today :)
+image: https://source.unsplash.com/900x1600?patterns&1
 ---
