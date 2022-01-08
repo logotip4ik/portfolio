@@ -66,6 +66,7 @@ export default {
 
   width: 100%;
 
+  pointer-events: none;
   color: #dfdfdf;
   padding: 2.5rem clamp(1rem, 10vw, 7rem);
 
@@ -74,6 +75,7 @@ export default {
     opacity: 0;
 
     margin: 0;
+    pointer-events: all;
   }
 
   &__navigation {
@@ -84,6 +86,7 @@ export default {
 
     font-size: var(--step--1);
     list-style-type: none;
+    pointer-events: all;
 
     &__item {
       letter-spacing: 0.25px;
