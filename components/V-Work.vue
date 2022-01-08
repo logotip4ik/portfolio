@@ -52,7 +52,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
     justify-items: center;
-    gap: var(--step-4);
+    gap: var(--step-3);
 
     max-width: 1100px;
 
@@ -60,8 +60,10 @@ export default {
     margin: 0 auto;
     padding-inline-start: 0;
 
-    &__item:nth-child(2n + 1) {
-      top: 2.5%;
+    @media screen and(min-width: 810px) {
+      &__item:nth-child(2n + 1) {
+        top: 2.5%;
+      }
     }
   }
 }
