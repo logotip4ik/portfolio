@@ -72,8 +72,8 @@ export default {
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.3) 20%,
-      rgba(0, 0, 0, 0.125) 30%,
+      rgba(0, 0, 0, 0.3) 25%,
+      rgba(0, 0, 0, 0.125) 33%,
       rgba(0, 0, 0, 0) 50%
     );
 
