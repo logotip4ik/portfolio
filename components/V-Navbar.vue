@@ -21,20 +21,9 @@ export default {
     links: [{ label: 'Work' }, { label: 'About' }, { label: 'Contact' }],
   }),
   mounted() {
-    const { navTitle, navNavigationItems } = this.$refs
+    const { navTitle } = this.$refs
 
     const gsap = this.$gsap
-    const ScrollTrigger = this.$ScrollTrigger
-
-    ScrollTrigger.create({
-      trigger: '.header',
-      start: 'bottom top+=70px',
-      end: 'bottom top+=70px',
-      onEnter: () =>
-        gsap.to([navTitle, navNavigationItems], { color: '#303030' }),
-      onEnterBack: () =>
-        gsap.to([navTitle, navNavigationItems], { color: '#dfdfdf' }),
-    })
 
     gsap.fromTo(
       navTitle,
