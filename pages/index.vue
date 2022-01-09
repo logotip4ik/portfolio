@@ -4,6 +4,7 @@
     <V-Header></V-Header>
     <main>
       <V-Work :works="works"></V-Work>
+      <V-About :about="about"></V-About>
     </main>
     <div class="spacer"></div>
     <!-- TODO: add loader, also need to track the three js loaded state or somehow to wait for scene to load -->
@@ -25,8 +26,9 @@ export default {
   name: 'IndexPage',
   async asyncData({ $content }) {
     const works = await $content('works').fetch()
+    const about = await $content('about').fetch()
 
-    return { works }
+    return { works, about }
   },
   beforeMount() {
     this.setVH()
