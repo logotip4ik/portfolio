@@ -1,5 +1,5 @@
 <template>
-  <li class="work" tabindex="0">
+  <li class="work">
     <a :href="work.live" target="_blank" class="work__wrapper">
       <img
         ref="workImage"
@@ -88,7 +88,7 @@ export default {
     }
   }
 
-  &:is(:hover, :focus-visible) {
+  &:is(:hover, :focus-visible, :focus-within) {
     --active-scale: 0.95;
 
     transform: scale(var(--active-scale));
