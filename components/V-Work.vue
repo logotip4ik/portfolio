@@ -1,5 +1,5 @@
 <template>
-  <div ref="works" class="works">
+  <section ref="works" class="works">
     <h2 ref="worksTitle" class="works__title serif">Work</h2>
     <ul class="works__list">
       <V-Work-Item
@@ -11,7 +11,7 @@
       >
       </V-Work-Item>
     </ul>
-  </div>
+  </section>
 </template>
 
 <script>
