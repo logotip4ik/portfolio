@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss">
 .works {
-  padding: 4rem clamp(1rem, 7vw, 5rem);
+  padding: 4rem clamp(1rem, 7vw, 5rem) 8rem;
   color: #303030;
 
   &__title {
