@@ -13,6 +13,7 @@
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix"
   },
   "dependencies": {
+    "@ashthornton/asscroll": "^2.0.4",
     "@nuxt/content": "^1.15.1",
     "core-js": "^3.19.3",
     "locomotive-scroll": "^4.1.3",
