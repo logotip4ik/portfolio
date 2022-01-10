@@ -5,6 +5,8 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
 
   if (isMobile) {
     inject('scrollY', () => window.scrollY)
+    inject('disableScrollY', () => {})
+    inject('enableScrollY', () => {})
     return
   }
 
@@ -42,6 +44,6 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
 
   inject('asscroll', asscroll)
   inject('scrollY', () => asscroll.currentPos)
-
-  window.addEventListener('DOMContentLoaded', () => asscroll.enable())
+  inject('disableScrollY', () => asscroll.disable())
+  inject('enableScrollY', () => asscroll.enable())
 }
