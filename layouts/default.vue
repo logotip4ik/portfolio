@@ -4,6 +4,7 @@
     <div class="scroller">
       <Nuxt></Nuxt>
     </div>
+    <V-Loader></V-Loader>
   </div>
 </template>
 
