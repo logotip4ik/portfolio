@@ -1,6 +1,5 @@
 <template>
   <div>
-    <V-Navbar></V-Navbar>
     <V-Header></V-Header>
     <main>
       <V-Work :works="works"></V-Work>
