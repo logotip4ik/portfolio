@@ -12,6 +12,7 @@
         :alt="work.title"
         class="work__image"
         width="400"
+        loading="lazy"
       />
       <div class="work__content">
         <h3 class="work__content__title">
