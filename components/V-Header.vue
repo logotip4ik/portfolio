@@ -11,12 +11,14 @@
         </span>
       </h1>
       <p class="header__container__subtitle">
+        <!-- eslint-disable -->
         <span
           v-for="(char, key) in subTitleChars"
           :key="key"
           ref="headerContainerSubtitle"
           v-html="char"
         ></span>
+        <!-- eslint-enable -->
       </p>
     </div>
     <p ref="headerClock" class="header__clock">
