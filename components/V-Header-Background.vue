@@ -109,6 +109,8 @@ export default {
         },
         randomSeed: { value: Math.random() * 100 },
         mouseVector: { value: new THREE.Vector2(0, 0) },
+        circleOpacity: { value: 0 },
+        circleDistortion: { value: 0 },
       },
       depthTest: false,
       depthWrite: false,
@@ -125,6 +127,20 @@ export default {
 
     this.resize()
     window.addEventListener('resize', this.resize)
+
+    this.$nuxt.$on('show-circle', () => {
+      this.$gsap.to(this.circle.material.uniforms.circleOpacity, {
+        value: 1,
+        duration: 1.75,
+        delay: 0.125,
+      })
+      this.$gsap.to(this.circle.material.uniforms.circleDistortion, {
+        value: 1,
+        duration: 2.5,
+        delay: 1,
+      })
+    })
+
     // NOTE: try to use only one requestAnimationFrame
     // this will improve overall performance
     this.$gsap.ticker.add(this.render)
