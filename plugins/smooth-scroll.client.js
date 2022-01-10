@@ -1,6 +1,10 @@
 import ASScroll from '@ashthornton/asscroll'
 
 export default ({ $gsap, $ScrollTrigger }, inject) => {
+  const isMobile = 'ontouchstart' in document
+
+  if (isMobile) return
+
   const el = document.querySelector('#__layout')
 
   const asscroll = new ASScroll({
