@@ -14,8 +14,13 @@
         :key="key"
         ref="navNavigationItems"
         class="nav__navigation__item"
+        @mouseenter="showHoverAnimation(key)"
+        @mouseleave="hideHoverAnimation(key)"
+        @touchstart="showHoverAnimation(key)"
+        @touchend="hideHoverAnimation(key)"
       >
-        {{ item.label }}
+        <span>{{ item.label }}</span>
+        <span class="serif">{{ item.label }}</span>
       </li>
     </ul>
 
@@ -55,6 +60,27 @@ export default {
     },
     hideBackground() {
       this.$gsap.to(this.$refs.navBackground, { bottom: '100%' })
+    },
+    showHoverAnimation(key) {
+      this.$gsap.fromTo(
+        this.$refs.navNavigationItems[key].children[1],
+        { yPercent: -10 },
+        { yPercent: -100, duration: 0.25 }
+      )
+      this.$gsap.to(this.$refs.navNavigationItems[key].children[0], {
+        yPercent: -100,
+        duration: 0.25,
+      })
+    },
+    hideHoverAnimation(key) {
+      this.$gsap.to(this.$refs.navNavigationItems[key].children[1], {
+        yPercent: -10,
+        duration: 0.25,
+      })
+      this.$gsap.to(this.$refs.navNavigationItems[key].children[0], {
+        yPercent: 0,
+        duration: 0.25,
+      })
     },
   },
 }
@@ -102,12 +128,27 @@ export default {
     list-style-type: none;
 
     &__item {
+      position: relative;
+
       letter-spacing: 0.25px;
 
-      mix-blend-mode: difference;
-
       margin: 0;
+
       cursor: pointer;
+      mix-blend-mode: difference;
+      overflow: hidden;
+
+      span {
+        display: inline-block;
+
+        &:nth-child(2) {
+          position: absolute;
+          left: 0;
+          top: 100%;
+
+          letter-spacing: 0.5px;
+        }
+      }
     }
   }
 
