@@ -6,7 +6,7 @@
     @mouseleave="hideBackground"
     @touchend="hideBackground"
   >
-    <p ref="navTitle" class="nav__title serif">BK</p>
+    <p ref="navTitle" class="nav__title serif" @click="$scrollTo(0)">BK</p>
 
     <ul class="nav__navigation">
       <li
@@ -14,6 +14,7 @@
         :key="key"
         ref="navNavigationItems"
         class="nav__navigation__item"
+        @click="item.action"
         @mouseenter="showHoverAnimation(key)"
         @mouseleave="hideHoverAnimation(key)"
         @touchstart="showHoverAnimation(key)"
@@ -30,9 +31,15 @@
 
 <script>
 export default {
-  data: () => ({
-    links: [{ label: 'Work' }, { label: 'About' }, { label: 'Contact' }],
-  }),
+  data() {
+    return {
+      links: [
+        { label: 'Work', action: () => this.$scrollTo('.works') },
+        { label: 'About', action: () => this.$scrollTo('.about') },
+        { label: 'Contact', action: () => null },
+      ],
+    }
+  },
   mounted() {
     const { navTitle } = this.$refs
 
@@ -40,9 +47,10 @@ export default {
 
     gsap.fromTo(
       navTitle,
-      { opacity: 0 },
+      { opacity: 0, pointerEvents: 'none' },
       {
         opacity: 1,
+        pointerEvents: 'all',
         scrollTrigger: {
           trigger: '.header',
           start: 'top+=25% top',
@@ -111,6 +119,7 @@ export default {
     padding-block: 1.75rem;
     padding-inline-start: clamp(1rem, 10vw, 7rem);
     pointer-events: all;
+    cursor: pointer;
   }
 
   &__navigation {
