@@ -100,6 +100,7 @@ export default {
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
+        randomSeed: { value: Math.random() * 100 },
       },
       depthTest: false,
       depthWrite: false,
