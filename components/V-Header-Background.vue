@@ -103,7 +103,7 @@ export default {
         derivatives: '#extension GL_OES_standard_derivatives : enable',
       },
       uniforms: {
-        time: { value: 0.0, type: 'f' },
+        time: { value: 0.0 },
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
