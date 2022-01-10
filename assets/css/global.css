@@ -26,7 +26,8 @@ body {
   height: 100%;
   font-family: 'Nunito Sans', sans-serif;
 
-  scroll-behavior: smooth;
+  /* NOTE: this is messing up with asscroll, like it will jump a bit when user stops scrolling */
+  /* scroll-behavior: smooth; */
 
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
