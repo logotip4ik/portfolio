@@ -17,7 +17,7 @@ export default {
 
     const gsap = this.$gsap
 
-    const tl = gsap.timeline({ defaults: { duration: 0.65 } })
+    const tl = gsap.timeline({ delay: 0.5, defaults: { duration: 0.65 } })
 
     tl.set(loaderChildren, { scale: 1.2, opacity: 0, filter: 'blur(0px)' })
 
