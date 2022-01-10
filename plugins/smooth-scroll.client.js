@@ -7,6 +7,13 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
     inject('scrollY', () => window.scrollY)
     inject('disableScrollY', () => {})
     inject('enableScrollY', () => {})
+    inject('scrollTo', (selector) =>
+      $gsap.to(window, {
+        scrollTo: selector,
+        ease: 'power2.inOut',
+        duration: 1,
+      })
+    )
     return
   }
 
@@ -46,4 +53,19 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
   inject('scrollY', () => asscroll.currentPos)
   inject('disableScrollY', () => asscroll.disable())
   inject('enableScrollY', () => asscroll.enable())
+  inject('scrollTo', (selector) => {
+    if (typeof selector === 'number')
+      return $gsap.to(asscroll, {
+        currentPos: selector,
+        ease: 'power2.inOut',
+        duration: 1,
+      })
+
+    const el = document.querySelector(selector)
+    $gsap.to(asscroll, {
+      currentPos: el.offsetTop,
+      ease: 'power2.inOut',
+      duration: 1,
+    })
+  })
 }
