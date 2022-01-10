@@ -5,7 +5,7 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
 
   if (isMobile) return
 
-  const el = document.querySelector('#__layout')
+  const el = document.querySelector('.scroller')
 
   const asscroll = new ASScroll({
     disableRaf: true,
