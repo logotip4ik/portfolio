@@ -1,5 +1,6 @@
 uniform float time;
 uniform float randomSeed;
+uniform vec2 mouseVector;
 
 varying vec2 vUv;
 varying vec3 vPosition;
@@ -84,9 +85,14 @@ void main() {
 
   vec4 newPos = modelViewMatrix * vec4( position, 1.0 );
 
-  // newPos.xy += vec2(sin(time * 2. + newPos.y * 3.) / 50.);
   float distortionX = cnoise(vec3(newPos.x, randomSeed, time / 10.)) / 2.;
-  float distortionY =cnoise(vec3(newPos.y, randomSeed, time / 10.)) / 2.;
+  float distortionY = cnoise(vec3(newPos.y, randomSeed, time / 10.)) / 2.;
+
+  float dist = distance(newPos.xy, mouseVector);
+
+  // NOTE: really, idk how i came up with this effect, but i like it
+  newPos.x = mix(newPos.x, mouseVector.x * 10., (1.0 - dist) / 20.);
+  newPos.y = mix(newPos.y, mouseVector.y * 10., (1.0 - dist) / 20.);
 
   newPos.x += cos(time * 2. + newPos.y * 3. + distortionX) / 50.;
   newPos.y -= sin(time * 2. + newPos.x * 3. + distortionY) / 50.;
