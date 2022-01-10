@@ -19,7 +19,7 @@ export default {
 
     const tl = gsap.timeline({
       delay: 0.5,
-      paused: true,
+      paused: false,
       defaults: { duration: 0.65 },
     })
 
@@ -45,8 +45,6 @@ export default {
       },
     })
     tl.set(loader, { display: 'none' })
-
-    window.addEventListener('DOMContentLoaded', () => tl.play())
   },
 }
 </script>
