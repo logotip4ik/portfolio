@@ -17,7 +17,11 @@ export default {
 
     const gsap = this.$gsap
 
-    const tl = gsap.timeline({ delay: 0.5, defaults: { duration: 0.65 } })
+    const tl = gsap.timeline({
+      delay: 0.5,
+      paused: true,
+      defaults: { duration: 0.65 },
+    })
 
     tl.set(loaderChildren, { scale: 1.2, opacity: 0, filter: 'blur(0px)' })
 
@@ -31,6 +35,8 @@ export default {
     }
 
     tl.to(loader, { opacity: 0, onEnd: () => this.$enableScrollY() })
+
+    window.addEventListener('DOMContentLoaded', () => tl.play())
   },
 }
 </script>
