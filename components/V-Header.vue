@@ -1,17 +1,28 @@
 <template>
-  <header ref="header" class="header">
+  <header ref="header" class="header" @mousemove="setMousePos">
     <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
     <div ref="headerContainer" class="header__container">
       <h1 class="header__container__title">
-        Bogdan<br /><span class="ml-responsive serif">Kostyuk</span>
+        <span class="line">
+          <span class="line__content">Bogdan</span>
+        </span>
+        <span class="line">
+          <span class="line__content ml-responsive serif">Kostyuk</span>
+        </span>
       </h1>
-      <p class="header__container__subtitle">Front End Developer</p>
+      <p class="header__container__subtitle">
+        <span
+          v-for="(char, key) in subTitleChars"
+          :key="key"
+          ref="headerContainerSubtitle"
+          v-html="char"
+        ></span>
+      </p>
     </div>
     <p ref="headerClock" class="header__clock">
       <span>Kyiv</span>
       <span>{{ localTime }}</span>
     </p>
-    <!-- TODO: add 100vw fix, (css tricks) -->
     <!-- TODO: add some sort of "scroll down" indication, see monopo.nyc -->
   </header>
 </template>
@@ -24,10 +35,16 @@ export default {
     return {
       mousePos: new Vector2(0, 0),
       localTime: this.getLocalTime(),
+      subTitleText: 'Front End Developer',
     }
   },
+  computed: {
+    subTitleChars() {
+      return this.subTitleText.split('')
+    },
+  },
   mounted() {
-    const { headerContainer, headerClock, header } = this.$refs
+    const { headerContainer, headerClock, headerContainerSubtitle } = this.$refs
 
     const gsap = this.$gsap
 
@@ -62,7 +79,33 @@ export default {
       }
     )
 
-    header.addEventListener('mousemove', this.setMousePos)
+    const tl = gsap.timeline({ paused: true, delay: 0.25 })
+
+    // NOTE: Yeah, i know, i shouldn't use plain selectors
+    // but really, this is working and if you wanted to use refs, then
+    // it will became really painful for developer
+    tl.fromTo(
+      '.line__content',
+      { yPercent: 105 },
+      { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.125 }
+    )
+    tl.fromTo(
+      headerContainerSubtitle,
+      { opacity: 0 },
+      { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
+      '-=0.75'
+    )
+    tl.fromTo(
+      '.nav__navigation__item',
+      { opacity: 0 },
+      { opacity: 1, stagger: { amount: 0.25, from: 'end' } },
+      '-=0.5'
+    )
+    tl.fromTo(headerClock, { opacity: 0 }, { opacity: 1 }, '<+0.125')
+
+    // NOTE: this even is fired when loader is done with animation
+    this.$nuxt.$on('show-layout', () => tl.play())
+
     gsap.ticker.add(() => {
       // NOTE: this will make circle collapse back to it's original position
       const newMousePosX = this.mousePos.x - this.mousePos.x / 30
@@ -120,7 +163,7 @@ export default {
     &__title {
       margin-bottom: 1.5rem;
 
-      line-height: 1;
+      line-height: 1.125;
     }
 
     &__subtitle {
@@ -135,6 +178,15 @@ export default {
     left: clamp(1rem, 5vw, 2rem);
 
     color: grey;
+  }
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+
+  &__content {
+    display: inline-block;
   }
 }
 </style>

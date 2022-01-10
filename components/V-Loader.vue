@@ -34,7 +34,16 @@ export default {
       )
     }
 
-    tl.to(loader, { opacity: 0, onStart: () => this.$enableScrollY() })
+    tl.to(loader, {
+      opacity: 0,
+      onStart: () => {
+        this.$enableScrollY()
+      },
+      onEnd: () => {
+        this.$nuxt.$emit('show-circle')
+        this.$nuxt.$emit('show-layout')
+      },
+    })
     tl.set(loader, { display: 'none' })
 
     window.addEventListener('DOMContentLoaded', () => tl.play())
