@@ -4,6 +4,7 @@ varying vec3 vPosition;
 uniform vec2 uResolution;
 uniform float time;
 uniform float randomSeed;
+uniform float circleOpacity;
 
 vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
 vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
@@ -97,5 +98,5 @@ void main() {
   vec3 color = baseColor + vec3(distortionR, distortionG, distortionB);
   color = clamp(color, vec3(0.65, 0.65, 0.65), vec3(1., 1., 1.));
 
-  gl_FragColor = vec4(color, alpha);
+  gl_FragColor = vec4(color, alpha) * circleOpacity;
 }

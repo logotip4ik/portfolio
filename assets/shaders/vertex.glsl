@@ -1,5 +1,6 @@
 uniform float time;
 uniform float randomSeed;
+uniform float circleDistortion;
 uniform vec2 mouseVector;
 
 varying vec2 vUv;
@@ -84,6 +85,7 @@ void main() {
   vPosition = position;
 
   vec4 newPos = modelViewMatrix * vec4( position, 1.0 );
+  vec4 initialPos = modelViewMatrix * vec4( position, 1.0 );
 
   float distortionX = cnoise(vec3(newPos.x, randomSeed, time / 10.)) / 2.;
   float distortionY = cnoise(vec3(newPos.y, randomSeed, time / 10.)) / 2.;
@@ -96,6 +98,8 @@ void main() {
 
   newPos.x += cos(time * 2. + newPos.y * 3. + distortionX) / 50.;
   newPos.y -= sin(time * 2. + newPos.x * 3. + distortionY) / 50.;
+
+  newPos = mix(initialPos, newPos, circleDistortion);
 
   gl_Position = projectionMatrix * newPos;
 }
