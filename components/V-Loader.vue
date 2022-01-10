@@ -34,7 +34,8 @@ export default {
       )
     }
 
-    tl.to(loader, { opacity: 0, onEnd: () => this.$enableScrollY() })
+    tl.to(loader, { opacity: 0, onStart: () => this.$enableScrollY() })
+    tl.set(loader, { display: 'none' })
 
     window.addEventListener('DOMContentLoaded', () => tl.play())
   },
