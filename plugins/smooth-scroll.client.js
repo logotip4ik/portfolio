@@ -3,7 +3,10 @@ import ASScroll from '@ashthornton/asscroll'
 export default ({ $gsap, $ScrollTrigger }, inject) => {
   const isMobile = 'ontouchstart' in document
 
-  if (isMobile) return
+  if (isMobile) {
+    inject('scrollY', () => window.scrollY)
+    return
+  }
 
   const el = document.querySelector('.scroller')
 
@@ -38,6 +41,7 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
   $ScrollTrigger.addEventListener('refresh', asscroll.resize)
 
   inject('asscroll', asscroll)
+  inject('scrollY', () => asscroll.currentPos)
 
   window.addEventListener('DOMContentLoaded', () => asscroll.enable())
 }
