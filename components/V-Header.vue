@@ -1,6 +1,6 @@
 <template>
-  <header class="header">
-    <V-Header-Background class="header__canvas" />
+  <header ref="header" class="header">
+    <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
     <div ref="headerContainer" class="header__container">
       <h1 class="header__container__title">
         Bogdan<br /><span class="ml-responsive serif">Kostyuk</span>
@@ -17,14 +17,17 @@
 </template>
 
 <script>
+import { Vector2 } from 'three'
+
 export default {
   data() {
     return {
+      mousePos: new Vector2(0, 0),
       localTime: this.getLocalTime(),
     }
   },
   mounted() {
-    const { headerContainer, headerClock } = this.$refs
+    const { headerContainer, headerClock, header } = this.$refs
 
     const gsap = this.$gsap
 
@@ -59,9 +62,22 @@ export default {
       }
     )
 
+    header.addEventListener('mousemove', this.setMousePos)
+    gsap.ticker.add(() => {
+      // NOTE: this will make circle collapse back to it's original position
+      const newMousePosX = this.mousePos.x - this.mousePos.x / 30
+      const newMousePosY = this.mousePos.y - this.mousePos.y / 30
+
+      this.mousePos.set(newMousePosX, newMousePosY)
+    })
+
     setInterval(() => (this.localTime = this.getLocalTime()), 1000)
   },
   methods: {
+    setMousePos({ clientX, clientY }) {
+      this.mousePos.setX(clientX / this.$refs.header.clientWidth - 0.5)
+      this.mousePos.setY((clientY / this.$refs.header.clientHeight - 0.5) * -1)
+    },
     getLocalTime() {
       return Intl.DateTimeFormat('uk-UA', {
         timeZone: 'Europe/Kiev',

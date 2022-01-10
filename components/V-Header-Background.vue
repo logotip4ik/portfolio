@@ -28,6 +28,13 @@ if (process.browser) {
 }
 
 export default {
+  props: {
+    mousePos: {
+      type: Object,
+      required: true,
+      default: () => new THREE.Vector2(),
+    },
+  },
   data: () => ({
     camera: null,
     scene: null,
@@ -101,6 +108,7 @@ export default {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
         randomSeed: { value: Math.random() * 100 },
+        mouseVector: { value: new THREE.Vector2(0, 0) },
       },
       depthTest: false,
       depthWrite: false,
@@ -140,6 +148,8 @@ export default {
       this.circle.updateMatrix()
     },
     render() {
+      this.circle.material.uniforms.mouseVector.value.lerp(this.mousePos, 0.025)
+
       this.circle.material.uniforms.time.value = this.clock.getElapsedTime()
       this.composer.render()
     },
