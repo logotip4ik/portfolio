@@ -1,5 +1,11 @@
 <template>
-  <nav class="nav">
+  <nav
+    class="nav"
+    @mouseenter="showBackground"
+    @touchstart="showBackground"
+    @mouseleave="hideBackground"
+    @touchend="hideBackground"
+  >
     <p ref="navTitle" class="nav__title serif">BK</p>
 
     <ul class="nav__navigation">
@@ -12,6 +18,8 @@
         {{ item.label }}
       </li>
     </ul>
+
+    <div ref="navBackground" class="nav__background"></div>
   </nav>
 </template>
 
@@ -39,6 +47,16 @@ export default {
       }
     )
   },
+  methods: {
+    showBackground() {
+      // NOTE: scrollY is coming from smooth scroll plugin
+      if (this.$scrollY() < window.innerHeight - 100) return
+      this.$gsap.to(this.$refs.navBackground, { bottom: '0%' })
+    },
+    hideBackground() {
+      this.$gsap.to(this.$refs.navBackground, { bottom: '100%' })
+    },
+  },
 }
 </script>
 
@@ -47,6 +65,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 
   position: fixed;
   top: 0;
@@ -57,13 +76,14 @@ export default {
 
   pointer-events: none;
   color: #dfdfdf;
-  padding: 2.5rem clamp(1rem, 10vw, 7rem);
 
   &__title {
     font-size: var(--step-2);
     opacity: 0;
 
     margin: 0;
+    padding-block: 1.75rem;
+    padding-inline-start: clamp(1rem, 10vw, 7rem);
     pointer-events: all;
   }
 
@@ -74,8 +94,12 @@ export default {
     gap: var(--step-2);
 
     font-size: var(--step--1);
-    list-style-type: none;
+
+    padding-block: 2.5rem;
+    padding-inline-end: clamp(1rem, 10vw, 7rem);
+
     pointer-events: all;
+    list-style-type: none;
 
     &__item {
       letter-spacing: 0.25px;
@@ -85,6 +109,19 @@ export default {
       margin: 0;
       cursor: pointer;
     }
+  }
+
+  &__background {
+    position: absolute;
+    top: 0;
+    bottom: 100%;
+    left: 0;
+    z-index: -1;
+
+    width: 100%;
+
+    background-color: #0e0d0d;
+    pointer-events: all;
   }
 }
 </style>
