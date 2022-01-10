@@ -33,6 +33,11 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+::selection {
+  color: #303030;
+  background-color: #ffe6ed;
+}
+
 p {
   font-size: var(--step--2);
 }
