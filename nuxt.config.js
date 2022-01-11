@@ -1,3 +1,5 @@
+import path from 'path'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: true,
@@ -70,6 +72,8 @@ export default {
         exclude: /node_modules/,
         use: ['raw-loader', 'glslify-loader'],
       })
+
+      config.resolve.alias.three$ = '~/helpers/three-exports.js'
     },
   },
 
