@@ -16,7 +16,10 @@
 
 <script>
 export default {
-  props: { works: { type: Array, required: true, default: () => [] } },
+  data: () => ({ works: [] }),
+  async fetch() {
+    this.works = await this.$content('works').fetch()
+  },
   mounted() {
     const { worksTitle } = this.$refs
 

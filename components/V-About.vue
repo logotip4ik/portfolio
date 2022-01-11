@@ -7,7 +7,10 @@
 
 <script>
 export default {
-  props: { about: { type: Object, required: true, default: () => ({}) } },
+  data: () => ({ about: null }),
+  async fetch() {
+    this.about = await this.$content('about').fetch()
+  },
   mounted() {
     const { section } = this.$refs
 

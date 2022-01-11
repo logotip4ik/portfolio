@@ -2,8 +2,8 @@
   <div>
     <V-Header></V-Header>
     <main>
-      <V-Work :works="works"></V-Work>
-      <V-About :about="about"></V-About>
+      <V-Work></V-Work>
+      <V-About></V-About>
     </main>
     <div class="spacer"></div>
     <!-- TODO: add about section -->
@@ -20,22 +20,6 @@
 <script>
 export default {
   name: 'IndexPage',
-  async asyncData({ $content }) {
-    const works = await $content('works').fetch()
-    const about = await $content('about').fetch()
-
-    return { works, about }
-  },
-  beforeMount() {
-    this.setVH()
-    window.addEventListener('resize', this.setVH)
-  },
-  methods: {
-    setVH() {
-      const vh = window.innerHeight * 0.01
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
-    },
-  },
 }
 </script>
 
