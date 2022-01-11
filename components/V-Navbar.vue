@@ -2,7 +2,6 @@
   <nav
     class="nav"
     @pointerenter="showBackground"
-    @pointermove="showBackground"
     @pointerleave="hideBackground"
   >
     <p ref="navTitle" class="nav__title serif" @click="$scrollTo(0)">BK</p>
@@ -30,10 +29,11 @@ export default {
         { label: 'About', action: () => this.$scrollTo('.about') },
         { label: 'Contact', action: () => null },
       ],
+      backgroundTimeline: {},
     }
   },
   mounted() {
-    const { navTitle } = this.$refs
+    const { navTitle, navBackground } = this.$refs
 
     const gsap = this.$gsap
 
@@ -51,15 +51,20 @@ export default {
         },
       }
     )
+
+    this.backgroundTimeline = this.$gsap
+      .timeline({ paused: true })
+      .to(navBackground, { bottom: '0%', ease: 'power1.inOut' })
   },
   methods: {
     showBackground() {
       // NOTE: scrollY is coming from smooth scroll plugin
       if (this.$scrollY() < window.innerHeight - 100) return
-      this.$gsap.to(this.$refs.navBackground, { bottom: '0%' })
+
+      this.backgroundTimeline.play()
     },
     hideBackground() {
-      this.$gsap.to(this.$refs.navBackground, { bottom: '100%' })
+      this.backgroundTimeline.reverse()
     },
   },
 }
