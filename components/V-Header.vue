@@ -89,7 +89,7 @@ export default {
     tl.fromTo(
       '.line__content',
       { yPercent: 105 },
-      { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.125 }
+      { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.25 }
     )
     tl.fromTo(
       headerContainerSubtitle,
