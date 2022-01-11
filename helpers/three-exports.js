@@ -1,14 +1,23 @@
-export { WebGLRenderer } from 'three/src/renderers/WebGLRenderer.js'
-export { Scene } from 'three/src/scenes/Scene.js'
-export { Mesh } from 'three/src/objects/Mesh.js'
-export { CircleBufferGeometry } from 'three/src/geometries/CircleGeometry.js'
-export { PerspectiveCamera } from 'three/src/cameras/PerspectiveCamera.js'
-export { Vector2 } from 'three/src/math/Vector2.js'
-export { sRGBEncoding, AdditiveBlending } from 'three/src/constants.js'
-export { ShaderMaterial } from 'three/src/materials/ShaderMaterial.js'
-export { Clock } from 'three/src/core/Clock.js'
+// NOTE: This is needed cuz nuxt can't transpile this modules
 
-export { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
-export { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
-export { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
-export { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+// eslint-disable-next-line
+let RenderPass
+// eslint-disable-next-line
+let UnrealBloomPass
+// eslint-disable-next-line
+let ShaderPass
+// eslint-disable-next-line
+let EffectComposer
+
+export { RenderPass, UnrealBloomPass, ShaderPass, EffectComposer }
+
+if (process.browser) {
+  RenderPass =
+    require('three/examples/jsm/postprocessing/RenderPass.js').RenderPass
+  UnrealBloomPass =
+    require('three/examples/jsm/postprocessing/UnrealBloomPass.js').UnrealBloomPass
+  ShaderPass =
+    require('three/examples/jsm/postprocessing/ShaderPass.js').ShaderPass
+  EffectComposer =
+    require('three/examples/jsm/postprocessing/EffectComposer.js').EffectComposer
+}

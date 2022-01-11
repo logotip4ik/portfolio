@@ -3,29 +3,17 @@
 </template>
 
 <script>
-import * as THREE from '~/helpers/three-exports.js'
+import * as THREE from 'three'
+import {
+  RenderPass,
+  UnrealBloomPass,
+  ShaderPass,
+  EffectComposer,
+} from '~/helpers/three-exports.js'
 
 import fragmentShader from '~/assets/shaders/fragment.glsl'
 import vertexShader from '~/assets/shaders/vertex.glsl'
 import { AberrationShader } from '~/assets/shaders/CustomPass.js'
-
-// let EffectComposer
-// let RenderPass
-// let UnrealBloomPass
-// let ShaderPass
-
-// NOTE: This actually enables to turn on ssr in nuxt and don't even try to wrap it into client only component
-// cuz it isn't fixing the issue. The component still is transpiled on a server which is causing the error
-// if (process.browser) {
-//   EffectComposer =
-//     require('three/examples/jsm/postprocessing/EffectComposer.js').EffectComposer
-//   RenderPass =
-//     require('three/examples/jsm/postprocessing/RenderPass.js').RenderPass
-//   UnrealBloomPass =
-//     require('three/examples/jsm/postprocessing/UnrealBloomPass').UnrealBloomPass
-//   ShaderPass =
-//     require('three/examples/jsm/postprocessing/ShaderPass.js').ShaderPass
-// }
 
 export default {
   props: {
@@ -73,17 +61,17 @@ export default {
     this.camera.position.set(0, 0, 2)
 
     // THREE: Composer
-    const renderPass = new THREE.RenderPass(this.scene, this.camera)
-    const bloomPass = new THREE.UnrealBloomPass(
+    const renderPass = new RenderPass(this.scene, this.camera)
+    const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
       0.75,
       0.5,
       0.125
     )
-    const AberrationShaderPass = new THREE.ShaderPass(AberrationShader)
+    const AberrationShaderPass = new ShaderPass(AberrationShader)
     AberrationShaderPass.renderToScreen = true
 
-    this.composer = new THREE.EffectComposer(this.renderer)
+    this.composer = new EffectComposer(this.renderer)
     this.composer.addPass(renderPass)
     this.composer.addPass(bloomPass)
     this.composer.addPass(AberrationShaderPass)

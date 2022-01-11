@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { Vector2 } from '~/helpers/three-exports.js'
+import { Vector2 } from 'three'
 
 export default {
   data() {

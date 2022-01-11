@@ -72,8 +72,6 @@ export default {
         exclude: /node_modules/,
         use: ['raw-loader', 'glslify-loader'],
       })
-
-      config.resolve.alias.three$ = '~/helpers/three-exports.js'
     },
   },
 
