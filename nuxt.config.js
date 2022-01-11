@@ -23,6 +23,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'normalize.css/normalize.css',
+    'locomotive-scroll/dist/locomotive-scroll.css',
     '~assets/css/global.css',
     '~/assets/css/utils.css',
   ],
