@@ -1,5 +1,5 @@
 <template>
-  <header ref="header" class="header" @mousemove="setMousePos">
+  <header ref="header" class="header" @pointermove="setMousePos">
     <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
     <div ref="headerContainer" class="header__container">
       <h1 class="header__container__title">

@@ -3,6 +3,7 @@
     class="nav"
     @mouseenter="showBackground"
     @touchstart="showBackground"
+    @touchmove="showBackground"
     @mouseleave="hideBackground"
     @touchend="hideBackground"
   >
