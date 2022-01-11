@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"@ashthornton/asscroll@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@ashthornton/asscroll/-/asscroll-2.0.4.tgz#fae0db00c69903aa50a0ef1cb52ccefbb248c02c"
-  integrity sha512-qo44dItBSq6+iYPh0qcekH6aFUoaelUDDxv7Qbq8viFuZpCM2yndIPRy2sFxOmqwe84+7ag/ATJUZ/mFSgnxpQ==
-  dependencies:
-    "@unseenco/e" "^1.8.2"
-
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
@@ -1956,13 +1949,6 @@
   dependencies:
     "@typescript-eslint/types" "5.9.0"
     eslint-visitor-keys "^3.0.0"
-
-"@unseenco/e@^1.8.2":
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/@unseenco/e/-/e-1.10.1.tgz#8bcef4e72e51ca8901cf6b48b3e8575ccc74c967"
-  integrity sha512-ydu7mdmDG4aHuI9HpWPa6MV61h5c7RoSAPp4FCUKCgK2YvwWr0BTpEnFmrhUgz8yJ22UMSAfI3qOxoQlv1TnWg==
-  dependencies:
-    selector-set "^1.1.5"
 
 "@vitejs/plugin-legacy@^1.6.0":
   version "1.6.4"
@@ -9605,11 +9591,6 @@ section-matter@^1.0.0:
   dependencies:
     extend-shallow "^2.0.1"
     kind-of "^6.0.0"
-
-selector-set@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/selector-set/-/selector-set-1.1.5.tgz#60c135aea482b6f46a2d95ad72058927690a8634"
-  integrity sha512-6SQw6yMew5iOZ8/cDHDEnJWRM4ot2mxP6szZyF5ptrBogw4AcS4EXRj/8BUfgAMwVfdL84qpModlBMOl2NVrsQ==
 
 "semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.6.0:
   version "5.7.1"
