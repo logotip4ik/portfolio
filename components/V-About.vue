@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss">
 .about {
-  padding: 1rem clamp(1rem, 7vw, 5rem) 8rem;
+  padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   min-height: 100vh;
   color: #dfdfdf;
 
