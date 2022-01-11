@@ -1,11 +1,9 @@
 <template>
   <nav
     class="nav"
-    @mouseenter="showBackground"
-    @touchstart="showBackground"
-    @touchmove="showBackground"
-    @mouseleave="hideBackground"
-    @touchend="hideBackground"
+    @pointerenter="showBackground"
+    @pointermove="showBackground"
+    @pointerleave="hideBackground"
   >
     <p ref="navTitle" class="nav__title serif" @click="$scrollTo(0)">BK</p>
 
