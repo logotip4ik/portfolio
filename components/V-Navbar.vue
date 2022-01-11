@@ -10,20 +10,13 @@
     <p ref="navTitle" class="nav__title serif" @click="$scrollTo(0)">BK</p>
 
     <ul class="nav__navigation">
-      <li
+      <V-Navbar-Item
         v-for="(item, key) in links"
         :key="key"
-        ref="navNavigationItems"
-        class="nav__navigation__item"
-        @click="item.action"
-        @mouseenter="showHoverAnimation(key)"
-        @mouseleave="hideHoverAnimation(key)"
-        @touchstart="showHoverAnimation(key)"
-        @touchend="hideHoverAnimation(key)"
+        @click.native="item.action"
       >
-        <span>{{ item.label }}</span>
-        <span class="serif">{{ item.label }}</span>
-      </li>
+        {{ item.label }}
+      </V-Navbar-Item>
     </ul>
 
     <div ref="navBackground" class="nav__background"></div>
@@ -70,27 +63,6 @@ export default {
     hideBackground() {
       this.$gsap.to(this.$refs.navBackground, { bottom: '100%' })
     },
-    showHoverAnimation(key) {
-      this.$gsap.fromTo(
-        this.$refs.navNavigationItems[key].children[1],
-        { yPercent: -10 },
-        { yPercent: -100, duration: 0.25 }
-      )
-      this.$gsap.to(this.$refs.navNavigationItems[key].children[0], {
-        yPercent: -100,
-        duration: 0.25,
-      })
-    },
-    hideHoverAnimation(key) {
-      this.$gsap.to(this.$refs.navNavigationItems[key].children[1], {
-        yPercent: -10,
-        duration: 0.25,
-      })
-      this.$gsap.to(this.$refs.navNavigationItems[key].children[0], {
-        yPercent: 0,
-        duration: 0.25,
-      })
-    },
   },
 }
 </script>
@@ -127,39 +99,13 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: var(--step-2);
 
     font-size: var(--step--1);
 
-    padding-block: 2.5rem;
     padding-inline-end: clamp(1rem, 10vw, 7rem);
 
     pointer-events: all;
     list-style-type: none;
-
-    &__item {
-      position: relative;
-
-      letter-spacing: 0.25px;
-
-      margin: 0;
-
-      cursor: pointer;
-      mix-blend-mode: difference;
-      overflow: hidden;
-
-      span {
-        display: inline-block;
-
-        &:nth-child(2) {
-          position: absolute;
-          left: 0;
-          top: 100%;
-
-          letter-spacing: 0.5px;
-        }
-      }
-    }
   }
 
   &__background {
