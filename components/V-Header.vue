@@ -98,12 +98,12 @@ export default {
       '-=0.75'
     )
     tl.fromTo(
-      '.nav__navigation__item',
+      '.navbar-item',
       { opacity: 0 },
       { opacity: 1, stagger: { amount: 0.25, from: 'end' } },
       '-=0.5'
     )
-    tl.fromTo(headerClock, { opacity: 0 }, { opacity: 1 }, '<+0.125')
+    tl.fromTo(headerClock, { opacity: 0 }, { opacity: 1 })
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
