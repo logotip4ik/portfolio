@@ -1,5 +1,4 @@
 import LocomotiveScroll from 'locomotive-scroll'
-import 'locomotive-scroll/dist/locomotive-scroll.css'
 
 export default ({ $gsap, $ScrollTrigger }, inject) => {
   const el = document.querySelector('.scroller')
@@ -38,12 +37,12 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
 
   inject('scrollY', () => scrollY)
   inject('disableScrollY', () => {
-    if (window.innerWidth > 999) locoScroll.stop()
+    if (window.innerWidth > 999) return locoScroll.stop()
 
     $gsap.set(document.body, { overflowY: 'hidden' })
   })
   inject('enableScrollY', () => {
-    if (window.innerWidth > 999) locoScroll.start()
+    if (window.innerWidth > 999) return locoScroll.start()
 
     $gsap.set(document.body, { overflowY: 'auto' })
   })
