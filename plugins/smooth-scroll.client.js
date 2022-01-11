@@ -1,41 +1,23 @@
-import ASScroll from '@ashthornton/asscroll'
+import LocomotiveScroll from 'locomotive-scroll'
+import 'locomotive-scroll/dist/locomotive-scroll.css'
 
 export default ({ $gsap, $ScrollTrigger }, inject) => {
-  const isMobile = 'ontouchstart' in document
-
-  if (isMobile) {
-    inject('scrollY', () => window.scrollY)
-    inject('disableScrollY', () => {})
-    inject('enableScrollY', () => {})
-    inject('scrollTo', (selector) =>
-      $gsap.to(window, {
-        scrollTo: selector,
-        ease: 'power2.inOut',
-        duration: 1,
-      })
-    )
-    return
-  }
-
   const el = document.querySelector('.scroller')
 
-  const asscroll = new ASScroll({
-    disableRaf: true,
-    containerElement: el,
+  const locoScroll = new LocomotiveScroll({
+    el,
+    smooth: true,
+    reloadOnContextChange: true,
   })
 
-  $gsap.ticker.add(asscroll.update)
+  locoScroll.on('scroll', $ScrollTrigger.update)
 
-  $ScrollTrigger.defaults({
-    scroller: asscroll.containerElement,
-  })
-
-  $ScrollTrigger.scrollerProxy(asscroll.containerElement, {
+  $ScrollTrigger.scrollerProxy(locoScroll.el, {
     scrollTop(value) {
       return arguments.length
-        ? (asscroll.currentPos = value)
-        : asscroll.currentPos
-    },
+        ? locoScroll.scrollTo(value, 0, 0)
+        : locoScroll.scroll.instance.scroll.y
+    }, // we don't have to define a scrollLeft because we're only scrolling vertically.
     getBoundingClientRect() {
       return {
         top: 0,
@@ -44,28 +26,42 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
         height: window.innerHeight,
       }
     },
+    // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+    pinType: locoScroll.el.style.transform ? 'transform' : 'fixed',
   })
 
-  asscroll.on('update', $ScrollTrigger.update)
-  $ScrollTrigger.addEventListener('refresh', asscroll.resize)
+  $ScrollTrigger.defaults({ scroller: locoScroll.el })
 
-  inject('asscroll', asscroll)
-  inject('scrollY', () => asscroll.currentPos)
-  inject('disableScrollY', () => asscroll.disable())
-  inject('enableScrollY', () => asscroll.enable())
+  let scrollY = 0
+
+  locoScroll.on('scroll', ({ scroll }) => (scrollY = scroll.y))
+
+  inject('scrollY', () => scrollY)
+  inject('disableScrollY', () => {
+    if (window.innerWidth > 999) locoScroll.stop()
+
+    $gsap.set(document.body, { overflowY: 'hidden' })
+  })
+  inject('enableScrollY', () => {
+    if (window.innerWidth > 999) locoScroll.start()
+
+    $gsap.set(document.body, { overflowY: 'auto' })
+  })
   inject('scrollTo', (selector) => {
-    if (typeof selector === 'number')
-      return $gsap.to(asscroll, {
-        currentPos: selector,
-        ease: 'power2.inOut',
+    if (window.innerWidth < 1000)
+      return $gsap.to(window, {
+        scrollTo: {
+          y: selector,
+          autoKill: true,
+          // offsetY: 50,
+        },
         duration: 1,
+        ease: 'power3.inOut',
       })
 
-    const el = document.querySelector(selector)
-    $gsap.to(asscroll, {
-      currentPos: el.offsetTop,
-      ease: 'power2.inOut',
-      duration: 1,
+    locoScroll.scrollTo(selector, {
+      duration: 1000,
+      easing: [0.645, 0.045, 0.355, 1.0],
     })
   })
 }
