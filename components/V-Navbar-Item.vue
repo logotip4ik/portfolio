@@ -1,6 +1,7 @@
 <template>
   <li
     class="navbar-item"
+    tabindex="0"
     @pointerenter="showHoverText"
     @pointerleave="hideHoverText"
   >

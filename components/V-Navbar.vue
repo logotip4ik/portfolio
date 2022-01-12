@@ -4,12 +4,23 @@
     @pointerenter="showBackground"
     @pointerleave="hideBackground"
   >
-    <p ref="navTitle" class="nav__title serif" @click="$scrollTo(0)">BK</p>
+    <p
+      ref="navTitle"
+      class="nav__title serif"
+      tabindex="0"
+      @focus="showBackground"
+      @blur="hideBackground"
+      @click="$scrollTo(0)"
+    >
+      BK
+    </p>
 
     <ul class="nav__navigation">
       <V-Navbar-Item
         v-for="(item, key) in links"
         :key="key"
+        @focus.native="showBackground"
+        @blur.native="hideBackground"
         @click.native="item.action"
       >
         {{ item.label }}
@@ -48,6 +59,8 @@ export default {
           start: 'top+=25% top',
           end: 'bottom top',
           scrub: 0.75,
+          onEnter: () => navTitle.setAttribute('tabindex', 0),
+          onLeaveBack: () => navTitle.setAttribute('tabindex', -1),
         },
       }
     )
