@@ -40,6 +40,10 @@ export default {
   }
 
   &__text {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
     p {
       font-size: var(--step--1);
       line-height: 1.75;
