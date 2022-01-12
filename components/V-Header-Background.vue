@@ -124,7 +124,7 @@ export default {
       })
       this.$gsap.to(this.circle.material.uniforms.circleDistortion, {
         value: 1,
-        duration: 2.5,
+        duration: 5,
         delay: 1,
       })
     })
