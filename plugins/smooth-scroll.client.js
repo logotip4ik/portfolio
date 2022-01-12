@@ -6,7 +6,6 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
   const locoScroll = new LocomotiveScroll({
     el,
     smooth: true,
-    reloadOnContextChange: true,
   })
 
   locoScroll.on('scroll', $ScrollTrigger.update)
