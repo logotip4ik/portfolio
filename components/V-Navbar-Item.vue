@@ -95,12 +95,11 @@ export default {
 
     margin: 0;
     padding: 0;
-
-    &.serif {
-      font-size: var(--step-0);
-    }
+    white-space: nowrap;
 
     &:nth-child(1) {
+      font-size: calc(var(--step-0) - 0.125rem);
+
       transform: translateY(100%);
     }
 
@@ -108,6 +107,12 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
+
+      font-size: calc(var(--step--1) - 0.0125rem);
+
+      @media screen and (max-width: 600px) {
+        font-size: calc(var(--step--1) - 0.05rem);
+      }
     }
   }
 
