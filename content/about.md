@@ -1,5 +1,3 @@
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia porro
-rem laborum. Soluta minus maiores reiciendis sunt, facere unde aspernatur
-omnis, quis veniam delectus deleniti quos voluptatem adipisci quidem
-consequatur magnam at velit quae quaerat mollitia tempore! Natus eius
-incidunt ea?
+<!-- Hello, my name is Bogdan Kostyuk. I am self thought developer, who started programming in early age. Started from Python then switched to JavaScript. Have learned Vue.js then SSR with Nuxt.js after that learned React as well as Next.js. I am really passionate about code, and -->
+
+Hi! I'm **Bogdan Kostyuk** - Ukrainian based Front End developer, passionate about UI effects, animations and code. I love creating things that live on internet. Mostly in use are Nuxt.js and Next.js, Scss for styling and Gsap for smooooth animations, also recently got my hands on three.js. All in all, Problem solver and curios person, fan of F1 and tech in general.
