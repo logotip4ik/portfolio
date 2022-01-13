@@ -21,10 +21,7 @@
         <!-- eslint-enable -->
       </p>
     </div>
-    <p ref="headerClock" class="header__clock">
-      <span>Kyiv</span>
-      <span>{{ localTime }}</span>
-    </p>
+    <V-Clock ref="headerClock" class="header__clock"></V-Clock>
     <!-- TODO: add some sort of "scroll down" indication, see monopo.nyc -->
   </header>
 </template>
@@ -36,7 +33,6 @@ export default {
   data() {
     return {
       mousePos: new Vector2(0, 0),
-      localTime: this.getLocalTime(),
       subTitleText: 'Front End Developer',
     }
   },
@@ -68,13 +64,13 @@ export default {
     )
 
     gsap.fromTo(
-      headerClock,
+      headerClock.$el,
       { opacity: 1 },
       {
         opacity: 0,
         scrollTrigger: {
           scrub: 0.75,
-          trigger: headerClock.parentElement,
+          trigger: headerClock.$el.parentElement,
           start: 'top+=25% top',
           end: 'bottom-=25% top',
         },
@@ -103,7 +99,7 @@ export default {
       { opacity: 1, stagger: { amount: 0.25, from: 'end' } },
       '-=0.5'
     )
-    tl.fromTo(headerClock, { opacity: 0 }, { opacity: 1 })
+    tl.fromTo(headerClock.$el, { opacity: 0 }, { opacity: 1 })
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
@@ -115,20 +111,11 @@ export default {
 
       this.mousePos.set(newMousePosX, newMousePosY)
     })
-
-    setInterval(() => (this.localTime = this.getLocalTime()), 1000)
   },
   methods: {
     setMousePos({ clientX, clientY }) {
       this.mousePos.setX(clientX / this.$refs.header.clientWidth - 0.5)
       this.mousePos.setY((clientY / this.$refs.header.clientHeight - 0.5) * -1)
-    },
-    getLocalTime() {
-      return Intl.DateTimeFormat('uk-UA', {
-        timeZone: 'Europe/Kiev',
-        hour: '2-digit',
-        minute: '2-digit',
-      }).format(new Date())
     },
   },
 }
@@ -175,11 +162,8 @@ export default {
   }
 
   &__clock {
-    position: absolute;
     bottom: clamp(1rem, 5vw, 2rem);
     left: clamp(1rem, 5vw, 2rem);
-
-    color: grey;
   }
 }
 
