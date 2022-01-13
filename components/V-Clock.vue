@@ -31,9 +31,16 @@ export default {
 .clock {
   position: absolute;
 
-  font-size: var(--size--1);
-
   color: lighten(black, 20);
   opacity: 0.95;
+
+  span:nth-child(2) {
+    display: inline-block;
+
+    font-size: calc(var(--step--2) - 0.115rem);
+
+    margin-inline-start: 0.25rem;
+    transform: translateY(-1px);
+  }
 }
 </style>
