@@ -10,7 +10,8 @@
       tabindex="0"
       @focus="showBackground"
       @blur="hideBackground"
-      @click="$scrollTo(0)"
+      @click="$scrollTo(0), hideBackground()"
+      @keypress.enter="$scrollTo(0), hideBackground()"
     >
       BK
     </p>
@@ -19,9 +20,9 @@
       <V-Navbar-Item
         v-for="(item, key) in links"
         :key="key"
+        @click="item.action"
         @focus.native="showBackground"
         @blur.native="hideBackground"
-        @click.native="item.action"
       >
         {{ item.label }}
       </V-Navbar-Item>

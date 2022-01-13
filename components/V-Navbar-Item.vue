@@ -2,6 +2,8 @@
   <li
     class="navbar-item"
     tabindex="0"
+    @click="$emit('click', $event)"
+    @keypress.enter="$emit('click', $event)"
     @pointerenter="showHoverText"
     @pointerleave="hideHoverText"
   >
