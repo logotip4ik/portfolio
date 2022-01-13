@@ -1,66 +1,89 @@
 <template>
   <section ref="section" class="about">
+    <CircleSVG
+      v-for="key in 10"
+      :key="key"
+      ref="sectionCircles"
+      class="about__bg-img"
+    ></CircleSVG>
+
     <h2 class="about__title serif">About</h2>
 
-    <TriangleSvg ref="sectionImageTriangle" class="about__img"></TriangleSvg>
-    <RectangleSvg ref="sectionImageRectangle" class="about__img"></RectangleSvg>
-
     <nuxt-content :document="about" class="about__text"></nuxt-content>
+
+    <ul class="about__tech">
+      <NuxtSVG ref="sectionImageNuxt" class="about__tech__item"></NuxtSVG>
+      <NextSVG ref="sectionImageNext" class="about__tech__item"></NextSVG>
+    </ul>
   </section>
 </template>
 
 <script>
-import TriangleSvg from '~/assets/img/triangle.svg?inline'
-import RectangleSvg from '~/assets/img/rectangle.svg?inline'
+import CircleSVG from '~/assets/img/circle.svg?inline'
+
+import NuxtSVG from '~/assets/img/nuxtjs.svg?inline'
+import NextSVG from '~/assets/img/nextjs.svg?inline'
 
 export default {
-  components: { TriangleSvg, RectangleSvg },
+  components: { CircleSVG, NuxtSVG, NextSVG },
   data: () => ({ about: null }),
   async fetch() {
     this.about = await this.$content('about').fetch()
   },
   mounted() {
-    const { section, sectionImageTriangle, sectionImageRectangle } = this.$refs
+    const { section, sectionCircles, sectionImageNuxt, sectionImageNext } =
+      this.$refs
 
     const gsap = this.$gsap
+    const ScrollTrigger = this.$ScrollTrigger
 
     const backgroundTl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         scrub: 1,
+        start: '-=100%',
+        end: '+=300%',
       },
     })
 
-    backgroundTl.to('body', { backgroundColor: '#0e0d0d' })
-    backgroundTl.to('body', { backgroundColor: '#fff' })
+    backgroundTl.to('body', { backgroundColor: '#0e0d0d' }, 0)
+    backgroundTl.to('body', { backgroundColor: '#fff' }, '+=90%')
 
     const colorizer = gsap.utils.interpolate('#ffffff', '#ffe6ed')
 
-    gsap.set([sectionImageTriangle, sectionImageRectangle], {
-      width: 'calc(var(--step-5) * random(1, 2))',
+    gsap.set(sectionCircles, {
+      width: 'calc(var(--step-5) * random(0.85, 2))',
     })
-    gsap.set('rect', { stroke: () => colorizer(Math.random()) })
+    gsap.set('circle', { stroke: () => colorizer(Math.random()) })
 
     const imagesTl = gsap.timeline({
       scrollTrigger: {
-        scrub: 2,
+        scrub: 1,
         trigger: section,
-        end: 'bottom top',
+        start: 'top bottom',
+        end: 'bottom+=125% top',
       },
     })
 
     imagesTl.fromTo(
-      sectionImageTriangle,
-      { left: 'random(0, 30)%', bottom: 'random(20, 40)%' },
-      { bottom: 'random(50, 60)%', rotate: 'random(10, 270)' },
+      sectionCircles,
+      { left: 'random(10, 90)%', bottom: 'random(10, 90)%' },
+      { bottom: 'random(10, 90)%' },
       0
     )
+
     imagesTl.fromTo(
-      sectionImageRectangle,
-      { right: 'random(0, 30)%', bottom: 'random(20, 30)%' },
-      { bottom: 'random(70, 100)%', rotate: 'random(100, 360)' },
-      0
+      [sectionImageNuxt, sectionImageNext],
+      { opacity: 0 },
+      { opacity: 0.5, stagger: 0.075 },
+      '<75%'
     )
+
+    ScrollTrigger.create({
+      trigger: section,
+      pin: true,
+      end: '+=100%',
+    })
   },
 }
 </script>
@@ -81,6 +104,7 @@ export default {
     max-width: 1100px;
 
     margin: 0 auto;
+    text-align: center;
 
     p {
       font-size: var(--step--1);
@@ -89,7 +113,30 @@ export default {
     }
   }
 
-  &__img {
+  &__tech {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: var(--step-3);
+
+    list-style-type: none;
+    padding-inline-start: 0;
+
+    height: 50%;
+
+    &__item {
+      width: 100%;
+      max-width: 275px;
+      height: auto;
+
+      @media screen and (max-width: 500px) {
+        max-width: 60vw;
+      }
+    }
+  }
+
+  &__bg-img {
     position: absolute;
 
     width: calc(var(--step-5) * 2);
