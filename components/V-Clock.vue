@@ -1,7 +1,7 @@
 <template>
   <p ref="clock" class="clock">
-    <span>Kyiv</span>
-    <span>{{ localTime }}</span>
+    <span>Ukraine</span>
+    <span>[{{ localTime }}]</span>
   </p>
 </template>
 
@@ -27,9 +27,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .clock {
   position: absolute;
-  color: grey;
+
+  font-size: var(--size--1);
+
+  color: lighten(black, 20);
+  opacity: 0.95;
 }
 </style>
