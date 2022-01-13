@@ -59,7 +59,7 @@ export default {
   z-index: 5;
 
   color: #dfdfdf;
-  background-color: #0e0d0d;
+  background-color: var(--black-color);
 
   &__word {
     position: absolute;

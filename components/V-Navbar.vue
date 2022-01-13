@@ -133,7 +133,7 @@ export default {
 
     width: 100%;
 
-    background-color: #0e0d0d;
+    background-color: var(--black-color);
     pointer-events: all;
   }
 }

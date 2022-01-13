@@ -46,7 +46,7 @@ export default {
       },
     })
 
-    backgroundTl.to('body', { backgroundColor: '#0e0d0d' }, 0)
+    backgroundTl.to('body', { backgroundColor: '#030303' }, 0)
     backgroundTl.to('body', { backgroundColor: '#fff' }, '+=90%')
 
     const colorizer = gsap.utils.interpolate('#ffffff', '#ffe6ed')
