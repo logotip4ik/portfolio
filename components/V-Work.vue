@@ -53,7 +53,7 @@ export default {
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     justify-items: center;
     gap: var(--step-3);
 
@@ -63,7 +63,7 @@ export default {
     margin: 0 auto;
     padding-inline-start: 0;
 
-    @media screen and(min-width: 810px) {
+    @media screen and(min-width: 798px) {
       &__item:nth-child(2n + 1) {
         top: 2.5%;
       }
