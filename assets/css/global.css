@@ -9,6 +9,8 @@
   --step-3: clamp(1.94rem, 1.32rem + 3.12vw, 3.66rem);
   --step-4: clamp(2.33rem, 1.52rem + 4.08vw, 4.58rem);
   --step-5: clamp(2.8rem, 1.74rem + 5.31vw, 5.72rem);
+
+  --black-color: #030303;
 }
 
 * {
