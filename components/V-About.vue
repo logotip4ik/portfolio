@@ -37,19 +37,7 @@ export default {
     const gsap = this.$gsap
     const ScrollTrigger = this.$ScrollTrigger
 
-    const backgroundTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        scrub: 1,
-        start: '-=100%',
-        end: '+=300%',
-      },
-    })
-
-    backgroundTl.to('body', { backgroundColor: '#030303' }, 0)
-    backgroundTl.to('body', { backgroundColor: '#fff' }, '+=90%')
-
-    const colorizer = gsap.utils.interpolate('#ffffff', '#ffe6ed')
+    const colorizer = gsap.utils.interpolate('#303030', '#ffe6ed')
 
     gsap.set(sectionCircles, {
       width: 'calc(var(--step-5) * random(0.85, 2))',
@@ -94,7 +82,7 @@ export default {
 
   min-height: 100vh;
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
-  color: #dfdfdf;
+  color: #303030;
 
   &__title {
     text-align: center;
