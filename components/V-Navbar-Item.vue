@@ -70,16 +70,9 @@ export default {
 .navbar-item {
   margin: 0;
   padding-block: 2.25rem;
-  padding-inline: var(--step--2);
+  padding-inline: calc(var(--step-0));
 
   cursor: pointer;
-
-  &:first-of-type {
-    padding-inline-start: 0;
-  }
-  &:last-of-type {
-    padding-inline-end: 0;
-  }
 
   &__wrapper {
     position: relative;

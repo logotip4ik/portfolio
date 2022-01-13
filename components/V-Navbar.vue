@@ -89,7 +89,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
 
   position: fixed;
   top: 0;
@@ -98,6 +97,7 @@ export default {
 
   width: 100%;
 
+  padding-inline: clamp(1rem, 4vw, 5rem);
   pointer-events: none;
   color: #dfdfdf;
 
@@ -107,7 +107,7 @@ export default {
 
     margin: 0;
     padding-block: 1.75rem;
-    padding-inline-start: clamp(1rem, 10vw, 7rem);
+    padding-inline: var(--step-0);
     pointer-events: all;
     cursor: pointer;
   }
@@ -119,10 +119,9 @@ export default {
 
     font-size: var(--step--1);
 
-    padding-inline-end: clamp(1rem, 10vw, 7rem);
-
     pointer-events: all;
     list-style-type: none;
+    padding-inline: 0;
   }
 
   &__background {
