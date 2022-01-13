@@ -11,28 +11,27 @@
 
     <nuxt-content :document="about" class="about__text"></nuxt-content>
 
-    <ul class="about__tech">
+    <!-- <ul class="about__tech">
       <NuxtSVG ref="sectionImageNuxt" class="about__tech__item"></NuxtSVG>
       <NextSVG ref="sectionImageNext" class="about__tech__item"></NextSVG>
-    </ul>
+    </ul> -->
   </section>
 </template>
 
 <script>
 import CircleSVG from '~/assets/img/circle.svg?inline'
 
-import NuxtSVG from '~/assets/img/nuxtjs.svg?inline'
-import NextSVG from '~/assets/img/nextjs.svg?inline'
+// import NuxtSVG from '~/assets/img/nuxtjs.svg?inline'
+// import NextSVG from '~/assets/img/nextjs.svg?inline'
 
 export default {
-  components: { CircleSVG, NuxtSVG, NextSVG },
+  components: { CircleSVG },
   data: () => ({ about: null }),
   async fetch() {
     this.about = await this.$content('about').fetch()
   },
   mounted() {
-    const { section, sectionCircles, sectionImageNuxt, sectionImageNext } =
-      this.$refs
+    const { section, sectionCircles } = this.$refs
 
     const gsap = this.$gsap
     const ScrollTrigger = this.$ScrollTrigger
@@ -49,7 +48,7 @@ export default {
         scrub: 1,
         trigger: section,
         start: 'top bottom',
-        end: 'bottom+=125% top',
+        end: 'bottom+=75% top',
       },
     })
 
@@ -60,17 +59,17 @@ export default {
       0
     )
 
-    imagesTl.fromTo(
-      [sectionImageNuxt, sectionImageNext],
-      { opacity: 0 },
-      { opacity: 0.5, stagger: 0.075 },
-      '<75%'
-    )
+    // imagesTl.fromTo(
+    //   [sectionImageNuxt, sectionImageNext],
+    //   { opacity: 0 },
+    //   { opacity: 0.5, stagger: 0.075 },
+    //   '<75%'
+    // )
 
     ScrollTrigger.create({
       trigger: section,
       pin: true,
-      end: '+=100%',
+      end: '+=50%',
     })
   },
 }
