@@ -1,13 +1,13 @@
 <template>
-  <section ref="section" class="about">
+  <section ref="about" class="about">
     <CircleSVG
       v-for="key in 10"
       :key="key"
-      ref="sectionCircles"
+      ref="aboutCircles"
       class="about__bg-img"
     ></CircleSVG>
 
-    <h2 class="about__title serif">About</h2>
+    <h2 ref="aboutTitle" class="about__title serif">About</h2>
 
     <nuxt-content :document="about" class="about__text"></nuxt-content>
 
@@ -31,14 +31,27 @@ export default {
     this.about = await this.$content('about').fetch()
   },
   mounted() {
-    const { section, sectionCircles } = this.$refs
+    const { about, aboutTitle, aboutCircles } = this.$refs
 
     const gsap = this.$gsap
-    const ScrollTrigger = this.$ScrollTrigger
+    // const ScrollTrigger = this.$ScrollTrigger
 
     const colorizer = gsap.utils.interpolate('#303030', '#ffe6ed')
 
-    gsap.set(sectionCircles, {
+    gsap.fromTo(
+      aboutTitle,
+      { yPercent: 50 },
+      {
+        yPercent: -50,
+        scrollTrigger: {
+          scrub: 0.75,
+          trigger: about,
+          start: 'top bottom',
+          end: '+=50% top',
+        },
+      }
+    )
+    gsap.set(aboutCircles, {
       width: 'calc(var(--step-5) * random(0.85, 2))',
     })
     gsap.set('circle', { stroke: () => colorizer(Math.random()) })
@@ -46,16 +59,16 @@ export default {
     const imagesTl = gsap.timeline({
       scrollTrigger: {
         scrub: 1,
-        trigger: section,
+        trigger: about,
         start: 'top bottom',
         end: 'bottom+=75% top',
       },
     })
 
     imagesTl.fromTo(
-      sectionCircles,
-      { left: 'random(10, 90)%', bottom: 'random(10, 90)%' },
-      { bottom: 'random(10, 90)%' },
+      aboutCircles,
+      { left: 'random(10, 90)%', bottom: 'random(20, 80)%' },
+      { bottom: 'random(20, 80)%' },
       0
     )
 
@@ -66,11 +79,11 @@ export default {
     //   '<75%'
     // )
 
-    ScrollTrigger.create({
-      trigger: section,
-      pin: true,
-      end: '+=50%',
-    })
+    // ScrollTrigger.create({
+    //   trigger: about,
+    //   pin: true,
+    //   end: '+=50%',
+    // })
   },
 }
 </script>
