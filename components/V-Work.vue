@@ -1,6 +1,6 @@
 <template>
   <section ref="works" class="works">
-    <h2 ref="worksTitle" class="works__title serif">Work</h2>
+    <V-H2>Work</V-H2>
     <ul class="works__list">
       <V-Work-Item
         v-for="(work, key) in works"
@@ -20,25 +20,6 @@ export default {
   async fetch() {
     this.works = await this.$content('works').fetch()
   },
-  mounted() {
-    const { worksTitle } = this.$refs
-
-    const gsap = this.$gsap
-
-    gsap.fromTo(
-      worksTitle,
-      { yPercent: 100 },
-      {
-        yPercent: -50,
-        scrollTrigger: {
-          scrub: 0.75,
-          trigger: worksTitle.parentElement,
-          start: '0px bottom',
-          end: '+=200px top',
-        },
-      }
-    )
-  },
 }
 </script>
 
@@ -46,10 +27,6 @@ export default {
 .works {
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   color: #303030;
-
-  &__title {
-    text-align: center;
-  }
 
   &__list {
     display: grid;

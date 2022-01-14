@@ -7,7 +7,7 @@
       class="about__bg-img"
     ></CircleSVG>
 
-    <h2 ref="aboutTitle" class="about__title serif">About</h2>
+    <V-H2>About</V-H2>
 
     <nuxt-content :document="about" class="about__text"></nuxt-content>
 
@@ -31,26 +31,13 @@ export default {
     this.about = await this.$content('about').fetch()
   },
   mounted() {
-    const { about, aboutTitle, aboutCircles } = this.$refs
+    const { about, aboutCircles } = this.$refs
 
     const gsap = this.$gsap
     // const ScrollTrigger = this.$ScrollTrigger
 
     const colorizer = gsap.utils.interpolate('#303030', '#ffe6ed')
 
-    gsap.fromTo(
-      aboutTitle,
-      { yPercent: 50 },
-      {
-        yPercent: -50,
-        scrollTrigger: {
-          scrub: 0.75,
-          trigger: about,
-          start: 'top bottom',
-          end: '+=50% top',
-        },
-      }
-    )
     gsap.set(aboutCircles, {
       width: 'calc(var(--step-5) * random(0.85, 2))',
     })
@@ -95,10 +82,6 @@ export default {
   min-height: 100vh;
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   color: #303030;
-
-  &__title {
-    text-align: center;
-  }
 
   &__text {
     max-width: 1100px;
