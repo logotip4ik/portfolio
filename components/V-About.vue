@@ -11,22 +11,33 @@
 
     <nuxt-content :document="about" class="about__text"></nuxt-content>
 
-    <!-- <ul class="about__tech">
-      <NuxtSVG ref="sectionImageNuxt" class="about__tech__item"></NuxtSVG>
-      <NextSVG ref="sectionImageNext" class="about__tech__item"></NextSVG>
-    </ul> -->
+    <ul class="about__tech">
+      <component
+        :is="icon"
+        v-for="(icon, key) in icons"
+        :key="key"
+        class="about__tech__item"
+      ></component>
+      <!-- <NuxtSVG ref="sectionImageNuxt" class="about__tech__item"></NuxtSVG>
+      <NextSVG ref="sectionImageNext" class="about__tech__item"></NextSVG> -->
+    </ul>
   </section>
 </template>
 
 <script>
 import CircleSVG from '~/assets/img/circle.svg?inline'
-
-// import NuxtSVG from '~/assets/img/nuxtjs.svg?inline'
-// import NextSVG from '~/assets/img/nextjs.svg?inline'
+import NuxtSVG from '~/assets/img/nuxtjs.svg?inline'
+import NextSVG from '~/assets/img/nextjs.svg?inline'
+import SassSVG from '~/assets/img/sass.svg?inline'
+import GsapSVG from '~/assets/img/gsap.svg?inline'
 
 export default {
-  components: { CircleSVG },
-  data: () => ({ about: null }),
+  // eslint-disable-next-line
+  components: { CircleSVG, NuxtSVG, NextSVG, SassSVG, GsapSVG },
+  data: () => ({
+    about: null,
+    icons: ['NuxtSVG', 'NextSVG', 'SassSVG', 'GsapSVG'],
+  }),
   async fetch() {
     this.about = await this.$content('about').fetch()
   },
@@ -97,24 +108,28 @@ export default {
   }
 
   &__tech {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    display: flex;
+    justify-content: space-evenly;
     align-items: center;
-    justify-items: center;
+    flex-wrap: wrap;
     gap: var(--step-3);
 
+    max-width: 1100px;
     list-style-type: none;
     padding-inline-start: 0;
-
-    height: 50%;
+    margin-block-start: 6%;
+    margin-inline: auto;
 
     &__item {
       width: 100%;
-      max-width: 275px;
+      max-width: 150px;
       height: auto;
 
+      opacity: 0.75;
+      filter: grayscale(1);
+
       @media screen and (max-width: 500px) {
-        max-width: 60vw;
+        max-width: 30vw;
       }
     }
   }
