@@ -108,9 +108,18 @@ export default {
     )
     tl.fromTo(
       '.navbar-item',
-      { opacity: 0 },
-      { opacity: 1, stagger: { amount: 0.25, from: 'end' } },
-      '-=0.5'
+      { opacity: 0, yPercent: -50 },
+      {
+        opacity: 1,
+        yPercent: 0,
+        ease: 'back.out',
+        duration: 0.8,
+        stagger: {
+          each: 0.2,
+          from: window.innerWidth < 512 ? 'center' : 'end',
+        },
+      },
+      '-=0.25'
     )
     tl.fromTo(headerClock.$el, { opacity: 0 }, { opacity: 1 })
 
