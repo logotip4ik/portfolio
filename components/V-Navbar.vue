@@ -1,51 +1,21 @@
 <template>
-  <nav
-    class="nav"
-    @pointerenter="showBackground"
-    @pointerleave="hideBackground"
-  >
+  <nav class="nav">
     <p
       ref="navTitle"
       class="nav__title serif"
       tabindex="0"
-      @focus="showBackground"
-      @blur="hideBackground"
-      @click="$scrollTo(0), hideBackground()"
-      @keypress.enter="$scrollTo(0), hideBackground()"
+      @click="$scrollTo(0)"
+      @keypress.enter="$scrollTo(0)"
     >
       BK
     </p>
-
-    <ul class="nav__navigation">
-      <V-Navbar-Item
-        v-for="(item, key) in links"
-        :key="key"
-        @click="item.action"
-        @focus.native="showBackground"
-        @blur.native="hideBackground"
-      >
-        {{ item.label }}
-      </V-Navbar-Item>
-    </ul>
-
-    <div ref="navBackground" class="nav__background"></div>
   </nav>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      links: [
-        { label: 'Work', action: () => this.$scrollTo('.works') },
-        { label: 'About', action: () => this.$scrollTo('.about') },
-        { label: 'Contact', action: () => null },
-      ],
-      backgroundTimeline: {},
-    }
-  },
   mounted() {
-    const { navTitle, navBackground } = this.$refs
+    const { navTitle } = this.$refs
 
     const gsap = this.$gsap
 
@@ -57,7 +27,7 @@ export default {
         pointerEvents: 'all',
         scrollTrigger: {
           trigger: '.header',
-          start: 'top+=25% top',
+          start: 'top+=50% top',
           end: 'bottom top',
           scrub: 0.75,
           onEnter: () => navTitle.setAttribute('tabindex', 0),
@@ -65,21 +35,6 @@ export default {
         },
       }
     )
-
-    this.backgroundTimeline = this.$gsap
-      .timeline({ paused: true })
-      .to(navBackground, { bottom: '0%', ease: 'power1.inOut' })
-  },
-  methods: {
-    showBackground() {
-      // NOTE: scrollY is coming from smooth scroll plugin
-      if (this.$scrollY() < window.innerHeight - 100) return
-
-      this.backgroundTimeline.play()
-    },
-    hideBackground() {
-      this.backgroundTimeline.reverse()
-    },
   },
 }
 </script>
@@ -110,31 +65,6 @@ export default {
     padding-inline: var(--step-0);
     pointer-events: all;
     cursor: pointer;
-  }
-
-  &__navigation {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    font-size: var(--step--1);
-
-    pointer-events: all;
-    list-style-type: none;
-    padding-inline: 0;
-  }
-
-  &__background {
-    position: absolute;
-    top: 0;
-    bottom: 100%;
-    left: 0;
-    z-index: -1;
-
-    width: 100%;
-
-    background-color: var(--black-color);
-    pointer-events: all;
   }
 }
 </style>
