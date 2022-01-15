@@ -4,10 +4,36 @@
 
 <script>
 export default {
+  props: {
+    yOffset: {
+      type: Object,
+      required: false,
+      default: () => ({ start: 0, end: 0 }),
+    },
+  },
+  computed: {
+    defaultedYOffset() {
+      return {
+        start: 0,
+        end: 0,
+        ...this.yOffset,
+      }
+    },
+  },
   mounted() {
     const { title } = this.$refs
 
     const gsap = this.$gsap
+
+    // BUG: start offset is breaking everything, idk why
+    const startString =
+      this.defaultedYOffset.start !== 0
+        ? `top+=${this.defaultedYOffset.start}% bottom`
+        : 'top bottom'
+    const endString =
+      this.defaultedYOffset.end !== 0
+        ? `+=${50 + this.defaultedYOffset.end}% top`
+        : '+=50% top'
 
     gsap.fromTo(
       title,
@@ -15,10 +41,11 @@ export default {
       {
         yPercent: -50,
         scrollTrigger: {
+          markers: true,
           scrub: 0.75,
           trigger: title.parentElement,
-          start: 'top bottom',
-          end: '+=50% top',
+          start: startString,
+          end: endString,
         },
       }
     )
