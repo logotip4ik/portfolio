@@ -41,7 +41,6 @@ export default {
       {
         yPercent: -50,
         scrollTrigger: {
-          markers: true,
           scrub: 0.75,
           trigger: title.parentElement,
           start: startString,
