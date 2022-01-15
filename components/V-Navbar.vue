@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav">
+  <nav :class="{ nav: true, 'nav--white': isNavbarWhite }">
     <p
       ref="navTitle"
       class="nav__title serif"
@@ -15,6 +15,7 @@
       ref="navMenuButton"
       tabindex="-1"
       class="nav__menu-button"
+      @click="toggleMenu"
       @pointerenter="hoverAnimation"
       @pointerleave="idleAnimation"
     >
@@ -28,6 +29,7 @@ import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
 
 export default {
   components: { MenuIconSVG },
+  data: () => ({ isNavbarWhite: false }),
   mounted() {
     const { navTitle, navMenuButton } = this.$refs
 
@@ -67,6 +69,10 @@ export default {
     )
   },
   methods: {
+    toggleMenu() {
+      this.$nuxt.$emit('toggle-menu')
+      this.isNavbarWhite = !this.isNavbarWhite
+    },
     idleAnimation() {
       const lines = this.$refs.navMenuButtonSVG.children
 
@@ -99,6 +105,13 @@ export default {
   pointer-events: none;
   color: #303030;
 
+  transition: color 200ms ease;
+
+  &--white {
+    color: white;
+    transition-duration: 1000ms;
+  }
+
   &__title {
     font-size: var(--step-2);
 
@@ -114,7 +127,7 @@ export default {
     height: var(--step-5);
 
     margin-inline: var(--step-0);
-    color: #303030;
+    color: inherit;
     border: none;
     background: transparent;
 
