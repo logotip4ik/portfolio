@@ -11,6 +11,7 @@
   --step-5: clamp(2.8rem, 1.74rem + 5.31vw, 5.72rem);
 
   --black-color: #030303;
+  --ease-back: cubic-bezier(0.34, 1.66, 0.64, 1);
 }
 
 * {
