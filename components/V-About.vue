@@ -28,6 +28,8 @@
         ref="aboutTechItems"
         class="about__tech__item"
         :href="icon.link"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <component :is="icon.svg" class="about__tech__item__svg"></component>
       </a>
@@ -169,6 +171,12 @@ export default {
     margin-inline: auto;
 
     &__item {
+      transition: transform 300ms var(--ease-back);
+
+      &:is(:hover, :focus-visible) {
+        transform: scale(0.9);
+      }
+
       &__svg {
         width: 100%;
         max-width: 150px;
