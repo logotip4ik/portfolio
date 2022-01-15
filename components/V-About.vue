@@ -7,7 +7,7 @@
       class="about__bg-img"
     ></CircleSVG>
 
-    <V-H2>About</V-H2>
+    <V-H2 :y-offset="{ end: 100 }">About</V-H2>
 
     <p class="about__text">
       <!-- eslint-disable -->
