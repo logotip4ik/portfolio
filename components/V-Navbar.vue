@@ -3,35 +3,56 @@
     <p
       ref="navTitle"
       class="nav__title serif"
-      tabindex="0"
+      tabindex="-1"
       @click="$scrollTo(0)"
       @keypress.enter="$scrollTo(0)"
     >
       BK
     </p>
+
+    <button ref="navMenuButton" tabindex="-1" class="nav__menu-button">
+      <MenuIconSVG></MenuIconSVG>
+    </button>
   </nav>
 </template>
 
 <script>
+import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
+
 export default {
+  components: { MenuIconSVG },
   mounted() {
-    const { navTitle } = this.$refs
+    const { navTitle, navMenuButton } = this.$refs
 
     const gsap = this.$gsap
 
     gsap.fromTo(
       navTitle,
-      { opacity: 0, pointerEvents: 'none' },
+      { opacity: 0 },
       {
         opacity: 1,
-        pointerEvents: 'all',
         scrollTrigger: {
           trigger: '.header',
           start: 'top+=50% top',
           end: 'bottom top',
-          scrub: 0.75,
-          onEnter: () => navTitle.setAttribute('tabindex', 0),
+          scrub: 0.25,
+          onEnter: () => navTitle.setAttribute('tabindex', 1),
           onLeaveBack: () => navTitle.setAttribute('tabindex', -1),
+        },
+      }
+    )
+    gsap.fromTo(
+      navMenuButton,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: '.header',
+          start: 'top+=60% top',
+          end: 'bottom+=10% top',
+          scrub: 0.25,
+          onEnter: () => navMenuButton.setAttribute('tabindex', 2),
+          onLeaveBack: () => navMenuButton.setAttribute('tabindex', -1),
         },
       }
     )
@@ -52,19 +73,31 @@ export default {
 
   width: 100%;
 
-  padding-inline: clamp(1rem, 4vw, 5rem);
+  padding: 1rem clamp(1rem, 4vw, 5rem);
   pointer-events: none;
-  color: #dfdfdf;
+  color: #303030;
 
   &__title {
     font-size: var(--step-2);
-    opacity: 0;
 
     margin: 0;
     padding-block: 1.75rem;
     padding-inline: var(--step-0);
     pointer-events: all;
     cursor: pointer;
+  }
+
+  &__menu-button {
+    width: var(--step-5);
+    height: var(--step-5);
+
+    margin-inline: var(--step-0);
+    color: #303030;
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+    pointer-events: all;
   }
 }
 </style>

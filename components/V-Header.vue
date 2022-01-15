@@ -28,6 +28,7 @@
       <V-Navbar-Item
         v-for="(item, key) in links"
         :key="key"
+        ref="headerNavigationItems"
         @click="item.action"
       >
         {{ item.label }}
@@ -55,9 +56,16 @@ export default {
     }
   },
   mounted() {
-    const { headerContainer, headerClock, headerContainerSubtitle } = this.$refs
+    const {
+      header,
+      headerContainer,
+      headerClock,
+      headerContainerSubtitle,
+      headerNavigationItems,
+    } = this.$refs
 
     const gsap = this.$gsap
+    const ScrollTrigger = this.$ScrollTrigger
 
     gsap.fromTo(
       headerContainer,
@@ -107,7 +115,7 @@ export default {
       '-=0.75'
     )
     tl.fromTo(
-      '.navbar-item',
+      headerNavigationItems.map(({ $el }) => $el),
       { opacity: 0, yPercent: -50 },
       {
         opacity: 1,
@@ -122,6 +130,19 @@ export default {
       '-=0.25'
     )
     tl.fromTo(headerClock.$el, { opacity: 0 }, { opacity: 1 })
+
+    ScrollTrigger.create({
+      trigger: header,
+      start: '50% top',
+      onEnter: () =>
+        headerNavigationItems
+          .map(({ $el }) => $el)
+          .forEach((item) => item.setAttribute('tabindex', -1)),
+      onLeaveBack: () =>
+        headerNavigationItems
+          .map(({ $el }) => $el)
+          .forEach((item) => item.setAttribute('tabindex', 0)),
+    })
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
