@@ -31,7 +31,6 @@ export default {
   &__list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    justify-items: center;
     gap: var(--step-3);
 
     max-width: 1100px;

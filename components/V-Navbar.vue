@@ -10,8 +10,15 @@
       BK
     </p>
 
-    <button ref="navMenuButton" tabindex="-1" class="nav__menu-button">
-      <MenuIconSVG></MenuIconSVG>
+    <!-- FIXME: tabindex, how to make it work correctly? -->
+    <button
+      ref="navMenuButton"
+      tabindex="-1"
+      class="nav__menu-button"
+      @pointerenter="hoverAnimation"
+      @pointerleave="idleAnimation"
+    >
+      <MenuIconSVG ref="navMenuButtonSVG"></MenuIconSVG>
     </button>
   </nav>
 </template>
@@ -28,9 +35,10 @@ export default {
 
     gsap.fromTo(
       navTitle,
-      { opacity: 0 },
+      { opacity: 0, pointerEvents: 'none' },
       {
         opacity: 1,
+        pointerEvents: 'all',
         scrollTrigger: {
           trigger: '.header',
           start: 'top+=50% top',
@@ -43,9 +51,10 @@ export default {
     )
     gsap.fromTo(
       navMenuButton,
-      { opacity: 0 },
+      { opacity: 0, pointerEvents: 'none' },
       {
         opacity: 1,
+        pointerEvents: 'all',
         scrollTrigger: {
           trigger: '.header',
           start: 'top+=60% top',
@@ -56,6 +65,19 @@ export default {
         },
       }
     )
+  },
+  methods: {
+    idleAnimation() {
+      const lines = this.$refs.navMenuButtonSVG.children
+
+      this.$gsap.to(lines[0], { attr: { x1: 0.5 }, ease: 'back.out' })
+      this.$gsap.to(lines[1], { attr: { x1: 5.5 }, ease: 'back.out' })
+    },
+    hoverAnimation() {
+      const lines = this.$refs.navMenuButtonSVG.children
+
+      this.$gsap.to(lines, { attr: { x1: 4.5 }, ease: 'back.out' })
+    },
   },
 }
 </script>
@@ -83,7 +105,7 @@ export default {
     margin: 0;
     padding-block: 1.75rem;
     padding-inline: var(--step-0);
-    pointer-events: all;
+    pointer-events: none;
     cursor: pointer;
   }
 
@@ -97,7 +119,14 @@ export default {
     background: transparent;
 
     cursor: pointer;
-    pointer-events: all;
+    pointer-events: none;
+
+    transition: transform 300ms var(--ease-back);
+    transform-origin: right center;
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }
 </style>
