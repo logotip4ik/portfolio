@@ -116,29 +116,6 @@ export default {
       )
     })
 
-    // imagesTl.fromTo(
-    //   [sectionImageNuxt, sectionImageNext],
-    //   { opacity: 0 },
-    //   { opacity: 0.5, stagger: 0.075 },
-    //   '<75%'
-    // )
-
-    // const mapper = gsap.utils.mapRange(0, 1, 0, aboutTextChars.length)
-
-    // ScrollTrigger.create({
-    //   trigger: about,
-    //   pin: true,
-    //   end: '+=100%',
-    //   scrub: 1,
-    //   onUpdate: (self) => {
-    //     const i = Math.floor(mapper(self.progress))
-
-    //     aboutTextChars[i].classList.add('about__text__char--active')
-    //   },
-    // })
-
-    // this.$nextTick(() => {
-    // })
     setTimeout(() => this.$locomotiveScroll.update(), 1000)
   },
 }
