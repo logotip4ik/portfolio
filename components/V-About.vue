@@ -9,17 +9,28 @@
 
     <V-H2>About</V-H2>
 
-    <nuxt-content :document="about" class="about__text"></nuxt-content>
+    <p class="about__text">
+      <!-- eslint-disable -->
+      <span
+        v-for="(char, key) in aboutByChars"
+        :key="key"
+        ref="aboutTextChars"
+        class="about__text__char"
+        v-html="char"
+      ></span>
+      <!-- eslint-enable -->
+    </p>
 
     <ul class="about__tech">
-      <component
-        :is="icon"
+      <a
         v-for="(icon, key) in icons"
         :key="key"
+        ref="aboutTechItems"
         class="about__tech__item"
-      ></component>
-      <!-- <NuxtSVG ref="sectionImageNuxt" class="about__tech__item"></NuxtSVG>
-      <NextSVG ref="sectionImageNext" class="about__tech__item"></NextSVG> -->
+        :href="icon.link"
+      >
+        <component :is="icon.svg" class="about__tech__item__svg"></component>
+      </a>
     </ul>
   </section>
 </template>
@@ -36,16 +47,25 @@ export default {
   components: { CircleSVG, NuxtSVG, NextSVG, SassSVG, GsapSVG },
   data: () => ({
     about: null,
-    icons: ['NuxtSVG', 'NextSVG', 'SassSVG', 'GsapSVG'],
+    icons: [
+      { svg: 'NuxtSVG', link: 'https://nuxtjs.org' },
+      { svg: 'NextSVG', link: 'https://nextjs.com' },
+      { svg: 'SassSVG', link: 'https://sass-lang.com' },
+      { svg: 'GsapSVG', link: 'https://greensock.com' },
+    ],
   }),
   async fetch() {
-    this.about = await this.$content('about').fetch()
+    this.about = await this.$content('about', { text: true }).fetch()
+  },
+  computed: {
+    aboutByChars() {
+      return this.about.text.split('')
+    },
   },
   mounted() {
-    const { about, aboutCircles } = this.$refs
+    const { about, aboutCircles, aboutTextChars, aboutTechItems } = this.$refs
 
     const gsap = this.$gsap
-    // const ScrollTrigger = this.$ScrollTrigger
 
     const colorizer = gsap.utils.interpolate('#303030', '#ffe6ed')
 
@@ -70,6 +90,32 @@ export default {
       0
     )
 
+    // NOTE: Just a scrollTrigger with update wont work, cuz it can skip some elements
+    // if user is scrolling to quickly, but timeline can't skip, it will just go forwards
+    // and fill up everything even items before that point in time
+    const charsTl = gsap.timeline({
+      scrollTrigger: { trigger: about, scrub: 1, pin: true, end: '+=100%' },
+    })
+
+    aboutTextChars.forEach((char) => {
+      charsTl.to(char, {
+        onUpdate: () => {
+          const fn = charsTl.scrollTrigger.direction > 0 ? 'add' : 'remove'
+
+          char.classList[fn]('about__text__char--active')
+        },
+      })
+    })
+
+    aboutTechItems.forEach((item, i) => {
+      charsTl.fromTo(
+        item,
+        { opacity: 0 },
+        { opacity: 1, duration: 10 },
+        i * 5 + 150
+      )
+    })
+
     // imagesTl.fromTo(
     //   [sectionImageNuxt, sectionImageNext],
     //   { opacity: 0 },
@@ -77,11 +123,23 @@ export default {
     //   '<75%'
     // )
 
+    // const mapper = gsap.utils.mapRange(0, 1, 0, aboutTextChars.length)
+
     // ScrollTrigger.create({
     //   trigger: about,
     //   pin: true,
-    //   end: '+=50%',
+    //   end: '+=100%',
+    //   scrub: 1,
+    //   onUpdate: (self) => {
+    //     const i = Math.floor(mapper(self.progress))
+
+    //     aboutTextChars[i].classList.add('about__text__char--active')
+    //   },
     // })
+
+    // this.$nextTick(() => {
+    // })
+    setTimeout(() => this.$locomotiveScroll.update(), 1000)
   },
 }
 </script>
@@ -97,13 +155,26 @@ export default {
   &__text {
     max-width: 1100px;
 
-    margin: 0 auto;
+    font-size: var(--step-0);
+    line-height: 1.5;
+    letter-spacing: 0.1px;
     text-align: center;
 
-    p {
-      font-size: var(--step--1);
-      line-height: 1.75;
-      letter-spacing: 0.1px;
+    margin: 0 auto;
+
+    &__char {
+      -webkit-text-stroke: 1px #303030;
+
+      transition: color 100ms ease;
+
+      @supports (-webkit-text-stroke: 1px #303030) {
+        color: white;
+      }
+
+      &--active {
+        color: #303030;
+        -webkit-text-stroke: none;
+      }
     }
   }
 
@@ -121,15 +192,17 @@ export default {
     margin-inline: auto;
 
     &__item {
-      width: 100%;
-      max-width: 150px;
-      height: auto;
+      &__svg {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
 
-      opacity: 0.75;
-      filter: grayscale(1);
+        opacity: 0.75;
+        filter: grayscale(1);
 
-      @media screen and (max-width: 500px) {
-        max-width: 30vw;
+        @media screen and (max-width: 500px) {
+          max-width: 30vw;
+        }
       }
     }
   }
