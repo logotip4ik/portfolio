@@ -1,5 +1,5 @@
 <template>
-  <li class="work">
+  <li ref="work" class="work">
     <a
       :href="work.live"
       target="_blank"
@@ -59,6 +59,21 @@ export default {
       return this.work.tags.reduce((str, val) => `${str}, ${val}`)
     },
   },
+  mounted() {
+    const { work, workImage } = this.$refs
+
+    const gsap = this.$gsap
+
+    // NOTE: max objectPosition y (-75) should be the same as in css
+    gsap.fromTo(
+      workImage,
+      { objectPosition: 'center random(-25, -75)px' },
+      {
+        objectPosition: 'center 0px',
+        scrollTrigger: { trigger: work, scrub: 0.75 },
+      }
+    )
+  },
 }
 </script>
 
@@ -81,15 +96,18 @@ export default {
   }
 
   &__image {
+    --top-offset: 75px;
+
     position: absolute;
     left: 0;
     top: 0;
     z-index: -2;
 
     width: 100%;
-    height: 100%;
+    height: calc(100% + var(--top-offset));
 
     object-fit: cover;
+    object-position: center calc(-1 * var(--top-offset));
 
     transition: transform var(--base-transition-props);
   }
