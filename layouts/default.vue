@@ -5,6 +5,7 @@
       <Nuxt></Nuxt>
     </div>
     <V-Loader></V-Loader>
+    <V-Menu></V-Menu>
   </div>
 </template>
 
