@@ -34,6 +34,7 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
 
   locoScroll.on('scroll', ({ scroll }) => (scrollY = scroll.y))
 
+  inject('locomotiveScroll', locoScroll)
   inject('scrollY', () => scrollY)
   inject('disableScrollY', () => {
     if (window.innerWidth > 999) return locoScroll.stop()
