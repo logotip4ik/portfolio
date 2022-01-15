@@ -98,7 +98,7 @@ export default {
         randomSeed: { value: Math.random() * 100 },
         mouseVector: { value: new THREE.Vector2(0, 0) },
         circleOpacity: { value: 0 },
-        circleDistortion: { value: 0 },
+        circleDistortion: { value: 1 },
       },
       depthTest: false,
       depthWrite: false,
@@ -121,11 +121,6 @@ export default {
         value: 1,
         duration: 1.75,
         delay: 0.125,
-      })
-      this.$gsap.to(this.circle.material.uniforms.circleDistortion, {
-        value: 1,
-        duration: 5,
-        delay: 1,
       })
     })
 
