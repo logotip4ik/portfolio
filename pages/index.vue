@@ -4,6 +4,7 @@
     <main>
       <V-Work></V-Work>
       <V-About></V-About>
+      <V-Contact></V-Contact>
     </main>
     <!-- TODO: add contact section -->
     <!-- TODO: add footer section -->
@@ -19,8 +20,4 @@ export default {
 }
 </script>
 
-<style>
-.spacer {
-  min-height: 200vh;
-}
-</style>
+<style></style>
