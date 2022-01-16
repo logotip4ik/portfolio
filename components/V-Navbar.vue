@@ -67,11 +67,15 @@ export default {
         },
       }
     )
+
+    this.$nuxt.$on(
+      'toggle-menu',
+      () => (this.isNavbarWhite = !this.isNavbarWhite)
+    )
   },
   methods: {
     toggleMenu() {
       this.$nuxt.$emit('toggle-menu')
-      this.isNavbarWhite = !this.isNavbarWhite
     },
     idleAnimation() {
       const lines = this.$refs.navMenuButtonSVG.children
