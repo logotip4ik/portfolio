@@ -73,9 +73,11 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   z-index: 5;
+
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
 
   color: #dfdfdf;
   background-color: var(--black-color);

@@ -1,6 +1,7 @@
 <template>
   <header ref="header" class="header" @pointermove="setMousePos">
     <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
+
     <div ref="headerContainer" class="header__container">
       <h1 class="header__container__title">
         <span class="line">
@@ -10,10 +11,11 @@
           <span class="line__content ml-responsive serif">Kostyuk</span>
         </span>
       </h1>
+
       <p class="header__container__subtitle">
         <!-- eslint-disable -->
         <span
-          v-for="(char, key) in subTitleChars"
+          v-for="(char, key) in subTitleText"
           :key="key"
           ref="headerContainerSubtitle"
           v-html="char"
@@ -21,6 +23,18 @@
         <!-- eslint-enable -->
       </p>
     </div>
+
+    <ul class="header__navigation">
+      <V-Navbar-Item
+        v-for="(item, key) in links"
+        :key="key"
+        ref="headerNavigationItems"
+        @click="item.action"
+      >
+        {{ item.label }}
+      </V-Navbar-Item>
+    </ul>
+
     <V-Clock ref="headerClock" class="header__clock"></V-Clock>
     <!-- TODO: add some sort of "scroll down" indication, see monopo.nyc -->
   </header>
@@ -33,18 +47,25 @@ export default {
   data() {
     return {
       mousePos: new Vector2(0, 0),
+      links: [
+        { label: 'Work', action: () => this.$scrollTo('.works') },
+        { label: 'About', action: () => this.$scrollTo('.about') },
+        { label: 'Contact', action: () => null },
+      ],
       subTitleText: 'Front End Developer',
     }
   },
-  computed: {
-    subTitleChars() {
-      return this.subTitleText.split('')
-    },
-  },
   mounted() {
-    const { headerContainer, headerClock, headerContainerSubtitle } = this.$refs
+    const {
+      header,
+      headerContainer,
+      headerClock,
+      headerContainerSubtitle,
+      headerNavigationItems,
+    } = this.$refs
 
     const gsap = this.$gsap
+    const ScrollTrigger = this.$ScrollTrigger
 
     gsap.fromTo(
       headerContainer,
@@ -55,7 +76,7 @@ export default {
         yPercent: -10,
         filter: 'blur(10px)',
         scrollTrigger: {
-          scrub: 0.75,
+          scrub: 0.5,
           trigger: headerContainer.parentElement,
           start: 'top+=15% top',
           end: 'bottom-=35%, top',
@@ -94,12 +115,34 @@ export default {
       '-=0.75'
     )
     tl.fromTo(
-      '.navbar-item',
-      { opacity: 0 },
-      { opacity: 1, stagger: { amount: 0.25, from: 'end' } },
-      '-=0.5'
+      headerNavigationItems.map(({ $el }) => $el),
+      { opacity: 0, yPercent: -50 },
+      {
+        opacity: 1,
+        yPercent: 0,
+        ease: 'back.out',
+        duration: 0.8,
+        stagger: {
+          each: 0.2,
+          from: window.innerWidth < 512 ? 'center' : 'end',
+        },
+      },
+      '-=0.25'
     )
     tl.fromTo(headerClock.$el, { opacity: 0 }, { opacity: 1 })
+
+    ScrollTrigger.create({
+      trigger: header,
+      start: '50% top',
+      onEnter: () =>
+        headerNavigationItems
+          .map(({ $el }) => $el)
+          .forEach((item) => item.setAttribute('tabindex', -1)),
+      onLeaveBack: () =>
+        headerNavigationItems
+          .map(({ $el }) => $el)
+          .forEach((item) => item.setAttribute('tabindex', 0)),
+    })
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
@@ -164,6 +207,31 @@ export default {
   &__clock {
     bottom: clamp(1rem, 5vw, 2rem);
     left: clamp(1rem, 5vw, 2rem);
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    font-size: var(--step--1);
+    color: white;
+    mix-blend-mode: difference;
+
+    width: 100%;
+
+    padding-inline: clamp(1rem, 4vw, 5rem);
+    pointer-events: all;
+    list-style-type: none;
+
+    @media screen and (max-width: 512px) {
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 }
 

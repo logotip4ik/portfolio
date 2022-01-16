@@ -28,7 +28,8 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
     pinType: locoScroll.el.style.transform ? 'transform' : 'fixed',
   })
 
-  $ScrollTrigger.defaults({ scroller: locoScroll.el })
+  if (window.innerWidth > 800)
+    $ScrollTrigger.defaults({ scroller: locoScroll.el })
 
   let scrollY = 0
 

@@ -1,51 +1,37 @@
 <template>
-  <nav
-    class="nav"
-    @pointerenter="showBackground"
-    @pointerleave="hideBackground"
-  >
+  <nav :class="{ nav: true, 'nav--white': isNavbarWhite }">
     <p
       ref="navTitle"
       class="nav__title serif"
-      tabindex="0"
-      @focus="showBackground"
-      @blur="hideBackground"
-      @click="$scrollTo(0), hideBackground()"
-      @keypress.enter="$scrollTo(0), hideBackground()"
+      tabindex="-1"
+      @click="$scrollTo(0)"
+      @keypress.enter="$scrollTo(0)"
     >
       BK
     </p>
 
-    <ul class="nav__navigation">
-      <V-Navbar-Item
-        v-for="(item, key) in links"
-        :key="key"
-        @click="item.action"
-        @focus.native="showBackground"
-        @blur.native="hideBackground"
-      >
-        {{ item.label }}
-      </V-Navbar-Item>
-    </ul>
-
-    <div ref="navBackground" class="nav__background"></div>
+    <!-- FIXME: tabindex, how to make it work correctly? -->
+    <button
+      ref="navMenuButton"
+      tabindex="-1"
+      class="nav__menu-button"
+      @click="toggleMenu"
+      @pointerenter="hoverAnimation"
+      @pointerleave="idleAnimation"
+    >
+      <MenuIconSVG ref="navMenuButtonSVG"></MenuIconSVG>
+    </button>
   </nav>
 </template>
 
 <script>
+import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
+
 export default {
-  data() {
-    return {
-      links: [
-        { label: 'Work', action: () => this.$scrollTo('.works') },
-        { label: 'About', action: () => this.$scrollTo('.about') },
-        { label: 'Contact', action: () => null },
-      ],
-      backgroundTimeline: {},
-    }
-  },
+  components: { MenuIconSVG },
+  data: () => ({ isNavbarWhite: false }),
   mounted() {
-    const { navTitle, navBackground } = this.$refs
+    const { navTitle, navMenuButton } = this.$refs
 
     const gsap = this.$gsap
 
@@ -57,28 +43,50 @@ export default {
         pointerEvents: 'all',
         scrollTrigger: {
           trigger: '.header',
-          start: 'top+=25% top',
+          start: 'top+=50% top',
           end: 'bottom top',
-          scrub: 0.75,
-          onEnter: () => navTitle.setAttribute('tabindex', 0),
+          scrub: 0.25,
+          onEnter: () => navTitle.setAttribute('tabindex', 1),
           onLeaveBack: () => navTitle.setAttribute('tabindex', -1),
         },
       }
     )
+    gsap.fromTo(
+      navMenuButton,
+      { opacity: 0, pointerEvents: 'none' },
+      {
+        opacity: 1,
+        pointerEvents: 'all',
+        scrollTrigger: {
+          trigger: '.header',
+          start: 'top+=60% top',
+          end: 'bottom+=10% top',
+          scrub: 0.25,
+          onEnter: () => navMenuButton.setAttribute('tabindex', 2),
+          onLeaveBack: () => navMenuButton.setAttribute('tabindex', -1),
+        },
+      }
+    )
 
-    this.backgroundTimeline = this.$gsap
-      .timeline({ paused: true })
-      .to(navBackground, { bottom: '0%', ease: 'power1.inOut' })
+    this.$nuxt.$on(
+      'toggle-menu',
+      () => (this.isNavbarWhite = !this.isNavbarWhite)
+    )
   },
   methods: {
-    showBackground() {
-      // NOTE: scrollY is coming from smooth scroll plugin
-      if (this.$scrollY() < window.innerHeight - 100) return
-
-      this.backgroundTimeline.play()
+    toggleMenu() {
+      this.$nuxt.$emit('toggle-menu')
     },
-    hideBackground() {
-      this.backgroundTimeline.reverse()
+    idleAnimation() {
+      const lines = this.$refs.navMenuButtonSVG.children
+
+      this.$gsap.to(lines[0], { attr: { x1: 0.5 }, ease: 'back.out' })
+      this.$gsap.to(lines[1], { attr: { x1: 5.5 }, ease: 'back.out' })
+    },
+    hoverAnimation() {
+      const lines = this.$refs.navMenuButtonSVG.children
+
+      this.$gsap.to(lines, { attr: { x1: 4.5 }, ease: 'back.out' })
     },
   },
 }
@@ -96,45 +104,47 @@ export default {
   z-index: 1;
 
   width: 100%;
+  max-width: 100vw;
 
-  padding-inline: clamp(1rem, 4vw, 5rem);
+  padding: 1rem clamp(1rem, 4vw, 5rem);
   pointer-events: none;
-  color: #dfdfdf;
+  color: #303030;
+
+  transition: color 200ms ease;
+
+  &--white {
+    color: white;
+    transition-duration: 1000ms;
+  }
 
   &__title {
     font-size: var(--step-2);
-    opacity: 0;
 
     margin: 0;
     padding-block: 1.75rem;
     padding-inline: var(--step-0);
-    pointer-events: all;
+    pointer-events: none;
     cursor: pointer;
   }
 
-  &__navigation {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  &__menu-button {
+    width: var(--step-5);
+    height: var(--step-5);
 
-    font-size: var(--step--1);
+    margin-inline: var(--step-0);
+    color: inherit;
+    border: none;
+    background: transparent;
 
-    pointer-events: all;
-    list-style-type: none;
-    padding-inline: 0;
-  }
+    cursor: pointer;
+    pointer-events: none;
 
-  &__background {
-    position: absolute;
-    top: 0;
-    bottom: 100%;
-    left: 0;
-    z-index: -1;
+    transition: transform 300ms var(--ease-back);
+    transform-origin: right center;
 
-    width: 100%;
-
-    background-color: var(--black-color);
-    pointer-events: all;
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }
 </style>
