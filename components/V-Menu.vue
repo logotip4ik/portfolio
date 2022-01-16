@@ -11,9 +11,10 @@
           'menu__back-item__content': true,
           'menu__back-item__content--active': key === currentSection,
         }"
+        @click="link.action(), $nuxt.$emit('toggle-menu')"
       >
         <p class="menu__back-item__content__title">
-          <span>{{ link }}</span>
+          <span>{{ link.label }}</span>
         </p>
       </div>
       <span class="menu__back-item__line"></span>
@@ -39,17 +40,27 @@
 <script>
 export default {
   props: { currentSection: { type: Number, required: true, default: 0 } },
-  data: () => ({
-    isShowingMenu: false,
-    prevAnimation: null,
-    navigationalLinks: ['Home', 'Works', 'About', 'Contact'],
-    socialLinks: [
-      { label: 'linkedin', href: 'https://www.linkedin.com/in/bogdankostyuk' },
-      { label: 'telegram', href: 'https://t.me/bogdankostyuk' },
-      { label: 'github', href: 'https://github.com/logotip4ik' },
-      { label: 'email', href: 'mailto:contact@bogdankostyuk.xyz' },
-    ],
-  }),
+  data() {
+    return {
+      isShowingMenu: false,
+      prevAnimation: null,
+      navigationalLinks: [
+        { label: 'Home', action: () => this.$scrollTo(0) },
+        { label: 'Works', action: () => this.$scrollTo('.works') },
+        { label: 'About', action: () => this.$scrollTo('.about') },
+        { label: 'Contact', action: () => {} },
+      ],
+      socialLinks: [
+        {
+          label: 'linkedin',
+          href: 'https://www.linkedin.com/in/bogdankostyuk',
+        },
+        { label: 'telegram', href: 'https://t.me/bogdankostyuk' },
+        { label: 'github', href: 'https://github.com/logotip4ik' },
+        { label: 'email', href: 'mailto:contact@bogdankostyuk.xyz' },
+      ],
+    }
+  },
   mounted() {
     this.$nuxt.$on('toggle-menu', () => {
       if (this.isShowingMenu) this.hideMenu()
