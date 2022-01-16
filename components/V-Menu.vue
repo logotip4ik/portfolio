@@ -39,12 +39,18 @@ export default {
 
       tl.from(this.$refs.menuBackItems, {
         yPercent: 100,
-        rotateX: -80,
+        rotateX: -90,
         opacity: 0,
         transformOrigin: 'center top',
         transformStyle: 'preserve-3d',
         stagger: 0.075,
       })
+      tl.fromTo(
+        this.$refs.menu,
+        { backgroundColor: 'transparent' },
+        { backgroundColor: '#030303' },
+        '<+0.3'
+      )
     },
     hideMenu() {
       this.$gsap.to(this.$refs.menu, { opacity: 0, pointerEvents: 'none' })
