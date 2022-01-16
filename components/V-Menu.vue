@@ -6,8 +6,15 @@
       :key="key"
       class="menu__back-item"
     >
-      <div class="menu__back-item__content">
-        <p class="menu__back-item__content__title">{{ link }}</p>
+      <div
+        :class="{
+          'menu__back-item__content': true,
+          'menu__back-item__content--active': key === currentSection,
+        }"
+      >
+        <p class="menu__back-item__content__title">
+          <span>{{ link }}</span>
+        </p>
       </div>
       <span class="menu__back-item__line"></span>
     </div>
@@ -31,6 +38,7 @@
 
 <script>
 export default {
+  props: { currentSection: { type: Number, required: true, default: 0 } },
   data: () => ({
     isShowingMenu: false,
     prevAnimation: null,
@@ -154,18 +162,40 @@ export default {
       height: 100%;
 
       cursor: pointer;
-      transform-origin: left center;
-      transition: transform 200ms var(--ease-back);
 
       &__title {
+        position: relative;
+
         color: darken($color: #fff, $amount: 50);
         font-size: var(--step-3);
         line-height: 1;
 
+        width: 100%;
         margin: 0;
 
-        transition: color 200ms;
-        transition-delay: 50ms;
+        span {
+          display: inline-block;
+          transform-origin: left center;
+          transition: color 200ms, transform 200ms var(--ease-back);
+        }
+
+        &::after {
+          --size: var(--step--1);
+
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+
+          width: var(--size);
+          height: var(--size);
+          border-radius: 50%;
+          background-color: #ffe6ed;
+          opacity: 0;
+
+          transform: translate(-50%, -50%);
+          transition: opacity 200ms ease;
+        }
       }
 
       &__links {
@@ -191,11 +221,21 @@ export default {
         }
       }
 
-      &:is(:focus, :hover) {
-        transform: scale(0.96);
+      &:is(:focus, :hover) .menu__back-item__content__title {
+        color: #ffe6ed;
 
+        span {
+          transform: scale(0.96);
+        }
+      }
+
+      &--active {
         .menu__back-item__content__title {
           color: #ffe6ed;
+
+          &::after {
+            opacity: 1;
+          }
         }
       }
 
