@@ -1,27 +1,13 @@
 <template>
   <div ref="menu" class="menu">
     <div class="menu__back-item"></div>
-    <div class="menu__back-item">
+    <div
+      v-for="(link, key) in navigationalLinks"
+      :key="key"
+      class="menu__back-item"
+    >
       <div class="menu__back-item__content">
-        <p class="menu__back-item__content__title">Home</p>
-      </div>
-      <span class="menu__back-item__line"></span>
-    </div>
-    <div class="menu__back-item">
-      <div class="menu__back-item__content">
-        <p class="menu__back-item__content__title">Work</p>
-      </div>
-      <span class="menu__back-item__line"></span>
-    </div>
-    <div class="menu__back-item">
-      <div class="menu__back-item__content">
-        <p class="menu__back-item__content__title">About</p>
-      </div>
-      <span class="menu__back-item__line"></span>
-    </div>
-    <div class="menu__back-item">
-      <div class="menu__back-item__content">
-        <p class="menu__back-item__content__title">Contact</p>
+        <p class="menu__back-item__content__title">{{ link }}</p>
       </div>
       <span class="menu__back-item__line"></span>
     </div>
@@ -29,7 +15,7 @@
       <div class="menu__back-item__content menu__back-item__content--no-anim">
         <ul class="menu__back-item__content__links">
           <li
-            v-for="(link, key) in links"
+            v-for="(link, key) in socialLinks"
             :key="key"
             class="menu__back-item__content__links__item"
           >
@@ -48,7 +34,8 @@ export default {
   data: () => ({
     isShowingMenu: false,
     prevAnimation: null,
-    links: [
+    navigationalLinks: ['Home', 'Works', 'About', 'Contact'],
+    socialLinks: [
       { label: 'linkedin', href: 'https://www.linkedin.com/in/bogdankostyuk' },
       { label: 'telegram', href: 'https://t.me/bogdankostyuk' },
       { label: 'github', href: 'https://github.com/logotip4ik' },
@@ -57,8 +44,6 @@ export default {
   }),
   mounted() {
     this.$nuxt.$on('toggle-menu', () => {
-      if (this.prevAnimation && this.prevAnimation.isActive()) return
-
       if (this.isShowingMenu) this.hideMenu()
       else this.showMenu()
 
@@ -67,18 +52,29 @@ export default {
   },
   methods: {
     showMenu() {
+      if (this.prevAnimation) this.prevAnimation.kill()
+
       const tl = this.$gsap.timeline()
+      this.prevAnimation = tl
 
       tl.set(this.$refs.menu, { opacity: 1, pointerEvents: 'all' })
 
-      tl.from('.menu__back-item', {
-        yPercent: 100,
-        rotateX: -90,
-        opacity: 0,
-        transformOrigin: 'center top',
-        transformStyle: 'preserve-3d',
-        stagger: 0.05,
-      })
+      tl.fromTo(
+        '.menu__back-item',
+        {
+          yPercent: 100,
+          rotateX: -90,
+          opacity: 0,
+        },
+        {
+          yPercent: 0,
+          rotateX: 0,
+          opacity: 1,
+          transformOrigin: 'center top',
+          transformStyle: 'preserve-3d',
+          stagger: 0.05,
+        }
+      )
       tl.fromTo(
         this.$refs.menu,
         { backgroundColor: 'transparent' },
@@ -102,14 +98,19 @@ export default {
           opacity: 1,
           yPercent: 0,
           duration: 1,
-          ease: 'back.out',
+          ease: 'power4.out',
           stagger: 0.075,
         },
-        '<'
+        '<-0.075'
       )
     },
     hideMenu() {
-      this.$gsap.to(this.$refs.menu, { opacity: 0, pointerEvents: 'none' })
+      if (this.prevAnimation) this.prevAnimation.kill()
+
+      this.prevAnimation = this.$gsap.to(this.$refs.menu, {
+        opacity: 0,
+        pointerEvents: 'none',
+      })
     },
   },
 }
