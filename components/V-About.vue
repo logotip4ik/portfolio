@@ -87,7 +87,7 @@ export default {
 
     imagesTl.fromTo(
       aboutCircles,
-      { left: 'random(10, 90)%', bottom: 'random(20, 80)%' },
+      { left: 'random(20, 80)%', bottom: 'random(20, 80)%' },
       { bottom: 'random(20, 80)%' },
       0
     )
