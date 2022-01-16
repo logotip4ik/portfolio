@@ -26,6 +26,15 @@ export default {
         onEnterBack: () => (this.currentSection = i),
       })
     })
+
+    this.setViewHeight()
+    window.addEventListener('resize', this.setViewHeight)
+  },
+  methods: {
+    setViewHeight() {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    },
   },
 }
 </script>

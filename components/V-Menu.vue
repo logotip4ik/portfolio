@@ -139,12 +139,15 @@ export default {
 
 <style lang="scss">
 .menu {
+  --100vh: calc(100 * var(--vh, 1vh));
+
   position: fixed;
   top: 0;
   left: 0;
 
   width: 100%;
   height: 100%;
+  height: var(--100vh);
 
   pointer-events: none;
   opacity: 0;
@@ -156,14 +159,14 @@ export default {
     position: absolute;
     left: 0;
     right: 0;
-    height: calc(100vh / #{$ITEMS_COUNT});
+    height: calc(var(--100vh) / #{$ITEMS_COUNT});
 
     padding: 1rem var(--x-padding);
     background-color: var(--black-color);
 
     @for $i from 0 to $ITEMS_COUNT {
       &:nth-child(#{$i + 1}) {
-        top: calc(#{$i} * calc(100vh / #{$ITEMS_COUNT}));
+        top: calc(#{$i} * calc(var(--100vh) / #{$ITEMS_COUNT}));
       }
     }
 
