@@ -104,6 +104,7 @@ export default {
   z-index: 1;
 
   width: 100%;
+  max-width: 100vw;
 
   padding: 1rem clamp(1rem, 4vw, 5rem);
   pointer-events: none;
