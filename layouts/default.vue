@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'DefaultLayout',
-  data: () => ({ currentSection: 'home' }),
+  data: () => ({ currentSection: 0 }),
   mounted() {
     const gsap = this.$gsap
     const ScrollTrigger = this.$ScrollTrigger
