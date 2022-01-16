@@ -67,6 +67,8 @@ export default {
       else this.showMenu()
 
       this.isShowingMenu = !this.isShowingMenu
+
+      this[this.isShowingMenu ? '$disableScrollY' : '$enableScrollY']()
     })
   },
   methods: {
