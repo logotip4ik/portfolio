@@ -38,25 +38,21 @@ export default {
   components: { MenuIconSVG },
   data: () => ({ isNavbarWhite: false }),
   mounted() {
-    const { nav } = this.$refs
+    const { navTitle, navMenuButton } = this.$refs
 
     const gsap = this.$gsap
 
-    gsap.fromTo(
-      nav,
-      { opacity: 0, display: 'none' },
-      {
-        opacity: 1,
-        display: 'flex',
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.header',
+        start: 'top+=50% top',
+        end: 'bottom top',
+        scrub: 0.25,
+      },
+    })
 
-        scrollTrigger: {
-          trigger: '.header',
-          start: 'top+=50% top',
-          end: 'bottom top',
-          scrub: 0.25,
-        },
-      }
-    )
+    tl.fromTo(navTitle, { opacity: 0 }, { opacity: 1 })
+    tl.fromTo(navMenuButton, { opacity: 0 }, { opacity: 1 }, 0)
 
     this.$nuxt.$on(
       'toggle-menu',
@@ -86,22 +82,14 @@ export default {
 
 <style lang="scss">
 .nav {
-  display: none;
-  justify-content: space-between;
-  align-items: center;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
+  --x-padding: clamp(1rem, 4vw, 5rem);
 
   width: 100%;
   max-width: 100vw;
 
-  padding: 1rem clamp(1rem, 4vw, 5rem);
-  pointer-events: none;
   color: #303030;
 
+  mix-blend-mode: exclusion;
   transition: color 200ms ease;
 
   &--white {
@@ -110,6 +98,12 @@ export default {
   }
 
   &__title {
+    position: fixed;
+    z-index: 1;
+
+    top: 1rem;
+    left: var(--x-padding);
+
     color: currentColor;
     font-size: var(--step-2);
 
@@ -124,6 +118,12 @@ export default {
   }
 
   &__menu-button {
+    position: fixed;
+    z-index: 1;
+
+    top: 1rem;
+    right: var(--x-padding);
+
     width: var(--step-5);
     height: var(--step-5);
 
