@@ -1,30 +1,6 @@
 <template>
-  <header ref="header" class="header" @pointermove="setMousePos">
-    <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
-
-    <div ref="headerContainer" class="header__container">
-      <h1 class="header__container__title">
-        <span class="line">
-          <span class="line__content">Bogdan</span>
-        </span>
-        <span class="line">
-          <span class="line__content ml-responsive serif">Kostyuk</span>
-        </span>
-      </h1>
-
-      <p class="header__container__subtitle">
-        <!-- eslint-disable -->
-        <span
-          v-for="(char, key) in subTitleText"
-          :key="key"
-          ref="headerContainerSubtitle"
-          v-html="char"
-        ></span>
-        <!-- eslint-enable -->
-      </p>
-    </div>
-
-    <ul class="header__navigation">
+  <header ref="header" class="header" role="banner" @pointermove="setMousePos">
+    <ul class="header__navigation" role="navigation" aria-label="navigation">
       <V-Navbar-Item
         v-for="(item, key) in links"
         :key="key"
@@ -34,6 +10,32 @@
         {{ item.label }}
       </V-Navbar-Item>
     </ul>
+
+    <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
+
+    <div ref="headerContainer" class="header__container">
+      <h1 class="header__container__title">
+        <span class="sr-only">Bogdan Kostyuk</span>
+        <span class="line" aria-hidden="true">
+          <span class="line__content">Bogdan</span>
+        </span>
+        <span class="line" aria-hidden="true">
+          <span class="line__content ml-responsive serif">Kostyuk</span>
+        </span>
+      </h1>
+
+      <p class="header__container__subtitle" :aria-label="subTitleText">
+        <!-- eslint-disable -->
+        <span
+          v-for="(char, key) in subTitleText"
+          :key="key"
+          ref="headerContainerSubtitle"
+          v-html="char"
+          aria-hidden="true"
+        ></span>
+        <!-- eslint-enable -->
+      </p>
+    </div>
 
     <V-Clock ref="headerClock" class="header__clock"></V-Clock>
     <!-- TODO: add some sort of "scroll down" indication, see monopo.nyc -->

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <V-Header></V-Header>
-    <main>
+  <div role="presentation">
+    <V-Header aria-label="content header"></V-Header>
+    <main aria-label="main content">
       <V-Work></V-Work>
       <V-About></V-About>
       <V-Contact></V-Contact>

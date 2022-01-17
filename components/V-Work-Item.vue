@@ -2,6 +2,7 @@
   <li ref="work" class="work">
     <a
       :href="work.live"
+      :aria-label="`open live ${work.title}`"
       target="_blank"
       rel="noopener noreferrer"
       class="work__wrapper"
@@ -26,6 +27,7 @@
     <a
       v-if="work.source"
       :href="work.source"
+      :aria-label="`open source of ${work.title}`"
       target="_blank"
       rel="noopener noreferrer"
       class="work__source"

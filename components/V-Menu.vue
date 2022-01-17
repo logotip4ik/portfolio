@@ -1,5 +1,5 @@
 <template>
-  <div ref="menu" class="menu">
+  <div ref="menu" class="menu" aria-label="menu">
     <div class="menu__back-item"></div>
     <div
       v-for="(link, key) in navigationalLinks"
@@ -7,10 +7,13 @@
       class="menu__back-item"
     >
       <div
+        role="button"
         :class="{
           'menu__back-item__content': true,
           'menu__back-item__content--active': key === currentSection,
         }"
+        tabindex="0"
+        :aria-label="`scroll to ${link.label}`"
         @click="link.action(), $nuxt.$emit('toggle-menu')"
       >
         <p class="menu__back-item__content__title">

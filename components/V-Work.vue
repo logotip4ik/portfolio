@@ -1,12 +1,13 @@
 <template>
-  <section ref="works" class="works">
-    <V-H2>Work</V-H2>
-    <ul class="works__list">
+  <section ref="works" class="works" aria-label="works section">
+    <V-H2 aria-label="work section heading">Work</V-H2>
+    <ul class="works__list" aria-label="works list">
       <V-Work-Item
         v-for="(work, key) in works"
         :key="key"
         ref="worksListItems"
         :work="work"
+        :aria-label="work.title"
         class="works__list__item"
       >
       </V-Work-Item>

@@ -1,9 +1,10 @@
 <template>
-  <nav :class="{ nav: true, 'nav--white': isNavbarWhite }">
+  <nav :class="{ nav: true, 'nav--white': isNavbarWhite }" role="navigation">
     <p
       ref="navTitle"
       class="nav__title serif"
       tabindex="-1"
+      aria-label="to top"
       @click="$scrollTo(0), $nuxt.$emit('toggle-menu')"
       @keypress.enter="$scrollTo(0), $nuxt.$emit('toggle-menu')"
     >
@@ -14,6 +15,7 @@
     <button
       ref="navMenuButton"
       tabindex="-1"
+      aria-label="menu button"
       class="nav__menu-button"
       @click="toggleMenu"
       @pointerenter="hoverAnimation"

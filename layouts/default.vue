@@ -1,9 +1,9 @@
 <template>
   <div>
-    <V-Navbar></V-Navbar>
-    <div class="scroller">
+    <div role="presentation" class="scroller">
       <Nuxt></Nuxt>
     </div>
+    <V-Navbar aria-label="secondary navigation"></V-Navbar>
     <V-Loader></V-Loader>
     <V-Menu :current-section="currentSection"></V-Menu>
   </div>

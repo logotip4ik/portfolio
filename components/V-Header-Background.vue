@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="canvas"></canvas>
+  <canvas ref="canvas" aria-label="landing background"></canvas>
 </template>
 
 <script>

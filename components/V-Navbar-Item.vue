@@ -2,20 +2,24 @@
   <li
     class="navbar-item"
     tabindex="0"
+    role="button"
+    :aria-label="`scroll to ${itemText}`"
     @click="$emit('click', $event)"
     @keypress.enter="$emit('click', $event)"
+    @focus="showHoverText"
+    @blur="hideHoverText"
     @pointerenter="showHoverText"
     @pointerleave="hideHoverText"
   >
-    <div class="navbar-item__wrapper">
+    <div class="navbar-item__wrapper" aria-hidden="true">
       <!-- First span will be for hover state and parent width will be determined by first span -->
       <span class="navbar-item__line serif">
-        <span v-for="(char, key) in itemChars" :key="key" ref="hoverChars">{{
+        <span v-for="(char, key) in itemText" :key="key" ref="hoverChars">{{
           char
         }}</span>
       </span>
       <span class="navbar-item__line">
-        <span v-for="(char, key) in itemChars" :key="key" ref="idleChars">{{
+        <span v-for="(char, key) in itemText" :key="key" ref="idleChars">{{
           char
         }}</span>
       </span>
@@ -27,9 +31,8 @@
 export default {
   data: () => ({ prevTl: null }),
   computed: {
-    itemChars() {
-      const text = this.$slots.default[0].text.trim()
-      return text.split('')
+    itemText() {
+      return this.$slots.default[0].text.trim()
     },
   },
   methods: {

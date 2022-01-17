@@ -1,7 +1,7 @@
 <template>
-  <p ref="clock" class="clock">
-    <span>Ukraine</span>
-    <span>[{{ localTime }}]</span>
+  <p ref="clock" class="clock" :aria-label="`time in Ukraine ${localTime}`">
+    <span aria-hidden="true">Kyiv</span
+    ><span aria-hidden="true">{{ localTime }}</span>
   </p>
 </template>
 

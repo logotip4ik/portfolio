@@ -1,37 +1,47 @@
 <template>
-  <section ref="about" class="about">
+  <section ref="about" class="about" aria-label="about section">
     <CircleSVG
       v-for="key in 10"
       :key="key"
       ref="aboutCircles"
       class="about__bg-img"
+      aria-hidden="true"
     ></CircleSVG>
 
-    <V-H2 :y-offset="{ end: 100 }">About</V-H2>
+    <V-H2 :y-offset="{ end: 100 }" aria-label="about section heading">
+      About
+    </V-H2>
 
-    <p class="about__text">
+    <p class="about__text" :aria-label="about.text">
+      <span class="sr-only">{{ about.text }}</span>
       <!-- eslint-disable -->
       <span
-        v-for="(char, key) in aboutByChars"
+        v-for="(char, key) in about.text"
         :key="key"
         ref="aboutTextChars"
         class="about__text__char"
         v-html="char"
+        aria-hidden="true"
       ></span>
       <!-- eslint-enable -->
     </p>
 
-    <ul class="about__tech">
+    <ul class="about__tech" aria-label="tech I am using">
       <a
         v-for="(icon, key) in icons"
         :key="key"
         ref="aboutTechItems"
         class="about__tech__item"
+        :aria-label="`link to ${icon.svg.slice(0, -3)} website`"
         :href="icon.link"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <component :is="icon.svg" class="about__tech__item__svg"></component>
+        <component
+          :is="icon.svg"
+          class="about__tech__item__svg"
+          aria-hidden="true"
+        ></component>
       </a>
     </ul>
   </section>
@@ -58,11 +68,6 @@ export default {
   }),
   async fetch() {
     this.about = await this.$content('about', { text: true }).fetch()
-  },
-  computed: {
-    aboutByChars() {
-      return this.about.text.split('')
-    },
   },
   mounted() {
     const { about, aboutCircles, aboutTextChars, aboutTechItems } = this.$refs
@@ -118,7 +123,12 @@ export default {
       )
     })
 
-    setTimeout(() => this.$locomotiveScroll.update(), 1000)
+    setTimeout(() => {
+      this.$locomotiveScroll.update()
+      document
+        .querySelectorAll('.pin-spacer')
+        .forEach((el) => el.setAttribute('role', 'presentation'))
+    }, 1000)
   },
 }
 </script>
