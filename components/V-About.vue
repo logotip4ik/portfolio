@@ -152,9 +152,11 @@ export default {
     margin: 0 auto;
 
     &__char {
-      -webkit-text-stroke: 1px #303030;
+      // TODO: decode how better, with animation of color or not
+      // wee can not animate the text-stroke, at least in firefox
+      -webkit-text-stroke: 0.65px #303030;
 
-      transition: color 100ms ease;
+      transition: color 100ms ease, -webkit-text-stroke-width 200ms ease;
 
       @supports (-webkit-text-stroke: 1px #303030) {
         color: white;
@@ -162,7 +164,7 @@ export default {
 
       &--active {
         color: #303030;
-        -webkit-text-stroke: none;
+        -webkit-text-stroke-width: 0.4px;
       }
     }
   }
