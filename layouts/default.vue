@@ -1,11 +1,11 @@
 <template>
   <div>
+    <V-Navbar></V-Navbar>
     <div role="presentation" class="scroller">
       <Nuxt></Nuxt>
     </div>
-    <V-Navbar aria-label="secondary navigation"></V-Navbar>
-    <V-Loader></V-Loader>
     <V-Menu :current-section="currentSection"></V-Menu>
+    <V-Loader></V-Loader>
   </div>
 </template>
 

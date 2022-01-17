@@ -1,10 +1,11 @@
 <template>
-  <div ref="menu" class="menu" aria-label="menu">
-    <div class="menu__back-item"></div>
+  <div ref="menu" class="menu" role="menu" @focus="log">
+    <div class="menu__back-item" aria-hidden="true"></div>
     <div
       v-for="(link, key) in navigationalLinks"
       :key="key"
       class="menu__back-item"
+      role="menuitem"
     >
       <div
         role="button"
@@ -75,13 +76,20 @@ export default {
     })
   },
   methods: {
+    log(ev) {
+      console.log('got focus with event: ', ev)
+    },
     showMenu() {
       if (this.prevAnimation) this.prevAnimation.kill()
 
       const tl = this.$gsap.timeline()
       this.prevAnimation = tl
 
-      tl.set(this.$refs.menu, { opacity: 1, pointerEvents: 'all' })
+      tl.set(this.$refs.menu, {
+        opacity: 1,
+        display: 'block',
+        pointerEvents: 'all',
+      })
 
       tl.fromTo(
         '.menu__back-item',
@@ -134,6 +142,7 @@ export default {
       this.prevAnimation = this.$gsap.to(this.$refs.menu, {
         opacity: 0,
         pointerEvents: 'none',
+        display: 'none',
       })
     },
   },
@@ -143,6 +152,8 @@ export default {
 <style lang="scss">
 .menu {
   --100vh: calc(100 * var(--vh, 1vh));
+
+  display: none;
 
   position: fixed;
   top: 0;

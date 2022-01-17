@@ -139,11 +139,11 @@ export default {
       onEnter: () =>
         headerNavigationItems
           .map(({ $el }) => $el)
-          .forEach((item) => item.setAttribute('tabindex', -1)),
+          .forEach((item) => item.style.setProperty('visibility', 'hidden')),
       onLeaveBack: () =>
         headerNavigationItems
           .map(({ $el }) => $el)
-          .forEach((item) => item.setAttribute('tabindex', 0)),
+          .forEach((item) => item.style.setProperty('visibility', 'visible')),
     })
 
     // NOTE: this even is fired when loader is done with animation

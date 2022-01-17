@@ -1,27 +1,32 @@
 <template>
-  <nav :class="{ nav: true, 'nav--white': isNavbarWhite }" role="navigation">
-    <p
+  <nav
+    ref="nav"
+    :class="{ nav: true, 'nav--white': isNavbarWhite }"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <button
       ref="navTitle"
       class="nav__title serif"
-      tabindex="-1"
+      tabindex="0"
       aria-label="to top"
       @click="$scrollTo(0), $nuxt.$emit('toggle-menu')"
-      @keypress.enter="$scrollTo(0), $nuxt.$emit('toggle-menu')"
     >
-      BK
-    </p>
+      <span aria-hidden="true">BK</span>
+    </button>
 
     <!-- FIXME: tabindex, how to make it work correctly? -->
     <button
       ref="navMenuButton"
-      tabindex="-1"
+      tabindex="0"
       aria-label="menu button"
       class="nav__menu-button"
       @click="toggleMenu"
+      @keypress.space.stop
       @pointerenter="hoverAnimation"
       @pointerleave="idleAnimation"
     >
-      <MenuIconSVG ref="navMenuButtonSVG"></MenuIconSVG>
+      <MenuIconSVG ref="navMenuButtonSVG" aria-hidden="true"></MenuIconSVG>
     </button>
   </nav>
 </template>
@@ -33,39 +38,22 @@ export default {
   components: { MenuIconSVG },
   data: () => ({ isNavbarWhite: false }),
   mounted() {
-    const { navTitle, navMenuButton } = this.$refs
+    const { nav } = this.$refs
 
     const gsap = this.$gsap
 
     gsap.fromTo(
-      navTitle,
-      { opacity: 0, pointerEvents: 'none' },
+      nav,
+      { opacity: 0, display: 'none' },
       {
         opacity: 1,
-        pointerEvents: 'all',
+        display: 'flex',
+
         scrollTrigger: {
           trigger: '.header',
           start: 'top+=50% top',
           end: 'bottom top',
           scrub: 0.25,
-          onEnter: () => navTitle.setAttribute('tabindex', 1),
-          onLeaveBack: () => navTitle.setAttribute('tabindex', -1),
-        },
-      }
-    )
-    gsap.fromTo(
-      navMenuButton,
-      { opacity: 0, pointerEvents: 'none' },
-      {
-        opacity: 1,
-        pointerEvents: 'all',
-        scrollTrigger: {
-          trigger: '.header',
-          start: 'top+=60% top',
-          end: 'bottom+=10% top',
-          scrub: 0.25,
-          onEnter: () => navMenuButton.setAttribute('tabindex', 2),
-          onLeaveBack: () => navMenuButton.setAttribute('tabindex', -1),
         },
       }
     )
@@ -78,6 +66,8 @@ export default {
   methods: {
     toggleMenu() {
       this.$nuxt.$emit('toggle-menu')
+
+      document.querySelector('.menu').focus()
     },
     idleAnimation() {
       const lines = this.$refs.navMenuButtonSVG.children
@@ -96,7 +86,7 @@ export default {
 
 <style lang="scss">
 .nav {
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
 
@@ -120,12 +110,16 @@ export default {
   }
 
   &__title {
+    color: currentColor;
     font-size: var(--step-2);
 
     margin: 0;
     padding-block: 1.75rem;
     padding-inline: var(--step-0);
-    pointer-events: none;
+    border: none;
+    background-color: transparent;
+
+    pointer-events: all;
     cursor: pointer;
   }
 
@@ -139,7 +133,7 @@ export default {
     background: transparent;
 
     cursor: pointer;
-    pointer-events: none;
+    pointer-events: all;
 
     transition: transform 300ms var(--ease-back);
     transform-origin: right center;
