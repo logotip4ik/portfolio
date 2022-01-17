@@ -29,10 +29,10 @@ export default {
     const tl = gsap.timeline({
       delay: 0.6,
       paused: false,
-      defaults: { duration: 0.75, ease: 'power1.inOut' },
+      defaults: { duration: 0.65, ease: 'power1.out' },
     })
 
-    tl.set(loaderChildren, { scale: 1.2, opacity: 0, filter: 'blur(0px)' })
+    tl.set(loaderChildren, { scale: 1.125, opacity: 0, filter: 'blur(0px)' })
 
     for (let i = 0; i < loaderChildren.length; i++) {
       const loaderChild = loaderChildren[i]
@@ -41,14 +41,19 @@ export default {
         tl.set(loaderChild, { opacity: 1 })
         tl.fromTo(
           loaderWord1Chars,
-          { yPercent: 100 },
-          { yPercent: 0, ease: 'power3.out', stagger: { amount: 0.1 } }
+          { yPercent: 100, color: '#000' },
+          {
+            yPercent: 0,
+            color: '#fff',
+            ease: 'power3.out',
+            stagger: { each: 0.05 },
+          }
         )
-      } else tl.to(loaderChild, { scale: 1, opacity: 1 })
+      } else tl.to(loaderChild, { scale: 1, opacity: 1 }, '-=0.125')
 
       tl.to(
         loaderChild,
-        { scale: 0.8, opacity: 0, filter: 'blur(10px)' },
+        { scale: 0.9, opacity: 0, filter: 'blur(5px)' },
         `+=${readTime}`
       )
     }
