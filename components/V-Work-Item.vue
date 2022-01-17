@@ -67,10 +67,10 @@ export default {
     // NOTE: max objectPosition y (-75) should be the same as in css
     gsap.fromTo(
       workImage,
-      { objectPosition: 'center random(-25, -75)px' },
+      { objectPosition: 'center random(-35, -45)px' },
       {
         objectPosition: 'center 0px',
-        scrollTrigger: { trigger: work, scrub: 0.75 },
+        scrollTrigger: { trigger: work, scrub: 0.5 },
       }
     )
   },
@@ -96,7 +96,7 @@ export default {
   }
 
   &__image {
-    --top-offset: 75px;
+    --top-offset: 45px;
 
     position: absolute;
     left: 0;
