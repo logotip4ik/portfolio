@@ -50,7 +50,7 @@ export default {
       links: [
         { label: 'Work', action: () => this.$scrollTo('.works') },
         { label: 'About', action: () => this.$scrollTo('.about') },
-        { label: 'Contact', action: () => null },
+        { label: 'Contact', action: () => this.$scrollTo('.contact') },
       ],
       subTitleText: 'Front End Developer',
     }

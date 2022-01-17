@@ -48,7 +48,7 @@ export default {
         { label: 'Home', action: () => this.$scrollTo(0) },
         { label: 'Works', action: () => this.$scrollTo('.works') },
         { label: 'About', action: () => this.$scrollTo('.about') },
-        { label: 'Contact', action: () => {} },
+        { label: 'Contact', action: () => this.$scrollTo('.contact') },
       ],
       socialLinks: [
         {
