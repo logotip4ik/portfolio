@@ -81,7 +81,7 @@ export default {
       // 1.25 / window.devicePixelRatio,
       (window.innerWidth / 1600) * (window.devicePixelRatio || 2),
       // window.innerWidth / 1500,
-      128
+      64
     )
 
     const material = new THREE.ShaderMaterial({
@@ -95,7 +95,7 @@ export default {
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
-        randomSeed: { value: Math.random() * 100 },
+        randomSeed: { value: Math.random() },
         mouseVector: { value: new THREE.Vector2(0, 0) },
         circleOpacity: { value: 0 },
         circleDistortion: { value: 1 },
@@ -147,9 +147,11 @@ export default {
       this.circle.updateMatrix()
     },
     render() {
-      this.circle.material.uniforms.mouseVector.value.lerp(this.mousePos, 0.025)
+      if (this.$scrollY() + 10 > window.innerHeight) return
 
+      this.circle.material.uniforms.mouseVector.value.lerp(this.mousePos, 0.025)
       this.circle.material.uniforms.time.value = this.clock.getElapsedTime()
+
       this.composer.render()
     },
   },

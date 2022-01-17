@@ -85,15 +85,16 @@ void main() {
   float dist = length(vUv - vec2(0.5));
   float alpha = 1.0 - smoothstep(0.0125, borderWidth, abs(radius-dist));
 
+  if (alpha < 0.01) {
+    gl_FragColor = vec4(vec3(0), alpha);
+    discard;
+  }
+
   vec3 baseColor = vec3(1., 0.9, 0.93);
   
-  float distortionR = cnoise(vec3(baseColor.r, randomSeed, time / 10.));
-  float distortionG = cnoise(vec3(baseColor.g, randomSeed, time / 10.));
-  float distortionB = cnoise(vec3(baseColor.b, randomSeed, time / 10.));
-
-  distortionR = clamp(distortionR, -0.5, 0.1);
-  distortionG = clamp(distortionG, -0.5, 0.1);
-  distortionB = clamp(distortionB, -0.5, 0.1);  
+  float distortionR = cnoise(vec3(baseColor.r, vUv.x, time / 10.)) / 7.;
+  float distortionG = cnoise(vec3(baseColor.g, vUv.y, time / 10.)) / 7.;
+  float distortionB = cnoise(vec3(baseColor.b, length(vUv.xy), time / 10.)) / 7.;
 
   vec3 color = baseColor + vec3(distortionR, distortionG, distortionB);
   color = clamp(color, vec3(0.65, 0.65, 0.65), vec3(1., 1., 1.));

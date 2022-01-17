@@ -85,19 +85,23 @@ void main() {
   vPosition = position;
 
   vec4 newPos = modelViewMatrix * vec4( position, 1.0 );
-  vec4 initialPos = modelViewMatrix * vec4( position, 1.0 );
+  vec4 initialPos = newPos;
 
-  float distortionX = cnoise(vec3(newPos.x, randomSeed, time / 10.)) / 2.;
-  float distortionY = cnoise(vec3(newPos.y, randomSeed, time / 10.)) / 2.;
+  // float distortionX = cnoise(vec3(newPos.x, randomSeed, time / 10.)) / 2.;
+  // float distortionY = cnoise(vec3(newPos.y, randomSeed, time / 10.)) / 2.;
+
+  float distortion = cnoise(vec3(uv, time / 10.)) / 2.;
+  distortion *= randomSeed;
 
   float dist = distance(newPos.xy, mouseVector);
 
   // NOTE: really, idk how i came up with this effect, but i like it
-  newPos.x = mix(newPos.x, mouseVector.x * 10., (1.0 - dist) / 20.);
-  newPos.y = mix(newPos.y, mouseVector.y * 10., (1.0 - dist) / 20.);
+  // newPos.x = mix(newPos.x, mouseVector.x * 10., (1.0 - dist) / 20.);
+  // newPos.y = mix(newPos.y, mouseVector.y * 10., (1.0 - dist) / 20.);
+  newPos.xy = mix(newPos.xy, mouseVector.xy * 10., vec2((1.0 - dist) / 20.));
 
-  newPos.x += cos(time * 2. + newPos.y * 3. + distortionX) / 50.;
-  newPos.y -= sin(time * 2. + newPos.x * 3. + distortionY) / 50.;
+  newPos.x += cos(time * 2. + newPos.y * 3. + distortion) / 50.;
+  newPos.y -= sin(time * 2. + newPos.x * 3. + distortion) / 50.;
 
   newPos = mix(initialPos, newPos, circleDistortion);
 
