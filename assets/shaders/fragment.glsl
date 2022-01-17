@@ -92,9 +92,9 @@ void main() {
 
   vec3 baseColor = vec3(1., 0.9, 0.93);
   
-  float distortionR = cnoise(vec3(baseColor.r, vUv.x, time / 10.)) / 7.;
-  float distortionG = cnoise(vec3(baseColor.g, vUv.y, time / 10.)) / 7.;
-  float distortionB = cnoise(vec3(baseColor.b, length(vUv.xy), time / 10.)) / 7.;
+  float distortionR = cnoise(vec3(baseColor.r, vUv.x, time / 10.)) / 6.;
+  float distortionG = cnoise(vec3(baseColor.g, vUv.y, time / 10.)) / 6.;
+  float distortionB = cnoise(vec3(baseColor.b, length(vUv.xy), time / 10.)) / 6.;
 
   vec3 color = baseColor + vec3(distortionR, distortionG, distortionB);
   color = clamp(color, vec3(0.65, 0.65, 0.65), vec3(1., 1., 1.));

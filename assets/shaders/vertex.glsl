@@ -87,8 +87,8 @@ void main() {
   vec4 newPos = modelViewMatrix * vec4( position, 1.0 );
   vec4 initialPos = newPos;
 
-  // float distortionX = cnoise(vec3(newPos.x, randomSeed, time / 10.)) / 2.;
-  // float distortionY = cnoise(vec3(newPos.y, randomSeed, time / 10.)) / 2.;
+  // float distortionX = cnoise(vec3(newPos.x, randomSeed, time / 10.));
+  // float distortionY = cnoise(vec3(newPos.y, randomSeed, time / 10.));
 
   float distortion = cnoise(vec3(uv, time / 10.)) / 2.;
   distortion *= randomSeed;
@@ -98,7 +98,7 @@ void main() {
   // NOTE: really, idk how i came up with this effect, but i like it
   // newPos.x = mix(newPos.x, mouseVector.x * 10., (1.0 - dist) / 20.);
   // newPos.y = mix(newPos.y, mouseVector.y * 10., (1.0 - dist) / 20.);
-  newPos.xy = mix(newPos.xy, mouseVector.xy * 10., vec2((1.0 - dist) / 20.));
+  newPos.xy = mix(newPos.xy, mouseVector.xy * 10., vec2((1.0 - dist) / 23.));
 
   newPos.x += cos(time * 2. + newPos.y * 3. + distortion) / 50.;
   newPos.y -= sin(time * 2. + newPos.x * 3. + distortion) / 50.;
