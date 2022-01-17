@@ -1,5 +1,5 @@
 <template>
-  <div ref="menu" class="menu" role="menu" @focus="log">
+  <div ref="menu" class="menu" role="menu">
     <div class="menu__back-item" aria-hidden="true"></div>
     <div
       v-for="(link, key) in navigationalLinks"
@@ -76,9 +76,6 @@ export default {
     })
   },
   methods: {
-    log(ev) {
-      console.log('got focus with event: ', ev)
-    },
     showMenu() {
       if (this.prevAnimation) this.prevAnimation.kill()
 
