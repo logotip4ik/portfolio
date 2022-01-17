@@ -4,8 +4,8 @@
       ref="navTitle"
       class="nav__title serif"
       tabindex="-1"
-      @click="$scrollTo(0), $nuxt.emit('toggle-menu')"
-      @keypress.enter="$scrollTo(0), $nuxt.emit('toggle-menu')"
+      @click="$scrollTo(0), $nuxt.$emit('toggle-menu')"
+      @keypress.enter="$scrollTo(0), $nuxt.$emit('toggle-menu')"
     >
       BK
     </p>
