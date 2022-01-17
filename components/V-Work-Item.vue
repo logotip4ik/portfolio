@@ -64,7 +64,7 @@ export default {
 
     const gsap = this.$gsap
 
-    // NOTE: max objectPosition y (-75) should be the same as in css
+    // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
       workImage,
       { objectPosition: 'center random(-35, -45)px' },
