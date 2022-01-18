@@ -40,21 +40,24 @@ export default {
   components: { MenuIconSVG },
   data: () => ({ isNavbarWhite: false }),
   mounted() {
-    const { navTitle, navMenuButton } = this.$refs
+    const { nav } = this.$refs
 
     const gsap = this.$gsap
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.header',
-        start: 'top+=50% top',
-        end: 'bottom top',
-        scrub: 0.25,
-      },
-    })
-
-    tl.fromTo(navTitle, { opacity: 0 }, { opacity: 1 })
-    tl.fromTo(navMenuButton, { opacity: 0 }, { opacity: 1 }, 0)
+    gsap.fromTo(
+      nav,
+      { display: 'none', opacity: 0 },
+      {
+        display: 'flex',
+        opacity: 1,
+        scrollTrigger: {
+          trigger: '.header',
+          start: 'top+=50% top',
+          end: 'bottom top',
+          scrub: 0.25,
+        },
+      }
+    )
 
     this.$nuxt.$on('toggle-menu', (bool) =>
       typeof bool === 'boolean'
