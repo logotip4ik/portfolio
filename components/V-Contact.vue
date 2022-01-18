@@ -1,43 +1,53 @@
 <template>
-  <section class="contact">
-    <a
-      href="mailto:contact@bogdankostyuk.xyz"
-      rel="noreferrer noopener"
-      class="contact__link"
-    >
-      <ContactText class="contact__link__svg"></ContactText>
+  <section ref="contact" class="contact">
+    <a class="contact__marquee" href="mailto:contact@bogdankostyuk.xyz">
+      <span class="sr-only">send me email</span>
+      <span
+        v-for="key in 4"
+        :key="key"
+        ref="contactMarqueeText"
+        aria-hidden="true"
+        class="contact__marquee__text"
+      >
+        Send me <span class="serif">email</span>&nbsp;&nbsp;
+      </span>
     </a>
   </section>
 </template>
 
 <script>
-import ContactText from '~/assets/img/contact-text.svg?inline'
-
 export default {
-  components: { ContactText },
+  mounted() {
+    const { contactMarqueeText } = this.$refs
+
+    const gsap = this.$gsap
+
+    gsap.to(contactMarqueeText, {
+      xPercent: -200,
+      repeat: -1,
+      ease: 'none',
+      duration: 10,
+    })
+  },
 }
 </script>
 
 <style lang="scss">
 .contact {
-  padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
+  padding-block: 4rem 8rem;
 
-  &__link {
-    display: block;
+  &__marquee {
+    display: flex;
+    color: #303030;
+    text-decoration: none;
+    overflow: hidden;
 
-    opacity: 0.5;
-    margin: 0 auto;
-    transition: transform 300ms var(--ease-back);
+    &__text {
+      display: inline-block;
 
-    &:is(:hover, :focus-visible) {
-      transform: scale(0.95);
-    }
-
-    &__svg {
-      width: 100%;
-
-      padding-inline-start: 1.25rem;
-      padding-inline-end: 0.75rem;
+      font-size: calc(var(--step-5) * 1.75);
+      margin: 0;
+      white-space: nowrap;
     }
   }
 }
