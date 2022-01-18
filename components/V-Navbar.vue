@@ -86,12 +86,21 @@ export default {
 .nav {
   --x-padding: clamp(1rem, 4vw, 5rem);
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  top: 1rem;
+  left: 0;
+
+  padding: 0 var(--x-padding);
   width: 100%;
   max-width: 100vw;
+  pointer-events: none;
 
   color: #303030;
 
-  mix-blend-mode: exclusion;
   transition: color 200ms ease;
 
   &--white {
@@ -100,12 +109,6 @@ export default {
   }
 
   &__title {
-    position: fixed;
-    z-index: 1;
-
-    top: 1rem;
-    left: var(--x-padding);
-
     color: currentColor;
     font-size: var(--step-2);
 
@@ -120,13 +123,6 @@ export default {
   }
 
   &__menu-button {
-    position: fixed;
-    z-index: 1;
-
-    // FIXME: how to properly align two buttons, title and menu button
-    // top: calc(var(--step-3) - 1vw);
-    right: var(--x-padding);
-
     width: var(--step-5);
     height: var(--step-5);
 
