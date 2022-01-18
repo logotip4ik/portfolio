@@ -24,7 +24,12 @@
         Ukraine
       </p>
     </div>
-    <div class="footer__arrow__wrapper">
+    <div
+      class="footer__arrow__wrapper"
+      role="button"
+      tabindex="0"
+      @click="$scrollTo(0)"
+    >
       <ArrowUpSVG class="footer__arrow"></ArrowUpSVG>
     </div>
   </footer>
@@ -84,7 +89,7 @@ export default {
       font-size: var(--step-4);
 
       .serif {
-        margin-inline-start: calc(var(--step-4) / 2);
+        margin-inline-start: calc(var(--step-5) / 2);
       }
     }
 
@@ -130,10 +135,21 @@ export default {
     height: auto;
     color: #303030;
 
+    transition: transform 300ms, color 300ms;
+
     &__wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
+
+      cursor: pointer;
+
+      &:is(:focus, :hover) {
+        svg {
+          transform: scale(0.9) translateY(-15px);
+          color: black;
+        }
+      }
     }
   }
 }
