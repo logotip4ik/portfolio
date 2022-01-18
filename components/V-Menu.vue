@@ -66,7 +66,9 @@ export default {
     }
   },
   mounted() {
-    this.$nuxt.$on('toggle-menu', () => {
+    this.$nuxt.$on('toggle-menu', (bool) => {
+      if (typeof bool === 'boolean' && this.isShowingMenu === bool) return
+
       if (this.isShowingMenu) this.hideMenu()
       else this.showMenu()
 

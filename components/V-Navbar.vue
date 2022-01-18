@@ -12,7 +12,7 @@
       class="nav__title serif"
       tabindex="0"
       aria-label="to top"
-      @click="$scrollTo(0), $nuxt.$emit('toggle-menu')"
+      @click="$scrollTo(0), $nuxt.$emit('toggle-menu', false)"
     >
       <span aria-hidden="true">BK</span>
     </button>
@@ -56,9 +56,10 @@ export default {
     tl.fromTo(navTitle, { opacity: 0 }, { opacity: 1 })
     tl.fromTo(navMenuButton, { opacity: 0 }, { opacity: 1 }, 0)
 
-    this.$nuxt.$on(
-      'toggle-menu',
-      () => (this.isNavbarWhite = !this.isNavbarWhite)
+    this.$nuxt.$on('toggle-menu', (bool) =>
+      typeof bool === 'boolean'
+        ? (this.isNavbarWhite = bool)
+        : (this.isNavbarWhite = !this.isNavbarWhite)
     )
   },
   methods: {
