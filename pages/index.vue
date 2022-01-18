@@ -6,9 +6,7 @@
       <V-About></V-About>
       <V-Contact></V-Contact>
     </main>
-    <!-- TODO: add contact section -->
-    <!-- TODO: add footer section -->
-    <!-- NOTE: footer section should have some sort of reveal animation as user is scrolling -->
+    <V-Footer></V-Footer>
     <!-- NOTE: footer ideas: https://www.rezo-zero.com -->
     <!-- TODO: add and see if floating particles will suite the site, like here: https://www.details.co.jp/ -->
   </div>
