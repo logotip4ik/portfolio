@@ -59,7 +59,7 @@ export default {
 
     gsap.fromTo(
       footer,
-      { opacity: 0.25, y: 100 },
+      { opacity: 0.5, y: 100 },
       {
         opacity: 1,
         y: 0,
@@ -84,10 +84,6 @@ export default {
   align-items: stretch;
   flex-grow: 1;
   flex-wrap: wrap;
-  // display: grid;
-  // grid-template-columns: 1fr calc(15% + 1vw);
-
-  // transition: grid-template-columns 400ms, grid-template-rows 400ms;
 
   &__content {
     --secondary-color: #{color.adjust($color: #fff, $lightness: -25)};
