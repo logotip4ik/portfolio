@@ -9,7 +9,7 @@
         aria-hidden="true"
         class="contact__marquee__text"
       >
-        Send me <span class="serif">email</span>&nbsp;&nbsp;
+        Send me an <span class="serif">email</span>&nbsp; - &nbsp;
       </span>
     </a>
   </section>
@@ -26,7 +26,7 @@ export default {
       xPercent: -200,
       repeat: -1,
       ease: 'none',
-      duration: 10,
+      duration: 15,
     })
   },
 }
@@ -45,7 +45,7 @@ export default {
     &__text {
       display: inline-block;
 
-      font-size: calc(var(--step-5) * 1.75);
+      font-size: calc(var(--step-5) * 1.5 + 2vw);
       margin: 0;
       white-space: nowrap;
     }
