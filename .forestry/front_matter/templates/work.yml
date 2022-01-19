@@ -4,19 +4,29 @@ hide_body: true
 fields:
 - type: text
   name: title
-  label: title
+  label: Title
+  config:
+    required: true
 - type: text
   name: source
-  label: source
+  label: Source
 - type: text
   name: live
-  label: live
+  label: Live
+  config:
+    required: true
 - type: list
   name: tags
-  label: tags
+  label: Tags
+  config:
+    min: 1
 - type: text
   name: desc
-  label: desc
-- type: text
-  name: image
-  label: image
+  label: Description
+  config:
+    required: true
+- name: image
+  type: file
+  config:
+    maxSize: 64
+  label: Image
