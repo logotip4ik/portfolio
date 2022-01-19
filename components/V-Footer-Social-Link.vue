@@ -1,6 +1,7 @@
 <template>
   <a
     :href="href"
+    rel="noopener noreferrer"
     class="social-link"
     @focus="showHoverText"
     @blur="hideHoverText"
