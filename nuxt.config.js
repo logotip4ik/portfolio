@@ -43,14 +43,14 @@ export default {
     '@nuxtjs/google-fonts',
     // https://github.com/nuxt-community/svg-module
     '@nuxtjs/svg',
+    // https://image.nuxtjs.org
+    '@nuxt/image',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://content.nuxtjs.org/installation
     '@nuxt/content',
-    // https://image.nuxtjs.org
-    '@nuxt/image',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
