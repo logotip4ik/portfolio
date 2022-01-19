@@ -66,10 +66,18 @@ export default {
 
     const gsap = this.$gsap
 
+    const maxOffset = gsap.utils.mapRange(
+      0.3,
+      1.75,
+      40,
+      70,
+      window.innerWidth / window.innerHeight
+    )
+
     // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
       workImage,
-      { objectPosition: 'center random(-35, -45)px' },
+      { objectPosition: `center random(-${maxOffset - 10}, -${maxOffset})px` },
       {
         objectPosition: 'center 0px',
         scrollTrigger: { trigger: work, scrub: 0.5 },
@@ -98,7 +106,7 @@ export default {
   }
 
   &__image {
-    --top-offset: 45px;
+    --top-offset: 70px;
 
     position: absolute;
     left: 0;
