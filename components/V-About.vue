@@ -25,22 +25,21 @@
     </p> -->
 
     <ul class="about__tech" aria-label="tech I am using">
-      <a
-        v-for="(icon, key) in icons"
-        :key="key"
-        ref="aboutTechItems"
-        class="about__tech__item"
-        :aria-label="`link to ${icon.svg.slice(0, -3)} website`"
-        :href="icon.link"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <component
-          :is="icon.svg"
-          class="about__tech__item__svg"
-          aria-hidden="true"
-        ></component>
-      </a>
+      <li v-for="(icon, key) in icons" :key="key" ref="aboutTechItems">
+        <a
+          class="about__tech__item"
+          :aria-label="`link to ${icon.svg.slice(0, -3)} website`"
+          :href="icon.link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <component
+            :is="icon.svg"
+            class="about__tech__item__svg"
+            aria-hidden="true"
+          ></component>
+        </a>
+      </li>
     </ul>
   </section>
 </template>
