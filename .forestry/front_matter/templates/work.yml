@@ -1,0 +1,22 @@
+---
+label: Work
+hide_body: true
+fields:
+- type: text
+  name: title
+  label: title
+- type: text
+  name: source
+  label: source
+- type: text
+  name: live
+  label: live
+- type: list
+  name: tags
+  label: tags
+- type: text
+  name: desc
+  label: desc
+- type: text
+  name: image
+  label: image
