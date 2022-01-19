@@ -45,7 +45,7 @@ export default {
     &__text {
       display: inline-block;
 
-      font-size: calc(var(--step-5) * 1.5 + 2vw);
+      font-size: calc(var(--step-5) * 1.25 + 3vw);
       margin: 0;
       white-space: nowrap;
     }
