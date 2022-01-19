@@ -170,7 +170,7 @@ export default {
 
   &__arrow {
     width: 40%;
-    max-width: 15vw;
+    max-width: min(15vw, 130px);
     height: auto;
     color: #303030;
 
