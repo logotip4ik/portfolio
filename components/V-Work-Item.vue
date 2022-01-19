@@ -7,13 +7,14 @@
       rel="noopener noreferrer"
       class="work__wrapper"
     >
-      <img
+      <nuxt-img
         ref="workImage"
         :src="work.image"
         :alt="work.title"
         class="work__image"
-        width="400"
-        loading="lazy"
+        format="webp"
+        sizes="sm:70vw md:350px lg:550px"
+        quality="75"
       />
       <div class="work__content">
         <h3 class="work__content__title">
@@ -66,20 +67,21 @@ export default {
 
     const gsap = this.$gsap
 
-    const maxOffset = gsap.utils.mapRange(
-      0.3,
-      1.75,
-      40,
-      70,
-      window.innerWidth / window.innerHeight
-    )
+    // const maxOffset = gsap.utils.mapRange(
+    //   0.3,
+    //   1.75,
+    //   40,
+    //   70,
+    //   window.innerWidth / window.innerHeight
+    // )
 
     // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
-      workImage,
-      { objectPosition: `center random(-${maxOffset - 10}, -${maxOffset})px` },
+      workImage.$el,
+      // { objectPosition: `center random(-${maxOffset - 10}, -${maxOffset})px` },
+      { objectPosition: `center 60%` },
       {
-        objectPosition: 'center 0px',
+        objectPosition: 'center 40%',
         scrollTrigger: { trigger: work, scrub: 0.5 },
       }
     )
