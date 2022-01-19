@@ -22,8 +22,13 @@
       </p>
       <p class="footer__content__note">
         Made with
-        <img src="~/assets/img/heart.png" width="30" alt="heart icon" /> in
-        Ukraine
+        <img
+          src="~/assets/img/heart.png"
+          width="60"
+          height="60"
+          alt="heart icon"
+        />
+        in Ukraine
       </p>
     </div>
     <div
