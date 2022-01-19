@@ -34,6 +34,7 @@
     <div
       class="footer__arrow__wrapper"
       role="button"
+      aria-label="scroll to top"
       tabindex="0"
       @click="$scrollTo(0)"
     >
