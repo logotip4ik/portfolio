@@ -11,11 +11,12 @@
           :key="key"
           class="footer__content__social__link"
         >
-          <a :href="link.href" target="_blank" rel="noopener noreferrer">
+          <V-Footer-Social-Link target="_blank" :href="link.href">
             {{ link.label }}
-          </a>
+          </V-Footer-Social-Link>
         </li>
       </ul>
+
       <p class="footer__content__copyright">
         Copyright © {{ getCurrentYear() }} BK
       </p>
@@ -126,20 +127,10 @@ export default {
         margin-block: 1rem;
 
         a {
-          display: inline-block;
-
           font-size: calc(var(--step--2) + 0.1rem);
           text-transform: uppercase;
           text-decoration: none;
           color: whitesmoke;
-          letter-spacing: 0.4px;
-
-          transition: color 100ms, transform 200ms;
-
-          &:is(:hover, :focus) {
-            color: darken($color: #ffe6ed, $amount: 2.5);
-            transform: scale(0.96);
-          }
         }
       }
     }
