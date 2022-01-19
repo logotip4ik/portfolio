@@ -51,6 +51,21 @@ export default {
       { label: 'email', href: 'mailto:contact@bogdankostyuk.xyz' },
     ],
   }),
+  mounted() {
+    const { footer } = this.$refs
+
+    const gsap = this.$gsap
+
+    gsap.fromTo(
+      footer,
+      { opacity: 0.25, y: 100 },
+      {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: 0.75 },
+      }
+    )
+  },
   methods: {
     getCurrentYear() {
       return new Date().getFullYear()
