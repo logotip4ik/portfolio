@@ -1,6 +1,6 @@
 <template>
   <footer ref="footer" class="footer">
-    <div class="footer__content">
+    <div ref="footerContent" class="footer__content">
       <p class="footer__content__title">
         Bogdan <br />
         <span class="serif">Kostyuk</span>
@@ -53,13 +53,13 @@ export default {
     ],
   }),
   mounted() {
-    const { footer } = this.$refs
+    const { footer, footerContent } = this.$refs
 
     const gsap = this.$gsap
 
     gsap.fromTo(
-      footer,
-      { opacity: 0.5, y: 100 },
+      footerContent,
+      { opacity: 0.75, y: 100 },
       {
         opacity: 1,
         y: 0,
