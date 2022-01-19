@@ -21,7 +21,8 @@
         Copyright © {{ getCurrentYear() }} BK
       </p>
       <p class="footer__content__note">
-        Made with <img src="~/assets/img/heart.png" alt="heart icon" /> in
+        Made with
+        <img src="~/assets/img/heart.png" width="30" alt="heart icon" /> in
         Ukraine
       </p>
     </div>
@@ -193,9 +194,5 @@ export default {
   @media screen and (max-width: 575px) {
     background-color: var(--black-color);
   }
-  // @media screen and (max-width: 980px) {
-  //   grid-template-columns: 1fr;
-  //   grid-template-rows: 1fr 15%;
-  // }
 }
 </style>
