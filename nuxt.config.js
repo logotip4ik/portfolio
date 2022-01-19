@@ -49,6 +49,8 @@ export default {
   modules: [
     // https://content.nuxtjs.org/installation
     '@nuxt/content',
+    // https://image.nuxtjs.org
+    '@nuxt/image',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
