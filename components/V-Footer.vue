@@ -85,6 +85,8 @@ export default {
   flex-grow: 1;
   flex-wrap: wrap;
 
+  transition: background-color 100ms;
+
   &__content {
     --secondary-color: #{color.adjust($color: #fff, $lightness: -25)};
 
@@ -161,7 +163,7 @@ export default {
     height: auto;
     color: #303030;
 
-    transition: transform 300ms, color 300ms;
+    transition: transform 300ms, opacity 300ms;
 
     &__wrapper {
       flex-basis: 20%;
@@ -177,16 +179,20 @@ export default {
       &:is(:focus, :hover) {
         svg {
           transform: scale(0.9) translateY(-15px);
-          color: black;
+          opacity: 0.75;
         }
       }
     }
 
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 575px) {
       min-height: 30vw;
+      color: whitesmoke;
     }
   }
 
+  @media screen and (max-width: 575px) {
+    background-color: var(--black-color);
+  }
   // @media screen and (max-width: 980px) {
   //   grid-template-columns: 1fr;
   //   grid-template-rows: 1fr 15%;
