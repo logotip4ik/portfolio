@@ -63,11 +63,21 @@ export default {
 @use 'sass:color';
 
 .footer {
-  display: grid;
-  grid-template-columns: 1fr calc(15% + 1vw);
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  // display: grid;
+  // grid-template-columns: 1fr calc(15% + 1vw);
+
+  // transition: grid-template-columns 400ms, grid-template-rows 400ms;
 
   &__content {
     --secondary-color: #{color.adjust($color: #fff, $lightness: -25)};
+
+    flex-basis: 80%;
+    flex-grow: 1;
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -101,16 +111,19 @@ export default {
         margin-block: 1rem;
 
         a {
-          font-size: calc(var(--step--1) + 0.1rem);
+          display: inline-block;
+
+          font-size: calc(var(--step--2) + 0.1rem);
           text-transform: uppercase;
           text-decoration: none;
           color: whitesmoke;
           letter-spacing: 0.4px;
 
-          transition: color 100ms;
+          transition: color 100ms, transform 200ms;
 
           &:is(:hover, :focus) {
-            color: darken($color: #ffe6ed, $amount: 5);
+            color: darken($color: #ffe6ed, $amount: 2.5);
+            transform: scale(0.96);
           }
         }
       }
@@ -128,20 +141,35 @@ export default {
         transform: translateY(20%);
       }
     }
+
+    @media screen and (max-width: 600px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, fit-content);
+
+      & > * {
+        justify-self: center !important;
+        text-align: center !important;
+      }
+    }
   }
 
   &__arrow {
     width: 40%;
+    max-width: 15vw;
     height: auto;
     color: #303030;
 
     transition: transform 300ms, color 300ms;
 
     &__wrapper {
+      flex-basis: 20%;
+      flex-grow: 1;
+
       display: flex;
       justify-content: center;
       align-items: center;
 
+      min-width: 115px;
       cursor: pointer;
 
       &:is(:focus, :hover) {
@@ -151,6 +179,15 @@ export default {
         }
       }
     }
+
+    @media screen and (max-width: 560px) {
+      min-height: 30vw;
+    }
   }
+
+  // @media screen and (max-width: 980px) {
+  //   grid-template-columns: 1fr;
+  //   grid-template-rows: 1fr 15%;
+  // }
 }
 </style>
