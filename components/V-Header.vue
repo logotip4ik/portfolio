@@ -58,16 +58,13 @@ export default {
     }
   },
   mounted() {
-    const {
-      header,
-      headerContainer,
-      headerClock,
-      headerContainerSubtitle,
-      headerNavigationItems,
-    } = this.$refs
+    const { header, headerContainer, headerContainerSubtitle } = this.$refs
 
     const gsap = this.$gsap
     const ScrollTrigger = this.$ScrollTrigger
+
+    // NOTE: this only works cuz i am server side rending content
+    const headerNavigationItems = gsap.utils.toArray('.navbar-item')
 
     gsap.fromTo(
       headerContainer,
@@ -87,20 +84,24 @@ export default {
     )
 
     gsap.fromTo(
-      headerClock.$el,
+      '.clock',
       { opacity: 1 },
       {
         opacity: 0,
         scrollTrigger: {
           scrub: 0.75,
-          trigger: headerClock.$el.parentElement,
+          trigger: header,
           start: 'top+=25% top',
           end: 'bottom-=25% top',
         },
       }
     )
 
-    const tl = gsap.timeline({ paused: true, delay: 0.25 })
+    const tl = gsap.timeline({
+      paused: true,
+      delay: 0.25,
+      onEnd: () => this.$locoScroll.update(),
+    })
 
     // NOTE: Yeah, i know, i shouldn't use plain selectors
     // but really, this is working and if you wanted to use refs, then
@@ -117,7 +118,7 @@ export default {
       '-=0.75'
     )
     tl.fromTo(
-      headerNavigationItems.map(({ $el }) => $el),
+      headerNavigationItems,
       { opacity: 0, yPercent: -50 },
       {
         opacity: 1,
@@ -131,19 +132,19 @@ export default {
       },
       '-=0.25'
     )
-    tl.fromTo(headerClock.$el, { opacity: 0 }, { opacity: 1 })
+    tl.fromTo('.clock', { opacity: 0 }, { opacity: 1 })
 
     ScrollTrigger.create({
       trigger: header,
       start: '50% top',
       onEnter: () =>
-        headerNavigationItems
-          .map(({ $el }) => $el)
-          .forEach((item) => item.style.setProperty('visibility', 'hidden')),
+        headerNavigationItems.forEach((item) =>
+          item.style.setProperty('visibility', 'hidden')
+        ),
       onLeaveBack: () =>
-        headerNavigationItems
-          .map(({ $el }) => $el)
-          .forEach((item) => item.style.setProperty('visibility', 'visible')),
+        headerNavigationItems.forEach((item) =>
+          item.style.setProperty('visibility', 'visible')
+        ),
     })
 
     // NOTE: this even is fired when loader is done with animation
