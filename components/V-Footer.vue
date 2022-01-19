@@ -89,7 +89,7 @@ export default {
   transition: background-color 100ms;
 
   &__content {
-    --secondary-color: #{color.adjust($color: #fff, $lightness: -25)};
+    --secondary-color: #{color.adjust($color: #fff, $lightness: -25%)};
 
     flex-basis: 80%;
     flex-grow: 1;
