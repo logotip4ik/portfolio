@@ -24,7 +24,8 @@
         </span>
       </h1>
 
-      <p class="header__container__subtitle" :aria-label="subTitleText">
+      <div class="header__container__subtitle">
+        <p class="sr-only">{{ subTitleText }}</p>
         <!-- eslint-disable -->
         <span
           v-for="(char, key) in subTitleText"
@@ -34,7 +35,7 @@
           aria-hidden="true"
         ></span>
         <!-- eslint-enable -->
-      </p>
+      </div>
     </div>
 
     <V-Clock ref="headerClock" class="header__clock"></V-Clock>
