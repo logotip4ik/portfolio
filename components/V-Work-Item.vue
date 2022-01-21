@@ -75,6 +75,17 @@ export default {
     //   window.innerWidth / window.innerHeight
     // )
 
+    gsap.fromTo(
+      work,
+      { opacity: 0, scale: 1.05 },
+      {
+        opacity: 1,
+        scale: 1,
+        ease: 'back.out',
+        scrollTrigger: { trigger: work, start: 'top bottom-=15%', once: true },
+      }
+    )
+
     // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
       workImage.$el,
