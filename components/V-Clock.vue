@@ -1,8 +1,8 @@
 <template>
   <p ref="clock" class="clock">
     <span class="sr-only">{{ `time in Ukraine ${localTime}` }}</span>
-    <span aria-hidden="true">Kyiv</span
-    ><span aria-hidden="true">{{ localTime }}</span>
+    <span aria-hidden="true">Kyiv</span>
+    <span aria-hidden="true">{{ localTime }}</span>
   </p>
 </template>
 
