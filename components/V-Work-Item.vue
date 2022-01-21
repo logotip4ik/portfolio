@@ -13,8 +13,8 @@
         :alt="work.title"
         class="work__image"
         format="webp"
-        sizes="sm:70vw md:350px lg:550px"
-        quality="75"
+        sizes="sm:500 md:900 lg:100%"
+        quality="90"
       />
       <div class="work__content">
         <h3 class="work__content__title">
@@ -96,10 +96,10 @@ export default {
     gsap.fromTo(
       workImage.$el,
       // { objectPosition: `center random(-${maxOffset - 10}, -${maxOffset})px` },
-      { objectPosition: `center 60%` },
+      { objectPosition: `center 55%` },
       {
-        objectPosition: 'center 40%',
-        scrollTrigger: { trigger: work, scrub: 0.5 },
+        objectPosition: 'center 45%',
+        scrollTrigger: { trigger: work, scrub: true },
       }
     )
   },
