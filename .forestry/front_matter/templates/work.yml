@@ -30,3 +30,5 @@ fields:
   config:
     maxSize: 64
   label: Image
+pages:
+- content/works/portfolio.md
