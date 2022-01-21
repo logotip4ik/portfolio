@@ -202,7 +202,7 @@ export default {
       to top,
       var(--black-color) 0%,
       var(--black-color) 40%,
-      rgba($color: #fff, $alpha: 0) 60%,
+      rgba($color: #fff, $alpha: 0) 80%,
       rgba($color: #fff, $alpha: 0) 100%
     );
   }
