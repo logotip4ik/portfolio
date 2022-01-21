@@ -102,6 +102,7 @@ export default {
     )
 
     aboutTechItems.forEach((item) => {
+      // reveal animation
       gsap.fromTo(
         item,
         { opacity: 0 },
@@ -112,6 +113,16 @@ export default {
             start: 'top bottom-=20%',
             once: true,
           },
+        }
+      )
+
+      // parallax animation
+      gsap.fromTo(
+        item,
+        { yPercent: 'random(-5, -10)' },
+        {
+          yPercent: 'random(5, 10)',
+          scrollTrigger: { trigger: item, scrub: true },
         }
       )
     })
