@@ -92,13 +92,16 @@ export default {
       }
     )
 
+    const initialObjectPosition = `center ${window.innerWidth < 700 ? 53 : 60}%`
+    const finalObjectPosition = `center ${window.innerWidth < 700 ? 47 : 40}%`
+
     // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
       workImage.$el,
       // { objectPosition: `center random(-${maxOffset - 10}, -${maxOffset})px` },
-      { objectPosition: `center 55%` },
+      { objectPosition: initialObjectPosition },
       {
-        objectPosition: 'center 45%',
+        objectPosition: finalObjectPosition,
         scrollTrigger: { trigger: work, scrub: true },
       }
     )
