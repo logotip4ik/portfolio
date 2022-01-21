@@ -41,8 +41,8 @@ export default {
     padding-inline-start: 0;
 
     @media screen and(min-width: 798px) {
-      &__item:nth-child(2n + 1) {
-        top: 2.5%;
+      &__item:nth-child(even) {
+        margin-block-start: 2rem;
       }
     }
   }
