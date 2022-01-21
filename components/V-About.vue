@@ -10,19 +10,21 @@
 
     <V-H2 aria-label="about section heading">About</V-H2>
 
-    <nuxt-content :document="about" class="about__text"></nuxt-content>
+    <!-- <nuxt-content :document="about" class="about__text"></nuxt-content> -->
 
-    <!-- <p class="about__text" :aria-label="about.text">
+    <p class="about__text">
       <span class="sr-only">{{ about.text }}</span>
+      <!-- eslint-disable -->
       <span
-        v-for="(char, key) in about.text"
+        v-for="(word, key) in aboutWords"
         :key="key"
-        ref="aboutTextChars"
-        class="about__text__char"
-        v-html="char"
+        ref="aboutTextWords"
+        class="about__text__word"
         aria-hidden="true"
+        v-html="`${key === 0 ? '' : '&nbsp'}${word}`"
       ></span>
-    </p> -->
+      <!-- eslint-enable -->
+    </p>
 
     <ul class="about__tech" aria-label="tech I am using">
       <li v-for="(icon, key) in icons" :key="key" ref="aboutTechItems">
@@ -64,15 +66,15 @@ export default {
     ],
   }),
   async fetch() {
-    this.about = await this.$content('about').fetch()
+    this.about = await this.$content('about', { text: true }).fetch()
+  },
+  computed: {
+    aboutWords() {
+      return this.about.text.split(' ')
+    },
   },
   mounted() {
-    const {
-      about,
-      aboutCircles,
-      // aboutTextChars,
-      aboutTechItems,
-    } = this.$refs
+    const { about, aboutCircles, aboutTextWords, aboutTechItems } = this.$refs
 
     const gsap = this.$gsap
 
@@ -99,7 +101,7 @@ export default {
       0
     )
 
-    aboutTechItems.forEach((item, i) => {
+    aboutTechItems.forEach((item) => {
       gsap.fromTo(
         item,
         { opacity: 0 },
@@ -108,6 +110,23 @@ export default {
           scrollTrigger: {
             trigger: item,
             start: 'top bottom-=20%',
+            once: true,
+          },
+        }
+      )
+    })
+
+    aboutTextWords.forEach((word) => {
+      gsap.fromTo(
+        word,
+        { yPercent: 100, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.75,
+          scrollTrigger: {
+            trigger: word,
+            start: 'top bottom-=15%',
             once: true,
           },
         }
@@ -125,7 +144,7 @@ export default {
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   color: #303030;
 
-  &__text p {
+  &__text {
     max-width: 1100px;
 
     color: #303030;
@@ -135,6 +154,10 @@ export default {
     text-align: center;
 
     margin: 0 auto;
+
+    &__word {
+      display: inline-block;
+    }
   }
 
   &__tech {
