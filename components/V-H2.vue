@@ -1,5 +1,11 @@
 <template>
-  <h2 ref="title" class="title-h2 serif"><slot></slot></h2>
+  <h2 ref="title" class="title-h2 serif">
+    <span class="sr-only">{{ defaultSlotText }}</span>
+    <div class="title-h2__content" aria-hidden="true">
+      <slot></slot>
+      <div ref="titleContentBlock" class="title-h2__content__block"></div>
+    </div>
+  </h2>
 </template>
 
 <script>
@@ -19,9 +25,12 @@ export default {
         ...this.yOffset,
       }
     },
+    defaultSlotText() {
+      return this.$slots.default[0].text
+    },
   },
   mounted() {
-    const { title } = this.$refs
+    const { title, titleContentBlock } = this.$refs
 
     const gsap = this.$gsap
 
@@ -48,12 +57,39 @@ export default {
         },
       }
     )
+
+    gsap.to(titleContentBlock, {
+      bottom: '100%',
+      duration: 0.75,
+      scrollTrigger: {
+        trigger: title.parentElement,
+        once: true,
+        markers: true,
+        start: 'top bottom-=13%',
+      },
+    })
   },
 }
 </script>
 
-<style>
+<style lang="scss">
 .title-h2 {
   text-align: center;
+
+  &__content {
+    display: inline-block;
+
+    position: relative;
+
+    &__block {
+      position: absolute;
+      top: 0;
+      left: -5px;
+      right: -5px;
+      bottom: 0%;
+
+      background-color: white;
+    }
+  }
 }
 </style>
