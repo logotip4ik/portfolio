@@ -185,10 +185,10 @@ export default {
     margin-inline: auto;
 
     &__item {
-      transition: transform 300ms var(--ease-back);
-
       &:is(:hover, :focus-visible) {
-        transform: scale(0.9);
+        svg {
+          transform: scale(0.9);
+        }
       }
 
       &__svg {
@@ -198,6 +198,7 @@ export default {
 
         opacity: 0.75;
         filter: grayscale(1);
+        transition: transform 300ms var(--ease-back);
 
         @media screen and (max-width: 500px) {
           max-width: 30vw;
