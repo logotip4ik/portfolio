@@ -64,89 +64,98 @@ export default {
     const gsap = this.$gsap
     const ScrollTrigger = this.$ScrollTrigger
 
-    // NOTE: this only works cuz i am server side rending content
-    const headerNavigationItems = gsap.utils.toArray('.navbar-item')
+    let tl
 
-    gsap.fromTo(
-      headerContainer,
-      { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
-      {
-        opacity: 0,
-        scale: 1.125,
-        yPercent: -10,
-        filter: 'blur(10px)',
-        scrollTrigger: {
-          scrub: 0.5,
-          trigger: headerContainer.parentElement,
-          start: 'top+=15% top',
-          end: 'bottom-=35%, top',
+    // NOTE: why should i do this ?
+    // cuz headerNavigationItems already exists in dom,
+    // but idk why, nuxt is rerendering the, in the client
+    // so previous references is not proper and gsap is
+    // animating wrong elements
+    setTimeout(() => {
+      gsap.fromTo(
+        headerContainer,
+        { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
+        {
+          opacity: 0,
+          scale: 1.125,
+          yPercent: -10,
+          filter: 'blur(10px)',
+          scrollTrigger: {
+            scrub: 0.5,
+            trigger: headerContainer.parentElement,
+            start: 'top+=15% top',
+            end: 'bottom-=35%, top',
+          },
+        }
+      )
+
+      gsap.fromTo(
+        '.clock',
+        { opacity: 1 },
+        {
+          opacity: 0,
+          scrollTrigger: {
+            scrub: 0.75,
+            trigger: header,
+            start: 'top+=25% top',
+            end: 'bottom-=25% top',
+          },
+        }
+      )
+
+      // NOTE: this only works cuz i am server side rending content
+      const headerNavigationItems = gsap.utils.toArray('.navbar-item')
+
+      tl = gsap.timeline({
+        paused: true,
+        delay: 0.25,
+        onEnd: () => this.$locoScroll.update(),
+      })
+
+      // NOTE: Yeah, i know, i shouldn't use plain selectors
+      // but really, this is working and if you wanted to use refs, then
+      // it will became really painful for developer
+      tl.fromTo(
+        '.line__content',
+        { yPercent: 105 },
+        { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.25 }
+      )
+      tl.fromTo(
+        headerContainerSubtitle,
+        { opacity: 0 },
+        { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
+        '-=0.75'
+      )
+      tl.fromTo(
+        headerNavigationItems,
+        { opacity: 0, yPercent: -50 },
+        {
+          opacity: 1,
+          yPercent: 0,
+          ease: 'back.out',
+          duration: 0.8,
+          stagger: {
+            each: 0.2,
+            from: window.innerWidth < 512 ? 'center' : 'end',
+          },
         },
-      }
-    )
+        '-=0.25'
+      )
+      tl.fromTo('.clock', { opacity: 0 }, { opacity: 1 })
 
-    gsap.fromTo(
-      '.clock',
-      { opacity: 1 },
-      {
-        opacity: 0,
-        scrollTrigger: {
-          scrub: 0.75,
-          trigger: header,
-          start: 'top+=25% top',
-          end: 'bottom-=25% top',
-        },
-      }
-    )
-
-    const tl = gsap.timeline({
-      paused: true,
-      delay: 0.25,
-      onEnd: () => this.$locoScroll.update(),
-    })
-
-    // NOTE: Yeah, i know, i shouldn't use plain selectors
-    // but really, this is working and if you wanted to use refs, then
-    // it will became really painful for developer
-    tl.fromTo(
-      '.line__content',
-      { yPercent: 105 },
-      { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.25 }
-    )
-    tl.fromTo(
-      headerContainerSubtitle,
-      { opacity: 0 },
-      { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
-      '-=0.75'
-    )
-    tl.fromTo(
-      headerNavigationItems,
-      { opacity: 0, yPercent: -50 },
-      {
-        opacity: 1,
-        yPercent: 0,
-        ease: 'back.out',
-        duration: 0.8,
-        stagger: {
-          each: 0.2,
-          from: window.innerWidth < 512 ? 'center' : 'end',
-        },
-      },
-      '-=0.25'
-    )
-    tl.fromTo('.clock', { opacity: 0 }, { opacity: 1 })
-
-    ScrollTrigger.create({
-      trigger: header,
-      start: '50% top',
-      onEnter: () =>
-        headerNavigationItems.forEach((item) =>
-          item.style.setProperty('visibility', 'hidden')
-        ),
-      onLeaveBack: () =>
-        headerNavigationItems.forEach((item) =>
-          item.style.setProperty('visibility', 'visible')
-        ),
-    })
+      ScrollTrigger.create({
+        trigger: header,
+        start: '50% top',
+        onEnter: () =>
+          headerNavigationItems.forEach((item) =>
+            item.style.setProperty('visibility', 'hidden')
+          ),
+        onLeaveBack: () =>
+          headerNavigationItems.forEach((item) =>
+            item.style.setProperty('visibility', 'visible')
+          ),
+      })
+    }, 10)
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
