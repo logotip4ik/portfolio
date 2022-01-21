@@ -64,7 +64,6 @@ export default {
       scrollTrigger: {
         trigger: title.parentElement,
         once: true,
-        markers: true,
         start: 'top bottom-=13%',
       },
     })
