@@ -4,6 +4,7 @@ source: ''
 live: https://studrecruit.lpnu.ua
 tags:
 - Website
+- Seo
 - Next.js
 - Scss
 - Gsap
