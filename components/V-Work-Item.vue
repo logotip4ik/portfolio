@@ -56,7 +56,10 @@
 
 <script>
 export default {
-  props: { work: { type: Object, required: true, default: () => ({}) } },
+  props: {
+    work: { type: Object, required: true, default: () => ({}) },
+    i: { type: Number, required: false, default: 0 },
+  },
   computed: {
     tagsString() {
       return this.work.tags.reduce((str, val) => `${str}, ${val}`)
@@ -77,11 +80,14 @@ export default {
 
     gsap.fromTo(
       work,
-      { opacity: 0, scale: 1.05 },
+      { opacity: 0, y: 55 },
       {
         opacity: 1,
-        scale: 1,
+        y: 0,
+        duration: 0.75,
+        delay: 0.035 * this.i,
         ease: 'back.out',
+        clearProps: 'transform',
         scrollTrigger: { trigger: work, start: 'top bottom-=15%', once: true },
       }
     )

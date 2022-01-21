@@ -7,6 +7,7 @@
         :key="key"
         ref="worksListItems"
         :work="work"
+        :i="key"
         :aria-label="work.title"
         class="works__list__item"
       >
