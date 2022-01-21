@@ -92,8 +92,8 @@ export default {
       }
     )
 
-    const initialObjectPosition = `center ${window.innerWidth < 700 ? 53 : 60}%`
-    const finalObjectPosition = `center ${window.innerWidth < 700 ? 47 : 40}%`
+    const initialObjectPosition = `center ${window.innerWidth < 700 ? 55 : 62}%`
+    const finalObjectPosition = `center ${window.innerWidth < 700 ? 45 : 38}%`
 
     // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
