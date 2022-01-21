@@ -31,4 +31,4 @@ fields:
     maxSize: 64
   label: Image
 pages:
-- content/works/test-project.md
+- content/works/portfolio.md
