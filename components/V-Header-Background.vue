@@ -68,13 +68,13 @@ export default {
       0.5,
       0.125
     )
-    const AberrationShaderPass = new ShaderPass(AberrationShader)
-    AberrationShaderPass.renderToScreen = true
+    const aberrationShaderPass = new ShaderPass(AberrationShader)
+    aberrationShaderPass.renderToScreen = true
 
     this.composer = new EffectComposer(this.renderer)
     this.composer.addPass(renderPass)
     this.composer.addPass(bloomPass)
-    this.composer.addPass(AberrationShaderPass)
+    this.composer.addPass(aberrationShaderPass)
 
     // THREE: Object
     const geometry = new THREE.CircleBufferGeometry(
