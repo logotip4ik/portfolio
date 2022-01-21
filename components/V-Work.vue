@@ -20,9 +20,7 @@
 export default {
   data: () => ({ works: [] }),
   async fetch() {
-    this.works = await this.$content('works')
-      .sortBy('createdAt', 'desc')
-      .fetch()
+    this.works = await this.$content('works').sortBy('createdAt').fetch()
   },
 }
 </script>
