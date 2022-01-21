@@ -30,5 +30,3 @@ fields:
   config:
     maxSize: 64
   label: Image
-pages:
-- content/works/test-project.md
