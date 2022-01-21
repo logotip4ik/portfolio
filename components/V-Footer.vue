@@ -198,7 +198,13 @@ export default {
   }
 
   @media screen and (max-width: 575px) {
-    background-color: var(--black-color);
+    background-image: linear-gradient(
+      to top,
+      var(--black-color) 0%,
+      var(--black-color) 40%,
+      rgba($color: #fff, $alpha: 0) 60%,
+      rgba($color: #fff, $alpha: 0) 100%
+    );
   }
 }
 </style>
