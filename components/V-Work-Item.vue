@@ -133,7 +133,7 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: -2;
+    z-index: -10;
 
     width: 100%;
     height: calc(100% + var(--top-offset));
@@ -153,20 +153,21 @@ export default {
 
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.3) 25%,
-      rgba(0, 0, 0, 0.125) 33%,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.45) 25%,
       rgba(0, 0, 0, 0) 50%
     );
 
     &__title {
       font-size: var(--step-2);
-      margin-bottom: 0;
-
+      letter-spacing: 0.25px;
       color: $text-color;
+
+      margin-bottom: 0;
     }
     &__tags {
       color: darken($text-color, 5);
+      font-size: calc(var(--step--2) + 0.15vw);
     }
   }
 
