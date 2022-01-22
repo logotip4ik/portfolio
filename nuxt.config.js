@@ -52,7 +52,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://github.com/victor-perez/nuxt-helmet
-    'nuxt-content',
+    'nuxt-helmet',
     // https://content.nuxtjs.org/installation
     '@nuxt/content',
   ],
