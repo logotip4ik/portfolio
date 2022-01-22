@@ -7987,6 +7987,11 @@ nuxt-helmet@^2.0.1:
     consola "^2.11.3"
     helmet "^4.6.0"
 
+nuxt-social-meta@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/nuxt-social-meta/-/nuxt-social-meta-1.0.0.tgz#1c2458d33726b1a87c8afc74446a6d0a7ba03583"
+  integrity sha512-IL0jGSqj7eRq7YxkMTHLPBX+mDtmnxOiyhle35xWwQL7CwIau05SysQyjMrQSvEqKL4zQAOM5+DGuPVcthfZ7Q==
+
 nuxt-vite@^0.3.5:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/nuxt-vite/-/nuxt-vite-0.3.5.tgz#89e01fdb1d28c4d3c5cc82f6d1efc77a46332205"
