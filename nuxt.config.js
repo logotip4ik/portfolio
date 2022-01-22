@@ -77,6 +77,21 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    // https://github.com/AlekseyPleshkov/nuxt-social-meta
+    [
+      'nuxt-social-meta',
+      {
+        url: 'https://bogdankostyuk.xyz',
+        title: 'Bogdan Kostyuk | Front End Developer',
+        site_name: 'Bogdan Kostyuk | Front End Developer',
+        description:
+          'I will build you website as quick as possible and with high attention to details',
+        img: 'https://bogdankostyuk.xyz/logo.png',
+        img_size: { width: '1440', height: '1440' },
+        locale: 'en',
+        theme_color: '#030303',
+      },
+    ],
     // https://github.com/victor-perez/nuxt-helmet
     'nuxt-helmet',
     // https://content.nuxtjs.org/installation
