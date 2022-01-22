@@ -17,6 +17,8 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  render: { csp: true },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'normalize.css/normalize.css',
@@ -49,6 +51,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    // https://github.com/victor-perez/nuxt-helmet
+    'nuxt-content',
     // https://content.nuxtjs.org/installation
     '@nuxt/content',
   ],
