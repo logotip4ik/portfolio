@@ -111,9 +111,13 @@ export default {
     this.scene.add(this.circle)
 
     // THREE: Prep
-    this.clock = new THREE.Clock()
+    this.camera.matrixAutoUpdate = false
+    this.circle.matrixAutoUpdate = false
 
     this.resize()
+
+    this.clock = new THREE.Clock()
+
     window.addEventListener('resize', this.resize)
 
     this.$nuxt.$on('show-circle', () => {
@@ -140,14 +144,11 @@ export default {
       this.camera.updateProjectionMatrix()
 
       // NOTE: this will help for performance
-      this.camera.matrixAutoUpdate = false
       this.camera.updateMatrix()
-
-      this.circle.matrixAutoUpdate = false
       this.circle.updateMatrix()
     },
     render() {
-      if (this.$scrollY() + 10 > window.innerHeight) return
+      if (this.$scrollY() + 1 > window.innerHeight) return
 
       this.circle.material.uniforms.mouseVector.value.lerp(this.mousePos, 0.025)
       this.circle.material.uniforms.time.value = this.clock.getElapsedTime()
