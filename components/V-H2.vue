@@ -61,6 +61,7 @@ export default {
     gsap.to(titleContentBlock, {
       bottom: '100%',
       duration: 0.75,
+      force3D: true,
       scrollTrigger: {
         trigger: title.parentElement,
         once: true,
