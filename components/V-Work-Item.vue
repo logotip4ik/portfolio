@@ -177,6 +177,9 @@ export default {
     max-width: var(--step-3);
     max-height: var(--step-3);
 
+    min-width: 48px;
+    min-height: 48px;
+
     mix-blend-mode: screen;
 
     color: darken($color: white, $amount: 10);
