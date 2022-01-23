@@ -18,6 +18,7 @@ export default {
           'I will build you website as quick as possible and with high attention to details',
       },
       { name: 'format-detection', content: 'telephone=no' },
+      { name: 'robots', content: 'all' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -140,6 +141,6 @@ export default {
   },
 
   cloudflareHeaders: {
-    'https://:project.pages.dev/*': [{ 'X-Robots-Tag': 'all' }],
+    'https://:project.pages.dev/*': [{ 'x-robots-tag': 'all' }],
   },
 }
