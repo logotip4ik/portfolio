@@ -98,6 +98,8 @@ export default {
     'nuxt-helmet',
     // https://content.nuxtjs.org/installation
     '@nuxt/content',
+    // https://sitemap.nuxtjs.org
+    '@nuxtjs/sitemap',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -147,5 +149,11 @@ export default {
 
   cloudflareHeaders: {
     '/*': [{ 'X-Robots-Tag': 'all' }],
+  },
+
+  sitemap: {
+    hostname: 'https://bogdankostyuk.xyz',
+    gzip: true,
+    exclude: ['/admin/**'],
   },
 }
