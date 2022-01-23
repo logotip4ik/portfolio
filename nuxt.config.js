@@ -111,7 +111,7 @@ export default {
         'postcss-preset-env': false,
       },
     },
-    extend(config) {
+    extend(config, { isClient }) {
       // This enables to import .glsl, .frag, .vert, as modules
       // example: import vertexShader from '~/assets/shaders/vertex.glsl'
       config.module.rules.push({
@@ -119,6 +119,11 @@ export default {
         exclude: /node_modules/,
         use: ['raw-loader', 'glslify-loader'],
       })
+
+      // Extend only webpack config for client-bundle
+      if (isClient) {
+        config.devtool = 'source-map'
+      }
     },
   },
 
