@@ -1488,6 +1488,21 @@
     consola "^2.15.3"
     google-fonts-helper "^1.2.0"
 
+"@nuxtjs/sitemap@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/sitemap/-/sitemap-2.4.0.tgz#6a9fa1c35e161f87375d59949d973568cec40614"
+  integrity sha512-TVgIYOtPp7KAfaUo76WRpGbO20j4D/xi/A7shFIGjARHs+FvfAWXNCtBT87dTwe/RoYzAsEKtijFFUTaSu5bUA==
+  dependencies:
+    async-cache "^1.1.0"
+    consola "^2.13.0"
+    etag "^1.8.1"
+    fresh "^0.5.2"
+    fs-extra "^8.1.0"
+    is-https "^2.0.2"
+    lodash.unionby "^4.8.0"
+    minimatch "^3.0.4"
+    sitemap "^4.1.1"
+
 "@nuxtjs/svg@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/svg/-/svg-0.3.0.tgz#a6f91743ffba8ed05766c013a401c96452c35176"
@@ -1763,6 +1778,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.12.tgz#fd9c1c2cfab536a2383ed1ef70f94adea743a226"
   integrity sha512-KQZ1al2hKOONAs2MFv+yTQP1LkDWMrRJ9YCVRalXltOfXsBmH5IownLxQaiq0lnAHwAViLnh2aTYqrPcRGEbgg==
 
+"@types/node@^12.0.2":
+  version "12.20.42"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.42.tgz#2f021733232c2130c26f9eabbdd3bfd881774733"
+  integrity sha512-aI3/oo5DzyiI5R/xAhxxRzfZlWlsbbqdgxfTPkqu/Zt+23GXiJvMCyPJT4+xKSXOnLqoL8jJYMLTwvK2M3a5hw==
+
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz#d3357479a0fdfdd5907fe67e17e0a85c906e1301"
@@ -1825,6 +1845,13 @@
   version "1.43.1"
   resolved "https://registry.yarnpkg.com/@types/sass/-/sass-1.43.1.tgz#86bb0168e9e881d7dade6eba16c9ed6d25dc2f68"
   integrity sha512-BPdoIt1lfJ6B7rw35ncdwBZrAssjcwzI5LByIrYs+tpXlj/CAkuVdRsgZDdP4lq5EjyWzwxZCqAoFyHKFwp32g==
+  dependencies:
+    "@types/node" "*"
+
+"@types/sax@^1.2.0":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@types/sax/-/sax-1.2.4.tgz#8221affa7f4f3cb21abd22f244cfabfa63e6a69e"
+  integrity sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==
   dependencies:
     "@types/node" "*"
 
@@ -2393,6 +2420,11 @@ are-we-there-yet@~1.1.2:
     delegates "^1.0.0"
     readable-stream "^2.0.6"
 
+arg@^4.1.1:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/arg/-/arg-4.1.3.tgz#269fc7ad5b8e42cb63c896d5666017261c144089"
+  integrity sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==
+
 arg@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/arg/-/arg-5.0.1.tgz#eb0c9a8f77786cad2af8ff2b862899842d7b6adb"
@@ -2482,6 +2514,13 @@ assign-symbols@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
+
+async-cache@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/async-cache/-/async-cache-1.1.0.tgz#4a9a5a89d065ec5d8e5254bd9ee96ba76c532b5a"
+  integrity sha1-SppaidBl7F2OUlS9nulrp2xTK1o=
+  dependencies:
+    lru-cache "^4.0.0"
 
 async-each@^1.0.1:
   version "1.0.3"
@@ -3796,7 +3835,7 @@ connect@^3.7.0:
     parseurl "~1.3.3"
     utils-merge "1.0.1"
 
-consola@^2.10.0, consola@^2.11.3, consola@^2.15.0, consola@^2.15.3, consola@^2.6.0, consola@^2.9.0:
+consola@^2.10.0, consola@^2.11.3, consola@^2.13.0, consola@^2.15.0, consola@^2.15.3, consola@^2.6.0, consola@^2.9.0:
   version "2.15.3"
   resolved "https://registry.yarnpkg.com/consola/-/consola-2.15.3.tgz#2e11f98d6a4be71ff72e0bdf07bd23e12cb61550"
   integrity sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==
@@ -6594,6 +6633,11 @@ is-hexadecimal@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-hexadecimal/-/is-hexadecimal-1.0.4.tgz#cc35c97588da4bd49a8eedd6bc4082d44dcb23a7"
   integrity sha512-gyPJuv83bHMpocVYoqof5VDiZveEoGoFL8m3BXNb2VW8Xs+rz9kqO8LOQ5DH6EsuvilT1ApazU0pyl+ytbPtlw==
 
+is-https@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/is-https/-/is-https-2.0.2.tgz#7009d303c72580f15897d5c063d6b6bc1f838fef"
+  integrity sha512-UfUCKVQH/6PQRCh5Qk9vNu4feLZiFmV/gr8DjbtJD0IrCRIDTA6E+d/AVFGPulI5tqK5W45fYbn1Nir1O99rFw==
+
 is-https@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/is-https/-/is-https-4.0.0.tgz#9ee725a334fb517b988278d2674efc96e4f348ed"
@@ -7074,6 +7118,11 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
 
+lodash.unionby@^4.8.0:
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/lodash.unionby/-/lodash.unionby-4.8.0.tgz#883f098ff78f564a727b7508e09cdd539734bb83"
+  integrity sha1-iD8Jj/ePVkpye3UI4JzdU5c0u4M=
+
 lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
@@ -7113,7 +7162,7 @@ lowercase-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-2.0.0.tgz#2603e78b7b4b0006cbca2fbcc8a3202558ac9479"
   integrity sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA==
 
-lru-cache@^4.1.2:
+lru-cache@^4.0.0, lru-cache@^4.1.2:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
   integrity sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==
@@ -10020,7 +10069,7 @@ sass@^1.45.2:
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
 
-sax@>=0.6.0, sax@~1.2.4:
+sax@>=0.6.0, sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
@@ -10277,6 +10326,17 @@ sirv@^1.0.7:
     "@polka/url" "^1.0.0-next.20"
     mrmime "^1.0.0"
     totalist "^1.0.0"
+
+sitemap@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/sitemap/-/sitemap-4.1.1.tgz#c9b459c7d797e629c61f56b86586d4f67dbf250b"
+  integrity sha512-+8yd66IxyIFEMFkFpVoPuoPwBvdiL7Ap/HS5YD7igqO4phkyTPFIprCAE9NMHehAY5ZGN3MkAze4lDrOAX3sVQ==
+  dependencies:
+    "@types/node" "^12.0.2"
+    "@types/sax" "^1.2.0"
+    arg "^4.1.1"
+    sax "^1.2.4"
+    xmlbuilder "^13.0.0"
 
 slash@^3.0.0:
   version "3.0.0"
@@ -11837,6 +11897,11 @@ xml2js@^0.4.23:
   dependencies:
     sax ">=0.6.0"
     xmlbuilder "~11.0.0"
+
+xmlbuilder@^13.0.0:
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-13.0.2.tgz#02ae33614b6a047d1c32b5389c1fdacb2bce47a7"
+  integrity sha512-Eux0i2QdDYKbdbA6AM6xE4m6ZTZr4G4xF9kahI2ukSEMCzwce2eX9WlTI5J3s+NU7hpasFsr8hWIONae7LluAQ==
 
 xmlbuilder@~11.0.0:
   version "11.0.1"
