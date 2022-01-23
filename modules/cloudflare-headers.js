@@ -1,5 +1,5 @@
 import path from 'path'
-import fs from 'fs/promises'
+import fs from 'fs'
 import consola from 'consola'
 
 const logger = consola.withScope('nuxt:cloudflare-headers')
@@ -14,13 +14,12 @@ export default function (moduleOptions = {}) {
   }
 
   const contentToWrite = stringify(options)
+  const distPath = self.nuxt.options.generate.dir
 
-  self.nuxt.hook('generate:done', async function () {
-    const distPath = self.nuxt.options.generate.dir
-
-    await fs.writeFile(path.join(distPath, headerFilename), contentToWrite)
-
-    logger.success('Nuxt `Cloudflare Headers` added')
+  self.nuxt.hook('generate:done', () => {
+    fs.writeFile(path.join(distPath, headerFilename), contentToWrite, () =>
+      logger.success('Nuxt `Cloudflare Headers` added')
+    )
   })
 }
 
