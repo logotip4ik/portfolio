@@ -141,6 +141,6 @@ export default {
   },
 
   cloudflareHeaders: {
-    'https://:project.pages.dev/*': [{ 'x-robots-tag': 'all' }],
+    '/*': [{ 'X-Robots-Tag': 'all' }],
   },
 }
