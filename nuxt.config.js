@@ -61,6 +61,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '~modules/cloudflare-headers.js',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://vite.nuxtjs.org
@@ -136,5 +137,9 @@ export default {
     },
     display: 'swap',
     download: true,
+  },
+
+  cloudflareHeaders: {
+    'https://:project.pages.dev/*': [{ 'X-Robots-Tag': 'all' }],
   },
 }
