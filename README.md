@@ -6,6 +6,8 @@
 This is my portfolio, where you can find little summery of my developer road. Also there are some of
 projects that i am using quite often
 
+> BTW: [previous portfolio](https://next.portfolio-5iw.pages.dev/)
+
 ## Build with
 
 - [Nuxt.js](https://nuxtjs.org/) - 2 version, this is like a core of the website, also i am planning to transfer portfolio to 3rd version of [Nuxt.js](https://v3.nuxtjs.org/) when it supports the static site generation
