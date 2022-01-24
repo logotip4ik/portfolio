@@ -34,6 +34,7 @@ export default {
 
   color: lighten(black, 20);
   opacity: 0.95;
+  margin: 0;
 
   span:nth-child(2) {
     display: inline-block;
