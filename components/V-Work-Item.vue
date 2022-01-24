@@ -85,6 +85,7 @@ export default {
         opacity: 1,
         y: 0,
         duration: 0.75,
+        clearProps: 'y',
         delay: 0.05 * this.i,
         scrollTrigger: { trigger: work, start: 'top bottom-=15%', once: true },
       }
