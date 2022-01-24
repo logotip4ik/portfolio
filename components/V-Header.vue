@@ -43,7 +43,6 @@
       class="header__scroll-down"
       @click.native="$scrollTo('.works')"
     ></V-Scroll-Down>
-    <!-- TODO: add some sort of "scroll down" indication, see monopo.nyc -->
   </header>
 </template>
 
