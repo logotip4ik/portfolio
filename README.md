@@ -44,11 +44,11 @@ projects that i am using quite often
 
 3. Run the local server!
    ```shell
-   $ yarn serve
+   $ yarn dev
    ```
    or
    ```shell
-   $ npm run serve
+   $ npm run dev
    ```
 
 ---
