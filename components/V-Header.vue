@@ -189,7 +189,7 @@ export default {
 <style lang="scss">
 .header {
   --100vh: calc(100 * var(--vh, 1vh));
-  --y-padding: clamp(3rem, 6vw, 6rem);
+  --y-padding: clamp(2rem, 4vw, 4rem);
   --x-padding: clamp(1rem, 5vw, 4rem);
 
   display: flex;
@@ -239,7 +239,7 @@ export default {
 
   &__scroll-down {
     position: absolute;
-    top: calc(var(--100vh) - calc(var(--y-padding) - 1rem));
+    top: calc(var(--100vh) - calc(var(--y-padding)));
     left: var(--step--1);
 
     color: lighten($color: grey, $amount: 7);
