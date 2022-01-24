@@ -1,68 +1,56 @@
-# portfolio-v4
+# Portfolio
 
-## Build Setup
+<img src="https://bogdankostyuk.xyz/logo.png" align="right"
+     alt="Portfolio logo by Bogdan Kostyuk" width="120" height="120">
 
-```bash
-# install dependencies
-$ yarn install
+This is my portfolio, where you can find little summery of my developer road. Also there are some of
+projects that i am using quite often
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+## Build with
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+- [Nuxt.js](https://nuxtjs.org/) - 2 version, this is like a core of the website, also i am planning to transfer portfolio to 3rd version of [Nuxt.js](https://v3.nuxtjs.org/) when it supports the static site generation
 
-# generate static project
-$ yarn generate
-```
+- [GSAP](https://greensock.com/gsap/) - for smoooooth transitions
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+- [Three.js](https://threejs.org/) - landing background. P.S. initially was using [metaballs.js](https://www.npmjs.com/package/metaballs-js) and [particles.js](https://vincentgarreau.com/particles.js/)
 
-## Special Directories
+- [LocomotiveScroll](https://github.com/locomotivemtl/locomotive-scroll) - this makes the page scroll really smoothly on PC
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+> as backend
+>
+> Nothing used as background just added email forwarding
 
-### `assets`
+---
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+## Usage
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+1. Clone or fork this repo
 
-### `components`
+   ```shell
+   $ git clone https://github.com/logotip4ik/portfolio
+   ```
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+2. Install all the dependencies
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+   ```shell
+   $ yarn
+   ```
 
-### `layouts`
+   or
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+   ```
+   $ npm install
+   ```
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+3. Run the local server!
+   ```shell
+   $ yarn serve
+   ```
+   or
+   ```shell
+   $ npm run serve
+   ```
 
-### `pages`
+---
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+### Star if you liked it 😜
