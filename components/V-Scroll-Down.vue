@@ -65,6 +65,7 @@ export default {
   padding-bottom: 2rem;
 
   writing-mode: vertical-lr;
+  cursor: pointer;
 
   transform: translateY(-25%);
 
