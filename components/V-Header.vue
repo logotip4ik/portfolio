@@ -220,6 +220,7 @@ export default {
   &__clock {
     bottom: clamp(1rem, 5vw, 2rem);
     left: clamp(1rem, 5vw, 2rem);
+    color: lighten($color: grey, $amount: 2);
   }
 
   &__navigation {
