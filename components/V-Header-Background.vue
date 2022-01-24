@@ -163,6 +163,10 @@ export default {
           delay: 0.125,
         })
       })
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 700) window.location = ''
+      })
     },
     resize() {
       const width = window.innerWidth
