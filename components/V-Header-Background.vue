@@ -13,6 +13,7 @@
       autoplay
       preload
       muted="muted"
+      playsinline
       disablepictureinpicture
       tabindex="-1"
       class="header-background__video"
