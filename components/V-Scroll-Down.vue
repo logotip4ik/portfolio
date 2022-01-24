@@ -60,7 +60,9 @@ export default {
 
 <style lang="scss">
 .scroll-down {
-  font-size: calc(var(--step-0) - 0.5vw);
+  --ff-size: calc(var(--step--1) - 0.2vw);
+
+  font-size: var(--ff-size);
   margin: 0;
   padding-bottom: 2rem;
 
@@ -84,7 +86,7 @@ export default {
       --skew-#{$i + 1}: 0deg;
     }
 
-    --size: var(--step--1);
+    --size: var(--ff-size);
     --min-size: 12px;
 
     position: absolute;
