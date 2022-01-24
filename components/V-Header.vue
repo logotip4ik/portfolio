@@ -39,6 +39,7 @@
     </div>
 
     <V-Clock ref="headerClock" class="header__clock"></V-Clock>
+    <V-Scroll-Down class="header__scroll-down"></V-Scroll-Down>
     <!-- TODO: add some sort of "scroll down" indication, see monopo.nyc -->
   </header>
 </template>
@@ -179,6 +180,10 @@ export default {
 
 <style lang="scss">
 .header {
+  --100vh: calc(100 * var(--vh, 1vh));
+  --y-padding: clamp(3rem, 6vw, 6rem);
+  --x-padding: clamp(1rem, 5vw, 4rem);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,9 +223,18 @@ export default {
   }
 
   &__clock {
-    bottom: clamp(1rem, 5vw, 2rem);
-    left: clamp(1rem, 5vw, 2rem);
+    top: calc(var(--100vh) - var(--y-padding));
+    right: var(--x-padding);
+
     color: lighten($color: grey, $amount: 2);
+  }
+
+  &__scroll-down {
+    position: absolute;
+    top: calc(var(--100vh) - calc(var(--y-padding) - 1rem));
+    left: var(--step--1);
+
+    color: lighten($color: grey, $amount: 7);
   }
 
   &__navigation {
