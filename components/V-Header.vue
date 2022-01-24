@@ -39,7 +39,10 @@
     </div>
 
     <V-Clock ref="headerClock" class="header__clock"></V-Clock>
-    <V-Scroll-Down class="header__scroll-down"></V-Scroll-Down>
+    <V-Scroll-Down
+      class="header__scroll-down"
+      @click.native="$scrollTo('.works')"
+    ></V-Scroll-Down>
     <!-- TODO: add some sort of "scroll down" indication, see monopo.nyc -->
   </header>
 </template>
