@@ -49,7 +49,7 @@ export default {
         circle,
         { [yOffsetCssVarName]: '3rem', [skewCssVarName]: '7deg' },
         { [yOffsetCssVarName]: '0.75rem', [skewCssVarName]: '0deg' },
-        `${0.125 + 0.075 * key}`
+        `${0.125 + 0.1 * key}`
       )
     })
 
