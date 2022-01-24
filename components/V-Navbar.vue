@@ -144,6 +144,10 @@ export default {
     &:active {
       transform: scale(0.9);
     }
+
+    svg {
+      min-height: 15px;
+    }
   }
 }
 </style>
