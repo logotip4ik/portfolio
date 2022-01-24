@@ -1,5 +1,25 @@
 <template>
-  <canvas ref="canvas" aria-label="landing background"></canvas>
+  <div class="header-background">
+    <canvas
+      v-show="isVideoHidden"
+      ref="canvas"
+      class="header-background__canvas"
+      aria-label="landing background"
+    ></canvas>
+    <video
+      v-show="!isVideoHidden"
+      ref="video"
+      loop
+      autoplay
+      preload
+      muted="muted"
+      disablepictureinpicture
+      tabindex="-1"
+      class="header-background__video"
+      aria-label="landing background"
+      src="~/assets/img/circle-animation.mp4"
+    ></video>
+  </div>
 </template>
 
 <script>
@@ -30,9 +50,12 @@ export default {
     composer: null,
     circle: null,
     clock: null,
+    isVideoHidden: true,
   }),
   mounted() {
     const { canvas } = this.$refs
+
+    if (window.innerWidth < 700) return this.setupVideo()
 
     // THREE: Scene
     this.scene = new THREE.Scene()
@@ -111,9 +134,6 @@ export default {
     this.scene.add(this.circle)
 
     // THREE: Prep
-    this.camera.matrixAutoUpdate = false
-    this.circle.matrixAutoUpdate = false
-
     this.resize()
 
     this.clock = new THREE.Clock()
@@ -133,6 +153,17 @@ export default {
     this.$gsap.ticker.add(this.render)
   },
   methods: {
+    setupVideo() {
+      this.isVideoHidden = false
+
+      this.$nuxt.$on('show-circle', () => {
+        this.$gsap.to('video', {
+          opacity: 1,
+          duration: 1.75,
+          delay: 0.125,
+        })
+      })
+    },
     resize() {
       const width = window.innerWidth
       const height = window.innerHeight
@@ -144,7 +175,10 @@ export default {
       this.camera.updateProjectionMatrix()
 
       // NOTE: this will help for performance
+      this.camera.matrixAutoUpdate = false
       this.camera.updateMatrix()
+
+      this.circle.matrixAutoUpdate = false
       this.circle.updateMatrix()
     },
     render() {
@@ -158,3 +192,22 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.header-background {
+  &__video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 120%;
+    height: 120%;
+
+    opacity: 0;
+    object-fit: cover;
+    filter: blur(2px);
+
+    transform: translate(-50%, -50%);
+  }
+}
+</style>
