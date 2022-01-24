@@ -199,6 +199,8 @@ export default {
 
 <style lang="scss">
 .header-background {
+  overflow: hidden;
+
   &__video {
     position: absolute;
     top: 50%;
