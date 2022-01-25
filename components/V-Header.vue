@@ -93,7 +93,7 @@ export default {
       )
 
       gsap.fromTo(
-        '.clock',
+        '.clock, .scroll-down',
         { opacity: 1 },
         {
           opacity: 0,
