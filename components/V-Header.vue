@@ -189,7 +189,7 @@ export default {
 <style lang="scss">
 .header {
   --100vh: calc(100 * var(--vh, 1vh));
-  --y-padding: clamp(2rem, 4vw, 4rem);
+  --y-padding: clamp(4rem, 6vw, 6rem);
   --x-padding: clamp(1rem, 5vw, 4rem);
 
   display: flex;
