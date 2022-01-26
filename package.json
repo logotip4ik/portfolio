@@ -40,7 +40,7 @@
     "eslint-plugin-vue": "^8.2.0",
     "glslify-loader": "^2.0.0",
     "nuxt-gsap-module": "^1.6.0",
-    "nuxt-helmet": "^2.0.1",
+    "nuxt-helmet": "^3.0.0",
     "nuxt-vite": "^0.3.5",
     "prettier": "^2.5.1",
     "raw-loader": "^4.0.2",
