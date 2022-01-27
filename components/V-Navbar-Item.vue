@@ -72,8 +72,7 @@ export default {
 <style lang="scss">
 .navbar-item {
   margin: 0;
-  padding-block: 2.25rem;
-  padding-inline: calc(var(--step-0));
+  padding: 2.25rem var(--step-0);
 
   cursor: pointer;
 
