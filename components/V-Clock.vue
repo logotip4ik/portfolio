@@ -35,14 +35,13 @@ export default {
   color: lighten(black, 20);
   opacity: 0.95;
   margin: 0;
+  font-size: calc(var(--step--1) - 0.075rem);
 
   span:nth-child(2) {
     display: inline-block;
 
-    font-size: calc(var(--step--2) - 0.115rem);
-
     margin-inline-start: 0.25rem;
-    transform: translateY(-1px);
+    // transform: translateY(-1px);
   }
 }
 </style>
