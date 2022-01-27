@@ -42,12 +42,11 @@ export default {
   opacity: 0.95;
   margin: 0;
   font-size: var(--base-font-size);
-  font-weight: 200;
-  line-height: 1.25;
+  line-height: 1.1;
   text-align: center;
 
   svg {
-    transform: translateY(19%);
+    transform: translateY(19.5%);
 
     max-width: var(--step-0);
     height: auto;
@@ -55,8 +54,8 @@ export default {
 
   span:nth-of-type(2) {
     display: inline-block;
-    font-size: calc(var(--base-font-size) + 0.13rem);
-    transform: translateX(1px);
+    font-size: calc(var(--base-font-size) + 0.135rem);
+    font-weight: 200;
   }
 }
 </style>
