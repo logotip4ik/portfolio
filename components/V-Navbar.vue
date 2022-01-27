@@ -117,8 +117,7 @@ export default {
     font-size: var(--step-2);
 
     margin: 0;
-    padding-block: 1.75rem;
-    padding-inline: var(--step-0);
+    padding: 1.75rem var(--step--1);
     border: none;
     background-color: transparent;
 
@@ -131,6 +130,7 @@ export default {
     height: auto;
 
     padding: 0.75rem 0;
+    margin: 0 var(--step--1);
     color: inherit;
     border: none;
     background: transparent;
