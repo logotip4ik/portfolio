@@ -65,12 +65,12 @@ export default {
     '~modules/cloudflare-headers.js',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    // https://google-fonts.nuxtjs.org
+    '@nuxtjs/google-fonts',
     // https://vite.nuxtjs.org
     // 'nuxt-vite',
     // https://github.com/ivodolenc/nuxt-gsap-module
     'nuxt-gsap-module',
-    // https://google-fonts.nuxtjs.org
-    '@nuxtjs/google-fonts',
     // https://github.com/nuxt-community/svg-module
     '@nuxtjs/svg',
     // https://image.nuxtjs.org
@@ -140,11 +140,12 @@ export default {
   googleFonts: {
     families: {
       'Nunito+Sans': {
-        wght: [400],
+        wght: [200, 400],
       },
     },
     display: 'swap',
     download: true,
+    overwriting: true,
   },
 
   cloudflareHeaders: {
