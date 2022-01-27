@@ -29,7 +29,7 @@ export default {
     const gsap = this.$gsap
 
     // prettier-ignore
-    const opacityRangeMapper = gsap.utils.mapRange(0, scrollDownCircles.length, 1, 0.25)
+    const opacityRangeMapper = gsap.utils.mapRange(0, scrollDownCircles.length, 0.75, 0.25)
     const circlesTl = gsap.timeline({
       defaults: { duration: 1.75, ease: 'power2.inOut' },
       repeat: -1,
@@ -41,70 +41,49 @@ export default {
       { opacity: (key) => opacityRangeMapper(key) }
     )
 
-    scrollDownCircles.forEach((circle, key) => {
-      const yOffsetCssVarName = `--y-offset-${key + 1}`
-      const skewCssVarName = `--skew-${key + 1}`
+    circlesTl.fromTo(
+      scrollDownCircles,
+      { top: '0%' },
+      { top: '-200%', duration: 2.5, stagger: 0.15 },
+      '<+0.5'
+    )
 
-      circlesTl.fromTo(
-        circle,
-        { [yOffsetCssVarName]: '3rem', [skewCssVarName]: '7deg' },
-        { [yOffsetCssVarName]: '0.75rem', [skewCssVarName]: '0deg' },
-        `${0.125 + 0.1 * key}`
-      )
-    })
-
-    circlesTl.to(scrollDownCircles, { opacity: 0, duration: 0.75 }, '-=0.25')
+    circlesTl.to(scrollDownCircles, { opacity: 0, duration: 0.75 }, '-=0.45')
   },
 }
 </script>
 
 <style lang="scss">
 .scroll-down {
-  --ff-size: calc(var(--step--1) - 0.2vw);
+  --base-font-size: calc(var(--step--1) - 0.075rem);
 
-  font-size: var(--ff-size);
   margin: 0;
-  padding-bottom: 2rem;
 
-  writing-mode: vertical-lr;
   cursor: pointer;
 
-  transform: translateY(-25%);
-
   &__text {
+    // NOTE: font size same as in clock
+    font-size: calc(var(--base-font-size) + 0.13rem);
+    font-weight: 200;
     letter-spacing: 0.5px;
-    padding-inline-end: 2rem;
 
-    opacity: 0.85;
+    padding-inline-end: calc(var(--base-font-size) + 0.5rem);
   }
 
   &__circle {
-    $circles-number: 3;
-
-    @for $i from 0 to $circles-number {
-      --y-offset-#{$i + 1}: 0.5rem;
-      --skew-#{$i + 1}: 0deg;
-    }
-
-    --size: var(--ff-size);
-    --min-size: 12px;
+    --size: var(--base-font-size);
+    --min-size: 15px;
 
     position: absolute;
-    left: 0;
-
-    @for $i from 0 to $circles-number {
-      &:nth-child(#{$i + 3}) {
-        bottom: calc(100% + var(--y-offset-#{$i + 1}));
-        transform: skewY(var(--skew-#{$i + 1}));
-      }
-    }
+    right: 0;
+    top: 0;
 
     height: var(--size);
     width: var(--size);
     min-height: var(--min-size);
     min-width: var(--min-size);
 
-    box-shadow: 0 0 2px 0 rgba($color: #fff, $alpha: 1);
+    box-shadow: 0 0 1px 1px rgba($color: #fff, $alpha: 1);
     border-radius: 50%;
     background: transparent;
   }
