@@ -3,7 +3,7 @@ import fs from 'fs'
 import consola from 'consola'
 
 const logger = consola.withScope('nuxt:update-humans-txt')
-const lastBuildTime = new Date().toDateString()
+const lastBuildTime = new Date().toISOString().split('T')[0]
 
 export default function () {
   const self = this
