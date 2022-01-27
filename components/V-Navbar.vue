@@ -127,10 +127,10 @@ export default {
   }
 
   &__menu-button {
-    width: var(--step-5);
-    height: var(--step-5);
+    width: max(var(--step-5), 3.75rem);
+    height: auto;
 
-    margin-inline: var(--step-0);
+    padding: 0.75rem 0;
     color: inherit;
     border: none;
     background: transparent;
@@ -143,10 +143,6 @@ export default {
 
     &:active {
       transform: scale(0.9);
-    }
-
-    svg {
-      min-height: 15px;
     }
   }
 }
