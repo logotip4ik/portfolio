@@ -38,11 +38,13 @@
       </div>
     </div>
 
-    <V-Clock ref="headerClock" class="header__clock"></V-Clock>
-    <V-Scroll-Down
-      class="header__scroll-down"
-      @click.native="$scrollTo('.works')"
-    ></V-Scroll-Down>
+    <div class="header__bottom-bar">
+      <V-Clock ref="headerClock" class="header__bottom-bar__clock"></V-Clock>
+      <V-Scroll-Down
+        class="header__bottom-bar__scroll-down"
+        @click.native="$scrollTo('.works')"
+      ></V-Scroll-Down>
+    </div>
   </header>
 </template>
 
@@ -189,8 +191,6 @@ export default {
 <style lang="scss">
 .header {
   --100vh: calc(100 * var(--vh, 1vh));
-  --y-padding: clamp(3.75rem, 5.75vw, 5.75rem);
-  --x-padding: clamp(1rem, 5vw, 4rem);
 
   display: flex;
   justify-content: center;
@@ -230,19 +230,27 @@ export default {
     }
   }
 
-  &__clock {
-    top: calc(var(--100vh) - var(--y-padding));
-    left: var(--step--1);
+  &__bottom-bar {
+    --x-padding: var(--step--1);
 
-    color: lighten($color: grey, $amount: 1);
-  }
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 
-  &__scroll-down {
     position: absolute;
-    top: calc(var(--100vh) - calc(var(--y-padding)) + 2.25rem);
-    right: var(--step--1);
+    top: calc(var(--100vh) - var(--step--1));
+    left: var(--x-padding);
+    right: var(--x-padding);
 
-    color: lighten($color: grey, $amount: 7);
+    transform: translateY(-100%);
+
+    &__clock {
+      color: lighten($color: grey, $amount: 1);
+    }
+
+    &__scroll-down {
+      color: lighten($color: grey, $amount: 7);
+    }
   }
 
   &__navigation {
