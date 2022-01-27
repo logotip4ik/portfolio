@@ -63,7 +63,8 @@ export default {
 
 <style lang="scss">
 .contact {
-  padding-block: 4rem 8rem;
+  padding-top: 4rem;
+  padding-bottom: 8rem;
 
   overflow: hidden;
 

@@ -181,8 +181,7 @@ export default {
     max-width: 1100px;
     list-style-type: none;
     padding-inline-start: 0;
-    margin-block-start: 6%;
-    margin-inline: auto;
+    margin: 6% auto 0;
 
     &__item {
       &:is(:hover, :focus-visible) {

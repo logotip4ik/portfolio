@@ -129,7 +129,7 @@ export default {
       padding-inline-start: 0;
 
       &__link {
-        margin-block: 1rem;
+        margin: 1rem 0;
 
         a {
           font-size: calc(var(--step--2) + 0.1rem);
