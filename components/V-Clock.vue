@@ -42,6 +42,7 @@ export default {
   opacity: 0.95;
   margin: 0;
   font-size: var(--base-font-size);
+  font-weight: 200;
   line-height: 1.25;
   text-align: center;
 
