@@ -189,7 +189,7 @@ export default {
 <style lang="scss">
 .header {
   --100vh: calc(100 * var(--vh, 1vh));
-  --y-padding: clamp(4rem, 6vw, 6rem);
+  --y-padding: clamp(3.75rem, 5.75vw, 5.75rem);
   --x-padding: clamp(1rem, 5vw, 4rem);
 
   display: flex;
@@ -232,15 +232,15 @@ export default {
 
   &__clock {
     top: calc(var(--100vh) - var(--y-padding));
-    right: var(--x-padding);
+    left: var(--step--1);
 
-    color: lighten($color: grey, $amount: 2);
+    color: lighten($color: grey, $amount: 1);
   }
 
   &__scroll-down {
     position: absolute;
-    top: calc(var(--100vh) - calc(var(--y-padding)));
-    left: var(--step--1);
+    top: calc(var(--100vh) - calc(var(--y-padding)) + 2.25rem);
+    right: var(--step--1);
 
     color: lighten($color: grey, $amount: 7);
   }
