@@ -43,8 +43,8 @@ export default {
 
     circlesTl.fromTo(
       scrollDownCircles,
-      { top: '0%' },
-      { top: '-200%', duration: 2.5, stagger: 0.15 },
+      { bottom: '10%' },
+      { bottom: '125%', duration: 2.5, stagger: 0.15 },
       '<+0.5'
     )
 
@@ -76,7 +76,7 @@ export default {
 
     position: absolute;
     right: 0;
-    top: 0;
+    bottom: 10%;
 
     height: var(--size);
     width: var(--size);
