@@ -146,12 +146,7 @@ export default {
         },
         '-=0.25'
       )
-      tl.fromTo(
-        '.header__scroll-down',
-        { opacity: 0 },
-        { opacity: 1 },
-        '-=0.25'
-      )
+      tl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '-=0.25')
       tl.fromTo('.clock', { opacity: 0 }, { opacity: 1 })
 
       ScrollTrigger.create({
