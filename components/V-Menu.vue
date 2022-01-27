@@ -85,9 +85,7 @@ export default {
       this.prevAnimation = tl
 
       tl.set(this.$refs.menu, {
-        opacity: 1,
-        display: 'block',
-        pointerEvents: 'all',
+        autoAlpha: 1,
       })
 
       tl.fromTo(
@@ -96,13 +94,13 @@ export default {
           yPercent: 100,
           rotateX: -90,
           opacity: 0,
+          transformOrigin: 'center top',
+          transformStyle: 'preserve-3d',
         },
         {
           yPercent: 0,
           rotateX: 0,
           opacity: 1,
-          transformOrigin: 'center top',
-          transformStyle: 'preserve-3d',
           stagger: 0.05,
         }
       )
@@ -114,10 +112,9 @@ export default {
       )
       tl.fromTo(
         '.menu__back-item__line',
-        { transform: 'scaleX(0)' },
+        { transform: 'scaleX(0)', transformOrigin: 'left bottom' },
         {
           transform: 'scaleX(1)',
-          transformOrigin: 'left bottom',
           stagger: 0.05,
         },
         '<+0.25'
@@ -139,9 +136,7 @@ export default {
       if (this.prevAnimation) this.prevAnimation.kill()
 
       this.prevAnimation = this.$gsap.to(this.$refs.menu, {
-        opacity: 0,
-        pointerEvents: 'none',
-        display: 'none',
+        autoAlpha: 0,
       })
     },
   },
@@ -151,8 +146,6 @@ export default {
 <style lang="scss">
 .menu {
   --100vh: calc(100 * var(--vh, 1vh));
-
-  display: none;
 
   position: fixed;
   top: 0;
