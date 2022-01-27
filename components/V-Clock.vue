@@ -36,8 +36,6 @@ export default {
 .clock {
   --base-font-size: calc(var(--step--1) - 0.075rem);
 
-  position: absolute;
-
   color: lighten(black, 20);
   opacity: 0.95;
   margin: 0;
