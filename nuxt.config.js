@@ -153,6 +153,7 @@ export default {
   },
 
   sitemap: {
+    defaults: { lastmod: new Date().toISOString() },
     hostname: 'https://bogdankostyuk.xyz',
     gzip: true,
     exclude: ['/admin/**'],
