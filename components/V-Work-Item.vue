@@ -70,14 +70,6 @@ export default {
 
     const gsap = this.$gsap
 
-    // const maxOffset = gsap.utils.mapRange(
-    //   0.3,
-    //   1.75,
-    //   40,
-    //   70,
-    //   window.innerWidth / window.innerHeight
-    // )
-
     gsap.fromTo(
       work,
       { opacity: 0, y: 45 },
@@ -86,7 +78,7 @@ export default {
         y: 0,
         duration: 0.75,
         clearProps: 'y',
-        delay: 0.05 * this.i,
+        delay: 0.125 * this.i,
         scrollTrigger: { trigger: work, start: 'top bottom-=15%', once: true },
       }
     )
