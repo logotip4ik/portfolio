@@ -20,19 +20,37 @@ jobs:
           node-version: 14
           check-latest: true
 
+      - name: Setup yarn
+        run: npm i -g yarn
+
       - name: Cache Nuxt
         id: nuxt-cache-build
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.0
         with:
           path: |
             .nuxt
             node_modules
-          key: ${{ runner.os }}-nuxt-logotip4ik-portfolio-v4-build-${{ github.run_id }}
-          restore-keys: |
-            ${{ runner.os }}-nuxt-logotip4ik-portfolio-v4-build-
+          key: ${{ runner.os }}-nuxt-logotip4ik-portfolio-v4-build-${{ hashFiles(format('{0}{1}', github.workspace, '/package-lock.json')) }}
 
       - name: Install dependencies
-        run: npm install
+        if: steps.nuxt-cache-build.outputs.cache-hit != 'true'
+        run: yarn install
 
-      - name: Build
-        run: npm run build
+      - name: Building
+        id: build
+        run: yarn build
+
+      - name: Send message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
+            ✅ Build stage was successful
