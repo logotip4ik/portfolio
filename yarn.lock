@@ -8013,10 +8013,10 @@ nuxt-gsap-module@^1.6.0:
   dependencies:
     gsap "^3.9.1"
 
-nuxt-helmet@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/nuxt-helmet/-/nuxt-helmet-2.0.1.tgz#805b6042755c5d294bb108a7110efb193f5a6c26"
-  integrity sha512-Eujogts6RSu+4t7Y3BM29pspv+o7uw7cuSbFN6aDPfoLuXDIL2J/62eug4OgR7am+OavTD14kZX34Kw8ZdQHVA==
+nuxt-helmet@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/nuxt-helmet/-/nuxt-helmet-2.1.1.tgz#fbb86bc1bda6d7385602864f72f84e35ed0a947d"
+  integrity sha512-NexHXShgLMYGin4ovFoMEeRux+xQzKMyJnMPBMH5GdLxCL+pSqNrSQ13jCSbSrAsTAtWxxwvJH3afAD7ns6/zw==
   dependencies:
     consola "^2.11.3"
     helmet "^4.6.0"
