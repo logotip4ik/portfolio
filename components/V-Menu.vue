@@ -155,8 +155,8 @@ export default {
   height: 100%;
   height: var(--100vh);
 
-  pointer-events: none;
   opacity: 0;
+  visibility: hidden;
 
   &__back-item {
     $ITEMS_COUNT: 6;
