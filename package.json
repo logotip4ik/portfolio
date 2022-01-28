@@ -44,7 +44,7 @@
     "nuxt-vite": "^0.3.5",
     "prettier": "^2.5.1",
     "raw-loader": "^4.0.2",
-    "sass": "^1.45.2",
+    "sass": "^1.49.0",
     "sass-loader": "10"
   }
 }
