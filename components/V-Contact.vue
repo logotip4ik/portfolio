@@ -37,9 +37,9 @@ export default {
 
     gsap.fromTo(
       contactMarquee,
-      { top: 'random(-15, -20)%' },
+      { yPercent: 'random(-15, -20)' },
       {
-        top: 'random(15, 20)%',
+        yPercent: 'random(15, 20)',
         scrollTrigger: { trigger: contact, scrub: true },
       }
     )

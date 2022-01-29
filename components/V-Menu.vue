@@ -121,10 +121,10 @@ export default {
       )
       tl.fromTo(
         '.menu__back-item__content__title',
-        { opacity: 0, top: '100%' },
+        { opacity: 0, yPercent: 100 },
         {
           opacity: 1,
-          top: '0%',
+          yPercent: 0,
           duration: 1,
           ease: 'power4.out',
           stagger: 0.075,

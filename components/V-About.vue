@@ -85,12 +85,7 @@ export default {
     gsap.set('circle', { stroke: () => colorizer(Math.random()) })
 
     const imagesTl = gsap.timeline({
-      scrollTrigger: {
-        scrub: 1,
-        trigger: about,
-        start: 'top bottom',
-        end: 'bottom top',
-      },
+      scrollTrigger: { scrub: true, trigger: about },
     })
 
     imagesTl.fromTo(
@@ -118,9 +113,9 @@ export default {
       // parallax animation
       gsap.fromTo(
         item,
-        { top: 'random(-5, -10)%' },
+        { yPercent: 'random(-5, -10)' },
         {
-          top: 'random(5, 10)%',
+          yPercent: 'random(5, 10)',
           scrollTrigger: { trigger: item, scrub: true },
         }
       )
@@ -167,15 +162,14 @@ export default {
     &__word {
       display: inline-block;
 
-      position: relative;
-      top: 1rem;
       opacity: 0;
+      transform: translateY(100%);
 
-      transition: top 750ms ease, opacity 750ms ease;
+      transition: transform 750ms ease, opacity 750ms ease;
 
       &--revealed {
-        top: 0;
         opacity: 1;
+        transform: translateY(0%);
       }
     }
   }
