@@ -50,11 +50,14 @@ export default {
       {
         top: '50%',
         bottom: '50%',
+        duration: 0.5,
         scrollTrigger: {
           trigger: contact,
-          once: true,
           start: 'top bottom-=15%',
+          once: true,
         },
+        onComplete: () =>
+          contactMarqueeBlock.classList.add('contact__marquee__block--hidden'),
       }
     )
   },
@@ -95,7 +98,13 @@ export default {
       top: 0;
       bottom: 0;
 
-      background-color: #fff;
+      background-color: rgba($color: #ffffff, $alpha: 1);
+
+      transition: background-color 100ms ease;
+
+      &--hidden {
+        background-color: rgba($color: #ffffff, $alpha: 0);
+      }
     }
   }
 }
