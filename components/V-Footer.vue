@@ -66,11 +66,11 @@ export default {
 
     gsap.fromTo(
       footerContent,
-      { opacity: 0.75, y: 100 },
+      { opacity: 0.75, top: 100 },
       {
         opacity: 1,
-        y: 0,
-        scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: 0.75 },
+        top: 0,
+        scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: true },
       }
     )
   },
@@ -103,6 +103,8 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
+
+    position: relative;
 
     width: 100%;
 

@@ -7,7 +7,7 @@
     >
       <span class="sr-only">send me email</span>
       <span
-        v-for="key in 4"
+        v-for="key in 3"
         :key="key"
         ref="contactMarqueeText"
         aria-hidden="true"
@@ -29,7 +29,7 @@ export default {
     const gsap = this.$gsap
 
     gsap.to(contactMarqueeText, {
-      xPercent: -200,
+      xPercent: -100,
       repeat: -1,
       ease: 'none',
       duration: 15,
@@ -37,9 +37,9 @@ export default {
 
     gsap.fromTo(
       contactMarquee,
-      { yPercent: 'random(-15, -20)' },
+      { top: 'random(-15, -20)%' },
       {
-        yPercent: 'random(15, 20)',
+        top: 'random(15, 20)%',
         scrollTrigger: { trigger: contact, scrub: true },
       }
     )
@@ -80,6 +80,8 @@ export default {
 
     &__text {
       display: inline-block;
+
+      position: relative;
 
       font-size: calc(var(--step-5) * 1.25 + 3vw);
       margin: 0;

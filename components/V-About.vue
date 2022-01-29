@@ -96,8 +96,8 @@ export default {
 
     imagesTl.fromTo(
       aboutCircles,
-      { left: 'random(20, 80)%', bottom: 'random(20, 80)%' },
-      { bottom: 'random(20, 80)%' },
+      { left: 'random(20, 80)%', bottom: 'random(0, 100)%' },
+      { bottom: 'random(0, 100)%' },
       0
     )
 
@@ -119,9 +119,9 @@ export default {
       // parallax animation
       gsap.fromTo(
         item,
-        { yPercent: 'random(-5, -10)' },
+        { top: 'random(-5, -10)%' },
         {
-          yPercent: 'random(5, 10)',
+          top: 'random(5, 10)%',
           scrollTrigger: { trigger: item, scrub: true },
         }
       )
@@ -130,9 +130,9 @@ export default {
     aboutTextWords.forEach((word) => {
       gsap.fromTo(
         word,
-        { yPercent: 100, opacity: 0 },
+        { top: '100%', opacity: 0 },
         {
-          yPercent: 0,
+          top: '0%',
           opacity: 1,
           duration: 0.75,
           scrollTrigger: {
