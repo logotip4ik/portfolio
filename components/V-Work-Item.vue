@@ -72,11 +72,13 @@ export default {
 
     gsap.fromTo(
       work,
-      { opacity: 0, top: '2rem' },
+      { opacity: 0, y: '2rem' },
       {
         opacity: 1,
-        top: '0rem',
+        y: '0rem',
         duration: 0.75,
+        ease: 'back.out',
+        clearProps: 'y',
         delay: 0.125 * this.i,
         scrollTrigger: { trigger: work, start: 'top bottom-=15%', once: true },
       }
