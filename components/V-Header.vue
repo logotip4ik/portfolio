@@ -133,10 +133,10 @@ export default {
       )
       tl.fromTo(
         headerNavigationItems,
-        { opacity: 0, yPercent: -50 },
+        { opacity: 0, top: '-50%' },
         {
           opacity: 1,
-          yPercent: 0,
+          top: '0%',
           ease: 'back.out',
           duration: 0.8,
           stagger: {
@@ -266,6 +266,10 @@ export default {
     padding-inline: clamp(1rem, 4vw, 5rem);
     pointer-events: all;
     list-style-type: none;
+
+    & > * {
+      position: relative;
+    }
 
     @media screen and (max-width: 512px) {
       width: 100%;
