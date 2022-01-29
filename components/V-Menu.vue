@@ -107,8 +107,7 @@ export default {
       tl.fromTo(
         this.$refs.menu,
         { backgroundColor: 'transparent' },
-        { backgroundColor: '#030303' },
-        '<+0.3'
+        { backgroundColor: '#030303' }
       )
       tl.fromTo(
         '.menu__back-item__line',
@@ -117,7 +116,7 @@ export default {
           transform: 'scaleX(1)',
           stagger: 0.05,
         },
-        '<+0.25'
+        '<'
       )
       tl.fromTo(
         '.menu__back-item__content__title',
