@@ -133,7 +133,6 @@ export default {
         end: '50% 70%',
         scrub: true,
         once: true,
-        markers: true,
       },
     })
 
