@@ -44,6 +44,8 @@ export default {
   text-align: center;
 
   svg {
+    display: inline-block;
+
     transform: translateY(19.5%);
 
     max-width: var(--step-0);
@@ -51,7 +53,7 @@ export default {
   }
 
   span:nth-of-type(2) {
-    display: inline-block;
+    display: block;
     font-size: calc(var(--base-font-size) + 0.135rem);
     font-weight: 200;
   }
