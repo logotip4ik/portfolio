@@ -10,9 +10,7 @@
 
     <V-H2 aria-label="about section heading">About</V-H2>
 
-    <!-- <nuxt-content :document="about" class="about__text"></nuxt-content> -->
-
-    <p class="about__text">
+    <p ref="aboutText" class="about__text">
       <span class="sr-only">{{ about.text }}</span>
       <!-- eslint-disable -->
       <span
@@ -74,7 +72,8 @@ export default {
     },
   },
   mounted() {
-    const { about, aboutCircles, aboutTextWords, aboutTechItems } = this.$refs
+    const { about, aboutCircles, aboutTextWords, aboutText, aboutTechItems } =
+      this.$refs
 
     const gsap = this.$gsap
 
@@ -127,21 +126,21 @@ export default {
       )
     })
 
+    const aboutTextWordsTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: aboutText,
+        start: 'top 85%',
+        end: '50% 70%',
+        scrub: true,
+        once: true,
+        markers: true,
+      },
+    })
+
     aboutTextWords.forEach((word) => {
-      gsap.fromTo(
-        word,
-        { top: '100%', opacity: 0 },
-        {
-          top: '0%',
-          opacity: 1,
-          duration: 0.75,
-          scrollTrigger: {
-            trigger: word,
-            start: 'top bottom-=15%',
-            once: true,
-          },
-        }
-      )
+      aboutTextWordsTl.to(word, {
+        onUpdate: () => word.classList.add('about__text__word--revealed'),
+      })
     })
   },
 }
@@ -168,6 +167,17 @@ export default {
 
     &__word {
       display: inline-block;
+
+      position: relative;
+      top: 1rem;
+      opacity: 0;
+
+      transition: top 750ms ease, opacity 750ms ease;
+
+      &--revealed {
+        top: 0;
+        opacity: 1;
+      }
     }
   }
 
