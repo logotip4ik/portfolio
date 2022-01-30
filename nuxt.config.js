@@ -64,6 +64,8 @@ export default {
   buildModules: [
     '~modules/cloudflare-headers.js',
     '~modules/update-humans-txt.js',
+    // https://github.com/nuxt/postcss8
+    '@nuxt/postcss8',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://google-fonts.nuxtjs.org
@@ -92,6 +94,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    postcss: { plugins: { 'postcss-logical': {} } },
     extend(config, { isClient }) {
       // This enables to import .glsl, .frag, .vert, as modules
       // example: import vertexShader from '~/assets/shaders/vertex.glsl'
