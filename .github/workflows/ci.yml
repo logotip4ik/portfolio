@@ -41,16 +41,9 @@ jobs:
         run: yarn build
 
       - name: Send message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          message: |
-            Repository: `${{ github.repository }}`
-
-            Commit message: `${{ github.event.commits[0].message }}`
-
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-
-            ✅ Build stage was successful
+        run: |
+          curl --request POST \
+            --url https://logotype.npkn.net/tg-builds/ \
+            --header 'Content-Type: application/json' \
+            --header 'napkin-account-api-key: ${{ secrets.napkinAccountApiKey }}' \
+            --data '{ "repo": "${{ github.repository }}", "commit": "${{github.sha}}" }'
