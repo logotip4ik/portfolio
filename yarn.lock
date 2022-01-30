@@ -4242,7 +4242,7 @@ debug@^3.2.7:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.0, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2:
+debug@^4.0.0, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.2:
   version "4.3.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.3.tgz#04266e0b70a98d4462e6e288e38259213332b664"
   integrity sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==
@@ -8020,6 +8020,13 @@ nuxt-helmet@^2.1.1:
   dependencies:
     consola "^2.11.3"
     helmet "^4.6.0"
+
+nuxt-seo@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/nuxt-seo/-/nuxt-seo-1.6.0.tgz#9d03e48e90f354300444fadb325299fea0068f0a"
+  integrity sha512-J1RgFsSpVpc9NK72LD6u2kkfJED1ajubLgx0LZu7zGVatrBFkTz9xaPG66yr6WoKdi2aSdMgWhnPTvF9PjV2vg==
+  dependencies:
+    debug "^4.2.0"
 
 nuxt-vite@^0.3.5:
   version "0.3.5"
