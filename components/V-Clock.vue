@@ -55,8 +55,10 @@ export default {
 
   span:nth-of-type(2) {
     display: block;
-    font-size: calc(var(--base-font-size) + 0.135rem);
+    font-size: calc(var(--base-font-size) + 0.24rem);
     font-weight: 200;
+
+    transform: translateX(2px);
   }
 }
 </style>
