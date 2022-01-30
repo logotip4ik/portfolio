@@ -19,9 +19,6 @@ export default {
 
     gsap.utils.toArray('header, section').forEach((item, i) => {
       const start = 'top 45%'
-      // NOTE: this is need cuz we are pinning section with class of 'about'
-      // const end =
-      //   item.classList[0] === 'about' ? 'bottom+=100% 45%' : 'bottom 45%'
       const end = 'bottom 45%'
 
       ScrollTrigger.create({
