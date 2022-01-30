@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    htmlAttrs: { lang: 'en' },
+    htmlAttrs: { lang: 'en', dir: 'ltr' },
     meta: [
       { charset: 'utf-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
@@ -94,7 +94,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    postcss: { plugins: { 'postcss-logical': {} } },
+    postcss: { plugins: { 'postcss-logical': { dir: 'ltr' } } },
     extend(config, { isClient }) {
       // This enables to import .glsl, .frag, .vert, as modules
       // example: import vertexShader from '~/assets/shaders/vertex.glsl'
