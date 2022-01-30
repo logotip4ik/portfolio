@@ -42,6 +42,7 @@ export default {
   font-size: var(--base-font-size);
   line-height: 1.1;
   text-align: center;
+  white-space: nowrap;
 
   svg {
     display: inline-block;
