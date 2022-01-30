@@ -4,12 +4,11 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Bogdan Kostyuk | Front End Developer',
-    htmlAttrs: {
-      lang: 'en',
-    },
+    htmlAttrs: { lang: 'en' },
     meta: [
       { charset: 'utf-8' },
+      { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+      { 'http-equiv': 'Reply-to', content: 'contact@bogdankostyuk.xyz' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
@@ -19,6 +18,8 @@ export default {
       },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'all' },
+      { name: 'theme-color', content: '#303030' },
+      { name: 'apple-mobile-web-app-capable', content: 'yes' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -50,7 +51,7 @@ export default {
     'normalize.css/normalize.css',
     'locomotive-scroll/dist/locomotive-scroll.css',
     '~assets/css/global.css',
-    '~/assets/css/utils.css',
+    '~assets/css/utils.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -79,22 +80,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://github.com/AlekseyPleshkov/nuxt-social-meta
-    [
-      'nuxt-social-meta',
-      {
-        url: 'https://bogdankostyuk.xyz',
-        title: 'Bogdan Kostyuk | Front End Developer',
-        site_name: 'Bogdan Kostyuk | Front End Developer',
-        description:
-          'I will build you website as quick as possible and with high attention to details',
-        img: 'https://bogdankostyuk.xyz/logo.png',
-        img_size: { width: '1440', height: '1440' },
-        locale: 'en',
-        theme_color: '#030303',
-        twitter: '@BogdanKostyuk',
-      },
-    ],
+    // https://nuxt-seo.frostbutter.com/setup
+    'nuxt-seo',
     // https://github.com/victor-perez/nuxt-helmet
     'nuxt-helmet',
     // https://content.nuxtjs.org/installation
@@ -158,5 +145,31 @@ export default {
     hostname: 'https://bogdankostyuk.xyz',
     gzip: true,
     exclude: ['/admin/**'],
+  },
+
+  seo: {
+    url: 'https://bogdankostyuk.xyz',
+    baseUrl: 'https://bogdankostyuk.xyz',
+    name: 'Bogdan Kostyuk',
+    title: 'Front End Developer',
+    templateTitle: '%name% | %title%',
+    description:
+      'I will build you website as quick as possible and with high attention to details 👌',
+    author: false,
+    lang: 'en',
+    language: 'English',
+    og: {
+      type: 'website',
+      image: {
+        url: 'https://bogdankostyuk.xyz/logo.png',
+        width: '1440',
+        height: '1440',
+      },
+    },
+    twitter: {
+      site: '@BogdanKostyuk',
+      creator: '@BogdanKostyuk',
+      card: 'summary',
+    },
   },
 }
