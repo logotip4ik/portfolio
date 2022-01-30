@@ -30,7 +30,7 @@ jobs:
           path: |
             .nuxt
             node_modules
-          key: ${{ runner.os }}-nuxt-logotip4ik-portfolio-v4-build-${{ hashFiles(format('{0}{1}', github.workspace, '/package-lock.json')) }}
+          key: ${{ runner.os }}-nuxt-logotip4ik-portfolio-v4-build-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Install dependencies
         if: steps.nuxt-cache-build.outputs.cache-hit != 'true'
