@@ -104,7 +104,7 @@ export default {
           opacity: 1,
           scrollTrigger: {
             trigger: item,
-            start: 'top bottom-=20%',
+            start: 'top-=2% bottom-=12%',
             once: true,
           },
         }
