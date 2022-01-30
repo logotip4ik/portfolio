@@ -119,7 +119,7 @@ export default {
         '<'
       )
       tl.fromTo(
-        '.menu__back-item__content__title',
+        '.menu__back-item__content__title, .menu__back-item__content__links__item',
         { opacity: 0, yPercent: 100 },
         {
           opacity: 1,
@@ -128,7 +128,7 @@ export default {
           ease: 'power4.out',
           stagger: 0.075,
         },
-        '<-0.075'
+        '<-0.125'
       )
     },
     hideMenu() {
