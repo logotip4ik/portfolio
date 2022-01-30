@@ -13,6 +13,20 @@ export default function () {
     'humans.txt'
   )
 
+  self.nuxt.hook('builder:prepared', (nuxt) => {
+    const { content: websiteUrl } = nuxt.options.head.meta.find(
+      (meta) => meta.hid === 'url'
+    )
+
+    nuxt.options.head.link.push({
+      rel: 'author',
+      type: 'text/plain',
+      href: `${websiteUrl}/humans.txt`,
+    })
+
+    logger.success('Injected link to `humans.txt` into head')
+  })
+
   self.nuxt.hook('generate:done', () => {
     if (!fs.existsSync(humansTxtDistPath))
       return logger.error(
