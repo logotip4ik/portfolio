@@ -92,15 +92,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    postcss: {
-      plugins: {
-        // NOTE: this is an issue with postcss-values-parser
-        // here is an issue: https://github.com/shellscape/postcss-values-parser/issues/136
-        'postcss-custom-properties': false,
-        'postcss-values-parser': false,
-        'postcss-preset-env': false,
-      },
-    },
     extend(config, { isClient }) {
       // This enables to import .glsl, .frag, .vert, as modules
       // example: import vertexShader from '~/assets/shaders/vertex.glsl'
