@@ -34,7 +34,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.nuxt-cache-build.outputs.cache-hit != 'true'
-        run: yarn install
+        run: yarn install --non-interactive --force --verbose
 
       - name: Building
         id: build
