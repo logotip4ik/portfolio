@@ -15,7 +15,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'I will build you website as quick as possible and with high attention to details',
+          'I will build you website as quick as possible and with high attention to details👌',
       },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'all' },
@@ -40,7 +40,6 @@ export default {
         href: '/apple-touch-icon.png',
       },
       { rel: 'manifest', href: '/site.webmanifest' },
-      { rel: 'author', type: 'text/plain', href: '/humans.txt' },
     ],
   },
 
@@ -93,6 +92,7 @@ export default {
         img_size: { width: '1440', height: '1440' },
         locale: 'en',
         theme_color: '#030303',
+        twitter: '@BogdanKostyuk',
       },
     ],
     // https://github.com/victor-perez/nuxt-helmet
