@@ -58,16 +58,19 @@ export default {
       }
     )
 
-    gsap.to(titleContentBlock, {
-      bottom: '100%',
-      duration: 0.75,
-      force3D: true,
-      scrollTrigger: {
-        trigger: title.parentElement,
-        once: true,
-        start: 'top bottom-=20%',
-      },
-    })
+    gsap.fromTo(
+      titleContentBlock,
+      { scaleY: '100%' },
+      {
+        scaleY: '0%',
+        duration: 0.75,
+        scrollTrigger: {
+          trigger: title.parentElement,
+          once: true,
+          start: 'top bottom-=20%',
+        },
+      }
+    )
   },
 }
 </script>
@@ -89,6 +92,7 @@ export default {
       bottom: 0%;
 
       background-color: white;
+      transform-origin: top center;
     }
   }
 }
