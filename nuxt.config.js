@@ -90,6 +90,8 @@ export default {
     '@nuxt/content',
     // https://sitemap.nuxtjs.org
     '@nuxtjs/sitemap',
+    // https://github.com/nuxt-community/critters-module
+    '@nuxtjs/critters',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
