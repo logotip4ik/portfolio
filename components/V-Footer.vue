@@ -66,10 +66,10 @@ export default {
 
     gsap.fromTo(
       footerContent,
-      { opacity: 0.75, top: '10rem' },
+      { opacity: 0.75, yPercent: 25 },
       {
         opacity: 1,
-        top: '0rem',
+        yPercent: 0,
         scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: true },
       }
     )
