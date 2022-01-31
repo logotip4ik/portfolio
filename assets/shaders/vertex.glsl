@@ -98,7 +98,8 @@ void main() {
   // NOTE: really, idk how i came up with this effect, but i like it
   // newPos.x = mix(newPos.x, mouseVector.x * 10., (1.0 - dist) / 20.);
   // newPos.y = mix(newPos.y, mouseVector.y * 10., (1.0 - dist) / 20.);
-  newPos.xy = mix(newPos.xy, mouseVector.xy * 10., vec2((1.0 - dist) / 23.));
+  newPos.xy = mix(newPos.xy, mouseVector.xy * 10., vec2(dist / 30.));
+  // newPos.xy = mix(newPos.xy, mouseVector.xy * 10., vec2((1.0 - dist) / 23.));
 
   newPos.x += cos(time * 2. + newPos.y * 3. + distortion) / 50.;
   newPos.y -= sin(time * 2. + newPos.x * 3. + distortion) / 50.;
