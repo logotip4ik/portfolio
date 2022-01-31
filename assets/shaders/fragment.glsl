@@ -91,10 +91,12 @@ void main() {
   }
 
   vec3 baseColor = vec3(1., 0.9, 0.93);
+
+  const float distortionNormalizer = 4.;
   
-  float distortionR = cnoise(vec3(randomSeed * 10., length(vUv.xy), time / 10.)) / 5.;
-  float distortionG = cnoise(vec3(randomSeed * 10., dot(vUv.xy, vUv.yx), time / 10.)) / 5.;
-  float distortionB = cnoise(vec3(randomSeed * 10., vUv.x, time / 10.)) / 5.;
+  float distortionR = cnoise(vec3(randomSeed * 10., length(vUv.xy), time / 10.)) / distortionNormalizer;
+  float distortionG = cnoise(vec3(randomSeed * 10., dot(vUv.xy, vUv.yx), time / 10.)) / distortionNormalizer;
+  float distortionB = cnoise(vec3(randomSeed * 10., vUv.x, time / 10.)) / distortionNormalizer;
 
   vec3 color = baseColor + vec3(distortionR, distortionG, distortionB);
   color = clamp(color, vec3(0.65, 0.65, 0.65), vec3(1., 1., 1.));
