@@ -1,7 +1,7 @@
 <template>
   <section ref="about" class="about" aria-label="about section">
     <CircleSVG
-      v-for="key in 10"
+      v-for="key in 4"
       :key="key"
       ref="aboutCircles"
       class="about__bg-img"
@@ -77,10 +77,10 @@ export default {
 
     const gsap = this.$gsap
 
-    const colorizer = gsap.utils.interpolate('#787878', '#ffe6ed')
+    const colorizer = gsap.utils.interpolate('#878787', '#ffe6ed')
 
     gsap.set(aboutCircles, {
-      width: 'calc(var(--step-5) * random(0.85, 2))',
+      width: 'calc(var(--step-5) * random(1.5, 4))',
     })
     gsap.set('circle', { stroke: () => colorizer(Math.random()) })
 
@@ -147,6 +147,7 @@ export default {
   min-height: 100vh;
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   color: #303030;
+  overflow-x: hidden;
 
   &__text {
     max-width: 1100px;
@@ -215,7 +216,7 @@ export default {
     width: calc(var(--step-5) * 2);
     height: auto;
 
-    filter: drop-shadow(0 0 2rem #fff);
+    filter: drop-shadow(0 0 2rem #fff) blur(3px);
   }
 }
 </style>
