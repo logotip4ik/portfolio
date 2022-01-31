@@ -77,7 +77,7 @@ export default {
 
     const gsap = this.$gsap
 
-    const colorizer = gsap.utils.interpolate('#303030', '#ffe6ed')
+    const colorizer = gsap.utils.interpolate('#787878', '#ffe6ed')
 
     gsap.set(aboutCircles, {
       width: 'calc(var(--step-5) * random(0.85, 2))',
@@ -90,8 +90,8 @@ export default {
 
     imagesTl.fromTo(
       aboutCircles,
-      { left: 'random(20, 80)%', bottom: 'random(0, 100)%' },
-      { bottom: 'random(0, 100)%' },
+      { left: 'random(20, 80)%', top: 0, y: 'random(20, 80)vh' },
+      { y: 'random(20, 80)vh' },
       0
     )
 
