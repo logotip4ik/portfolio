@@ -40,6 +40,10 @@ jobs:
         id: build
         run: yarn build
 
+      - name: Hide log
+        run: |
+          echo "::add-mask::${{secrets.napkinAccountApiKey}}"
+
       - name: Send message
         run: |
           curl --request POST \
