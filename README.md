@@ -20,7 +20,7 @@ projects that i am using quite often
 
 > as backend
 >
-> Nothing used as background just added email forwarding
+> Nothing used as backend just added email forwarding to my [domain provider](https://porkbun.com/)
 
 ---
 
