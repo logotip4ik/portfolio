@@ -15,6 +15,20 @@
       <span aria-hidden="true">BK</span>
     </button>
 
+    <ul class="nav__sections" :style="{ '--sections-length': sections.length }">
+      <li
+        v-for="(section, key) in sections"
+        :key="key"
+        :class="{
+          nav__sections__section: true,
+          'nav__sections__section--active': activeSection === key,
+        }"
+        @click="activeSection = key"
+      >
+        {{ section.label }}
+      </li>
+    </ul>
+
     <!-- FIXME: tabindex, how to make it work correctly? -->
     <button
       ref="navMenuButton"
@@ -36,7 +50,16 @@ import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
 
 export default {
   components: { MenuIconSVG },
-  data: () => ({ isMenuActive: false }),
+  data: () => ({
+    isMenuActive: false,
+    activeSection: 1,
+    sections: [
+      { label: 'Home', scrollTo: '0' },
+      { label: 'Work', scrollTo: '.work' },
+      { label: 'About', scrollTo: '.about' },
+      { label: 'Contact', scrollTo: '.contact' },
+    ],
+  }),
   mounted() {
     const { navTitle } = this.$refs
 
@@ -102,8 +125,29 @@ export default {
     border: none;
     background-color: transparent;
 
-    pointer-events: all;
     cursor: pointer;
+    pointer-events: all;
+  }
+
+  &__sections {
+    display: grid;
+    grid-template-rows: repeat(var(--sections-length), 1fr);
+    gap: 0.25rem;
+
+    padding: 0;
+    list-style-type: none;
+
+    &__section {
+      position: relative;
+      text-align: right;
+
+      cursor: pointer;
+      pointer-events: all;
+    }
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   &__menu-button {
@@ -127,8 +171,7 @@ export default {
     }
 
     @media screen and (min-width: 768px) {
-      visibility: hidden;
-      opacity: 0;
+      display: none;
     }
   }
 }
