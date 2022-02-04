@@ -36,7 +36,7 @@ import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
 
 export default {
   components: { MenuIconSVG },
-  data: () => ({ isNavbarWhite: false }),
+  data: () => ({ isMenuActive: false }),
   mounted() {
     const { navTitle } = this.$refs
 
@@ -55,18 +55,10 @@ export default {
         },
       }
     )
-
-    this.$nuxt.$on('toggle-menu', (bool) =>
-      typeof bool === 'boolean'
-        ? (this.isNavbarWhite = bool)
-        : (this.isNavbarWhite = !this.isNavbarWhite)
-    )
   },
   methods: {
     toggleMenu() {
       this.$nuxt.$emit('toggle-menu')
-
-      document.querySelector('.menu').focus()
     },
     idleAnimation() {
       const lines = this.$refs.navMenuButtonSVG.children
@@ -115,7 +107,7 @@ export default {
   }
 
   &__menu-button {
-    width: max(var(--step-5), 3.75rem);
+    width: max(var(--step-5), 4rem);
     height: auto;
 
     padding: 0.75rem 0;
@@ -132,6 +124,11 @@ export default {
 
     &:active {
       transform: scale(0.9);
+    }
+
+    @media screen and (min-width: 768px) {
+      visibility: hidden;
+      opacity: 0;
     }
   }
 }
