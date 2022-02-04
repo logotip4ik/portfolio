@@ -1,6 +1,7 @@
 uniform float time;
 uniform float randomSeed;
 uniform float objectOpacity;
+uniform float noise;
 uniform vec2 resolution;
 
 varying vec2 vUv;
@@ -207,7 +208,7 @@ void main() {
   // vec2 newUv = gl_FragCoord.xy / resolution.xy;
   newUv = rotate( newUv, radians(rotation) );
 
-  float distorion = cnoise(vec4(newUv * noiseStrength, time / 30., randomSeed * 10.));
+  float distorion = cnoise(vec4(newUv * noiseStrength, time / 30., randomSeed * 10.))  * noise;
   newUv += distorion;
 
   newUv = repeatLine(newUv, lineNumber);

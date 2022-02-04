@@ -76,6 +76,7 @@ export default {
         time: { value: 0.0 },
         randomSeed: { value: Math.random() },
         objectOpacity: { value: 0.0 },
+        noise: { value: 0.0 },
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
@@ -101,6 +102,12 @@ export default {
         value: 1,
         duration: 1.75,
         delay: 0.125,
+      })
+      this.$gsap.to(this.object.material.uniforms.noise, {
+        value: 1,
+        duration: 4,
+        ease: 'power3.out',
+        delay: 0.1,
       })
     })
 
