@@ -11,6 +11,8 @@
   --step-4: clamp(2.33rem, calc(1.52rem + 4.08vw), 4.58rem);
   --step-5: clamp(2.8rem, calc(1.74rem + 5.31vw), 5.72rem);
 
+  --x-padding: clamp(1rem, 8vw, 7rem);
+
   --black-color: #030303;
   --ease-back: cubic-bezier(0.34, 1.66, 0.64, 1);
 }
