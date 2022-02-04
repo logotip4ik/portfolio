@@ -31,7 +31,8 @@
 html,
 body {
   height: 100%;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 0.6px;
 
   /* NOTE: this is messing up with asscroll, like it will jump a bit when user stops scrolling */
   /* scroll-behavior: smooth; */
