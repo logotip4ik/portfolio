@@ -204,10 +204,8 @@ export default {
   }
 
   &__bottom-bar {
-    --x-padding: var(--step--1);
-
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-end;
 
     position: absolute;
@@ -218,6 +216,7 @@ export default {
     transform: translateY(-100%);
 
     &__clock {
+      display: none;
       color: lighten($color: grey, $amount: 1);
     }
 
