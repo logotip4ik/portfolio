@@ -121,7 +121,7 @@ export default {
 
   googleFonts: {
     families: {
-      'Nunito+Sans': {
+      Raleway: {
         wght: [200, 400],
       },
     },
