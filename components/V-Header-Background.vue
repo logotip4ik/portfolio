@@ -90,6 +90,8 @@ export default {
     this.scene.add(this.object)
 
     // THREE: Prep
+    const resizeObserver = new ResizeObserver(this.resize)
+    resizeObserver.observe(this.renderer.domElement, { box: 'border-box' })
     this.resize()
 
     this.clock = new THREE.Clock()
@@ -115,21 +117,23 @@ export default {
 
       if (canvas.width !== width || canvas.height !== height) {
         this.renderer.setSize(width, height, false)
+
         this.camera.aspect = width / height
         this.camera.updateProjectionMatrix()
+
+        // NOTE: this will help for performance
+        this.camera.matrixAutoUpdate = false
+        this.camera.updateMatrix()
+
+        this.object.matrixAutoUpdate = false
+        this.object.updateMatrix()
+
+        // NOTE: not perfect, at least it will cover all the viewport
+        this.object.scale.x = 1.4 * (width / height)
       }
-
-      // NOTE: this will help for performance
-      this.camera.matrixAutoUpdate = false
-      this.camera.updateMatrix()
-
-      this.object.matrixAutoUpdate = false
-      this.object.updateMatrix()
     },
     render() {
       if (this.$scrollY() + 1 > window.innerHeight) return
-
-      this.resize()
 
       this.object.material.uniforms.time.value = this.clock.getElapsedTime()
 
@@ -160,7 +164,9 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba($color: #000000, $alpha: 0.4);
+    background-color: rgba($color: #000000, $alpha: 0.5);
+
+    pointer-events: none;
   }
 }
 </style>
