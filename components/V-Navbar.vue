@@ -1,12 +1,10 @@
 <template>
   <nav
     ref="nav"
-    :class="{ nav: true, 'nav--white': isNavbarWhite }"
+    class="nav container"
     role="navigation"
     aria-label="main navigation"
   >
-    <!-- TODO: check if menu is open, berofe emiting the toggle-menu, cuz it will cause to open the
-    menu is it closen -->
     <button
       ref="navTitle"
       class="nav__title serif"
@@ -40,21 +38,20 @@ export default {
   components: { MenuIconSVG },
   data: () => ({ isNavbarWhite: false }),
   mounted() {
-    const { nav } = this.$refs
+    const { navTitle } = this.$refs
 
     const gsap = this.$gsap
 
     gsap.fromTo(
-      nav,
-      { display: 'none', opacity: 0 },
+      navTitle,
+      { autoAlpha: 0 },
       {
-        display: 'flex',
-        opacity: 1,
+        autoAlpha: 1,
         scrollTrigger: {
           trigger: '.header',
-          start: 'top+=50% top',
-          end: 'bottom top',
-          scrub: 0.25,
+          start: `60% top+=60px`,
+          end: `bottom top+=60px`,
+          scrub: true,
         },
       }
     )
@@ -88,8 +85,6 @@ export default {
 
 <style lang="scss">
 .nav {
-  --x-padding: clamp(1rem, 4vw, 5rem);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,24 +95,18 @@ export default {
 
   padding: 0 var(--x-padding);
   width: 100%;
-  max-width: 100vw;
   pointer-events: none;
 
-  color: #303030;
+  color: darken($color: white, $amount: 27);
 
   transition: color 200ms ease;
-
-  &--white {
-    color: white;
-    transition-duration: 1000ms;
-  }
 
   &__title {
     color: currentColor;
     font-size: var(--step-2);
 
     margin: 0;
-    padding: 1.75rem var(--step--1);
+    padding: 1.75rem 0;
     border: none;
     background-color: transparent;
 
@@ -131,7 +120,7 @@ export default {
 
     padding: 0.75rem 0;
     margin: 0 var(--step--1);
-    color: inherit;
+    color: currentColor;
     border: none;
     background: transparent;
 
