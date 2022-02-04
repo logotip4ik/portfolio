@@ -160,6 +160,7 @@ export default {
     content: '';
 
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
     right: 0;
@@ -167,6 +168,27 @@ export default {
     background-color: rgba($color: #000000, $alpha: 0.75);
 
     pointer-events: none;
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 25%;
+    min-height: 2rem;
+    max-height: 11rem;
+
+    background: linear-gradient(
+      to top,
+      var(--black-color) 0%,
+      var(--black-color) 25%,
+      rgba(3, 3, 3, 0)
+    );
   }
 }
 </style>
