@@ -172,7 +172,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba($color: #000000, $alpha: 0.75);
+    background-color: rgba(3, 3, 3, 0.75);
 
     pointer-events: none;
   }
@@ -182,7 +182,7 @@ export default {
 
     position: absolute;
     z-index: 1;
-    bottom: 0;
+    bottom: -5px;
     left: 0;
 
     width: 100%;
