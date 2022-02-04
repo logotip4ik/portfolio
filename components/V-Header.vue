@@ -1,16 +1,5 @@
 <template>
   <header ref="header" class="header" role="banner" @pointermove="setMousePos">
-    <ul class="header__navigation" role="navigation" aria-label="navigation">
-      <V-Navbar-Item
-        v-for="(item, key) in links"
-        :key="key"
-        ref="headerNavigationItems"
-        @click="item.action"
-      >
-        {{ item.label }}
-      </V-Navbar-Item>
-    </ul>
-
     <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
 
     <div ref="headerContainer" class="header__container">
@@ -31,8 +20,8 @@
           v-for="(char, key) in subTitleText"
           :key="key"
           ref="headerContainerSubtitle"
-          v-html="char"
           aria-hidden="true"
+          v-html="char"
         ></span>
         <!-- eslint-enable -->
       </div>
@@ -131,21 +120,6 @@ export default {
         { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
         '-=0.75'
       )
-      tl.fromTo(
-        headerNavigationItems,
-        { opacity: 0, top: '-50%' },
-        {
-          opacity: 1,
-          top: '0%',
-          ease: 'back.out',
-          duration: 0.8,
-          stagger: {
-            each: 0.2,
-            from: window.innerWidth < 512 ? 'center' : 'end',
-          },
-        },
-        '-=0.25'
-      )
       tl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.75')
       tl.fromTo('.clock', { opacity: 0 }, { opacity: 1 }, '<+0.25')
 
@@ -211,7 +185,7 @@ export default {
 
   &__container {
     color: white;
-    mix-blend-mode: difference;
+    mix-blend-mode: exclusion;
 
     &__title {
       margin-bottom: 1.5rem;
