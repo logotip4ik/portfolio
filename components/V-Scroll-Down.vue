@@ -57,6 +57,7 @@ export default {
 .scroll-down {
   --base-font-size: calc(var(--step--1) - 0.075rem);
 
+  position: relative;
   margin: 0;
 
   cursor: pointer;
@@ -67,7 +68,7 @@ export default {
     font-weight: 200;
     letter-spacing: 0.5px;
 
-    padding-inline-end: calc(var(--base-font-size) + 0.5rem);
+    padding-inline-start: calc(var(--base-font-size) + 0.5rem);
   }
 
   &__circle {
@@ -75,7 +76,7 @@ export default {
     --min-size: 15px;
 
     position: absolute;
-    right: 0;
+    left: 0;
     bottom: 10%;
 
     height: var(--size);
