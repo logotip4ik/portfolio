@@ -96,7 +96,7 @@ export default {
 
     this.clock = new THREE.Clock()
 
-    this.$nuxt.$on('show-circle', () => {
+    this.$nuxt.$on('show-shader', () => {
       this.$gsap.to(this.object.material.uniforms.objectOpacity, {
         value: 1,
         duration: 1.75,
