@@ -185,12 +185,16 @@ export default {
 
   &__container {
     color: white;
-    mix-blend-mode: exclusion;
+    mix-blend-mode: difference;
 
     &__title {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
 
-      line-height: 1.125;
+      line-height: 1.2;
+
+      & > *:last-of-type {
+        margin-top: min(-0.5rem, calc(1vw * -1));
+      }
     }
 
     &__subtitle {
