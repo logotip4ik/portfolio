@@ -91,7 +91,7 @@ export default {
       right: -5px;
       bottom: 0%;
 
-      background-color: white;
+      background-color: var(--black-color);
       transform-origin: top center;
     }
   }

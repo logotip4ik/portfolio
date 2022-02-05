@@ -99,12 +99,12 @@ export default {
       top: 0;
       bottom: 0;
 
-      background-color: rgba($color: #ffffff, $alpha: 1);
+      background-color: rgba($color: #030303, $alpha: 1);
 
       transition: background-color 100ms ease;
 
       &--hidden {
-        background-color: rgba($color: #ffffff, $alpha: 0);
+        background-color: rgba($color: #030303, $alpha: 0);
       }
     }
   }
