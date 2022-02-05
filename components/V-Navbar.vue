@@ -15,16 +15,27 @@
       <span aria-hidden="true">BK</span>
     </button>
 
-    <ul class="nav__sections" :style="{ '--sections-length': sections.length }">
-      <li
-        v-for="(section, key) in sections"
-        :key="key"
-        class="nav__sections__section"
-        @click="$scrollTo(section.scrollTo)"
+    <div ref="navSections" class="nav__sections">
+      <div ref="navSectionsCircle" class="nav__sections__circle"></div>
+      <ul
+        ref="navSectionsList"
+        class="nav__sections__list"
+        :style="{ '--sections-length': sections.length }"
       >
-        {{ section.label }}
-      </li>
-    </ul>
+        <li
+          v-for="(section, key) in sections"
+          :key="key"
+          ref="navSectionsListSections"
+          :class="{
+            nav__sections__list__section: true,
+            'nav__sections__list__section--active': key === currentSection,
+          }"
+          @click="$scrollTo(section.scrollTo)"
+        >
+          {{ section.label }}
+        </li>
+      </ul>
+    </div>
 
     <!-- FIXME: tabindex, how to make it work correctly? -->
     <button
@@ -47,8 +58,10 @@ import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
 
 export default {
   components: { MenuIconSVG },
+  props: { currentSection: { type: Number, required: true, default: 0 } },
   data: () => ({
     isMenuActive: false,
+    isShowingCurrentSection: false,
     sections: [
       { label: 'Home', scrollTo: 0 },
       { label: 'Work', scrollTo: '.work' },
@@ -56,6 +69,21 @@ export default {
       { label: 'Contact', scrollTo: '.contact' },
     ],
   }),
+  watch: {
+    currentSection(val) {
+      const { navSections, navSectionsListSections, navSectionsCircle } =
+        this.$refs
+
+      const oneHeight =
+        navSections.clientHeight / navSectionsListSections.length
+
+      this.$gsap.to(navSectionsCircle, {
+        '--top-offset': val * oneHeight,
+        ease: 'back.out',
+        duration: 0.3,
+      })
+    },
+  },
   mounted() {
     const { navTitle } = this.$refs
 
@@ -126,43 +154,42 @@ export default {
   }
 
   &__sections {
-    display: grid;
-    grid-template-rows: repeat(var(--sections-length), 1fr);
-    gap: 0.25rem;
+    position: relative;
 
-    padding: 0;
-    list-style-type: none;
+    &__list {
+      display: grid;
+      grid-template-rows: repeat(var(--sections-length), 1fr);
+      gap: 0.25rem;
 
-    &__section {
-      position: relative;
-      text-align: right;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
 
-      cursor: pointer;
-      pointer-events: all;
+      &__section {
+        position: relative;
+        text-align: right;
 
-      &::after {
-        --size: calc(var(--step--1) - 0.75rem);
-        content: '';
-
-        position: absolute;
-        right: 100%;
-        top: 50%;
-        width: var(--size);
-        height: var(--size);
-
-        opacity: 0;
-        border-radius: 50%;
-        background-color: #ffe6ed;
-
-        transform: translate(-100%, -50%);
-        transition: opacity 300ms, transform 300ms;
-        transition-delay: 50ms;
+        cursor: pointer;
+        pointer-events: all;
       }
+    }
 
-      &:is(:hover, :focus)::after {
-        opacity: 0.75;
-        transform: translate(-50%, -50%);
-      }
+    &__circle {
+      --top-offset: 1px;
+      --size: calc(var(--step--2) - 0.6rem);
+
+      position: absolute;
+      top: var(--top-offset);
+      right: 105%;
+
+      width: var(--size);
+      height: var(--size);
+
+      border-radius: 50%;
+      opacity: 0.75;
+      background-color: #ffe6ed;
+
+      transform: translate(-50%, 50%);
     }
 
     @media screen and (max-width: 768px) {
@@ -175,7 +202,6 @@ export default {
     height: auto;
 
     padding: 0.75rem 0;
-    margin: 0 var(--step--1);
     color: currentColor;
     border: none;
     background: transparent;
