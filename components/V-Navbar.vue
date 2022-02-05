@@ -143,6 +143,30 @@ export default {
 
       cursor: pointer;
       pointer-events: all;
+
+      &::after {
+        --size: calc(var(--step--1) - 0.75rem);
+        content: '';
+
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        width: var(--size);
+        height: var(--size);
+
+        opacity: 0;
+        border-radius: 50%;
+        background-color: #ffe6ed;
+
+        transform: translate(-100%, -50%);
+        transition: opacity 300ms, transform 300ms;
+        transition-delay: 50ms;
+      }
+
+      &:is(:hover, :focus)::after {
+        opacity: 0.75;
+        transform: translate(-50%, -50%);
+      }
     }
 
     @media screen and (max-width: 768px) {
