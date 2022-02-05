@@ -4,7 +4,7 @@
       <Nuxt></Nuxt>
     </div>
     <V-Menu :current-section="currentSection"></V-Menu>
-    <V-Navbar></V-Navbar>
+    <V-Navbar :current-section="currentSection"></V-Navbar>
     <V-Loader></V-Loader>
   </div>
 </template>

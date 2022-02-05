@@ -49,7 +49,6 @@ export default {
   components: { MenuIconSVG },
   data: () => ({
     isMenuActive: false,
-    activeSection: 1,
     sections: [
       { label: 'Home', scrollTo: 0 },
       { label: 'Work', scrollTo: '.work' },
