@@ -132,7 +132,7 @@ export default {
   top: 1rem;
   left: 0;
 
-  padding: 0 var(--x-padding);
+  padding: 1rem var(--x-padding);
   width: 100%;
   pointer-events: none;
 
