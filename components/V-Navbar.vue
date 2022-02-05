@@ -19,11 +19,8 @@
       <li
         v-for="(section, key) in sections"
         :key="key"
-        :class="{
-          nav__sections__section: true,
-          'nav__sections__section--active': activeSection === key,
-        }"
-        @click="activeSection = key"
+        class="nav__sections__section"
+        @click="$scrollTo(section.scrollTo)"
       >
         {{ section.label }}
       </li>
@@ -54,7 +51,7 @@ export default {
     isMenuActive: false,
     activeSection: 1,
     sections: [
-      { label: 'Home', scrollTo: '0' },
+      { label: 'Home', scrollTo: 0 },
       { label: 'Work', scrollTo: '.work' },
       { label: 'About', scrollTo: '.about' },
       { label: 'Contact', scrollTo: '.contact' },
