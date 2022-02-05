@@ -68,6 +68,7 @@ export default {
 .contact {
   padding-top: 4rem;
   padding-bottom: 8rem;
+  background-color: var(--black-color);
 
   overflow: hidden;
 
@@ -76,7 +77,7 @@ export default {
 
     position: relative;
 
-    color: #303030;
+    color: darken($color: white, $amount: 40);
     text-decoration: none;
 
     overflow: hidden;
