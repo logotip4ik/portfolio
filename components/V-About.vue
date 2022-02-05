@@ -146,13 +146,14 @@ export default {
 
   min-height: 100vh;
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
-  color: #303030;
+  color: white;
+  background-color: var(--black-color);
   overflow-x: hidden;
 
   &__text {
     max-width: 1100px;
 
-    color: #303030;
+    color: darken($color: white, $amount: 40);
     font-size: var(--step-0);
     line-height: 1.5;
     letter-spacing: 0.1px;
@@ -200,13 +201,17 @@ export default {
         height: auto;
 
         opacity: 0.75;
-        filter: grayscale(1);
+        filter: grayscale(1) invert(1);
         transition: transform 300ms var(--ease-back);
 
         @media screen and (max-width: 500px) {
           max-width: 30vw;
         }
       }
+    }
+
+    & > *:last-child svg {
+      filter: grayscale(1);
     }
   }
 
