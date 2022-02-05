@@ -40,6 +40,8 @@ body {
   /* scroll-behavior: smooth; */
 
   -webkit-font-smoothing: antialiased;
+
+  background-color: var(--black-color);
 }
 
 ::selection {
