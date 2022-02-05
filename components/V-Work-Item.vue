@@ -7,15 +7,17 @@
       rel="noopener noreferrer"
       class="work__wrapper"
     >
-      <nuxt-img
-        ref="workImage"
-        :src="work.image"
-        :alt="work.title"
-        class="work__image"
-        format="webp"
-        sizes="sm:500 md:900 lg:100%"
-        quality="90"
-      />
+      <div ref="workImageWrapper" class="work__image__wrapper">
+        <nuxt-img
+          ref="workImage"
+          :src="work.image"
+          :alt="work.title"
+          class="work__image"
+          format="webp"
+          sizes="sm:500 md:900 lg:100%"
+          quality="90"
+        />
+      </div>
       <div class="work__content">
         <h3 class="work__content__title">
           {{ work.title }}
@@ -27,6 +29,7 @@
     </a>
     <a
       v-if="work.source"
+      ref="workSource"
       :href="work.source"
       :aria-label="`open source of ${work.title}`"
       target="_blank"
@@ -66,9 +69,16 @@ export default {
     },
   },
   mounted() {
-    const { work, workImage } = this.$refs
+    const { work, workImage, workSource, workImageWrapper } = this.$refs
 
     const gsap = this.$gsap
+
+    const imageResizeObserver = new ResizeObserver((ev) =>
+      gsap.to(workSource, {
+        '--image-height': `${workImageWrapper.clientHeight}px`,
+      })
+    )
+    imageResizeObserver.observe(workImage.$el)
 
     gsap.fromTo(
       work,
@@ -76,24 +86,20 @@ export default {
       {
         opacity: 1,
         y: '0rem',
-        duration: 0.75,
-        ease: 'back.out',
-        clearProps: 'y',
+        duration: 0.3,
         delay: 0.125 * this.i,
         scrollTrigger: { trigger: work, start: 'top bottom-=15%', once: true },
       }
     )
 
-    const initialObjectPosition = `center ${window.innerWidth < 700 ? 55 : 62}%`
-    const finalObjectPosition = `center ${window.innerWidth < 700 ? 45 : 38}%`
+    const imageMovement = 3
 
     // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
       workImage.$el,
-      // { objectPosition: `center random(-${maxOffset - 10}, -${maxOffset})px` },
-      { objectPosition: initialObjectPosition },
+      { yPercent: imageMovement * -1 },
       {
-        objectPosition: finalObjectPosition,
+        yPercent: imageMovement,
         scrollTrigger: { trigger: work, scrub: true },
       }
     )
@@ -102,72 +108,75 @@ export default {
 </script>
 
 <style lang="scss">
+@use 'sass:color';
+
 .work {
   --base-transition-props: 200ms cubic-bezier(0.5, 1, 0.89, 1);
 
   position: relative;
-  width: 100%;
-  height: 100%;
-  height: calc(60vw + 5rem);
-  max-height: 850px;
 
-  isolation: isolate;
-  overflow: hidden;
-  transition: transform var(--base-transition-props);
+  max-width: 475px;
 
   &__wrapper {
+    display: grid;
+    grid-template-rows: fit-content fit-content;
+    gap: 1rem;
+
     text-decoration: none;
+
+    &:is(:hover, :focus-within) {
+      img {
+        transform: scale(--active-scale);
+      }
+    }
   }
 
   &__image {
-    --top-offset: 70px;
-
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -10;
-
     width: 100%;
-    height: calc(100% + var(--top-offset));
+    height: 110%;
+
+    aspect-ratio: 1/1;
 
     object-fit: cover;
-    object-position: center calc(-1 * var(--top-offset));
+    object-position: center center;
 
     transition: transform var(--base-transition-props);
+
+    &__wrapper {
+      width: 100%;
+      max-height: 60vw;
+
+      overflow: hidden;
+    }
   }
 
   &__content {
-    $text-color: #eee;
-
-    height: 100%;
-
-    padding: 1rem 2rem;
-
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.45) 25%,
-      rgba(0, 0, 0, 0) 50%
+    $text-color: color.adjust(
+      $color: #fff,
+      $lightness: -25%,
     );
 
     &__title {
-      font-size: var(--step-2);
+      font-size: calc(var(--step-0) + 0.4rem);
       letter-spacing: 0.25px;
       color: $text-color;
 
       margin-bottom: 0;
     }
+
     &__tags {
       color: darken($text-color, 5);
-      font-size: calc(var(--step--2) + 0.15vw);
+      font-size: calc(var(--step--2) - 0rem);
     }
   }
 
   &__source {
+    --pd: 0.5rem;
+
     position: absolute;
     z-index: 1;
-    bottom: var(--step-2);
-    right: var(--step-2);
+    top: calc(var(--image-height) - var(--pd));
+    right: var(--pd);
 
     max-width: var(--step-3);
     max-height: var(--step-3);
@@ -178,16 +187,8 @@ export default {
     mix-blend-mode: screen;
 
     color: darken($color: white, $amount: 10);
-  }
 
-  &:is(:hover, :focus-within) {
-    --active-scale: 0.95;
-
-    transform: scale(var(--active-scale));
-
-    .work__image {
-      transform: scale(calc(2 - var(--active-scale)));
-    }
+    transform: translateY(-100%);
   }
 }
 </style>
