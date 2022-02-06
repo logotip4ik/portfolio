@@ -85,9 +85,6 @@ export default {
         duration: 0.3,
       })
     },
-    isShowingCurrentSection(val) {
-      console.log(val)
-    },
   },
   mounted() {
     const { navTitle } = this.$refs
