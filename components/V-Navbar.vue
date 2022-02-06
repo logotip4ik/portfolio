@@ -16,7 +16,13 @@
     </button>
 
     <div ref="navSections" class="nav__sections">
-      <div ref="navSectionsCircle" class="nav__sections__circle"></div>
+      <div
+        ref="navSectionsCircle"
+        :class="{
+          nav__sections__circle: true,
+          'nav__sections__circle--hidden': !isShowingCurrentSection,
+        }"
+      ></div>
       <ul
         ref="navSectionsList"
         class="nav__sections__list"
@@ -215,6 +221,12 @@ export default {
       background-color: #ffe6ed;
 
       transform: translate(-50%, 50%);
+      transition: right 300ms var(--ease-back), opacity 300ms;
+
+      &--hidden {
+        opacity: 0;
+        right: 110%;
+      }
     }
 
     @media screen and (max-width: 768px) {
