@@ -178,6 +178,8 @@ export default {
 
       &__section {
         position: relative;
+
+        font-size: var(--step--2);
         text-align: right;
 
         cursor: pointer;
