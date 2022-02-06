@@ -77,7 +77,7 @@ export default {
         this.$refs
 
       const oneHeight =
-        navSections.clientHeight / navSectionsListSections.length
+        1.5 + navSections.clientHeight / navSectionsListSections.length
 
       this.$gsap.to(navSectionsCircle, {
         '--top-offset': val * oneHeight,
