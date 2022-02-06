@@ -29,6 +29,8 @@
           :class="{
             nav__sections__list__section: true,
             'nav__sections__list__section--active': key === currentSection,
+            'nav__sections__list__section--non-active':
+              key !== currentSection && isShowingCurrentSection,
           }"
           @click="$scrollTo(section.scrollTo)"
         >
@@ -83,11 +85,15 @@ export default {
         duration: 0.3,
       })
     },
+    isShowingCurrentSection(val) {
+      console.log(val)
+    },
   },
   mounted() {
     const { navTitle } = this.$refs
 
     const gsap = this.$gsap
+    const ScrollTrigger = this.$ScrollTrigger
 
     gsap.fromTo(
       navTitle,
@@ -102,6 +108,14 @@ export default {
         },
       }
     )
+
+    ScrollTrigger.create({
+      trigger: 'header',
+      start: 'top+=35% top+=80px',
+      end: 'top+=35% top+=80px',
+      onEnter: () => (this.isShowingCurrentSection = true),
+      onLeaveBack: () => (this.isShowingCurrentSection = false),
+    })
   },
   methods: {
     toggleMenu() {
@@ -171,6 +185,18 @@ export default {
 
         cursor: pointer;
         pointer-events: all;
+
+        transition: color 100ms var(--ease-back);
+
+        &--non-active {
+          color: darken($color: white, $amount: 60);
+          transition: color 400ms var(--ease-back);
+        }
+
+        &:is(:hover, :focus) {
+          color: white;
+          transition: none;
+        }
       }
     }
 
