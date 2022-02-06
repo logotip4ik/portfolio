@@ -66,7 +66,7 @@ export default {
     isShowingCurrentSection: false,
     sections: [
       { label: 'Home', scrollTo: 0 },
-      { label: 'Work', scrollTo: '.work' },
+      { label: 'Work', scrollTo: '.works' },
       { label: 'About', scrollTo: '.about' },
       { label: 'Contact', scrollTo: '.contact' },
     ],
