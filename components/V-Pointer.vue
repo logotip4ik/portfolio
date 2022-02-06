@@ -6,7 +6,17 @@
 
 <script>
 export default {
-  data: () => ({ pointerSize: 12 }),
+  data: () => ({
+    isPointerInWindow: true,
+    pointerSize: 12,
+    pointerMoveAnimation: null,
+  }),
+  watch: {
+    isPointerInWindow(val) {
+      if (val) this.$refs.pointer.classList.remove('pointer--hidden')
+      else this.$refs.pointer.classList.add('pointer--hidden')
+    },
+  },
   mounted() {
     const { pointer } = this.$refs
 
@@ -17,14 +27,38 @@ export default {
         delay: 1,
         autoAlpha: 1,
         onEnd: () => {
-          window.addEventListener('pointermove', (ev) => {
-            const x = ev.clientX - window.innerWidth / 2 - this.pointerSize / 2
-            const y = ev.clientY - window.innerHeight / 2 - this.pointerSize / 2
-            gsap.to(pointer, { x, y, duration: 1, ease: 'expo.out' })
-          })
+          // prettier-ignore
+          document.addEventListener('pointermove', this.pointermoveHandler, false)
+          // prettier-ignore
+          document.addEventListener('pointerover', this.pointeroverHandler, false)
+          document.addEventListener('pointerout', this.pointeroutHandler, false)
         },
       })
     })
+  },
+  methods: {
+    pointeroutHandler(ev) {
+      // NOTE: taken from: https://stackoverflow.com/a/9229957/12038615
+      if (!ev.toElement && !ev.relatedTarget) this.isPointerInWindow = false
+    },
+    pointeroverHandler() {
+      // NOTE: taken from: https://stackoverflow.com/a/1672200/12038615
+      if (this.isPointerInWindow) return
+
+      this.isPointerInWindow = true
+    },
+    pointermoveHandler({ clientX, clientY }) {
+      const x = clientX - window.innerWidth / 2 - this.pointerSize / 2
+      const y = clientY - window.innerHeight / 2 - this.pointerSize / 2
+
+      this.pointerMoveAnimation = this.$gsap.to(this.$refs.pointer, {
+        x,
+        y,
+        opacity: this.isPointerInWindow ? 1 : 0,
+        duration: 1,
+        ease: 'expo.out',
+      })
+    },
   },
 }
 </script>
@@ -54,5 +88,11 @@ export default {
   pointer-events: none;
 
   mix-blend-mode: exclusion;
+
+  transition: opacity 300ms;
+
+  &--hidden {
+    opacity: 0 !important;
+  }
 }
 </style>
