@@ -165,7 +165,7 @@ export default {
       display: inline-block;
 
       opacity: 0;
-      transform: translateY(100%);
+      transform: translateY(50%);
 
       transition: transform 750ms ease, opacity 750ms ease;
 
