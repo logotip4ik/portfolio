@@ -154,8 +154,6 @@ export default {
 
 <style lang="scss">
 .header-background {
-  position: relative;
-
   &__canvas {
     display: block;
 
