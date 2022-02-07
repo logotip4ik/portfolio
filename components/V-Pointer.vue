@@ -57,8 +57,8 @@ export default {
         x,
         y,
         opacity: this.isPointerInWindow ? 1 : 0,
-        duration: 1,
-        ease: 'expo.out',
+        duration: 0.4,
+        ease: 'power2.out(1.5)',
       })
     },
   },
