@@ -181,7 +181,7 @@ export default {
     right: 0;
     bottom: 0;
 
-    background-color: rgba($color: #030303, $alpha: 0.3);
+    background-color: rgba($color: #030303, $alpha: 0.35);
     pointer-events: none;
 
     transition: opacity 400ms;
