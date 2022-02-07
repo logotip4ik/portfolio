@@ -18,6 +18,8 @@ export default {
     },
   },
   mounted() {
+    if ('ontouchstart' in window) return
+
     const { pointer } = this.$refs
 
     const gsap = this.$gsap
