@@ -187,6 +187,8 @@ export default {
     color: white;
     mix-blend-mode: difference;
 
+    cursor: default;
+
     &__title {
       margin-bottom: 1rem;
 
