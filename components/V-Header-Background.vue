@@ -61,10 +61,7 @@ export default {
 
     // THREE: Object
     const size = 1.4
-    const geometry = new THREE.PlaneBufferGeometry(
-      size * (window.innerWidth / window.innerHeight),
-      size
-    )
+    const geometry = new THREE.PlaneBufferGeometry(size, size)
 
     const material = new THREE.ShaderMaterial({
       fragmentShader,
@@ -86,6 +83,11 @@ export default {
       transparent: true,
     })
     this.object = new THREE.Mesh(geometry, material)
+
+    // NOTE: taken from: https://gist.github.com/ayamflow/96a1f554c3f88eef2f9d0024fc42940f
+    const dist = this.camera.position.z - this.object.position.z
+    this.camera.fov = 2 * Math.atan(size / (2 * dist)) * (180 / Math.PI)
+    this.camera.updateProjectionMatrix()
 
     // THREE: Adding to scene
     this.scene.add(this.object)
