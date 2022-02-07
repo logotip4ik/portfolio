@@ -31,14 +31,7 @@ export default {
         this.$gsap.fromTo(
           this.$refs.pointerArrow,
           { scale: 0, rotate: 0 },
-          {
-            scale: 1,
-            rotate: -45,
-            delay: 0.075,
-            origin: 'center center',
-            duration,
-            ease,
-          }
+          { scale: 1, rotate: -45, delay: 0.075, duration, ease }
         )
       } else {
         this.$gsap.to(this.$refs.pointer, { scale: idleSize, duration, ease })
