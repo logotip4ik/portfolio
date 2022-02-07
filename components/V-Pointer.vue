@@ -1,20 +1,49 @@
 <template>
-  <div ref="pointer" class="pointer" :style="{ '--size': `${pointerSize}px` }">
-    <!-- TODO: add arrow svg, for link animations -->
+  <div ref="pointer" class="pointer">
+    <ArrowLink ref="pointerArrow" class="pointer__arrow"></ArrowLink>
   </div>
 </template>
 
 <script>
+import ArrowLink from '~/assets/img/arrow-link.svg?inline'
+
 export default {
-  data: () => ({
-    isPointerInWindow: true,
-    pointerSize: 12,
-    pointerMoveAnimation: null,
-  }),
+  components: { ArrowLink },
+  data: () => ({ isPointerInWindow: true, isHovering: false }),
   watch: {
     isPointerInWindow(val) {
       if (val) this.$refs.pointer.classList.remove('pointer--hidden')
       else this.$refs.pointer.classList.add('pointer--hidden')
+    },
+    isHovering(val) {
+      const duration = 0.3
+      const ease = 'back.out'
+
+      const hoveringSize = 10
+      const idleSize = 1
+
+      if (val) {
+        this.$gsap.to(this.$refs.pointer, {
+          scale: hoveringSize,
+          duration,
+          ease,
+        })
+        this.$gsap.fromTo(
+          this.$refs.pointerArrow,
+          { scale: 0, rotate: 0 },
+          {
+            scale: 1,
+            rotate: -45,
+            delay: 0.075,
+            origin: 'center center',
+            duration,
+            ease,
+          }
+        )
+      } else {
+        this.$gsap.to(this.$refs.pointer, { scale: idleSize, duration, ease })
+        this.$gsap.to(this.$refs.pointerArrow, { scale: 0, duration, ease })
+      }
     },
   },
   mounted() {
@@ -37,6 +66,11 @@ export default {
         },
       })
     })
+
+    this.$nuxt.$on('toggle-hovering', (val) => {
+      if (typeof val === 'boolean') this.isHovering = val
+      else this.isHovering = !this.isHovering
+    })
   },
   methods: {
     pointeroutHandler(ev) {
@@ -50,10 +84,12 @@ export default {
       this.isPointerInWindow = true
     },
     pointermoveHandler({ clientX, clientY }) {
-      const x = clientX - window.innerWidth / 2 - this.pointerSize / 2
-      const y = clientY - window.innerHeight / 2 - this.pointerSize / 2
+      const pointerSize = this.$gsap.getProperty(this.$refs.pointer, 'width')
 
-      this.pointerMoveAnimation = this.$gsap.to(this.$refs.pointer, {
+      const x = clientX - window.innerWidth / 2 - pointerSize / 2
+      const y = clientY - window.innerHeight / 2 - pointerSize / 2
+
+      this.$gsap.to(this.$refs.pointer, {
         x,
         y,
         opacity: this.isPointerInWindow ? 1 : 0,
@@ -67,8 +103,6 @@ export default {
 
 <style lang="scss">
 .pointer {
-  --size: 12px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,8 +110,8 @@ export default {
   position: fixed;
   z-index: 100;
 
-  width: var(--size);
-  height: var(--size);
+  width: 12px;
+  height: 12px;
 
   top: 50%;
   left: 50%;
@@ -92,6 +126,15 @@ export default {
   mix-blend-mode: exclusion;
 
   transition: opacity 300ms;
+  transform-origin: center center;
+
+  &__arrow {
+    width: 22.5%;
+    height: auto;
+
+    transform: scale(0);
+    transform-origin: center center;
+  }
 
   &--hidden {
     opacity: 0 !important;
