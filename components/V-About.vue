@@ -193,6 +193,8 @@ export default {
     margin: 6% auto 0;
 
     &__item {
+      cursor: none;
+
       &:is(:hover, :focus-visible) {
         svg {
           transform: scale(0.9);
