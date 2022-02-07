@@ -19,7 +19,7 @@ export default {
       const duration = 0.3
       const ease = 'back.out'
 
-      const hoveringSize = 10
+      const hoveringSize = 7
       const idleSize = 1
 
       if (val) {
