@@ -167,6 +167,7 @@ export default {
 
     mix-blend-mode: screen;
 
+    cursor: none;
     color: darken($color: white, $amount: 10);
 
     transform: translateY(-100%);
