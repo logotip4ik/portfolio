@@ -144,6 +144,7 @@ export default {
 
     &__wrapper {
       width: 100%;
+      min-height: 21rem;
       max-height: 60vw;
 
       overflow: hidden;
