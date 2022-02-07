@@ -2,6 +2,7 @@
   <section ref="contact" class="contact">
     <a
       ref="contactMarquee"
+      v-hoverable
       class="contact__marquee"
       href="mailto:contact@bogdankostyuk.xyz"
     >

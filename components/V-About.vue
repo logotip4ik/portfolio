@@ -25,7 +25,12 @@
     </p>
 
     <ul class="about__tech" aria-label="tech I am using">
-      <li v-for="(icon, key) in icons" :key="key" ref="aboutTechItems">
+      <li
+        v-for="(icon, key) in icons"
+        :key="key"
+        ref="aboutTechItems"
+        v-hoverable
+      >
         <a
           class="about__tech__item"
           :aria-label="`link to ${icon.svg.slice(0, -3)} website`"

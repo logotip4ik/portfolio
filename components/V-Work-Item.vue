@@ -1,5 +1,5 @@
 <template>
-  <li ref="work" class="work">
+  <li ref="work" v-hoverable class="work">
     <a
       :href="work.live"
       :aria-label="`open live ${work.title}`"

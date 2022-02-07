@@ -11,7 +11,7 @@
           :key="key"
           class="footer__content__social__link"
         >
-          <V-Footer-Social-Link target="_blank" :href="link.href">
+          <V-Footer-Social-Link v-hoverable target="_blank" :href="link.href">
             {{ link.label }}
           </V-Footer-Social-Link>
         </li>
