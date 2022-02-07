@@ -11,7 +11,7 @@
           :key="key"
           class="footer__content__social__link"
         >
-          <V-Footer-Social-Link target="_blank" :href="link.href">
+          <V-Footer-Social-Link v-hoverable target="_blank" :href="link.href">
             {{ link.label }}
           </V-Footer-Social-Link>
         </li>
@@ -23,12 +23,21 @@
       <p class="footer__content__note">
         Made with
         <img
+          loading="lazy"
           src="~/assets/img/heart.png"
           width="60"
           height="60"
           alt="heart icon"
         />
-        in Ukraine
+        in
+        <img
+          title="Ukraine"
+          loading="lazy"
+          src="~/assets/img/ukraine-flag.png"
+          width="70"
+          height="70"
+          alt="heart icon"
+        />
       </p>
     </div>
     <div
@@ -64,7 +73,7 @@ export default {
 
     const gsap = this.$gsap
 
-    gsap.fromTo(
+    const revealAnim = gsap.fromTo(
       footerContent,
       { opacity: 0.75, yPercent: 25 },
       {
@@ -73,6 +82,11 @@ export default {
         scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: true },
       }
     )
+
+    setTimeout(() => {
+      revealAnim.scrollTrigger.update()
+      this.$locomotiveScroll.update()
+    }, 50)
   },
   methods: {
     getCurrentYear() {
@@ -109,7 +123,7 @@ export default {
     width: 100%;
 
     color: whitesmoke;
-    padding: 3rem clamp(1rem, 4vw, 5rem);
+    padding: 1rem clamp(1rem, 4vw, 5rem);
     background: var(--black-color);
     box-shadow: 5px -5px 1rem rgba($color: #000000, $alpha: 0.125);
 
@@ -145,6 +159,7 @@ export default {
     &__copyright {
       color: var(--secondary-color);
     }
+
     &__note {
       color: var(--secondary-color);
 
@@ -152,7 +167,24 @@ export default {
         width: var(--step--1);
         height: auto;
         transform: translateY(20%);
+
+        &:last-of-type {
+          width: calc(var(--step--1) + 0.15rem);
+        }
       }
+    }
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+
+      width: 1px;
+
+      background-color: rgba($color: white, $alpha: 0.125);
     }
 
     @media screen and (max-width: 600px) {
@@ -170,7 +202,7 @@ export default {
     width: 40%;
     max-width: min(15vw, 130px);
     height: auto;
-    color: #303030;
+    color: darken($color: white, $amount: 40);
 
     transition: transform 300ms, opacity 300ms;
 

@@ -64,7 +64,7 @@ export default {
         this.$enableScrollY()
       },
       onEnd: () => {
-        this.$nuxt.$emit('show-circle')
+        this.$nuxt.$emit('show-shader')
         this.$nuxt.$emit('show-layout')
       },
     })

@@ -30,10 +30,12 @@ export default {
 <style lang="scss">
 .works {
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
-  color: #303030;
+  color: white;
+  background-color: var(--black-color);
 
   &__list {
     display: grid;
+    justify-items: center;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: var(--step-3);
 
@@ -45,7 +47,7 @@ export default {
 
     @media screen and(min-width: 798px) {
       &__item:nth-child(even) {
-        margin-block-start: 2rem;
+        margin-block-start: 5rem;
       }
     }
   }

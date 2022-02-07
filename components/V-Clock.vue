@@ -36,7 +36,7 @@ export default {
 .clock {
   --base-font-size: calc(var(--step--1) - 0.075rem);
 
-  color: lighten(black, 20);
+  color: lighten(black, 35);
   opacity: 0.95;
   margin: 0;
   font-size: var(--base-font-size);
@@ -53,9 +53,14 @@ export default {
     height: auto;
   }
 
+  span:nth-of-type(1) {
+    font-feature-settings: 'lnum' 1;
+    font-variant-ligatures: no-historical-ligatures;
+  }
+
   span:nth-of-type(2) {
     display: block;
-    font-size: calc(var(--base-font-size) + 0.24rem);
+    font-size: calc(var(--base-font-size) + 0.05rem);
     font-weight: 200;
 
     transform: translateX(2px);
