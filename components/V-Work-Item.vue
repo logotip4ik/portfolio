@@ -82,17 +82,16 @@ export default {
 
     gsap.fromTo(
       work,
-      { opacity: 0, y: '2rem' },
+      { opacity: 0, y: 100 },
       {
         opacity: 1,
-        y: '0rem',
-        duration: 0.3,
-        delay: 0.125 * this.i,
-        scrollTrigger: { trigger: work, start: 'top bottom-=15%', once: true },
+        y: 0,
+        duration: 0.75,
+        scrollTrigger: { trigger: work, start: 'top bottom-=10%', once: true },
       }
     )
 
-    const imageMovement = 3
+    const imageMovement = 4
 
     // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
@@ -123,12 +122,6 @@ export default {
     gap: 1rem;
 
     text-decoration: none;
-
-    &:is(:hover, :focus-within) {
-      img {
-        transform: scale(--active-scale);
-      }
-    }
   }
 
   &__image {
@@ -190,6 +183,32 @@ export default {
     color: darken($color: white, $amount: 10);
 
     transform: translateY(-100%);
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: rgba($color: #030303, $alpha: 0.3);
+    pointer-events: none;
+
+    transition: opacity 400ms;
+  }
+
+  &:is(:focus, :hover) {
+    &::after {
+      opacity: 0;
+    }
+
+    .work__img {
+      transform: scale(1.1);
+    }
   }
 }
 </style>
