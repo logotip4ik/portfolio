@@ -48,7 +48,7 @@ export default {
       )
       // eslint-disable-next-line
       console.log(
-        "%cHello😁 curios friend! Currently I am looking👀 for a job as a front end developer, so write let's get in touch! If you are looking for a source📦 here you are: https://github.com/logotip4ik/portfolio",
+        "%cHello😁 curios friend! Currently I am looking👀 for a job as a front end developer, so let's get in touch! If you are looking for a source📦 here you are: https://github.com/logotip4ik/portfolio",
         'background-color: #030303;border-radius: 0.125rem;padding: 5px 10px;font-size:1rem;color: white;line-height:1.75'
       )
     },
