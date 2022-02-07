@@ -23,12 +23,21 @@
       <p class="footer__content__note">
         Made with
         <img
+          loading="lazy"
           src="~/assets/img/heart.png"
           width="60"
           height="60"
           alt="heart icon"
         />
-        in Ukraine
+        in
+        <img
+          title="Ukraine"
+          loading="lazy"
+          src="~/assets/img/ukraine-flag.png"
+          width="70"
+          height="70"
+          alt="heart icon"
+        />
       </p>
     </div>
     <div
@@ -158,6 +167,10 @@ export default {
         width: var(--step--1);
         height: auto;
         transform: translateY(20%);
+
+        &:last-of-type {
+          width: calc(var(--step--1) + 0.15rem);
+        }
       }
     }
 
