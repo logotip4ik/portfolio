@@ -74,6 +74,7 @@ export default {
       {
         opacity: 1,
         y: 0,
+        ease: 'power4.out',
         duration: 0.75,
         scrollTrigger: { trigger: work, start: 'top bottom-=10%', once: true },
       }
