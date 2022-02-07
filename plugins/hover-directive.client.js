@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export default function (context) {
+export default () => {
   const emitFactory = (name, value) => () => window.$nuxt.$emit(name, value)
 
   Vue.directive('hoverable', (node) => {
