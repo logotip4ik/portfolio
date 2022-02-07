@@ -68,7 +68,6 @@ export default {
 .contact {
   padding-top: 4rem;
   padding-bottom: 8rem;
-  background-color: var(--black-color);
 
   overflow: hidden;
 

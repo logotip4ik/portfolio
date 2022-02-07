@@ -148,7 +148,6 @@ export default {
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   color: white;
   background-color: var(--black-color);
-  overflow-x: hidden;
 
   &__text {
     max-width: 1100px;
