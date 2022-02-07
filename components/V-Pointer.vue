@@ -40,7 +40,7 @@ export default {
     },
   },
   mounted() {
-    if ('ontouchstart' in window) return
+    if ('ontouchstart' in document.documentElement) return
 
     const { pointer } = this.$refs
 
