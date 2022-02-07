@@ -64,6 +64,9 @@
 <script>
 import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
 
+const SVG_SIZE = 20
+const SVG_LINES_PADDING = 4
+
 export default {
   components: { MenuIconSVG },
   props: { currentSection: { type: Number, required: true, default: 0 } },
@@ -90,6 +93,10 @@ export default {
         ease: 'back.out',
         duration: 0.3,
       })
+    },
+    isMenuActive(val) {
+      if (val) this.closeAnimation()
+      else this.idleAnimation()
     },
   },
   mounted() {
@@ -119,21 +126,64 @@ export default {
       onEnter: () => (this.isShowingCurrentSection = true),
       onLeaveBack: () => (this.isShowingCurrentSection = false),
     })
+
+    this.$nuxt.$on('toggle-menu', (bool) => {
+      if (typeof bool === 'boolean') this.isMenuActive = bool
+      else this.isMenuActive = !this.isMenuActive
+    })
   },
   methods: {
     toggleMenu() {
       this.$nuxt.$emit('toggle-menu')
     },
-    idleAnimation() {
+    closeAnimation() {
       const lines = this.$refs.navMenuButtonSVG.children
 
-      this.$gsap.to(lines[0], { attr: { x1: 0.5 }, ease: 'back.out' })
-      this.$gsap.to(lines[1], { attr: { x1: 5.5 }, ease: 'back.out' })
+      const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
+
+      tl.to(lines[0], {
+        attr: {
+          x1: SVG_SIZE - SVG_LINES_PADDING,
+          y1: SVG_LINES_PADDING,
+          x2: SVG_LINES_PADDING,
+          y2: SVG_SIZE - SVG_LINES_PADDING,
+        },
+      })
+      tl.to(
+        lines[1],
+        {
+          attr: {
+            x1: SVG_LINES_PADDING,
+            y1: SVG_LINES_PADDING,
+            x2: SVG_SIZE - SVG_LINES_PADDING,
+            y2: SVG_SIZE - SVG_LINES_PADDING,
+          },
+        },
+        '<'
+      )
+    },
+    idleAnimation() {
+      if (this.isMenuActive) return
+
+      const lines = this.$refs.navMenuButtonSVG.children
+
+      const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
+
+      // NOTE: just reverting everything to default
+      tl.to(lines[0], { attr: { x1: 0.25, y1: 7.75, x2: 19.75, y2: 7.75 } })
+      // prettier-ignore
+      tl.to(lines[1], { attr: { x1: 5.25, y1: 11.75, x2: 19.75, y2: 11.75 } }, '<')
     },
     hoverAnimation() {
+      if (this.isMenuActive) return
+
       const lines = this.$refs.navMenuButtonSVG.children
 
-      this.$gsap.to(lines, { attr: { x1: 4.5 }, ease: 'back.out' })
+      // NOTE: just setting first x coordinate of two lines to padding
+      this.$gsap.to(lines, {
+        attr: { x1: SVG_LINES_PADDING },
+        ease: 'back.out',
+      })
     },
   },
 }
