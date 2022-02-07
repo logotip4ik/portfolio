@@ -93,7 +93,6 @@ export default {
 
     const imageMovement = 4
 
-    // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
       workImage.$el,
       { yPercent: imageMovement * -1 },
@@ -110,11 +109,10 @@ export default {
 @use 'sass:color';
 
 .work {
-  --base-transition-props: 200ms cubic-bezier(0.5, 1, 0.89, 1);
-
   position: relative;
 
   max-width: 475px;
+  will-change: transform;
 
   &__wrapper {
     display: grid;
@@ -132,8 +130,7 @@ export default {
 
     object-fit: cover;
     object-position: center center;
-
-    transition: transform var(--base-transition-props);
+    will-change: transform;
 
     &__wrapper {
       width: 100%;
@@ -204,10 +201,6 @@ export default {
   &:is(:focus, :hover) {
     &::after {
       opacity: 0;
-    }
-
-    .work__img {
-      transform: scale(1.1);
     }
   }
 }
