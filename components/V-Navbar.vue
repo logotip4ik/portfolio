@@ -1,12 +1,10 @@
 <template>
   <nav
     ref="nav"
-    :class="{ nav: true, 'nav--white': isNavbarWhite }"
+    class="nav container"
     role="navigation"
     aria-label="main navigation"
   >
-    <!-- TODO: check if menu is open, berofe emiting the toggle-menu, cuz it will cause to open the
-    menu is it closen -->
     <button
       ref="navTitle"
       class="nav__title serif"
@@ -16,6 +14,36 @@
     >
       <span aria-hidden="true">BK</span>
     </button>
+
+    <div ref="navSections" class="nav__sections">
+      <div
+        ref="navSectionsCircle"
+        :class="{
+          nav__sections__circle: true,
+          'nav__sections__circle--hidden': !isShowingCurrentSection,
+        }"
+      ></div>
+      <ul
+        ref="navSectionsList"
+        class="nav__sections__list"
+        :style="{ '--sections-length': sections.length }"
+      >
+        <li
+          v-for="(section, key) in sections"
+          :key="key"
+          ref="navSectionsListSections"
+          :class="{
+            nav__sections__list__section: true,
+            'nav__sections__list__section--active': key === currentSection,
+            'nav__sections__list__section--non-active':
+              key !== currentSection && isShowingCurrentSection,
+          }"
+          @click="$scrollTo(section.scrollTo)"
+        >
+          {{ section.label }}
+        </li>
+      </ul>
+    </div>
 
     <!-- FIXME: tabindex, how to make it work correctly? -->
     <button
@@ -36,51 +64,126 @@
 <script>
 import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
 
+const SVG_SIZE = 20
+const SVG_LINES_PADDING = 4
+
 export default {
   components: { MenuIconSVG },
-  data: () => ({ isNavbarWhite: false }),
+  props: { currentSection: { type: Number, required: true, default: 0 } },
+  data: () => ({
+    isMenuActive: false,
+    isShowingCurrentSection: false,
+    sections: [
+      { label: 'Home', scrollTo: 0 },
+      { label: 'Work', scrollTo: '.works' },
+      { label: 'About', scrollTo: '.about' },
+      { label: 'Contact', scrollTo: '.contact' },
+    ],
+  }),
+  watch: {
+    currentSection(val) {
+      const { navSections, navSectionsListSections, navSectionsCircle } =
+        this.$refs
+
+      const oneHeight =
+        1.5 + navSections.clientHeight / navSectionsListSections.length
+
+      this.$gsap.to(navSectionsCircle, {
+        '--top-offset': val * oneHeight,
+        ease: 'back.out',
+        duration: 0.3,
+      })
+    },
+    isMenuActive(val) {
+      if (val) this.closeAnimation()
+      else this.idleAnimation()
+    },
+  },
   mounted() {
-    const { nav } = this.$refs
+    const { navTitle } = this.$refs
 
     const gsap = this.$gsap
+    const ScrollTrigger = this.$ScrollTrigger
 
     gsap.fromTo(
-      nav,
-      { display: 'none', opacity: 0 },
+      navTitle,
+      { autoAlpha: 0 },
       {
-        display: 'flex',
-        opacity: 1,
+        autoAlpha: 1,
         scrollTrigger: {
           trigger: '.header',
-          start: 'top+=50% top',
-          end: 'bottom top',
-          scrub: 0.25,
+          start: `60% top+=60px`,
+          end: `bottom top+=60px`,
+          scrub: true,
         },
       }
     )
 
-    this.$nuxt.$on('toggle-menu', (bool) =>
-      typeof bool === 'boolean'
-        ? (this.isNavbarWhite = bool)
-        : (this.isNavbarWhite = !this.isNavbarWhite)
-    )
+    ScrollTrigger.create({
+      trigger: 'header',
+      start: 'top+=35% top+=80px',
+      end: 'top+=35% top+=80px',
+      onEnter: () => (this.isShowingCurrentSection = true),
+      onLeaveBack: () => (this.isShowingCurrentSection = false),
+    })
+
+    this.$nuxt.$on('toggle-menu', (bool) => {
+      if (typeof bool === 'boolean') this.isMenuActive = bool
+      else this.isMenuActive = !this.isMenuActive
+    })
   },
   methods: {
     toggleMenu() {
       this.$nuxt.$emit('toggle-menu')
+    },
+    closeAnimation() {
+      const lines = this.$refs.navMenuButtonSVG.children
 
-      document.querySelector('.menu').focus()
+      const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
+
+      tl.to(lines[0], {
+        attr: {
+          x1: SVG_SIZE - SVG_LINES_PADDING,
+          y1: SVG_LINES_PADDING,
+          x2: SVG_LINES_PADDING,
+          y2: SVG_SIZE - SVG_LINES_PADDING,
+        },
+      })
+      tl.to(
+        lines[1],
+        {
+          attr: {
+            x1: SVG_LINES_PADDING,
+            y1: SVG_LINES_PADDING,
+            x2: SVG_SIZE - SVG_LINES_PADDING,
+            y2: SVG_SIZE - SVG_LINES_PADDING,
+          },
+        },
+        '<'
+      )
     },
     idleAnimation() {
+      if (this.isMenuActive) return
+
       const lines = this.$refs.navMenuButtonSVG.children
 
-      this.$gsap.to(lines[0], { attr: { x1: 0.5 }, ease: 'back.out' })
-      this.$gsap.to(lines[1], { attr: { x1: 5.5 }, ease: 'back.out' })
+      const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
+
+      // NOTE: just reverting everything to default
+      tl.to(lines[0], { attr: { x1: 0.25, y1: 7.75, x2: 19.75, y2: 7.75 } })
+      // prettier-ignore
+      tl.to(lines[1], { attr: { x1: 5.25, y1: 11.75, x2: 19.75, y2: 11.75 } }, '<')
     },
     hoverAnimation() {
+      if (this.isMenuActive) return
+
       const lines = this.$refs.navMenuButtonSVG.children
 
-      this.$gsap.to(lines, { attr: { x1: 4.5 }, ease: 'back.out' })
+      // NOTE: just setting first x coordinate of two lines to padding
+      this.$gsap.to(lines, {
+        attr: { x1: SVG_LINES_PADDING },
+        ease: 'back.out',
+      })
     },
   },
 }
@@ -88,8 +191,6 @@ export default {
 
 <style lang="scss">
 .nav {
-  --x-padding: clamp(1rem, 4vw, 5rem);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -98,40 +199,99 @@ export default {
   top: 1rem;
   left: 0;
 
-  padding: 0 var(--x-padding);
+  padding: 1rem var(--x-padding);
   width: 100%;
-  max-width: 100vw;
   pointer-events: none;
 
-  color: #303030;
+  color: darken($color: white, $amount: 27);
 
   transition: color 200ms ease;
-
-  &--white {
-    color: white;
-    transition-duration: 1000ms;
-  }
 
   &__title {
     color: currentColor;
     font-size: var(--step-2);
 
     margin: 0;
-    padding: 1.75rem var(--step--1);
+    padding: 1.75rem 0;
     border: none;
     background-color: transparent;
 
-    pointer-events: all;
     cursor: pointer;
+    pointer-events: all;
+  }
+
+  &__sections {
+    position: relative;
+
+    pointer-events: all;
+
+    &__list {
+      display: grid;
+      grid-template-rows: repeat(var(--sections-length), 1fr);
+      gap: 0.25rem;
+
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+
+      &__section {
+        position: relative;
+
+        font-size: var(--step--2);
+        text-align: right;
+
+        cursor: pointer;
+        pointer-events: all;
+
+        transition: color 100ms var(--ease-back);
+
+        &--non-active {
+          color: darken($color: white, $amount: 60);
+          transition: color 400ms var(--ease-back);
+        }
+
+        &:is(:hover, :focus) {
+          color: white;
+          transition: none;
+        }
+      }
+    }
+
+    &__circle {
+      --top-offset: 1px;
+      --size: calc(var(--step--2) - 0.6rem);
+
+      position: absolute;
+      top: var(--top-offset);
+      right: 105%;
+
+      width: var(--size);
+      height: var(--size);
+
+      border-radius: 50%;
+      opacity: 0.75;
+      background-color: #ffe6ed;
+
+      transform: translate(-50%, 50%);
+      transition: right 300ms var(--ease-back), opacity 300ms;
+
+      &--hidden {
+        opacity: 0;
+        right: 110%;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   &__menu-button {
-    width: max(var(--step-5), 3.75rem);
+    width: max(var(--step-5), 4rem);
     height: auto;
 
     padding: 0.75rem 0;
-    margin: 0 var(--step--1);
-    color: inherit;
+    color: currentColor;
     border: none;
     background: transparent;
 
@@ -143,6 +303,10 @@ export default {
 
     &:active {
       transform: scale(0.9);
+    }
+
+    @media screen and (min-width: 768px) {
+      display: none;
     }
   }
 }

@@ -1,40 +1,18 @@
 <template>
   <div class="header-background">
     <canvas
-      v-show="isVideoHidden"
       ref="canvas"
       class="header-background__canvas"
       aria-label="landing background"
     ></canvas>
-    <video
-      v-show="!isVideoHidden"
-      ref="video"
-      loop
-      autoplay
-      preload
-      muted="muted"
-      playsinline
-      disablepictureinpicture
-      tabindex="-1"
-      class="header-background__video"
-      aria-label="landing background"
-      src="~/assets/img/circle-animation.mp4"
-    ></video>
   </div>
 </template>
 
 <script>
 import * as THREE from 'three'
-import {
-  RenderPass,
-  UnrealBloomPass,
-  ShaderPass,
-  EffectComposer,
-} from '~/helpers/three-exports.js'
 
 import fragmentShader from '~/assets/shaders/fragment.glsl'
 import vertexShader from '~/assets/shaders/vertex.glsl'
-import { AberrationShader } from '~/assets/shaders/CustomPass.js'
 
 export default {
   props: {
@@ -49,14 +27,11 @@ export default {
     scene: null,
     renderer: null,
     composer: null,
-    circle: null,
+    object: null,
     clock: null,
-    isVideoHidden: true,
   }),
   mounted() {
     const { canvas } = this.$refs
-
-    if (window.innerWidth < 700) return this.setupVideo()
 
     // THREE: Scene
     this.scene = new THREE.Scene()
@@ -64,13 +39,13 @@ export default {
     // THREE: Renderer
     this.renderer = new THREE.WebGLRenderer({
       canvas,
-      antialias: false,
+      antialias: true,
       stencil: false,
       depth: false,
     })
-    this.renderer.setPixelRatio(window.devicePixelRatio || 2)
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
-    this.renderer.setClearColor(0x000000, 1)
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3))
+    this.renderer.setClearColor(0x121212, 1)
+    this.renderer.sortObjects = false
     this.renderer.physicallyCorrectLights = true
     this.renderer.outputEncoding = THREE.sRGBEncoding
 
@@ -78,35 +53,15 @@ export default {
     this.camera = new THREE.PerspectiveCamera(
       70,
       window.innerWidth / window.innerHeight,
-      1,
-      2
+      0.001,
+      100
     )
 
-    this.camera.position.set(0, 0, 2)
-
-    // THREE: Composer
-    const renderPass = new RenderPass(this.scene, this.camera)
-    const bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(window.innerWidth, window.innerHeight),
-      0.75,
-      0.5,
-      0.125
-    )
-    const aberrationShaderPass = new ShaderPass(AberrationShader)
-    aberrationShaderPass.renderToScreen = true
-
-    this.composer = new EffectComposer(this.renderer)
-    this.composer.addPass(renderPass)
-    this.composer.addPass(bloomPass)
-    this.composer.addPass(aberrationShaderPass)
+    this.camera.position.set(0, 0, 1)
 
     // THREE: Object
-    const geometry = new THREE.CircleBufferGeometry(
-      // 1.25 / window.devicePixelRatio,
-      (window.innerWidth / 1600) * (window.devicePixelRatio || 2),
-      // window.innerWidth / 1500,
-      64
-    )
+    const size = 1.4
+    const geometry = new THREE.PlaneBufferGeometry(size, size)
 
     const material = new THREE.ShaderMaterial({
       fragmentShader,
@@ -116,36 +71,45 @@ export default {
       },
       uniforms: {
         time: { value: 0.0 },
+        randomSeed: { value: Math.random() },
+        objectOpacity: { value: 0.0 },
+        noise: { value: 0.0 },
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
-        randomSeed: { value: Math.random() },
-        mouseVector: { value: new THREE.Vector2(0, 0) },
-        circleOpacity: { value: 0 },
-        circleDistortion: { value: 1 },
       },
       depthTest: false,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
       transparent: true,
     })
-    this.circle = new THREE.Mesh(geometry, material)
+    this.object = new THREE.Mesh(geometry, material)
+
+    // NOTE: taken from: https://gist.github.com/ayamflow/96a1f554c3f88eef2f9d0024fc42940f
+    const dist = this.camera.position.z - this.object.position.z
+    this.camera.fov = 2 * Math.atan(size / (2 * dist)) * (180 / Math.PI)
+    this.camera.updateProjectionMatrix()
 
     // THREE: Adding to scene
-    this.scene.add(this.circle)
+    this.scene.add(this.object)
 
     // THREE: Prep
+    const resizeObserver = new ResizeObserver(this.resize)
+    resizeObserver.observe(this.renderer.domElement, { box: 'border-box' })
     this.resize()
 
     this.clock = new THREE.Clock()
 
-    window.addEventListener('resize', this.resize)
-
-    this.$nuxt.$on('show-circle', () => {
-      this.$gsap.to(this.circle.material.uniforms.circleOpacity, {
+    this.$nuxt.$on('show-shader', () => {
+      this.$gsap.to(this.object.material.uniforms.objectOpacity, {
         value: 1,
         duration: 1.75,
         delay: 0.125,
+      })
+      this.$gsap.to(this.object.material.uniforms.noise, {
+        value: 1,
+        duration: 4,
+        ease: 'power3.out',
+        delay: 0.1,
       })
     })
 
@@ -154,45 +118,35 @@ export default {
     this.$gsap.ticker.add(this.render)
   },
   methods: {
-    setupVideo() {
-      this.isVideoHidden = false
-
-      this.$nuxt.$on('show-circle', () => {
-        this.$gsap.to('video', {
-          opacity: 1,
-          duration: 1.75,
-          delay: 0.125,
-        })
-      })
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 700) window.location = ''
-      })
-    },
     resize() {
-      const width = window.innerWidth
-      const height = window.innerHeight
+      const canvas = this.renderer.domElement
 
-      this.renderer.setSize(width, height)
-      this.composer.setSize(width, height)
-      this.camera.aspect = width / height
+      const width = canvas.clientWidth
+      const height = canvas.clientHeight
 
-      this.camera.updateProjectionMatrix()
+      if (canvas.width !== width || canvas.height !== height) {
+        this.renderer.setSize(width, height, false)
 
-      // NOTE: this will help for performance
-      this.camera.matrixAutoUpdate = false
-      this.camera.updateMatrix()
+        this.camera.aspect = width / height
+        this.camera.updateProjectionMatrix()
 
-      this.circle.matrixAutoUpdate = false
-      this.circle.updateMatrix()
+        // NOTE: this will help for performance
+        this.camera.matrixAutoUpdate = false
+        this.camera.updateMatrix()
+
+        this.object.matrixAutoUpdate = false
+        this.object.updateMatrix()
+
+        // NOTE: not perfect, at least it will cover all the viewport
+        this.object.scale.x = 1.4 * (width / height)
+      }
     },
     render() {
       if (this.$scrollY() + 1 > window.innerHeight) return
 
-      this.circle.material.uniforms.mouseVector.value.lerp(this.mousePos, 0.025)
-      this.circle.material.uniforms.time.value = this.clock.getElapsedTime()
+      this.object.material.uniforms.time.value = this.clock.getElapsedTime()
 
-      this.composer.render()
+      this.renderer.render(this.scene, this.camera)
     },
   },
 }
@@ -200,21 +154,48 @@ export default {
 
 <style lang="scss">
 .header-background {
-  overflow: hidden;
+  &__canvas {
+    display: block;
 
-  &__video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    width: 100vw;
+    height: 100vh;
 
-    width: 120%;
-    height: 120%;
-
-    opacity: 0;
-    object-fit: cover;
     filter: blur(2px);
+  }
 
-    transform: translate(-50%, -50%);
+  &::after {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(3, 3, 3, 0.75);
+
+    pointer-events: none;
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    bottom: -5px;
+    left: 0;
+
+    width: 100%;
+    height: 25%;
+    min-height: 2rem;
+    max-height: 11rem;
+
+    background: linear-gradient(
+      to top,
+      var(--black-color) 0%,
+      var(--black-color) 25%,
+      rgba(3, 3, 3, 0)
+    );
   }
 }
 </style>

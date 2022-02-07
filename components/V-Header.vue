@@ -1,16 +1,5 @@
 <template>
   <header ref="header" class="header" role="banner" @pointermove="setMousePos">
-    <ul class="header__navigation" role="navigation" aria-label="navigation">
-      <V-Navbar-Item
-        v-for="(item, key) in links"
-        :key="key"
-        ref="headerNavigationItems"
-        @click="item.action"
-      >
-        {{ item.label }}
-      </V-Navbar-Item>
-    </ul>
-
     <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
 
     <div ref="headerContainer" class="header__container">
@@ -31,8 +20,8 @@
           v-for="(char, key) in subTitleText"
           :key="key"
           ref="headerContainerSubtitle"
-          v-html="char"
           aria-hidden="true"
+          v-html="char"
         ></span>
         <!-- eslint-enable -->
       </div>
@@ -67,16 +56,16 @@ export default {
     const { header, headerContainer, headerContainerSubtitle } = this.$refs
 
     const gsap = this.$gsap
-    const ScrollTrigger = this.$ScrollTrigger
 
     let tl
 
     // NOTE: why should i do this ?
     // cuz headerNavigationItems already exists in dom,
-    // but idk why, nuxt is rerendering the, in the client
+    // but idk why, nuxt is rerendering them, in the client
     // so previous references is not proper and gsap is
     // animating wrong elements
     setTimeout(() => {
+      // Scroll based animations
       gsap.fromTo(
         headerContainer,
         { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
@@ -87,7 +76,7 @@ export default {
           filter: 'blur(10px)',
           scrollTrigger: {
             scrub: 0.5,
-            trigger: headerContainer.parentElement,
+            trigger: header,
             start: 'top+=15% top',
             end: 'bottom-=35%, top',
           },
@@ -95,7 +84,7 @@ export default {
       )
 
       gsap.fromTo(
-        '.clock, .scroll-down',
+        '.scroll-down',
         { opacity: 1 },
         {
           opacity: 0,
@@ -108,9 +97,7 @@ export default {
         }
       )
 
-      // NOTE: this only works cuz i am server side rending content
-      const headerNavigationItems = gsap.utils.toArray('.navbar-item')
-
+      // MAIN Timeline
       tl = gsap.timeline({
         paused: true,
         delay: 0.25,
@@ -131,36 +118,13 @@ export default {
         { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
         '-=0.75'
       )
-      tl.fromTo(
-        headerNavigationItems,
-        { opacity: 0, top: '-50%' },
-        {
-          opacity: 1,
-          top: '0%',
-          ease: 'back.out',
-          duration: 0.8,
-          stagger: {
-            each: 0.2,
-            from: window.innerWidth < 512 ? 'center' : 'end',
-          },
-        },
-        '-=0.25'
-      )
       tl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.75')
-      tl.fromTo('.clock', { opacity: 0 }, { opacity: 1 }, '<+0.25')
-
-      ScrollTrigger.create({
-        trigger: header,
-        start: '50% top',
-        onEnter: () =>
-          headerNavigationItems.forEach((item) =>
-            item.style.setProperty('visibility', 'hidden')
-          ),
-        onLeaveBack: () =>
-          headerNavigationItems.forEach((item) =>
-            item.style.setProperty('visibility', 'visible')
-          ),
-      })
+      tl.fromTo(
+        '.nav__sections__list__section',
+        { opacity: 0 },
+        { opacity: 1, stagger: 0.05 },
+        '<+0.25'
+      )
     }, 10)
 
     // NOTE: this even is fired when loader is done with animation
@@ -213,10 +177,16 @@ export default {
     color: white;
     mix-blend-mode: difference;
 
-    &__title {
-      margin-bottom: 1.5rem;
+    cursor: default;
 
-      line-height: 1.125;
+    &__title {
+      margin-bottom: 1rem;
+
+      line-height: 1.2;
+
+      & > *:last-of-type {
+        margin-top: min(-0.5rem, calc(1vw * -1));
+      }
     }
 
     &__subtitle {
@@ -226,10 +196,8 @@ export default {
   }
 
   &__bottom-bar {
-    --x-padding: var(--step--1);
-
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-end;
 
     position: absolute;
@@ -240,6 +208,7 @@ export default {
     transform: translateY(-100%);
 
     &__clock {
+      display: none;
       color: lighten($color: grey, $amount: 1);
     }
 

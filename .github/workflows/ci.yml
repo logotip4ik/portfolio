@@ -25,7 +25,7 @@ jobs:
 
       - name: Cache Nuxt
         id: nuxt-cache-build
-        uses: actions/cache@v2.1.0
+        uses: actions/cache@v2.1.7
         with:
           path: |
             .nuxt
@@ -39,6 +39,10 @@ jobs:
       - name: Building
         id: build
         run: yarn build
+
+      - name: Hide log
+        run: |
+          echo "::add-mask::${{secrets.napkinAccountApiKey}}"
 
       - name: Send message
         run: |

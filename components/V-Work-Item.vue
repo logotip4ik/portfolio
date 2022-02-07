@@ -1,5 +1,5 @@
 <template>
-  <li ref="work" class="work">
+  <li ref="work" v-hoverable class="work">
     <a
       :href="work.live"
       :aria-label="`open live ${work.title}`"
@@ -7,15 +7,17 @@
       rel="noopener noreferrer"
       class="work__wrapper"
     >
-      <nuxt-img
-        ref="workImage"
-        :src="work.image"
-        :alt="work.title"
-        class="work__image"
-        format="webp"
-        sizes="sm:500 md:900 lg:100%"
-        quality="90"
-      />
+      <div ref="workImageWrapper" class="work__image__wrapper">
+        <nuxt-img
+          ref="workImage"
+          :src="work.image"
+          :alt="work.title"
+          class="work__image"
+          format="webp"
+          sizes="sm:500 md:900 lg:100%"
+          quality="90"
+        />
+      </div>
       <div class="work__content">
         <h3 class="work__content__title">
           {{ work.title }}
@@ -27,6 +29,7 @@
     </a>
     <a
       v-if="work.source"
+      ref="workSource"
       :href="work.source"
       :aria-label="`open source of ${work.title}`"
       target="_blank"
@@ -34,28 +37,16 @@
       class="work__source"
       title="source"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        aria-hidden="true"
-        role="img"
-        width="100%"
-        height="100%"
-        preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59c.4.07.55-.17.55-.38c0-.19-.01-.82-.01-1.49c-2.01.37-2.53-.49-2.69-.94c-.09-.23-.48-.94-.82-1.13c-.28-.15-.68-.52-.01-.53c.63-.01 1.08.58 1.23.82c.72 1.21 1.87.87 2.33.66c.07-.52.28-.87.51-1.07c-1.78-.2-3.64-.89-3.64-3.95c0-.87.31-1.59.82-2.15c-.08-.2-.36-1.02.08-2.12c0 0 .67-.21 2.2.82c.64-.18 1.32-.27 2-.27c.68 0 1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82c.44 1.1.16 1.92.08 2.12c.51.56.82 1.27.82 2.15c0 3.07-1.87 3.75-3.65 3.95c.29.25.54.73.54 1.48c0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-          fill="currentColor"
-        ></path>
-      </svg>
+      <SourceSVG></SourceSVG>
     </a>
   </li>
 </template>
 
 <script>
+import SourceSVG from '~/assets/img/source.svg?inline'
+
 export default {
+  components: { SourceSVG },
   props: {
     work: { type: Object, required: true, default: () => ({}) },
     i: { type: Number, required: false, default: 0 },
@@ -66,34 +57,37 @@ export default {
     },
   },
   mounted() {
-    const { work, workImage } = this.$refs
+    const { work, workImage, workSource, workImageWrapper } = this.$refs
 
     const gsap = this.$gsap
 
+    const imageResizeObserver = new ResizeObserver((ev) => {
+      if (!workSource) return
+      gsap.to(workSource, {
+        '--image-height': `${workImageWrapper.clientHeight}px`,
+      })
+    })
+    imageResizeObserver.observe(workImage.$el)
+
     gsap.fromTo(
       work,
-      { opacity: 0, y: '2rem' },
+      { opacity: 0, y: 100 },
       {
         opacity: 1,
-        y: '0rem',
+        y: 0,
+        ease: 'power4.out',
         duration: 0.75,
-        ease: 'back.out',
-        clearProps: 'y',
-        delay: 0.125 * this.i,
-        scrollTrigger: { trigger: work, start: 'top bottom-=15%', once: true },
+        scrollTrigger: { trigger: work, start: 'top bottom-=10%', once: true },
       }
     )
 
-    const initialObjectPosition = `center ${window.innerWidth < 700 ? 55 : 62}%`
-    const finalObjectPosition = `center ${window.innerWidth < 700 ? 45 : 38}%`
+    const imageMovement = 4
 
-    // NOTE: max objectPosition y should be the same as in css (see --top-offset)
     gsap.fromTo(
       workImage.$el,
-      // { objectPosition: `center random(-${maxOffset - 10}, -${maxOffset})px` },
-      { objectPosition: initialObjectPosition },
+      { yPercent: imageMovement * -1 },
       {
-        objectPosition: finalObjectPosition,
+        yPercent: imageMovement,
         scrollTrigger: { trigger: work, scrub: true },
       }
     )
@@ -102,72 +96,69 @@ export default {
 </script>
 
 <style lang="scss">
+@use 'sass:color';
+
 .work {
-  --base-transition-props: 200ms cubic-bezier(0.5, 1, 0.89, 1);
-
   position: relative;
-  width: 100%;
-  height: 100%;
-  height: calc(60vw + 5rem);
-  max-height: 850px;
 
-  isolation: isolate;
-  overflow: hidden;
-  transition: transform var(--base-transition-props);
+  max-width: 475px;
+  will-change: transform;
 
   &__wrapper {
+    display: grid;
+    grid-template-rows: fit-content fit-content;
+    gap: 1rem;
+
+    cursor: none;
     text-decoration: none;
   }
 
   &__image {
-    --top-offset: 70px;
-
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -10;
-
     width: 100%;
-    height: calc(100% + var(--top-offset));
+    height: 110%;
+
+    aspect-ratio: 1/1;
 
     object-fit: cover;
-    object-position: center calc(-1 * var(--top-offset));
+    object-position: center center;
+    will-change: transform;
 
-    transition: transform var(--base-transition-props);
+    &__wrapper {
+      width: 100%;
+      min-height: 21rem;
+      max-height: 60vw;
+
+      overflow: hidden;
+    }
   }
 
   &__content {
-    $text-color: #eee;
-
-    height: 100%;
-
-    padding: 1rem 2rem;
-
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.45) 25%,
-      rgba(0, 0, 0, 0) 50%
+    $text-color: color.adjust(
+      $color: #fff,
+      $lightness: -25%,
     );
 
     &__title {
-      font-size: var(--step-2);
+      font-size: calc(var(--step-0) + 0.4rem);
       letter-spacing: 0.25px;
       color: $text-color;
 
       margin-bottom: 0;
     }
+
     &__tags {
       color: darken($text-color, 5);
-      font-size: calc(var(--step--2) + 0.15vw);
+      font-size: calc(var(--step--2) - 0rem);
     }
   }
 
   &__source {
+    --pd: 0.5rem;
+
     position: absolute;
     z-index: 1;
-    bottom: var(--step-2);
-    right: var(--step-2);
+    top: calc(var(--image-height) - var(--pd));
+    right: var(--pd);
 
     max-width: var(--step-3);
     max-height: var(--step-3);
@@ -177,16 +168,31 @@ export default {
 
     mix-blend-mode: screen;
 
+    cursor: none;
     color: darken($color: white, $amount: 10);
+
+    transform: translateY(-100%);
   }
 
-  &:is(:hover, :focus-within) {
-    --active-scale: 0.95;
+  &::after {
+    content: '';
 
-    transform: scale(var(--active-scale));
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-    .work__image {
-      transform: scale(calc(2 - var(--active-scale)));
+    background-color: rgba($color: #030303, $alpha: 0.35);
+    pointer-events: none;
+
+    transition: opacity 400ms;
+  }
+
+  &:is(:focus, :hover) {
+    &::after {
+      opacity: 0;
     }
   }
 }

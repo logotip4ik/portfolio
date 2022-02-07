@@ -2,6 +2,7 @@
   <section ref="contact" class="contact">
     <a
       ref="contactMarquee"
+      v-hoverable
       class="contact__marquee"
       href="mailto:contact@bogdankostyuk.xyz"
     >
@@ -76,7 +77,7 @@ export default {
 
     position: relative;
 
-    color: #303030;
+    color: darken($color: white, $amount: 40);
     text-decoration: none;
 
     overflow: hidden;
@@ -98,12 +99,12 @@ export default {
       top: 0;
       bottom: 0;
 
-      background-color: rgba($color: #ffffff, $alpha: 1);
+      background-color: rgba($color: #030303, $alpha: 1);
 
       transition: background-color 100ms ease;
 
       &--hidden {
-        background-color: rgba($color: #ffffff, $alpha: 0);
+        background-color: rgba($color: #030303, $alpha: 0);
       }
     }
   }

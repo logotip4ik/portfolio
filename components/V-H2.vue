@@ -11,11 +11,7 @@
 <script>
 export default {
   props: {
-    yOffset: {
-      type: Object,
-      required: false,
-      default: () => ({ start: 0, end: 0 }),
-    },
+    rangeOfMovement: { type: Number, required: false, default: 25 },
   },
   computed: {
     defaultedYOffset() {
@@ -34,40 +30,28 @@ export default {
 
     const gsap = this.$gsap
 
-    // BUG: start offset is breaking everything, idk why
-    const startString =
-      this.defaultedYOffset.start !== 0
-        ? `top+=${this.defaultedYOffset.start}% bottom`
-        : 'top bottom'
-    const endString =
-      this.defaultedYOffset.end !== 0
-        ? `+=${50 + this.defaultedYOffset.end}% top`
-        : '+=50% top'
-
     gsap.fromTo(
       title,
-      { yPercent: 50 },
+      { yPercent: this.rangeOfMovement * -1 },
       {
-        yPercent: -50,
-        scrollTrigger: {
-          scrub: true,
-          trigger: title.parentElement,
-          start: startString,
-          end: endString,
-        },
+        yPercent: this.rangeOfMovement,
+        scrollTrigger: { scrub: true, trigger: title },
       }
     )
 
-    gsap.to(titleContentBlock, {
-      bottom: '100%',
-      duration: 0.75,
-      force3D: true,
-      scrollTrigger: {
-        trigger: title.parentElement,
-        once: true,
-        start: 'top bottom-=20%',
-      },
-    })
+    gsap.fromTo(
+      titleContentBlock,
+      { scaleY: '100%' },
+      {
+        scaleY: '0%',
+        duration: 0.75,
+        scrollTrigger: {
+          trigger: title.parentElement,
+          once: true,
+          start: 'top bottom-=20%',
+        },
+      }
+    )
   },
 }
 </script>
@@ -88,7 +72,8 @@ export default {
       right: -5px;
       bottom: 0%;
 
-      background-color: white;
+      background-color: var(--black-color);
+      transform-origin: top center;
     }
   }
 }

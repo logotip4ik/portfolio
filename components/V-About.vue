@@ -1,7 +1,7 @@
 <template>
   <section ref="about" class="about" aria-label="about section">
     <CircleSVG
-      v-for="key in 10"
+      v-for="key in 4"
       :key="key"
       ref="aboutCircles"
       class="about__bg-img"
@@ -25,7 +25,12 @@
     </p>
 
     <ul class="about__tech" aria-label="tech I am using">
-      <li v-for="(icon, key) in icons" :key="key" ref="aboutTechItems">
+      <li
+        v-for="(icon, key) in icons"
+        :key="key"
+        ref="aboutTechItems"
+        v-hoverable
+      >
         <a
           class="about__tech__item"
           :aria-label="`link to ${icon.svg.slice(0, -3)} website`"
@@ -77,10 +82,10 @@ export default {
 
     const gsap = this.$gsap
 
-    const colorizer = gsap.utils.interpolate('#303030', '#ffe6ed')
+    const colorizer = gsap.utils.interpolate('#878787', '#ffe6ed')
 
     gsap.set(aboutCircles, {
-      width: 'calc(var(--step-5) * random(0.85, 2))',
+      width: 'calc(var(--step-5) * random(1.5, 4))',
     })
     gsap.set('circle', { stroke: () => colorizer(Math.random()) })
 
@@ -90,8 +95,8 @@ export default {
 
     imagesTl.fromTo(
       aboutCircles,
-      { left: 'random(20, 80)%', bottom: 'random(0, 100)%' },
-      { bottom: 'random(0, 100)%' },
+      { left: 'random(20, 80)%', top: 0, y: 'random(20, 80)vh' },
+      { y: 'random(20, 80)vh' },
       0
     )
 
@@ -146,12 +151,13 @@ export default {
 
   min-height: 100vh;
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
-  color: #303030;
+  color: white;
+  background-color: var(--black-color);
 
   &__text {
     max-width: 1100px;
 
-    color: #303030;
+    color: darken($color: white, $amount: 40);
     font-size: var(--step-0);
     line-height: 1.5;
     letter-spacing: 0.1px;
@@ -163,7 +169,7 @@ export default {
       display: inline-block;
 
       opacity: 0;
-      transform: translateY(100%);
+      transform: translateY(50%);
 
       transition: transform 750ms ease, opacity 750ms ease;
 
@@ -187,6 +193,8 @@ export default {
     margin: 6% auto 0;
 
     &__item {
+      cursor: none;
+
       &:is(:hover, :focus-visible) {
         svg {
           transform: scale(0.9);
@@ -199,13 +207,17 @@ export default {
         height: auto;
 
         opacity: 0.75;
-        filter: grayscale(1);
+        filter: grayscale(1) invert(1);
         transition: transform 300ms var(--ease-back);
 
         @media screen and (max-width: 500px) {
           max-width: 30vw;
         }
       }
+    }
+
+    & > *:last-child svg {
+      filter: grayscale(1);
     }
   }
 
@@ -215,7 +227,7 @@ export default {
     width: calc(var(--step-5) * 2);
     height: auto;
 
-    filter: drop-shadow(0 0 2rem #fff);
+    filter: drop-shadow(0 0 2rem #fff) blur(3px);
   }
 }
 </style>
