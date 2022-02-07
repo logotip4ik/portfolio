@@ -173,6 +173,8 @@ export default {
   &__sections {
     position: relative;
 
+    pointer-events: all;
+
     &__list {
       display: grid;
       grid-template-rows: repeat(var(--sections-length), 1fr);
