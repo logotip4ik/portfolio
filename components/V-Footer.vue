@@ -64,7 +64,7 @@ export default {
 
     const gsap = this.$gsap
 
-    gsap.fromTo(
+    const revealAnim = gsap.fromTo(
       footerContent,
       { opacity: 0.75, yPercent: 25 },
       {
@@ -73,6 +73,11 @@ export default {
         scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: true },
       }
     )
+
+    setTimeout(() => {
+      revealAnim.scrollTrigger.update()
+      this.$locomotiveScroll.update()
+    }, 50)
   },
   methods: {
     getCurrentYear() {
@@ -109,7 +114,7 @@ export default {
     width: 100%;
 
     color: whitesmoke;
-    padding: 3rem clamp(1rem, 4vw, 5rem);
+    padding: 1rem clamp(1rem, 4vw, 5rem);
     background: var(--black-color);
     box-shadow: 5px -5px 1rem rgba($color: #000000, $alpha: 0.125);
 
@@ -145,6 +150,7 @@ export default {
     &__copyright {
       color: var(--secondary-color);
     }
+
     &__note {
       color: var(--secondary-color);
 
@@ -153,6 +159,19 @@ export default {
         height: auto;
         transform: translateY(20%);
       }
+    }
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+
+      width: 1px;
+
+      background-color: rgba($color: white, $alpha: 0.125);
     }
 
     @media screen and (max-width: 600px) {
@@ -170,7 +189,7 @@ export default {
     width: 40%;
     max-width: min(15vw, 130px);
     height: auto;
-    color: #303030;
+    color: darken($color: white, $amount: 40);
 
     transition: transform 300ms, opacity 300ms;
 
