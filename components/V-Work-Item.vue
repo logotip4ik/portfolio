@@ -107,6 +107,7 @@ export default {
     grid-template-rows: fit-content fit-content;
     gap: 1rem;
 
+    cursor: none;
     text-decoration: none;
   }
 
