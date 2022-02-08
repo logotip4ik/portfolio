@@ -85,8 +85,11 @@ export default {
       const { navSections, navSectionsListSections, navSectionsCircle } =
         this.$refs
 
-      const oneHeight =
-        1.5 + navSections.clientHeight / navSectionsListSections.length
+      // NOTE: when desktop navigation is hidden
+      // it doesn't have any width or height
+      const sectionsHeight = navSections.clientHeight || 94
+
+      const oneHeight = 1.5 + sectionsHeight / navSectionsListSections.length
 
       this.$gsap.to(navSectionsCircle, {
         '--top-offset': val * oneHeight,
