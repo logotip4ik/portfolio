@@ -133,10 +133,17 @@ export default {
       width: 100%;
       height: 40vw;
       min-height: 20rem;
-      max-height: 40rem;
+      max-height: 30rem;
 
       overflow: hidden;
-      aspect-ratio: 1/1;
+
+      @supports (aspect-ratio: 1/1) {
+        aspect-ratio: 1/1;
+
+        height: unset;
+        max-height: unset;
+        min-height: unset;
+      }
     }
   }
 
