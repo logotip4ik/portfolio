@@ -10,7 +10,7 @@
 <script>
 export default {
   props: {
-    rangeOfMovement: { type: Number, required: false, default: 25 },
+    rangeOfMovement: { type: Number, required: false, default: 15 },
   },
   computed: {
     defaultedYOffset() {
