@@ -1,9 +1,8 @@
 <template>
   <h2 ref="title" class="title-h2 serif">
     <span class="sr-only">{{ defaultSlotText }}</span>
-    <div class="title-h2__content" aria-hidden="true">
+    <div ref="titleContent" class="title-h2__content" aria-hidden="true">
       <slot></slot>
-      <div ref="titleContentBlock" class="title-h2__content__block"></div>
     </div>
   </h2>
 </template>
@@ -26,10 +25,11 @@ export default {
     },
   },
   mounted() {
-    const { title, titleContentBlock } = this.$refs
+    const { title, titleContent } = this.$refs
 
     const gsap = this.$gsap
 
+    // Parallax animation
     gsap.fromTo(
       title,
       { yPercent: this.rangeOfMovement * -1 },
@@ -39,16 +39,18 @@ export default {
       }
     )
 
+    // Reveal animation
     gsap.fromTo(
-      titleContentBlock,
-      { scaleY: '100%' },
+      titleContent,
+      { yPercent: 110 },
       {
-        scaleY: '0%',
+        yPercent: 0,
         duration: 0.75,
+        ease: 'power2.out(1.5)',
         scrollTrigger: {
-          trigger: title.parentElement,
-          once: true,
+          trigger: title,
           start: 'top bottom-=20%',
+          once: true,
         },
       }
     )
@@ -59,22 +61,6 @@ export default {
 <style lang="scss">
 .title-h2 {
   text-align: center;
-
-  &__content {
-    display: inline-block;
-
-    position: relative;
-
-    &__block {
-      position: absolute;
-      top: 0;
-      left: -5px;
-      right: -5px;
-      bottom: 0%;
-
-      background-color: var(--black-color);
-      transform-origin: top center;
-    }
-  }
+  overflow: hidden;
 }
 </style>
