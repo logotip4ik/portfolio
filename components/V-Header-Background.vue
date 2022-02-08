@@ -158,6 +158,8 @@ export default {
 
 <style lang="scss">
 .header-background {
+  overflow: hidden;
+
   &__canvas {
     display: block;
 
@@ -186,7 +188,7 @@ export default {
 
     position: absolute;
     z-index: 1;
-    bottom: -5px;
+    bottom: 0;
     left: 0;
 
     width: 100%;
