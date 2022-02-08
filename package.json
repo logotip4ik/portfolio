@@ -39,7 +39,7 @@
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^3.1.0",
-    "eslint-plugin-vue": "^8.4.0",
+    "eslint-plugin-vue": "^8.4.1",
     "glslify-loader": "^2.0.0",
     "nuxt-gsap-module": "^1.6.0",
     "nuxt-helmet": "^2.1.1",
