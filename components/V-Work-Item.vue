@@ -81,14 +81,16 @@ export default {
       }
     )
 
-    const imageMovement = 3.5
-    const randomMultiplier = gsap.utils.random(0.875, 1.125)
+    const imageMovementBase = 3.5
+    const randomMultiplier = gsap.utils.random(0.85, 1.15)
+
+    const imageMovement = imageMovementBase * randomMultiplier
 
     gsap.fromTo(
       workImage.$el,
-      { yPercent: randomMultiplier * imageMovement * -1 },
+      { yPercent: -50 + imageMovement * -1 },
       {
-        yPercent: randomMultiplier * imageMovement,
+        yPercent: -50 + imageMovement,
         scrollTrigger: { trigger: work, scrub: true },
       }
     )
@@ -115,21 +117,26 @@ export default {
   }
 
   &__image {
+    position: relative;
+    top: 50%;
+    left: 0;
+
     width: 100%;
     height: 110%;
 
-    aspect-ratio: 1/1;
-
     object-fit: cover;
     object-position: center center;
+
     will-change: transform;
 
     &__wrapper {
       width: 100%;
-      min-height: 21rem;
-      max-height: 60vw;
+      height: 40vw;
+      min-height: 20rem;
+      max-height: 40rem;
 
       overflow: hidden;
+      aspect-ratio: 1/1;
     }
   }
 
