@@ -70,7 +70,7 @@ export default {
   width: 100%;
   max-width: 100vw;
 
-  padding-top: 4rem 0 8rem;
+  padding: 4rem 0 8rem;
 
   overflow: hidden;
 
