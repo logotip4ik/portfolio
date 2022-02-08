@@ -81,13 +81,14 @@ export default {
       }
     )
 
-    const imageMovement = 4
+    const imageMovement = 3
+    const randomMultiplier = gsap.utils.random(0.875, 1.125)
 
     gsap.fromTo(
       workImage.$el,
-      { yPercent: imageMovement * -1 },
+      { yPercent: randomMultiplier * imageMovement * -1 },
       {
-        yPercent: imageMovement,
+        yPercent: randomMultiplier * imageMovement,
         scrollTrigger: { trigger: work, scrub: true },
       }
     )
