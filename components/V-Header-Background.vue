@@ -15,13 +15,6 @@ import fragmentShader from '~/assets/shaders/fragment.glsl'
 import vertexShader from '~/assets/shaders/vertex.glsl'
 
 export default {
-  props: {
-    mousePos: {
-      type: Object,
-      required: true,
-      default: () => new THREE.Vector2(),
-    },
-  },
   data: () => ({
     isShaderRunning: false,
     camera: null,

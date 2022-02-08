@@ -1,6 +1,6 @@
 <template>
-  <header ref="header" class="header" role="banner" @pointermove="setMousePos">
-    <V-Header-Background :mouse-pos="mousePos" class="header__canvas" />
+  <header ref="header" class="header" role="banner">
+    <V-Header-Background class="header__canvas" />
 
     <div ref="headerContainer" class="header__container">
       <h1 class="header__container__title">
@@ -38,12 +38,9 @@
 </template>
 
 <script>
-import { Vector2 } from 'three'
-
 export default {
   data() {
     return {
-      mousePos: new Vector2(0, 0),
       links: [
         { label: 'Work', action: () => this.$scrollTo('.works') },
         { label: 'About', action: () => this.$scrollTo('.about') },
@@ -129,20 +126,6 @@ export default {
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
-
-    gsap.ticker.add(() => {
-      // NOTE: this will make circle collapse back to it's original position
-      const newMousePosX = this.mousePos.x - this.mousePos.x / 30
-      const newMousePosY = this.mousePos.y - this.mousePos.y / 30
-
-      this.mousePos.set(newMousePosX, newMousePosY)
-    })
-  },
-  methods: {
-    setMousePos({ clientX, clientY }) {
-      this.mousePos.setX(clientX / this.$refs.header.clientWidth - 0.5)
-      this.mousePos.setY((clientY / this.$refs.header.clientHeight - 0.5) * -1)
-    },
   },
 }
 </script>
