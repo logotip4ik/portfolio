@@ -23,6 +23,7 @@ export default {
     },
   },
   data: () => ({
+    isShaderRunning: false,
     camera: null,
     scene: null,
     renderer: null,
@@ -100,6 +101,8 @@ export default {
     this.clock = new THREE.Clock()
 
     this.$nuxt.$on('show-shader', () => {
+      this.isShaderRunning = true
+
       this.$gsap.to(this.object.material.uniforms.objectOpacity, {
         value: 1,
         duration: 1.75,
@@ -142,7 +145,8 @@ export default {
       }
     },
     render() {
-      if (this.$scrollY() + 1 > window.innerHeight) return
+      if (this.$scrollY() + 1 > window.innerHeight || !this.isShaderRunning)
+        return
 
       this.object.material.uniforms.time.value = this.clock.getElapsedTime()
 
