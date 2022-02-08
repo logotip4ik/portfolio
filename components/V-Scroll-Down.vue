@@ -29,7 +29,7 @@ export default {
     const gsap = this.$gsap
 
     // prettier-ignore
-    const opacityRangeMapper = gsap.utils.mapRange(0, scrollDownCircles.length, 0.7, 0.5)
+    const opacityRangeMapper = gsap.utils.mapRange(0, scrollDownCircles.length, 0.8, 0.3)
 
     const circlesTl = gsap.timeline({
       defaults: { duration: 1.75, ease: 'power2.inOut' },
