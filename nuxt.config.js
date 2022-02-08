@@ -81,6 +81,8 @@ export default {
     '@nuxtjs/svg',
     // https://image.nuxtjs.org
     '@nuxt/image',
+    // https://github.com/harlan-zw/nuxt-webpack-optimisations
+    'nuxt-webpack-optimisations',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
