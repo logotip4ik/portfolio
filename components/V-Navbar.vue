@@ -193,7 +193,7 @@ export default {
 .nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
 
   position: fixed;
   top: 1rem;
@@ -212,7 +212,7 @@ export default {
     font-size: var(--step-2);
 
     margin: 0;
-    padding: 1.75rem 0;
+    padding: 0;
     border: none;
     background-color: transparent;
 
@@ -290,7 +290,8 @@ export default {
     width: max(var(--step-5), 4rem);
     height: auto;
 
-    padding: 0.75rem 0;
+    padding: 0;
+    margin: 0;
     color: currentColor;
     border: none;
     background: transparent;
