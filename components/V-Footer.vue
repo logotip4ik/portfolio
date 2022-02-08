@@ -11,14 +11,19 @@
           :key="key"
           class="footer__content__social__link"
         >
-          <V-Footer-Social-Link v-hoverable target="_blank" :href="link.href">
+          <V-Footer-Social-Link
+            v-hoverable
+            target="_blank"
+            :href="link.href"
+            :aria-label="`link to ${link.label}`"
+          >
             {{ link.label }}
           </V-Footer-Social-Link>
         </li>
       </ul>
 
       <p class="footer__content__copyright">
-        Copyright © {{ getCurrentYear() }} BK
+        Copyright ©{{ getCurrentYear() }} BK
       </p>
       <p class="footer__content__note">
         Made with
@@ -27,7 +32,7 @@
           src="~/assets/img/heart.png"
           width="60"
           height="60"
-          alt="heart icon"
+          alt="love"
         />
         in
         <img
@@ -36,7 +41,7 @@
           src="~/assets/img/ukraine-flag.png"
           width="70"
           height="70"
-          alt="heart icon"
+          alt="ukraine"
         />
       </p>
     </div>
