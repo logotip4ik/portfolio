@@ -94,3 +94,7 @@ sw.*
 
 # Vim swap files
 *.swp
+
+.forestry
+content
+.github
