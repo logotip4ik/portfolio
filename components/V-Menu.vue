@@ -69,12 +69,15 @@ export default {
     this.$nuxt.$on('toggle-menu', (bool) => {
       if (typeof bool === 'boolean' && this.isShowingMenu === bool) return
 
-      if (this.isShowingMenu) this.hideMenu()
-      else this.showMenu()
+      if (this.isShowingMenu) {
+        this.$enableScrollY()
+        this.hideMenu()
+      } else {
+        this.$disableScrollY()
+        this.showMenu()
+      }
 
       this.isShowingMenu = !this.isShowingMenu
-
-      this[this.isShowingMenu ? '$disableScrollY' : '$enableScrollY']()
     })
   },
   methods: {
