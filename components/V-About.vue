@@ -1,13 +1,5 @@
 <template>
   <section ref="about" class="about" aria-label="about section">
-    <CircleSVG
-      v-for="key in 4"
-      :key="key"
-      ref="aboutCircles"
-      class="about__bg-img"
-      aria-hidden="true"
-    ></CircleSVG>
-
     <V-H2 aria-label="about section heading">About</V-H2>
 
     <p ref="aboutText" class="about__text">
@@ -50,7 +42,6 @@
 </template>
 
 <script>
-import CircleSVG from '~/assets/img/circle.svg?inline'
 import NuxtSVG from '~/assets/img/nuxtjs.svg?inline'
 import NextSVG from '~/assets/img/nextjs.svg?inline'
 import SassSVG from '~/assets/img/sass.svg?inline'
@@ -58,7 +49,7 @@ import GsapSVG from '~/assets/img/gsap.svg?inline'
 
 export default {
   // eslint-disable-next-line
-  components: { CircleSVG, NuxtSVG, NextSVG, SassSVG, GsapSVG },
+  components: { NuxtSVG, NextSVG, SassSVG, GsapSVG },
   data: () => ({
     about: null,
     icons: [
@@ -77,28 +68,9 @@ export default {
     },
   },
   mounted() {
-    const { about, aboutCircles, aboutTextWords, aboutText, aboutTechItems } =
-      this.$refs
+    const { about, aboutTextWords, aboutText, aboutTechItems } = this.$refs
 
     const gsap = this.$gsap
-
-    const colorizer = gsap.utils.interpolate('#878787', '#ffe6ed')
-
-    gsap.set(aboutCircles, {
-      width: 'calc(var(--step-5) * random(1.5, 4))',
-    })
-    gsap.set('circle', { stroke: () => colorizer(Math.random()) })
-
-    const imagesTl = gsap.timeline({
-      scrollTrigger: { scrub: true, trigger: about },
-    })
-
-    imagesTl.fromTo(
-      aboutCircles,
-      { left: 'random(20, 80)%', top: 0, y: 'random(20, 80)vh' },
-      { y: 'random(20, 80)vh' },
-      0
-    )
 
     aboutTechItems.forEach((item) => {
       // reveal animation
@@ -121,7 +93,7 @@ export default {
         { yPercent: 'random(-5, -10)' },
         {
           yPercent: 'random(5, 10)',
-          scrollTrigger: { trigger: item, scrub: true },
+          scrollTrigger: { trigger: about, scrub: true },
         }
       )
     })
