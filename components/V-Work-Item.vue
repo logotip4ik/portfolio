@@ -81,7 +81,7 @@ export default {
       }
     )
 
-    const imageMovement = 3
+    const imageMovement = 3.5
     const randomMultiplier = gsap.utils.random(0.875, 1.125)
 
     gsap.fromTo(
