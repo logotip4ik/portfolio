@@ -27,7 +27,13 @@
 <script>
 export default {
   props: {
-    href: { type: String, required: true, default: 'https://example.com' },
+    href: {
+      type: String,
+      required: true,
+      default: 'https://example.com',
+      validator: (string) =>
+        string.startsWith('https://') || string.startsWith('mailto:'),
+    },
   },
   computed: {
     linkText() {
