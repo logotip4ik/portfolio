@@ -74,22 +74,26 @@ export default {
     ],
   }),
   mounted() {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
     const { footer, footerContent } = this.$refs
 
     const gsap = this.$gsap
 
-    const revealAnim = gsap.fromTo(
-      footerContent,
-      { opacity: 0.75, yPercent: 25 },
-      {
-        opacity: 1,
-        yPercent: 0,
-        scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: true },
-      }
-    )
+    if (!prefersReducedMotion)
+      gsap.fromTo(
+        footerContent,
+        { opacity: 0.75, yPercent: 25 },
+        {
+          opacity: 1,
+          yPercent: 0,
+          scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: true },
+        }
+      )
 
     setTimeout(() => {
-      revealAnim.scrollTrigger.update()
       this.$locomotiveScroll.update()
     }, 50)
   },

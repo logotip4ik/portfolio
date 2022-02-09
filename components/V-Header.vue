@@ -51,8 +51,11 @@ export default {
   },
   mounted() {
     const { header, headerContainer, headerContainerSubtitle } = this.$refs
-
     const gsap = this.$gsap
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
 
     let tl
 
@@ -63,36 +66,38 @@ export default {
     // animating wrong elements
     setTimeout(() => {
       // Scroll based animations
-      gsap.fromTo(
-        headerContainer,
-        { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
-        {
-          opacity: 0,
-          scale: 1.125,
-          yPercent: -10,
-          filter: 'blur(10px)',
-          scrollTrigger: {
-            scrub: 0.5,
-            trigger: header,
-            start: 'top+=15% top',
-            end: 'bottom-=35%, top',
-          },
-        }
-      )
+      if (!prefersReducedMotion)
+        gsap.fromTo(
+          headerContainer,
+          { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
+          {
+            opacity: 0,
+            scale: 1.125,
+            yPercent: -10,
+            filter: 'blur(10px)',
+            scrollTrigger: {
+              scrub: 0.5,
+              trigger: header,
+              start: 'top+=15% top',
+              end: 'bottom-=35%, top',
+            },
+          }
+        )
 
-      gsap.fromTo(
-        '.scroll-down',
-        { opacity: 1 },
-        {
-          opacity: 0,
-          scrollTrigger: {
-            scrub: 0.75,
-            trigger: header,
-            start: 'top+=25% top',
-            end: 'bottom-=25% top',
-          },
-        }
-      )
+      if (!prefersReducedMotion)
+        gsap.fromTo(
+          '.scroll-down',
+          { opacity: 1 },
+          {
+            opacity: 0,
+            scrollTrigger: {
+              scrub: 0.75,
+              trigger: header,
+              start: 'top+=25% top',
+              end: 'bottom-=25% top',
+            },
+          }
+        )
 
       // MAIN Timeline
       tl = gsap.timeline({
@@ -104,11 +109,19 @@ export default {
       // NOTE: Yeah, i know, i shouldn't use plain selectors
       // but really, this is working and if you wanted to use refs, then
       // it will became really painful for developer
-      tl.fromTo(
-        '.line__content',
-        { yPercent: 105 },
-        { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.25 }
-      )
+      if (prefersReducedMotion)
+        tl.fromTo(
+          '.line__content',
+          { opacity: 0 },
+          { opacity: 1, stagger: 0.25 }
+        )
+      else
+        tl.fromTo(
+          '.line__content',
+          { yPercent: 105 },
+          { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.25 }
+        )
+
       tl.fromTo(
         headerContainerSubtitle,
         { opacity: 0 },

@@ -71,6 +71,7 @@ export default {
   components: { MenuIconSVG },
   props: { currentSection: { type: Number, required: true, default: 0 } },
   data: () => ({
+    prefersReducedMotion: false,
     isMenuActive: false,
     isShowingCurrentSection: false,
     sections: [
@@ -82,6 +83,8 @@ export default {
   }),
   watch: {
     currentSection(val) {
+      if (this.prefersReducedMotion) return
+
       const { navSections, navSectionsListSections, navSectionsCircle } =
         this.$refs
 
@@ -103,6 +106,10 @@ export default {
     },
   },
   mounted() {
+    this.prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
     const { navTitle } = this.$refs
 
     const gsap = this.$gsap
@@ -144,41 +151,55 @@ export default {
 
       const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
 
-      tl.to(lines[0], {
-        attr: {
-          x1: SVG_SIZE - SVG_LINES_PADDING,
-          y1: SVG_LINES_PADDING,
-          x2: SVG_LINES_PADDING,
-          y2: SVG_SIZE - SVG_LINES_PADDING,
-        },
-      })
-      tl.to(
-        lines[1],
-        {
-          attr: {
-            x1: SVG_LINES_PADDING,
-            y1: SVG_LINES_PADDING,
-            x2: SVG_SIZE - SVG_LINES_PADDING,
-            y2: SVG_SIZE - SVG_LINES_PADDING,
-          },
-        },
-        '<'
-      )
+      const line0Attrs = {
+        x1: SVG_SIZE - SVG_LINES_PADDING,
+        y1: SVG_LINES_PADDING,
+        x2: SVG_LINES_PADDING,
+        y2: SVG_SIZE - SVG_LINES_PADDING,
+      }
+      const line1Attrs = {
+        x1: SVG_LINES_PADDING,
+        y1: SVG_LINES_PADDING,
+        x2: SVG_SIZE - SVG_LINES_PADDING,
+        y2: SVG_SIZE - SVG_LINES_PADDING,
+      }
+
+      if (this.prefersReducedMotion) {
+        tl.to(lines, { opacity: 0 })
+        tl.set(lines[0], { attr: line0Attrs })
+        tl.set(lines[1], { attr: line1Attrs })
+        tl.to(lines, { opacity: 1 })
+      } else {
+        tl.to(lines[0], { attr: line0Attrs })
+        tl.to(lines[1], { attr: line1Attrs }, '<')
+      }
     },
-    idleAnimation() {
-      if (this.isMenuActive) return
+    idleAnimation(ev) {
+      // NOTE: this will work, because of pointer leave event
+      // if toggle menu even is fired, then ev will be undefined
+      if (this.isMenuActive || ev) return
 
       const lines = this.$refs.navMenuButtonSVG.children
 
       const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
 
+      const line0Attrs = { x1: 0.25, y1: 7.75, x2: 19.75, y2: 7.75 }
+      const line1Attrs = { x1: 5.25, y1: 11.75, x2: 19.75, y2: 11.75 }
+
       // NOTE: just reverting everything to default
-      tl.to(lines[0], { attr: { x1: 0.25, y1: 7.75, x2: 19.75, y2: 7.75 } })
-      // prettier-ignore
-      tl.to(lines[1], { attr: { x1: 5.25, y1: 11.75, x2: 19.75, y2: 11.75 } }, '<')
+
+      if (this.prefersReducedMotion) {
+        tl.to(lines, { opacity: 0 })
+        tl.set(lines[0], { attr: line0Attrs })
+        tl.set(lines[1], { attr: line1Attrs })
+        tl.to(lines, { opacity: 1 })
+      } else {
+        tl.to(lines[0], { attr: line0Attrs })
+        tl.to(lines[1], { attr: line1Attrs }, '<')
+      }
     },
     hoverAnimation() {
-      if (this.isMenuActive) return
+      if (this.isMenuActive || this.prefersReducedMotion) return
 
       const lines = this.$refs.navMenuButtonSVG.children
 
@@ -248,9 +269,36 @@ export default {
 
         transition: color 100ms var(--ease-back);
 
+        &::before {
+          --size: calc(var(--step--2) - 0.6rem);
+          content: '';
+
+          position: absolute;
+          top: 50%;
+          right: 105%;
+
+          width: var(--size);
+          height: var(--size);
+
+          border-radius: 50%;
+          opacity: 0.75;
+          background-color: #ffe6ed;
+
+          transform: translate(-50%, -50%);
+
+          opacity: 0;
+
+          transition: opacity 100ms ease;
+        }
+
         &--non-active {
           color: darken($color: white, $amount: 60);
           transition: color 400ms var(--ease-back);
+        }
+
+        &--active::before {
+          opacity: 1;
+          transition: opacity 400ms ease;
         }
 
         &:is(:hover, :focus) {
@@ -282,6 +330,10 @@ export default {
         opacity: 0;
         right: 110%;
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        display: none;
+      }
     }
 
     @media screen and (max-width: 768px) {
@@ -311,6 +363,12 @@ export default {
 
     @media screen and (min-width: 768px) {
       display: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &:active {
+        transform: none;
+      }
     }
   }
 }

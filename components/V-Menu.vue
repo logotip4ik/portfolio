@@ -46,6 +46,7 @@ export default {
   props: { currentSection: { type: Number, required: true, default: 0 } },
   data() {
     return {
+      prefersReducedMotion: false,
       isShowingMenu: false,
       prevAnimation: null,
       navigationalLinks: [
@@ -66,6 +67,10 @@ export default {
     }
   },
   mounted() {
+    this.prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
     this.$nuxt.$on('toggle-menu', (bool) => {
       if (typeof bool === 'boolean' && this.isShowingMenu === bool) return
 
@@ -83,6 +88,13 @@ export default {
   methods: {
     showMenu() {
       if (this.prevAnimation) this.prevAnimation.kill()
+
+      if (this.prefersReducedMotion)
+        return (this.prevAnimation = this.$gsap.fromTo(
+          this.$refs.menu,
+          { autoAlpha: 0 },
+          { autoAlpha: 1 }
+        ))
 
       const tl = this.$gsap.timeline()
       this.prevAnimation = tl
@@ -136,6 +148,11 @@ export default {
     },
     hideMenu() {
       if (this.prevAnimation) this.prevAnimation.kill()
+
+      if (this.prefersReducedMotion)
+        return (this.prevAnimation = this.$gsap.to(this.$refs.menu, {
+          autoAlpha: 0,
+        }))
 
       this.prevAnimation = this.$gsap.to(this.$refs.menu, {
         autoAlpha: 0,

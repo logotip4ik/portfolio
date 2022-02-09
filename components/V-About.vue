@@ -144,6 +144,10 @@ export default {
 
       transition: transform 750ms ease, opacity 750ms ease;
 
+      @media (prefers-reduced-motion: reduce) {
+        transform: translateY(0%);
+      }
+
       &--revealed {
         opacity: 1;
         transform: translateY(0%);
@@ -164,12 +168,13 @@ export default {
     margin: 6% auto 0;
 
     &__item {
+      display: inline-block;
+
       cursor: none;
+      transition: transform 300ms var(--ease-back);
 
       &:is(:hover, :focus-visible) {
-        svg {
-          transform: scale(0.9);
-        }
+        transform: scale(0.9);
       }
 
       &__svg {
@@ -179,11 +184,14 @@ export default {
 
         opacity: 0.75;
         filter: grayscale(1) invert(1);
-        transition: transform 300ms var(--ease-back);
 
         @media screen and (max-width: 500px) {
           max-width: 30vw;
         }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        cursor: pointer;
       }
     }
 

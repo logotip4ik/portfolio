@@ -2,16 +2,11 @@
   <div class="scroll-down">
     <div class="sr-only">scroll down to see more content</div>
     <div class="scroll-down__text" aria-hidden="true">
-      <!-- NOTE: this only works without if text does not contain spaces -->
-      <span
-        v-for="(char, key) in scrollText"
-        :key="key"
-        ref="scrollDownTextChars"
-        >{{ char }}</span
-      >
+      {{ scrollText }}
     </div>
     <div
       v-for="key in 3"
+      v-show="!prefersReducedMotion"
       :key="key"
       ref="scrollDownCircles"
       class="scroll-down__circle"
@@ -22,8 +17,20 @@
 
 <script>
 export default {
-  data: () => ({ scrollText: 'Scroll' }),
+  data: () => ({ prefersReducedMotion: false }),
+  computed: {
+    scrollText() {
+      if (this.prefersReducedMotion) return 'Scroll Down'
+      else return 'Scroll'
+    },
+  },
   mounted() {
+    this.prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
+    if (this.prefersReducedMotion) return
+
     const { scrollDownCircles } = this.$refs
 
     const gsap = this.$gsap
@@ -70,6 +77,10 @@ export default {
     letter-spacing: 0.5px;
 
     padding-inline-start: calc(var(--base-font-size) + 0.5rem);
+
+    @media (prefers-reduced-motion: reduce) {
+      padding-inline-start: 0;
+    }
   }
 
   &__circle {

@@ -32,30 +32,25 @@ export default {
       defaults: { duration: 0.65, ease: 'power1.out' },
     })
 
-    tl.set(loaderChildren, { scale: 1.125, opacity: 0, filter: 'blur(0px)' })
+    tl.set(loaderChildren, {
+      opacity: 0,
+      filter: 'blur(10px)',
+    })
 
     for (let i = 0; i < loaderChildren.length; i++) {
       const loaderChild = loaderChildren[i]
 
       if (i === 0) {
-        tl.set(loaderChild, { opacity: 1 })
+        tl.set(loaderChild, { opacity: 1, filter: 'blur(0px)' })
+
         tl.fromTo(
           loaderWord1Chars,
-          { yPercent: 100, color: '#000' },
-          {
-            yPercent: 0,
-            color: '#fff',
-            ease: 'power3.out',
-            stagger: { each: 0.05 },
-          }
+          { color: '#000' },
+          { color: '#fff', ease: 'power3.out', stagger: 0.05 }
         )
-      } else tl.to(loaderChild, { scale: 1, opacity: 1 }, '-=0.125')
+      } else tl.to(loaderChild, { opacity: 1, filter: 'blur(0px)' }, '-=0.125')
 
-      tl.to(
-        loaderChild,
-        { scale: 0.9, opacity: 0, filter: 'blur(5px)' },
-        `+=${readTime}`
-      )
+      tl.to(loaderChild, { opacity: 0, filter: 'blur(5px)' }, `+=${readTime}`)
     }
 
     tl.to(loader, {

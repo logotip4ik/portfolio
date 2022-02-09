@@ -17,6 +17,7 @@ import vertexShader from '~/assets/shaders/vertex.glsl'
 export default {
   data: () => ({
     isShaderRunning: false,
+    prefersReducedMotion: false,
     camera: null,
     scene: null,
     renderer: null,
@@ -26,6 +27,10 @@ export default {
   }),
   mounted() {
     const { canvas } = this.$refs
+
+    this.prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
 
     // THREE: Scene
     this.scene = new THREE.Scene()
@@ -66,8 +71,8 @@ export default {
       uniforms: {
         time: { value: 0.0 },
         randomSeed: { value: Math.random() },
-        objectOpacity: { value: 0.0 },
-        noise: { value: 0.0 },
+        objectOpacity: { value: this.prefersReducedMotion ? 1.0 : 0.0 },
+        noise: { value: this.prefersReducedMotion ? 1.0 : 0.0 },
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
@@ -141,7 +146,9 @@ export default {
       if (this.$scrollY() + 1 > window.innerHeight || !this.isShaderRunning)
         return
 
-      this.object.material.uniforms.time.value = this.clock.getElapsedTime()
+      const time = this.prefersReducedMotion ? 0.0 : this.clock.getElapsedTime()
+
+      this.object.material.uniforms.time.value = time
 
       this.renderer.render(this.scene, this.camera)
     },

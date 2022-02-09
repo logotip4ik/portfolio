@@ -40,7 +40,12 @@ export default {
     },
   },
   mounted() {
-    if ('ontouchstart' in document.documentElement) return
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
+    if ('ontouchstart' in document.documentElement || prefersReducedMotion)
+      return
 
     const { pointer } = this.$refs
 

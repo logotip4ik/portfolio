@@ -25,35 +25,45 @@ export default {
     },
   },
   mounted() {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
     const { title, titleContent } = this.$refs
 
     const gsap = this.$gsap
 
     // Parallax animation
-    gsap.fromTo(
-      title,
-      { yPercent: this.rangeOfMovement * -1 },
-      {
-        yPercent: this.rangeOfMovement,
-        scrollTrigger: { scrub: true, trigger: title },
-      }
-    )
+    if (!prefersReducedMotion)
+      gsap.fromTo(
+        title,
+        { yPercent: this.rangeOfMovement * -1 },
+        {
+          yPercent: this.rangeOfMovement,
+          scrollTrigger: { scrub: true, trigger: title },
+        }
+      )
+
+    // NOTE: default scroll Trigger for reveal animation
+    const scrollTrigger = {
+      trigger: title,
+      start: 'top bottom-=20%',
+      once: true,
+    }
 
     // Reveal animation
-    gsap.fromTo(
-      titleContent,
-      { yPercent: 110 },
-      {
-        yPercent: 0,
-        duration: 0.75,
-        ease: 'power2.out(1.5)',
-        scrollTrigger: {
-          trigger: title,
-          start: 'top bottom-=20%',
-          once: true,
-        },
-      }
-    )
+    if (prefersReducedMotion)
+      gsap.fromTo(
+        titleContent,
+        { filter: 'blur(10px)', opacity: 0 },
+        { filter: 'blur(0px)', opacity: 1, scrollTrigger }
+      )
+    else
+      gsap.fromTo(
+        titleContent,
+        { yPercent: 110 },
+        { yPercent: 0, duration: 0.75, ease: 'power2.out(1.5)', scrollTrigger }
+      )
   },
 }
 </script>
@@ -62,5 +72,9 @@ export default {
 .title-h2 {
   text-align: center;
   overflow: hidden;
+
+  @media (prefers-reduced-motion: reduce) {
+    overflow: visible;
+  }
 }
 </style>

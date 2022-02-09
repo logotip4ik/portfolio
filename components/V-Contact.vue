@@ -24,17 +24,22 @@
 <script>
 export default {
   mounted() {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
     const { contact, contactMarquee, contactMarqueeText, contactMarqueeBlock } =
       this.$refs
 
     const gsap = this.$gsap
 
-    gsap.to(contactMarqueeText, {
-      xPercent: -100,
-      repeat: -1,
-      ease: 'none',
-      duration: 15,
-    })
+    if (!prefersReducedMotion)
+      gsap.to(contactMarqueeText, {
+        xPercent: -100,
+        repeat: -1,
+        ease: 'none',
+        duration: 15,
+      })
 
     gsap.fromTo(
       contactMarquee,
@@ -45,22 +50,29 @@ export default {
       }
     )
 
-    gsap.fromTo(
-      contactMarqueeBlock,
-      { top: '0%', bottom: '0%' },
-      {
-        top: '50%',
-        bottom: '50%',
-        duration: 0.5,
-        scrollTrigger: {
-          trigger: contact,
-          start: 'top bottom-=15%',
-          once: true,
-        },
-        onComplete: () =>
-          contactMarqueeBlock.classList.add('contact__marquee__block--hidden'),
-      }
-    )
+    const scrollTrigger = {
+      trigger: contact,
+      start: 'top bottom-=15%',
+      once: true,
+    }
+
+    if (prefersReducedMotion)
+      gsap.to(contactMarqueeBlock, { opacity: 0, scrollTrigger })
+    else
+      gsap.fromTo(
+        contactMarqueeBlock,
+        { top: '0%', bottom: '0%' },
+        {
+          top: '50%',
+          bottom: '50%',
+          duration: 0.5,
+          scrollTrigger,
+          onComplete: () =>
+            contactMarqueeBlock.classList.add(
+              'contact__marquee__block--hidden'
+            ),
+        }
+      )
   },
 }
 </script>
@@ -84,6 +96,11 @@ export default {
 
     overflow: hidden;
 
+    @media (prefers-reduced-motion: reduce) {
+      // NOTE: important is needed for overwriting styles which was set by JS
+      cursor: pointer !important;
+    }
+
     &__text {
       display: inline-block;
 
@@ -92,12 +109,18 @@ export default {
       font-size: calc(var(--step-5) * 1.25 + 3vw);
       margin: 0;
       white-space: nowrap;
+
+      @media (prefers-reduced-motion: reduce) {
+        font-size: var(--step-5);
+
+        transform: translateX(calc(65vw * -1));
+      }
     }
 
     &__block {
       position: absolute;
       left: 0;
-      right: 0%;
+      right: 0;
       top: 0;
       bottom: 0;
 

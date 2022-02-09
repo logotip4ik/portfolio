@@ -57,6 +57,10 @@ export default {
     },
   },
   mounted() {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
     const { work, workImage, workSource, workImageWrapper } = this.$refs
 
     const gsap = this.$gsap
@@ -71,7 +75,7 @@ export default {
 
     gsap.fromTo(
       work,
-      { opacity: 0, y: 100 },
+      { opacity: 0, y: prefersReducedMotion ? 0 : 100 },
       {
         opacity: 1,
         y: 0,
@@ -114,6 +118,10 @@ export default {
 
     cursor: none;
     text-decoration: none;
+
+    @media (prefers-reduced-motion: reduce) {
+      cursor: pointer;
+    }
   }
 
   &__image {

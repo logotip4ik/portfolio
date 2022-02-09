@@ -35,10 +35,16 @@ export default {
         string.startsWith('https://') || string.startsWith('mailto:'),
     },
   },
+  data: () => ({ prefersReducedMotion: false }),
   computed: {
     linkText() {
       return this.$slots.default[0].text.trim()
     },
+  },
+  mounted() {
+    this.prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
   },
   methods: {
     /**
@@ -51,6 +57,8 @@ export default {
       })
     },
     showHoverText() {
+      if (this.prefersReducedMotion) return
+
       if (this.prevTl) this.prevTl.kill()
 
       const tl = this.timelineFactory()
@@ -61,6 +69,8 @@ export default {
       this.prevTl = tl
     },
     hideHoverText() {
+      if (this.prefersReducedMotion) return
+
       if (this.prevTl) this.prevTl.kill()
 
       const tl = this.timelineFactory()
@@ -101,6 +111,21 @@ export default {
       font-size: calc(var(--step-0) - 0.125rem);
 
       transform: translateY(100%);
+
+      @media (prefers-reduced-motion: reduce) {
+        font-size: calc(var(--step--1));
+
+        transform: none;
+        transform-origin: right center;
+
+        transition: color, transform 400ms var(--ease-back);
+        transition-delay: 50ms;
+
+        &:is(:focus, :hover) {
+          color: #ffe6ed;
+          transform: scale(0.95);
+        }
+      }
     }
 
     &:nth-child(2) {
@@ -115,6 +140,10 @@ export default {
 
         right: 50%;
         transform: translateX(50%);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        display: none;
       }
     }
   }
