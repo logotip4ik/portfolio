@@ -48,7 +48,6 @@ import SassSVG from '~/assets/img/sass.svg?inline'
 import GsapSVG from '~/assets/img/gsap.svg?inline'
 
 export default {
-  // eslint-disable-next-line
   components: { NuxtSVG, NextSVG, SassSVG, GsapSVG },
   data: () => ({
     about: null,
