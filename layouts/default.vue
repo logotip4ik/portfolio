@@ -1,10 +1,10 @@
 <template>
   <div>
+    <V-Navbar :current-section="currentSection"></V-Navbar>
     <div role="presentation" class="scroller">
       <Nuxt></Nuxt>
     </div>
     <V-Menu :current-section="currentSection"></V-Menu>
-    <V-Navbar :current-section="currentSection"></V-Navbar>
     <V-Pointer></V-Pointer>
     <V-Loader></V-Loader>
   </div>
