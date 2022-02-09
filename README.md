@@ -10,7 +10,7 @@ projects that i am using quite often
 
 ## Build with
 
-- [Nuxt.js](https://nuxtjs.org/) - 2 version, this is like a core of the website, also i am planning to transfer portfolio to 3rd version of [Nuxt.js](https://v3.nuxtjs.org/) when it supports the static site generation
+- [Nuxt.js](https://nuxtjs.org/) - 2-nd version, this is like a core of the website, also i am planning to transfer portfolio to 3rd version of [Nuxt.js](https://v3.nuxtjs.org/) when it supports the static site generation
 
 - [GSAP](https://greensock.com/gsap/) - for smoooooth transitions
 
