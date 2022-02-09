@@ -83,18 +83,13 @@ export default {
     })
     this.object = new THREE.Mesh(geometry, material)
 
-    // NOTE: taken from: https://gist.github.com/ayamflow/96a1f554c3f88eef2f9d0024fc42940f
-    const dist = this.camera.position.z - this.object.position.z
-    this.camera.fov = 2 * Math.atan(size / (2 * dist)) * (180 / Math.PI)
-    this.camera.updateProjectionMatrix()
-
     // THREE: Adding to scene
     this.scene.add(this.object)
 
     // THREE: Prep
     const resizeObserver = new ResizeObserver(this.resize)
     resizeObserver.observe(this.renderer.domElement, { box: 'border-box' })
-    this.resize()
+    this.resize(true)
 
     this.clock = new THREE.Clock()
 
@@ -119,13 +114,13 @@ export default {
     this.$gsap.ticker.add(this.render)
   },
   methods: {
-    resize() {
+    resize(forceResize = false) {
       const canvas = this.renderer.domElement
 
       const width = canvas.clientWidth
       const height = canvas.clientHeight
 
-      if (canvas.width !== width || canvas.height !== height) {
+      if (canvas.width !== width || canvas.height !== height || forceResize) {
         this.renderer.setSize(width, height, false)
 
         this.camera.aspect = width / height
@@ -166,7 +161,7 @@ export default {
     width: 100vw;
     height: 100vh;
 
-    filter: blur(2px);
+    filter: blur(2.5px);
   }
 
   &::after {
