@@ -32,6 +32,8 @@
           v-for="(section, key) in sections"
           :key="key"
           ref="navSectionsListSections"
+          role="button"
+          tabindex="0"
           :class="{
             nav__sections__list__section: true,
             'nav__sections__list__section--active': key === currentSection,
@@ -39,6 +41,7 @@
               key !== currentSection && isShowingCurrentSection,
           }"
           @click="$scrollTo(section.scrollTo)"
+          @keypress.enter.space.prevent="$scrollTo(section.scrollTo)"
         >
           {{ section.label }}
         </li>
@@ -222,6 +225,7 @@ export default {
   position: fixed;
   top: 1rem;
   left: 0;
+  z-index: 1;
 
   padding: 1rem var(--x-padding);
   width: 100%;
