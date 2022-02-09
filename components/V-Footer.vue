@@ -1,58 +1,60 @@
 <template>
   <footer ref="footer" class="footer">
-    <div ref="footerContent" class="footer__content">
-      <p class="footer__content__title">
-        Bogdan <br />
-        <span class="serif">Kostyuk</span>
-      </p>
-      <ul class="footer__content__social">
-        <li
-          v-for="(link, key) in socialLinks"
-          :key="key"
-          class="footer__content__social__link"
-        >
-          <V-Footer-Social-Link
-            v-hoverable
-            target="_blank"
-            :href="link.href"
-            :aria-label="`link to ${link.label}`"
+    <div ref="footerWrapper" class="footer__wrapper">
+      <div ref="footerContent" class="footer__content">
+        <p class="footer__content__title">
+          Bogdan <br />
+          <span class="serif">Kostyuk</span>
+        </p>
+        <ul class="footer__content__social">
+          <li
+            v-for="(link, key) in socialLinks"
+            :key="key"
+            class="footer__content__social__link"
           >
-            {{ link.label }}
-          </V-Footer-Social-Link>
-        </li>
-      </ul>
+            <V-Footer-Social-Link
+              v-hoverable
+              target="_blank"
+              :href="link.href"
+              :aria-label="`link to ${link.label}`"
+            >
+              {{ link.label }}
+            </V-Footer-Social-Link>
+          </li>
+        </ul>
 
-      <p class="footer__content__copyright">
-        Copyright ©{{ getCurrentYear() }} BK
-      </p>
-      <p class="footer__content__note">
-        Made with
-        <img
-          loading="lazy"
-          src="~/assets/img/heart.png"
-          width="60"
-          height="60"
-          alt="love"
-        />
-        in
-        <img
-          title="Ukraine"
-          loading="lazy"
-          src="~/assets/img/ukraine-flag.png"
-          width="70"
-          height="70"
-          alt="ukraine"
-        />
-      </p>
-    </div>
-    <div
-      class="footer__arrow__wrapper"
-      role="button"
-      aria-label="scroll to top"
-      tabindex="0"
-      @click="$scrollTo(0)"
-    >
-      <ArrowUpSVG class="footer__arrow"></ArrowUpSVG>
+        <p class="footer__content__copyright">
+          Copyright ©{{ getCurrentYear() }} BK
+        </p>
+        <p class="footer__content__note">
+          Made with
+          <img
+            loading="lazy"
+            src="~/assets/img/heart.png"
+            width="60"
+            height="60"
+            alt="love"
+          />
+          in
+          <img
+            title="Ukraine"
+            loading="lazy"
+            src="~/assets/img/ukraine-flag.png"
+            width="70"
+            height="70"
+            alt="ukraine"
+          />
+        </p>
+      </div>
+      <div
+        class="footer__arrow__wrapper"
+        role="button"
+        aria-label="scroll to top"
+        tabindex="0"
+        @click="$scrollTo(0)"
+      >
+        <ArrowUpSVG class="footer__arrow"></ArrowUpSVG>
+      </div>
     </div>
   </footer>
 </template>
@@ -78,18 +80,22 @@ export default {
       '(prefers-reduced-motion: reduce)'
     ).matches
 
-    const { footer, footerContent } = this.$refs
+    const { footer, footerWrapper } = this.$refs
 
     const gsap = this.$gsap
 
     if (!prefersReducedMotion)
       gsap.fromTo(
-        footerContent,
-        { opacity: 0.75, yPercent: 25 },
+        footerWrapper,
+        { y: -footerWrapper.offsetHeight },
         {
-          opacity: 1,
-          yPercent: 0,
-          scrollTrigger: { trigger: footer, end: 'bottom bottom', scrub: true },
+          y: 0,
+          scrollTrigger: {
+            trigger: footer,
+            start: 'top bottom',
+            end: 'bottom bottom',
+            scrub: true,
+          },
         }
       )
 
@@ -109,13 +115,14 @@ export default {
 @use 'sass:color';
 
 .footer {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  flex-grow: 1;
-  flex-wrap: wrap;
+  overflow: hidden;
 
-  transition: background-color 100ms;
+  &__wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
 
   &__content {
     --secondary-color: #{color.adjust($color: #fff, $lightness: -25%)};
@@ -125,6 +132,7 @@ export default {
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
     align-items: center;
 
     position: relative;
@@ -132,9 +140,8 @@ export default {
     width: 100%;
 
     color: whitesmoke;
-    padding: 1rem clamp(1rem, 4vw, 5rem);
+    padding: 2rem clamp(1rem, 4vw, 5rem) 3rem;
     background: var(--black-color);
-    box-shadow: 5px -5px 1rem rgba($color: #000000, $alpha: 0.125);
 
     & > *:nth-child(even) {
       justify-self: end;
@@ -143,6 +150,7 @@ export default {
 
     &__title {
       font-size: var(--step-4);
+      margin: 0;
 
       .serif {
         margin-inline-start: calc(var(--step-5) / 2);
@@ -151,6 +159,7 @@ export default {
 
     &__social {
       list-style-type: none;
+      margin: 0;
       padding-inline-start: 0;
 
       &__link {
@@ -167,10 +176,12 @@ export default {
 
     &__copyright {
       color: var(--secondary-color);
+      margin: 0;
     }
 
     &__note {
       color: var(--secondary-color);
+      margin: 0;
 
       img {
         width: var(--step--1);
@@ -224,6 +235,7 @@ export default {
       align-items: center;
 
       min-width: 115px;
+      background: var(--black-color);
       cursor: pointer;
 
       &:is(:focus, :hover) {
@@ -238,16 +250,6 @@ export default {
       min-height: 30vw;
       color: whitesmoke;
     }
-  }
-
-  @media screen and (max-width: 575px) {
-    background-image: linear-gradient(
-      to top,
-      var(--black-color) 0%,
-      var(--black-color) 40%,
-      rgba($color: #fff, $alpha: 0) 80%,
-      rgba($color: #fff, $alpha: 0) 100%
-    );
   }
 }
 </style>
