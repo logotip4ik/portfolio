@@ -114,7 +114,6 @@ export default {
             start: `bottom-=${footerContentTitle.offsetHeight} bottom`,
             end: `bottom bottom`,
             scrub: true,
-            markers: true,
           },
         }
       )
