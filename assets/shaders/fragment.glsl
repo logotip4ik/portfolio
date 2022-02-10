@@ -2,13 +2,8 @@ uniform float time;
 uniform float randomSeed;
 uniform float objectOpacity;
 uniform float noise;
-uniform vec2 resolution;
 
 varying vec2 vUv;
-varying vec3 vNormal;
-varying vec3 vPosition;
-
-const float PI = 3.14159;
 
 vec4 mod289(vec4 x)
 {
@@ -205,7 +200,6 @@ void main() {
   const float noiseStrength = 1.5;
 
   vec2 newUv = vUv;
-  // vec2 newUv = gl_FragCoord.xy / resolution.xy;
   newUv = rotate( newUv, radians(rotation) );
 
   float distorion = cnoise(vec4(newUv * noiseStrength, time / 30., randomSeed * 10.))  * noise;
