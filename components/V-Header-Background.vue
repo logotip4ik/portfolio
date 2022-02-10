@@ -14,49 +14,51 @@ import * as THREE from 'three'
 import fragmentShader from '~/assets/shaders/fragment.glsl'
 import vertexShader from '~/assets/shaders/vertex.glsl'
 
+// NOTE: Probably asking why ?
+// This will increase performance just a bit
+// cuz vue wont check if dom needs update
+let hasRunOnce = false
+let isShaderRunning = false
+let prefersReducedMotion = false
+let camera = null
+let scene = null
+let renderer = null
+let object = null
+let clock = null
+
 export default {
-  data: () => ({
-    isShaderRunning: false,
-    prefersReducedMotion: false,
-    camera: null,
-    scene: null,
-    renderer: null,
-    composer: null,
-    object: null,
-    clock: null,
-  }),
   mounted() {
     const { canvas } = this.$refs
 
-    this.prefersReducedMotion = window.matchMedia(
+    prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches
 
     // THREE: Scene
-    this.scene = new THREE.Scene()
+    scene = new THREE.Scene()
 
     // THREE: Renderer
-    this.renderer = new THREE.WebGLRenderer({
+    renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
       stencil: false,
       depth: false,
     })
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3))
-    this.renderer.setClearColor(0x121212, 1)
-    this.renderer.sortObjects = false
-    this.renderer.physicallyCorrectLights = true
-    this.renderer.outputEncoding = THREE.sRGBEncoding
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3))
+    renderer.setClearColor(0x121212, 1)
+    renderer.sortObjects = false
+    renderer.physicallyCorrectLights = true
+    renderer.outputEncoding = THREE.sRGBEncoding
 
     // THREE: Camera
-    this.camera = new THREE.PerspectiveCamera(
+    camera = new THREE.PerspectiveCamera(
       70,
       window.innerWidth / window.innerHeight,
       0.001,
       100
     )
 
-    this.camera.position.set(0, 0, 1)
+    camera.position.set(0, 0, 1)
 
     // THREE: Object
     const size = 1.4
@@ -71,8 +73,8 @@ export default {
       uniforms: {
         time: { value: 0.0 },
         randomSeed: { value: Math.random() },
-        objectOpacity: { value: this.prefersReducedMotion ? 1.0 : 0.0 },
-        noise: { value: this.prefersReducedMotion ? 1.0 : 0.0 },
+        objectOpacity: { value: prefersReducedMotion ? 1.0 : 0.0 },
+        noise: { value: prefersReducedMotion ? 1.0 : 0.0 },
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
@@ -81,27 +83,27 @@ export default {
       depthWrite: false,
       transparent: true,
     })
-    this.object = new THREE.Mesh(geometry, material)
+    object = new THREE.Mesh(geometry, material)
 
     // THREE: Adding to scene
-    this.scene.add(this.object)
+    scene.add(object)
 
     // THREE: Prep
     const resizeObserver = new ResizeObserver(this.resize)
-    resizeObserver.observe(this.renderer.domElement, { box: 'border-box' })
+    resizeObserver.observe(renderer.domElement, { box: 'border-box' })
     this.resize(true)
 
-    this.clock = new THREE.Clock()
+    clock = new THREE.Clock()
 
     this.$nuxt.$on('show-shader', () => {
-      this.isShaderRunning = true
+      isShaderRunning = true
 
-      this.$gsap.to(this.object.material.uniforms.objectOpacity, {
+      this.$gsap.to(object.material.uniforms.objectOpacity, {
         value: 1,
         duration: 1.75,
         delay: 0.125,
       })
-      this.$gsap.to(this.object.material.uniforms.noise, {
+      this.$gsap.to(object.material.uniforms.noise, {
         value: 1,
         duration: 4,
         ease: 'power3.out',
@@ -115,37 +117,41 @@ export default {
   },
   methods: {
     resize(forceResize = false) {
-      const canvas = this.renderer.domElement
+      const canvas = renderer.domElement
 
       const width = canvas.clientWidth
       const height = canvas.clientHeight
 
       if (canvas.width !== width || canvas.height !== height || forceResize) {
-        this.renderer.setSize(width, height, false)
+        renderer.setSize(width, height, false)
 
-        this.camera.aspect = width / height
-        this.camera.updateProjectionMatrix()
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
 
         // NOTE: this will help for performance
-        this.camera.matrixAutoUpdate = false
-        this.camera.updateMatrix()
+        camera.matrixAutoUpdate = false
+        camera.updateMatrix()
 
-        this.object.matrixAutoUpdate = false
-        this.object.updateMatrix()
+        object.matrixAutoUpdate = false
+        object.updateMatrix()
 
         // NOTE: not perfect, at least it will cover all the viewport
-        this.object.scale.x = 1.4 * (width / height)
+        object.scale.x = 1.4 * (width / height)
       }
     },
     render() {
-      if (this.$scrollY() + 1 > window.innerHeight || !this.isShaderRunning)
+      if (
+        this.$scrollY() - 10 > window.innerHeight ||
+        !isShaderRunning ||
+        (prefersReducedMotion && hasRunOnce)
+      )
         return
 
-      const time = this.prefersReducedMotion ? 0.0 : this.clock.getElapsedTime()
+      if (prefersReducedMotion) hasRunOnce = true
 
-      this.object.material.uniforms.time.value = time
+      object.material.uniforms.time.value = clock.getElapsedTime()
 
-      this.renderer.render(this.scene, this.camera)
+      renderer.render(scene, camera)
     },
   },
 }
