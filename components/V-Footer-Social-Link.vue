@@ -113,18 +113,7 @@ export default {
       transform: translateY(100%);
 
       @media (prefers-reduced-motion: reduce) {
-        font-size: calc(var(--step--1));
-
-        transform: none;
-        transform-origin: right center;
-
-        transition: color, transform 400ms var(--ease-back);
-        transition-delay: 50ms;
-
-        &:is(:focus, :hover) {
-          color: #ffe6ed;
-          transform: scale(0.95);
-        }
+        display: none;
       }
     }
 
@@ -144,6 +133,23 @@ export default {
 
       @media (prefers-reduced-motion: reduce) {
         display: none;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    cursor: pointer !important;
+
+    .sr-only {
+      position: static;
+      width: auto;
+      height: auto;
+
+      font-size: var(--step--1);
+
+      &:is(:focus, :hover) {
+        color: #ffe6ed;
+        text-decoration: underline;
       }
     }
   }
