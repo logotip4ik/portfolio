@@ -87,13 +87,15 @@ export default {
     if (!prefersReducedMotion)
       gsap.fromTo(
         footerWrapper,
-        { y: -footerWrapper.offsetHeight },
+        { y: -footerWrapper.offsetHeight, opacity: 0.125 },
         {
           y: 0,
+          opacity: 1,
+          ease: 'none',
           scrollTrigger: {
             trigger: footer,
             start: 'top bottom',
-            end: 'bottom bottom',
+            end: `bottom bottom`,
             scrub: true,
           },
         }
