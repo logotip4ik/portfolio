@@ -2,7 +2,7 @@
   <footer ref="footer" class="footer">
     <div ref="footerWrapper" class="footer__wrapper">
       <div ref="footerContent" class="footer__content">
-        <p class="footer__content__title">
+        <p ref="footerContentTitle" class="footer__content__title">
           Bogdan <br />
           <span class="serif">Kostyuk</span>
         </p>
@@ -13,6 +13,7 @@
             class="footer__content__social__link"
           >
             <V-Footer-Social-Link
+              ref="footerContentSocialLinks"
               v-hoverable
               target="_blank"
               :href="link.href"
@@ -80,7 +81,7 @@ export default {
       '(prefers-reduced-motion: reduce)'
     ).matches
 
-    const { footer, footerWrapper } = this.$refs
+    const { footer, footerWrapper, footerContentTitle } = this.$refs
 
     const gsap = this.$gsap
 
@@ -101,6 +102,23 @@ export default {
         }
       )
 
+    if (!prefersReducedMotion)
+      gsap.fromTo(
+        footerContentTitle,
+        { '--x-offset': '0%' },
+        {
+          '--x-offset': '100%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: footer,
+            start: `bottom-=${footerContentTitle.offsetHeight} bottom`,
+            end: `bottom bottom`,
+            scrub: true,
+            markers: true,
+          },
+        }
+      )
+
     setTimeout(() => {
       this.$locomotiveScroll.update()
     }, 50)
@@ -115,6 +133,16 @@ export default {
 
 <style lang="scss">
 @use 'sass:color';
+
+@mixin visible-after {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
 .footer {
   overflow: hidden;
@@ -151,11 +179,41 @@ export default {
     }
 
     &__title {
+      --x-offset: 0px;
+      display: inline-block;
+
+      position: relative;
+
       font-size: var(--step-4);
+
       margin: 0;
+      width: min-content;
+
+      overflow: hidden;
 
       .serif {
+        display: inline-block;
+
+        position: relative;
+
         margin-inline-start: calc(var(--step-5) / 2);
+
+        &::after {
+          @include visible-after;
+
+          background-color: rgba($color: black, $alpha: 0.75);
+
+          transform: translateX(var(--x-offset));
+        }
+      }
+
+      &::after {
+        @include visible-after;
+
+        bottom: calc(50% - 5px);
+        background-color: rgba($color: black, $alpha: 0.65);
+
+        transform: translateX(var(--x-offset));
       }
     }
 
