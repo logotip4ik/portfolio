@@ -1,6 +1,6 @@
 <template>
   <footer ref="footer" class="footer">
-    <div ref="footerWrapper" class="footer__wrapper">
+    <div ref="footerWrapper" class="footer__wrapper" data-scroll-sticky>
       <div ref="footerContent" class="footer__content">
         <p ref="footerContentTitle" class="footer__content__title">
           Bogdan <br />
@@ -83,22 +83,9 @@ export default {
 
     const gsap = this.$gsap
 
-    if (!prefersReducedMotion)
-      gsap.fromTo(
-        footerWrapper,
-        { y: -footerWrapper.offsetHeight, opacity: 0.125 },
-        {
-          y: 0,
-          opacity: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: footer,
-            start: 'top bottom',
-            end: `bottom bottom`,
-            scrub: true,
-          },
-        }
-      )
+    const resizeObserver = new ResizeObserver(this.setFooterWrapperHeightVar)
+    resizeObserver.observe(footerWrapper)
+    this.setFooterWrapperHeightVar()
 
     if (!prefersReducedMotion)
       gsap.fromTo(
@@ -115,12 +102,14 @@ export default {
           },
         }
       )
-
-    setTimeout(() => {
-      this.$locomotiveScroll.update()
-    }, 50)
   },
   methods: {
+    setFooterWrapperHeightVar() {
+      this.$gsap.set(this.$refs.footer, {
+        '--wrapper-height': `${this.$refs.footerWrapper.offsetHeight}px`,
+        onEnd: () => this.$locomotiveScroll.update(),
+      })
+    },
     getCurrentYear() {
       return new Date().getFullYear()
     },
@@ -146,6 +135,7 @@ export default {
 }
 
 .footer {
+  height: var(--wrapper-height);
   overflow: hidden;
 
   &__wrapper {
@@ -153,6 +143,14 @@ export default {
     justify-content: flex-start;
     align-items: stretch;
     flex-wrap: wrap;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    pointer-events: all;
   }
 
   &__content {
@@ -202,7 +200,8 @@ export default {
         &::after {
           @include visible-after;
 
-          background-color: rgba($color: black, $alpha: 0.75);
+          // NOTE: #030303 - main black color
+          background-color: rgba($color: #030303, $alpha: 0.75);
 
           transform: translateX(var(--x-offset));
         }
@@ -212,7 +211,9 @@ export default {
         @include visible-after;
 
         bottom: calc(50% - 5px);
-        background-color: rgba($color: black, $alpha: 0.65);
+
+        // NOTE: #030303 - main black color
+        background-color: rgba($color: #030303, $alpha: 0.65);
 
         transform: translateX(var(--x-offset));
       }
