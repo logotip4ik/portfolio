@@ -30,9 +30,7 @@ export default {
   mounted() {
     const { canvas } = this.$refs
 
-    prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
+    prefersReducedMotion = this.$prefersReducedMotion()
 
     // THREE: Scene
     scene = new THREE.Scene()

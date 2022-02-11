@@ -24,9 +24,7 @@
 <script>
 export default {
   mounted() {
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
+    const prefersReducedMotion = this.$prefersReducedMotion()
 
     const { contact, contactMarquee, contactMarqueeText, contactMarqueeBlock } =
       this.$refs

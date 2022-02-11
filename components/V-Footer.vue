@@ -77,9 +77,7 @@ export default {
     ],
   }),
   mounted() {
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
+    const prefersReducedMotion = this.$prefersReducedMotion()
 
     const { footer, footerWrapper, footerContentTitle } = this.$refs
 
