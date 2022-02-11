@@ -1,20 +1,22 @@
 import LocomotiveScroll from 'locomotive-scroll'
 
+const SCROLL_TO_DURATION_IN_SECONDS = 1.5
+const LOCOMOTIVE_SCROLL_BREAK_POINT = 1024
+
 export default ({ $gsap, $ScrollTrigger }, inject) => {
+  inject('smoothScrollBreakPoint', LOCOMOTIVE_SCROLL_BREAK_POINT)
+
   const el = document.querySelector('.scroller')
 
-  const locoScroll = new LocomotiveScroll({
-    el,
-    smooth: true,
-  })
+  const locomotiveScroll = new LocomotiveScroll({ el, smooth: true })
 
-  locoScroll.on('scroll', $ScrollTrigger.update)
+  locomotiveScroll.on('scroll', $ScrollTrigger.update)
 
-  $ScrollTrigger.scrollerProxy(locoScroll.el, {
+  $ScrollTrigger.scrollerProxy(locomotiveScroll.el, {
     scrollTop(value) {
       return arguments.length
-        ? locoScroll.scrollTo(value, 0, 0)
-        : locoScroll.scroll.instance.scroll.y
+        ? locomotiveScroll.scrollTo(value, 0, 0)
+        : locomotiveScroll.scroll.instance.scroll.y
     }, // we don't have to define a scrollLeft because we're only scrolling vertically.
     getBoundingClientRect() {
       return {
@@ -24,44 +26,48 @@ export default ({ $gsap, $ScrollTrigger }, inject) => {
         height: window.innerHeight,
       }
     },
-    // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-    pinType: locoScroll.el.style.transform ? 'transform' : 'fixed',
+    // LocomotiveScroll handles things completely differently on mobile devices - it
+    // doesn't even transform the container at all! So to get the correct behavior
+    // and avoid jitters, we should pin things with position: fixed on mobile. We
+    // sense it by checking to see if there's a transform applied to the container
+    // (the LocomotiveScroll-controlled element).
+    pinType: locomotiveScroll.el.style.transform ? 'transform' : 'fixed',
   })
 
-  if (window.innerWidth > 800)
-    $ScrollTrigger.defaults({ scroller: locoScroll.el })
+  if (window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT)
+    $ScrollTrigger.defaults({ scroller: locomotiveScroll.el })
 
   let scrollY = 0
 
-  locoScroll.on('scroll', ({ scroll }) => (scrollY = scroll.y))
+  locomotiveScroll.on('scroll', ({ scroll }) => (scrollY = scroll.y))
 
-  inject('locomotiveScroll', locoScroll)
-  inject('scrollY', () => scrollY)
+  inject('locomotiveScroll', locomotiveScroll)
+
+  inject('scrollY', () =>
+    window.innerWidth < LOCOMOTIVE_SCROLL_BREAK_POINT ? window.scrollY : scrollY
+  )
   inject('disableScrollY', () => {
-    if (window.innerWidth > 999) return locoScroll.stop()
-
-    $gsap.set(document.body, { overflowY: 'hidden' })
+    if (window.innerWidth < LOCOMOTIVE_SCROLL_BREAK_POINT)
+      $gsap.set(document.body, { overflowY: 'hidden' })
+    else locomotiveScroll.stop()
   })
   inject('enableScrollY', () => {
-    if (window.innerWidth > 999) return locoScroll.start()
-
-    $gsap.set(document.body, { overflowY: 'auto' })
+    if (window.innerWidth < LOCOMOTIVE_SCROLL_BREAK_POINT)
+      $gsap.set(document.body, { overflowY: 'auto' })
+    else locomotiveScroll.start()
   })
   inject('scrollTo', (selector) => {
-    if (window.innerWidth < 1000)
-      return $gsap.to(window, {
-        scrollTo: {
-          y: selector,
-          autoKill: true,
-          // offsetY: 50,
-        },
-        duration: 1,
+    if (window.innerWidth < LOCOMOTIVE_SCROLL_BREAK_POINT)
+      $gsap.to(window, {
+        scrollTo: { y: selector, autoKill: true },
+        duration: SCROLL_TO_DURATION_IN_SECONDS,
         ease: 'power3.inOut',
       })
-
-    locoScroll.scrollTo(selector, {
-      duration: 1000,
-      easing: [0.645, 0.045, 0.355, 1.0],
-    })
+    else
+      locomotiveScroll.scrollTo(selector, {
+        // NOTE: Locomotive scroll needs milliseconds
+        duration: SCROLL_TO_DURATION_IN_SECONDS * 1000,
+        easing: [0.645, 0.045, 0.355, 1.0],
+      })
   })
 }
