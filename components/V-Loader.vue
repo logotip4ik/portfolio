@@ -1,5 +1,19 @@
 <template>
-  <div ref="loader" class="loader">
+  <!-- NOTE: inlining loader styles for preventing flashes when browser is rendering the web page  -->
+  <div
+    ref="loader"
+    class="loader"
+    style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      width: 100vw;
+      height: 100vh;
+      background-color: #030303;
+      pointer-events: all;
+    "
+  >
     <p class="loader__word">
       <span
         v-for="(char, key) in firstWord"
@@ -75,13 +89,11 @@ export default {
   left: 0;
   z-index: 5;
 
-  width: 100%;
-  height: 100%;
-  max-width: 100vw;
+  width: 100vw;
+  height: 100vh;
 
   color: #dfdfdf;
-  background-color: var(--black-color);
-
+  background-color: #030303;
   pointer-events: all;
 
   &__word {
