@@ -53,89 +53,76 @@ export default {
     const { header, headerContainer, headerContainerSubtitle } = this.$refs
     const gsap = this.$gsap
 
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
+    const prefersReducedMotion = this.$prefersReducedMotion()
 
-    let tl
+    // NOTE: Yeah, i know, i shouldn't use plain selectors
+    // but really, this is working cuz of server side rendering
+    // and if you wanted to use refs, then it will be really
+    // painful to get every needed element as reference
 
-    // NOTE: why should i do this ?
-    // cuz headerNavigationItems already exists in dom,
-    // but idk why, nuxt is rerendering them, in the client
-    // so previous references is not proper and gsap is
-    // animating wrong elements
-    setTimeout(() => {
-      // Scroll based animations
-      if (!prefersReducedMotion)
-        gsap.fromTo(
-          headerContainer,
-          { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
-          {
-            opacity: 0,
-            scale: 1.125,
-            yPercent: -10,
-            filter: 'blur(10px)',
-            scrollTrigger: {
-              scrub: 0.5,
-              trigger: header,
-              start: 'top+=15% top',
-              end: 'bottom-=35%, top',
-            },
-          }
-        )
-
-      if (!prefersReducedMotion)
-        gsap.fromTo(
-          '.scroll-down',
-          { opacity: 1 },
-          {
-            opacity: 0,
-            scrollTrigger: {
-              scrub: 0.75,
-              trigger: header,
-              start: 'top+=25% top',
-              end: 'bottom-=25% top',
-            },
-          }
-        )
-
-      // MAIN Timeline
-      tl = gsap.timeline({
-        paused: true,
-        delay: 0.25,
-        onEnd: () => this.$locoScroll.update(),
-      })
-
-      // NOTE: Yeah, i know, i shouldn't use plain selectors
-      // but really, this is working and if you wanted to use refs, then
-      // it will became really painful for developer
-      if (prefersReducedMotion)
-        tl.fromTo(
-          '.line__content',
-          { opacity: 0 },
-          { opacity: 1, stagger: 0.25 }
-        )
-      else
-        tl.fromTo(
-          '.line__content',
-          { yPercent: 105 },
-          { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.25 }
-        )
-
-      tl.fromTo(
-        headerContainerSubtitle,
-        { opacity: 0 },
-        { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
-        '-=0.75'
+    // Scroll based animations
+    if (!prefersReducedMotion)
+      gsap.fromTo(
+        headerContainer,
+        { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
+        {
+          opacity: 0,
+          scale: 1.125,
+          yPercent: -10,
+          filter: 'blur(10px)',
+          scrollTrigger: {
+            scrub: 0.5,
+            trigger: header,
+            start: 'top+=15% top',
+            end: 'bottom-=35%, top',
+          },
+        }
       )
-      tl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.75')
-      tl.fromTo(
-        '.nav__sections__list__section',
-        { opacity: 0 },
-        { opacity: 1, stagger: 0.05 },
-        '<+0.25'
+
+    if (!prefersReducedMotion)
+      gsap.fromTo(
+        '.scroll-down',
+        { opacity: 1 },
+        {
+          opacity: 0,
+          scrollTrigger: {
+            scrub: 0.75,
+            trigger: header,
+            start: 'top+=25% top',
+            end: 'bottom-=25% top',
+          },
+        }
       )
-    }, 10)
+
+    // MAIN reveal timeline
+    const tl = gsap.timeline({
+      paused: true,
+      delay: 0.25,
+      onEnd: () => this.$locomotiveScroll.update(),
+    })
+
+    if (prefersReducedMotion)
+      tl.fromTo('.line__content', { opacity: 0 }, { opacity: 1, stagger: 0.25 })
+    else
+      tl.fromTo(
+        '.line__content',
+        { yPercent: 105 },
+        { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.25 }
+      )
+
+    tl.fromTo(
+      headerContainerSubtitle,
+      { opacity: 0 },
+      { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
+      '-=0.75'
+    )
+    tl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.75')
+    tl.fromTo(
+      '.nav__sections__list__section, .nav__menu-button',
+      { opacity: 0 },
+      { opacity: 1, stagger: 0.05 },
+      '<+0.25'
+    )
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
