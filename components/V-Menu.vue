@@ -1,5 +1,5 @@
 <template>
-  <div ref="menu" class="menu" role="menu">
+  <div ref="menu" class="menu" role="menu" data-scroll-sticky>
     <div class="menu__back-item" aria-hidden="true"></div>
     <div
       v-for="(link, key) in navigationalLinks"
@@ -174,6 +174,7 @@ export default {
 
   opacity: 0;
   visibility: hidden;
+  pointer-events: all;
 
   &__back-item {
     $ITEMS_COUNT: 6;

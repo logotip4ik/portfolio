@@ -1,5 +1,10 @@
 <template>
-  <section ref="works" class="works" aria-label="works section">
+  <section
+    ref="works"
+    class="works"
+    aria-label="works section"
+    data-scroll-section
+  >
     <V-H2 aria-label="work section heading">Work</V-H2>
     <ul class="works__list" aria-label="works list">
       <V-Work-Item
@@ -32,6 +37,7 @@ export default {
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   color: white;
   background-color: var(--black-color);
+  pointer-events: all;
 
   &__list {
     display: grid;

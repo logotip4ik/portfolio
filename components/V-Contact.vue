@@ -1,5 +1,5 @@
 <template>
-  <section ref="contact" class="contact">
+  <section ref="contact" class="contact" data-scroll-section>
     <a
       ref="contactMarquee"
       v-hoverable
@@ -80,9 +80,12 @@ export default {
   width: 100%;
   max-width: 100vw;
 
+  margin-top: -2px;
   padding: 4rem 0 8rem;
+  background-color: var(--black-color);
 
   overflow: hidden;
+  pointer-events: all;
 
   &__marquee {
     display: flex;

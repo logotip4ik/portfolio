@@ -1,5 +1,5 @@
 <template>
-  <header ref="header" class="header" role="banner">
+  <header ref="header" class="header" role="banner" data-scroll-section>
     <V-Header-Background class="header__canvas" />
 
     <div ref="headerContainer" class="header__container">
@@ -146,6 +146,7 @@ export default {
   min-height: 100vh;
   // min-height: calc(var(--vh, 1vh) * 100);
   background-color: var(--black-color);
+  pointer-events: all;
 
   &__canvas {
     position: absolute;

@@ -4,6 +4,7 @@
     class="nav container"
     role="navigation"
     aria-label="main navigation"
+    data-scroll-sticky
   >
     <button
       ref="navTitle"
@@ -273,7 +274,7 @@ export default {
 
         &::before {
           --size: calc(var(--step--2) - 0.6rem);
-          content: '';
+          content: none;
 
           position: absolute;
           top: 50%;
@@ -291,6 +292,10 @@ export default {
           opacity: 0;
 
           transition: opacity 100ms ease;
+
+          @media (prefers-reduced-motion: reduce) {
+            content: '';
+          }
         }
 
         &--non-active {

@@ -1,5 +1,10 @@
 <template>
-  <section ref="about" class="about" aria-label="about section">
+  <section
+    ref="about"
+    class="about"
+    aria-label="about section"
+    data-scroll-section
+  >
     <V-H2 aria-label="about section heading">About</V-H2>
 
     <p ref="aboutText" class="about__text">
@@ -124,6 +129,7 @@ export default {
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   color: white;
   background-color: var(--black-color);
+  pointer-events: all;
 
   &__text {
     max-width: 1100px;
