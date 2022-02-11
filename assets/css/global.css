@@ -33,13 +33,13 @@
 html,
 body {
   height: 100%;
+
+  -webkit-font-smoothing: antialiased;
   font-family: 'Raleway', sans-serif;
   letter-spacing: 0.6px;
 
-  /* NOTE: this is messing up with asscroll, like it will jump a bit when user stops scrolling */
+  /* NOTE: this is messing up with gsap scrollTo and locomotive scroll */
   /* scroll-behavior: smooth; */
-
-  -webkit-font-smoothing: antialiased;
 
   background-color: var(--black-color);
   isolation: isolate;
