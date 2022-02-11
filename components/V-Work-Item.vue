@@ -47,10 +47,7 @@ import SourceSVG from '~/assets/img/source.svg?inline'
 
 export default {
   components: { SourceSVG },
-  props: {
-    work: { type: Object, required: true, default: () => ({}) },
-    i: { type: Number, required: false, default: 0 },
-  },
+  props: { work: { type: Object, required: true, default: () => ({}) } },
   computed: {
     tagsString() {
       return this.work.tags.reduce((str, val) => `${str}, ${val}`)
