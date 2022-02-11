@@ -140,6 +140,8 @@ export default {
       }
     },
     render() {
+      // NOTE: Wont render anything is scrolled past window height - 10 or
+      // if overlay is hiding the canvas or if user prefers reduced motion
       if (
         this.$scrollY() - 10 > window.innerHeight ||
         !isShaderRunning ||
