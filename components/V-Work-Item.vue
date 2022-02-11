@@ -60,7 +60,7 @@ export default {
 
     const gsap = this.$gsap
 
-    const imageResizeObserver = new ResizeObserver((ev) => {
+    const imageResizeObserver = new ResizeObserver(() => {
       if (!workSource) return
       gsap.to(workSource, {
         '--image-height': `${workImageWrapper.clientHeight}px`,
