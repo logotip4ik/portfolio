@@ -1,10 +1,8 @@
 <template>
   <div>
-    <V-Navbar :current-section="currentSection"></V-Navbar>
     <div role="presentation" class="scroller">
       <Nuxt></Nuxt>
     </div>
-    <V-Menu :current-section="currentSection"></V-Menu>
     <V-Pointer></V-Pointer>
     <V-Loader></V-Loader>
   </div>
@@ -13,24 +11,7 @@
 <script>
 export default {
   name: 'DefaultLayout',
-  data: () => ({ currentSection: 0 }),
   mounted() {
-    const gsap = this.$gsap
-    const ScrollTrigger = this.$ScrollTrigger
-
-    gsap.utils.toArray('header, section').forEach((item, i) => {
-      const start = 'top 45%'
-      const end = 'bottom 45%'
-
-      ScrollTrigger.create({
-        trigger: item,
-        start,
-        end,
-        onEnter: () => (this.currentSection = i),
-        onEnterBack: () => (this.currentSection = i),
-      })
-    })
-
     this.logGreeting()
     this.setViewHeight()
     window.addEventListener('resize', this.setViewHeight)
