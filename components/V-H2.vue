@@ -10,7 +10,7 @@
 <script>
 export default {
   props: {
-    rangeOfMovement: { type: Number, required: false, default: 15 },
+    rangeOfMovement: { type: Number, required: false, default: 20 },
   },
   computed: {
     defaultedYOffset() {
@@ -59,7 +59,7 @@ export default {
     else
       gsap.fromTo(
         titleContent,
-        { yPercent: 110 },
+        { yPercent: -110 },
         { yPercent: 0, duration: 0.75, ease: 'power2.out(1.5)', scrollTrigger }
       )
   },
