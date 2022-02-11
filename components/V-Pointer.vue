@@ -40,9 +40,7 @@ export default {
     },
   },
   mounted() {
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
+    const prefersReducedMotion = this.$prefersReducedMotion()
 
     if ('ontouchstart' in document.documentElement || prefersReducedMotion)
       return

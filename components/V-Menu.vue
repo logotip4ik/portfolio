@@ -67,9 +67,7 @@ export default {
     }
   },
   mounted() {
-    this.prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
+    this.prefersReducedMotion = this.$prefersReducedMotion()
 
     this.$nuxt.$on('toggle-menu', (bool) => {
       if (typeof bool === 'boolean' && this.isShowingMenu === bool) return

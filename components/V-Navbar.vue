@@ -109,9 +109,7 @@ export default {
     },
   },
   mounted() {
-    this.prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
+    this.prefersReducedMotion = this.$prefersReducedMotion()
 
     const { navTitle } = this.$refs
 
