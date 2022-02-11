@@ -82,6 +82,8 @@ export default {
   color: #dfdfdf;
   background-color: var(--black-color);
 
+  pointer-events: all;
+
   &__word {
     position: absolute;
     top: 50%;
