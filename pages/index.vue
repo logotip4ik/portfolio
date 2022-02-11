@@ -7,8 +7,6 @@
       <V-Contact></V-Contact>
     </main>
     <V-Footer></V-Footer>
-    <!-- NOTE: footer ideas: https://www.rezo-zero.com -->
-    <!-- TODO: add and see if floating particles will suite the site, like here: https://www.details.co.jp/ -->
   </div>
 </template>
 
