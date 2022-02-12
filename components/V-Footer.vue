@@ -30,6 +30,7 @@
         <p class="footer__content__note">
           Made with
           <img
+            title="love"
             loading="lazy"
             src="~/assets/img/heart.png"
             width="60"
