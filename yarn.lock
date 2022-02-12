@@ -5721,10 +5721,10 @@ header-case@^2.0.4:
     capital-case "^1.0.4"
     tslib "^2.0.3"
 
-helmet@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/helmet/-/helmet-4.6.0.tgz#579971196ba93c5978eb019e4e8ec0e50076b4df"
-  integrity sha512-HVqALKZlR95ROkrnesdhbbZJFi/rIVSoNq6f3jA/9u6MIbTsPh3xZwihjeI5+DO/2sOV6HMHooXcEOuwskHpTg==
+helmet@^5.0.1:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/helmet/-/helmet-5.0.2.tgz#3264ec6bab96c82deaf65e3403c369424cb2366c"
+  integrity sha512-QWlwUZZ8BtlvwYVTSDTBChGf8EOcQ2LkGMnQJxSzD1mUu8CCjXJZq/BXP8eWw4kikRnzlhtYo3lCk0ucmYA3Vg==
 
 hex-color-regex@^1.1.0:
   version "1.1.0"
@@ -7734,13 +7734,13 @@ nuxt-gsap-module@^1.6.0:
   dependencies:
     gsap "^3.9.1"
 
-nuxt-helmet@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/nuxt-helmet/-/nuxt-helmet-2.1.1.tgz#fbb86bc1bda6d7385602864f72f84e35ed0a947d"
-  integrity sha512-NexHXShgLMYGin4ovFoMEeRux+xQzKMyJnMPBMH5GdLxCL+pSqNrSQ13jCSbSrAsTAtWxxwvJH3afAD7ns6/zw==
+nuxt-helmet@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/nuxt-helmet/-/nuxt-helmet-3.0.0.tgz#983c02b2767f61f4b0ac73e914de816daab5c1a0"
+  integrity sha512-rPQz9vdh+DzARVJdSUrZIX0ojWPt0RbZiEf6mXvvk7/Y1gVm2w+6VA/199G+XQVdNNzYsDM92UXXCDU6UQHpRA==
   dependencies:
     consola "^2.11.3"
-    helmet "^4.6.0"
+    helmet "^5.0.1"
 
 nuxt-seo@^1.6.0:
   version "1.6.0"
