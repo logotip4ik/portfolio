@@ -126,6 +126,7 @@ export default {
   position: relative;
 
   min-height: 100vh;
+  margin-top: -2px;
   padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   color: white;
   background-color: var(--black-color);
