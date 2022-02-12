@@ -116,13 +116,13 @@ export default {
       { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
       '-=0.75'
     )
-    tl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.75')
     tl.fromTo(
       '.nav__sections__list__section, .nav__menu-button',
       { opacity: 0 },
       { opacity: 1, stagger: 0.05 },
-      '<+0.25'
+      '<+0.75'
     )
+    tl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.25')
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
