@@ -109,11 +109,6 @@ export default {
         exclude: /node_modules/,
         use: ['raw-loader', 'glslify-loader'],
       })
-
-      // Extend only webpack config for client-bundle
-      if (isClient) {
-        config.devtool = 'source-map'
-      }
     },
   },
 
