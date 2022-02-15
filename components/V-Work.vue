@@ -42,6 +42,7 @@ export default {
   &__list {
     display: grid;
     justify-items: center;
+    align-items: start;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: var(--step-3);
 
