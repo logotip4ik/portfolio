@@ -76,3 +76,7 @@ h5 {
 h6 {
   font-size: var(--step-6);
 }
+
+a, button {
+  touch-action: manipulation;
+}
