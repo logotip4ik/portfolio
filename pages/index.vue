@@ -21,13 +21,10 @@ export default {
     const ScrollTrigger = this.$ScrollTrigger
 
     gsap.utils.toArray('header, section').forEach((item, i) => {
-      const start = 'top 45%'
-      const end = 'bottom 45%'
-
       ScrollTrigger.create({
         trigger: item,
-        start,
-        end,
+        start: 'top 45%',
+        end: 'bottom 45%',
         onEnter: () => (this.currentSection = i),
         onEnterBack: () => (this.currentSection = i),
       })
