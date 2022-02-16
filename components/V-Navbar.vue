@@ -112,7 +112,7 @@ export default {
   mounted() {
     this.prefersReducedMotion = this.$prefersReducedMotion()
 
-    const { navTitle } = this.$refs
+    const { nav, navTitle } = this.$refs
 
     const gsap = this.$gsap
     const ScrollTrigger = this.$ScrollTrigger
@@ -137,6 +137,15 @@ export default {
       end: 'top+=35% top+=80px',
       onEnter: () => (this.isShowingCurrentSection = true),
       onLeaveBack: () => (this.isShowingCurrentSection = false),
+    })
+
+    let prevScrollPosition = 0
+    this.$locomotiveScroll.on('scroll', ({ scroll }) => {
+      const scrollingDown = scroll.y - prevScrollPosition > 0
+      prevScrollPosition = scroll.y
+
+      if (scrollingDown) gsap.to(nav, { autoAlpha: 0 })
+      else gsap.to(nav, { autoAlpha: 1, duration: 0.15 })
     })
 
     this.$nuxt.$on('toggle-menu', (bool) => {
