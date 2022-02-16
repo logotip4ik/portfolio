@@ -100,6 +100,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extractCSS: true,
     postcss: { plugins: { 'postcss-logical': { dir: 'ltr' } } },
     extend(config, { isClient }) {
       // This enables to import .glsl, .frag, .vert, as modules
