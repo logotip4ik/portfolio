@@ -1,5 +1,11 @@
 <template>
-  <li ref="work" v-hoverable class="work">
+  <li
+    ref="work"
+    v-hoverable
+    class="work"
+    @pointerenter="hoverWorkItemAnimation"
+    @pointerleave="idleWorkItemAnimation"
+  >
     <a
       :href="work.live"
       :aria-label="`open live ${work.title}`"
@@ -94,6 +100,14 @@ export default {
       }
     )
   },
+  methods: {
+    hoverWorkItemAnimation() {
+      this.$gsap.to(this.$refs.workImage.$el, { scale: 1.04, duration: 0.3 })
+    },
+    idleWorkItemAnimation() {
+      this.$gsap.to(this.$refs.workImage.$el, { scale: 1 })
+    },
+  },
 }
 </script>
 
@@ -153,7 +167,7 @@ export default {
   &__content {
     $text-color: color.adjust(
       $color: #fff,
-      $lightness: -25%,
+      $lightness: -20%,
     );
 
     &__title {
@@ -208,7 +222,7 @@ export default {
     transition: opacity 400ms;
   }
 
-  &:is(:focus, :hover) {
+  &:is(:focus-within, :hover) {
     &::after {
       opacity: 0;
     }
