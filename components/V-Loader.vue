@@ -34,7 +34,7 @@ export default {
   mounted() {
     this.$disableScrollY()
 
-    const readTime = 0.175
+    const readTime = 0.35
     const { loader, loaderWord1Chars } = this.$refs
     const loaderChildren = Array.from(loader.children)
 
