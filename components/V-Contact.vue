@@ -36,7 +36,7 @@ export default {
         xPercent: -100,
         repeat: -1,
         ease: 'none',
-        duration: 15,
+        duration: 12,
       })
 
     gsap.fromTo(
@@ -107,14 +107,17 @@ export default {
 
       position: relative;
 
-      font-size: calc(var(--step-5) + 3vw);
+      font-size: var(--step-5);
       margin: 0;
       white-space: nowrap;
 
       @media (prefers-reduced-motion: reduce) {
-        font-size: var(--step-5);
-
         transform: translateX(calc(65vw * -1));
+      }
+
+      @supports (-webkit-text-stroke: 1px red) {
+        color: transparent;
+        -webkit-text-stroke: 1px darken($color: white, $amount: 40);
       }
     }
 
