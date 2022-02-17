@@ -145,7 +145,7 @@ export default {
       prevScrollPosition = scroll.y
 
       if (scrollingDown) gsap.to(nav, { autoAlpha: 0 })
-      else gsap.to(nav, { autoAlpha: 1, duration: 0.15 })
+      else gsap.to(nav, { autoAlpha: 1, duration: 0.25 })
     })
 
     this.$nuxt.$on('toggle-menu', (bool) => {
