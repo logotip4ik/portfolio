@@ -104,7 +104,7 @@ export default {
   position: relative;
 
   max-width: 475px;
-  will-change: transform;
+  will-change: transform, opacity;
 
   &__wrapper {
     display: grid;
