@@ -45,9 +45,6 @@ export default {
     this.prefersReducedMotion = this.$prefersReducedMotion()
   },
   methods: {
-    /**
-     * @param {Object} props Additional gsap timeline props
-     */
     timelineFactory(props) {
       return this.$gsap.timeline({
         defaults: { stagger: 0.05, duration: 0.2 },
