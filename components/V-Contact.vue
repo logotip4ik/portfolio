@@ -26,18 +26,9 @@ export default {
   mounted() {
     const prefersReducedMotion = this.$prefersReducedMotion()
 
-    const { contact, contactMarquee, contactMarqueeText, contactMarqueeBlock } =
-      this.$refs
+    const { contact, contactMarquee, contactMarqueeBlock } = this.$refs
 
     const gsap = this.$gsap
-
-    if (!prefersReducedMotion)
-      gsap.to(contactMarqueeText, {
-        xPercent: -100,
-        repeat: -1,
-        ease: 'none',
-        duration: 12,
-      })
 
     gsap.fromTo(
       contactMarquee,
@@ -55,7 +46,7 @@ export default {
     }
 
     if (prefersReducedMotion)
-      gsap.to(contactMarqueeBlock, { opacity: 0, scrollTrigger })
+      gsap.to(contactMarqueeBlock, { autoAlpha: 0, scrollTrigger })
     else
       gsap.fromTo(
         contactMarqueeBlock,
@@ -110,8 +101,10 @@ export default {
       font-size: var(--step-5);
       margin: 0;
       white-space: nowrap;
+      animation: 10s linear infinite 10s running marquee-text;
 
       @media (prefers-reduced-motion: reduce) {
+        animation: none;
         transform: translateX(calc(65vw * -1));
       }
 
@@ -136,6 +129,15 @@ export default {
         background-color: rgba($color: #030303, $alpha: 0);
       }
     }
+  }
+}
+
+@keyframes marquee-text {
+  from {
+    transform: translate3d(0%, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
   }
 }
 </style>
