@@ -107,7 +107,7 @@ export default {
 
       position: relative;
 
-      font-size: calc(var(--step-5) * 1.25 + 3vw);
+      font-size: calc(var(--step-5) + 3vw);
       margin: 0;
       white-space: nowrap;
 
