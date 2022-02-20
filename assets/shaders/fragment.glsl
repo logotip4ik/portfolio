@@ -2,6 +2,7 @@ uniform float time;
 uniform float randomSeed;
 uniform float objectOpacity;
 uniform float noisePower;
+uniform vec2 resolution;
 
 varying vec3 vPosition;
 
@@ -107,7 +108,10 @@ float rand(vec2 p) {
 }
 
 void main() {
-  const float shaderZoom = .25;
+  float shaderZoom = 0.0;
+
+  if (resolution.x > 700.0) shaderZoom = 0.25;
+  else shaderZoom = 0.4;
 
   vec3 color1 = vec3(0.0, 0.0, 0.0);
   vec3 color2 = vec3(255.0, 230.0, 237.0);
@@ -136,7 +140,7 @@ void main() {
 
   vec2 baseUv = getRotationMatrix(noise + -1.0) * vPosition.xy * shaderZoom;
 
-  float firstPattern = lines(baseUv, 0.4, 10.0);
+  float firstPattern = lines(baseUv, 0.5, 10.0);
   float secondPattern = lines(baseUv, 0.05, 15.0);
 
   vec3 firstColor = mix(color3, color2, firstPattern);

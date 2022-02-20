@@ -58,6 +58,9 @@ export default {
         randomSeed: { value: Math.random() },
         objectOpacity: { value: prefersReducedMotion ? 1.0 : 0.0 },
         noisePower: { value: 1.0 },
+        resolution: {
+          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        },
       },
       depthTest: false,
     })
@@ -103,6 +106,11 @@ export default {
 
       camera.updateMatrix()
       object.updateMatrix()
+
+      object.material.uniforms.resolution.value.set(
+        window.innerWidth,
+        window.innerHeight
+      )
     },
 
     render() {
