@@ -111,7 +111,7 @@ void main() {
   float shaderZoom = 0.0;
 
   if (resolution.x > 700.0) shaderZoom = 0.25;
-  else shaderZoom = 0.4;
+  else shaderZoom = 0.45;
 
   vec3 color1 = vec3(0.0, 0.0, 0.0);
   vec3 color2 = vec3(255.0, 230.0, 237.0);
@@ -146,7 +146,7 @@ void main() {
   vec3 firstColor = mix(color3, color2, firstPattern);
   vec3 resColor = mix(firstColor, color1, secondPattern);
 
-  float strength = 0.07;
+  float strength = 0.075;
   vec2 uvNoise = vPosition.xy;
   uvNoise.y *= rand(vec2(uvNoise.y, randomSeed));
   vec3 grain = vec3(rand(uvNoise)*strength);
