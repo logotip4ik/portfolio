@@ -100,10 +100,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // extractCSS: true,
+    // NOTE: This is really dirty, but it works, idk why, but sometimes
+    // dev server is completely broken if this option set to true
+    extractCSS: process.env.NODE_ENV === 'production',
     transpile: ['three'],
     postcss: { plugins: { 'postcss-logical': { dir: 'ltr' } } },
-    extend(config, { isClient }) {
+    extend(config) {
       // This enables to import .glsl, .frag, .vert, as modules
       // example: import vertexShader from '~/assets/shaders/vertex.glsl'
       config.module.rules.push({
