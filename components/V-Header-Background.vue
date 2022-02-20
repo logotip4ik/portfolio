@@ -1,11 +1,5 @@
 <template>
-  <div class="header-background">
-    <canvas
-      ref="canvas"
-      class="header-background__canvas"
-      aria-label="landing background"
-    ></canvas>
-  </div>
+  <canvas ref="canvas" class="canvas" aria-label="landing background"></canvas>
 </template>
 
 <script>
@@ -24,13 +18,15 @@ let camera = null
 let scene = null
 let renderer = null
 let object = null
-let clock = null
+const clock = new THREE.Clock()
+let aspect = 16 / 9
 
 export default {
   mounted() {
     const { canvas } = this.$refs
 
     prefersReducedMotion = this.$prefersReducedMotion()
+    aspect = window.innerWidth / window.innerHeight
 
     // THREE: Scene
     scene = new THREE.Scene()
@@ -38,30 +34,19 @@ export default {
     // THREE: Renderer
     renderer = new THREE.WebGLRenderer({
       canvas,
-      antialias: true,
-      stencil: false,
-      depth: false,
+      precision: 'highp',
+      powerPreference: 'high-performance',
     })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3))
-    renderer.setClearColor(0x121212, 1)
-    renderer.sortObjects = false
-    renderer.physicallyCorrectLights = true
     renderer.outputEncoding = THREE.sRGBEncoding
 
     // THREE: Camera
-    camera = new THREE.PerspectiveCamera(
-      70,
-      window.innerWidth / window.innerHeight,
-      0.001,
-      100
-    )
-
+    camera = new THREE.PerspectiveCamera(70, aspect, 0.5, 2)
     camera.position.set(0, 0, 1)
 
     // THREE: Object
-    const size = 1.4
-    const geometry = new THREE.PlaneBufferGeometry(size, size)
-
+    const size = 2
+    const geometry = new THREE.PlaneBufferGeometry(size * aspect, size)
     const material = new THREE.ShaderMaterial({
       fragmentShader,
       vertexShader,
@@ -72,14 +57,9 @@ export default {
         time: { value: 0.0 },
         randomSeed: { value: Math.random() },
         objectOpacity: { value: prefersReducedMotion ? 1.0 : 0.0 },
-        noise: { value: prefersReducedMotion ? 1.0 : 0.0 },
-        resolution: {
-          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
-        },
+        noisePower: { value: 1.0 },
       },
       depthTest: false,
-      depthWrite: false,
-      transparent: true,
     })
     object = new THREE.Mesh(geometry, material)
 
@@ -87,11 +67,12 @@ export default {
     scene.add(object)
 
     // THREE: Prep
-    const resizeObserver = new ResizeObserver(this.resize)
-    resizeObserver.observe(renderer.domElement, { box: 'border-box' })
-    this.resize(true)
+    // NOTE: this will help for performance
+    camera.matrixAutoUpdate = false
+    object.matrixAutoUpdate = false
 
-    clock = new THREE.Clock()
+    window.addEventListener('resize', this.resize)
+    this.resize()
 
     this.$nuxt.$on('show-shader', () => {
       isShaderRunning = true
@@ -101,12 +82,6 @@ export default {
         duration: 1.75,
         delay: 0.125,
       })
-      this.$gsap.to(object.material.uniforms.noise, {
-        value: 1,
-        duration: 4,
-        ease: 'power3.out',
-        delay: 0.1,
-      })
     })
 
     // NOTE: try to use only one requestAnimationFrame
@@ -114,34 +89,27 @@ export default {
     this.$gsap.ticker.add(this.render)
   },
   methods: {
-    resize(forceResize = false) {
+    resize() {
       const canvas = renderer.domElement
 
       const width = canvas.clientWidth
       const height = canvas.clientHeight
 
-      if (canvas.width !== width || canvas.height !== height || forceResize) {
+      if (canvas.width !== width || canvas.height !== height) {
         renderer.setSize(width, height, false)
-
         camera.aspect = width / height
         camera.updateProjectionMatrix()
-
-        // NOTE: this will help for performance
-        camera.matrixAutoUpdate = false
-        camera.updateMatrix()
-
-        object.matrixAutoUpdate = false
-        object.updateMatrix()
-
-        // NOTE: not perfect, at least it will cover all the viewport
-        object.scale.x = 1.4 * (width / height)
       }
+
+      camera.updateMatrix()
+      object.updateMatrix()
     },
+
     render() {
-      // NOTE: Wont render anything is scrolled past window height - 10 or
+      // NOTE: Wont render anything is scrolled past window height - 20 or
       // if overlay is hiding the canvas or if user prefers reduced motion
       if (
-        this.$scrollY() - 10 > window.innerHeight ||
+        this.$scrollY() - 20 > window.innerHeight ||
         !isShaderRunning ||
         (prefersReducedMotion && hasRunOnce)
       )
@@ -156,53 +124,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-.header-background {
-  overflow: hidden;
-
-  &__canvas {
-    display: block;
-
-    width: 100vw;
-    height: 100vh;
-
-    filter: blur(2.5px);
-  }
-
-  &::after {
-    content: '';
-
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(3, 3, 3, 0.75);
-
-    pointer-events: none;
-  }
-
-  &::before {
-    content: '';
-
-    position: absolute;
-    z-index: 1;
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 25%;
-    min-height: 2rem;
-    max-height: 11rem;
-
-    background: linear-gradient(
-      to top,
-      var(--black-color) 0%,
-      var(--black-color) 25%,
-      rgba(3, 3, 3, 0)
-    );
-  }
-}
-</style>
