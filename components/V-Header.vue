@@ -147,15 +147,16 @@ export default {
   // min-height: calc(var(--vh, 1vh) * 100);
   background-color: var(--black-color);
   pointer-events: all;
+  overflow: hidden;
 
   &__canvas {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
-
     width: 100%;
     height: 100%;
+
+    z-index: -2;
   }
 
   &__container {
@@ -229,6 +230,27 @@ export default {
       width: 100%;
       justify-content: space-between;
     }
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 25%;
+    min-height: 2rem;
+    max-height: 11rem;
+
+    background: linear-gradient(
+      to top,
+      var(--black-color) 0%,
+      var(--black-color) 25%,
+      rgba(3, 3, 3, 0)
+    );
   }
 }
 
