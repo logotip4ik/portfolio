@@ -37,7 +37,7 @@ export default {
       precision: 'highp',
       powerPreference: 'high-performance',
     })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3))
+    renderer.setPixelRatio(window.devicePixelRatio)
     renderer.outputEncoding = THREE.sRGBEncoding
 
     // THREE: Camera
@@ -58,6 +58,7 @@ export default {
         randomSeed: { value: Math.random() },
         objectOpacity: { value: prefersReducedMotion ? 1.0 : 0.0 },
         noisePower: { value: 1.0 },
+        pixelRatio: { value: window.devicePixelRatio },
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },

@@ -2,6 +2,7 @@ uniform float time;
 uniform float randomSeed;
 uniform float objectOpacity;
 uniform float noisePower;
+uniform float pixelRatio;
 uniform vec2 resolution;
 
 varying vec3 vPosition;
@@ -146,10 +147,12 @@ void main() {
   vec3 firstColor = mix(color3, color2, firstPattern);
   vec3 resColor = mix(firstColor, color1, secondPattern);
 
-  float strength = 0.075;
+  float grainStrength = 0.075;
+  if (pixelRatio > 2.0) grainStrength = 0.135;
+
   vec2 uvNoise = vPosition.xy;
   uvNoise.y *= rand(vec2(uvNoise.y, randomSeed));
-  vec3 grain = vec3(rand(uvNoise)*strength);
+  vec3 grain = vec3(rand(uvNoise) * grainStrength);
 
   resColor += grain;
 
