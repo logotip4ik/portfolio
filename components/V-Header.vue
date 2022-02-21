@@ -139,7 +139,7 @@ export default {
   align-items: center;
 
   position: relative;
-  isolation: isolate;
+  z-index: 1;
 
   width: 100%;
   max-width: 100vw;
