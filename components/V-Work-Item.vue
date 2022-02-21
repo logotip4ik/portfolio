@@ -1,11 +1,5 @@
 <template>
-  <li
-    ref="work"
-    v-hoverable
-    class="work"
-    @pointerenter="hoverWorkItemAnimation"
-    @pointerleave="idleWorkItemAnimation"
-  >
+  <li ref="work" v-hoverable class="work">
     <a
       :href="work.live"
       :aria-label="`open live ${work.title}`"
@@ -99,14 +93,6 @@ export default {
         scrollTrigger: { trigger: work, scrub: true },
       }
     )
-  },
-  methods: {
-    hoverWorkItemAnimation() {
-      this.$gsap.to(this.$refs.workImage.$el, { scale: 1.04, duration: 0.3 })
-    },
-    idleWorkItemAnimation() {
-      this.$gsap.to(this.$refs.workImage.$el, { scale: 1 })
-    },
   },
 }
 </script>
