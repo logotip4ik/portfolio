@@ -141,6 +141,9 @@ export default {
 
     let prevScrollPosition = 0
     this.$locomotiveScroll.on('scroll', ({ scroll }) => {
+      if (scroll.y < window.innerHeight - window.innerHeight / 2)
+        return gsap.to(nav, { autoAlpha: 1 })
+
       const scrollingDown = scroll.y - prevScrollPosition > 0
       prevScrollPosition = scroll.y
 
