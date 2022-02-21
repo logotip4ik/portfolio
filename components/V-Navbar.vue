@@ -233,7 +233,7 @@ export default {
   position: fixed;
   top: 1rem;
   left: 0;
-  z-index: 1;
+  z-index: 2;
 
   padding: 1rem var(--x-padding);
   width: 100%;
