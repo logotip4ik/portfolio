@@ -64,17 +64,14 @@ export default {
     if (!prefersReducedMotion)
       gsap.fromTo(
         headerContainer,
-        { opacity: 1, scale: 1, yPercent: 0, filter: 'blur(0px)' },
+        { y: -3 },
         {
-          opacity: 0,
-          scale: 1.125,
-          yPercent: -10,
-          filter: 'blur(10px)',
+          y: 20,
           scrollTrigger: {
-            scrub: 0.5,
+            scrub: true,
             trigger: header,
-            start: 'top+=15% top',
-            end: 'bottom-=35%, top',
+            start: 'top-=50px top',
+            end: 'bottom top',
           },
         }
       )
@@ -102,27 +99,26 @@ export default {
     })
 
     if (prefersReducedMotion)
-      tl.fromTo('.line__content', { opacity: 0 }, { opacity: 1, stagger: 0.25 })
+      tl.from('.line__content', { opacity: 0, stagger: 0.25 })
     else
-      tl.fromTo(
-        '.line__content',
-        { yPercent: 105 },
-        { yPercent: 0, ease: 'power1.out', duration: 1, stagger: 0.25 }
-      )
+      tl.from('.line__content', {
+        yPercent: 105,
+        ease: 'power1.out',
+        duration: 1,
+        stagger: 0.25,
+      })
 
-    tl.fromTo(
+    tl.from(
       headerContainerSubtitle,
-      { opacity: 0 },
-      { opacity: 1, stagger: { amount: 0.5, from: 'center' } },
+      { opacity: 0, stagger: { amount: 0.5, from: 'center' } },
       '-=0.75'
     )
-    tl.fromTo(
+    tl.from(
       '.nav__sections__list__section, .nav__menu-button',
-      { opacity: 0 },
-      { opacity: 1, stagger: 0.05 },
+      { opacity: 0, stagger: 0.05 },
       '<+0.75'
     )
-    tl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.25')
+    tl.from('.scroll-down', { opacity: 0 }, '<+0.25')
 
     // NOTE: this even is fired when loader is done with animation
     this.$nuxt.$on('show-layout', () => tl.play())
@@ -161,14 +157,14 @@ export default {
 
   &__container {
     color: white;
-    mix-blend-mode: difference;
 
+    mix-blend-mode: difference;
     cursor: default;
 
     &__title {
-      margin-bottom: 1rem;
-
       line-height: 1.2;
+
+      margin-bottom: 1rem;
 
       & > *:last-of-type {
         margin-top: min(-0.5rem, calc(1vw * -1));
