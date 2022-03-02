@@ -1,6 +1,10 @@
 <template>
   <div ref="pointer" class="pointer">
-    <ArrowLink ref="pointerArrow" class="pointer__arrow"></ArrowLink>
+    <ArrowLink
+      ref="pointerArrow"
+      aria-label="arrow for indicating link"
+      class="pointer__arrow"
+    ></ArrowLink>
   </div>
 </template>
 

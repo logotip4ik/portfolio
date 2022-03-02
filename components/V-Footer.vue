@@ -55,7 +55,7 @@
         tabindex="0"
         @click="$scrollTo(0)"
       >
-        <ArrowUpSVG class="footer__arrow"></ArrowUpSVG>
+        <ArrowUpSVG aria-label="up arrow" class="footer__arrow"></ArrowUpSVG>
       </div>
     </div>
   </footer>
