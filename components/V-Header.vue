@@ -139,7 +139,7 @@ export default {
   align-items: center;
 
   position: relative;
-  z-index: 1;
+  z-index: 0;
 
   width: 100%;
   max-width: 100vw;
@@ -156,7 +156,7 @@ export default {
     width: 100%;
     height: 100%;
 
-    z-index: -2;
+    z-index: -10;
   }
 
   &__container {
@@ -236,7 +236,7 @@ export default {
     content: '';
 
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     bottom: 0;
     left: 0;
 
