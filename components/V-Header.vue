@@ -28,7 +28,6 @@
     </div>
 
     <div class="header__bottom-bar">
-      <V-Clock ref="headerClock" class="header__bottom-bar__clock"></V-Clock>
       <V-Scroll-Down
         class="header__bottom-bar__scroll-down"
         @click.native="$scrollTo('.works')"
