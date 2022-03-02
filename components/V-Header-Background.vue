@@ -39,6 +39,8 @@ export default {
     })
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.outputEncoding = THREE.sRGBEncoding
+    renderer.autoClearColor = new THREE.Color(3, 3, 3)
+    renderer.failIfMajorPerformanceCaveat = true
 
     // THREE: Camera
     camera = new THREE.PerspectiveCamera(70, aspect, 0.5, 2)
