@@ -27,31 +27,12 @@
         </span>
       </span>
     </a>
-    <!-- <a
-      v-for="key in 3"
-      :key="key"
-      ref="contactMarquee"
-      class="contact__marquee"
-      href="mailto:contact@bogdankostyuk.xyz"
-    >
-      <span class="sr-only">send me email</span>
-      <span
-        v-for="keyInner in 3"
-        :key="keyInner"
-        ref="contactMarqueeText"
-        aria-hidden="true"
-        class="contact__marquee__text"
-      >
-        Send me an <span class="serif">email</span
-        ><span v-if="keyInner !== 3">&nbsp; - &nbsp;</span>
-      </span>
-    </a> -->
   </section>
 </template>
 
 <script>
 export default {
-  data: () => ({ textCount: 3 }),
+  data: () => ({ textCount: 4 }),
   mounted() {
     // const prefersReducedMotion = this.$prefersReducedMotion()
 
