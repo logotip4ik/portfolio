@@ -55,7 +55,7 @@ export default {
 
     @media screen and(min-width: 798px) {
       &__item:nth-child(even) {
-        margin-block-start: 5rem;
+        margin-block-start: 35%;
       }
     }
   }
