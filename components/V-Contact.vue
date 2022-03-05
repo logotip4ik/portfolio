@@ -51,23 +51,19 @@ export default {
 
     const scrollTriggerFactory = (trigger) => ({
       trigger,
-      scrub: window.innerWidth >= this.$smoothScrollBreakPoint ? true : 0.75,
+      scrub: window.innerWidth >= this.$smoothScrollBreakPoint ? true : 0.5,
     })
 
     contactEmailRow.forEach((item, key) => {
-      const sumWidth = item.offsetWidth + window.innerWidth
-      if (key % 2 === 0)
-        gsap.fromTo(
-          item,
-          { x: window.innerWidth },
-          { x: -sumWidth, scrollTrigger: scrollTriggerFactory(item) }
-        )
-      else
-        gsap.fromTo(
-          item,
-          { x: -sumWidth },
-          { x: window.innerWidth, scrollTrigger: scrollTriggerFactory(item) }
-        )
+      const sumWidth =
+        item.offsetWidth + window.innerWidth / (window.innerWidth < 700 ? 2 : 4)
+      const scrollTrigger = scrollTriggerFactory(item)
+
+      gsap.fromTo(
+        item,
+        { x: window.innerWidth },
+        { x: -sumWidth, scrollTrigger }
+      )
     })
   },
 }
@@ -100,6 +96,7 @@ export default {
       font-size: var(--step-5);
       margin: 0;
       white-space: nowrap;
+      will-change: transform;
 
       @supports (-webkit-text-stroke: 1px white) {
         color: transparent;
