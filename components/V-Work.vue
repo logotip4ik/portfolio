@@ -34,7 +34,8 @@ export default {
 
 <style lang="scss">
 .works {
-  padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
+  margin-top: -1px;
+  padding: 4rem clamp(1rem, 7vw, 5rem) 1rem;
   color: white;
   background-color: var(--black-color);
   pointer-events: all;
@@ -54,7 +55,7 @@ export default {
 
     @media screen and(min-width: 798px) {
       &__item:nth-child(even) {
-        margin-block-start: 5rem;
+        margin-block-start: 35%;
       }
     }
   }

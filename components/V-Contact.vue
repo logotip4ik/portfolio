@@ -1,37 +1,47 @@
 <template>
   <section ref="contact" class="contact" data-scroll-section>
     <a
-      ref="contactMarquee"
+      ref="contactEmail"
       v-hoverable
-      class="contact__marquee"
       href="mailto:contact@bogdankostyuk.xyz"
+      rel="noopener"
+      class="contact__email"
     >
-      <span class="sr-only">send me email</span>
+      <span class="sr-only"> send me an email </span>
       <span
-        v-for="key in 3"
-        :key="key"
-        ref="contactMarqueeText"
+        v-for="row in 3"
+        :key="row"
+        ref="contactEmailRow"
         aria-hidden="true"
-        class="contact__marquee__text"
+        class="contact__email__row"
       >
-        Send me an <span class="serif">email</span>&nbsp; - &nbsp;
+        <span
+          v-for="textKey in textCount"
+          :key="textKey"
+          ref="contactMarqueeText"
+          aria-hidden="true"
+          class="contact__email__row__text"
+        >
+          Send me an <span class="serif">email</span
+          ><span v-if="textKey !== textCount">&nbsp; - &nbsp;</span>
+        </span>
       </span>
-      <div ref="contactMarqueeBlock" class="contact__marquee__block"></div>
     </a>
   </section>
 </template>
 
 <script>
 export default {
+  data: () => ({ textCount: 4 }),
   mounted() {
-    const prefersReducedMotion = this.$prefersReducedMotion()
+    // const prefersReducedMotion = this.$prefersReducedMotion()
 
-    const { contact, contactMarquee, contactMarqueeBlock } = this.$refs
+    const { contact, contactEmailRow } = this.$refs
 
     const gsap = this.$gsap
 
     gsap.fromTo(
-      contactMarquee,
+      contactEmailRow,
       { yPercent: 'random(-15, -20)' },
       {
         yPercent: 'random(15, 20)',
@@ -39,29 +49,22 @@ export default {
       }
     )
 
-    const scrollTrigger = {
-      trigger: contact,
-      start: 'top bottom-=15%',
-      once: true,
-    }
+    const scrollTriggerFactory = (trigger) => ({
+      trigger,
+      scrub: window.innerWidth >= this.$smoothScrollBreakPoint ? true : 0.5,
+    })
 
-    if (prefersReducedMotion)
-      gsap.to(contactMarqueeBlock, { autoAlpha: 0, scrollTrigger })
-    else
+    contactEmailRow.forEach((item, key) => {
+      const sumWidth =
+        item.offsetWidth + window.innerWidth / (window.innerWidth < 700 ? 2 : 4)
+      const scrollTrigger = scrollTriggerFactory(item)
+
       gsap.fromTo(
-        contactMarqueeBlock,
-        { top: '0%', bottom: '0%' },
-        {
-          top: '50%',
-          bottom: '50%',
-          duration: 0.5,
-          scrollTrigger,
-          onComplete: () =>
-            contactMarqueeBlock.classList.add(
-              'contact__marquee__block--hidden'
-            ),
-        }
+        item,
+        { x: window.innerWidth },
+        { x: -sumWidth, scrollTrigger }
       )
+    })
   },
 }
 </script>
@@ -78,66 +81,33 @@ export default {
   overflow: hidden;
   pointer-events: all;
 
-  &__marquee {
-    display: flex;
-
+  &__email {
+    display: block;
     position: relative;
+
+    line-height: 1;
 
     color: darken($color: white, $amount: 40);
     text-decoration: none;
 
-    overflow: hidden;
-
-    @media (prefers-reduced-motion: reduce) {
-      // NOTE: important is needed for overwriting styles which was set by JS
-      cursor: pointer !important;
-    }
-
-    &__text {
-      display: inline-block;
-
-      position: relative;
+    &__row {
+      display: block;
 
       font-size: var(--step-5);
       margin: 0;
       white-space: nowrap;
-      animation: 10s linear infinite 10s running marquee-text;
+      will-change: transform;
 
-      @media (prefers-reduced-motion: reduce) {
-        animation: none;
-        transform: translateX(calc(65vw * -1));
-      }
-
-      @supports (-webkit-text-stroke: 1px red) {
+      @supports (-webkit-text-stroke: 1px white) {
         color: transparent;
         -webkit-text-stroke: 1px darken($color: white, $amount: 40);
       }
     }
 
-    &__block {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-
-      background-color: rgba($color: #030303, $alpha: 1);
-
-      transition: background-color 100ms ease;
-
-      &--hidden {
-        background-color: rgba($color: #030303, $alpha: 0);
-      }
+    @media (prefers-reduced-motion: reduce) {
+      // NOTE: important is needed for overwriting styles which was set by JS
+      cursor: pointer !important;
     }
-  }
-}
-
-@keyframes marquee-text {
-  from {
-    transform: translate3d(0%, 0, 0);
-  }
-  to {
-    transform: translate3d(-100%, 0, 0);
   }
 }
 </style>

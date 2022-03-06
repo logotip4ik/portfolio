@@ -56,7 +56,7 @@
       aria-label="menu button"
       class="nav__menu-button"
       @click="toggleMenu"
-      @keypress.space.stop
+      @keypress.space.enter="toggleMenu"
       @pointerenter="hoverAnimation"
       @pointerleave="idleAnimation"
     >
@@ -69,7 +69,7 @@
 import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
 
 const SVG_SIZE = 20
-const SVG_LINES_PADDING = 4
+const SVG_LINES_PADDING = 5
 
 export default {
   components: { MenuIconSVG },
@@ -164,6 +164,7 @@ export default {
       const lines = this.$refs.navMenuButtonSVG.children
 
       const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
+      const { navMenuButton } = this.$refs
 
       const line0Attrs = {
         x1: SVG_SIZE - SVG_LINES_PADDING,
@@ -182,18 +183,21 @@ export default {
         tl.to(lines, { opacity: 0 })
         tl.set(lines[0], { attr: line0Attrs })
         tl.set(lines[1], { attr: line1Attrs })
+        tl.set(lines, { color: '#030303' })
+        tl.set(navMenuButton, { '--bg-scale': '1' }, 0)
         tl.to(lines, { opacity: 1 })
       } else {
-        tl.to(lines[0], { attr: line0Attrs })
+        tl.to(lines, { color: '#030303' })
+        tl.to(lines[0], { attr: line0Attrs }, 0)
         tl.to(lines[1], { attr: line1Attrs }, '<')
+        tl.to(navMenuButton, { '--bg-scale': '1' }, '0.135')
       }
     },
-    idleAnimation(ev) {
-      // NOTE: this will work, because of pointer leave event
-      // if toggle menu even is fired, then ev will be undefined
-      if (this.isMenuActive || ev) return
+    idleAnimation() {
+      if (this.isMenuActive) return
 
       const lines = this.$refs.navMenuButtonSVG.children
+      const { navMenuButton } = this.$refs
 
       const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
 
@@ -206,9 +210,13 @@ export default {
         tl.to(lines, { opacity: 0 })
         tl.set(lines[0], { attr: line0Attrs })
         tl.set(lines[1], { attr: line1Attrs })
+        tl.set(lines, { color: '#bababa' })
+        tl.set(navMenuButton, { '--bg-scale': '0' })
         tl.to(lines, { opacity: 1 })
       } else {
-        tl.to(lines[0], { attr: line0Attrs })
+        tl.to(lines, { color: '#bababa' })
+        tl.to(navMenuButton, { '--bg-scale': '0', ease: 'power2.out' }, 0)
+        tl.to(lines[0], { attr: line0Attrs }, 0)
         tl.to(lines[1], { attr: line1Attrs }, '<')
       }
     },
@@ -361,6 +369,11 @@ export default {
   }
 
   &__menu-button {
+    --bg-scale: 0;
+
+    position: relative;
+    z-index: 1;
+
     width: max(var(--step-5), 4rem);
     height: auto;
 
@@ -387,6 +400,32 @@ export default {
     @media (prefers-reduced-motion: reduce) {
       &:active {
         transform: none;
+      }
+    }
+
+    &::after {
+      --size: 120%;
+
+      content: '';
+
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+
+      width: var(--size);
+      height: var(--size);
+
+      border-radius: 50%;
+      background-color: #ffe6ed;
+
+      transform: translate(-50%, -51.5%) scale(var(--bg-scale));
+      // transition: transform 400ms;
+
+      @supports (aspect-ratio: 1/1) {
+        height: unset;
+
+        aspect-ratio: 1/1;
       }
     }
   }
