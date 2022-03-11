@@ -166,8 +166,8 @@ export default {
       },
     },
     twitter: {
-      site: '@BogdanKostyuk',
-      creator: '@BogdanKostyuk',
+      site: '@BogdanKostyuk_',
+      creator: '@BogdanKostyuk_',
       card: 'summary',
     },
   },
