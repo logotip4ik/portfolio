@@ -21,6 +21,8 @@ let object = null
 const clock = new THREE.Clock()
 let aspect = 16 / 9
 
+const MAX_DPR = 2.3
+
 export default {
   mounted() {
     const { canvas } = this.$refs
@@ -37,7 +39,8 @@ export default {
       precision: 'highp',
       powerPreference: 'high-performance',
     })
-    renderer.setPixelRatio(window.devicePixelRatio)
+    // NOTE: after 2.3 devices start to struggle a lot with the shader
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_DPR))
     renderer.outputEncoding = THREE.sRGBEncoding
     renderer.autoClearColor = new THREE.Color(3, 3, 3)
     renderer.failIfMajorPerformanceCaveat = true
