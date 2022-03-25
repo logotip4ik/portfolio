@@ -60,6 +60,7 @@ export default {
     '~plugins/smooth-scroll.client.js',
     '~plugins/hover-directive.client.js',
     '~plugins/prefers-reduced-motion.js',
+    '~plugins/color-scheme.client.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
