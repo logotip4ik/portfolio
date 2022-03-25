@@ -23,10 +23,26 @@ let aspect = 16 / 9
 
 const MAX_DPR = 2.3
 
+const color1 = {
+  dark: { x: 0, y: 0, z: 0 },
+  light: { x: 235, y: 235, z: 235 },
+}
+
+const color2 = {
+  dark: { x: 255, y: 230, z: 237 },
+  light: { x: 255, y: 181, z: 202 },
+}
+
+const color3 = {
+  dark: { x: 125, y: 179, z: 132 },
+  light: { x: 106, y: 168, z: 114 },
+}
+
 export default {
   mounted() {
     const { canvas } = this.$refs
 
+    const isDarkMode = this.$isDarkMode()
     prefersReducedMotion = this.$prefersReducedMotion()
     aspect = window.innerWidth / window.innerHeight
 
@@ -67,6 +83,21 @@ export default {
         resolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
+        color1: {
+          value: isDarkMode
+            ? new THREE.Vector3(...Object.values(color1.dark))
+            : new THREE.Vector3(...Object.values(color1.light)),
+        },
+        color2: {
+          value: isDarkMode
+            ? new THREE.Vector3(...Object.values(color2.dark))
+            : new THREE.Vector3(...Object.values(color2.light)),
+        },
+        color3: {
+          value: isDarkMode
+            ? new THREE.Vector3(...Object.values(color3.dark))
+            : new THREE.Vector3(...Object.values(color3.light)),
+        },
       },
       depthTest: false,
     })
@@ -91,6 +122,16 @@ export default {
         duration: 1.75,
         delay: 0.125,
       })
+    })
+
+    this.$onColorSchemeChange((media) => {
+      const switchTo = media.matches ? 'light' : 'dark'
+
+      const tl = this.$gsap.timeline()
+
+      tl.to(object.material.uniforms.color1.value, color1[switchTo], 0)
+      tl.to(object.material.uniforms.color2.value, color2[switchTo], 0)
+      tl.to(object.material.uniforms.color3.value, color3[switchTo], 0)
     })
 
     // NOTE: try to use only one requestAnimationFrame
