@@ -132,7 +132,7 @@ export default {
   background-color: var(--black-color);
   pointer-events: all;
 
-  transition: color 400ms;
+  transition: color 400ms, background-color 400ms;
 
   &__text {
     max-width: 1100px;
