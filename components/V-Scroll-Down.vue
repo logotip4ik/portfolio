@@ -97,6 +97,12 @@ export default {
     box-shadow: 0 0 1px 1px rgba($color: #fff, $alpha: 1);
     border-radius: 50%;
     background: transparent;
+
+    will-change: transform, opacity;
+
+    @media (prefers-color-scheme: light) {
+      box-shadow: 0 0 1px 1px rgba($color: #303030, $alpha: 1);
+    }
   }
 }
 </style>
