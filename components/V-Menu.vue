@@ -87,6 +87,8 @@ export default {
     showMenu() {
       if (this.prevAnimation) this.prevAnimation.kill()
 
+      const isDarkMode = this.$isDarkMode()
+
       if (this.prefersReducedMotion)
         return (this.prevAnimation = this.$gsap.fromTo(
           this.$refs.menu,
@@ -120,7 +122,7 @@ export default {
       tl.fromTo(
         this.$refs.menu,
         { backgroundColor: 'transparent' },
-        { backgroundColor: '#030303' }
+        { backgroundColor: isDarkMode ? '#030303' : '#ebebeb' }
       )
       tl.fromTo(
         '.menu__back-item__line',
