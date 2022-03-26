@@ -88,3 +88,9 @@ button {
   /* NOTE: Tells browser not to wait for potential second tap */
   touch-action: manipulation;
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --black-color: #ebebeb;
+  }
+}
