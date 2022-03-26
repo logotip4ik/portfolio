@@ -242,10 +242,19 @@ export default {
 
     background: linear-gradient(
       to top,
-      var(--black-color) 0%,
-      var(--black-color) 25%,
-      rgba(3, 3, 3, 0)
+      rgba($color: #030303, $alpha: 1) 0%,
+      rgba($color: #030303, $alpha: 1) 25%,
+      rgba($color: #030303, $alpha: 0)
     );
+
+    @media (prefers-color-scheme: light) {
+      background: linear-gradient(
+        to top,
+        rgba($color: #ebebeb, $alpha: 1) 0%,
+        rgba($color: #ebebeb, $alpha: 1) 25%,
+        rgba($color: #ebebeb, $alpha: 0)
+      );
+    }
   }
 }
 
