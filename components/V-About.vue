@@ -132,6 +132,8 @@ export default {
   background-color: var(--black-color);
   pointer-events: all;
 
+  transition: color 400ms;
+
   &__text {
     max-width: 1100px;
 
@@ -159,6 +161,10 @@ export default {
         opacity: 1;
         transform: translateY(0%);
       }
+    }
+
+    @media (prefers-color-scheme: light) {
+      color: #666666;
     }
   }
 
@@ -191,9 +197,14 @@ export default {
 
         opacity: 0.75;
         filter: grayscale(1) invert(1);
+        transition: filter 400ms;
 
         @media screen and (max-width: 500px) {
           max-width: 30vw;
+        }
+
+        @media (prefers-color-scheme: light) {
+          filter: grayscale(1);
         }
       }
 
@@ -214,6 +225,10 @@ export default {
     height: auto;
 
     filter: drop-shadow(0 0 2rem #fff) blur(3px);
+  }
+
+  @media (prefers-color-scheme: light) {
+    color: #030303;
   }
 }
 </style>
