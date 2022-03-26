@@ -4,6 +4,9 @@ uniform float objectOpacity;
 uniform float noisePower;
 uniform float pixelRatio;
 uniform vec2 resolution;
+uniform vec3 color1;
+uniform vec3 color2;
+uniform vec3 color3;
 
 varying vec3 vPosition;
 
@@ -114,12 +117,12 @@ void main() {
   if (resolution.x > 700.0) shaderZoom = 0.25;
   else shaderZoom = 0.45;
 
-  vec3 color1 = vec3(0.0, 0.0, 0.0);
-  vec3 color2 = vec3(255.0, 230.0, 237.0);
+  // vec3 color1 = vec3(0.0, 0.0, 0.0);
+  // vec3 color2 = vec3(255.0, 230.0, 237.0);
   // LIGHTGREEN-ish
   // vec3 color3 = vec3(230.0, 255.0, 233.0);
   // GREEN-ish
-  vec3 color3 = vec3(125.0, 179.0, 132.0);
+  // vec3 color3 = vec3(125.0, 179.0, 132.0);
   // DARK-GREEN-ish
   // vec3 color3 = vec3(89.0, 128.0, 94.0);
   // NOT-SO-DARK-GREEN-ish
@@ -133,9 +136,9 @@ void main() {
   // LIGHTBLUE+GRAY-ish
   // vec3 color3 = vec3(152.0, 172.0, 179.0);
 
-  color1 = normalizeRGBColor(color1);
-  color2 = normalizeRGBColor(color2);
-  color3 = normalizeRGBColor(color3);
+  vec3 _color1 = normalizeRGBColor(color1);
+  vec3 _color2 = normalizeRGBColor(color2);
+  vec3 _color3 = normalizeRGBColor(color3);
 
   float noise = snoise(vPosition + time * 0.175 + randomSeed * 100.0) * (noisePower * 0.55);
 
@@ -144,8 +147,8 @@ void main() {
   float firstPattern = lines(baseUv, 0.5, 10.0);
   float secondPattern = lines(baseUv, 0.05, 15.0);
 
-  vec3 firstColor = mix(color3, color2, firstPattern);
-  vec3 resColor = mix(firstColor, color1, secondPattern);
+  vec3 firstColor = mix(_color3, _color2, firstPattern);
+  vec3 resColor = mix(firstColor, _color1, secondPattern);
 
   float grainStrength = 0.075;
   if (pixelRatio > 2.0) grainStrength = 0.135;

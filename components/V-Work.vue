@@ -34,10 +34,14 @@ export default {
 
 <style lang="scss">
 .works {
+  color: white;
+
   margin-top: -1px;
   padding: 4rem clamp(1rem, 7vw, 5rem) 1rem;
-  color: white;
+
   background-color: var(--black-color);
+
+  transition: background-color 400ms, color 400ms;
   pointer-events: all;
 
   &__list {
@@ -58,6 +62,10 @@ export default {
         margin-block-start: 35%;
       }
     }
+  }
+
+  @media (prefers-color-scheme: light) {
+    color: #030303;
   }
 }
 </style>

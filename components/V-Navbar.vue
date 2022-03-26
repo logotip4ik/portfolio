@@ -71,6 +71,9 @@ import MenuIconSVG from '~/assets/img/menu-icon.svg?inline'
 const SVG_SIZE = 20
 const SVG_LINES_PADDING = 5
 
+const svgColorIdle = { light: '#030303', dark: '#bababa' }
+const svgColorActive = { light: '#ffffff', dark: '#030303' }
+
 export default {
   components: { MenuIconSVG },
   props: { currentSection: { type: Number, required: true, default: 0 } },
@@ -155,12 +158,23 @@ export default {
       if (typeof bool === 'boolean') this.isMenuActive = bool
       else this.isMenuActive = !this.isMenuActive
     })
+
+    this.$onColorSchemeChange((media) => {
+      const isDarkMode = !media.matches
+      const lines = this.$refs.navMenuButtonSVG.children
+
+      this.$gsap.to(lines, {
+        color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
+      })
+    })
   },
   methods: {
     toggleMenu() {
       this.$nuxt.$emit('toggle-menu')
     },
     closeAnimation() {
+      const isDarkMode = this.$isDarkMode()
+
       const lines = this.$refs.navMenuButtonSVG.children
 
       const tl = this.$gsap.timeline({ defaults: { ease: 'back.out' } })
@@ -183,11 +197,15 @@ export default {
         tl.to(lines, { opacity: 0 })
         tl.set(lines[0], { attr: line0Attrs })
         tl.set(lines[1], { attr: line1Attrs })
-        tl.set(lines, { color: '#030303' })
+        tl.set(lines, {
+          color: isDarkMode ? svgColorActive.dark : svgColorActive.light,
+        })
         tl.set(navMenuButton, { '--bg-scale': '1' }, 0)
         tl.to(lines, { opacity: 1 })
       } else {
-        tl.to(lines, { color: '#030303' })
+        tl.to(lines, {
+          color: isDarkMode ? svgColorActive.dark : svgColorActive.light,
+        })
         tl.to(lines[0], { attr: line0Attrs }, 0)
         tl.to(lines[1], { attr: line1Attrs }, '<')
         tl.to(navMenuButton, { '--bg-scale': '1' }, '0.135')
@@ -195,6 +213,8 @@ export default {
     },
     idleAnimation() {
       if (this.isMenuActive) return
+
+      const isDarkMode = this.$isDarkMode()
 
       const lines = this.$refs.navMenuButtonSVG.children
       const { navMenuButton } = this.$refs
@@ -210,11 +230,15 @@ export default {
         tl.to(lines, { opacity: 0 })
         tl.set(lines[0], { attr: line0Attrs })
         tl.set(lines[1], { attr: line1Attrs })
-        tl.set(lines, { color: '#bababa' })
+        tl.set(lines, {
+          color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
+        })
         tl.set(navMenuButton, { '--bg-scale': '0' })
         tl.to(lines, { opacity: 1 })
       } else {
-        tl.to(lines, { color: '#bababa' })
+        tl.to(lines, {
+          color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
+        })
         tl.to(navMenuButton, { '--bg-scale': '0', ease: 'power2.out' }, 0)
         tl.to(lines[0], { attr: line0Attrs }, 0)
         tl.to(lines[1], { attr: line1Attrs }, '<')
@@ -265,6 +289,10 @@ export default {
 
     cursor: pointer;
     pointer-events: all;
+
+    @media (prefers-color-scheme: light) {
+      color: #030303;
+    }
   }
 
   &__sections {
@@ -316,6 +344,10 @@ export default {
           @media (prefers-reduced-motion: reduce) {
             content: '';
           }
+
+          @media (prefers-color-scheme: light) {
+            background-color: #030303;
+          }
         }
 
         &--non-active {
@@ -331,6 +363,15 @@ export default {
         &:is(:hover, :focus) {
           color: white;
           transition: none;
+        }
+
+        @media (prefers-color-scheme: light) {
+          color: lighten($color: black, $amount: 40);
+
+          &:is(:hover, :focus) {
+            color: black;
+            transition: none;
+          }
         }
       }
     }
@@ -360,6 +401,10 @@ export default {
 
       @media (prefers-reduced-motion: reduce) {
         display: none;
+      }
+
+      @media (prefers-color-scheme: light) {
+        background-color: #030303;
       }
     }
 
@@ -420,13 +465,20 @@ export default {
       background-color: #ffe6ed;
 
       transform: translate(-50%, -51.5%) scale(var(--bg-scale));
-      // transition: transform 400ms;
 
       @supports (aspect-ratio: 1/1) {
         height: unset;
 
         aspect-ratio: 1/1;
       }
+
+      @media (prefers-color-scheme: light) {
+        background-color: #030303;
+      }
+    }
+
+    @media (prefers-color-scheme: light) {
+      color: #030303;
     }
   }
 }

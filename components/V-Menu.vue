@@ -87,6 +87,8 @@ export default {
     showMenu() {
       if (this.prevAnimation) this.prevAnimation.kill()
 
+      const isDarkMode = this.$isDarkMode()
+
       if (this.prefersReducedMotion)
         return (this.prevAnimation = this.$gsap.fromTo(
           this.$refs.menu,
@@ -120,7 +122,7 @@ export default {
       tl.fromTo(
         this.$refs.menu,
         { backgroundColor: 'transparent' },
-        { backgroundColor: '#030303' }
+        { backgroundColor: isDarkMode ? '#030303' : '#ebebeb' }
       )
       tl.fromTo(
         '.menu__back-item__line',
@@ -236,6 +238,10 @@ export default {
 
           transform: translate(-50%, -50%);
           transition: opacity 200ms ease;
+
+          @media (prefers-color-scheme: light) {
+            background-color: #303030;
+          }
         }
       }
 
@@ -258,6 +264,10 @@ export default {
 
           &:is(:hover, :focus) {
             color: #ffe6ed;
+
+            @media (prefers-color-scheme: light) {
+              color: #030303;
+            }
           }
         }
       }
@@ -268,6 +278,10 @@ export default {
         span {
           transform: scale(0.96);
         }
+
+        @media (prefers-color-scheme: light) {
+          color: #030303;
+        }
       }
 
       &--active {
@@ -276,6 +290,10 @@ export default {
 
           &::after {
             opacity: 1;
+          }
+
+          @media (prefers-color-scheme: light) {
+            color: #030303;
           }
         }
       }

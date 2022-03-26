@@ -10,7 +10,6 @@
       z-index: 5;
       width: 100vw;
       height: 100vh;
-      background-color: #030303;
       pointer-events: all;
     "
   >
@@ -34,6 +33,7 @@ export default {
   mounted() {
     this.$disableScrollY()
 
+    const isDarkMode = this.$isDarkMode()
     const readTime = 0.35
     const { loader, loaderWord1Chars } = this.$refs
     const loaderChildren = Array.from(loader.children)
@@ -59,8 +59,12 @@ export default {
 
         tl.fromTo(
           loaderWord1Chars,
-          { color: '#000' },
-          { color: '#fff', ease: 'power3.out', stagger: 0.05 }
+          { color: isDarkMode ? '#030303' : '#ebebeb' },
+          {
+            color: isDarkMode ? '#ffffff' : '#030303',
+            ease: 'power3.out',
+            stagger: 0.05,
+          }
         )
       } else tl.to(loaderChild, { opacity: 1, filter: 'blur(0px)' }, '-=0.125')
 
@@ -93,8 +97,10 @@ export default {
   height: 100vh;
 
   color: #dfdfdf;
-  background-color: #030303;
+  background-color: var(--black-color);
   pointer-events: all;
+
+  transition: color 400ms, background-color 400ms;
 
   &__word {
     position: absolute;
@@ -117,6 +123,10 @@ export default {
     &--logo {
       font-size: var(--step-4);
     }
+  }
+
+  @media (prefers-color-scheme: light) {
+    color: #030303;
   }
 }
 </style>
