@@ -58,7 +58,9 @@ export default {
     // NOTE: after 2.3 devices start to struggle a lot with the shader
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_DPR))
     renderer.outputEncoding = THREE.sRGBEncoding
-    renderer.autoClearColor = new THREE.Color(3, 3, 3)
+    renderer.autoClearColor = isDarkMode
+      ? new THREE.Color(3, 3, 3)
+      : new THREE.Color(235, 235, 235)
     renderer.failIfMajorPerformanceCaveat = true
 
     // THREE: Camera
