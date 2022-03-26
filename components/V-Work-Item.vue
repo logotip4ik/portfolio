@@ -151,22 +151,25 @@ export default {
   }
 
   &__content {
-    $text-color: color.adjust(
-      $color: #fff,
-      $lightness: -20%,
-    );
-
     &__title {
       font-size: calc(var(--step-0) + 0.4rem);
       letter-spacing: 0.25px;
-      color: $text-color;
+      color: #cccccc;
 
       margin-bottom: 0;
+
+      @media (prefers-color-scheme: light) {
+        color: #424242;
+      }
     }
 
     &__tags {
-      color: darken($text-color, 5);
+      color: #bfbfbf;
       font-size: calc(var(--step--2) - 0rem);
+
+      @media (prefers-color-scheme: light) {
+        color: #4b4b4b;
+      }
     }
   }
 
@@ -205,7 +208,11 @@ export default {
     background-color: rgba($color: #030303, $alpha: 0.35);
     pointer-events: none;
 
-    transition: opacity 400ms;
+    transition: opacity 400ms, background-color 400ms;
+
+    @media (prefers-color-scheme: light) {
+      background-color: rgba($color: #ebebeb, $alpha: 0.25);
+    }
   }
 
   &:is(:focus-within, :hover) {
