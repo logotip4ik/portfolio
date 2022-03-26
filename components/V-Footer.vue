@@ -173,6 +173,8 @@ export default {
     padding: 2rem clamp(1rem, 4vw, 5rem) 3rem;
     background: var(--black-color);
 
+    transition: color 400ms, background-color 400ms;
+
     & > *:nth-child(even) {
       justify-self: end;
       text-align: right;
@@ -205,6 +207,10 @@ export default {
           background-color: rgba($color: #030303, $alpha: 0.75);
 
           transform: translateX(var(--x-offset));
+
+          @media (prefers-color-scheme: light) {
+            background-color: rgba($color: #ebebeb, $alpha: 0.75);
+          }
         }
       }
 
@@ -217,6 +223,10 @@ export default {
         background-color: rgba($color: #030303, $alpha: 0.65);
 
         transform: translateX(var(--x-offset));
+
+        @media (prefers-color-scheme: light) {
+          background-color: rgba($color: #ebebeb, $alpha: 0.75);
+        }
       }
     }
 
@@ -233,6 +243,12 @@ export default {
           text-transform: uppercase;
           text-decoration: none;
           color: whitesmoke;
+
+          transition: color 400ms;
+
+          @media (prefers-color-scheme: light) {
+            color: #030303;
+          }
         }
       }
     }
@@ -279,6 +295,12 @@ export default {
         text-align: center !important;
       }
     }
+
+    @media (prefers-color-scheme: light) {
+      --secondary-color: #{color.adjust($color: #030303, $lightness: 35%)};
+
+      color: #030303;
+    }
   }
 
   &__arrow {
@@ -307,11 +329,28 @@ export default {
           opacity: 0.75;
         }
       }
+
+      @media (prefers-color-scheme: light) {
+        svg {
+          opacity: 0.75;
+        }
+
+        &:is(:focus, :hover) {
+          svg {
+            transform: scale(0.9) translateY(-15px);
+            opacity: 1;
+          }
+        }
+      }
     }
 
     @media screen and (max-width: 575px) {
       min-height: 30vw;
       color: whitesmoke;
+    }
+
+    @media (prefers-color-scheme: light) {
+      color: #303030;
     }
   }
 }
