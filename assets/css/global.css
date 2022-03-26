@@ -93,4 +93,9 @@ button {
   :root {
     --black-color: #ebebeb;
   }
+
+  ::selection {
+    background-color: #030303;
+    color: #ffe6ed;
+  }
 }
