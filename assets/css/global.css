@@ -48,6 +48,8 @@ body {
   the footer is fixed and z-indexed with -1. I will just
   add pointer events all to main sections of the page + menu + loader */
   pointer-events: none;
+
+  transition: background-color 400ms;
 }
 
 ::selection {
