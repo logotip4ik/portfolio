@@ -7750,10 +7750,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt-gsap-module@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/nuxt-gsap-module/-/nuxt-gsap-module-1.6.0.tgz#37be3cf807933b45a746a0bb67a1f7107dc8bb5e"
-  integrity sha512-KaH2gALeHASo/eSkH4Fh/DREjXwdmpAeY53xUAjvNZccDevJO8+7b6uZjPHPfDe397rl3vCzJOf/lwZJW1e3Jg==
+nuxt-gsap-module@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/nuxt-gsap-module/-/nuxt-gsap-module-1.6.2.tgz#c7e9c56a9f0236dfd4d1547ee387ab9d7acecce8"
+  integrity sha512-9rr4jXNz26yvFeAcy/AcJwRzVSTEKFkS8jA09L2A8OCg0rfpBgD3m1rYgzrqqMuMbU7GFNqD7YmYVdMsUEHGTw==
   dependencies:
     gsap "^3.9.1"
 
