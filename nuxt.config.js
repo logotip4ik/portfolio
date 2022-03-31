@@ -18,7 +18,6 @@ export default {
       },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'all' },
-      { name: 'theme-color', content: '#030303' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
     ],
     link: [
