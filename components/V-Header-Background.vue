@@ -5,7 +5,7 @@
 <script>
 import * as THREE from 'three'
 
-import fragmentShader from '~/assets/shaders/fragment.glsl'
+import fragmentShader from '~/assets/shaders/fragment-ukraine.glsl'
 import vertexShader from '~/assets/shaders/vertex.glsl'
 
 // NOTE: Probably asking why ?
@@ -24,13 +24,13 @@ let aspect = 16 / 9
 const MAX_DPR = 2.3
 
 const color1 = {
-  dark: { x: 0, y: 0, z: 0 },
-  light: { x: 235, y: 235, z: 235 },
+  dark: { x: 0, y: 87, z: 184 },
+  light: { x: 0, y: 87, z: 184 },
 }
 
 const color2 = {
-  dark: { x: 255, y: 230, z: 237 },
-  light: { x: 255, y: 181, z: 202 },
+  dark: { x: 254, y: 221, z: 0 },
+  light: { x: 254, y: 221, z: 0 },
 }
 
 const color3 = {
