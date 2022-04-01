@@ -13,5 +13,6 @@ desc: This is my portfolio, used probably all of my knowledge to create this sor
   of animations and interactions. Currently open to work, so send get in contact with
   me as soon as posible
 image: "/img/portfolio.png"
+createdAt: 2022-03-31T00:00:00+03:00
 
 ---
