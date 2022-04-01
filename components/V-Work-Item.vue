@@ -205,6 +205,7 @@ export default {
     right: 0;
     bottom: 0;
 
+    opacity: 0;
     background-color: rgba($color: #030303, $alpha: 0.35);
     pointer-events: none;
 
@@ -212,6 +213,10 @@ export default {
 
     @media (prefers-color-scheme: light) {
       background-color: rgba($color: #ebebeb, $alpha: 0.25);
+    }
+
+    @media (hover: hover) {
+      opacity: 1;
     }
   }
 
@@ -222,3 +227,4 @@ export default {
   }
 }
 </style>
+
