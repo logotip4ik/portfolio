@@ -5,7 +5,7 @@
     aria-label="works section"
     data-scroll-section
   >
-    <V-H2 aria-label="work section heading">Work</V-H2>
+    <V-H2 aria-label="work section heading" class="works__title">Work</V-H2>
     <ul class="works__list" aria-label="works list">
       <V-Work-Item
         v-for="(work, key) in works"
@@ -44,6 +44,10 @@ export default {
   transition: background-color 400ms, color 400ms;
   pointer-events: all;
 
+  &__title {
+    margin-bottom: 3.5rem;
+  }
+
   &__list {
     display: grid;
     justify-items: center;
@@ -69,3 +73,4 @@ export default {
   }
 }
 </style>
+
