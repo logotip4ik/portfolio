@@ -20,6 +20,7 @@ export default {
       { name: 'robots', content: 'all' },
       { name: 'theme-color', content: 'var(--black-color)' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
+      { name: 'copyrighted-site-verification', content: 'c552f044f4e41c2b' },
     ],
     link: [
       { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -174,3 +175,4 @@ export default {
     },
   },
 }
+
