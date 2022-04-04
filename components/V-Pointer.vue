@@ -132,6 +132,8 @@ export default {
     width: 22.5%;
     height: auto;
 
+    color: black;
+
     transform: scale(0);
     transform-origin: center center;
   }
@@ -141,3 +143,4 @@ export default {
   }
 }
 </style>
+
