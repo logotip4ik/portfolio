@@ -213,7 +213,7 @@ export default {
       }
     }
 
-    & > *:last-child svg {
+    & > *:is(:nth-child(3), :last-child) svg {
       filter: grayscale(1);
     }
   }
@@ -232,3 +232,4 @@ export default {
   }
 }
 </style>
+
