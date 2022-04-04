@@ -232,4 +232,3 @@ export default {
   }
 }
 </style>
-
