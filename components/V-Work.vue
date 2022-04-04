@@ -9,10 +9,10 @@
     <ul class="works__list" aria-label="works list">
       <V-Work-Item
         v-for="(work, key) in works"
+        :id="key"
         :key="key"
         ref="worksListItems"
         :work="work"
-        :i="key"
         :aria-label="work.title"
         class="works__list__item"
       >
@@ -45,15 +45,22 @@ export default {
   pointer-events: all;
 
   &__title {
-    margin-bottom: 3.5rem;
+    margin-bottom: 4rem;
+
+    // NOTE: smoothscroll (locomotive scroll) breakpoint
+    @media screen and (min-width: 1024px) {
+      margin-bottom: 7rem;
+    }
   }
 
   &__list {
+    --spacing: 60%;
+
     display: grid;
     justify-items: center;
     align-items: start;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--step-3);
+    gap: calc(1.25 * var(--step-5));
 
     max-width: 1100px;
 
@@ -61,9 +68,21 @@ export default {
     margin: 0 auto;
     padding-inline-start: 0;
 
-    @media screen and(min-width: 798px) {
+    @media screen and(min-width: 850px) {
+      &__item:nth-child(odd) {
+        margin-block-start: calc(-0.75 * var(--spacing));
+      }
+
       &__item:nth-child(even) {
-        margin-block-start: 35%;
+        margin-block-start: calc(0.125 * var(--spacing));
+      }
+
+      &__item:first-of-type {
+        margin-block-start: 0;
+      }
+
+      &__item:nth-child(2) {
+        margin-block-start: var(--spacing);
       }
     }
   }
@@ -73,3 +92,4 @@ export default {
   }
 }
 </style>
+
