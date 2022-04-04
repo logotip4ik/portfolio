@@ -1,5 +1,11 @@
 <template>
-  <li ref="work" v-hoverable class="work">
+  <li
+    ref="work"
+    v-hoverable
+    class="work"
+    data-scroll
+    :data-scroll-speed="id % 2 === 0 ? -1 : 1"
+  >
     <a
       :href="work.live"
       :aria-label="`open live ${work.title}`"
@@ -83,6 +89,8 @@ export default {
       }
     )
 
+    if (window.innerWidth > this.$smoothScrollBreakPoint) return
+
     const imageMovementBase = 4
     const randomMultiplier = gsap.utils.random(0.85, 1.15)
 
@@ -107,7 +115,8 @@ export default {
   methods: {
     getMovementDirection() {
       if (window.innerWidth < 798) return -1
-      return this.id === 0 ? 1 : this.id % 3 === 0 ? 1 : -1
+      return this.id === 0 ? -1 : 1
+      // return this.id === 0 ? 1 : this.id % 3 === 0 ? 1 : -1
     },
   },
 }
@@ -163,6 +172,11 @@ export default {
         max-height: unset;
         min-height: unset;
       }
+    }
+
+    // NOTE: smoothscroll (locomotive scroll) breakpoint
+    @media screen and (min-width: 1024px) {
+      position: static;
     }
   }
 
