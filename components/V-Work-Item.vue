@@ -47,7 +47,10 @@ import SourceSVG from '~/assets/img/source.svg?inline'
 
 export default {
   components: { SourceSVG },
-  props: { work: { type: Object, required: true, default: () => ({}) } },
+  props: {
+    id: { type: Number, required: true, default: 0 },
+    work: { type: Object, required: true, default: () => ({}) },
+  },
   computed: {
     tagsString() {
       return this.work.tags.reduce((str, val) => `${str}, ${val}`)
@@ -80,19 +83,32 @@ export default {
       }
     )
 
-    const imageMovementBase = 3.5
+    const imageMovementBase = 4
     const randomMultiplier = gsap.utils.random(0.85, 1.15)
 
     const imageMovement = imageMovementBase * randomMultiplier
 
+    let movementDirection = this.getMovementDirection()
+
     gsap.fromTo(
       workImage.$el,
-      { yPercent: -50 + imageMovement * -1 },
+      { yPercent: () => -50 + imageMovement * movementDirection },
       {
-        yPercent: -50 + imageMovement,
+        yPercent: () => -50 + imageMovement * movementDirection * -1,
         scrollTrigger: { trigger: work, scrub: true },
       }
     )
+
+    window.addEventListener(
+      'resize',
+      () => (movementDirection = this.getMovementDirection())
+    )
+  },
+  methods: {
+    getMovementDirection() {
+      if (window.innerWidth < 798) return -1
+      return this.id === 0 ? 1 : this.id % 3 === 0 ? 1 : -1
+    },
   },
 }
 </script>
@@ -227,3 +243,4 @@ export default {
   }
 }
 </style>
+
