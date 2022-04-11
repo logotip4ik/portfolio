@@ -46,7 +46,7 @@
     "postcss-logical": "^5.0.4",
     "prettier": "^2.6.2",
     "raw-loader": "^4.0.2",
-    "sass": "^1.49.11",
+    "sass": "^1.50.0",
     "sass-loader": "10"
   }
 }
