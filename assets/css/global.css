@@ -38,7 +38,7 @@ body {
 
   -webkit-font-smoothing: antialiased;
   font-family: 'e-Ukraine', sans-serif;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 
   /* NOTE: this is messing up with gsap scrollTo and locomotive scroll */
   /* scroll-behavior: smooth; */
