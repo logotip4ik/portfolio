@@ -228,7 +228,7 @@ export default {
   }
 
   @media (prefers-color-scheme: light) {
-    color: #030303;
+    color: #252525;
   }
 }
 </style>

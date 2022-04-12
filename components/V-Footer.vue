@@ -285,6 +285,10 @@ export default {
       width: 1px;
 
       background-color: rgba($color: white, $alpha: 0.125);
+
+      @media (prefers-color-scheme: light) {
+        background-color: rgba($color: #030303, $alpha: 0.125);
+      }
     }
 
     @media screen and (max-width: 600px) {
@@ -300,7 +304,7 @@ export default {
     @media (prefers-color-scheme: light) {
       --secondary-color: #{color.adjust($color: #030303, $lightness: 35%)};
 
-      color: #030303;
+      color: #252525;
     }
   }
 
