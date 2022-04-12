@@ -4,7 +4,7 @@
     v-hoverable
     class="work"
     data-scroll
-    :data-scroll-speed="id % 2 === 0 ? -1 : 1"
+    :data-scroll-speed="id % 2 === 0 ? -0.5 : 1"
   >
     <a
       :href="work.live"
