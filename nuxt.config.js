@@ -93,6 +93,8 @@ export default {
     '@nuxt/content',
     // https://sitemap.nuxtjs.org
     '@nuxtjs/sitemap',
+    // https://nuxt-speedkit.grabarzundpartner.dev
+    'nuxt-speedkit',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
