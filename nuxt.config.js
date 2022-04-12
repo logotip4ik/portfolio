@@ -73,10 +73,6 @@ export default {
     '@nuxt/postcss8',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    // https://google-fonts.nuxtjs.org
-    '@nuxtjs/google-fonts',
-    // https://vite.nuxtjs.org
-    // 'nuxt-vite',
     // https://github.com/ivodolenc/nuxt-gsap-module
     'nuxt-gsap-module',
     // https://github.com/nuxt-community/svg-module
@@ -125,17 +121,6 @@ export default {
     },
   },
 
-  googleFonts: {
-    families: {
-      Raleway: {
-        wght: [200, 400],
-      },
-    },
-    display: 'swap',
-    download: true,
-    overwriting: true,
-  },
-
   cloudflareHeaders: {
     '/*': [{ 'X-Robots-Tag': 'all' }],
   },
@@ -173,3 +158,4 @@ export default {
     },
   },
 }
+
