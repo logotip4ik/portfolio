@@ -113,6 +113,7 @@ export default {
     margin: 0;
     opacity: 0;
 
+    white-space: nowrap;
     overflow: hidden;
     transform: translate(-50%, -50%);
 
@@ -130,3 +131,4 @@ export default {
   }
 }
 </style>
+
