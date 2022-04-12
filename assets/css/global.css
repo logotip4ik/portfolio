@@ -37,8 +37,8 @@ body {
   height: 100%;
 
   -webkit-font-smoothing: antialiased;
-  font-family: 'Raleway', sans-serif;
-  letter-spacing: 0.6px;
+  font-family: 'e-Ukraine', sans-serif;
+  letter-spacing: -1px;
 
   /* NOTE: this is messing up with gsap scrollTo and locomotive scroll */
   /* scroll-behavior: smooth; */
@@ -103,3 +103,4 @@ button {
     color: #ffe6ed;
   }
 }
+
