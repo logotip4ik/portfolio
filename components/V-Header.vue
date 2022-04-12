@@ -161,7 +161,9 @@ export default {
     cursor: default;
 
     &__title {
-      line-height: 1.2;
+      font-weight: 200;
+
+      line-height: 1.24;
 
       margin-bottom: 1rem;
 
@@ -172,6 +174,7 @@ export default {
 
     &__subtitle {
       font-size: var(--step--1);
+      font-weight: 100;
       text-align: center;
     }
   }
@@ -267,3 +270,4 @@ export default {
   }
 }
 </style>
+
