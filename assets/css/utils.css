@@ -1,8 +1,3 @@
-.serif {
-  /* font-family: 'Raleway', ui-serif, 'Times New Roman', Times, serif;
-  font-style: italic; */
-}
-
 .ml-responsive {
   margin-left: clamp(5rem, 10vw, 8rem);
 }
