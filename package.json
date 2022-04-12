@@ -21,6 +21,7 @@
     "normalize.css": "^8.0.1",
     "nuxt": "^2.15.8",
     "nuxt-seo": "^1.6.0",
+    "nuxt-speedkit": "^2.0.9",
     "nuxt-webpack-optimisations": "^2.2.0",
     "three": "^0.137.5",
     "vue": "^2.6.14",
