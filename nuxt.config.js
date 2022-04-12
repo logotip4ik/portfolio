@@ -50,6 +50,7 @@ export default {
   css: [
     'normalize.css/normalize.css',
     'locomotive-scroll/dist/locomotive-scroll.css',
+    '~assets/css/fonts.css',
     '~assets/css/global.css',
     '~assets/css/utils.css',
   ],
@@ -93,8 +94,6 @@ export default {
     '@nuxt/content',
     // https://sitemap.nuxtjs.org
     '@nuxtjs/sitemap',
-    // https://nuxt-speedkit.grabarzundpartner.dev
-    'nuxt-speedkit',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
