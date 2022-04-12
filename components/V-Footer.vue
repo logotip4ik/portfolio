@@ -187,6 +187,7 @@ export default {
       position: relative;
 
       font-size: var(--step-4);
+      line-height: 1.215;
 
       margin: 0;
       width: min-content;
@@ -355,3 +356,4 @@ export default {
   }
 }
 </style>
+

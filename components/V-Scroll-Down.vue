@@ -71,8 +71,8 @@ export default {
   &__text {
     // NOTE: font size same as in clock
     font-size: calc(var(--base-font-size) + 0.13rem);
-    font-weight: 200;
-    letter-spacing: 0.5px;
+    font-weight: 100;
+    letter-spacing: 0.25px;
 
     padding-inline-start: calc(var(--base-font-size) + 0.5rem);
 
@@ -106,3 +106,4 @@ export default {
   }
 }
 </style>
+

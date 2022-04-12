@@ -138,7 +138,7 @@ export default {
     max-width: 1100px;
 
     color: darken($color: white, $amount: 40);
-    font-size: var(--step-0);
+    font-size: calc(var(--step--1) + 0.125rem);
     line-height: 1.5;
     letter-spacing: 0.1px;
     text-align: center;
@@ -232,3 +232,4 @@ export default {
   }
 }
 </style>
+
