@@ -3449,9 +3449,9 @@ core-js@^2.6.5:
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
 core-js@^3.21.0:
-  version "3.21.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
-  integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
+  version "3.22.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.0.tgz#b52007870c5e091517352e833b77f0b2d2b259f3"
+  integrity sha512-8h9jBweRjMiY+ORO7bdWSeWfHhLPO7whobj7Z2Bl0IDo00C228EdGgH7FE4jGumbEjzcFfkfW8bXgdkEDhnwHQ==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -7594,9 +7594,9 @@ nuxt-helmet@3.0.0:
     helmet "^5.0.1"
 
 nuxt-seo@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/nuxt-seo/-/nuxt-seo-1.6.0.tgz#9d03e48e90f354300444fadb325299fea0068f0a"
-  integrity sha512-J1RgFsSpVpc9NK72LD6u2kkfJED1ajubLgx0LZu7zGVatrBFkTz9xaPG66yr6WoKdi2aSdMgWhnPTvF9PjV2vg==
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/nuxt-seo/-/nuxt-seo-1.6.1.tgz#08e9365390d5eae5065bfbf88f272a104c88eb5d"
+  integrity sha512-GROnW5ntmmmmeOUCdYsmCEHJ+Wo0Sil+5ma4N5UVreXUTNNw9zZ9lJ6jO0/cDU24oo7nUvDAUNxzIqCjKKJoYQ==
   dependencies:
     debug "^4.2.0"
 
