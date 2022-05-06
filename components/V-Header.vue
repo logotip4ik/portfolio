@@ -65,7 +65,8 @@ export default {
         headerContainer,
         { y: -3 },
         {
-          y: 20,
+          y: 50,
+          ease: 'none',
           scrollTrigger: {
             scrub: true,
             trigger: header,
@@ -102,9 +103,9 @@ export default {
     else
       tl.from('.line__content', {
         yPercent: 105,
-        ease: 'power1.out',
-        duration: 1,
-        stagger: 0.25,
+        ease: 'expo.out',
+        duration: 1.75,
+        stagger: 0.15,
       })
 
     tl.from(
@@ -270,3 +271,4 @@ export default {
   }
 }
 </style>
+

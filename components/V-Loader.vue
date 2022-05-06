@@ -66,7 +66,7 @@ export default {
             stagger: 0.05,
           }
         )
-      } else tl.to(loaderChild, { opacity: 1, filter: 'blur(0px)' }, '-=0.125')
+      } else tl.to(loaderChild, { opacity: 1, filter: 'blur(0px)' }, '-=0.25')
 
       tl.to(loaderChild, { opacity: 0, filter: 'blur(5px)' }, `+=${readTime}`)
     }

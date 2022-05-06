@@ -38,6 +38,7 @@ export default {
         { yPercent: this.rangeOfMovement * -1 },
         {
           yPercent: this.rangeOfMovement,
+          ease: 'none',
           scrollTrigger: { scrub: true, trigger: title },
         }
       )
@@ -60,7 +61,7 @@ export default {
       gsap.fromTo(
         titleContent,
         { yPercent: -110 },
-        { yPercent: 0, duration: 0.75, ease: 'power2.out(1.5)', scrollTrigger }
+        { yPercent: 0, duration: 1.5, ease: 'expo.out', scrollTrigger }
       )
   },
 }
@@ -76,3 +77,4 @@ export default {
   }
 }
 </style>
+

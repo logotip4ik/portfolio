@@ -47,7 +47,7 @@ export default {
   methods: {
     timelineFactory(props) {
       return this.$gsap.timeline({
-        defaults: { stagger: 0.05, duration: 0.2 },
+        defaults: { stagger: 0.05, duration: 0.5, ease: 'expo.out' },
         ...props,
       })
     },
@@ -154,3 +154,4 @@ export default {
   }
 }
 </style>
+

@@ -93,8 +93,7 @@ export default {
         x,
         y,
         opacity: this.isPointerInWindow ? 1 : 0,
-        duration: 0.4,
-        ease: 'power2.out(1.5)',
+        ease: 'expo.out',
       })
     },
   },
@@ -143,3 +142,4 @@ export default {
   }
 }
 </style>
+
