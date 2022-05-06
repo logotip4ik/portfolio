@@ -152,7 +152,7 @@ export default {
       // NOTE: Wont render anything is scrolled past window height - 20 or
       // if overlay is hiding the canvas or if user prefers reduced motion
       if (
-        this.$scrollY() - 20 > window.innerHeight ||
+        this.$scrollY() + 30 > window.innerHeight ||
         !isShaderRunning ||
         (prefersReducedMotion && hasRunOnce)
       )
@@ -167,3 +167,4 @@ export default {
   },
 }
 </script>
+
