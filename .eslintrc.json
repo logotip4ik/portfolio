@@ -5,7 +5,7 @@
     "node": true
   },
   "extends": [
-    "prettier",
+    "eslint-config-prettier",
     "eslint:recommended",
     "plugin:vue/essential",
     "plugin:@typescript-eslint/recommended",
@@ -18,13 +18,13 @@
   },
   "plugins": ["vue", "@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "error",
     "semi": "off",
     "comma-dangle": "off",
     "arrow-parens": "off",
     "space-before-function-paren": "off",
     "curly": "off",
     "no-unused-vars": "warn",
-    "@typescript-eslint/no-unused-vars": "warn"
+    "@typescript-eslint/no-unused-vars": "warn",
+    "vue/html-indent": "off"
   }
 }
