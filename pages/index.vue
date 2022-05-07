@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup>
+const { $smoothScroll } = useNuxtApp();
+
+onMounted(() => {
+  $smoothScroll.disable();
+});
+</script>
 
 <template>
   <div>
