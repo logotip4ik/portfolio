@@ -8,6 +8,7 @@ import { WhitePinkGreen as pallet } from '~/assets/shaders/colors';
 
 const { gsap } = useGsap();
 const { $smoothScroll, $isDarkMode, $onColorSchemeChange } = useNuxtApp();
+const emitter = useEmitter();
 
 const canvas = ref(null);
 
@@ -141,10 +142,12 @@ onMounted(() => {
 
     gsap.to(object.material.uniforms.objectOpacity, {
       value: 1,
-      duration: 1.75,
-      delay: 0.125,
+      ease: 'expo.out',
+      duration: 2,
+      delay: 0.5,
+      onComplete: () => emitter.emit('shader:running'),
     });
-  }, 500);
+  }, 100);
 
   $onColorSchemeChange((media) => {
     const switchTo = media.matches ? 'light' : 'dark';

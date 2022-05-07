@@ -1,5 +1,7 @@
 <script setup>
+const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
+const emitter = useEmitter();
 
 const subtitleText = 'Front End Developer';
 
@@ -9,11 +11,12 @@ function showContentAnimation() {
   const mainTl = gsap.timeline({
     paused: true,
     defaults: { ease: 'expo.out', duration: 1.25 },
-    delay: 0.125,
+    delay: 0.2,
   });
 
   mainTl.to('.header__container__title__line__content', {
     y: 0,
+    duration: 1.5,
     stagger: 0.175,
   });
 
@@ -23,7 +26,7 @@ function showContentAnimation() {
       opacity: 1,
       stagger: { from: 'center', amount: 0.35 },
     },
-    '-=0.5'
+    '-=0.75'
   );
 
   mainTl.to('.scroll-down', { opacity: 1 }, '-=0.5');
@@ -33,7 +36,11 @@ function showContentAnimation() {
 
 onMounted(() => {
   const appearAnim = showContentAnimation();
-  appearAnim.play();
+
+  emitter.on('loader:end', () => {
+    appearAnim.play();
+    $smoothScroll.enable();
+  });
 });
 </script>
 
