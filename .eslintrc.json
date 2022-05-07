@@ -25,6 +25,9 @@
     "curly": "off",
     "no-unused-vars": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
-    "vue/html-indent": "off"
+    "vue/html-indent": "off",
+    "vue/html-self-closing": "off",
+    "vue/html-closing-bracket-newline": "off",
+    "vue/singleline-html-element-content-newline": "off"
   }
 }
