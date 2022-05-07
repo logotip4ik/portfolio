@@ -1,0 +1,12 @@
+/* TEAM */
+	Developer: Bogdan Kostyuk.
+	Telegram: https://t.me/bogdankostyuk.
+	Location: Ukraine, if you wanna know more, write me 😁.
+
+/* THANKS */
+	Patterns: taken from: https://products.ls.graphics/paaatterns
+
+/* SITE */
+	Software: Nuxt.js, Gsap, Three.js, Scss, Locomotive Scroll
+	Language: English
+	IDE: Visual Studio Code, Figma

@@ -1,0 +1,66 @@
+/* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1140,28,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,3xs-3xl */
+
+:root {
+  --step--2: clamp(0.69rem, calc(0.53rem + 0.83vw), 1.12rem);
+  --step--1: clamp(0.83rem, calc(0.61rem + 1.11vw), 1.4rem);
+  --step-0: clamp(1rem, calc(0.71rem + 1.46vw), 1.75rem);
+  --step-1: clamp(1.2rem, calc(0.81rem + 1.93vw), 2.19rem);
+  --step-2: clamp(1.44rem, calc(0.93rem + 2.53vw), 2.73rem);
+  --step-3: clamp(1.73rem, calc(1.07rem + 3.3vw), 3.42rem);
+  --step-4: clamp(2.07rem, calc(1.22rem + 4.29vw), 4.27rem);
+  --step-5: clamp(2.49rem, calc(1.37rem + 5.57vw), 5.34rem);
+
+  --surface-color: #030303;
+  --ff-color: #ebebeb;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "e-Ukraine", sans-serif;
+  letter-spacing: -0.5px;
+  -webkit-font-smoothing: antialiased;
+  color: var(--ff-color);
+
+  min-height: 100%;
+
+  background-color: var(--surface-color);
+
+  transition: background-color 500ms;
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+
+h2 {
+  font-size: var(--step-4);
+}
+
+h3 {
+  font-size: var(--step-3);
+}
+
+h4 {
+  font-size: var(--step-2);
+}
+
+h5 {
+  font-size: var(--step-1);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --surface-color: #ebebeb;
+    --ff-color: #030303;
+  }
+}
+
+.c-scrollbar {
+  z-index: 10;
+}

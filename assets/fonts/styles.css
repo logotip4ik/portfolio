@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "e-Ukraine";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("~/assets/fonts/e-Ukraine-UltraLight.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "e-Ukraine";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("~/assets/fonts/e-Ukraine-Thin.woff2") format("woff2");
+}

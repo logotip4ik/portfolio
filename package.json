@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.1",
+    "sass": "^1.51.0",
+    "vite-plugin-glsl": "^0.1.2",
+    "vite-svg-loader": "^3.3.0"
+  },
+  "dependencies": {
+    "@ashthornton/asscroll": "^2.0.6",
+    "gsap": "^3.10.4",
+    "locomotive-scroll": "^4.1.4",
+    "normalize.css": "^8.0.1",
+    "three": "^0.140.0"
+  }
+}
