@@ -1,7 +1,7 @@
 <template>
   <div id="scroller">
     <NuxtLayout>
-      <NuxtPage></NuxtPage>
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>

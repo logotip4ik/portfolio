@@ -1,10 +1,10 @@
 <script setup>
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import fragmentShader from "~/assets/shaders/fragment.glsl";
-import vertexShader from "~/assets/shaders/vertex.glsl";
+import fragmentShader from '~/assets/shaders/fragment.glsl';
+import vertexShader from '~/assets/shaders/vertex.glsl';
 
-import { WhitePinkGreen as pallet } from "~/assets/shaders/colors";
+import { WhitePinkGreen as pallet } from '~/assets/shaders/colors';
 
 const { gsap } = useGsap();
 const { $smoothScroll, $isDarkMode, $onColorSchemeChange } = useNuxtApp();
@@ -72,8 +72,8 @@ onMounted(() => {
   // THREE: Renderer
   renderer = new THREE.WebGLRenderer({
     canvas: canvas.value,
-    precision: "highp",
-    powerPreference: "high-performance",
+    precision: 'highp',
+    powerPreference: 'high-performance',
   });
   // NOTE: after 2.3 devices start to struggle a lot with the shader
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_DPR));
@@ -94,7 +94,7 @@ onMounted(() => {
     fragmentShader,
     vertexShader,
     extensions: {
-      derivatives: "#extension GL_OES_standard_derivatives : enable",
+      derivatives: '#extension GL_OES_standard_derivatives : enable',
     },
     uniforms: {
       time: { value: 0.0 },
@@ -133,7 +133,7 @@ onMounted(() => {
   camera.matrixAutoUpdate = false;
   object.matrixAutoUpdate = false;
 
-  window.addEventListener("resize", resize);
+  window.addEventListener('resize', resize);
   resize();
 
   setTimeout(() => {
@@ -147,7 +147,7 @@ onMounted(() => {
   }, 500);
 
   $onColorSchemeChange((media) => {
-    const switchTo = media.matches ? "light" : "dark";
+    const switchTo = media.matches ? 'light' : 'dark';
 
     const tl = gsap.timeline({ paused: true });
 

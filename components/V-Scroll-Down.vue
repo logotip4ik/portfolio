@@ -2,8 +2,8 @@
 
 <template>
   <div class="scroll-down">
-    <div class="scroll-down__circle"></div>
-    <div class="scroll-down__circle"></div>
+    <div class="scroll-down__circle" />
+    <div class="scroll-down__circle" />
 
     <p class="scroll-down__text">Scroll</p>
   </div>

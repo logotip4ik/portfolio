@@ -1,32 +1,32 @@
 <script setup>
 const { gsap } = useGsap();
 
-const subtitleText = "Front End Developer";
+const subtitleText = 'Front End Developer';
 
 const header = ref(null);
 
 function showContentAnimation() {
   const mainTl = gsap.timeline({
     paused: true,
-    defaults: { ease: "expo.out", duration: 1.25 },
+    defaults: { ease: 'expo.out', duration: 1.25 },
     delay: 0.125,
   });
 
-  mainTl.to(".header__container__title__line__content", {
+  mainTl.to('.header__container__title__line__content', {
     y: 0,
     stagger: 0.175,
   });
 
   mainTl.to(
-    ".header__container__subtitle__char",
+    '.header__container__subtitle__char',
     {
       opacity: 1,
-      stagger: { from: "center", amount: 0.35 },
+      stagger: { from: 'center', amount: 0.35 },
     },
-    "-=0.5"
+    '-=0.5'
   );
 
-  mainTl.to(".scroll-down", { opacity: 1 }, "-=0.5");
+  mainTl.to('.scroll-down', { opacity: 1 }, '-=0.5');
 
   return mainTl;
 }
@@ -39,7 +39,7 @@ onMounted(() => {
 
 <template>
   <header ref="header" class="header" data-scroll-section>
-    <HeaderBackground class="header__canvas"></HeaderBackground>
+    <VHeaderBackground class="header__canvas" />
 
     <div class="header__container">
       <h1 class="header__container__title">
@@ -74,7 +74,7 @@ onMounted(() => {
     </div>
 
     <div class="header__bottom-bar">
-      <ScrollDown></ScrollDown>
+      <VScrollDown />
     </div>
   </header>
 </template>
@@ -93,7 +93,7 @@ onMounted(() => {
   overflow: hidden;
 
   &::before {
-    content: "";
+    content: '';
 
     position: absolute;
     bottom: 0;

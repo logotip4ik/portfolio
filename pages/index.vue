@@ -2,9 +2,9 @@
 
 <template>
   <div>
-    <Header></Header>
+    <Header />
     <main>
-      <Projects></Projects>
+      <Projects />
       <section>just some section</section>
       <section>just some section</section>
     </main>

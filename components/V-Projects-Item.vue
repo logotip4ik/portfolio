@@ -1,5 +1,5 @@
 <script setup>
-import SourceSVG from "~/assets/img/source.svg";
+import SourceSVG from '~/assets/img/source.svg';
 
 const { gsap } = useGsap();
 
@@ -22,7 +22,7 @@ onMounted(() => {
     if (!props.project.source) return;
 
     gsap.to(projectSource.value.$el, {
-      "--image-height": `${projectImageWrapper.value.clientHeight}px`,
+      '--image-height': `${projectImageWrapper.value.clientHeight}px`,
     });
   });
 
@@ -34,11 +34,11 @@ onMounted(() => {
     {
       opacity: 1,
       y: 0,
-      ease: "expo.out",
+      ease: 'expo.out',
       duration: 1.25,
       scrollTrigger: {
         trigger: projectEl.value,
-        start: "top bottom-=10%",
+        start: 'top bottom-=10%',
         once: true,
       },
     }
@@ -115,13 +115,13 @@ onMounted(() => {
       :href="project.source"
       class="project__source"
     >
-      <SourceSVG></SourceSVG>
+      <SourceSVG />
     </NuxtLink>
   </li>
 </template>
 
 <style lang="scss" scoped>
-@use "sass:color";
+@use 'sass:color';
 
 .project {
   position: relative;
@@ -213,7 +213,7 @@ onMounted(() => {
   }
 
   &::after {
-    content: "";
+    content: '';
 
     position: absolute;
     z-index: 10;

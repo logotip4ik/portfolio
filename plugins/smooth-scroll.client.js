@@ -1,17 +1,17 @@
 // import ASScroll from "@ashthornton/asscroll";
-import LocomotiveScroll from "locomotive-scroll";
+import LocomotiveScroll from 'locomotive-scroll';
 
 const LOCOMOTIVE_SCROLL_BREAK_POINT = 1024;
 
-export default defineNuxtPlugin(({ $gsap, $ScrollTrigger }) => {
-  const scrollerEl = document.getElementById("scroller");
+export default defineNuxtPlugin(({ $ScrollTrigger }) => {
+  const scrollerEl = document.getElementById('scroller');
 
   const locomotiveScroll = new LocomotiveScroll({
     el: scrollerEl,
     smooth: true,
   });
 
-  locomotiveScroll.on("scroll", $ScrollTrigger.update);
+  locomotiveScroll.on('scroll', $ScrollTrigger.update);
 
   $ScrollTrigger.scrollerProxy(locomotiveScroll.el, {
     scrollTop(value) {
@@ -27,10 +27,10 @@ export default defineNuxtPlugin(({ $gsap, $ScrollTrigger }) => {
         height: window.innerHeight,
       };
     },
-    pinType: locomotiveScroll.el.style.transform ? "transform" : "fixed",
+    pinType: locomotiveScroll.el.style.transform ? 'transform' : 'fixed',
   });
 
-  $ScrollTrigger.addEventListener("refresh", () => locomotiveScroll.update());
+  $ScrollTrigger.addEventListener('refresh', () => locomotiveScroll.update());
 
   if (window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT)
     $ScrollTrigger.defaults({ scroller: locomotiveScroll.el });
@@ -43,7 +43,7 @@ export default defineNuxtPlugin(({ $gsap, $ScrollTrigger }) => {
 function makeLocomotiveScrollAdaptor(locomotiveScroll) {
   let scrollY = 0;
 
-  locomotiveScroll.on("scroll", ({ scroll }) => (scrollY = scroll.y));
+  locomotiveScroll.on('scroll', ({ scroll }) => (scrollY = scroll.y));
 
   return {
     scrollY: () =>
@@ -54,11 +54,11 @@ function makeLocomotiveScrollAdaptor(locomotiveScroll) {
     enable: () =>
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
         ? locomotiveScroll.start()
-        : (document.body.style.overflow = "auto"),
+        : (document.body.style.overflow = 'auto'),
     disable: () =>
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
         ? locomotiveScroll.stop()
-        : (document.body.style.overflow = "hidden"),
+        : (document.body.style.overflow = 'hidden'),
   };
 }
 
@@ -71,10 +71,10 @@ function makeASScrollAdaptor(asscroll) {
     enable: () =>
       asscroll.isScrollJacking
         ? asscroll.enable()
-        : (document.body.style.overflow = "auto"),
+        : (document.body.style.overflow = 'auto'),
     disable: () =>
       asscroll.isScrollJacking
         ? asscroll.disable()
-        : (document.body.style.overflow = "hidden"),
+        : (document.body.style.overflow = 'hidden'),
   };
 }
