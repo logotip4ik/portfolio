@@ -33,8 +33,7 @@ const projects = [
         :project="project"
         :aria-label="project.title"
         class="projects__list__item"
-      >
-      </VProjectsItem>
+      />
     </ul>
   </section>
 </template>

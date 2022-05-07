@@ -44,43 +44,6 @@ onMounted(() => {
     }
   );
 });
-
-// export default {
-//   components: { SourceSVG },
-//   mounted() {
-//     const prefersReducedMotion = this.$prefersReducedMotion()
-
-//     if (window.innerWidth > this.$smoothScrollBreakPoint) return
-
-//     const imageMovementBase = 4
-//     const randomMultiplier = gsap.utils.random(0.85, 1.15)
-
-//     const imageMovement = imageMovementBase * randomMultiplier
-
-//     let movementDirection = this.getMovementDirection()
-
-//     gsap.fromTo(
-//       workImage.$el,
-//       { yPercent: () => -50 + imageMovement * movementDirection },
-//       {
-//         yPercent: () => -50 + imageMovement * movementDirection * -1,
-//         scrollTrigger: { trigger: work, scrub: true },
-//       }
-//     )
-
-//     window.addEventListener(
-//       'resize',
-//       () => (movementDirection = this.getMovementDirection())
-//     )
-//   },
-//   methods: {
-//     getMovementDirection() {
-//       if (window.innerWidth < 798) return -1
-//       return this.id === 0 ? -1 : 1
-//       // return this.id === 0 ? 1 : this.id % 3 === 0 ? 1 : -1
-//     },
-//   },
-// }
 </script>
 
 <template>
