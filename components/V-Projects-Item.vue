@@ -53,7 +53,7 @@ onMounted(() => {
     data-scroll
     :data-scroll-speed="id % 2 === 0 ? -0.5 : 1"
   >
-    <NuxtLink class="project__wrapper" :href="project.live">
+    <NuxtLink v-hoverable class="project__wrapper" :href="project.live">
       <div ref="projectImageWrapper" class="project__image__wrapper">
         <img
           ref="projectImage"
@@ -75,6 +75,7 @@ onMounted(() => {
     <NuxtLink
       v-if="project.source"
       ref="projectSource"
+      v-hoverable.source
       :href="project.source"
       class="project__source"
     >
@@ -164,7 +165,7 @@ onMounted(() => {
     top: calc(var(--image-height) - var(--pd));
     right: var(--pd);
 
-    color: var(--surface-color);
+    color: var(--ff-color);
     mix-blend-mode: screen;
 
     max-width: var(--size);
