@@ -147,7 +147,7 @@ onMounted(() => {
       delay: 0.5,
       onComplete: () => emitter.emit('shader:running'),
     });
-  }, 100);
+  }, 50);
 
   $onColorSchemeChange((media) => {
     const switchTo = media.matches ? 'light' : 'dark';
