@@ -5,6 +5,7 @@
         <NuxtPage />
       </NuxtLayout>
     </div>
+    <VPointer />
     <VLoader />
   </div>
 </template>
