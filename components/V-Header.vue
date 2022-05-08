@@ -11,7 +11,6 @@ function showContentAnimation() {
   const mainTl = gsap.timeline({
     paused: true,
     defaults: { ease: 'expo.out', duration: 1.25 },
-    delay: 0.2,
   });
 
   mainTl.to('.header__container__title__line__content', {
