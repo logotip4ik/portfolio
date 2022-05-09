@@ -1,17 +1,36 @@
 <script setup>
+import SplitType from 'split-type';
+
 const { gsap } = useGsap();
 
 const heading = ref(null);
 
 onMounted(() => {
+  const text = new SplitType(heading.value, {
+    types: 'lines, words',
+    lineClass: 'heading__line',
+    wordClass: 'heading__line__word',
+  });
+
+  for (const line of text.lines) {
+    const lineParent = line.parentNode;
+    line.remove();
+
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('heading__line__wrapper');
+
+    lineParent.appendChild(wrapper);
+    wrapper.appendChild(line);
+  }
+
   gsap.fromTo(
-    heading.value.querySelectorAll('.heading__line__content'),
+    text.words,
     { yPercent: -105 },
     {
       yPercent: 0,
       ease: 'expo.out',
       duration: 1.25,
-      stagger: 0.175,
+      stagger: 0.125,
       scrollTrigger: {
         trigger: heading.value,
         start: 'top 75%',
@@ -24,11 +43,7 @@ onMounted(() => {
 
 <template>
   <h2 ref="heading" class="heading" data-scroll data-scroll-speed="-1">
-    <span class="heading__line">
-      <span class="heading__line__content">
-        <slot />
-      </span>
-    </span>
+    <slot />
   </h2>
 </template>
 
@@ -37,20 +52,16 @@ onMounted(() => {
   text-align: center;
 
   width: 100%;
+  max-width: 550px;
 
+  margin: 0 auto;
   opacity: 0.85;
 
   &__line {
-    display: inline-block;
-
-    position: relative;
-
     line-height: 1.225;
 
-    overflow: hidden;
-
-    &__content {
-      display: inline-block;
+    &__wrapper {
+      overflow: hidden;
     }
   }
 }
