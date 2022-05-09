@@ -165,7 +165,7 @@ onMounted(() => {
     top: calc(var(--image-height) - var(--pd));
     right: var(--pd);
 
-    color: var(--ff-color);
+    color: #ebebeb;
     mix-blend-mode: screen;
 
     max-width: var(--size);

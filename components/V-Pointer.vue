@@ -100,14 +100,16 @@ $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   &__svg {
+    --size: 30%;
+
     position: absolute;
     top: 50%;
     left: 50%;
 
-    width: 35%;
-    height: 35%;
+    width: var(--size);
+    height: var(--size);
 
-    color: var(--surface-color);
+    color: #030303;
 
     transform: translate(-50%, -50%) rotate(0) scale(1);
   }
