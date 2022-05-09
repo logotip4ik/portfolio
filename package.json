@@ -27,6 +27,7 @@
     "locomotive-scroll": "^4.1.4",
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
+    "split-type": "^0.2.5",
     "three": "^0.140.0"
   }
 }

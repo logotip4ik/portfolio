@@ -5086,6 +5086,11 @@ split-on-first@^1.0.0:
   resolved "https://registry.yarnpkg.com/split-on-first/-/split-on-first-1.1.0.tgz#f610afeee3b12bce1d0c30425e76398b78249a5f"
   integrity sha512-43ZssAJaMusuKWL8sKUBQXHWOpq8d6CfN/u1p4gUzfJkM05C8rxTmYrkIPTXapZpORA6LkkzcUulJ8FqA7Uudw==
 
+split-type@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/split-type/-/split-type-0.2.5.tgz#dae919b64016a65a8ff4ce2cde0d98dc82b91d16"
+  integrity sha512-11o9ICDfvcG2cctbrBVfa2VOIa6+umUa32/4NkQ1CXQTZevucChhPpX7N6OzlVyHvuFOMMb04ohnOBaTJem+Ig==
+
 stable@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/stable/-/stable-0.1.8.tgz#836eb3c8382fe2936feaf544631017ce7d47a3cf"
