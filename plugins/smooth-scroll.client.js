@@ -63,6 +63,7 @@ function makeLocomotiveScrollAdaptor(locomotiveScroll) {
 }
 
 /** @param {import('@ashthornton/asscroll').default} asscroll */
+// eslint-disable-next-line
 function makeASScrollAdaptor(asscroll) {
   return {
     scrollY: () =>
