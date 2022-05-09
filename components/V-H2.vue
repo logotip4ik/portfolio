@@ -30,7 +30,7 @@ onMounted(() => {
       yPercent: 0,
       ease: 'expo.out',
       duration: 1.25,
-      stagger: 0.125,
+      stagger: 0.1,
       scrollTrigger: {
         trigger: heading.value,
         start: 'top 75%',
