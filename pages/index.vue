@@ -11,7 +11,7 @@ onMounted(() => {
     <VHeader />
     <main>
       <VProjects />
-      <section>just some section</section>
+      <VAboutMe />
       <section>just some section</section>
     </main>
     <footer>just some footer</footer>
