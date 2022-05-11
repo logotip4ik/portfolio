@@ -12,7 +12,7 @@ onMounted(() => {
     <main>
       <VProjects />
       <VAboutMe />
-      <section>just some section</section>
+      <VContact />
     </main>
     <footer>just some footer</footer>
   </div>
