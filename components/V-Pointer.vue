@@ -1,12 +1,14 @@
 <script setup>
 import LinkSVG from '~/assets/img/arrow-link.svg';
 import OuterLinkSVG from '~/assets/img/arrow-outer-link.svg';
+import MailLinkSVG from '~/assets/img/mail-link.svg';
 
 import { pointerModifiersWhitelist } from '~/lib/constants';
 
 const SVGComponents = {
   [pointerModifiersWhitelist.at(0)]: LinkSVG,
   [pointerModifiersWhitelist.at(1)]: OuterLinkSVG,
+  [pointerModifiersWhitelist.at(2)]: MailLinkSVG,
 };
 
 const { gsap } = useGsap();
@@ -100,7 +102,7 @@ $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   &__svg {
-    --size: 30%;
+    --size: 35%;
 
     position: absolute;
     top: 50%;
