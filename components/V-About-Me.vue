@@ -1,6 +1,7 @@
 <script setup>
 import SplitType from 'split-type';
 
+const { $smoothScrollBreakPoint } = useNuxtApp();
 const { gsap } = useGsap();
 
 const aboutText =
@@ -25,7 +26,7 @@ onMounted(() => {
         trigger: aboutMeContent.value,
         start: 'top 80%',
         end: 'bottom 85%',
-        scrub: 0.15,
+        scrub: window.innerWidth >= $smoothScrollBreakPoint ? true : 0.5,
       },
     }
   );
