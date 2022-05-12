@@ -2,6 +2,7 @@
 import LinkSVG from '~/assets/img/arrow-link.svg';
 import OuterLinkSVG from '~/assets/img/arrow-outer-link.svg';
 import MailLinkSVG from '~/assets/img/mail-link.svg';
+import ActionSVG from '~/assets/img/action.svg';
 
 import { pointerModifiersWhitelist } from '~/lib/constants';
 
@@ -9,6 +10,7 @@ const SVGComponents = {
   [pointerModifiersWhitelist.at(0)]: LinkSVG,
   [pointerModifiersWhitelist.at(1)]: OuterLinkSVG,
   [pointerModifiersWhitelist.at(2)]: MailLinkSVG,
+  [pointerModifiersWhitelist.at(3)]: ActionSVG,
 };
 
 const { gsap } = useGsap();
