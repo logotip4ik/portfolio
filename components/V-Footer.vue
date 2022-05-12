@@ -43,14 +43,15 @@ onMounted(() => {
           </span>
         </p>
         <ul class="footer__content__social-links">
-          <NuxtLink
+          <li
             v-for="(link, key) in socialLinks"
             :key="key"
-            v-hoverable.outer-link
-            :href="link.href"
+            class="footer__content__social-links__link"
           >
-            {{ link.label }}
-          </NuxtLink>
+            <VFooterLink v-hoverable.outer-link :href="link.href">
+              {{ link.label }}
+            </VFooterLink>
+          </li>
         </ul>
 
         <p class="footer__content__copyright">
@@ -154,6 +155,12 @@ onMounted(() => {
       margin: 0;
       padding: 0;
 
+      list-style-type: none;
+
+      &__links:not(:first-of-type) {
+        margin-top: 0.1rem;
+      }
+
       @media screen and (max-width: 685px) {
         align-items: center;
       }
@@ -196,6 +203,10 @@ onMounted(() => {
 
       opacity: 0.125;
       background-color: var(--ff-color);
+
+      @media (max-width: 575px) {
+        content: none;
+      }
     }
 
     @media screen and (max-width: 685px) {
@@ -203,10 +214,6 @@ onMounted(() => {
       grid-template-rows: repeat(4, min-content);
 
       row-gap: 1.5rem;
-
-      &::after {
-        content: none;
-      }
 
       & > * {
         justify-self: center !important;
