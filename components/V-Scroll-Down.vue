@@ -13,9 +13,10 @@
 .scroll-down {
   position: relative;
 
-  cursor: pointer;
-
   opacity: 0;
+
+  cursor: pointer;
+  transition: color 400ms;
 
   &__circle {
     $anim-duration: 3s;

@@ -23,7 +23,7 @@ const projects = [
 
 <template>
   <section class="projects" data-scroll-section>
-    <VH2>Projects</VH2>
+    <VH2 class="projects__title">Projects</VH2>
 
     <ul class="projects__list">
       <VProjectsItem
@@ -42,16 +42,12 @@ const projects = [
 .projects {
   color: var(--ff-color);
 
-  margin-top: -1px;
   padding: 4rem clamp(1rem, 7vw, 5rem) 1rem;
 
-  background-color: var(--surface-color);
-
-  transition: background-color 400ms, color 400ms;
-  pointer-events: all;
-
   &__title {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
+
+    transition: color 400ms;
 
     // NOTE: smoothscroll (locomotive scroll) breakpoint
     @media screen and (min-width: 1024px) {

@@ -134,6 +134,8 @@ onMounted(() => {
   }
 
   &__content {
+    transition: color 400ms;
+
     &__title {
       font-size: calc(var(--step-0) + 0.4rem);
       letter-spacing: 0.25px;

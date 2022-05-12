@@ -61,15 +61,10 @@ onMounted(() => {
 <style lang="scss">
 .contact {
   width: 100%;
-  max-width: 100vw;
 
-  margin-top: -2px;
   padding: 5rem 0 8rem;
 
-  background-color: var(--black-color);
-
   overflow: hidden;
-  pointer-events: all;
 
   &__email {
     display: block;

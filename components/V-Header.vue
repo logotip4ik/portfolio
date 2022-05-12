@@ -92,7 +92,6 @@ onMounted(() => {
   align-items: center;
 
   position: relative;
-  z-index: 1;
 
   min-height: 100vh;
 
@@ -132,6 +131,8 @@ onMounted(() => {
 
     mix-blend-mode: difference;
     cursor: default;
+
+    transition: color 400ms;
 
     &__title {
       font-weight: 200;

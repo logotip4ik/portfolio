@@ -47,13 +47,10 @@ onMounted(() => {
 .about-me {
   color: var(--ff-color);
 
-  margin-top: -1px;
   padding: 4rem clamp(1rem, 7vw, 5rem) 1rem;
 
-  background-color: var(--surface-color);
-
-  transition: background-color 400ms, color 400ms;
   pointer-events: all;
+  transition: color 400ms;
 
   &__title {
     opacity: 0.85;
