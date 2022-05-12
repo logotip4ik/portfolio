@@ -8,20 +8,22 @@ onMounted(() => {
 
 <template>
   <div>
-    <VHeader />
-    <main>
-      <VProjects />
-      <VAboutMe />
-      <VContact />
-    </main>
-    <footer>just some footer</footer>
+    <div class="smooth-scroll-fix">
+      <VHeader />
+      <main>
+        <VProjects />
+        <VAboutMe />
+        <VContact />
+      </main>
+    </div>
+    <VFooter />
   </div>
 </template>
 
-<style lang="scss">
-header,
-section,
-footer {
-  min-height: 100vh;
+<style>
+.smooth-scroll-fix {
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
 }
 </style>
