@@ -69,6 +69,8 @@ onMounted(() => {
     color: darken($color: #ffffff, $amount: 25);
     text-align: left;
 
+    overflow: hidden;
+
     &__line {
       position: relative;
 
