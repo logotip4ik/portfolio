@@ -63,8 +63,12 @@ onMounted(() => {
   width: 100%;
 
   padding: 5rem 0 8rem;
+  margin-top: -3px;
+
+  background-color: var(--surface-color);
 
   overflow: hidden;
+  pointer-events: all;
 
   &__email {
     display: block;

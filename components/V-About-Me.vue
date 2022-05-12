@@ -48,6 +48,9 @@ onMounted(() => {
   color: var(--ff-color);
 
   padding: 4rem clamp(1rem, 7vw, 5rem) 1rem;
+  margin-top: -2px;
+
+  background-color: var(--surface-color);
 
   pointer-events: all;
   transition: color 400ms;

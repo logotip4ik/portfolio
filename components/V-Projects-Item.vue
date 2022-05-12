@@ -75,7 +75,7 @@ onMounted(() => {
     <NuxtLink
       v-if="project.source"
       ref="projectSource"
-      v-hoverable.source
+      v-hoverable.outer-link
       :href="project.source"
       class="project__source"
     >

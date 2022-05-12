@@ -92,10 +92,12 @@ onMounted(() => {
   align-items: center;
 
   position: relative;
+  z-index: 1;
 
   min-height: 100vh;
 
   overflow: hidden;
+  background-color: var(--surface-color);
 
   &::before {
     content: '';

@@ -43,6 +43,10 @@ const projects = [
   color: var(--ff-color);
 
   padding: 4rem clamp(1rem, 7vw, 5rem) 1rem;
+  margin-top: -1px;
+
+  background-color: var(--surface-color);
+  pointer-events: all;
 
   &__title {
     margin-bottom: 3rem;
