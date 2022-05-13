@@ -204,7 +204,7 @@ onMounted(() => {
       opacity: 0.125;
       background-color: var(--ff-color);
 
-      @media (max-width: 575px) {
+      @media (max-width: 591.5px) {
         content: none;
       }
     }
