@@ -7,10 +7,10 @@ const nav = ref(null);
 const navList = ref(null);
 
 const links = [
-  { label: 'Home', action: () => null },
-  { label: 'Projects', action: () => null },
-  { label: 'About', action: () => null },
-  { label: 'Contact', action: () => null },
+  { label: 'Home', action: () => $smoothScroll.scrollTo(0) },
+  { label: 'Projects', action: () => $smoothScroll.scrollTo('.projects') },
+  { label: 'About', action: () => $smoothScroll.scrollTo('.about-me') },
+  { label: 'Contact', action: () => $smoothScroll.scrollTo('.contact') },
 ];
 
 watch(currentSection, (val) => {
@@ -67,6 +67,7 @@ onMounted(() => {
       <li
         v-for="(link, key) in links"
         :key="key"
+        v-hoverable.action
         tabindex="0"
         class="nav__list__item"
         @click="link.action"
