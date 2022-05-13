@@ -20,7 +20,7 @@ onMounted(() => {
     { '--overlay-offset': '0%' },
     {
       '--overlay-offset': '100%',
-      stagger: 0.125,
+      stagger: 0.1,
       ease: 'none',
       scrollTrigger: {
         trigger: aboutMeContent.value,
@@ -47,7 +47,7 @@ onMounted(() => {
 .about-me {
   color: var(--ff-color);
 
-  padding: 4rem clamp(1rem, 7vw, 5rem) 1rem;
+  padding: 4rem clamp(1rem, 7vw, 5rem) 4rem;
   margin-top: -2px;
 
   background-color: var(--surface-color);
@@ -59,20 +59,27 @@ onMounted(() => {
     opacity: 0.85;
 
     margin-top: 1rem;
-    margin-bottom: 5rem;
+    margin-bottom: 6rem;
   }
 
   &__content {
     position: relative;
 
     font-size: calc(var(--step-3) - 0.25rem);
-    line-height: 1.25;
+    line-height: 1.3;
     color: darken($color: #ffffff, $amount: 25);
     text-align: left;
+
+    width: fit-content;
+    max-width: 30ch;
+
+    margin: 0 auto;
 
     overflow: hidden;
 
     &__line {
+      width: fit-content !important;
+
       position: relative;
 
       &::after {
