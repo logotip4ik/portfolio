@@ -186,8 +186,8 @@ onMounted(() => {
     color: #ebebeb;
     mix-blend-mode: screen;
 
-    max-width: var(--size);
-    max-height: var(--size);
+    width: var(--size);
+    height: var(--size);
 
     cursor: none;
 
