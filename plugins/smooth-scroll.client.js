@@ -41,14 +41,19 @@ export default defineNuxtPlugin(({ $ScrollTrigger }) => {
 });
 
 function makeLocomotiveScrollAdaptor(locomotiveScroll) {
-  let scrollY = 0;
+  const scroll = { x: 0, y: 0 };
 
-  locomotiveScroll.on('scroll', ({ scroll }) => (scrollY = scroll.y));
+  locomotiveScroll.on('scroll', ({ scroll: { x, y } }) => {
+    scroll.x = x;
+    scroll.y = y;
+  });
 
   return {
+    on: (evName, evCallback) =>
+      locomotiveScroll.on(evName, evCallback.bind(null, { scroll })),
     scrollY: () =>
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
-        ? scrollY
+        ? scroll.y
         : window.scrollY,
     update: () => locomotiveScroll.update(),
     enable: () =>
