@@ -79,7 +79,7 @@ onMounted(() => {
 $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
 
 .pointer {
-  --size: 1rem;
+  --size: 0.85rem;
 
   position: fixed;
   top: 0;
@@ -97,10 +97,10 @@ $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
   transform: translate(-50%, -50%);
 
-  transition: width 400ms $ease-back-out, height 400ms $ease-back-out;
+  transition: width 300ms $ease-back-out, height 300ms $ease-back-out;
 
   &--active {
-    --size: 5.5rem;
+    --size: 5rem;
   }
 
   &__svg {
@@ -121,12 +121,15 @@ $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
 
 .pointer-svg-enter-active,
 .pointer-svg-leave-active {
-  transition: transform 300ms $ease-back-out;
-  transition-delay: 100ms;
+  transition: transform 175ms $ease-back-out, opacity 175ms;
+  transition-delay: 75ms;
 }
 
-.pointer-svg-enter-from,
+.pointer-svg-enter-from {
+  transform: translate(-50%, -50%) rotate(50deg) scale(0);
+}
 .pointer-svg-leave-to {
-  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
 }
 </style>
