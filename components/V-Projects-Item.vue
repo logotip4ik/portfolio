@@ -28,7 +28,15 @@ onMounted(() => {
 
   imageResizeObserver.observe(projectImage.value);
 
-  gsap.fromTo(
+  const revealAnim = gsap.timeline({
+    scrollTrigger: {
+      trigger: projectEl.value,
+      start: 'top bottom-=10%',
+      once: true,
+    },
+  });
+
+  revealAnim.fromTo(
     projectEl.value.children[0],
     { opacity: 0, y: 100 },
     {
@@ -42,6 +50,13 @@ onMounted(() => {
         once: true,
       },
     }
+  );
+
+  revealAnim.fromTo(
+    projectImage.value,
+    { scale: 0.925, transformOrigin: 'bottom center', opacity: 0.25 },
+    { scale: 1, opacity: 1 },
+    0
   );
 });
 </script>
