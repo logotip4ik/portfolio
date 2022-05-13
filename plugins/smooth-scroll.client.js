@@ -1,7 +1,9 @@
 // import ASScroll from "@ashthornton/asscroll";
+import { gsap } from 'gsap';
 import LocomotiveScroll from 'locomotive-scroll';
 
 const LOCOMOTIVE_SCROLL_BREAK_POINT = 1024;
+const SCROLL_TO_DURATION_IN_SECONDS = 1.5;
 
 export default defineNuxtPlugin(({ $ScrollTrigger }) => {
   const scrollerEl = document.getElementById('scroller');
@@ -64,6 +66,19 @@ function makeLocomotiveScrollAdaptor(locomotiveScroll) {
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
         ? locomotiveScroll.stop()
         : (document.body.style.overflow = 'hidden'),
+    scrollTo: (selectorOrNumber) =>
+      // prettier-ignore
+      window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
+        ? locomotiveScroll.scrollTo(selectorOrNumber, {
+          duration: SCROLL_TO_DURATION_IN_SECONDS * 1000,
+          // https://easings.net/#easeOutExpo
+          easing: [0.645, 0.045, 0.355, 1.0],
+        })
+        : gsap.to(window, {
+          scrollTo: { y: selectorOrNumber, autoKill: true },
+          duration: SCROLL_TO_DURATION_IN_SECONDS,
+          ease: 'power3.inOut',
+        }),
   };
 }
 
