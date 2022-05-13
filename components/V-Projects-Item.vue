@@ -92,6 +92,7 @@ onMounted(() => {
       ref="projectSource"
       v-hoverable.outer-link
       :href="project.source"
+      target="_blank"
       class="project__source"
     >
       <SourceSVG />

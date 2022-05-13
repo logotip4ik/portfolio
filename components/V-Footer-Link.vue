@@ -51,6 +51,7 @@ onMounted(() => {
 <template>
   <NuxtLink
     :href="href"
+    target="_blank"
     class="footer-link"
     @pointerenter="hoverLink"
     @pointerleave="idleLink"
