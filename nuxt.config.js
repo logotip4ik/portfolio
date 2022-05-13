@@ -15,5 +15,7 @@ export default defineNuxtConfig({
     '~/assets/styles/global.css',
   ],
 
-  vite: { plugins: [PluginGLSL(), PluginSVGLoader(), PluginEslint()] },
+  vite: {
+    plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
+  },
 });
