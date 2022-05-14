@@ -28,7 +28,14 @@ function showContentAnimation() {
     '-=0.75'
   );
 
-  mainTl.to('.scroll-down', { opacity: 1 }, '-=0.5');
+  mainTl.to('.scroll-down', { opacity: 1 }, '<+0.5');
+
+  mainTl.fromTo(
+    '.nav__menu-button, .nav__list__item',
+    { opacity: 0 },
+    { opacity: 1, stagger: 0.125 },
+    '-=0.75'
+  );
 
   return mainTl;
 }
