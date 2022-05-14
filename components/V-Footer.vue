@@ -79,7 +79,11 @@ onMounted(() => {
           />
         </p>
       </div>
-      <button v-hoverable.action class="footer__arrow">
+      <button
+        v-hoverable.action
+        class="footer__arrow"
+        @click="() => $smoothScroll.scrollTo(0)"
+      >
         <ArrowUpSVG />
       </button>
     </div>
