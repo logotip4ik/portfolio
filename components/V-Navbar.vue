@@ -22,8 +22,8 @@ const links = [
 const SVG_SIZE = 20;
 const SVG_LINES_PADDING = 5;
 
-const svgColorIdle = { light: '#030303', dark: '#bababa' };
-const svgColorActive = { light: '#ffffff', dark: '#030303' };
+const svgColorIdle = { light: '#bababa', dark: '#bababa' };
+const svgColorActive = { light: '#030303', dark: '#030303' };
 
 function hoverAnimation() {
   if (isMenuActive.value) return;
@@ -149,8 +149,9 @@ onMounted(() => {
       ease: 'expo.out',
       scrollTrigger: {
         trigger: '.header',
-        start: 'bottom 2%',
-        end: 'bottom 2%',
+        start: 'bottom 5%',
+        end: 'bottom 5%',
+        markers: true,
         toggleActions: 'play none reverse none',
       },
     }
