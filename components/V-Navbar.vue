@@ -193,6 +193,7 @@ onMounted(() => {
         tabindex="0"
         class="nav__list__item"
         @click="link.action"
+        @keypress.space.enter.prevent="link.action"
       >
         {{ link.label }}
       </li>
@@ -226,7 +227,7 @@ onMounted(() => {
   width: 95%;
   max-width: 1400px;
 
-  padding: 1rem 0;
+  padding: 1.75rem 0;
 
   color: #bababa;
   pointer-events: none;
