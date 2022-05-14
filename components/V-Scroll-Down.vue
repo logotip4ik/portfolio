@@ -1,7 +1,18 @@
-<script setup></script>
+<script setup>
+const { $smoothScroll } = useNuxtApp();
+
+function scrollDown() {
+  $smoothScroll.scrollTo('.projects');
+}
+</script>
 
 <template>
-  <div class="scroll-down">
+  <div
+    v-hoverable.action
+    class="scroll-down"
+    @click="scrollDown"
+    @keypress.space="scrollDown"
+  >
     <div class="scroll-down__circle" />
     <div class="scroll-down__circle" />
 
