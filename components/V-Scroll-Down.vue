@@ -26,7 +26,7 @@ function scrollDown() {
 
   opacity: 0;
 
-  cursor: pointer;
+  cursor: none;
   transition: color 400ms;
 
   &__circle {
@@ -62,6 +62,10 @@ function scrollDown() {
     padding-left: 2rem;
 
     opacity: 0.65;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    cursor: pointer;
   }
 }
 
