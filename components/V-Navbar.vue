@@ -151,7 +151,6 @@ onMounted(() => {
         trigger: '.header',
         start: 'bottom 5%',
         end: 'bottom 5%',
-        markers: true,
         toggleActions: 'play none reverse none',
       },
     }
