@@ -34,6 +34,7 @@ onMounted(() => {
       </main>
     </div>
     <VFooter />
+    <VMenu />
   </div>
 </template>
 
