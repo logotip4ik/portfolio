@@ -6,10 +6,34 @@ const currentSection = useCurrentSection();
 const isShowingMenu = useMenuToggle();
 
 const navigationalLinks = [
-  { label: 'Home', action: () => $smoothScroll.scrollTo(0) },
-  { label: 'Projects', action: () => $smoothScroll.scrollTo('.projects') },
-  { label: 'About', action: () => $smoothScroll.scrollTo('.about') },
-  { label: 'Contact', action: () => $smoothScroll.scrollTo('.contact') },
+  {
+    label: 'Home',
+    action: () => {
+      $smoothScroll.scrollTo(0);
+      isShowingMenu.value = false;
+    },
+  },
+  {
+    label: 'Projects',
+    action: () => {
+      $smoothScroll.scrollTo('.projects');
+      isShowingMenu.value = false;
+    },
+  },
+  {
+    label: 'About',
+    action: () => {
+      $smoothScroll.scrollTo('.about');
+      isShowingMenu.value = false;
+    },
+  },
+  {
+    label: 'Contact',
+    action: () => {
+      $smoothScroll.scrollTo('.contact');
+      isShowingMenu.value = false;
+    },
+  },
 ];
 
 const socialLinks = [
@@ -130,7 +154,7 @@ watch(isShowingMenu, (bool) => {
         }"
         tabindex="0"
         :aria-label="`scroll to ${link.label}`"
-        @click="link.action(), $nuxt.$emit('toggle-menu')"
+        @click="link.action"
       >
         <p
           :ref="(el) => (menuBackItemContentTitle[key] = el)"
