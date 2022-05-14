@@ -38,10 +38,14 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .smooth-scroll-fix {
   position: relative;
   z-index: 3;
-  pointer-events: none;
+  pointer-events: all;
+
+  @media screen and (min-width: 1024px) {
+    pointer-events: none;
+  }
 }
 </style>
