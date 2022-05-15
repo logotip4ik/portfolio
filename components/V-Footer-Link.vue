@@ -4,125 +4,134 @@ defineProps({ href: { type: String, required: true, default: '' } });
 const { gsap } = useGsap();
 const slots = useSlots();
 
-const footerLinkUpper = ref(null);
-const footerLinkLower = ref(null);
+const hoverChars = ref(null);
+const idleChars = ref(null);
 
 const linkText = computed(() => slots.default()[0].children);
 
 let prevAnim;
 
-function hoverLink() {
-  if (prevAnim) prevAnim.kill();
-
-  prevAnim = gsap.timeline({
-    defaults: { ease: 'expo.out', stagger: { amount: 0.25, from: 'end' } },
+function makeTimeline(props) {
+  return gsap.timeline({
+    defaults: {
+      stagger: { amount: 0.3, from: 'end' },
+      duration: 0.5,
+      ease: 'expo.out',
+    },
+    ...props,
   });
-
-  prevAnim.fromTo(
-    footerLinkLower.value.children,
-    { yPercent: 0 },
-    { yPercent: -100 },
-    0
-  );
-  prevAnim.fromTo(
-    footerLinkUpper.value.children,
-    { yPercent: 0 },
-    { yPercent: -100 },
-    0.05
-  );
 }
 
-function idleLink() {
+function showHoverText() {
+  // if (this.prefersReducedMotion) return
+
   if (prevAnim) prevAnim.kill();
 
-  prevAnim = gsap.timeline({
-    defaults: { ease: 'expo.out', stagger: { amount: 0.35, from: 'end' } },
-  });
+  prevAnim = makeTimeline();
 
-  prevAnim.to(footerLinkLower.value.children, { yPercent: 0 }, 0);
-  prevAnim.to(footerLinkUpper.value.children, { yPercent: 0 }, 0);
+  prevAnim.to(idleChars.value, { yPercent: -100 });
+  prevAnim.to(hoverChars.value, { yPercent: -100 }, '<');
 }
 
-onMounted(() => {
-  // gsap.set(footerLinkUpper.value, { y: -105 });
-});
+function hideHoverText() {
+  // if (this.prefersReducedMotion) return
+
+  if (prevAnim) prevAnim.kill();
+
+  prevAnim = makeTimeline();
+
+  prevAnim.to(idleChars.value, { yPercent: 0 });
+  prevAnim.to(hoverChars.value, { yPercent: 0 }, '<');
+}
 </script>
 
 <template>
-  <NuxtLink
+  <a
     :href="href"
-    target="_blank"
-    class="footer-link"
-    @pointerenter="hoverLink"
-    @pointerleave="idleLink"
-    @focus="hoverLink"
-    @blur="idleLink"
+    rel="noopener noreferrer"
+    class="social-link"
+    @focus="showHoverText"
+    @blur="hideHoverText"
+    @pointerenter="showHoverText"
+    @pointerleave="hideHoverText"
   >
-    <span ref="footerLinkUpper" class="footer-link__line">
-      <span
-        v-for="(char, key) in linkText"
-        :key="key"
-        class="footer-link__line__char"
-        >{{ char }}</span
-      >
-    </span>
-    <span
-      ref="footerLinkLower"
-      class="footer-link__line footer-link__line--smaller"
-    >
-      <span
-        v-for="(char, key) in linkText"
-        :key="key"
-        class="footer-link__line__char"
-        >{{ char }}</span
-      >
-    </span>
-  </NuxtLink>
+    <div class="social-link__wrapper" aria-hidden="true">
+      <span class="social-link__line serif">
+        <span v-for="(char, key) in linkText" :key="key" ref="hoverChars">{{
+          char
+        }}</span>
+      </span>
+      <span class="social-link__line">
+        <span v-for="(char, key) in linkText" :key="key" ref="idleChars">{{
+          char
+        }}</span>
+      </span>
+    </div>
+    <!-- <span class="sr-only">{{ linkText }}</span> -->
+  </a>
 </template>
 
 <style lang="scss" scoped>
-.footer-link {
+.social-link {
   display: inline-block;
 
-  position: relative;
+  color: var(--ff-color);
+  text-transform: uppercase;
 
-  color: currentColor;
-  text-decoration: none;
-  line-height: 1.24;
+  margin: 0;
 
-  opacity: 0.85;
+  cursor: none;
 
-  overflow: hidden;
+  &__wrapper {
+    position: relative;
 
-  transition: opacity 400ms ease;
+    line-height: 1;
+    overflow: hidden;
+  }
 
   &__line {
-    display: flex;
+    letter-spacing: 0.25px;
 
-    font-size: var(--step-0);
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
 
-    &--smaller {
-      position: absolute;
+    &:nth-child(1) {
+      font-size: calc(var(--step-0) - 0.075rem);
 
-      top: 87%;
-      right: 0;
+      transform: translateY(100%);
 
-      font-size: calc(var(--step-0) - 0.25rem);
-
-      @media (max-width: 685px) {
-        right: 50%;
-
-        transform: translate(50%);
+      @media (prefers-reduced-motion: reduce) {
+        display: none;
       }
     }
 
-    &__char {
-      display: inline-block;
+    &:nth-child(2) {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      font-size: var(--step--1);
+
+      @media screen and (max-width: 600px) {
+        font-size: calc(var(--step--1) - 0.05rem);
+
+        right: 50%;
+        transform: translateX(50%);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        display: none;
+      }
     }
   }
 
-  &:is(:hover, :focus-visible) {
-    opacity: 1;
+  @media (prefers-reduced-motion: reduce) {
+    cursor: pointer;
+  }
+
+  span {
+    display: inline-block;
   }
 }
 </style>
