@@ -1,6 +1,7 @@
 <script setup>
 defineProps({ href: { type: String, required: true, default: '' } });
 
+const { $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
 const slots = useSlots();
 
@@ -10,6 +11,7 @@ const idleChars = ref(null);
 const linkText = computed(() => slots.default()[0].children);
 
 let prevAnim;
+let prefersReducedMotion;
 
 function makeTimeline(props) {
   return gsap.timeline({
@@ -23,7 +25,7 @@ function makeTimeline(props) {
 }
 
 function showHoverText() {
-  // if (this.prefersReducedMotion) return
+  if (prefersReducedMotion) return;
 
   if (prevAnim) prevAnim.kill();
 
@@ -34,7 +36,7 @@ function showHoverText() {
 }
 
 function hideHoverText() {
-  // if (this.prefersReducedMotion) return
+  if (prefersReducedMotion) return;
 
   if (prevAnim) prevAnim.kill();
 
@@ -43,6 +45,10 @@ function hideHoverText() {
   prevAnim.to(idleChars.value, { yPercent: 0 });
   prevAnim.to(hoverChars.value, { yPercent: 0 }, '<');
 }
+
+onMounted(() => {
+  prefersReducedMotion = $checkReducedMotion();
+});
 </script>
 
 <template>
@@ -101,8 +107,16 @@ function hideHoverText() {
 
       transform: translateY(100%);
 
+      transition: opacity 400ms;
+
       @media (prefers-reduced-motion: reduce) {
-        display: none;
+        transform: none;
+
+        &:is(:hover, :focus-visible) {
+          opacity: 0.5;
+
+          transition: opacity 200ms;
+        }
       }
     }
 

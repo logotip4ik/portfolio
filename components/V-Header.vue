@@ -1,5 +1,5 @@
 <script setup>
-const { $smoothScroll } = useNuxtApp();
+const { $smoothScroll, $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
 const emitter = useEmitter();
 
@@ -8,16 +8,25 @@ const subtitleText = 'Front End Developer';
 const header = ref(null);
 
 function showContentAnimation() {
+  const prefersReducedMotion = $checkReducedMotion();
+
   const mainTl = gsap.timeline({
     paused: true,
     defaults: { ease: 'expo.out', duration: 1.25 },
   });
 
-  mainTl.to('.header__container__title__line__content', {
-    y: 0,
-    duration: 1.5,
-    stagger: 0.175,
-  });
+  if (prefersReducedMotion)
+    mainTl.fromTo(
+      '.header__container__title__line__content',
+      { opacity: 0, y: 0 },
+      { opacity: 1, stagger: 0.175 }
+    );
+  else
+    mainTl.to('.header__container__title__line__content', {
+      y: 0,
+      duration: 1.5,
+      stagger: 0.175,
+    });
 
   mainTl.to(
     '.header__container__subtitle__char',

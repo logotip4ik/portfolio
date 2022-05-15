@@ -261,8 +261,14 @@ onMounted(() => {
     &__item {
       font-size: calc(var(--step--2) - 0.05rem);
 
+      cursor: none;
+
       &:not(:first-of-type) {
         margin-top: 0.25rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        cursor: pointer;
       }
     }
 

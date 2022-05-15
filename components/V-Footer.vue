@@ -272,6 +272,14 @@ onMounted(() => {
         transition-duration: 300ms;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      cursor: pointer;
+
+      svg {
+        transition: none;
+      }
+    }
   }
 
   @media screen and (max-width: 575px) {
