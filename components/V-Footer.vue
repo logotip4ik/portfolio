@@ -162,7 +162,7 @@ onMounted(() => {
       list-style-type: none;
 
       &__link:not(:first-of-type) {
-        margin-top: 0.25rem;
+        margin-top: 0.35rem;
       }
 
       @media screen and (max-width: 685px) {
@@ -234,9 +234,11 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
 
+    text-align: center;
+
     min-width: 115px;
 
-    text-align: center;
+    padding: 0 0 1rem;
 
     cursor: none;
     border: none;
@@ -257,6 +259,7 @@ onMounted(() => {
 
       @media (max-width: 700px) {
         max-width: 100px;
+        max-height: 70px;
       }
     }
 
