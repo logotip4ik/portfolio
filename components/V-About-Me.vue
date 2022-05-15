@@ -10,26 +10,28 @@ const aboutText =
 const aboutMeContent = ref(null);
 
 onMounted(() => {
-  const text = new SplitType(aboutMeContent.value, {
-    types: 'lines',
-    lineClass: 'about-me__content__line',
-  });
+  setTimeout(() => {
+    const text = new SplitType(aboutMeContent.value, {
+      types: 'lines',
+      lineClass: 'about-me__content__line',
+    });
 
-  gsap.fromTo(
-    text.lines,
-    { '--overlay-offset': '0%' },
-    {
-      '--overlay-offset': '100%',
-      stagger: 0.1,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: aboutMeContent.value,
-        start: 'top 80%',
-        end: 'bottom 85%',
-        scrub: window.innerWidth >= $smoothScrollBreakPoint ? true : 0.5,
-      },
-    }
-  );
+    gsap.fromTo(
+      text.lines,
+      { '--overlay-offset': '0%' },
+      {
+        '--overlay-offset': '100%',
+        stagger: 0.1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: aboutMeContent.value,
+          start: 'top 80%',
+          end: 'bottom 85%',
+          scrub: window.innerWidth >= $smoothScrollBreakPoint ? true : 0.5,
+        },
+      }
+    );
+  }, 50);
 });
 </script>
 
