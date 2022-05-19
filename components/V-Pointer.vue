@@ -59,6 +59,10 @@ onMounted(() => {
       pointerState.value = '';
     });
   }
+
+  emitter.on('pointer:inactive', () => {
+    pointerState.value = '';
+  });
 });
 </script>
 
