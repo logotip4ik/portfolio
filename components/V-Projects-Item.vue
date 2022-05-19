@@ -60,6 +60,8 @@ onMounted(() => {
       { scale: 1, opacity: 1 },
       0
     );
+
+  onBeforeUnmount(() => imageResizeObserver.disconnect());
 });
 </script>
 
