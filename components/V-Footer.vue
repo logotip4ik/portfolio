@@ -26,7 +26,7 @@ onMounted(() => {
   );
   resizeObserver.observe(footer.value);
 
-  setTimeout($smoothScroll.update, 150);
+  onBeforeUnmount(() => resizeObserver.disconnect());
 });
 </script>
 
