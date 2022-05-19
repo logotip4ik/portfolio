@@ -7,7 +7,12 @@ import vertexShader from '~/assets/shaders/vertex.glsl';
 import { WhitePinkGreen as pallet } from '~/assets/shaders/colors';
 
 const { gsap } = useGsap();
-const { $smoothScroll, $isDarkMode, $onColorSchemeChange } = useNuxtApp();
+const {
+  $smoothScroll,
+  $isDarkMode,
+  $onColorSchemeChange,
+  $checkReducedMotion,
+} = useNuxtApp();
 const emitter = useEmitter();
 
 const canvas = ref(null);
@@ -61,10 +66,8 @@ function render() {
 }
 
 onMounted(() => {
-  // prefersReducedMotion = this.$prefersReducedMotion()
-
+  prefersReducedMotion = $checkReducedMotion();
   const isDarkMode = $isDarkMode();
-  prefersReducedMotion = false;
   aspect = window.innerWidth / window.innerHeight;
 
   // THREE: Scene
@@ -137,17 +140,15 @@ onMounted(() => {
   window.addEventListener('resize', resize);
   resize();
 
-  setTimeout(() => {
-    isShaderRunning = true;
+  isShaderRunning = true;
 
-    gsap.to(object.material.uniforms.objectOpacity, {
-      value: 1,
-      ease: 'expo.out',
-      duration: 2,
-      delay: 0.5,
-      onComplete: () => emitter.emit('shader:running'),
-    });
-  }, 50);
+  gsap.to(object.material.uniforms.objectOpacity, {
+    value: 1,
+    ease: 'expo.out',
+    duration: 2,
+    delay: 0.5,
+    onComplete: () => emitter.emit('shader:running'),
+  });
 
   $onColorSchemeChange((media) => {
     const switchTo = media.matches ? 'light' : 'dark';
@@ -163,7 +164,9 @@ onMounted(() => {
 
   // NOTE: try to use only one requestAnimationFrame
   // this will improve overall performance
-  gsap.ticker.add(render);
+  const callbackTicker = gsap.ticker.add(render);
+
+  onBeforeUnmount(() => gsap.ticker.remove(callbackTicker));
 });
 </script>
 
