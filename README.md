@@ -1,42 +1,58 @@
-# Nuxt 3 Minimal Starter
+# Portfolio
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+<img src="https://bogdankostyuk.xyz/logo.png" align="right"
+     alt="Portfolio logo by Bogdan Kostyuk" width="120" height="120">
 
-## Setup
+This is my portfolio, where you can find little summery of my developer road. Also there are some of
+projects that i am using quite often
 
-Make sure to install the dependencies:
+> BTW: [previous portfolio](https://next.portfolio-5iw.pages.dev/)
 
-```bash
-# yarn
-yarn install
+## Build with
 
-# npm
-npm install
+- [Nuxt.js](https://v3.nuxtjs.org) - 3-nd version, this is like a core of the website.
 
-# pnpm
-pnpm install --shamefully-hoist
-```
+- [GSAP](https://greensock.com/gsap/) - for smoooooth transitions
 
-## Development Server
+- [Three.js](https://threejs.org/) - landing background. P.S. initially was using [metaballs.js](https://www.npmjs.com/package/metaballs-js) and [particles.js](https://vincentgarreau.com/particles.js/)
 
-Start the development server on http://localhost:3000
+- [LocomotiveScroll](https://github.com/locomotivemtl/locomotive-scroll) - this makes the page scroll really smoothly on PC
 
-```bash
-npm run dev
-```
+> as backend
+>
+> Nothing used as backend just added email forwarding to my [domain provider](https://porkbun.com/)
 
-## Production
+---
 
-Build the application for production:
+## Usage
 
-```bash
-npm run build
-```
+1. Clone or fork this repo
 
-Locally preview production build:
+   ```shell
+   $ git clone https://github.com/logotip4ik/portfolio
+   ```
 
-```bash
-npm run preview
-```
+2. Install all the dependencies
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment) for more information.
+   ```shell
+   $ yarn
+   ```
+
+   or
+
+   ```
+   $ npm install
+   ```
+
+3. Run the local server!
+   ```shell
+   $ yarn dev
+   ```
+   or
+   ```shell
+   $ npm run dev
+   ```
+
+---
+
+### Star if you liked it 😜
