@@ -22,7 +22,6 @@
     "vite-svg-loader": "^3.3.0"
   },
   "dependencies": {
-    "@ashthornton/asscroll": "^2.0.6",
     "gsap": "^3.10.4",
     "locomotive-scroll": "^4.1.4",
     "mitt": "^3.0.0",
