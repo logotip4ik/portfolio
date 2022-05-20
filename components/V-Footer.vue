@@ -162,7 +162,7 @@ onMounted(() => {
       list-style-type: none;
 
       &__link:not(:first-of-type) {
-        margin-top: 0.35rem;
+        margin-top: 0.5rem;
       }
 
       @media screen and (max-width: 685px) {
