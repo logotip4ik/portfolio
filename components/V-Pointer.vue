@@ -22,6 +22,42 @@ let firstMove = false;
 const pointer = ref(null);
 const pointerState = ref('');
 
+function svgEnterAnimation(svgEl, done) {
+  gsap.fromTo(
+    svgEl,
+    { scale: 0, rotate: 45 },
+    {
+      scale: 1,
+      rotate: 0,
+      duration: 0.25,
+      delay: 0.1,
+      ease: 'back.out',
+      onComplete: () => done(),
+    }
+  );
+}
+
+function svgLeaveAnimation(svgEl, done) {
+  gsap.to(svgEl, {
+    scale: 0,
+    duration: 0.25,
+    ease: 'back.out',
+    onComplete: () => done(),
+  });
+}
+
+watch(pointerState, (val) => {
+  const pointerTl = gsap.timeline({
+    defaults: { ease: 'back.out', duration: 0.3 },
+    paused: true,
+  });
+
+  if (val) pointerTl.to(pointer.value, { scale: 6 });
+  else pointerTl.to(pointer.value, { scale: 1 });
+
+  pointerTl.play();
+});
+
 onMounted(() => {
   gsap.set(pointer.value, {
     x: window.innerWidth / 2,
@@ -67,11 +103,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    ref="pointer"
-    :class="{ pointer: true, 'pointer--active': pointerState !== '' }"
-  >
-    <Transition name="pointer-svg">
+  <div ref="pointer" class="pointer">
+    <Transition
+      :css="false"
+      @enter="svgEnterAnimation"
+      @leave="svgLeaveAnimation"
+    >
       <Component
         :is="SVGComponents[pointerState]"
         :key="pointerState"
@@ -103,12 +140,6 @@ $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
   transform: translate(-50%, -50%);
 
-  transition: width 300ms $ease-back-out, height 300ms $ease-back-out;
-
-  &--active {
-    --size: 5rem;
-  }
-
   &__svg {
     --size: 35%;
 
@@ -123,19 +154,5 @@ $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
 
     transform: translate(-50%, -50%) rotate(0) scale(1);
   }
-}
-
-.pointer-svg-enter-active,
-.pointer-svg-leave-active {
-  transition: transform 175ms $ease-back-out, opacity 175ms;
-  transition-delay: 75ms;
-}
-
-.pointer-svg-enter-from {
-  transform: translate(-50%, -50%) rotate(50deg) scale(0);
-}
-.pointer-svg-leave-to {
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0;
 }
 </style>
