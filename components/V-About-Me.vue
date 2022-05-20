@@ -67,7 +67,7 @@ onMounted(() => {
   &__content {
     position: relative;
 
-    font-size: calc(var(--step-3) - 0.25rem);
+    font-size: calc(var(--step-2) + 0.125rem);
     line-height: 1.3;
     color: darken($color: #ffffff, $amount: 25);
     text-align: left;
