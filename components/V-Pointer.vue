@@ -30,7 +30,7 @@ function svgEnterAnimation(svgEl, done) {
       scale: 1,
       rotate: 0,
       duration: 0.25,
-      delay: 0.1,
+      delay: 0.15,
       ease: 'back.out',
       onComplete: () => done(),
     }
@@ -141,7 +141,7 @@ $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
   transform: translate(-50%, -50%);
 
   &__svg {
-    --size: 35%;
+    --size: 30%;
 
     position: absolute;
     top: 50%;
