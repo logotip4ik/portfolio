@@ -12,6 +12,14 @@
 
   --surface-color: #030303;
   --ff-color: #ebebeb;
+  --primary-color: #ffe6ed;
+
+  color-scheme: light dark;
+}
+
+::selection {
+  color: var(--surface-color);
+  background-color: var(--primary-color);
 }
 
 *,
@@ -22,7 +30,7 @@
 
 html,
 body {
-  font-family: "e-Ukraine", sans-serif;
+  font-family: 'e-Ukraine', sans-serif;
   letter-spacing: -0.5px;
   -webkit-font-smoothing: antialiased;
   color: var(--ff-color);
@@ -32,6 +40,13 @@ body {
   background-color: var(--surface-color);
 
   transition: background-color 500ms;
+}
+
+a,
+button {
+  /* NOTE: Tells browser not to wait for potential second tap */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 h1 {
@@ -58,6 +73,11 @@ h5 {
   :root {
     --surface-color: #ebebeb;
     --ff-color: #030303;
+  }
+
+  ::selection {
+    color: var(--ff-color);
+    background-color: var(--primary-color);
   }
 }
 
