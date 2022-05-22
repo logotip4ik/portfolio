@@ -103,6 +103,8 @@ onMounted(() => {
 
 <style lang="scss">
 .header {
+  --100vh: calc(100 * var(--vh, 1vh));
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -202,7 +204,7 @@ onMounted(() => {
     align-items: center;
 
     position: absolute;
-    bottom: 1.5rem;
+    top: calc(var(--100vh) - var(--step-2));
     left: 50%;
 
     width: 95%;
