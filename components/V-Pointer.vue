@@ -79,12 +79,27 @@ onMounted(() => {
     duration: 0.5,
   });
 
+  const pointerScaleTl = gsap.to(pointer.value, {
+    scale: '-=1',
+    ease: 'back.out',
+    duration: 0.15,
+    paused: true,
+  });
+
   window.addEventListener('pointermove', ({ x, y }) => {
     if (!firstMove)
       gsap.to(pointer.value, { autoAlpha: 1 }).then(() => (firstMove = true));
 
     toPointerX(x);
     toPointerY(y);
+  });
+
+  window.addEventListener('pointerdown', () => {
+    if (pointerState.value !== '') pointerScaleTl.play();
+  });
+
+  window.addEventListener('pointerup', () => {
+    if (pointerState.value !== '') pointerScaleTl.reverse();
   });
 
   for (const modifier of pointerModifiersWhitelist) {
