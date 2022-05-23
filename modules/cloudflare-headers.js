@@ -8,8 +8,8 @@ const logger = consola.withScope('nuxt3:cloudflare-headers');
 
 export default defineNuxtModule({
   meta: {
-    name: 'CloudflareHeaders',
-    configKey: '__cloudflare_headers',
+    name: 'cloudflare-headers',
+    configKey: '_cloudflare_headers',
     compatibility: { nuxt: '^3.0.0' },
   },
   setup(moduleOptions = {}, nuxt) {
@@ -21,15 +21,10 @@ export default defineNuxtModule({
     const contentToWrite = stringify(options);
     const distPath = nuxt.options.generate.dir;
 
-    nuxt.hook('export:done', () => {
-      try {
-        fs.writeFileSync(path.join(distPath, headerFilename), contentToWrite, {
-          encoding: 'utf-8',
-        });
-        logger.success('Wrote cloudflare headers to dist folder');
-      } catch (error) {
-        logger.error('Cannot write the cloudflare headers to file: ', error);
-      }
+    nuxt.hook('generate:routeCreated', () => {
+      fs.writeFile(path.join(distPath, headerFilename), contentToWrite, () =>
+        logger.success('Nuxt `Cloudflare Headers` added')
+      );
     });
   },
 });
