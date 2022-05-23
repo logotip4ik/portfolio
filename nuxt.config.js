@@ -96,6 +96,10 @@ export default defineNuxtConfig({
     '~/assets/styles/global.css',
   ],
 
+  cloudflareHeaders: {
+    '/*': [{ 'X-Robots-Tag': 'all' }],
+  },
+
   vite: {
     plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
   },
