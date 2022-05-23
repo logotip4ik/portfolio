@@ -17,3 +17,19 @@ export const WhitePinkGreen = {
     light: { x: 106, y: 168, z: 114 },
   },
 };
+
+// Flag of Ukraine
+export const BlueYellowWhite = {
+  color1: {
+    dark: { x: 0, y: 87, z: 183 },
+    light: { x: 0, y: 87, z: 183 },
+  },
+  color2: {
+    dark: { x: 255, y: 215, z: 0 },
+    light: { x: 255, y: 215, z: 0 },
+  },
+  color3: {
+    dark: { x: 3, y: 3, z: 3 },
+    light: { x: 235, y: 235, z: 235 },
+  },
+};
