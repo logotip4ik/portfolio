@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   target: 'static',
   sourcemap: false,
 
-  head: {
+  vueMeta: {
     htmlAttrs: { lang: 'en', dir: 'ltr' },
     meta: [
       { title: 'Bogdan Kostyuk | Front End Developer' },
