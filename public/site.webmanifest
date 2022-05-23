@@ -1,6 +1,7 @@
 {
   "name": "Bogdan Kostyuk",
   "short_name": "BK",
+  "description": "Portfolio website created by Ukrainian developer Bogdan Kostyuk",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -16,8 +17,10 @@
       "src": "/maskable_icon.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
   ],
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": ".",
+  "background_color": "#030303"
 }
