@@ -18,13 +18,21 @@ export default defineNuxtModule({
       ...moduleOptions,
     };
 
-    const contentToWrite = stringify(options);
     const distPath = nuxt.options.generate.dir;
+    const contentToWrite = stringify(options);
 
-    nuxt.hook('generate:routeCreated', () => {
-      fs.writeFile(path.join(distPath, headerFilename), contentToWrite, () =>
-        logger.success('Nuxt `Cloudflare Headers` added')
-      );
+    // this wont actually work cuz of this:
+    // @link https://github.com/nuxt/framework/issues/4698
+    nuxt.hook('generate:done', () => {
+      try {
+        fs.writeFileSync(path.join(distPath, headerFilename), contentToWrite, {
+          encoding: 'utf-8',
+        });
+
+        logger.success('Wrote cloudflare headers to public dir');
+      } catch (error) {
+        logger.fatal('something was broken creating a file', error);
+      }
     });
   },
 });
