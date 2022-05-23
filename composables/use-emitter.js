@@ -1,5 +1,5 @@
-import mitt from 'mitt';
+export default () => {
+  const nuxtApp = useNuxtApp();
 
-const emitter = mitt();
-
-export default () => emitter;
+  return nuxtApp.$emitter;
+};

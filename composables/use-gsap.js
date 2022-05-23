@@ -1,9 +1,9 @@
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
+export default () => {
+  const nuxtApp = useNuxtApp();
 
-export default () => ({
-  gsap,
-  ScrollTrigger,
-  ScrollToPlugin,
-});
+  return {
+    gsap: nuxtApp.$gsap,
+    ScrollTrigger: nuxtApp.$ScrollTrigger,
+    ScrollToPlugin: nuxtApp.$ScrollToPlugin,
+  };
+};
