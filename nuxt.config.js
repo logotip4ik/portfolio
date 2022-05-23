@@ -8,6 +8,7 @@ import PluginEslint from 'vite-plugin-eslint';
 export default defineNuxtConfig({
   ssr: true,
   target: 'static',
+  sourcemap: false,
 
   head: {
     htmlAttrs: { lang: 'en', dir: 'ltr' },
