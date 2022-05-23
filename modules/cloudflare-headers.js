@@ -12,7 +12,7 @@ export default defineNuxtModule({
     configKey: '__cloudflare_headers',
     compatibility: { nuxt: '^3.0.0' },
   },
-  setup(moduleOptions, nuxt) {
+  setup(moduleOptions = {}, nuxt) {
     const options = {
       ...(nuxt.options.cloudflareHeaders || {}),
       ...moduleOptions,
@@ -21,7 +21,7 @@ export default defineNuxtModule({
     const contentToWrite = stringify(options);
     const distPath = nuxt.options.generate.dir;
 
-    nuxt.hook('generate:done', () => {
+    nuxt.hook('export:done', () => {
       try {
         fs.writeFileSync(path.join(distPath, headerFilename), contentToWrite, {
           encoding: 'utf-8',
