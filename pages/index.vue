@@ -36,7 +36,7 @@ useHead({
       hid: 'description',
       name: 'description',
       content:
-        'I will build you website as quick as possible and with high attention to details👌',
+        'I will build you website as quick as possible and with high attention to details 👌',
     },
     { name: 'format-detection', content: 'telephone=no' },
     { name: 'robots', content: 'all' },
@@ -58,7 +58,7 @@ useHead({
       property: 'og:description',
       name: 'og:description',
       content:
-        'I will build you website as quick as possible and with high attention to details рџ‘Њ',
+        'I will build you website as quick as possible and with high attention to details 👌',
     },
     { property: 'og:locale', name: 'og:locale', content: 'en' },
     {
