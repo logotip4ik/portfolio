@@ -22,9 +22,10 @@ onMounted(() => {
 });
 
 useHead({
+  title: 'Front End Developer',
+  titleTemplate: 'Bogdan Kostyuk | %s',
   htmlAttrs: { lang: 'en', dir: 'ltr' },
   meta: [
-    { title: 'Bogdan Kostyuk | Front End Developer' },
     { lang: 'en' },
     { language: 'English' },
     { property: 'name', name: 'name', content: 'Bogdan Kostyuk' },
@@ -33,7 +34,6 @@ useHead({
     { 'http-equiv': 'Reply-to', content: 'contact@bogdankostyuk.xyz' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     {
-      hid: 'description',
       name: 'description',
       content:
         'I will build you website as quick as possible and with high attention to details👌',
