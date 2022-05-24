@@ -10,6 +10,8 @@ export default defineNuxtConfig({
   target: 'static',
   sourcemap: false,
 
+  // nighter head or vueMeta is not working, idk why,
+  // but global seo currently is placed in index page
   vueMeta: {
     htmlAttrs: { lang: 'en', dir: 'ltr' },
     meta: [
