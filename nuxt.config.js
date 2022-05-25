@@ -12,7 +12,7 @@ export default defineNuxtConfig({
 
   // nighter head or vueMeta is not working, idk why,
   // but global seo currently is placed in index page
-  vueMeta: {
+  head: {
     htmlAttrs: { lang: 'en', dir: 'ltr' },
     meta: [
       { title: 'Bogdan Kostyuk | Front End Developer' },
@@ -98,7 +98,7 @@ export default defineNuxtConfig({
     '~/assets/styles/global.css',
   ],
 
-  modules: ['~/modules/cloudflare-headers.js'],
+  modules: ['~/modules/cloudflare-headers.js', '@nuxt/content'],
 
   cloudflareHeaders: {
     '/*': [{ 'X-Robots-Tag': 'all' }],
@@ -106,5 +106,9 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
+  },
+
+  content: {
+    watch: false,
   },
 });
