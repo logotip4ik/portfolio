@@ -28,6 +28,10 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 html,
 body {
   font-family: 'e-Ukraine', sans-serif;
@@ -40,6 +44,8 @@ body {
   background-color: var(--surface-color);
 
   transition: background-color 500ms;
+
+  scrollbar-width: none;
 }
 
 a,
