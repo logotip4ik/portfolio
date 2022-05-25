@@ -1,24 +1,7 @@
 <script setup>
-const projects = [
-  {
-    title: 'LPNU StudRecruit',
-    source: '',
-    live: 'https://studrecruit.lpnu.ua',
-    tags: ['Website', 'Seo', 'Next.js', 'Scss', 'Gsap'],
-    desc: 'Website build for student recruiting department in Lviv Polytechnics',
-    image: '/img/studrecruit-img.png',
-    createdAt: '2022-04-01T00:00:00+03:00',
-  },
-  {
-    title: 'Portfolio',
-    source: 'https://github.com/logotip4ik/portfolio/tree/v4-pika',
-    live: 'https://bogdankostyuk.xyz',
-    tags: ['Website', 'Seo', 'Nuxt.js', 'Three.js', 'Gsap', 'Scss'],
-    desc: 'This is my portfolio, used probably all of my knowledge to create this sort of animations and interactions. Currently open to work, so send get in contact with me as soon as posible',
-    image: '/img/portfolio.png',
-    createdAt: '2022-03-31T00:00:00+03:00',
-  },
-];
+const { data: projects } = await useAsyncData('projects', () =>
+  queryContent('projects').sort({ createdAt: 0 }).find()
+);
 </script>
 
 <template>

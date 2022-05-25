@@ -1,11 +1,12 @@
 <script setup>
 import SplitType from 'split-type';
 
+const { data: aboutMeText } = await useAsyncData('about-me-text', () =>
+  queryContent('about-me').findOne()
+);
+
 const { $smoothScrollBreakPoint } = useNuxtApp();
 const { gsap } = useGsap();
-
-const aboutText =
-  'My name is Bogdan Kostyuk and I am Ukrainian based Front End developer, passionate about UI effects, animations and code. Mostly in use are Nuxt.js and Next.js, Scss for styling and Gsap for smooth animations, also recently got my hands on three.js.';
 
 const aboutMeContent = ref(null);
 
@@ -31,7 +32,7 @@ onMounted(() => {
         },
       }
     );
-  }, 50);
+  }, 75);
 });
 </script>
 
@@ -40,7 +41,7 @@ onMounted(() => {
     <VH2 class="about-me__title">About Me</VH2>
 
     <p ref="aboutMeContent" class="about-me__content">
-      {{ aboutText }}
+      {{ aboutMeText.description }}
     </p>
   </section>
 </template>
