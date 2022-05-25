@@ -34,7 +34,7 @@ function scrollDown() {
     --size: calc(var(--step--1));
 
     position: absolute;
-    left: 0;
+    left: 3px;
     top: 0;
 
     width: var(--size);
@@ -59,7 +59,7 @@ function scrollDown() {
     color: var(--ff-color);
 
     margin: 0;
-    padding-left: 2rem;
+    padding-left: var(--step-1);
 
     opacity: 0.65;
   }
