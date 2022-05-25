@@ -36,12 +36,9 @@ const navigationalLinks = [
   },
 ];
 
-const socialLinks = [
-  { label: 'linkedin', href: 'https://www.linkedin.com/in/bogdankostyuk' },
-  { label: 'telegram', href: 'https://t.me/bogdankostyuk' },
-  { label: 'github', href: 'https://github.com/logotip4ik' },
-  { label: 'email', href: 'mailto:contact@bogdankostyuk.xyz' },
-];
+const { data: social } = await useAsyncData('social-menu', () =>
+  queryContent('social').findOne()
+);
 
 const menu = ref(null);
 const menuBackItem = ref([]);
@@ -172,7 +169,7 @@ watch(isShowingMenu, (bool) => {
       <div class="menu__back-item__content menu__back-item__content--no-anim">
         <ul class="menu__back-item__content__links">
           <li
-            v-for="(link, key) in socialLinks"
+            v-for="(link, key) in social.links"
             :key="key"
             :ref="(el) => (menuBackItemContentLinksItem[key] = el)"
             class="menu__back-item__content__links__item"

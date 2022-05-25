@@ -1,15 +1,11 @@
 <script setup>
 import ArrowUpSVG from '~/assets/img/arrow-up.svg';
 
-const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
 
-const socialLinks = [
-  { label: 'linkedin', href: 'https://www.linkedin.com/in/bogdankostyuk' },
-  { label: 'telegram', href: 'https://t.me/bogdankostyuk' },
-  { label: 'github', href: 'https://github.com/logotip4ik' },
-  { label: 'email', href: 'mailto:contact@bogdankostyuk.xyz' },
-];
+const { data: social } = await useAsyncData('social-footer', () =>
+  queryContent('social').findOne()
+);
 
 const footer = ref(null);
 const footerWrapper = ref(null);
@@ -44,7 +40,7 @@ onMounted(() => {
         </p>
         <ul class="footer__content__social-links">
           <li
-            v-for="(link, key) in socialLinks"
+            v-for="(link, key) in social.links"
             :key="key"
             class="footer__content__social-links__link"
           >
