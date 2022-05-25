@@ -47,5 +47,6 @@ onBeforeUnmount(() => {
     </div>
     <VPointer />
     <VLoader />
+    <UkraineFlagStripe />
   </div>
 </template>
