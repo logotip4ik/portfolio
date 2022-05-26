@@ -1,5 +1,5 @@
 <template>
-  <div tabindex="0" class="flag-stripe" data-scroll-sticky>
+  <div tabindex="0" class="flag-stripe" target="_blank" data-scroll-sticky>
     <NuxtLink href="https://u24.gov.ua" class="flag-stripe__content">
       Help Ukraine
     </NuxtLink>
