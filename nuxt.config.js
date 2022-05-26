@@ -98,11 +98,11 @@ export default defineNuxtConfig({
     '~/assets/styles/global.css',
   ],
 
-  modules: ['~/modules/cloudflare-headers.js', '@nuxt/content'],
+  modules: ['@nuxt/content'],
 
-  cloudflareHeaders: {
-    '/*': [{ 'X-Robots-Tag': 'all' }],
-  },
+  // cloudflareHeaders: {
+  //   '/*': [{ 'X-Robots-Tag': 'all' }],
+  // },
 
   vite: {
     plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
