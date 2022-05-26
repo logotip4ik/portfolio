@@ -70,6 +70,8 @@ onMounted(() => {
   overflow: hidden;
   pointer-events: all;
 
+  box-shadow: 0 2rem 0.75rem -1rem rgba($color: #ebebeb, $alpha: 0.0875);
+
   &__email {
     display: block;
 
@@ -99,6 +101,10 @@ onMounted(() => {
     @media (prefers-reduced-motion: reduce) {
       cursor: pointer;
     }
+  }
+
+  @media (prefers-color-scheme: light) {
+    box-shadow: 0 2rem 0.75rem -1rem rgba($color: #030303, $alpha: 0.025);
   }
 }
 </style>
