@@ -7,10 +7,10 @@ import ActionSVG from '~/assets/img/action.svg';
 import { pointerModifiersWhitelist } from '~/lib/constants';
 
 const SVGComponents = {
-  [pointerModifiersWhitelist.at(0)]: LinkSVG,
-  [pointerModifiersWhitelist.at(1)]: OuterLinkSVG,
-  [pointerModifiersWhitelist.at(2)]: MailLinkSVG,
-  [pointerModifiersWhitelist.at(3)]: ActionSVG,
+  [pointerModifiersWhitelist[0]]: LinkSVG,
+  [pointerModifiersWhitelist[1]]: OuterLinkSVG,
+  [pointerModifiersWhitelist[2]]: MailLinkSVG,
+  [pointerModifiersWhitelist[3]]: ActionSVG,
 };
 
 const { $checkReducedMotion } = useNuxtApp();
@@ -25,8 +25,15 @@ const pointerState = ref('');
 function svgEnterAnimation(svgEl, done) {
   gsap.fromTo(
     svgEl,
-    { scale: 0, rotate: 45 },
     {
+      yPercent: -55,
+      xPercent: -55,
+      scale: 0,
+      rotate: 45,
+    },
+    {
+      yPercent: -55,
+      xPercent: -55,
       scale: 1,
       rotate: 0,
       duration: 0.25,
@@ -39,6 +46,8 @@ function svgEnterAnimation(svgEl, done) {
 
 function svgLeaveAnimation(svgEl, done) {
   gsap.to(svgEl, {
+    yPercent: -55,
+    xPercent: -55,
     scale: 0,
     duration: 0.25,
     ease: 'back.out',
@@ -134,8 +143,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-$ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
-
 .pointer {
   --size: 0.85rem;
 
@@ -166,8 +173,6 @@ $ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
     height: var(--size);
 
     color: #030303;
-
-    transform: translate(-50%, -50%) rotate(0) scale(1);
   }
 }
 </style>
