@@ -91,7 +91,7 @@ onMounted(() => {
   const pointerScaleTl = gsap.to(pointer.value, {
     scale: '-=1',
     ease: 'back.out',
-    duration: 0.15,
+    duration: 0.25,
     paused: true,
   });
 
