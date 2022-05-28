@@ -107,8 +107,4 @@ export default defineNuxtConfig({
   vite: {
     plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
   },
-
-  content: {
-    watch: false,
-  },
 });
