@@ -1,5 +1,8 @@
 <template>
   <div tabindex="0" class="flag-stripe" data-scroll-sticky>
+    <div class="flag-stripe__line"></div>
+    <div class="flag-stripe__line"></div>
+
     <NuxtLink
       href="https://u24.gov.ua"
       target="_blank"
@@ -21,7 +24,7 @@
   width: calc(var(--step-5) + 1.25rem);
   height: 100vh;
 
-  background: linear-gradient(180deg, #2659ac 50%, #f8d447 50%);
+  // background: linear-gradient(180deg, #2659ac 50%, #f8d447 50%);
 
   transform: translateX(calc(-100% + var(--step--2) - 0.075rem));
 
@@ -34,6 +37,23 @@
   @media (hover: hover) {
     &:hover {
       transform: none;
+    }
+  }
+
+  &__line {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    height: 50%;
+
+    &:nth-child(1) {
+      background-color: #2659ac;
+      top: 0;
+    }
+    &:nth-child(2) {
+      background-color: #f8d447;
+      top: 50%;
     }
   }
 

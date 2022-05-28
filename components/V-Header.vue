@@ -7,7 +7,7 @@ const subtitleText = 'Front End Developer';
 
 const header = ref(null);
 
-function showContentAnimation() {
+function contentAnimation() {
   const prefersReducedMotion = $checkReducedMotion();
 
   const mainTl = gsap.timeline({
@@ -37,6 +37,12 @@ function showContentAnimation() {
     '-=0.75'
   );
 
+  mainTl.from(
+    '.flag-stripe__line',
+    { xPercent: -25, stagger: 0.1, ease: 'expo.out', duration: 1.5 },
+    '<+0.25'
+  );
+
   mainTl.to('.scroll-down', { opacity: 1 }, '<+0.5');
 
   mainTl.fromTo(
@@ -50,7 +56,7 @@ function showContentAnimation() {
 }
 
 onMounted(() => {
-  const appearAnim = showContentAnimation();
+  const appearAnim = contentAnimation();
 
   emitter.on('loader:end', () => {
     appearAnim.play();
