@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt';
+import { defineNuxtConfig } from 'nuxt3';
 
 import PluginGLSL from 'vite-plugin-glsl';
 import PluginSVGLoader from 'vite-svg-loader';
