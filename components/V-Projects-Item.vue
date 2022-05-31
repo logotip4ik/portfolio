@@ -72,7 +72,7 @@ onMounted(() => {
     data-scroll
     :data-scroll-speed="id % 2 === 0 ? -0.5 : 1"
   >
-    <NuxtLink v-hoverable class="project__wrapper" :href="project.live">
+    <NuxtLink v-hoverable class="project__wrapper" :href="project._path">
       <div ref="projectImageWrapper" class="project__image__wrapper">
         <img
           ref="projectImage"
