@@ -1,9 +1,28 @@
 <script setup>
+const route = useRoute();
 const { $smoothScroll, ...nuxtApp } = useNuxtApp();
+const { gsap } = useGsap();
 const emitter = useEmitter();
 
 nuxtApp.hook('page:start', () => emitter.emit('pointer:inactive'));
-nuxtApp.hook('page:finish', () => setTimeout($smoothScroll.update, 50));
+nuxtApp.hook('page:finish', () => {
+  emitter.emit('shader:start');
+  setTimeout($smoothScroll.update, 50);
+});
+
+function leavePageAnim(el, done) {
+  gsap.to(el, { opacity: 0, onComplete: () => done() });
+}
+
+function enterPageAnim(el, done) {
+  gsap.to(el, {
+    opacity: 1,
+    onComplete: () => {
+      done();
+      $smoothScroll.update();
+    },
+  });
+}
 
 function setVh() {
   const windowHeight = window.innerHeight;
@@ -26,9 +45,20 @@ function logGreeting() {
   );
 }
 
+function showFlagStripes() {
+  gsap.from('.flag-stripe__line', {
+    xPercent: -25,
+    stagger: 0.125,
+    ease: 'expo.out',
+    duration: 1.5,
+    delay: route.name === 'index' ? 3 : 0.25,
+  });
+}
+
 onMounted(() => {
   logGreeting();
   setVh();
+  showFlagStripes();
 
   window.addEventListener('resize', setVh);
 });
@@ -41,10 +71,20 @@ onBeforeUnmount(() => {
 <template>
   <div>
     <div id="scroller">
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
+      <VNavbar />
+
+      <Transition
+        :css="false"
+        mode="out-in"
+        @enter="enterPageAnim"
+        @leave="leavePageAnim"
+      >
+        <div :key="$route.name">
+          <NuxtPage />
+        </div>
+      </Transition>
     </div>
+
     <VPointer />
     <VLoader />
     <UkraineFlagStripe />

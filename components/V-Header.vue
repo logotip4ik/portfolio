@@ -38,13 +38,6 @@ function contentAnimation() {
     '-=0.75'
   );
 
-  mainTl.fromTo(
-    '.flag-stripe__line',
-    { xPercent: -25 },
-    { xPercent: 0, stagger: 0.1, ease: 'expo.out', duration: 1.5 },
-    '<+0.25'
-  );
-
   mainTl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.5');
 
   mainTl.fromTo(
