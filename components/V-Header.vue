@@ -22,14 +22,15 @@ function contentAnimation() {
       { opacity: 1, stagger: 0.175 }
     );
   else
-    mainTl.to('.header__container__title__line__content', {
-      y: 0,
-      duration: 1.5,
-      stagger: 0.175,
-    });
+    mainTl.fromTo(
+      '.header__container__title__line__content',
+      { y: 100 },
+      { y: 0, duration: 1.5, stagger: 0.175 }
+    );
 
-  mainTl.to(
+  mainTl.fromTo(
     '.header__container__subtitle__char',
+    { opacity: 0 },
     {
       opacity: 1,
       stagger: { from: 'center', amount: 0.35 },
@@ -37,13 +38,14 @@ function contentAnimation() {
     '-=0.75'
   );
 
-  mainTl.from(
+  mainTl.fromTo(
     '.flag-stripe__line',
-    { xPercent: -25, stagger: 0.1, ease: 'expo.out', duration: 1.5 },
+    { xPercent: -25 },
+    { xPercent: 0, stagger: 0.1, ease: 'expo.out', duration: 1.5 },
     '<+0.25'
   );
 
-  mainTl.to('.scroll-down', { opacity: 1 }, '<+0.5');
+  mainTl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.5');
 
   mainTl.fromTo(
     '.nav__menu-button, .nav__list__item',
