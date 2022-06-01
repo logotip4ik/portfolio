@@ -103,7 +103,6 @@ useHead({
 
 <template>
   <div>
-    <VNavbar />
     <div class="smooth-scroll-fix">
       <VHeader />
       <main>

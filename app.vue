@@ -72,7 +72,6 @@ onBeforeUnmount(() => {
   <div>
     <div id="scroller">
       <VNavbar />
-
       <Transition
         :css="false"
         mode="out-in"
