@@ -8,7 +8,7 @@ onMounted(() => {
   $smoothScroll.disable();
 
   // website parts, heading, sections and footer
-  const parts = gsap.utils.toArray('header, section, footer');
+  const parts = gsap.utils.toArray('header, section');
 
   parts.forEach((part, key) => {
     ScrollTrigger.create({
