@@ -53,10 +53,13 @@ function contentAnimation() {
 onMounted(() => {
   const appearAnim = contentAnimation();
 
-  emitter.on('loader:end', () => {
+  const handleAppear = () => {
     appearAnim.play();
     $smoothScroll.enable();
-  });
+  };
+
+  emitter.on('loader:end', handleAppear);
+  onBeforeUnmount(() => emitter.off('loader:end', handleAppear));
 });
 </script>
 
