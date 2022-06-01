@@ -16,10 +16,11 @@ function getCurrentYear() {
 
 onMounted(() => {
   const resizeObserver = new ResizeObserver(() =>
-    gsap.set(footer.value, {
-      '--footer-wrapper-height': `${footerWrapper.value.clientHeight}px`,
+    gsap.set(footerWrapper.value, {
+      '--footer-wrapper-height': `${footer.value.clientHeight}px`,
     })
   );
+
   resizeObserver.observe(footer.value);
 
   onBeforeUnmount(() => resizeObserver.disconnect());
@@ -27,8 +28,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <footer ref="footer" class="footer">
-    <div ref="footerWrapper" class="footer__wrapper" data-scroll-sticky>
+  <div
+    id="footerTarget"
+    ref="footerWrapper"
+    class="footer__wrapper"
+    data-scroll-section
+  >
+    <footer
+      ref="footer"
+      class="footer"
+      data-scroll
+      data-scroll-speed="-9"
+      data-scroll-target="#footerTarget"
+      data-scroll-direction="vertical"
+      data-scroll-position="bottom"
+    >
       <div class="footer__content">
         <p class="footer__content__title">
           <span class="footer__content__title__line">Bogdan</span>
@@ -82,28 +96,29 @@ onMounted(() => {
       >
         <ArrowUpSVG />
       </button>
-    </div>
-  </footer>
+    </footer>
+  </div>
 </template>
 
 <style lang="scss">
 .footer {
-  height: var(--footer-wrapper-height);
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
+
+  width: 100%;
 
   overflow: hidden;
 
   &__wrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: stretch;
-    flex-wrap: wrap;
-
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    position: relative;
     z-index: 1;
 
     width: 100%;
+    height: var(--footer-wrapper-height);
+
+    overflow: hidden;
   }
 
   &__content {
@@ -276,6 +291,13 @@ onMounted(() => {
         transition: none;
       }
     }
+  }
+
+  @media screen and (max-width: 1024px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
   }
 
   @media screen and (max-width: 575px) {
