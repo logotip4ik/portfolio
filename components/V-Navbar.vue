@@ -6,7 +6,6 @@ const { $smoothScroll, $isDarkMode } = useNuxtApp();
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
 const isMenuActive = useMenuToggle();
-const currentRoute = useCurrentRoute();
 
 const nav = ref(null);
 const navTitle = ref(null);
@@ -131,14 +130,6 @@ watch(currentSection, (val) => {
   });
 });
 
-// watch(
-//   currentRoute,
-//   (val) => {
-//     console.log(val);
-//   },
-//   { immediate: true }
-// );
-
 onMounted(() => {
   const visibleOffset = 150;
   let prevScrollY = 0;
@@ -200,7 +191,7 @@ onMounted(() => {
       @leave="leaveElAnim"
     >
       <p
-        v-show="currentRoute === 'index'"
+        v-show="$route.name === 'index'"
         ref="navTitle"
         v-hoverable.action
         tabindex="0"
@@ -217,7 +208,7 @@ onMounted(() => {
       @enter="enterElAnim"
       @leave="leaveElAnim"
     >
-      <ul v-show="currentRoute === 'index'" ref="navList" class="nav__list">
+      <ul v-show="$route.name === 'index'" ref="navList" class="nav__list">
         <li
           v-for="(link, key) in links"
           :key="key"
@@ -239,7 +230,7 @@ onMounted(() => {
       @leave="leaveElAnim"
     >
       <button
-        v-show="currentRoute === 'index'"
+        v-show="$route.name === 'index'"
         ref="navMenuButton"
         aria-label="menu button"
         class="nav__menu-button"
@@ -259,7 +250,7 @@ onMounted(() => {
       @leave="leaveElAnim"
     >
       <NuxtLink
-        v-show="currentRoute !== 'index'"
+        v-show="$route.name !== 'index'"
         v-hoverable.action
         href="/"
         class="nav__back-link"
@@ -343,13 +334,17 @@ onMounted(() => {
 
       opacity: var(--indicator-opacity);
       border-radius: 50%;
-      background-color: var(--surface-color);
+      background-color: var(--ff-color);
 
       transform: translateY(var(--indicator-offset, 0px));
     }
 
     @media screen and (max-width: 768px) {
       display: none;
+    }
+
+    @media (prefers-color-scheme: light) {
+      background-color: var(--surface-color);
     }
   }
 
