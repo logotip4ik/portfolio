@@ -4,24 +4,62 @@ const { $smoothScroll, ...nuxtApp } = useNuxtApp();
 const { gsap } = useGsap();
 const emitter = useEmitter();
 
-nuxtApp.hook('page:start', () => emitter.emit('pointer:inactive'));
 nuxtApp.hook('page:finish', () => {
   emitter.emit('shader:start');
   setTimeout($smoothScroll.update, 50);
 });
 
-function leavePageAnim(el, done) {
-  gsap.to(el, { opacity: 0, onComplete: () => done() });
-}
-
-function enterPageAnim(el, done) {
-  gsap.to(el, {
-    opacity: 1,
+function leavePageAnim(pageEl, done) {
+  const tl = gsap.timeline({
+    defaults: { ease: 'expo.out' },
     onComplete: () => {
       done();
-      $smoothScroll.update();
     },
   });
+
+  tl.to(pageEl, { y: -75, duration: 0.75 }, 0.1);
+  tl.fromTo(
+    '.page-overlay__slide',
+    {
+      opacity: 1,
+      pointerEvents: 'all',
+      yPercent: 25,
+      clipPath: 'inset(75% 0% 0% 0%)',
+    },
+    {
+      yPercent: 0,
+      clipPath: 'inset(0% 0% 0% 0%)',
+      stagger: { each: 0.2 },
+    },
+    0
+  );
+}
+
+function enterPageAnim(pageEl, done) {
+  const tl = gsap.timeline({
+    defaults: { ease: 'expo.out' },
+    onStart: () => emitter.emit('pointer:inactive'),
+    onComplete: () => {
+      done();
+    },
+  });
+
+  tl.fromTo(pageEl, { y: 75 }, { y: 0, duration: 0.75 }, 0.3);
+  tl.fromTo(
+    '.page-overlay__slide',
+    {
+      opacity: 1,
+      pointerEvents: 'all',
+      yPercent: 0,
+      clipPath: 'inset(0% 0% 0% 0%)',
+    },
+    {
+      yPercent: -25,
+      clipPath: 'inset(0% 0% 75% 0%)',
+      stagger: { each: 0.2, from: 'end' },
+    },
+    0
+  );
 }
 
 function setVh() {
@@ -51,7 +89,7 @@ function showFlagStripes() {
     stagger: 0.125,
     ease: 'expo.out',
     duration: 1.5,
-    delay: route.name === 'index' ? 3 : 0.25,
+    delay: route.name === 'index' ? 3 : 0.75,
   });
 }
 
@@ -59,6 +97,11 @@ onMounted(() => {
   logGreeting();
   setVh();
   showFlagStripes();
+
+  if (route.name !== 'index') {
+    gsap.set('.loader', { autoAlpha: 0 });
+    enterPageAnim('#scroller', () => null);
+  }
 
   window.addEventListener('resize', setVh);
 });
@@ -87,5 +130,6 @@ onBeforeUnmount(() => {
     <VPointer />
     <VLoader />
     <UkraineFlagStripe />
+    <VOverlay />
   </div>
 </template>
