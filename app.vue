@@ -3,7 +3,6 @@ const route = useRoute();
 const { $smoothScroll, ...nuxtApp } = useNuxtApp();
 const { gsap } = useGsap();
 const emitter = useEmitter();
-const currentRoute = useCurrentRoute();
 
 nuxtApp.hook('page:finish', () => {
   emitter.emit('shader:start');
@@ -15,7 +14,6 @@ function leavePageAnim(pageEl, done) {
     defaults: { ease: 'expo.out' },
     onComplete: () => {
       done();
-      currentRoute.value = route.name;
     },
   });
 
@@ -40,9 +38,15 @@ function leavePageAnim(pageEl, done) {
 function enterPageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
-    onStart: () => emitter.emit('pointer:inactive'),
+    onStart: () => {
+      emitter.emit('pointer:inactive');
+
+      // listener for this event is not even mounted when on start hook is executed
+      setTimeout(() => emitter.emit('overlay:hiding'), 100);
+    },
     onComplete: () => {
       done();
+      $smoothScroll.update();
     },
   });
 
@@ -91,7 +95,7 @@ function showFlagStripes() {
     stagger: 0.125,
     ease: 'expo.out',
     duration: 1.5,
-    delay: route.name === 'index' ? 3 : 0.75,
+    delay: route.name === 'index' ? 3 : 1,
   });
 }
 
@@ -100,9 +104,18 @@ onMounted(() => {
   setVh();
   showFlagStripes();
 
+  if (route.name === 'index')
+    gsap.set('.page-overlay__slide', {
+      opacity: 0,
+      pointerEvents: 'none',
+    });
+
   if (route.name !== 'index') {
-    gsap.set('.loader', { autoAlpha: 0 });
-    enterPageAnim('#scroller', () => null);
+    gsap.set('.loader', { autoAlpha: 0, display: 'none' });
+
+    setTimeout(() => {
+      enterPageAnim('#scroller', () => null);
+    }, 500);
   }
 
   window.addEventListener('resize', setVh);
