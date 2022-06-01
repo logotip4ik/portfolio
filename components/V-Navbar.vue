@@ -1,10 +1,12 @@
 <script setup>
 import MenuIconSVG from '~/assets/img/menu-icon.svg';
+import ArrowLeft from '~/assets/img/arrow-left.svg';
 
 const { $smoothScroll, $isDarkMode } = useNuxtApp();
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
 const isMenuActive = useMenuToggle();
+const currentRoute = useCurrentRoute();
 
 const nav = ref(null);
 const navTitle = ref(null);
@@ -107,6 +109,14 @@ function toggleMenu() {
   isMenuActive.value = !isMenuActive.value;
 }
 
+function enterElAnim(el, done) {
+  gsap.fromTo(el, { opacity: 0 }, { opacity: 1, onComplete: () => done() });
+}
+
+function leaveElAnim(el, done) {
+  gsap.to(el, { opacity: 0, onComplete: () => done() });
+}
+
 watch(isMenuActive, (val) => {
   if (val) closeAnimation();
   else idleAnimation();
@@ -120,6 +130,14 @@ watch(currentSection, (val) => {
     ease: 'expo.out',
   });
 });
+
+// watch(
+//   currentRoute,
+//   (val) => {
+//     console.log(val);
+//   },
+//   { immediate: true }
+// );
 
 onMounted(() => {
   const visibleOffset = 150;
@@ -175,41 +193,80 @@ onMounted(() => {
 
 <template>
   <nav ref="nav" class="nav" data-scroll-sticky>
-    <p
-      ref="navTitle"
-      v-hoverable.action
-      tabindex="0"
-      class="nav__title"
-      @click="() => $smoothScroll.scrollTo(0)"
+    <Transition
+      :css="false"
+      mode="out-in"
+      @enter="enterElAnim"
+      @leave="leaveElAnim"
     >
-      BK
-    </p>
-
-    <ul ref="navList" class="nav__list">
-      <li
-        v-for="(link, key) in links"
-        :key="key"
+      <p
+        v-show="currentRoute === 'index'"
+        ref="navTitle"
         v-hoverable.action
         tabindex="0"
-        class="nav__list__item"
-        @click="link.action"
-        @keypress.space.enter.prevent="link.action"
+        class="nav__title"
+        @click="() => $smoothScroll.scrollTo(0)"
       >
-        {{ link.label }}
-      </li>
-    </ul>
+        BK
+      </p>
+    </Transition>
 
-    <button
-      ref="navMenuButton"
-      aria-label="menu button"
-      class="nav__menu-button"
-      @click="toggleMenu"
-      @keypress.space.enter="toggleMenu"
-      @pointerenter="hoverAnimation"
-      @pointerleave="idleAnimation"
+    <Transition
+      :css="false"
+      mode="out-in"
+      @enter="enterElAnim"
+      @leave="leaveElAnim"
     >
-      <MenuIconSVG ref="navMenuButtonSVG" />
-    </button>
+      <ul v-show="currentRoute === 'index'" ref="navList" class="nav__list">
+        <li
+          v-for="(link, key) in links"
+          :key="key"
+          v-hoverable.action
+          tabindex="0"
+          class="nav__list__item"
+          @click="link.action"
+          @keypress.space.enter.prevent="link.action"
+        >
+          {{ link.label }}
+        </li>
+      </ul>
+    </Transition>
+
+    <Transition
+      :css="false"
+      mode="out-in"
+      @enter="enterElAnim"
+      @leave="leaveElAnim"
+    >
+      <button
+        v-show="currentRoute === 'index'"
+        ref="navMenuButton"
+        aria-label="menu button"
+        class="nav__menu-button"
+        @click="toggleMenu"
+        @keypress.space.enter="toggleMenu"
+        @pointerenter="hoverAnimation"
+        @pointerleave="idleAnimation"
+      >
+        <MenuIconSVG ref="navMenuButtonSVG" />
+      </button>
+    </Transition>
+
+    <Transition
+      :css="false"
+      mode="out-in"
+      @enter="enterElAnim"
+      @leave="leaveElAnim"
+    >
+      <NuxtLink
+        v-show="currentRoute !== 'index'"
+        v-hoverable.action
+        href="/"
+        class="nav__back-link"
+      >
+        <ArrowLeft />
+      </NuxtLink>
+    </Transition>
   </nav>
 </template>
 
@@ -352,6 +409,34 @@ onMounted(() => {
         height: unset;
         aspect-ratio: 1/1;
       }
+    }
+  }
+
+  &__back-link {
+    --size: calc(var(--step-5) * 1.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: var(--size);
+    height: var(--size);
+
+    background-color: transparent;
+    border: 1px solid var(--ff-color);
+    border-radius: 100%;
+
+    margin-left: auto;
+
+    pointer-events: all;
+
+    svg {
+      width: 35%;
+      height: auto;
+
+      min-width: 50px;
+
+      color: var(--ff-color);
     }
   }
 }
