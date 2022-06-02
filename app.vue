@@ -5,22 +5,23 @@ const { gsap } = useGsap();
 const emitter = useEmitter();
 const currentRoute = useCurrentRoute();
 
-nuxtApp.hook('page:finish', () => {
-  emitter.emit('shader:start');
-  setTimeout($smoothScroll.update, 50);
-});
+nuxtApp.hook('page:finish', () => emitter.emit('shader:start'));
 
 function leavePageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
+    onStart: () => {
+      $smoothScroll.disable();
+    },
     onComplete: () => {
       done();
 
+      // need to set this myself because the route changes faster then overlay is hiding the page
       currentRoute.value = route.name;
     },
   });
 
-  tl.to(pageEl, { y: -75, duration: 0.75 }, 0.1);
+  tl.to(pageEl, { y: -75, duration: 0.75, clearProps: 'y' }, 0.1);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -32,32 +33,38 @@ function leavePageAnim(pageEl, done) {
     {
       yPercent: 0,
       clipPath: 'inset(0% 0% 0% 0%)',
-      stagger: { each: 0.2 },
+      stagger: { each: 0.1 },
     },
     0
   );
 }
 
 function enterPageAnim(pageEl, done) {
+  // if you try to use fromTo function then user will see `from` jumping and then transitioning
+  gsap.set(pageEl, { y: 75 });
+
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
       emitter.emit('pointer:inactive');
 
-      // event `overlay:hiding` will emit 0.4 seconds before the end of the timeline
+      // event `overlay:hiding` will emit 0.35 seconds before the end of the timeline
       const time = (tl.totalDuration() - 0.35) * 1000;
       setTimeout(() => emitter.emit('overlay:hiding'), time);
     },
     onComplete: () => {
       done();
 
+      $smoothScroll.enable();
       $smoothScroll.update();
 
+      // when user was scrolling down, the nav will be hidden, but
+      // on a new page the nav should be visible
       gsap.to('.nav', { autoAlpha: 1 });
     },
   });
 
-  tl.fromTo(pageEl, { y: 75 }, { y: 0, duration: 0.75 }, 0.3);
+  tl.to(pageEl, { y: 0, duration: 0.75, clearProps: 'y' }, 0.3);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -69,9 +76,8 @@ function enterPageAnim(pageEl, done) {
     {
       yPercent: -25,
       clipPath: 'inset(0% 0% 75% 0%)',
-      stagger: { each: 0.2, from: 'end' },
-    },
-    0
+      stagger: { each: 0.1, from: 'end' },
+    }
   );
 }
 
@@ -107,6 +113,8 @@ function showFlagStripes() {
 }
 
 onMounted(() => {
+  $smoothScroll.disable();
+
   logGreeting();
   setVh();
   showFlagStripes();
@@ -115,6 +123,7 @@ onMounted(() => {
     gsap.set('.page-overlay__slide', {
       opacity: 0,
       pointerEvents: 'none',
+      onComplete: () => $smoothScroll.enable(),
     });
 
   if (route.name !== 'index') {
