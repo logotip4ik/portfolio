@@ -33,7 +33,7 @@ function leavePageAnim(pageEl, done) {
     {
       yPercent: 0,
       clipPath: 'inset(0% 0% 0% 0%)',
-      stagger: { each: 0.1 },
+      stagger: { each: 0.2 },
     },
     0
   );
@@ -76,7 +76,7 @@ function enterPageAnim(pageEl, done) {
     {
       yPercent: -25,
       clipPath: 'inset(0% 0% 75% 0%)',
-      stagger: { each: 0.1, from: 'end' },
+      stagger: { each: 0.2, from: 'end' },
     }
   );
 }
