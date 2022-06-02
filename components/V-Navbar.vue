@@ -6,6 +6,7 @@ const { $smoothScroll, $isDarkMode } = useNuxtApp();
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
 const isMenuActive = useMenuToggle();
+const currentRoute = useCurrentRoute();
 
 const nav = ref(null);
 const navTitle = ref(null);
@@ -191,7 +192,7 @@ onMounted(() => {
       @leave="leaveElAnim"
     >
       <p
-        v-show="$route.name === 'index'"
+        v-show="currentRoute === 'index'"
         ref="navTitle"
         v-hoverable.action
         tabindex="0"
@@ -208,7 +209,7 @@ onMounted(() => {
       @enter="enterElAnim"
       @leave="leaveElAnim"
     >
-      <ul v-show="$route.name === 'index'" ref="navList" class="nav__list">
+      <ul v-show="currentRoute === 'index'" ref="navList" class="nav__list">
         <li
           v-for="(link, key) in links"
           :key="key"
@@ -230,7 +231,7 @@ onMounted(() => {
       @leave="leaveElAnim"
     >
       <button
-        v-show="$route.name === 'index'"
+        v-show="currentRoute === 'index'"
         ref="navMenuButton"
         aria-label="menu button"
         class="nav__menu-button"
@@ -250,7 +251,7 @@ onMounted(() => {
       @leave="leaveElAnim"
     >
       <NuxtLink
-        v-show="$route.name !== 'index'"
+        v-show="currentRoute !== 'index'"
         v-hoverable.action
         href="/"
         class="nav__back-link"
@@ -409,6 +410,7 @@ onMounted(() => {
 
   &__back-link {
     --size: calc(var(--step-5) * 1.5);
+    --preferred-color: #ebebeb;
 
     display: flex;
     justify-content: center;
@@ -418,7 +420,7 @@ onMounted(() => {
     height: var(--size);
 
     background-color: transparent;
-    border: 1px solid #030303;
+    border: 1px solid var(--preferred-color);
     border-radius: 100%;
 
     margin-left: auto;
@@ -431,7 +433,11 @@ onMounted(() => {
 
       min-width: 22px;
 
-      color: var(--ff-color);
+      color: var(--preferred-color);
+    }
+
+    @media (prefers-color-scheme: light) {
+      --preferred-color: #030303;
     }
   }
 }
