@@ -300,7 +300,7 @@ onMounted(() => {
     z-index: 1;
   }
 
-  @media screen and (max-width: 575px) {
+  @media screen and (min-width: 575px) {
     min-height: 30vw;
   }
 }
