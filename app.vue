@@ -3,6 +3,7 @@ const route = useRoute();
 const { $smoothScroll, ...nuxtApp } = useNuxtApp();
 const { gsap } = useGsap();
 const emitter = useEmitter();
+const currentRoute = useCurrentRoute();
 
 nuxtApp.hook('page:finish', () => {
   emitter.emit('shader:start');
@@ -14,6 +15,8 @@ function leavePageAnim(pageEl, done) {
     defaults: { ease: 'expo.out' },
     onComplete: () => {
       done();
+
+      currentRoute.value = route.name;
     },
   });
 
@@ -47,7 +50,10 @@ function enterPageAnim(pageEl, done) {
     },
     onComplete: () => {
       done();
+
       $smoothScroll.update();
+
+      gsap.to('.nav', { autoAlpha: 1 });
     },
   });
 
@@ -137,7 +143,7 @@ onBeforeUnmount(() => {
         @enter="enterPageAnim"
         @leave="leavePageAnim"
       >
-        <div :key="$route.name">
+        <div :key="route.name">
           <NuxtPage />
         </div>
       </Transition>
