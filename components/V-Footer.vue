@@ -38,7 +38,7 @@ onMounted(() => {
       ref="footer"
       class="footer"
       data-scroll
-      data-scroll-speed="-8"
+      data-scroll-speed="-7"
       data-scroll-target="#footerTarget"
       data-scroll-direction="vertical"
       data-scroll-position="bottom"
@@ -136,7 +136,7 @@ onMounted(() => {
 
     color: var(--ff-color);
 
-    padding: 2rem clamp(1rem, 4vw, 5rem);
+    padding: 3rem clamp(1rem, 4vw, 5rem) 2rem;
     background: var(--black-color);
     transition: color 400ms, background-color 400ms;
 
@@ -182,6 +182,8 @@ onMounted(() => {
     }
 
     &__copyright {
+      align-self: end;
+
       font-size: var(--step-0);
       white-space: nowrap;
 
@@ -191,6 +193,8 @@ onMounted(() => {
     }
 
     &__note {
+      align-self: end;
+
       font-size: var(--step-0);
       white-space: nowrap;
 
@@ -301,7 +305,7 @@ onMounted(() => {
   }
 
   @media screen and (min-width: 575px) {
-    min-height: 30vw;
+    min-height: min(40vh, 400px);
   }
 }
 </style>
