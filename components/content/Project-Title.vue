@@ -1,10 +1,6 @@
 <script setup>
 import SplitType from 'split-type';
 
-defineProps({
-  text: { type: String, required: true, default: '' },
-});
-
 const { gsap } = useGsap();
 const emitter = useEmitter();
 
@@ -58,7 +54,7 @@ emitter.on('overlay:hiding', showTitle);
 
 <template>
   <h1 ref="title" class="project-title" data-scroll>
-    {{ text }}
+    <Markdown :use="$slots.default" :unwrap="true" />
   </h1>
 </template>
 
