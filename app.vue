@@ -40,11 +40,14 @@ function enterPageAnim(pageEl, done) {
     defaults: { ease: 'expo.out' },
     onStart: () => {
       emitter.emit('pointer:inactive');
+
+      // event `overlay:hiding` will emit 0.4 seconds before the end of the timeline
+      const time = (tl.totalDuration() - 0.4) * 1000;
+      setTimeout(() => emitter.emit('overlay:hiding'), time);
     },
     onComplete: () => {
       done();
       $smoothScroll.update();
-      emitter.emit('overlay:hidden');
     },
   });
 
