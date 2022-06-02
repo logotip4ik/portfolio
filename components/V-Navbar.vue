@@ -109,14 +109,6 @@ function toggleMenu() {
   isMenuActive.value = !isMenuActive.value;
 }
 
-function enterElAnim(el, done) {
-  gsap.fromTo(el, { opacity: 0 }, { opacity: 1, onComplete: () => done() });
-}
-
-function leaveElAnim(el, done) {
-  gsap.to(el, { opacity: 0, onComplete: () => done() });
-}
-
 watch(isMenuActive, (val) => {
   if (val) closeAnimation();
   else idleAnimation();
@@ -185,80 +177,52 @@ onMounted(() => {
 
 <template>
   <nav ref="nav" class="nav" data-scroll-sticky>
-    <Transition
-      :css="false"
-      mode="out-in"
-      @enter="enterElAnim"
-      @leave="leaveElAnim"
+    <p
+      v-show="currentRoute === 'index'"
+      ref="navTitle"
+      v-hoverable.action
+      tabindex="0"
+      class="nav__title"
+      @click="() => $smoothScroll.scrollTo(0)"
     >
-      <p
-        v-show="currentRoute === 'index'"
-        ref="navTitle"
+      BK
+    </p>
+
+    <ul v-show="currentRoute === 'index'" ref="navList" class="nav__list">
+      <li
+        v-for="(link, key) in links"
+        :key="key"
         v-hoverable.action
         tabindex="0"
-        class="nav__title"
-        @click="() => $smoothScroll.scrollTo(0)"
+        class="nav__list__item"
+        @click="link.action"
+        @keypress.space.enter.prevent="link.action"
       >
-        BK
-      </p>
-    </Transition>
+        {{ link.label }}
+      </li>
+    </ul>
 
-    <Transition
-      :css="false"
-      mode="out-in"
-      @enter="enterElAnim"
-      @leave="leaveElAnim"
+    <button
+      v-show="currentRoute === 'index'"
+      ref="navMenuButton"
+      aria-label="menu button"
+      class="nav__menu-button"
+      @click="toggleMenu"
+      @keypress.space.enter="toggleMenu"
+      @pointerenter="hoverAnimation"
+      @pointerleave="idleAnimation"
     >
-      <ul v-show="currentRoute === 'index'" ref="navList" class="nav__list">
-        <li
-          v-for="(link, key) in links"
-          :key="key"
-          v-hoverable.action
-          tabindex="0"
-          class="nav__list__item"
-          @click="link.action"
-          @keypress.space.enter.prevent="link.action"
-        >
-          {{ link.label }}
-        </li>
-      </ul>
-    </Transition>
+      <MenuIconSVG ref="navMenuButtonSVG" />
+    </button>
 
-    <Transition
-      :css="false"
-      mode="out-in"
-      @enter="enterElAnim"
-      @leave="leaveElAnim"
+    <NuxtLink
+      v-show="currentRoute !== 'index'"
+      v-hoverable.action
+      href="/"
+      class="nav__back-link"
     >
-      <button
-        v-show="currentRoute === 'index'"
-        ref="navMenuButton"
-        aria-label="menu button"
-        class="nav__menu-button"
-        @click="toggleMenu"
-        @keypress.space.enter="toggleMenu"
-        @pointerenter="hoverAnimation"
-        @pointerleave="idleAnimation"
-      >
-        <MenuIconSVG ref="navMenuButtonSVG" />
-      </button>
-    </Transition>
-
-    <Transition
-      :css="false"
-      mode="out-in"
-      @enter="enterElAnim"
-      @leave="leaveElAnim"
-    >
-      <NuxtLink
-        v-show="currentRoute !== 'index'"
-        v-hoverable.action
-        href="/"
-        class="nav__back-link"
-      >
-        <ArrowLeft />
-      </NuxtLink>
-    </Transition>
+      <ArrowLeft />
+    </NuxtLink>
   </nav>
 </template>
 
