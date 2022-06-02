@@ -5,14 +5,11 @@ useSeoHead({
     'I will build you website as quick as possible and with high attention to details👌',
 });
 
-const { $smoothScroll } = useNuxtApp();
 const { gsap, ScrollTrigger } = useGsap();
 
 const currentSection = useCurrentSection();
 
 onMounted(() => {
-  $smoothScroll.disable();
-
   // website parts, heading, sections and footer
   const parts = gsap.utils.toArray('header, section');
 
@@ -45,11 +42,9 @@ onMounted(() => {
 
 <style lang="scss">
 .smooth-scroll-fix {
-  position: relative;
-  z-index: 3;
-  pointer-events: all;
-
-  @media screen and (min-width: 1024px) {
+  @media screen and (max-width: 1024px) {
+    position: relative;
+    z-index: 5;
     pointer-events: none;
   }
 }

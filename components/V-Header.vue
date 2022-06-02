@@ -1,5 +1,5 @@
 <script setup>
-const { $smoothScroll, $checkReducedMotion } = useNuxtApp();
+const { $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
 const emitter = useEmitter();
 
@@ -53,10 +53,7 @@ function contentAnimation() {
 onMounted(() => {
   const appearAnim = contentAnimation();
 
-  const handleAppear = () => {
-    appearAnim.play();
-    $smoothScroll.enable();
-  };
+  const handleAppear = () => appearAnim.play();
 
   emitter.on('loader:end', handleAppear);
   onBeforeUnmount(() => emitter.off('loader:end', handleAppear));
