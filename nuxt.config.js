@@ -107,4 +107,6 @@ export default defineNuxtConfig({
   vite: {
     plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
   },
+
+  nitro: { prerender: { routes: ['/sitemap.xml'] } },
 });
