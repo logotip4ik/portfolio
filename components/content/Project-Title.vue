@@ -15,7 +15,7 @@ function showTitle() {
   });
 
   revealRef.fromTo(
-    '.project-title__line',
+    '.project-title__line__word',
     { yPercent: 105 },
     { yPercent: 0, stagger: 0.1, duration: 1 }
   );
@@ -30,8 +30,9 @@ function showTitle() {
 
 onMounted(() => {
   const text = new SplitType(title.value, {
-    types: 'lines',
+    types: 'lines, words',
     lineClass: 'project-title__line',
+    wordClass: 'project-title__line__word',
   });
 
   for (const line of text.lines) {
@@ -45,7 +46,7 @@ onMounted(() => {
     wrapper.appendChild(line);
   }
 
-  gsap.set(text.lines, { yPercent: 105 });
+  gsap.set(text.words, { yPercent: 105 });
   gsap.set('.project-title__line__wrapper', { y: 40 });
 });
 
