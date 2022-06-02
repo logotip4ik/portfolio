@@ -337,14 +337,14 @@ onMounted(() => {
       background-color: var(--ff-color);
 
       transform: translateY(var(--indicator-offset, 0px));
+
+      @media (prefers-color-scheme: light) {
+        background-color: var(--surface-color);
+      }
     }
 
     @media screen and (max-width: 768px) {
       display: none;
-    }
-
-    @media (prefers-color-scheme: light) {
-      background-color: var(--surface-color);
     }
   }
 
@@ -418,7 +418,7 @@ onMounted(() => {
     height: var(--size);
 
     background-color: transparent;
-    border: 1px solid var(--ff-color);
+    border: 1px solid #030303;
     border-radius: 100%;
 
     margin-left: auto;
@@ -429,7 +429,7 @@ onMounted(() => {
       width: 35%;
       height: auto;
 
-      min-width: 50px;
+      min-width: 22px;
 
       color: var(--ff-color);
     }
