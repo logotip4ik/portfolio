@@ -12,6 +12,12 @@ createdAt: '2022-04-01T00:00:00+03:00'
 ---
 
 ::project-header
-::project-title{text="LPNU Student Recruiting Team"}
-::
+:::project-title
+LPNU Student Recruiting
+:::
+
+#live
+:::project-outer-link{href="https://studrecruit.lpnu.ua"}
+see live
+:::
 ::
