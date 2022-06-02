@@ -40,13 +40,11 @@ function enterPageAnim(pageEl, done) {
     defaults: { ease: 'expo.out' },
     onStart: () => {
       emitter.emit('pointer:inactive');
-
-      // listener for this event is not even mounted when on start hook is executed
-      setTimeout(() => emitter.emit('overlay:hiding'), 350);
     },
     onComplete: () => {
       done();
       $smoothScroll.update();
+      emitter.emit('overlay:hidden');
     },
   });
 

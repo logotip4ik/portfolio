@@ -11,7 +11,7 @@ function showTitle() {
 
   const revealRef = gsap.timeline({
     defaults: { ease: 'expo.out' },
-    onStart: () => emitter.off('overlay:hiding', showTitle),
+    onStart: () => emitter.off('overlay:hidden', showTitle),
   });
 
   revealRef.fromTo(
@@ -49,7 +49,7 @@ onMounted(() => {
   gsap.set('.project-title__line__wrapper', { y: 40 });
 });
 
-emitter.on('overlay:hiding', showTitle);
+emitter.on('overlay:hidden', showTitle);
 </script>
 
 <template>
