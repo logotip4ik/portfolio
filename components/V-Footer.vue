@@ -38,7 +38,7 @@ onMounted(() => {
       ref="footer"
       class="footer"
       data-scroll
-      data-scroll-speed="-9"
+      data-scroll-speed="-8"
       data-scroll-target="#footerTarget"
       data-scroll-direction="vertical"
       data-scroll-position="bottom"
