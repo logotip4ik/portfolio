@@ -26,7 +26,6 @@
     &:nth-of-type(1) {
       z-index: 1;
 
-      // background-color: hsl(343 20% 35%);
       background-color: #8e8285;
 
       @media (prefers-color-scheme: light) {
