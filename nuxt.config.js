@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt3';
+import { defineNuxtConfig } from 'nuxt';
 
 import PluginGLSL from 'vite-plugin-glsl';
 import PluginSVGLoader from 'vite-svg-loader';
@@ -103,6 +103,10 @@ export default defineNuxtConfig({
   // cloudflareHeaders: {
   //   '/*': [{ 'X-Robots-Tag': 'all' }],
   // },
+
+  content: {
+    watch: false,
+  },
 
   vite: {
     plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
