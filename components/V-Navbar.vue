@@ -399,10 +399,6 @@ onMounted(() => {
 
       color: var(--preferred-color);
     }
-
-    @media (prefers-color-scheme: light) {
-      --preferred-color: #030303;
-    }
   }
 }
 </style>
