@@ -174,9 +174,9 @@ watch(isShowingMenu, (bool) => {
             :ref="(el) => (menuBackItemContentLinksItem[key] = el)"
             class="menu__back-item__content__links__item"
           >
-            <a :href="link.href" target="_blank" rel="noopener noreferrer">
+            <NuxtLink :href="link.href" target="_blank">
               {{ link.label }}
-            </a>
+            </NuxtLink>
           </li>
         </ul>
       </div>

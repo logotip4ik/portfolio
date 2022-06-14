@@ -52,9 +52,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <a
+  <NuxtLink
     :href="href"
-    rel="noopener noreferrer"
+    target="_blank"
     class="social-link"
     @focus="showHoverText"
     @blur="hideHoverText"
@@ -74,7 +74,7 @@ onMounted(() => {
       </span>
     </div>
     <!-- <span class="sr-only">{{ linkText }}</span> -->
-  </a>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>
