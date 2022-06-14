@@ -21,8 +21,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="bannerRef" class="banner" data-scroll-sticky>
-    <slot />
+  <div
+    ref="bannerRef"
+    :class="{ banner: true, 'banner--grid': $slots.icon }"
+    data-scroll-sticky
+  >
+    <div v-if="$slots.icon" class="banner__icon">
+      <Markdown :use="$slots.icon" />
+    </div>
+
+    <p class="banner__text">
+      <Markdown :use="$slots.default" :unwrap="true" />
+    </p>
   </div>
 </template>
 
@@ -50,7 +60,21 @@ onMounted(() => {
 
   transform: translate(-50%, calc(100% + 2rem));
 
-  p {
+  &--grid {
+    display: grid;
+    grid-template-columns: var(--step-0) auto;
+    align-items: center;
+    gap: var(--step--2);
+  }
+
+  &__icon {
+    width: 100%;
+    height: auto;
+
+    opacity: 0.75;
+  }
+
+  &__text {
     font-size: var(--step--1);
     text-align: left;
 
