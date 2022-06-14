@@ -21,7 +21,7 @@ function leavePageAnim(pageEl, done) {
     },
   });
 
-  tl.to(pageEl, { y: -75, duration: 0.75, clearProps: 'y' }, 0.1);
+  tl.to(pageEl, { y: -75, duration: 0.75 }, 0.1);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -64,7 +64,7 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.to(pageEl, { y: 0, duration: 0.75, clearProps: 'y' }, 0.3);
+  tl.fromTo(pageEl, { y: 75 }, { y: 0, duration: 0.75, clearProps: 'y' }, 0.3);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -77,7 +77,8 @@ function enterPageAnim(pageEl, done) {
       yPercent: -25,
       clipPath: 'inset(0% 0% 75% 0%)',
       stagger: { each: 0.2, from: 'end' },
-    }
+    },
+    0
   );
 }
 
