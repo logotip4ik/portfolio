@@ -49,7 +49,7 @@ onMounted(() => {
 
   border: 1px solid darken($color: #ffe6ed, $amount: 1.5);
   border-radius: 0.5rem;
-  background-color: transparentize($color: #ffe6ed, $amount: 0.9);
+  background-color: transparentize($color: #ffe6ed, $amount: 0.925);
   // https://shadows.brumm.af/
   // prettier-ignore
   box-shadow:
