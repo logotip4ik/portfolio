@@ -18,7 +18,7 @@ createdAt: '2022-03-31T00:00:00+03:00'
 :::
 
 #default
-This webpage is under construction
+This page is under construction
 ::
 
 ::project-header
