@@ -21,7 +21,7 @@ function leavePageAnim(pageEl, done) {
     },
   });
 
-  tl.to(pageEl, { y: -75, duration: 0.75 }, 0.1);
+  tl.to(pageEl, { y: -100, duration: 0.75 }, 0.1);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -40,9 +40,6 @@ function leavePageAnim(pageEl, done) {
 }
 
 function enterPageAnim(pageEl, done) {
-  // if you try to use fromTo function then user will see `from` jumping and then transitioning
-  gsap.set(pageEl, { y: 75 });
-
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
@@ -64,7 +61,7 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.fromTo(pageEl, { y: 75 }, { y: 0, duration: 0.75, clearProps: 'y' }, 0.3);
+  tl.fromTo(pageEl, { y: 100 }, { y: 0, duration: 0.75, clearProps: 'y' }, 0.2);
   tl.fromTo(
     '.page-overlay__slide',
     {
