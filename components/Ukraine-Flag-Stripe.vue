@@ -4,6 +4,7 @@
     <div class="flag-stripe__line"></div>
 
     <NuxtLink
+      v-hoverable.outer-link
       href="https://u24.gov.ua"
       target="_blank"
       class="flag-stripe__content"

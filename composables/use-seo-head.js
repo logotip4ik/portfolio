@@ -1,21 +1,9 @@
-import { defineNuxtConfig } from 'nuxt';
-
-import PluginGLSL from 'vite-plugin-glsl';
-import PluginSVGLoader from 'vite-svg-loader';
-import PluginEslint from 'vite-plugin-eslint';
-
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
-export default defineNuxtConfig({
-  ssr: true,
-  target: 'static',
-  sourcemap: false,
-
-  // nighter head or vueMeta is not working, idk why,
-  // but global seo currently is placed in index page
-  head: {
+export default ({ title, description }) =>
+  useHead({
+    title,
+    titleTemplate: '%s | Bogdan Kostyuk',
     htmlAttrs: { lang: 'en', dir: 'ltr' },
     meta: [
-      { title: 'Bogdan Kostyuk | Front End Developer' },
       { lang: 'en' },
       { language: 'English' },
       { property: 'name', name: 'name', content: 'Bogdan Kostyuk' },
@@ -23,12 +11,7 @@ export default defineNuxtConfig({
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { 'http-equiv': 'Reply-to', content: 'contact@bogdankostyuk.xyz' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content:
-          'I will build you website as quick as possible and with high attention to details👌',
-      },
+      { name: 'description', content: description },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'all' },
       { name: 'theme-color', content: 'var(--surface-color)' },
@@ -40,16 +23,11 @@ export default defineNuxtConfig({
         name: 'og:site_name',
         content: 'Bogdan Kostyuk',
       },
-      {
-        property: 'og:title',
-        name: 'og:title',
-        content: 'Front End Developer',
-      },
+      { property: 'og:title', name: 'og:title', content: title },
       {
         property: 'og:description',
         name: 'og:description',
-        content:
-          'I will build you website as quick as possible and with high attention to details рџ‘Њ',
+        content: description,
       },
       { property: 'og:locale', name: 'og:locale', content: 'en' },
       {
@@ -89,28 +67,4 @@ export default defineNuxtConfig({
       },
       { rel: 'manifest', href: '/site.webmanifest' },
     ],
-  },
-
-  css: [
-    'normalize.css/normalize.css',
-    'locomotive-scroll/dist/locomotive-scroll.css',
-    '~/assets/fonts/styles.css',
-    '~/assets/styles/global.css',
-  ],
-
-  modules: ['@nuxt/content'],
-
-  // cloudflareHeaders: {
-  //   '/*': [{ 'X-Robots-Tag': 'all' }],
-  // },
-
-  content: {
-    watch: false,
-  },
-
-  vite: {
-    plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
-  },
-
-  nitro: { prerender: { routes: ['/sitemap.xml'] } },
-});
+  });

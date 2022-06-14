@@ -1,9 +1,86 @@
 <script setup>
+const route = useRoute();
 const { $smoothScroll, ...nuxtApp } = useNuxtApp();
+const { gsap } = useGsap();
 const emitter = useEmitter();
+const currentRoute = useCurrentRoute();
 
-nuxtApp.hook('page:start', () => emitter.emit('pointer:inactive'));
-nuxtApp.hook('page:finish', () => setTimeout($smoothScroll.update, 50));
+nuxtApp.hook('page:finish', () => emitter.emit('shader:start'));
+
+function leavePageAnim(pageEl, done) {
+  const tl = gsap.timeline({
+    defaults: { ease: 'expo.out' },
+    onStart: () => {
+      $smoothScroll.disable();
+    },
+    onComplete: () => {
+      done();
+
+      // need to set this myself because the route changes faster then overlay is hiding the page
+      currentRoute.value = route.name;
+    },
+  });
+
+  tl.to(pageEl, { y: -75, duration: 0.75 }, 0.1);
+  tl.fromTo(
+    '.page-overlay__slide',
+    {
+      opacity: 1,
+      pointerEvents: 'all',
+      yPercent: 25,
+      clipPath: 'inset(75% 0% 0% 0%)',
+    },
+    {
+      yPercent: 0,
+      clipPath: 'inset(0% 0% 0% 0%)',
+      stagger: { each: 0.2 },
+    },
+    0
+  );
+}
+
+function enterPageAnim(pageEl, done) {
+  // if you try to use fromTo function then user will see `from` jumping and then transitioning
+  gsap.set(pageEl, { y: 75 });
+
+  const tl = gsap.timeline({
+    defaults: { ease: 'expo.out' },
+    onStart: () => {
+      emitter.emit('pointer:inactive');
+
+      // event `overlay:hiding` will emit 0.35 seconds before the end of the timeline
+      const time = (tl.totalDuration() - 0.35) * 1000;
+      setTimeout(() => emitter.emit('overlay:hiding'), time);
+    },
+    onComplete: () => {
+      done();
+
+      $smoothScroll.enable();
+      $smoothScroll.update();
+
+      // when user was scrolling down, the nav will be hidden, but
+      // on a new page the nav should be visible
+      gsap.to('.nav', { autoAlpha: 1 });
+    },
+  });
+
+  tl.fromTo(pageEl, { y: 75 }, { y: 0, duration: 0.75, clearProps: 'y' }, 0.3);
+  tl.fromTo(
+    '.page-overlay__slide',
+    {
+      opacity: 1,
+      pointerEvents: 'all',
+      yPercent: 0,
+      clipPath: 'inset(0% 0% 0% 0%)',
+    },
+    {
+      yPercent: -25,
+      clipPath: 'inset(0% 0% 75% 0%)',
+      stagger: { each: 0.2, from: 'end' },
+    },
+    0
+  );
+}
 
 function setVh() {
   const windowHeight = window.innerHeight;
@@ -17,7 +94,7 @@ function logGreeting() {
   // eslint-disable-next-line
   console.log(
     '%cBogdan Kostyuk',
-    'background-color: #030303;border-radius: 0.125rem;padding: 5px 10px;font-family: "Times New Roman", serif;font-size: 2rem;color: white'
+    'background-color: #030303;border-radius: 0.125rem;padding: 5px 10px;font-family: "Arial", sans-serif;font-size: 2rem;color: white'
   );
   // eslint-disable-next-line
   console.log(
@@ -26,9 +103,37 @@ function logGreeting() {
   );
 }
 
+function showFlagStripes() {
+  gsap.from('.flag-stripe__line', {
+    xPercent: -25,
+    stagger: 0.125,
+    ease: 'expo.out',
+    duration: 1.5,
+    delay: route.name === 'index' ? 3 : 1,
+  });
+}
+
 onMounted(() => {
+  $smoothScroll.disable();
+
   logGreeting();
   setVh();
+  showFlagStripes();
+
+  if (route.name === 'index')
+    gsap.set('.page-overlay__slide', {
+      opacity: 0,
+      pointerEvents: 'none',
+      onComplete: () => $smoothScroll.enable(),
+    });
+
+  if (route.name !== 'index') {
+    gsap.set('.loader', { autoAlpha: 0, display: 'none' });
+
+    setTimeout(() => {
+      enterPageAnim('#scroller', () => null);
+    }, 500);
+  }
 
   window.addEventListener('resize', setVh);
 });
@@ -41,12 +146,22 @@ onBeforeUnmount(() => {
 <template>
   <div>
     <div id="scroller">
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
+      <VNavbar />
+      <Transition
+        :css="false"
+        mode="out-in"
+        @enter="enterPageAnim"
+        @leave="leavePageAnim"
+      >
+        <div :key="route.name">
+          <NuxtPage />
+        </div>
+      </Transition>
     </div>
+
     <VPointer />
     <VLoader />
     <UkraineFlagStripe />
+    <VOverlay />
   </div>
 </template>

@@ -1,10 +1,12 @@
 <script setup>
 import MenuIconSVG from '~/assets/img/menu-icon.svg';
+import ArrowLeft from '~/assets/img/arrow-left.svg';
 
 const { $smoothScroll, $isDarkMode } = useNuxtApp();
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
 const isMenuActive = useMenuToggle();
+const currentRoute = useCurrentRoute();
 
 const nav = ref(null);
 const navTitle = ref(null);
@@ -176,6 +178,7 @@ onMounted(() => {
 <template>
   <nav ref="nav" class="nav" data-scroll-sticky>
     <p
+      v-show="currentRoute === 'index'"
       ref="navTitle"
       v-hoverable.action
       tabindex="0"
@@ -185,7 +188,7 @@ onMounted(() => {
       BK
     </p>
 
-    <ul ref="navList" class="nav__list">
+    <ul v-show="currentRoute === 'index'" ref="navList" class="nav__list">
       <li
         v-for="(link, key) in links"
         :key="key"
@@ -200,6 +203,7 @@ onMounted(() => {
     </ul>
 
     <button
+      v-show="currentRoute === 'index'"
       ref="navMenuButton"
       aria-label="menu button"
       class="nav__menu-button"
@@ -210,6 +214,15 @@ onMounted(() => {
     >
       <MenuIconSVG ref="navMenuButtonSVG" />
     </button>
+
+    <NuxtLink
+      v-show="currentRoute !== 'index'"
+      v-hoverable.action
+      href="/"
+      class="nav__back-link"
+    >
+      <ArrowLeft />
+    </NuxtLink>
   </nav>
 </template>
 
@@ -286,9 +299,13 @@ onMounted(() => {
 
       opacity: var(--indicator-opacity);
       border-radius: 50%;
-      background-color: var(--surface-color);
+      background-color: var(--ff-color);
 
       transform: translateY(var(--indicator-offset, 0px));
+
+      @media (prefers-color-scheme: light) {
+        background-color: var(--surface-color);
+      }
     }
 
     @media screen and (max-width: 768px) {
@@ -352,6 +369,35 @@ onMounted(() => {
         height: unset;
         aspect-ratio: 1/1;
       }
+    }
+  }
+
+  &__back-link {
+    --size: calc(var(--step-5) * 1.5);
+    --preferred-color: #ebebeb;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: var(--size);
+    height: var(--size);
+
+    background-color: transparent;
+    border: 1px solid var(--preferred-color);
+    border-radius: 100%;
+
+    margin-left: auto;
+
+    pointer-events: all;
+
+    svg {
+      width: 35%;
+      height: auto;
+
+      min-width: 22px;
+
+      color: var(--preferred-color);
     }
   }
 }
