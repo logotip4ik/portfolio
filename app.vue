@@ -14,8 +14,6 @@ function leavePageAnim(pageEl, done) {
       $smoothScroll.disable();
     },
     onComplete: () => {
-      done();
-
       // need to set this myself because the route changes faster then overlay is hiding the page
       currentRoute.value = route.name;
     },
@@ -34,6 +32,7 @@ function leavePageAnim(pageEl, done) {
       yPercent: 0,
       clipPath: 'inset(0% 0% 0% 0%)',
       stagger: { each: 0.2 },
+      onComplete: () => done(),
     },
     0
   );
@@ -44,13 +43,9 @@ function enterPageAnim(pageEl, done) {
     defaults: { ease: 'expo.out' },
     onStart: () => {
       emitter.emit('pointer:inactive');
-
-      // event `overlay:hiding` will emit 0.2 seconds before the end of the timeline
-      const time = (tl.totalDuration() - 0.2) * 1000;
-      setTimeout(() => emitter.emit('overlay:hiding'), time);
     },
     onComplete: () => {
-      done();
+      emitter.emit('overlay:hiding');
 
       $smoothScroll.enable();
       $smoothScroll.update();
@@ -74,6 +69,7 @@ function enterPageAnim(pageEl, done) {
       yPercent: -25,
       clipPath: 'inset(0% 0% 75% 0%)',
       stagger: { each: 0.2, from: 'end' },
+      onComplete: () => done(),
     },
     0
   );
