@@ -45,8 +45,8 @@ function enterPageAnim(pageEl, done) {
     onStart: () => {
       emitter.emit('pointer:inactive');
 
-      // event `overlay:hiding` will emit 0.35 seconds before the end of the timeline
-      const time = (tl.totalDuration() - 0.35) * 1000;
+      // event `overlay:hiding` will emit 0.2 seconds before the end of the timeline
+      const time = (tl.totalDuration() - 0.2) * 1000;
       setTimeout(() => emitter.emit('overlay:hiding'), time);
     },
     onComplete: () => {
