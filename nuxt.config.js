@@ -104,10 +104,6 @@ export default defineNuxtConfig({
   //   '/*': [{ 'X-Robots-Tag': 'all' }],
   // },
 
-  content: {
-    watch: false,
-  },
-
   vite: {
     plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
   },
