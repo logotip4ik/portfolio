@@ -41,6 +41,7 @@ onMounted(() => {
   position: fixed;
   bottom: 2rem;
   left: 50%;
+  z-index: 1;
 
   width: 92%;
   max-width: 900px;
@@ -57,6 +58,7 @@ onMounted(() => {
     0px 4.5px 17.9px rgba(0, 0, 0, 0.012),
     0px 20px 80px rgba(0, 0, 0, 0.02)
   ;
+  backdrop-filter: blur(5px);
 
   transform: translate(-50%, calc(100% + 2rem));
 
