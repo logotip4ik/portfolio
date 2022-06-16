@@ -390,6 +390,7 @@ onMounted(() => {
     margin-left: auto;
 
     pointer-events: all;
+    opacity: 0;
 
     svg {
       width: 35%;
