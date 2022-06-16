@@ -15,11 +15,15 @@ const icon = computed(() =>
   <span v-html="icon" />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 span {
   display: inline-block;
 
   width: auto;
   height: auto;
+
+  svg {
+    width: 100%;
+  }
 }
 </style>
