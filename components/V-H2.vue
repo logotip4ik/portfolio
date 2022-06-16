@@ -49,6 +49,7 @@ onMounted(() => {
 
 <style lang="scss">
 .heading {
+  font-weight: 400;
   text-align: center;
 
   width: 100%;
