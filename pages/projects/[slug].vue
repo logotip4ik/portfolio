@@ -12,6 +12,8 @@ const emitter = useEmitter();
 useSeoHead({ title: project.value.title });
 
 onMounted(() => {
+  gsap.set('.nav__back-link', { autoAlpha: 0 });
+
   const showBackButton = () =>
     gsap.fromTo(
       '.nav__back-link',
