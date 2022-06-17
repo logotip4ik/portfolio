@@ -1,7 +1,7 @@
 <script setup>
 const route = useRoute();
 const { $smoothScroll, ...nuxtApp } = useNuxtApp();
-const { gsap } = useGsap();
+const { gsap, ScrollTrigger } = useGsap();
 const emitter = useEmitter();
 const currentRoute = useCurrentRoute();
 
@@ -32,7 +32,11 @@ function leavePageAnim(pageEl, done) {
       yPercent: 0,
       clipPath: 'inset(0% 0% 0% 0%)',
       stagger: { each: 0.2 },
-      onComplete: () => done(),
+      onComplete: () => {
+        $smoothScroll.scrollTo(0, 0);
+
+        done();
+      },
     },
     0
   );
@@ -49,6 +53,8 @@ function enterPageAnim(pageEl, done) {
 
       $smoothScroll.enable();
       $smoothScroll.update();
+
+      ScrollTrigger.refresh();
 
       // when user was scrolling down, the nav will be hidden, but
       // on a new page the nav should be visible
