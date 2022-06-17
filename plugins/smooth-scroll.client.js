@@ -66,17 +66,20 @@ function makeLocomotiveScrollAdaptor(locomotiveScroll) {
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
         ? locomotiveScroll.stop()
         : (document.body.style.overflow = 'hidden'),
-    scrollTo: (selectorOrNumber) =>
+    scrollTo: (
+      selectorOrNumber,
+      durationInSeconds = SCROLL_TO_DURATION_IN_SECONDS
+    ) =>
       // prettier-ignore
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
         ? locomotiveScroll.scrollTo(selectorOrNumber, {
-          duration: SCROLL_TO_DURATION_IN_SECONDS * 1000,
+          duration: durationInSeconds * 1000,
           // https://easings.net/#easeOutExpo
           easing: [0.645, 0.045, 0.355, 1.0],
         })
         : gsap.to(window, {
           scrollTo: { y: selectorOrNumber, autoKill: true },
-          duration: SCROLL_TO_DURATION_IN_SECONDS,
+          duration: durationInSeconds,
           ease: 'power3.inOut',
         }),
   };
