@@ -51,8 +51,6 @@ function enterPageAnim(pageEl, done) {
       emitter.emit('pointer:inactive');
     },
     onComplete: () => {
-      emitter.emit('overlay:hiding');
-
       $smoothScroll.enable();
       $smoothScroll.update();
 
@@ -77,7 +75,11 @@ function enterPageAnim(pageEl, done) {
       yPercent: -25,
       clipPath: 'inset(0% 0% 75% 0%)',
       stagger: { each: 0.2, from: 'end' },
-      onComplete: () => done(),
+      onComplete: () => {
+        done();
+
+        emitter.emit('overlay:hiding');
+      },
     },
     0.1
   );
