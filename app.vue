@@ -13,13 +13,10 @@ function leavePageAnim(pageEl, done) {
     onStart: () => {
       $smoothScroll.disable();
     },
-    onComplete: () => {
-      // need to set this myself because the route changes faster then overlay is hiding the page
-      currentRoute.value = route.name;
-    },
+    onComplete: () => done(),
   });
 
-  tl.to(pageEl, { y: -100, duration: 0.75 }, 0.1);
+  tl.to(pageEl, { y: -200, duration: 1.5 }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -33,9 +30,10 @@ function leavePageAnim(pageEl, done) {
       clipPath: 'inset(0% 0% 0% 0%)',
       stagger: { each: 0.2 },
       onComplete: () => {
-        $smoothScroll.scrollTo(0, 0);
+        // need to set this myself because the route changes faster then overlay is hiding the page
+        currentRoute.value = route.name;
 
-        done();
+        $smoothScroll.scrollTo(0, 0);
       },
     },
     0
@@ -46,6 +44,10 @@ function enterPageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
+      $smoothScroll.disable();
+
+      gsap.set('#scroller', { clearProps: 'all' });
+
       emitter.emit('pointer:inactive');
     },
     onComplete: () => {
@@ -62,7 +64,7 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.fromTo(pageEl, { y: 100 }, { y: 0, duration: 0.75, clearProps: 'y' }, 0.2);
+  tl.fromTo(pageEl, { y: 200 }, { y: 0, duration: 1.5, clearProps: 'y' }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -77,7 +79,7 @@ function enterPageAnim(pageEl, done) {
       stagger: { each: 0.2, from: 'end' },
       onComplete: () => done(),
     },
-    0
+    0.1
   );
 }
 
