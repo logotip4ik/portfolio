@@ -46,8 +46,9 @@ function enterPageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
-      emitter.emit('pointer:inactive');
       gsap.set('#scroller', { clearProps: 'transform' });
+
+      emitter.emit('pointer:inactive');
     },
     onComplete: () => {
       $smoothScroll.update();
