@@ -16,7 +16,7 @@ function leavePageAnim(pageEl, done) {
     onComplete: () => done(),
   });
 
-  tl.to(pageEl, { y: -200, duration: 1.5 }, 0);
+  tl.to(pageEl, { y: -200, duration: 1, ease: 'power2.out' }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -64,7 +64,7 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.fromTo(pageEl, { y: 200 }, { y: 0, duration: 1.5, clearProps: 'y' }, 0);
+  tl.fromTo(pageEl, { y: 200 }, { y: 0, duration: 1, clearProps: 'y' }, 0.2);
   tl.fromTo(
     '.page-overlay__slide',
     {
