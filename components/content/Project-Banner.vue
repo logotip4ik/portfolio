@@ -44,7 +44,7 @@ onMounted(() => {
   position: fixed;
   bottom: 2rem;
   left: 50%;
-  z-index: 1;
+  z-index: 4;
 
   width: 92%;
   max-width: 900px;
