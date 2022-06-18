@@ -194,6 +194,7 @@ onMounted(() => {
       tabindex="0"
       class="nav__title"
       @click="() => $smoothScroll.scrollTo(0)"
+      @keypress.enter.space.prevent="() => $smoothScroll.scrollTo(0)"
     >
       BK
     </p>
@@ -264,6 +265,7 @@ onMounted(() => {
     margin: 0;
 
     pointer-events: all;
+    cursor: none;
   }
 
   &__list {
