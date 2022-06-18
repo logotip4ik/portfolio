@@ -45,7 +45,8 @@ onMounted(() => {
   @media screen and (max-width: 1024px) {
     position: relative;
     z-index: 5;
-    pointer-events: none;
+
+    pointer-events: all;
   }
 }
 </style>
