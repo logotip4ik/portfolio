@@ -21,7 +21,6 @@ onMounted(() => {
         trigger: part,
         start: 'top 55%',
         end: 'bottom 55%',
-        markers: true,
         onEnter: () => (currentSection.value = key),
         onEnterBack: () => (currentSection.value = key),
       })
