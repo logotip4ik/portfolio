@@ -12,11 +12,11 @@ const icon = computed(() =>
 
 <template>
   <!-- eslint-disable -->
-  <span v-html="icon" />
+  <span class="project-svg-icon" v-html="icon" />
 </template>
 
-<style scoped lang="scss">
-span {
+<style lang="scss">
+.project-svg-icon {
   display: inline-block;
 
   width: auto;
