@@ -7,23 +7,19 @@ const emitter = useEmitter();
 const title = ref(null);
 
 function showTitle() {
-  if (!title.value.querySelector('.project-title__line')) return;
-
   const revealRef = gsap.timeline({
     defaults: { ease: 'expo.out' },
-    onStart: () => emitter.off('overlay:hiding', showTitle),
   });
 
-  revealRef.fromTo(
-    '.project-title__line__word',
-    { yPercent: 105 },
-    { yPercent: 0, stagger: 0.1, duration: 1 }
-  );
+  revealRef.to('.project-title__line__word', {
+    yPercent: -105,
+    stagger: 0.1,
+    duration: 1.25,
+  });
 
-  revealRef.fromTo(
+  revealRef.to(
     '.project-title__line__wrapper',
-    { y: 40 },
-    { y: 0, stagger: 0.075, duration: 1 },
+    { y: -40, stagger: 0.075, duration: 1 },
     0.1
   );
 }
@@ -45,12 +41,9 @@ onMounted(() => {
     lineParent.appendChild(wrapper);
     wrapper.appendChild(line);
   }
-
-  gsap.set(text.words, { yPercent: 105 });
-  gsap.set('.project-title__line__wrapper', { y: 40 });
 });
 
-emitter.on('overlay:hiding', showTitle);
+emitter.once('overlay:hiding', showTitle);
 </script>
 
 <template>
@@ -73,8 +66,14 @@ emitter.on('overlay:hiding', showTitle);
   &__line {
     line-height: 1.225;
 
+    &__word {
+      transform: translateY(105%);
+    }
+
     &__wrapper {
       overflow: hidden;
+
+      transform: translateY(40px);
     }
   }
 }
