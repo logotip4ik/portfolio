@@ -10,17 +10,26 @@ const { gsap, ScrollTrigger } = useGsap();
 const currentSection = useCurrentSection();
 
 onMounted(() => {
+  const triggers = [];
+
   // website parts, heading, sections and footer
   const parts = gsap.utils.toArray('header, section');
 
   parts.forEach((part, key) => {
-    ScrollTrigger.create({
-      trigger: part,
-      start: 'top 55%',
-      end: 'bottom 55%',
-      onEnter: () => (currentSection.value = key),
-      onEnterBack: () => (currentSection.value = key),
-    });
+    triggers.push(
+      ScrollTrigger.create({
+        trigger: part,
+        start: 'top 55%',
+        end: 'bottom 55%',
+        markers: true,
+        onEnter: () => (currentSection.value = key),
+        onEnterBack: () => (currentSection.value = key),
+      })
+    );
+  });
+
+  onBeforeUnmount(() => {
+    triggers.forEach((trigger) => trigger.kill());
   });
 });
 </script>
