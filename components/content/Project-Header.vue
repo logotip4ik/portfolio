@@ -9,7 +9,7 @@ onMounted(() => {
       stagger: { from: 'end', each: 0.075 },
       ease: 'expo.out',
       duration: 1,
-      delay: 0.225,
+      delay: 0.275,
     });
   });
 });
