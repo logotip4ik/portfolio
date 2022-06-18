@@ -7,30 +7,32 @@ const subtitleText = 'Front End Developer';
 
 const header = ref(null);
 
-function contentAnimation() {
+function revealContent() {
   const prefersReducedMotion = $checkReducedMotion();
 
   const mainTl = gsap.timeline({
-    paused: true,
     defaults: { ease: 'expo.out', duration: 1.25 },
+    onStart: () => {
+      emitter.off('loader:end', revealContent);
+      emitter.off('overlay:hiding', revealContent);
+    },
   });
 
   if (prefersReducedMotion)
     mainTl.fromTo(
       '.header__container__title__line__content',
-      { opacity: 0, y: 0 },
+      { opacity: 0, yPercent: -100 },
       { opacity: 1, stagger: 0.175 }
     );
   else
-    mainTl.fromTo(
-      '.header__container__title__line__content',
-      { y: 100 },
-      { y: 0, duration: 1.5, stagger: 0.175 }
-    );
+    mainTl.to('.header__container__title__line__content', {
+      yPercent: -100,
+      duration: 1.5,
+      stagger: 0.175,
+    });
 
-  mainTl.fromTo(
+  mainTl.to(
     '.header__container__subtitle__char',
-    { opacity: 0 },
     {
       opacity: 1,
       stagger: { from: 'center', amount: 0.35 },
@@ -38,25 +40,22 @@ function contentAnimation() {
     '-=0.75'
   );
 
-  mainTl.fromTo('.scroll-down', { opacity: 0 }, { opacity: 1 }, '<+0.5');
+  mainTl.to('.scroll-down', { opacity: 1 }, '<+0.5');
 
-  mainTl.fromTo(
+  mainTl.to(
     '.nav__menu-button, .nav__list__item',
-    { opacity: 0 },
     { opacity: 1, stagger: 0.125 },
     '-=0.75'
   );
-
-  return mainTl;
 }
 
-onMounted(() => {
-  const appearAnim = contentAnimation();
+emitter.on('loader:end', revealContent);
+emitter.on('overlay:hiding', revealContent);
 
-  const handleAppear = () => appearAnim.play();
-
-  emitter.on('loader:end', handleAppear);
-  onBeforeUnmount(() => emitter.off('loader:end', handleAppear));
+onBeforeUnmount(() => {
+  gsap.set('.header__container__title__line__content', {
+    clearProps: 'all',
+  });
 });
 </script>
 
@@ -66,27 +65,17 @@ onMounted(() => {
 
     <div class="header__container">
       <h1 class="header__container__title">
-        <span
-          class="header__container__title__line"
-          data-scroll
-          data-scroll-speed="-1"
-        >
+        <span class="header__container__title__line">
           <span class="header__container__title__line__content">Bogdan</span>
         </span>
         <span
           class="header__container__title__line header__container__title__line--pl"
-          data-scroll
-          data-scroll-speed="-1.25"
         >
           <span class="header__container__title__line__content">Kostyuk</span>
         </span>
       </h1>
 
-      <p
-        class="header__container__subtitle"
-        data-scroll
-        data-scroll-speed="-1.5"
-      >
+      <p class="header__container__subtitle">
         <span
           v-for="(char, key) in subtitleText"
           :key="key"
@@ -173,7 +162,7 @@ onMounted(() => {
         &__content {
           display: inline-block;
 
-          transform: translateY(100%);
+          transform: translate(0, 100%);
         }
 
         &--pl {
