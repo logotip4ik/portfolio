@@ -2,7 +2,7 @@
 import MenuIconSVG from '~/assets/img/menu-icon.svg';
 import ArrowLeft from '~/assets/img/arrow-left.svg';
 
-const { $smoothScroll, $isDarkMode } = useNuxtApp();
+const { $smoothScroll, $isDarkMode, $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
 const isMenuActive = useMenuToggle();
@@ -39,6 +39,7 @@ function hoverAnimation() {
 }
 
 function closeAnimation() {
+  const prefersReducedMotion = $checkReducedMotion();
   const isDarkMode = $isDarkMode();
 
   const lines = navMenuButtonSVG.value.$el.children;
@@ -56,28 +57,29 @@ function closeAnimation() {
     x2: SVG_SIZE - SVG_LINES_PADDING,
     y2: SVG_SIZE - SVG_LINES_PADDING,
   };
-  // if (this.prefersReducedMotion) {
-  //   tl.to(lines, { opacity: 0 })
-  //   tl.set(lines[0], { attr: line0Attrs })
-  //   tl.set(lines[1], { attr: line1Attrs })
-  //   tl.set(lines, {
-  //     color: isDarkMode ? svgColorActive.dark : svgColorActive.light,
-  //   })
-  //   tl.set(navMenuButton, { '--bg-scale': '1' }, 0)
-  //   tl.to(lines, { opacity: 1 })
-  // } else {
-  tl.to(lines, {
-    color: isDarkMode ? svgColorActive.dark : svgColorActive.light,
-  });
-  tl.to(lines[0], { attr: line0Attrs }, 0);
-  tl.to(lines[1], { attr: line1Attrs }, '<');
-  tl.to(navMenuButton.value, { '--bg-scale': '1' }, '0.135');
-  // }
+  if (prefersReducedMotion) {
+    tl.to(lines, { opacity: 0 });
+    tl.set(lines[0], { attr: line0Attrs });
+    tl.set(lines[1], { attr: line1Attrs });
+    tl.set(lines, {
+      color: isDarkMode ? svgColorActive.dark : svgColorActive.light,
+    });
+    tl.set(navMenuButton, { '--bg-scale': '1' }, 0);
+    tl.to(lines, { opacity: 1 });
+  } else {
+    tl.to(lines, {
+      color: isDarkMode ? svgColorActive.dark : svgColorActive.light,
+    });
+    tl.to(lines[0], { attr: line0Attrs }, 0);
+    tl.to(lines[1], { attr: line1Attrs }, '<');
+    tl.to(navMenuButton.value, { '--bg-scale': '1' }, '0.135');
+  }
 }
 
 function idleAnimation() {
   if (isMenuActive.value) return;
 
+  const prefersReducedMotion = $checkReducedMotion();
   const isDarkMode = $isDarkMode();
 
   const lines = navMenuButtonSVG.value.$el.children;
@@ -86,23 +88,23 @@ function idleAnimation() {
   const line0Attrs = { x1: 0.25, y1: 7.75, x2: 19.75, y2: 7.75 };
   const line1Attrs = { x1: 5.25, y1: 11.75, x2: 19.75, y2: 11.75 };
   // NOTE: just reverting everything to default
-  // if (this.prefersReducedMotion) {
-  //   tl.to(lines, { opacity: 0 })
-  //   tl.set(lines[0], { attr: line0Attrs })
-  //   tl.set(lines[1], { attr: line1Attrs })
-  //   tl.set(lines, {
-  //     color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
-  //   })
-  //   tl.set(navMenuButton, { '--bg-scale': '0' })
-  //   tl.to(lines, { opacity: 1 })
-  // } else {
-  tl.to(lines, {
-    color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
-  });
-  tl.to(navMenuButton.value, { '--bg-scale': '0', ease: 'power2.out' }, 0);
-  tl.to(lines[0], { attr: line0Attrs }, 0);
-  tl.to(lines[1], { attr: line1Attrs }, '<');
-  // }
+  if (prefersReducedMotion) {
+    tl.to(lines, { opacity: 0 });
+    tl.set(lines[0], { attr: line0Attrs });
+    tl.set(lines[1], { attr: line1Attrs });
+    tl.set(lines, {
+      color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
+    });
+    tl.set(navMenuButton, { '--bg-scale': '0' });
+    tl.to(lines, { opacity: 1 });
+  } else {
+    tl.to(lines, {
+      color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
+    });
+    tl.to(navMenuButton.value, { '--bg-scale': '0', ease: 'power2.out' }, 0);
+    tl.to(lines[0], { attr: line0Attrs }, 0);
+    tl.to(lines[1], { attr: line1Attrs }, '<');
+  }
 }
 
 function toggleMenu() {
@@ -143,35 +145,43 @@ onMounted(() => {
     prevScrollY = scroll.y;
   });
 
-  gsap.fromTo(
-    navTitle.value,
-    { autoAlpha: 0 },
-    {
-      autoAlpha: 1,
-      ease: 'expo.out',
-      scrollTrigger: {
-        trigger: '.header',
-        start: 'bottom 5%',
-        end: 'bottom 5%',
-        toggleActions: 'play none reverse none',
-      },
-    }
+  const animations = [];
+
+  animations.push(
+    gsap.fromTo(
+      navTitle.value,
+      { autoAlpha: 0 },
+      {
+        autoAlpha: 1,
+        ease: 'expo.out',
+        scrollTrigger: {
+          start: `${window.innerHeight}px 5%`,
+          end: `${window.innerHeight}px 5%`,
+          toggleActions: 'play none reverse none',
+        },
+      }
+    )
   );
 
-  gsap.fromTo(
-    navList.value,
-    { '--indicator-opacity': 0 },
-    {
-      '--indicator-opacity': 1,
-      ease: 'expo.out',
-      scrollTrigger: {
-        trigger: '.header',
-        start: '40% top',
-        end: '40% top',
-        toggleActions: 'play none reverse none',
-      },
-    }
+  animations.push(
+    gsap.fromTo(
+      navList.value,
+      { '--indicator-opacity': 0 },
+      {
+        '--indicator-opacity': 1,
+        ease: 'expo.out',
+        scrollTrigger: {
+          start: `${window.innerHeight / 3}px 90px`,
+          end: `${window.innerHeight / 3}px 90px`,
+          toggleActions: 'play none reverse none',
+        },
+      }
+    )
   );
+
+  onBeforeUnmount(() => {
+    animations.forEach((anim) => anim.scrollTrigger.kill());
+  });
 });
 </script>
 
@@ -274,6 +284,8 @@ onMounted(() => {
     &__item {
       font-size: calc(var(--step--2) - 0.05rem);
 
+      opacity: 0;
+
       cursor: none;
 
       &:not(:first-of-type) {
@@ -328,6 +340,7 @@ onMounted(() => {
     color: currentColor;
     border: none;
     background: transparent;
+    opacity: 0;
 
     cursor: pointer;
     pointer-events: all;
