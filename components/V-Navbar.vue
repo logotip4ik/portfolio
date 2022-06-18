@@ -404,6 +404,7 @@ onMounted(() => {
 
     pointer-events: all;
     opacity: 0;
+    cursor: none;
 
     svg {
       width: 35%;

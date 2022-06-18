@@ -31,6 +31,7 @@ defineProps({
   text-decoration: none;
 
   opacity: 0.75;
+  cursor: none;
 
   &__arrow-svg {
     width: var(--size);
