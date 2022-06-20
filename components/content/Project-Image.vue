@@ -24,9 +24,9 @@ onMounted(() => {
   gsap.set(imageRef.value, { scale: 1 + imageScale * 0.01 });
   gsap.fromTo(
     imageRef.value,
-    { yPercent: imageScale / 2 },
+    { yPercent: -imageScale / 2 },
     {
-      yPercent: -imageScale / 2,
+      yPercent: imageScale / 2,
       ease: 'none',
       scrollTrigger: {
         trigger: imageWrapperRef.value,
@@ -47,9 +47,7 @@ onMounted(() => {
     :alt="alt"
     :width="type === 'fwidth' ? 1400 : 900"
     height="550"
-    loading="lazy"
     class="project-image"
-    data-scroll
   />
   <div v-else ref="imageWrapperRef" class="project-image__wrapper">
     <img
@@ -73,15 +71,7 @@ onMounted(() => {
   width: 100%;
   height: auto;
 
-  opacity: 0;
   box-shadow: 0 0 1rem 0 rgba($color: #000000, $alpha: 0.025);
-
-  transition: opacity 0.4s ease;
-  transition-delay: 0.75;
-
-  &.is-inview {
-    opacity: 1;
-  }
 
   &--fwidth {
     position: relative;
