@@ -34,6 +34,7 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
   margin-top: 10rem;
 
   overflow: hidden;
+  cursor: none;
 
   &__image {
     position: absolute;
