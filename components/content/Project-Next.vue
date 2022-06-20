@@ -1,7 +1,8 @@
 <script setup>
 const route = useRoute();
-const { data: surrounded } = await useAsyncData('surround-project', () =>
-  queryContent('projects').findSurround(route.fullPath)
+const { data: surrounded } = await useAsyncData(
+  `surround-project-${route.params.slug}`,
+  () => queryContent('projects').findSurround(route.fullPath)
 );
 
 const next = computed(() =>
@@ -29,7 +30,7 @@ const next = computed(() =>
   color: currentColor;
   text-decoration: none;
 
-  min-height: min(20rem, 33vh);
+  min-height: min(20rem, 35vh);
 
   padding: 1rem;
   margin-top: 10rem;
@@ -48,7 +49,7 @@ const next = computed(() =>
     object-fit: cover;
     object-position: center center;
 
-    filter: blur(10px);
+    filter: blur(15px);
 
     transform: scale(1.1);
   }
