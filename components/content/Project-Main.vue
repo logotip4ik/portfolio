@@ -8,6 +8,6 @@
 .project-main {
   width: 100%;
 
-  padding: 15rem 0 10rem;
+  padding-top: 15rem;
 }
 </style>
