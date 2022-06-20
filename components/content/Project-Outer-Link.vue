@@ -37,7 +37,7 @@ defineProps({
     width: var(--size);
     height: auto;
 
-    margin-left: 0.75rem;
+    margin-left: 0.5rem;
 
     transform: translateY(15%);
   }
