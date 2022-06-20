@@ -8,7 +8,7 @@ tags:
   - three.js
   - gsap
   - SCSS
-image: 'img/portfolio.png'
+image: '/img/portfolio.png'
 createdAt: '2022-03-31T00:00:00+03:00'
 ---
 
