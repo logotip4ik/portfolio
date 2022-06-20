@@ -5,9 +5,7 @@ const { data: surrounded } = await useAsyncData(
   () => queryContent('projects').findSurround(route.fullPath)
 );
 
-const next = computed(() =>
-  surrounded.value[1] ? surrounded.value[1] : surrounded.value[0]
-);
+const next = computed(() => surrounded.value[1] || surrounded.value[0]);
 </script>
 
 <template>
