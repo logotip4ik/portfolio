@@ -26,6 +26,8 @@
 *::before,
 *::after {
   box-sizing: border-box;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 ::-webkit-scrollbar {
@@ -53,7 +55,6 @@ a,
 button {
   /* NOTE: Tells browser not to wait for potential second tap */
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 h1 {
