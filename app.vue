@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
         @enter="enterPageAnim"
         @leave="leavePageAnim"
       >
-        <div :key="route.name">
+        <div :key="route.name + route.params.slug">
           <NuxtPage />
         </div>
       </Transition>
