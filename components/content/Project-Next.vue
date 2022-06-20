@@ -24,13 +24,13 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
   position: relative;
   z-index: 1;
 
-  font-size: var(--step-1);
+  font-size: var(--step-2);
   color: currentColor;
   text-decoration: none;
 
-  min-height: min(20rem, 35vh);
+  min-height: min(20rem, 45vh);
 
-  padding: 1rem;
+  padding: 1rem 4rem;
   margin-top: 10rem;
 
   overflow: hidden;
@@ -48,7 +48,7 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
     object-fit: cover;
     object-position: center center;
 
-    filter: blur(15px);
+    filter: blur(12px);
 
     transform: scale(1.1);
   }
@@ -74,7 +74,6 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
     background: linear-gradient(
       to bottom,
       var(--surface-color) 0%,
-      var(--surface-color) 10%,
       #00000000 100%
     );
   }
@@ -91,7 +90,7 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
 
     background-color: var(--surface-color);
 
-    opacity: 0.25
+    opacity: 0.25;
   }
 }
 </style>
