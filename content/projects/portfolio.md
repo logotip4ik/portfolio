@@ -31,3 +31,9 @@ Portfolio Version 3
 source
 :::
 ::
+
+::project-main{style="padding: 0"}
+:::project-section{type="fwidth" style="margin: 0"}
+::::project-next
+:::
+::
