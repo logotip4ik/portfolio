@@ -74,7 +74,7 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
     background: linear-gradient(
       to bottom,
       var(--surface-color) 0%,
-      var(--surface-color) 5%,
+      var(--surface-color) 10%,
       #00000000 100%
     );
   }
@@ -89,12 +89,9 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
     bottom: 0;
     z-index: -2;
 
-    background-color: rgba($color: #030303, $alpha: 0.75);
-    // backdrop-filter: blur(5px);
+    background-color: var(--surface-color);
 
-    @media (prefers-color-scheme: light) {
-      background-color: rgba($color: #ebebeb, $alpha: 0.75);
-    }
+    opacity: 0.25
   }
 }
 </style>
