@@ -13,7 +13,6 @@ function leavePageAnim(pageEl, done) {
     onStart: () => {
       $smoothScroll.disable();
     },
-    onComplete: () => done(),
   });
 
   tl.to(pageEl, { y: -200, duration: 1, ease: 'power2.out' }, 0);
@@ -34,6 +33,8 @@ function leavePageAnim(pageEl, done) {
         currentRoute.value = route.name;
 
         $smoothScroll.scrollTo(0, 0);
+
+        done();
       },
     },
     0
@@ -61,6 +62,8 @@ function enterPageAnim(pageEl, done) {
       // when user was scrolling down, the nav will be hidden, but
       // on a new page the nav should be visible
       gsap.to('.nav', { autoAlpha: 1 });
+
+      done();
     },
   });
 
@@ -78,8 +81,6 @@ function enterPageAnim(pageEl, done) {
       clipPath: 'inset(0% 0% 75% 0%)',
       stagger: { each: 0.2, from: 'end' },
       onComplete: () => {
-        done();
-
         emitter.emit('overlay:hiding');
       },
     },
