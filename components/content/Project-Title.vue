@@ -19,7 +19,7 @@ function showTitle() {
 
   revealRef.to(
     '.project-title__line__wrapper',
-    { y: -40, stagger: 0.075, duration: 1 },
+    { y: 0, stagger: 0.075, duration: 1 },
     0.1
   );
 }
