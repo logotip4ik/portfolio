@@ -65,7 +65,7 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
     content: '';
 
     position: absolute;
-    top: 0;
+    top: -2px;
     left: 0;
     right: 0;
     bottom: 0;
