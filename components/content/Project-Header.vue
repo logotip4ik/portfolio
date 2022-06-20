@@ -44,7 +44,7 @@ onMounted(() => {
 
 <style lang="scss">
 .project-header {
-  padding: 30vh clamp(1rem, 7vw, 10rem) 5vh;
+  padding: 30vh clamp(1rem, 7vw, 10rem) 7vh;
 
   &__info {
     display: flex;
