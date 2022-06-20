@@ -21,15 +21,15 @@ function revealContent() {
   if (prefersReducedMotion)
     mainTl.fromTo(
       '.header__container__title__line__content',
-      { opacity: 0, yPercent: -100 },
+      { opacity: 0 },
       { opacity: 1, stagger: 0.175 }
     );
   else
-    mainTl.to('.header__container__title__line__content', {
-      yPercent: -100,
-      duration: 1.5,
-      stagger: 0.175,
-    });
+    mainTl.fromTo(
+      '.header__container__title__line__content',
+      { yPercent: 100, opacity: 1 },
+      { yPercent: 0, duration: 1.5, stagger: 0.175 }
+    );
 
   mainTl.to(
     '.header__container__subtitle__char',
@@ -162,7 +162,7 @@ onBeforeUnmount(() => {
         &__content {
           display: inline-block;
 
-          transform: translate(0, 100%);
+          opacity: 0;
         }
 
         &--pl {
