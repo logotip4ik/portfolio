@@ -48,6 +48,7 @@ onMounted(() => {
     :width="type === 'fwidth' ? 1400 : 900"
     height="550"
     class="project-image"
+    decoding="async"
   />
   <div v-else ref="imageWrapperRef" class="project-image__wrapper">
     <img
@@ -60,6 +61,8 @@ onMounted(() => {
       }"
       :width="type === 'fwidth' ? 1400 : 900"
       height="550"
+      decoding="async"
+      fetch-priority="high"
     />
   </div>
 </template>
