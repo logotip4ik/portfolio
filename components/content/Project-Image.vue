@@ -5,12 +5,6 @@ const props = defineProps({
   type: { type: String, required: false, default: '' },
 });
 
-if (props.type === 'fwidth') {
-  useHead({
-    link: [{ rel: 'preload', as: 'image', href: props.src }],
-  });
-}
-
 const imageRef = ref(null);
 const imageWrapperRef = ref(null);
 
