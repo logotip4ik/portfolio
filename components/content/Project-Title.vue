@@ -5,8 +5,11 @@ const { gsap } = useGsap();
 const emitter = useEmitter();
 
 const title = ref(null);
+const canRunReveal = ref(false);
 
 function showTitle() {
+  if (!canRunReveal.value) return setTimeout(showTitle, 20);
+
   const revealRef = gsap.timeline({
     defaults: { ease: 'expo.out' },
   });
@@ -41,13 +44,15 @@ onMounted(() => {
     lineParent.appendChild(wrapper);
     wrapper.appendChild(line);
   }
+
+  canRunReveal.value = true;
 });
 
 emitter.once('overlay:hiding', showTitle);
 </script>
 
 <template>
-  <h1 ref="title" class="project-title" data-scroll>
+  <h1 ref="title" class="project-title">
     <Markdown :use="$slots.default" :unwrap="true" />
   </h1>
 </template>
