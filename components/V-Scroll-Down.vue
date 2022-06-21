@@ -42,7 +42,7 @@ function scrollDown() {
 
     opacity: 0;
     border-radius: 999999px;
-    outline: 1px solid var(--ff-color);
+    box-shadow: 0 0 2px 0px var(--ff-color);
 
     animation: cubic-bezier(0.87, 0, 0.13, 1) infinite $anim-duration
       scrollDownIndication;
