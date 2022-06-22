@@ -5,6 +5,16 @@ useSeoHead({
     'I will build you website as quick as possible and with high attention to details👌',
 });
 
+const { data: projects } = await useAsyncData('prerender-projects', () =>
+  queryContent('projects').only(['_path']).find()
+);
+
+useHead({
+  links: [
+    ...projects.value.map(({ _path }) => ({ rel: 'prerender', href: _path })),
+  ],
+});
+
 const { gsap, ScrollTrigger } = useGsap();
 
 const currentSection = useCurrentSection();
