@@ -2,6 +2,8 @@
 const { gsap } = useGsap();
 const emitter = useEmitter();
 
+const slots = ['live', 'source'];
+
 const revealInfoLinks = () =>
   gsap.utils.toArray('.project-header__info__links__item__content').length === 0
     ? setTimeout(revealInfoLinks, 20)
@@ -22,22 +24,20 @@ emitter.once('overlay:hiding', revealInfoLinks);
 
     <div class="project-header__info">
       <ul class="project-header__info__links">
-        <li
-          v-if="$slots.live"
-          class="project-header__info__links__item project-header__info__links__item--live"
-        >
-          <span class="project-header__info__links__item__content">
-            <slot name="live" />
-          </span>
-        </li>
-        <li
-          v-if="$slots.source"
-          class="project-header__info__links__item project-header__info__links__item--source"
-        >
-          <span class="project-header__info__links__item__content">
-            <slot name="source" />
-          </span>
-        </li>
+        <template v-for="(slot, key) in slots">
+          <li
+            v-if="$slots.live"
+            :key="key"
+            :class="[
+              'project-header__info__links__item',
+              `project-header__info__links__item--${slot}`,
+            ]"
+          >
+            <span class="project-header__info__links__item__content">
+              <slot :name="slot" />
+            </span>
+          </li>
+        </template>
       </ul>
     </div>
   </header>
