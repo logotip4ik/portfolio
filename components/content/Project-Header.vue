@@ -2,15 +2,18 @@
 const { gsap } = useGsap();
 const emitter = useEmitter();
 
-emitter.once('overlay:hiding', () => {
-  gsap.to('.project-header__info__links__item__content', {
-    yPercent: -110,
-    stagger: { from: 'end', each: 0.075 },
-    ease: 'expo.out',
-    duration: 1,
-    delay: 0.275,
-  });
-});
+const revealInfoLinks = () =>
+  gsap.utils.toArray('.project-header__info__links__item__content').length === 0
+    ? setTimeout(revealInfoLinks, 20)
+    : gsap.to('.project-header__info__links__item__content', {
+        yPercent: -110, // eslint-disable-line
+        stagger: { from: 'end', each: 0.075 }, // eslint-disable-line
+        ease: 'expo.out', // eslint-disable-line
+        duration: 1, // eslint-disable-line
+        delay: 0.275, // eslint-disable-line
+      }); // eslint-disable-line
+
+emitter.once('overlay:hiding', revealInfoLinks);
 </script>
 
 <template>
