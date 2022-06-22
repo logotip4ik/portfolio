@@ -1,5 +1,5 @@
 <script setup>
-const { $smoothScroll, $isDarkMode } = useNuxtApp();
+const { $smoothScroll, $isDarkMode, $checkReducedMotion } = useNuxtApp();
 
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
@@ -49,14 +49,16 @@ const menuBackItemContentLinksItem = ref([]);
 let prevAnimation;
 
 function showMenu() {
+  const prefersReducedMotion = $checkReducedMotion();
+
   if (prevAnimation) prevAnimation.kill();
 
-  // if (this.prefersReducedMotion)
-  //   return (this.prevAnimation = this.$gsap.fromTo(
-  //     this.$refs.menu,
-  //     { autoAlpha: 0 },
-  //     { autoAlpha: 1 }
-  //   ))
+  if (prefersReducedMotion)
+    return (prevAnimation = gsap.fromTo(
+      menu.value,
+      { autoAlpha: 0 },
+      { autoAlpha: 1 }
+    ));
 
   prevAnimation = gsap.timeline();
 
@@ -107,11 +109,6 @@ function showMenu() {
 
 function hideMenu() {
   if (prevAnimation) prevAnimation.kill();
-
-  // if (this.prefersReducedMotion)
-  //   return (this.prevAnimation = this.$gsap.to(this.$refs.menu, {
-  //     autoAlpha: 0,
-  //   }))
 
   prevAnimation = gsap.to(menu.value, {
     autoAlpha: 0,
