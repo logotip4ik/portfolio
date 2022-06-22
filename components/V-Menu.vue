@@ -23,7 +23,7 @@ const navigationalLinks = [
   {
     label: 'About',
     action: () => {
-      $smoothScroll.scrollTo('.about');
+      $smoothScroll.scrollTo('.about-me');
       isShowingMenu.value = false;
     },
   },
