@@ -61,7 +61,7 @@ emitter.once('overlay:hiding', showTitle);
 .project-title {
   font-weight: 200;
 
-  max-width: 90vh;
+  max-width: 60vw;
 
   color: var(--ff-color);
 
