@@ -47,8 +47,6 @@ function enterPageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
-      gsap.set(['#scroller', pageEl], { clearProps: 'transform' });
-
       emitter.emit('pointer:inactive');
     },
     onComplete: () => {
@@ -58,18 +56,26 @@ function enterPageAnim(pageEl, done) {
       ScrollTrigger.refresh();
 
       gsap.set(['#scroller', pageEl], { clearProps: 'transform' });
-
-      // when user was scrolling down, the nav will be hidden, but
-      // on a new page the nav should be visible
-      gsap.to('.nav', { autoAlpha: 1 });
-
-      done();
-
-      emitter.emit('overlay:hiding');
     },
   });
 
-  tl.fromTo(pageEl, { y: 200 }, { y: 0, duration: 1, clearProps: 'y' }, 0.3);
+  tl.fromTo(
+    pageEl,
+    { y: 200 },
+    {
+      y: 0,
+      duration: 1,
+      clearProps: 'y',
+      onStart() {
+        setTimeout(() => {
+          gsap.set(['#scroller', pageEl], { clearProps: 'transform' });
+
+          done();
+        }, (this.time / 3) * 1000);
+      },
+    },
+    0.2
+  );
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -82,8 +88,15 @@ function enterPageAnim(pageEl, done) {
       yPercent: -25,
       clipPath: 'inset(0% 0% 75% 0%)',
       stagger: { each: 0.2, from: 'end' },
+      onComplete: () => {
+        // when user was scrolling down, the nav will be hidden, but
+        // on a new page the nav should be visible
+        gsap.to('.nav', { autoAlpha: 1 });
+
+        emitter.emit('overlay:hiding');
+      },
     },
-    0.2
+    0.1
   );
 }
 
