@@ -11,23 +11,14 @@ const emitter = useEmitter();
 
 useSeoHead({ title: project.value.title });
 
+const showBackButton = () =>
+  gsap.to('.nav__back-link', { autoAlpha: 1, delay: 0.5 });
+
 onMounted(() => {
-  gsap.set('#scroller', { clearProps: 'all' });
   gsap.set('.nav__back-link', { autoAlpha: 0 });
-
-  const showBackButton = () =>
-    gsap.fromTo(
-      '.nav__back-link',
-      { autoAlpha: 0 },
-      { autoAlpha: 1, delay: 0.5 }
-    );
-
-  emitter.on('overlay:hiding', showBackButton);
-
-  onBeforeUnmount(() => {
-    emitter.off('overlay:hiding', showBackButton);
-  });
 });
+
+emitter.once('overlay:hiding', showBackButton);
 </script>
 
 <template>
