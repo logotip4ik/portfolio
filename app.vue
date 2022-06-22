@@ -50,9 +50,6 @@ function enterPageAnim(pageEl, done) {
       gsap.set(['#scroller', pageEl], { clearProps: 'transform' });
 
       emitter.emit('pointer:inactive');
-
-      const time = (tl.totalDuration() - 0.175) * 1000;
-      setTimeout(() => emitter.emit('overlay:hiding'), time);
     },
     onComplete: () => {
       $smoothScroll.update();
@@ -67,6 +64,8 @@ function enterPageAnim(pageEl, done) {
       gsap.to('.nav', { autoAlpha: 1 });
 
       done();
+
+      emitter.emit('overlay:hiding');
     },
   });
 
