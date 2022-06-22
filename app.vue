@@ -40,6 +40,7 @@ function leavePageAnim(pageEl, done) {
 
 function enterPageAnim(pageEl, done) {
   const tl = gsap.timeline({
+    delay: 0.1,
     defaults: { ease: 'expo.out' },
     onStart: () => {
       emitter.emit('pointer:inactive');
