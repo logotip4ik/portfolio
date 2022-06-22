@@ -10,12 +10,9 @@ nuxtApp.hook('page:finish', () => emitter.emit('shader:start'));
 function leavePageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
-    onStart: () => {
-      $smoothScroll.disable();
-    },
   });
 
-  tl.to(pageEl, { y: -200, duration: 1, ease: 'power2.out' }, 0);
+  tl.to(pageEl, { y: -200, duration: 1 }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -42,18 +39,20 @@ function leavePageAnim(pageEl, done) {
 }
 
 function enterPageAnim(pageEl, done) {
-  $smoothScroll.disable();
-
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
       emitter.emit('pointer:inactive');
     },
     onComplete: () => {
-      $smoothScroll.update();
       $smoothScroll.enable();
-
       ScrollTrigger.refresh();
+
+      gsap.set('#scroller', { clearProps: 'all' });
+
+      // when user was scrolling down, the nav will be hidden, but
+      // on a new page the nav should be visible
+      gsap.to('.nav', { autoAlpha: 1 });
     },
   });
 
@@ -81,10 +80,6 @@ function enterPageAnim(pageEl, done) {
       clipPath: 'inset(0% 0% 75% 0%)',
       stagger: { each: 0.2, from: 'end' },
       onComplete: () => {
-        // when user was scrolling down, the nav will be hidden, but
-        // on a new page the nav should be visible
-        gsap.to('.nav', { autoAlpha: 1 });
-
         emitter.emit('overlay:hiding');
       },
     },
