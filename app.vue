@@ -54,8 +54,6 @@ function enterPageAnim(pageEl, done) {
       $smoothScroll.enable();
 
       ScrollTrigger.refresh();
-
-      gsap.set(['#scroller', pageEl], { clearProps: 'transform' });
     },
   });
 
@@ -66,13 +64,7 @@ function enterPageAnim(pageEl, done) {
       y: 0,
       duration: 1,
       clearProps: 'y',
-      onStart() {
-        setTimeout(() => {
-          gsap.set(['#scroller', pageEl], { clearProps: 'transform' });
-
-          done();
-        }, (this.time / 3) * 1000);
-      },
+      onStart: () => done(),
     },
     0.2
   );
