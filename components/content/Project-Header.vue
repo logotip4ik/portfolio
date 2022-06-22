@@ -2,15 +2,13 @@
 const { gsap } = useGsap();
 const emitter = useEmitter();
 
-onMounted(() => {
-  emitter.once('overlay:hiding', () => {
-    gsap.to('.project-header__info__links__item__content', {
-      yPercent: -110,
-      stagger: { from: 'end', each: 0.075 },
-      ease: 'expo.out',
-      duration: 1,
-      delay: 0.275,
-    });
+emitter.once('overlay:hiding', () => {
+  gsap.to('.project-header__info__links__item__content', {
+    yPercent: -110,
+    stagger: { from: 'end', each: 0.075 },
+    ease: 'expo.out',
+    duration: 1,
+    delay: 0.275,
   });
 });
 </script>
