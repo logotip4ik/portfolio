@@ -47,9 +47,12 @@ function enterPageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
-      gsap.set('#scroller', { clearProps: 'transform' });
+      gsap.set(['#scroller', pageEl], { clearProps: 'transform' });
 
       emitter.emit('pointer:inactive');
+
+      const time = (tl.totalDuration() - 0.175) * 1000;
+      setTimeout(() => emitter.emit('overlay:hiding'), time);
     },
     onComplete: () => {
       $smoothScroll.update();
@@ -57,7 +60,7 @@ function enterPageAnim(pageEl, done) {
 
       ScrollTrigger.refresh();
 
-      gsap.set('#scroller', { clearProps: 'transform' });
+      gsap.set(['#scroller', pageEl], { clearProps: 'transform' });
 
       // when user was scrolling down, the nav will be hidden, but
       // on a new page the nav should be visible
@@ -80,9 +83,6 @@ function enterPageAnim(pageEl, done) {
       yPercent: -25,
       clipPath: 'inset(0% 0% 75% 0%)',
       stagger: { each: 0.2, from: 'end' },
-      onComplete: () => {
-        emitter.emit('overlay:hiding');
-      },
     },
     0.2
   );
