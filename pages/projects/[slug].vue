@@ -12,6 +12,7 @@ const emitter = useEmitter();
 useSeoHead({ title: project.value.title });
 
 onMounted(() => {
+  gsap.set('#scroller', { clearProps: 'all' });
   gsap.set('.nav__back-link', { autoAlpha: 0 });
 
   const showBackButton = () =>
