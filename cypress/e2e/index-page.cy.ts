@@ -51,7 +51,7 @@ describe('Index page', () => {
     aboutMe.should('be.visible');
 
     aboutMe.each((el) => {
-      expect(el.text().length).to.be.greaterThan(0);
+      cy.wrap(el.text()).should('have.length.above', 0);
     });
   });
 });
