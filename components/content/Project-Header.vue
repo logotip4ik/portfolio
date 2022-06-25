@@ -15,7 +15,16 @@ const revealInfoLinks = () =>
         delay: 0.275, // eslint-disable-line
       }); // eslint-disable-line
 
-emitter.once('overlay:hiding', revealInfoLinks);
+let timeout;
+onMounted(() => {
+  timeout = setTimeout(revealInfoLinks, 850);
+});
+
+emitter.once('overlay:hiding', () => {
+  revealInfoLinks();
+
+  clearTimeout(timeout);
+});
 </script>
 
 <template>
