@@ -388,8 +388,10 @@ onMounted(() => {
   }
 
   &__back-link {
+    --easing: cubic-bezier(0.19, 1, 0.22, 1);
     --size: calc(var(--step-5) * 1.5);
     --preferred-color: #ebebeb;
+    --inverted-color: #030303;
 
     display: flex;
     justify-content: center;
@@ -407,6 +409,7 @@ onMounted(() => {
     pointer-events: all;
     opacity: 0;
     cursor: none;
+    transition: background-color 0.75s var(--easing);
 
     svg {
       width: 35%;
@@ -415,6 +418,16 @@ onMounted(() => {
       min-width: 22px;
 
       color: var(--preferred-color);
+
+      transition: color 0.75s var(--easing);
+    }
+
+    &:is(:focus, :hover) {
+      background-color: var(--preferred-color);
+
+      svg {
+        color: var(--inverted-color);
+      }
     }
   }
 }
