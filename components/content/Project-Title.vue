@@ -5,10 +5,10 @@ const { gsap } = useGsap();
 const emitter = useEmitter();
 
 const title = ref(null);
-const canRunReveal = ref(false);
+const canReveal = ref(false);
 
 function showTitle() {
-  if (!canRunReveal.value) return setTimeout(showTitle, 20);
+  if (!canReveal.value) return setTimeout(showTitle, 20);
 
   const revealRef = gsap.timeline({
     defaults: { ease: 'expo.out' },
@@ -45,7 +45,7 @@ onMounted(() => {
     wrapper.appendChild(line);
   }
 
-  canRunReveal.value = true;
+  canReveal.value = true;
 });
 
 emitter.once('overlay:hiding', showTitle);
