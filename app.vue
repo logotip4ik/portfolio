@@ -10,6 +10,9 @@ nuxtApp.hook('page:finish', () => emitter.emit('shader:start'));
 function leavePageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
+    onStart: () => {
+      $smoothScroll.disable();
+    },
   });
 
   tl.to(pageEl, { y: -200, duration: 1 }, 0);
@@ -44,10 +47,13 @@ function enterPageAnim(pageEl, done) {
     defaults: { ease: 'expo.out' },
     onStart: () => {
       emitter.emit('pointer:inactive');
+
+      done();
     },
     onComplete: () => {
-      $smoothScroll.enable();
       ScrollTrigger.refresh();
+
+      $smoothScroll.enable();
 
       gsap.set('#scroller', { clearProps: 'all' });
 
@@ -57,17 +63,7 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.fromTo(
-    pageEl,
-    { y: 200 },
-    {
-      y: 0,
-      duration: 1,
-      clearProps: 'y',
-      onStart: () => done(),
-    },
-    0.2
-  );
+  tl.fromTo(pageEl, { y: 200 }, { y: 0, duration: 1, clearProps: 'y' }, 0.2);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -156,11 +152,14 @@ onBeforeUnmount(() => {
       <Transition
         :css="false"
         mode="out-in"
+        :duration="{ leave: 0.7, enter: 0.1 }"
         @enter="enterPageAnim"
         @leave="leavePageAnim"
       >
         <div :key="route.name + route.params.slug">
-          <NuxtPage />
+          <KeepAlive>
+            <NuxtPage />
+          </KeepAlive>
         </div>
       </Transition>
     </div>
