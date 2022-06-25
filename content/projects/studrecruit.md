@@ -41,20 +41,20 @@ This project was build exclusively for Student Recruiting Department. It is a st
 :::
 
 :::project-section
-::::project-image{src="/img/studrecruit-collage.png" alt="some student recruiting website screens combined into collage"}
+::::lazy-project-image{src="/img/studrecruit-collage.png" alt="some student recruiting website screens combined into collage"}
 ::::
 :::
 
 :::project-section{type="2-col" style="--gap: 2rem;--col-1: 75%"}
-::::project-image{src="/img/studrecruit-fonts.png" alt="student recruit website typography"}
+::::lazy-project-image{src="/img/studrecruit-fonts.png" alt="student recruit website typography"}
 ::::
 
-::::project-image{src="/img/studrecruit-phone-frame.png" alt="student recruit website in phone frame"}
+::::lazy-project-image{src="/img/studrecruit-phone-frame.png" alt="student recruit website in phone frame"}
 ::::
 :::
 
 :::project-section
-::::project-image{src="/img/studrecruit-colors.png" alt="student recruit website colors"}
+::::lazy-project-image{src="/img/studrecruit-colors.png" alt="student recruit website colors"}
 ::::
 :::
 
