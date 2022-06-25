@@ -53,6 +53,7 @@ onMounted(() => {
 
 emitter.once('overlay:hiding', () => {
   showTitle();
+
   clearTimeout(timeout);
 });
 </script>
