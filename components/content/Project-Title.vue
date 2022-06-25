@@ -27,7 +27,10 @@ function showTitle() {
   );
 }
 
+let timeout;
 onMounted(() => {
+  timeout = setTimeout(showTitle, 850);
+
   const text = new SplitType(title.value, {
     types: 'lines, words',
     lineClass: 'project-title__line',
@@ -48,7 +51,10 @@ onMounted(() => {
   canReveal.value = true;
 });
 
-emitter.once('overlay:hiding', showTitle);
+emitter.once('overlay:hiding', () => {
+  showTitle();
+  clearTimeout(timeout);
+});
 </script>
 
 <template>
