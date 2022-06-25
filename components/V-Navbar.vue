@@ -422,7 +422,7 @@ onMounted(() => {
       transition: color 0.75s var(--easing);
     }
 
-    &:is(:focus, :hover) {
+    &:is(:focus-visible, :hover) {
       background-color: var(--preferred-color);
 
       svg {
