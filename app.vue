@@ -33,11 +33,15 @@ function leavePageAnim(pageEl, done) {
         currentRoute.value = route.name;
 
         $smoothScroll.scrollTo(0, 0);
-
-        done();
       },
     },
     0
+  );
+  tl.fromTo(
+    '.page-overlay__slide__text',
+    { yPercent: 105, autoAlpha: 1 },
+    { yPercent: 0, onComplete: () => done() },
+    0.25
   );
 }
 
@@ -81,6 +85,12 @@ function enterPageAnim(pageEl, done) {
       },
     },
     0.1
+  );
+  tl.fromTo(
+    '.page-overlay__slide__text',
+    { yPercent: 0, autoAlpha: 1 },
+    { yPercent: -105 },
+    0
   );
 }
 
