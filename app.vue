@@ -21,8 +21,8 @@ function leavePageAnim(pageEl, done) {
     {
       opacity: 1,
       pointerEvents: 'all',
-      yPercent: 25,
-      clipPath: 'inset(75% 0% 0% 0%)',
+      yPercent: 5,
+      clipPath: 'inset(95% 0% 0% 0%)',
     },
     {
       yPercent: 0,
@@ -73,8 +73,8 @@ function enterPageAnim(pageEl, done) {
       clipPath: 'inset(0% 0% 0% 0%)',
     },
     {
-      yPercent: -25,
-      clipPath: 'inset(0% 0% 75% 0%)',
+      yPercent: -5,
+      clipPath: 'inset(0% 0% 95% 0%)',
       stagger: { each: 0.2, from: 'end' },
       onComplete: () => {
         emitter.emit('overlay:hiding');
