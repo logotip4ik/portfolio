@@ -1,7 +1,16 @@
 <template>
   <div class="page-overlay">
     <div class="page-overlay__slide"></div>
-    <div class="page-overlay__slide"></div>
+    <div class="page-overlay__slide">
+      <p class="page-overlay__slide__text__wrapper">
+        <span
+          class="page-overlay__slide__text"
+          style="opacity: 0; visibility: hidden"
+        >
+          {{ $route.params.slug || 'index' }}
+        </span>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -17,6 +26,10 @@
   pointer-events: none;
 
   &__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: absolute;
     top: 0;
     left: 0;
@@ -37,6 +50,20 @@
       z-index: 2;
 
       background-color: var(--surface-color);
+    }
+
+    &__text {
+      display: inline-block;
+
+      font-size: var(--step-1);
+
+      opacity: 0.8;
+
+      &__wrapper {
+        overflow: hidden;
+
+        max-width: 60vw;
+      }
     }
   }
 }
