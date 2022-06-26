@@ -152,7 +152,6 @@ onBeforeUnmount(() => {
       <Transition
         :css="false"
         mode="out-in"
-        :duration="{ leave: 0.7, enter: 0.1 }"
         @enter="enterPageAnim"
         @leave="leavePageAnim"
       >
