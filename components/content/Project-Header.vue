@@ -35,7 +35,7 @@ emitter.once('overlay:hiding', () => {
       <ul class="project-header__info__links">
         <template v-for="(slot, key) in slots">
           <li
-            v-if="$slots.live"
+            v-if="$slots[slot]"
             :key="key"
             :class="[
               'project-header__info__links__item',
