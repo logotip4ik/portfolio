@@ -142,9 +142,15 @@ onMounted(() => {
   if (route.name !== 'index') {
     gsap.set('.loader', { autoAlpha: 0, display: 'none' });
 
-    setTimeout(() => {
-      enterPageAnim('#scroller', () => null);
-    }, 500);
+    gsap
+      .fromTo(
+        '.page-overlay__slide__text',
+        { yPercent: 105, autoAlpha: 1 },
+        { yPercent: 0, delay: 0.75 }
+      )
+      .then(() => {
+        enterPageAnim('#scroller', () => null);
+      });
   }
 
   window.addEventListener('resize', setVh);
