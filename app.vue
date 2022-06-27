@@ -146,7 +146,7 @@ onMounted(() => {
       .fromTo(
         '.page-overlay__slide__text',
         { yPercent: 105, autoAlpha: 1 },
-        { yPercent: 0, delay: 0.75 }
+        { yPercent: 0, delay: 0.5, ease: 'expo.out' }
       )
       .then(() => {
         enterPageAnim('#scroller', () => null);
