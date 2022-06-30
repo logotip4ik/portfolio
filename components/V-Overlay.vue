@@ -39,7 +39,7 @@
     &:nth-of-type(1) {
       z-index: 1;
 
-      background-color: #8e8285;
+      background-color: #403a3b;
 
       @media (prefers-color-scheme: light) {
         background-color: var(--primary-color);
