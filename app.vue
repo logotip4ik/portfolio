@@ -21,13 +21,13 @@ function leavePageAnim(pageEl, done) {
     {
       opacity: 1,
       pointerEvents: 'all',
-      yPercent: 5,
-      clipPath: 'inset(95% 0% 0% 0%)',
+      yPercent: 15,
+      clipPath: 'inset(85% 0% 0% 0%)',
     },
     {
       yPercent: 0,
       clipPath: 'inset(0% 0% 0% 0%)',
-      stagger: { each: 0.2 },
+      stagger: { each: 0.14 },
       onComplete: () => {
         // need to set this myself because the route changes faster then overlay is hiding the page
         currentRoute.value = route.name;
@@ -77,9 +77,9 @@ function enterPageAnim(pageEl, done) {
       clipPath: 'inset(0% 0% 0% 0%)',
     },
     {
-      yPercent: -5,
-      clipPath: 'inset(0% 0% 95% 0%)',
-      stagger: { each: 0.2, from: 'end' },
+      yPercent: -15,
+      clipPath: 'inset(0% 0% 85% 0%)',
+      stagger: { each: 0.14, from: 'end' },
       onComplete: () => {
         emitter.emit('overlay:hiding');
       },
