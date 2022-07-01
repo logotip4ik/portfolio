@@ -27,7 +27,8 @@ function leavePageAnim(pageEl, done) {
     {
       yPercent: 0,
       clipPath: 'inset(0% 0% 0% 0%)',
-      stagger: { each: 0.185 },
+      stagger: { each: 0.1 },
+      duration: 0.75,
       onComplete: () => {
         // need to set this myself because the route changes faster then overlay is hiding the page
         currentRoute.value = route.name;
@@ -47,7 +48,7 @@ function leavePageAnim(pageEl, done) {
 
 function enterPageAnim(pageEl, done) {
   const tl = gsap.timeline({
-    delay: 0.1,
+    delay: 0.15,
     defaults: { ease: 'expo.out' },
     onStart: () => {
       emitter.emit('pointer:inactive');
@@ -79,7 +80,8 @@ function enterPageAnim(pageEl, done) {
     {
       yPercent: -15,
       clipPath: 'inset(0% 0% 85% 0%)',
-      stagger: { each: 0.185, from: 'end' },
+      stagger: { each: 0.1, from: 'end' },
+      duration: 0.75,
       onComplete: () => {
         emitter.emit('overlay:hiding');
       },
@@ -146,7 +148,7 @@ onMounted(() => {
       .fromTo(
         '.page-overlay__slide__text',
         { yPercent: 105, autoAlpha: 1 },
-        { yPercent: 0, delay: 0.2, ease: 'expo.out' }
+        { yPercent: 0, delay: 0.15, ease: 'expo.out' }
       )
       .then(() => {
         enterPageAnim('#scroller', () => null);
