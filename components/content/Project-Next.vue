@@ -6,6 +6,13 @@ const { data: surrounded } = await useAsyncData(
 );
 
 const next = computed(() => surrounded.value[1] || surrounded.value[0]);
+
+useHead({
+  link: [
+    { rel: 'next', href: next.value._path },
+    { rel: 'prefetch', href: next.value.image },
+  ],
+});
 </script>
 
 <template>
