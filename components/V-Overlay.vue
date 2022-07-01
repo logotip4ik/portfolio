@@ -39,10 +39,19 @@
     &:nth-of-type(1) {
       z-index: 1;
 
-      background-color: #403a3b;
+      background: #201d1e;
+      background: linear-gradient(0deg, #201d1e 0%, #605659 50%, #201d1e 100%);
 
       @media (prefers-color-scheme: light) {
         background-color: var(--primary-color);
+
+        background: #ffe6ed;
+        background: linear-gradient(
+          0deg,
+          #ffe6ed 0%,
+          #fff6f8 50%,
+          #ffe6ed 100%
+        );
       }
     }
 
