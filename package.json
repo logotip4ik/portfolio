@@ -7,6 +7,7 @@
     "preview": "nuxt preview",
     "cypress:open": "cypress open"
   },
+  "browserslist": [ "last 3 versions" ],
   "devDependencies": {
     "@nuxt/content": "^2.0.0",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
