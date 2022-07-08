@@ -49,7 +49,7 @@ export default defineNuxtConfig({
         property: 'og:description',
         name: 'og:description',
         content:
-          'I will build you website as quick as possible and with high attention to details рџ‘Њ',
+          'I will build you website as quick as possible and with high attention to details👌',
       },
       { property: 'og:locale', name: 'og:locale', content: 'en' },
       {
