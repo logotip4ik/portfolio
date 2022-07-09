@@ -4,6 +4,8 @@ import PluginGLSL from 'vite-plugin-glsl';
 import PluginSVGLoader from 'vite-svg-loader';
 import PluginEslint from 'vite-plugin-eslint';
 
+import cloudflareHeaders from '@logotip4ik_/nuxt-cloudflare-headers';
+
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: true,
@@ -100,9 +102,9 @@ export default defineNuxtConfig({
 
   modules: ['@nuxt/content'],
 
-  // cloudflareHeaders: {
-  //   '/*': [{ 'X-Robots-Tag': 'all' }],
-  // },
+  cloudflareHeaders: {
+    '/*': [{ 'X-Robots-Tag': 'all' }],
+  },
 
   vite: {
     plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
