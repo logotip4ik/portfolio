@@ -395,9 +395,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
 "@logotip4ik_/nuxt-cloudflare-headers@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@logotip4ik_/nuxt-cloudflare-headers/-/nuxt-cloudflare-headers-1.0.2.tgz#2aa78d943e81f34bda4c0e4f786ba88de88044c9"
-  integrity sha512-EwjfkNs989/0qS3sPdFbyKc0VQGZgChNQtTB0rts6Au5x92tm4aCzJrATtxMeYWESyoKAHmmep12uXcKbD6daw==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@logotip4ik_/nuxt-cloudflare-headers/-/nuxt-cloudflare-headers-1.0.3.tgz#98c35c63bb2d84b8ff2fe41d286133c5f42ae7d4"
+  integrity sha512-dOw5Di8++5ahziA1gZFscA0RphbsRVWnCd41iiMLJRnvtZnZ2NPko3XJPb2yKleFl1/A9Sjsx3dWrBbtmDK24Q==
   dependencies:
     "@nuxt/kit" "^3.0.0-rc.4"
     defu "^6.0.0"
