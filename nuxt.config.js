@@ -100,7 +100,7 @@ export default defineNuxtConfig({
     '~/assets/styles/global.css',
   ],
 
-  modules: ['@nuxt/content', cloudflareHeaders],
+  modules: ['@nuxt/content'],
 
   cloudflareHeaders: {
     '/*': [{ 'X-Robots-Tag': 'all' }],
