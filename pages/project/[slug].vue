@@ -5,7 +5,7 @@ const route = useRoute();
 
 const { data: project } = await useAsyncData(
   `project-${route.params.slug}`,
-  () => queryContent(`projects/${route.params.slug}`).findOne()
+  () => queryContent(`project/${route.params.slug}`).findOne()
 );
 
 const projectPage = ref(null);

@@ -6,7 +6,7 @@ useSeoHead({
 });
 
 const { data: projects } = await useAsyncData('prerender-projects', () =>
-  queryContent('projects').only(['_path']).find()
+  queryContent('project').only(['_path']).find()
 );
 
 useHead({

@@ -2,7 +2,7 @@
 const route = useRoute();
 const { data: surrounded } = await useAsyncData(
   `surround-project-${route.params.slug}`,
-  () => queryContent('projects').findSurround(route.fullPath)
+  () => queryContent('project').findSurround(route.fullPath)
 );
 
 const next = computed(() => surrounded.value[1] || surrounded.value[0]);
