@@ -268,6 +268,11 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
+"@builder.io/partytown@^0.6.0":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@builder.io/partytown/-/partytown-0.6.2.tgz#3437fb5a0fcbdd36f239bbde05ff31c60948386e"
+  integrity sha512-2wSTB7v3176Mzfu+gTGm+I7MAALeOpvATQ5qf+NUMLfeuvVEX/eWxcJPrrIy7UcoQyT3Mm6Tsb2sfBqJy4R4EQ==
+
 "@cloudflare/kv-asset-handler@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@cloudflare/kv-asset-handler/-/kv-asset-handler-0.2.0.tgz#c9959bbd7a1c40bd7c674adae98aa8c8d0e5ca68"
@@ -654,6 +659,17 @@
     eslint-plugin-promise "^6.0.0"
     eslint-plugin-unicorn "^42.0.0"
     eslint-plugin-vue "^8.7.1"
+
+"@nuxtjs/partytown@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/partytown/-/partytown-1.2.1.tgz#3b0fa870934a367a01c3c42bd1186aac95fdc121"
+  integrity sha512-4kKza3idt1vRzLaeK4pnXeSg82iPG8cFhLcFNvyn7pNX7FLf8jciqdOY05xlKXeBYa7EY162euKHY2+eb0IXPg==
+  dependencies:
+    "@builder.io/partytown" "^0.6.0"
+    "@nuxt/kit" "^3.0.0-rc.3"
+    knitwork "^0.1.1"
+    serve-static "^1.15.0"
+    ufo "^0.8.4"
 
 "@rollup/plugin-alias@^3.1.9":
   version "3.1.9"
