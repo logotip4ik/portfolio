@@ -103,7 +103,16 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', cloudflareHeaders],
 
   cloudflareHeaders: {
-    '/*': [{ 'X-Robots-Tag': 'all' }],
+    '/*': [
+      { 'X-Robots-Tag': 'all' },
+      { 'X-Frame-Options': 'DENY' },
+      { 'X-Content-Type-Options': 'nosniff' },
+      { 'Referrer-Policy': 'no-referrer' },
+      { 'Permissions-Policy': 'document-domain=()' },
+      {
+        'Content-Security-Policy': "script-src 'self'; frame-ancestors 'none';",
+      },
+    ],
   },
 
   vite: {
