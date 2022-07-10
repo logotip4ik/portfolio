@@ -109,9 +109,6 @@ export default defineNuxtConfig({
       { 'X-Content-Type-Options': 'nosniff' },
       { 'Referrer-Policy': 'no-referrer' },
       { 'Permissions-Policy': 'document-domain=()' },
-      {
-        'Content-Security-Policy': "script-src 'self'; frame-ancestors 'none';",
-      },
     ],
   },
 
