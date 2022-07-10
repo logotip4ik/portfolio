@@ -4,8 +4,6 @@ import PluginGLSL from 'vite-plugin-glsl';
 import PluginSVGLoader from 'vite-svg-loader';
 import PluginEslint from 'vite-plugin-eslint';
 
-import cloudflareHeaders from '@logotip4ik_/nuxt-cloudflare-headers';
-
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: true,
@@ -100,7 +98,11 @@ export default defineNuxtConfig({
     '~/assets/styles/global.css',
   ],
 
-  modules: ['@nuxt/content', cloudflareHeaders],
+  modules: [
+    '@nuxt/content',
+    '@logotip4ik_/nuxt-cloudflare-headers',
+    '@nuxtjs/partytown',
+  ],
 
   cloudflareHeaders: {
     '/*': [
