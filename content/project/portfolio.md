@@ -27,9 +27,7 @@ Portfolio Version 3
 :::
 
 #source
-:::project-outer-link{href="https://github.com/logotip4ik/portfolio"}
-source
-:::
+[source](https://github.com/logotip4ik/portfolio)
 ::
 
 ::project-main{style="padding: 0"}

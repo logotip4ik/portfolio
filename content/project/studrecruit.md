@@ -17,9 +17,7 @@ LPNU Student Recruiting
 :::
 
 #live
-:::project-outer-link{href="https://studrecruit.lpnu.ua"}
-see live
-:::
+[see live](https://studrecruit.lpnu.ua)
 ::
 
 ::project-main
@@ -31,12 +29,8 @@ see live
 :::project-section{type="text"}
 This project was build exclusively for Student Recruiting Department. It is a student organization that consolidates the students' union and its government. The recruitment department is one of the functioning departments of the Students' and Ph.D. students' government and primary trade-union organization of Lviv Polytechnic National University that provides employment opportunities for students.
 
-- ::::project-outer-link{href="https://t.me/recruiting_nulp"}
-  tg
-  ::::
-- ::::project-outer-link{href="https://instagram.com"}
-  ig
-  ::::
+- [tg](https://t.me/recruiting_nulp)
+- [ig](https://www.instagram.com/recruiting.nulp/)
 
 :::
 
