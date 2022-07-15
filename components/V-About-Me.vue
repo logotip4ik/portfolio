@@ -1,5 +1,5 @@
 <script setup>
-import SplitType from 'split-type';
+import SplitType from 'split-type/lib/SplitType';
 
 const { data: aboutMeText } = await useAsyncData('about-me-text', () =>
   queryContent('about-me').findOne()
@@ -12,7 +12,7 @@ const aboutMeContent = ref(null);
 
 onMounted(() => {
   setTimeout(() => {
-    const text = new SplitType(aboutMeContent.value, {
+    const text = new SplitType(aboutMeContent.value.$el.firstChild, {
       types: 'lines',
       lineClass: 'about-me__content__line',
     });
@@ -25,14 +25,14 @@ onMounted(() => {
         stagger: 0.1,
         ease: 'none',
         scrollTrigger: {
-          trigger: aboutMeContent.value,
+          trigger: aboutMeContent.value.$el,
           start: 'top 80%',
           end: 'bottom 85%',
           scrub: window.innerWidth >= $smoothScrollBreakPoint ? true : 0.5,
         },
       }
     );
-  }, 75);
+  }, 0);
 });
 </script>
 
@@ -40,9 +40,11 @@ onMounted(() => {
   <section class="about-me" data-scroll-section>
     <VH2 class="about-me__title">About Me</VH2>
 
-    <p ref="aboutMeContent" class="about-me__content">
-      {{ aboutMeText.description }}
-    </p>
+    <ContentRenderer
+      ref="aboutMeContent"
+      :value="aboutMeText"
+      class="about-me__content"
+    />
   </section>
 </template>
 

@@ -1,5 +1,5 @@
 <script setup>
-import SplitType from 'split-type';
+import SplitType from 'split-type/lib/SplitType';
 
 const { gsap } = useGsap();
 
