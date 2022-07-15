@@ -29,6 +29,7 @@ defineProps({
 
   color: var(--ff-color);
   text-decoration: none;
+  text-transform: lowercase;
 
   opacity: 0.75;
   cursor: none;
