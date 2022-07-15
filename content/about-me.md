@@ -1,1 +1,1 @@
-My name is Bogdan Kostyuk and I am Ukrainian based Front End developer, passionate about UI effects, animations and code. Mostly in use are Nuxt.js and Next.js, Scss for styling and Gsap for smooth animations, also recently got my hands on three.js.
+My name is _Bogdan Kostyuk_ and I am Ukrainian based Front End developer, passionate about UI effects, animations and code. Mostly in use are NuxtJS and Next.js, SCSS for styling and GreenSock for smooth animations, also recently got my hands on ThreeJS.
