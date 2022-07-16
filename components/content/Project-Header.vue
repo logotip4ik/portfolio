@@ -5,26 +5,15 @@ const emitter = useEmitter();
 const slots = ['live', 'source'];
 
 const revealInfoLinks = () =>
-  gsap.utils.toArray('.project-header__info__links__item__content').length === 0
-    ? setTimeout(revealInfoLinks, 20)
-    : gsap.to('.project-header__info__links__item__content', {
-        yPercent: -110, // eslint-disable-line
-        stagger: { from: 'end', each: 0.075 }, // eslint-disable-line
-        ease: 'expo.out', // eslint-disable-line
-        duration: 1, // eslint-disable-line
-        delay: 0.275, // eslint-disable-line
-      }); // eslint-disable-line
+  gsap.to('.project-header__info__links__item__content', {
+    yPercent: -110,
+    stagger: { from: 'end', each: 0.075 },
+    ease: 'expo.out',
+    duration: 1,
+    delay: 0.275,
+  });
 
-let timeout;
-onMounted(() => {
-  timeout = setTimeout(revealInfoLinks, 850);
-});
-
-emitter.once('overlay:hiding', () => {
-  revealInfoLinks();
-
-  clearTimeout(timeout);
-});
+emitter.once('overlay:hiding', revealInfoLinks);
 </script>
 
 <template>

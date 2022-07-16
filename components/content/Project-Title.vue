@@ -5,11 +5,8 @@ const { gsap } = useGsap();
 const emitter = useEmitter();
 
 const title = ref(null);
-const canReveal = ref(false);
 
 function showTitle() {
-  if (!canReveal.value) return setTimeout(showTitle, 20);
-
   const revealRef = gsap.timeline({
     defaults: { ease: 'expo.out' },
   });
@@ -27,10 +24,7 @@ function showTitle() {
   );
 }
 
-let timeout;
 onMounted(() => {
-  timeout = setTimeout(showTitle, 850);
-
   const text = new SplitType(title.value, {
     types: 'lines, words',
     lineClass: 'project-title__line',
@@ -47,15 +41,9 @@ onMounted(() => {
     lineParent.appendChild(wrapper);
     wrapper.appendChild(line);
   }
-
-  canReveal.value = true;
 });
 
-emitter.once('overlay:hiding', () => {
-  showTitle();
-
-  clearTimeout(timeout);
-});
+emitter.once('overlay:hiding', showTitle);
 </script>
 
 <template>

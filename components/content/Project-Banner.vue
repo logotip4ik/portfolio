@@ -4,23 +4,19 @@ const bannerRef = ref(null);
 const { gsap } = useGsap();
 const emitter = useEmitter();
 
+const showBanner = () =>
+  gsap.to(bannerRef.value, {
+    yPercent: 0,
+    delay: 0.55,
+    duration: 0.65,
+    ease: 'back.out(0.8)',
+  });
+
 onMounted(() => {
   gsap.set(bannerRef.value, { yPercent: 175 });
-
-  const showBanner = () =>
-    gsap.to(bannerRef.value, {
-      yPercent: 0,
-      delay: 0.55,
-      duration: 0.65,
-      ease: 'back.out(0.8)',
-    });
-
-  emitter.on('overlay:hiding', showBanner);
-
-  onBeforeUnmount(() => {
-    emitter.off('overlay:hiding', showBanner);
-  });
 });
+
+emitter.once('overlay:hiding', showBanner);
 </script>
 
 <template>
