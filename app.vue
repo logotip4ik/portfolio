@@ -185,6 +185,5 @@ onBeforeUnmount(() => {
     <VLoader />
     <UkraineFlagStripe />
     <VOverlay />
-    <Script src="/posthog.js" type="text/partytown" />
   </div>
 </template>
