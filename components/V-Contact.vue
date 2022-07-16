@@ -65,12 +65,13 @@ onMounted(() => {
   padding: 5rem 0 8rem;
   margin-top: -3px;
 
+  border-radius: 0 0 2rem 2rem;
   background-color: var(--surface-color);
 
   overflow: hidden;
   pointer-events: all;
 
-  box-shadow: 0 2rem 0.75rem -1rem rgba($color: #ebebeb, $alpha: 0.0875);
+  box-shadow: 0 2rem 1.125rem -1.125rem rgba($color: #ebebeb, $alpha: 0.0875);
 
   &__email {
     display: block;
