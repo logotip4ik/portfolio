@@ -50,10 +50,17 @@ function enterPageAnim(pageEl, done) {
   const tl = gsap.timeline({
     delay: 0.15,
     defaults: { ease: 'expo.out' },
+    paused: true,
     onStart: () => {
       emitter.emit('pointer:inactive');
 
       done();
+
+      const waitFor = 0.75;
+      setTimeout(
+        () => emitter.emit('overlay:hiding'),
+        (tl.totalDuration() - waitFor) * 1000
+      );
     },
     onComplete: () => {
       ScrollTrigger.refresh();
@@ -83,7 +90,7 @@ function enterPageAnim(pageEl, done) {
       stagger: { each: 0.1, from: 'end' },
       duration: 0.75,
       onComplete: () => {
-        emitter.emit('overlay:hiding');
+        // emitter.emit('overlay:hiding');
       },
     },
     0.1
@@ -94,6 +101,10 @@ function enterPageAnim(pageEl, done) {
     { yPercent: -105 },
     0
   );
+
+  if (route.name === 'project-slug')
+    emitter.once('images:loaded', () => tl.play());
+  else tl.play();
 }
 
 function setVh() {
@@ -144,15 +155,13 @@ onMounted(() => {
   if (route.name !== 'index') {
     gsap.set('.loader', { autoAlpha: 0, display: 'none' });
 
-    gsap
-      .fromTo(
-        '.page-overlay__slide__text',
-        { yPercent: 105, autoAlpha: 1 },
-        { yPercent: 0, delay: 0.15, ease: 'expo.out' }
-      )
-      .then(() => {
-        enterPageAnim('#scroller', () => null);
-      });
+    gsap.fromTo(
+      '.page-overlay__slide__text',
+      { yPercent: 105, autoAlpha: 1 },
+      { yPercent: 0, delay: 0.075, ease: 'expo.out' }
+    );
+
+    enterPageAnim('#scroller', () => null);
   }
 
   window.addEventListener('resize', setVh);

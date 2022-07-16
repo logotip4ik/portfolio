@@ -2,18 +2,17 @@
 import imagesLoaded from 'imagesloaded';
 
 const route = useRoute();
+const { gsap } = useGsap();
+const emitter = useEmitter();
 
 const { data: project } = await useAsyncData(
   `project-${route.params.slug}`,
   () => queryContent(`project/${route.params.slug}`).findOne()
 );
 
-const projectPage = ref(null);
-
-const { gsap, ScrollTrigger } = useGsap();
-const emitter = useEmitter();
-
 useSeoHead({ title: project.value.title });
+
+const projectPage = ref(null);
 
 const showBackButton = () =>
   gsap.to('.nav__back-link', { autoAlpha: 1, delay: 0.5 });
@@ -21,7 +20,7 @@ const showBackButton = () =>
 onMounted(() => {
   gsap.set('.nav__back-link', { autoAlpha: 0 });
 
-  imagesLoaded(projectPage.value, () => ScrollTrigger.refresh());
+  imagesLoaded(projectPage.value, () => emitter.emit('images:loaded'));
 });
 
 emitter.once('overlay:hiding', showBackButton);
