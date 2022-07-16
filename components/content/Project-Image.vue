@@ -13,7 +13,7 @@ const { gsap } = useGsap();
 onMounted(() => {
   if (props.type !== 'fwidth') return;
 
-  const imageScale = 20;
+  const imageScale = 70;
 
   gsap.set(imageRef.value, { scale: 1 + imageScale * 0.01 });
   gsap.fromTo(
@@ -68,11 +68,15 @@ onMounted(() => {
   width: 100%;
   height: auto;
 
+  object-fit: cover;
+
   box-shadow: 0 0 1rem 0 rgba($color: #000000, $alpha: 0.025);
 
   &--fwidth {
     position: relative;
     z-index: -1;
+
+    max-height: 90vh;
 
     opacity: 1;
     box-shadow: none;
