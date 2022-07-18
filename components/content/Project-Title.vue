@@ -76,5 +76,9 @@ emitter.once('overlay:hiding', showTitle);
       transform: translateY(40px);
     }
   }
+
+  @media screen and (max-width: 900px) {
+    max-width: 100%;
+  }
 }
 </style>
