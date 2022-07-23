@@ -5332,6 +5332,11 @@ object.values@^1.1.5:
     define-properties "^1.1.3"
     es-abstract "^1.19.1"
 
+ogl@^0.0.97:
+  version "0.0.97"
+  resolved "https://registry.yarnpkg.com/ogl/-/ogl-0.0.97.tgz#88d71846599e1c81f96825562162582e5f6d6ab6"
+  integrity sha512-8VGNwb+BnVgg80uF2MDJGX+rLja8DPvmSsW1a3KCZO4pQF8sszRCgQVQmUA2EnoIYXtMUEztChkB0fuoFcWLxw==
+
 ohash@^0.1.0, ohash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/ohash/-/ohash-0.1.4.tgz#e5b55740b6047b9b66a3b836b1c92cc747197c05"
