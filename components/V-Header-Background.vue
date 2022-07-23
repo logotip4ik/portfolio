@@ -144,7 +144,7 @@ function createBackground() {
   gsap.to(object.program.uniforms.objectOpacity, {
     value: 1,
     duration: 1,
-    delay: 0.25,
+    delay: 0.4,
     onComplete: () => emitter.emit('shader:running'),
   });
 
