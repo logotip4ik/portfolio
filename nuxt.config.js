@@ -1,8 +1,8 @@
 import { defineNuxtConfig } from 'nuxt';
 
-import PluginGLSL from 'vite-plugin-glsl';
-import PluginSVGLoader from 'vite-svg-loader';
-import PluginEslint from 'vite-plugin-eslint';
+import GLSL from 'vite-plugin-glsl';
+import SVGLoader from 'vite-svg-loader';
+import Eslint from 'vite-plugin-eslint';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -122,7 +122,7 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [PluginGLSL(), PluginSVGLoader({ svgo: false }), PluginEslint()],
+    plugins: [GLSL(), SVGLoader({ svgo: false }), Eslint()],
   },
 
   nitro: { prerender: { routes: ['/sitemap.xml'] } },
