@@ -1,7 +1,7 @@
 describe('Changing routes', () => {
   beforeEach(() => cy.visit('http://localhost:3000'));
 
-  it('Going from index to projects and back to index', () => {
+  it('Going from index to project and back to index', () => {
     cy.get('.loader').should('not.be.visible');
 
     cy.get('.project').then((elements) => {
@@ -15,13 +15,13 @@ describe('Changing routes', () => {
         );
         cy.get('.nav__back-link').should('be.visible');
 
-        cy.url().should('include', '/projects/');
+        cy.url().should('include', '/project/');
 
         cy.get('.nav__back-link').click();
 
         cy.get('.header__container__title__line__content').should('be.visible');
 
-        cy.url().should('not.include', '/projects/');
+        cy.url().should('not.include', '/project/');
       }
     });
   });
@@ -38,7 +38,7 @@ describe('Changing routes', () => {
       'be.visible'
     );
     cy.get('.nav__back-link').should('be.visible');
-    cy.url().should('include', '/projects/');
+    cy.url().should('include', '/project/');
 
     const titleText = cy.$$('.project-title').text();
     visited.add(titleText);
@@ -48,6 +48,9 @@ describe('Changing routes', () => {
 
       projectNext.should('be.visible');
       projectNext.click();
+
+      cy.get('.page-overlay').should('be.visible');
+      cy.get('.page-overlay').should('not.be.visible');
 
       cy.get('.project-title__line__word', { timeout: 10000 }).should(
         'be.visible'
