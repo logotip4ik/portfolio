@@ -6,15 +6,12 @@ const emitter = useEmitter();
 
 const showBanner = () =>
   gsap.to(bannerRef.value, {
-    yPercent: 0,
+    yPercent: -175,
     delay: 0.55,
     duration: 0.65,
     ease: 'back.out(0.8)',
+    startAt: { yPercent: 175 },
   });
-
-onMounted(() => {
-  gsap.set(bannerRef.value, { yPercent: 175 });
-});
 
 emitter.once('overlay:hiding', showBanner);
 </script>
@@ -59,7 +56,7 @@ emitter.once('overlay:hiding', showBanner);
   ;
   backdrop-filter: blur(5px);
 
-  transform: translateX(-50%);
+  transform: translate(-50%, 175%);
 
   &--grid {
     display: grid;
