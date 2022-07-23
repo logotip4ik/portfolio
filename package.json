@@ -6,6 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "cypress:open": "cypress open",
+    "lint": "eslint --ext .vue,.ts,.js,.mjs .",
     "lintfix": "prettier --write . && eslint --fix ."
   },
   "browserslist": [
