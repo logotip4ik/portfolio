@@ -1,5 +1,6 @@
 <script setup>
-import * as THREE from 'three';
+// prettier-ignore
+import { Renderer, Transform, Camera, Plane, Program, Vec2, Color, Mesh } from 'ogl';
 
 import fragmentShader from '~/assets/shaders/fragment.glsl';
 import vertexShader from '~/assets/shaders/vertex.glsl';
@@ -23,31 +24,23 @@ let prefersReducedMotion = false;
 let camera = null;
 let scene = null;
 let renderer = null;
+let gl = null;
 let object = null;
-const clock = new THREE.Clock();
 let aspect = 16 / 9;
 
-const MAX_DPR = 2.3;
+const MAX_DPR = 2.2;
 
 function resize() {
-  const canvas = renderer.domElement;
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
 
-  const width = canvas.clientWidth;
-  const height = canvas.clientHeight;
-
-  if (canvas.width !== width || canvas.height !== height) {
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  }
-
-  camera.updateMatrix();
-  object.updateMatrix();
-
-  object.material.uniforms.resolution.value.set(
+  object.program.uniforms.resolution.value.set(
     window.innerWidth,
     window.innerHeight
   );
+
+  object.updateMatrix();
+  camera.updateMatrix();
 }
 
 function render() {
@@ -60,46 +53,49 @@ function render() {
 
   if (prefersReducedMotion) hasRunOnce = true;
 
-  object.material.uniforms.time.value = clock.getElapsedTime();
+  object.program.uniforms.time.value += 0.015;
 
-  renderer.render(scene, camera);
+  renderer.render({ scene, camera });
 }
 
-onMounted(() => {
-  prefersReducedMotion = $checkReducedMotion();
-  const isDarkMode = $isDarkMode();
+function createBackground() {
   aspect = window.innerWidth / window.innerHeight;
+  prefersReducedMotion = $checkReducedMotion();
 
-  // THREE: Scene
-  scene = new THREE.Scene();
+  const isDarkMode = $isDarkMode();
+  const clearColor = isDarkMode ? [3, 3, 3] : [235, 235, 235];
 
-  // THREE: Renderer
-  renderer = new THREE.WebGLRenderer({
+  renderer = new Renderer({
     canvas: canvas.value,
-    precision: 'highp',
+    dpr: Math.min(window.devicePixelRatio, MAX_DPR),
+    alpha: false,
+    depth: false,
+    width: window.innerWidth,
+    height: window.innerHeight,
     powerPreference: 'high-performance',
   });
-  // NOTE: after 2.3 devices start to struggle a lot with the shader
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_DPR));
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.autoClearColor = isDarkMode
-    ? new THREE.Color(3, 3, 3)
-    : new THREE.Color(235, 235, 235);
-  renderer.failIfMajorPerformanceCaveat = true;
 
-  // THREE: Camera
-  camera = new THREE.PerspectiveCamera(70, aspect, 0.5, 2);
+  gl = renderer.gl;
+
+  gl.clearColor(...clearColor, 1);
+
+  camera = new Camera(gl, { fov: 70, aspect, near: 0.5, far: 1.5 });
   camera.position.set(0, 0, 1);
 
-  // THREE: Object
-  const size = 2;
-  const geometry = new THREE.PlaneBufferGeometry(size * aspect, size);
-  const material = new THREE.ShaderMaterial({
-    fragmentShader,
-    vertexShader,
-    extensions: {
-      derivatives: '#extension GL_OES_standard_derivatives : enable',
-    },
+  scene = new Transform();
+
+  const objectSize = 2;
+  const objectGeometry = new Plane(gl, {
+    width: objectSize * aspect,
+    height: objectSize,
+  });
+  const objectMaterial = new Program(gl, {
+    vertex: vertexShader,
+    fragment: fragmentShader,
+    transparent: false,
+    depthTest: false,
+    depthWrite: false,
+    cullFace: false,
     uniforms: {
       time: { value: 0.0 },
       randomSeed: { value: Math.random() },
@@ -107,66 +103,66 @@ onMounted(() => {
       noisePower: { value: 1.0 },
       pixelRatio: { value: window.devicePixelRatio },
       resolution: {
-        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        value: new Vec2(window.innerWidth, window.innerHeight),
       },
       color1: {
         value: isDarkMode
-          ? new THREE.Vector3(...Object.values(pallet.color1.dark))
-          : new THREE.Vector3(...Object.values(pallet.color1.light)),
+          ? new Color(pallet.color1.dark)
+          : new Color(pallet.color1.light),
       },
       color2: {
         value: isDarkMode
-          ? new THREE.Vector3(...Object.values(pallet.color2.dark))
-          : new THREE.Vector3(...Object.values(pallet.color2.light)),
+          ? new Color(pallet.color2.dark)
+          : new Color(pallet.color2.light),
       },
       color3: {
         value: isDarkMode
-          ? new THREE.Vector3(...Object.values(pallet.color3.dark))
-          : new THREE.Vector3(...Object.values(pallet.color3.light)),
+          ? new Color(pallet.color3.dark)
+          : new Color(pallet.color3.light),
       },
     },
-    depthTest: false,
   });
-  object = new THREE.Mesh(geometry, material);
 
-  // THREE: Adding to scene
-  scene.add(object);
-
-  // THREE: Prep
-  // NOTE: this will help for performance
-  camera.matrixAutoUpdate = false;
-  object.matrixAutoUpdate = false;
-
-  window.addEventListener('resize', resize);
-  resize();
+  object = new Mesh(gl, {
+    geometry: objectGeometry,
+    program: objectMaterial,
+  });
+  object.setParent(scene);
 
   isShaderRunning = true;
 
-  gsap.to(object.material.uniforms.objectOpacity, {
+  object.matrixAutoUpdate = false;
+  camera.matrixAutoUpdate = false;
+
+  resize();
+  window.addEventListener('resize', resize, false);
+
+  // NOTE: try to use only one requestAnimationFrame
+  // this will improve overall performance
+  const callbackTicker = gsap.ticker.add(render);
+
+  gsap.to(object.program.uniforms.objectOpacity, {
     value: 1,
-    ease: 'expo.out',
-    duration: 2,
-    delay: 0.5,
+    duration: 1,
+    delay: 0.25,
     onComplete: () => emitter.emit('shader:running'),
   });
 
   $onColorSchemeChange((media) => {
     const switchTo = media.matches ? 'light' : 'dark';
 
-    const tl = gsap.timeline({ paused: true });
+    const tl = gsap.timeline();
 
-    tl.to(object.material.uniforms.color1.value, pallet.color1[switchTo], 0);
-    tl.to(object.material.uniforms.color2.value, pallet.color2[switchTo], 0);
-    tl.to(object.material.uniforms.color3.value, pallet.color3[switchTo], 0);
-
-    tl.play();
+    tl.to(object.program.uniforms.color1.value, pallet.color1[switchTo], 0);
+    tl.to(object.program.uniforms.color2.value, pallet.color2[switchTo], 0);
+    tl.to(object.program.uniforms.color3.value, pallet.color3[switchTo], 0);
   });
 
-  // NOTE: try to use only one requestAnimationFrame
-  // this will improve overall performance
-  const callbackTicker = gsap.ticker.add(render);
-
   onBeforeUnmount(() => gsap.ticker.remove(callbackTicker));
+}
+
+onMounted(() => {
+  createBackground();
 });
 </script>
 
