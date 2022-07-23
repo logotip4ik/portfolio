@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "nuxt start",
+    "start": "npx serve ./.output/public",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
