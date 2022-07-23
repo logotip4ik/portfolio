@@ -4,9 +4,6 @@ on:
   push:
     branches: ['v5-nemo']
 
-env:
-  NODE_ENV: 'production'
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -78,6 +75,8 @@ jobs:
         run: yarn --immutable
 
       - uses: cypress-io/github-action@v4
+        env:
+          NODE_ENV: 'production'
         with:
           build: yarn generate
           start: yarn start
