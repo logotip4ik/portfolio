@@ -29,7 +29,7 @@
     "sitemap": "^7.1.1",
     "typescript": "^4.6.4",
     "vite-plugin-eslint": "1.7.0",
-    "vite-plugin-glsl": "^0.1.2",
+    "vite-plugin-glsl": "0.3.0",
     "vite-svg-loader": "^3.3.0"
   },
   "dependencies": {

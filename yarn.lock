@@ -807,7 +807,7 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@rollup/pluginutils@^4.1.2", "@rollup/pluginutils@^4.2.0", "@rollup/pluginutils@^4.2.1":
+"@rollup/pluginutils@^4.2.0", "@rollup/pluginutils@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-4.2.1.tgz#e6c6c3aba0744edce3fb2074922d3776c0af2a6d"
   integrity sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==
@@ -6930,7 +6930,7 @@ tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.1.0, tslib@^2.3.1:
+tslib@^2.1.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
@@ -7353,13 +7353,12 @@ vite-plugin-eslint@1.7.0:
     "@types/eslint" "^8.4.5"
     rollup "^2.77.0"
 
-vite-plugin-glsl@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/vite-plugin-glsl/-/vite-plugin-glsl-0.1.2.tgz#1d8a8d5c5b0be99dd918f69f823e4ad62af27c61"
-  integrity sha512-RFwoYn8EQFXp4YygIyt8Ex3bQE5/v5927AF0MAgrNfX4NRPlDAX12ciWlpVs4ObKLYro49fctnou4+fajO0FOg==
+vite-plugin-glsl@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-glsl/-/vite-plugin-glsl-0.3.0.tgz#118197e5aed1725a46dcc3a8f4c4906739a7644d"
+  integrity sha512-cH7ni+Y3Vz1yOumvrP/71hXVdyTxZIaYYNDeK7KMvO5nzo0uGZZrrkwEVUaESS8/5dYemb/6G0YBj3jsP2sW1A==
   dependencies:
-    "@rollup/pluginutils" "^4.1.2"
-    tslib "^2.3.1"
+    "@rollup/pluginutils" "^4.2.1"
 
 vite-svg-loader@^3.3.0:
   version "3.4.0"
