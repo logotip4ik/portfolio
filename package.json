@@ -5,7 +5,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "lintfix": "prettier --write . && eslint --fix ."
   },
   "browserslist": [
     "last 3 versions, not dead, not IE 11, Safari > 14"
@@ -15,19 +16,19 @@
     "@nuxt/content": "^2.0.0",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@nuxtjs/partytown": "^1.2.1",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
+    "@typescript-eslint/eslint-plugin": "5.30.7",
+    "@typescript-eslint/parser": "5.30.7",
     "consola": "^2.15.3",
-    "cypress": "^10.2.0",
-    "eslint": "^8.15.0",
+    "cypress": "10.3.1",
+    "eslint": "8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^8.7.1",
     "nuxt": "3.0.0-rc.6",
     "prettier": "^2.6.2",
-    "sass": "^1.51.0",
+    "sass": "1.54.0",
     "sitemap": "^7.1.1",
     "typescript": "^4.6.4",
-    "vite-plugin-eslint": "^1.6.0",
+    "vite-plugin-eslint": "1.7.0",
     "vite-plugin-glsl": "^0.1.2",
     "vite-svg-loader": "^3.3.0"
   },
@@ -37,7 +38,7 @@
     "locomotive-scroll": "^4.1.4",
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
-    "split-type": "^0.3.1",
+    "split-type": "0.3.2",
     "three": "^0.142.0"
   }
 }
