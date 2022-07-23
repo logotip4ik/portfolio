@@ -1,0 +1,86 @@
+name: ci
+
+on:
+  push:
+    branches: ['v5-nemo']
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: Build
+        run: yarn build
+
+      - name: Cache Nuxt
+        uses: actions/cache@v3
+        with:
+          path: '.nuxt'
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-${{ github.sha }}
+
+      - name: Building
+        id: build
+        run: yarn build
+
+  lint:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: Lint
+        run: yarn lint
+
+  test:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - uses: cypress-io/github-action@v4
+        with:
+          build: yarn generate
+          start: yarn start
+          wait-on: 'http://localhost:3000'
+          config: 'baseUrl=http://localhost:3000'
