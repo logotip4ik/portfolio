@@ -8,12 +8,12 @@ updates:
       time: '00:00'
     open-pull-requests-limit: 10
     reviewers:
-      - '@logotip4ik'
+      - 'logotip4ik'
     assignees:
-      - '@logotip4ik'
+      - 'logotip4ik'
     commit-message:
-      prefix: 'build(deps)'
-      prefix-development: 'build(devDeps)'
+      prefix: 'build'
+      prefix-development: 'build'
       include: scope
   # Fetch and update latest `github-actions` packages
   - package-ecosystem: github-actions
@@ -23,10 +23,10 @@ updates:
       time: '00:00'
     open-pull-requests-limit: 10
     reviewers:
-      - '@logotip4ik'
+      - 'logotip4ik'
     assignees:
-      - '@logotip4ik'
+      - 'logotip4ik'
     commit-message:
-      prefix: fix
-      prefix-development: chore
+      prefix: ci
+      prefix-development: ci
       include: scope
