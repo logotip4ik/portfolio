@@ -57,7 +57,7 @@ const { data: projects } = await useAsyncData('projects', () =>
     margin: 0 auto;
     padding-inline-start: 0;
 
-    @media screen and(min-width: 850px) {
+    @media screen and (min-width: 850px) {
       margin-block-start: 5rem;
 
       &__item:nth-child(odd) {

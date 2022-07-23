@@ -10,7 +10,9 @@ describe('Changing routes', () => {
       for (let i = 0; i < count; i++) {
         cy.get(`.project:nth-of-type(${i + 1})`).click();
 
-        cy.get('.project-title__line__word', { timeout: 10000 }).should('be.visible');
+        cy.get('.project-title__line__word', { timeout: 10000 }).should(
+          'be.visible'
+        );
         cy.get('.nav__back-link').should('be.visible');
 
         cy.url().should('include', '/projects/');
@@ -32,7 +34,9 @@ describe('Changing routes', () => {
 
     cy.get('.project').first().click();
 
-    cy.get('.project-title__line__word', { timeout: 10000 }).should('be.visible');
+    cy.get('.project-title__line__word', { timeout: 10000 }).should(
+      'be.visible'
+    );
     cy.get('.nav__back-link').should('be.visible');
     cy.url().should('include', '/projects/');
 
@@ -45,7 +49,9 @@ describe('Changing routes', () => {
       projectNext.should('be.visible');
       projectNext.click();
 
-      cy.get('.project-title__line__word', { timeout: 10000 }).should('be.visible');
+      cy.get('.project-title__line__word', { timeout: 10000 }).should(
+        'be.visible'
+      );
       cy.get('.nav__back-link').should('be.visible');
 
       const titleText = cy.$$('.project-title').text();

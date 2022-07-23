@@ -11,7 +11,7 @@ const icon = computed(() =>
 </script>
 
 <template>
-  <!-- eslint-disable -->
+  <!-- eslint-disable-next-line -->
   <span class="project-svg-icon" v-html="icon" />
 </template>
 
