@@ -399,10 +399,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@logotip4ik_/nuxt-cloudflare-headers@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@logotip4ik_/nuxt-cloudflare-headers/-/nuxt-cloudflare-headers-1.1.4.tgz#3d84a56b133dd4d42492166d84e8299834bff566"
-  integrity sha512-3JSA8tpowg7Sz17FfReNViGzcGuPnJhqk60FdFvFRkvhp6Kclnf9NcVNoxByYMvSpRhCqDzGe8wR8DbbZxg4OQ==
+"@logotip4ik_/nuxt-cloudflare-headers@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@logotip4ik_/nuxt-cloudflare-headers/-/nuxt-cloudflare-headers-1.2.0.tgz#27e613e52ad13b28c553616b0728b8dcea8fda71"
+  integrity sha512-K6NhRx+qVtR216NtkWO2VtLaHCfyF98ZdDfv0xYoKmMGN6DoBSyHkpnb85UOpW5SmREjCVjLD5zt1+QCvVJjqg==
   dependencies:
     "@nuxt/kit" "^3.0.0-rc.4"
     defaults-deep "^0.2.4"
@@ -530,55 +530,7 @@
     unimport "^0.1.6"
     untyped "^0.4.4"
 
-"@nuxt/kit@^3.0.0-rc.3":
-  version "3.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.0.0-rc.4.tgz#8aa3c26f1bb9f3e7bb78ad2cec33473e32ffccd0"
-  integrity sha512-ZBSeHFy3fPUx0equCtyP6eVUAZQWwRqTp2YnHSFqM5+yhN5aTGo8gBlfwttVBr4yhFBpGFRHhQj/iNPqrCeTnQ==
-  dependencies:
-    "@nuxt/schema" "^3.0.0-rc.4"
-    c12 "^0.2.7"
-    consola "^2.15.3"
-    defu "^6.0.0"
-    globby "^13.1.2"
-    hash-sum "^2.0.0"
-    ignore "^5.2.0"
-    jiti "^1.13.0"
-    knitwork "^0.1.2"
-    lodash.template "^4.5.0"
-    mlly "^0.5.2"
-    pathe "^0.3.0"
-    pkg-types "^0.3.2"
-    scule "^0.2.1"
-    semver "^7.3.7"
-    unctx "^1.1.4"
-    unimport "^0.2.7"
-    untyped "^0.4.4"
-
-"@nuxt/kit@^3.0.0-rc.4":
-  version "3.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.0.0-rc.5.tgz#4ee104e517910ed26132583d7adaff88bdd8d89a"
-  integrity sha512-PmRfy0AdpvYne5p1/QWXOFoJawnjC/p2TkEJeCgI7MMHP7U2ru/7MxM7x0+ScjD13fUd4KSv1bCMJRTCoaCzPQ==
-  dependencies:
-    "@nuxt/schema" "^3.0.0-rc.5"
-    c12 "^0.2.8"
-    consola "^2.15.3"
-    defu "^6.0.0"
-    globby "^13.1.2"
-    hash-sum "^2.0.0"
-    ignore "^5.2.0"
-    jiti "^1.14.0"
-    knitwork "^0.1.2"
-    lodash.template "^4.5.0"
-    mlly "^0.5.4"
-    pathe "^0.3.2"
-    pkg-types "^0.3.3"
-    scule "^0.2.1"
-    semver "^7.3.7"
-    unctx "^1.1.4"
-    unimport "^0.4.4"
-    untyped "^0.4.4"
-
-"@nuxt/kit@^3.0.0-rc.6":
+"@nuxt/kit@^3.0.0-rc.3", "@nuxt/kit@^3.0.0-rc.4", "@nuxt/kit@^3.0.0-rc.6":
   version "3.0.0-rc.6"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.0.0-rc.6.tgz#b59c10639cb591bdc5a63164fb352b344230a065"
   integrity sha512-+lxSd6dSWlAzMXfGOPcY4856xnMF1Ck1rycFUZ+K2QYiDXphq/fiW2eMaWLVvqgPyL2Box2WzVDZJ6C5ceptcw==
@@ -602,7 +554,7 @@
     unimport "^0.4.5"
     untyped "^0.4.4"
 
-"@nuxt/schema@^3.0.0-rc.1", "@nuxt/schema@^3.0.0-rc.4", "@nuxt/schema@^3.0.0-rc.5":
+"@nuxt/schema@^3.0.0-rc.1":
   version "3.0.0-rc.5"
   resolved "https://registry.yarnpkg.com/@nuxt/schema/-/schema-3.0.0-rc.5.tgz#c32b84b3aeb0ce474cd268b9dc5d801d8139aaed"
   integrity sha512-qfKr9/1i7buLEgJ1Vjw27LJ5Svtq9jB5TvFAbIfDI9fg80M/bgTDXgKXARJk6ofB39Ijdx8z2nNj8EXu8+tVbQ==
@@ -7059,22 +7011,6 @@ unimport@^0.1.6:
     scule "^0.2.1"
     unplugin "^0.6.3"
 
-unimport@^0.2.7:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/unimport/-/unimport-0.2.10.tgz#9ac0d003db40c750a8ecc0fd4317dc5e0500795e"
-  integrity sha512-HoQ0ZDzHJboRYJ4/YxtMAATxiya/s5C2UE6jLFNj1e0D6Qfq6Pw2P40L+ALCkjLwLhR8l2VROE7kba/AaFtdQg==
-  dependencies:
-    "@rollup/pluginutils" "^4.2.1"
-    escape-string-regexp "^5.0.0"
-    fast-glob "^3.2.11"
-    local-pkg "^0.4.1"
-    magic-string "^0.26.2"
-    mlly "^0.5.3"
-    pathe "^0.3.0"
-    scule "^0.2.1"
-    strip-literal "^0.4.0"
-    unplugin "^0.7.0"
-
 unimport@^0.4.4, unimport@^0.4.5:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/unimport/-/unimport-0.4.5.tgz#aa4c4aa2ef1027352f9ad79693f083929f18b660"
@@ -7162,7 +7098,7 @@ unplugin@^0.6.1, unplugin@^0.6.3:
     webpack-sources "^3.2.3"
     webpack-virtual-modules "^0.4.3"
 
-unplugin@^0.7.0, unplugin@^0.7.2:
+unplugin@^0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/unplugin/-/unplugin-0.7.2.tgz#4127012fdc2c84ea4ce03ce75e3d4f54ea47bba1"
   integrity sha512-m7thX4jP8l5sETpLdUASoDOGOcHaOVtgNyrYlToyQUvILUtEzEnngRBrHnAX3IKqooJVmXpoa/CwQ/QqzvGaHQ==
