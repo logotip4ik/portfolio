@@ -4,6 +4,9 @@ on:
   push:
     branches: ['v5-nemo']
 
+env:
+  NODE_ENV: 'production'
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -76,6 +79,7 @@ jobs:
 
       - uses: cypress-io/github-action@v4
         with:
-          start: yarn dev
+          build: yarn generate
+          start: yarn start
           wait-on: 'http://localhost:3000'
           config: 'baseUrl=http://localhost:3000'
