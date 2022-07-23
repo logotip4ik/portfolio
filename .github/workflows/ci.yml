@@ -25,17 +25,13 @@ jobs:
         run: yarn --immutable
 
       - name: Build
-        run: yarn build
+        run: yarn generate
 
       - name: Cache Nuxt
         uses: actions/cache@v3
         with:
           path: '.nuxt'
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-${{ github.sha }}
-
-      - name: Building
-        id: build
-        run: yarn build
 
   lint:
     runs-on: ${{ matrix.os }}
