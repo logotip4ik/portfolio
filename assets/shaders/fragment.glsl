@@ -1,3 +1,5 @@
+precision highp float;
+
 uniform float time;
 uniform float randomSeed;
 uniform float objectOpacity;
@@ -29,16 +31,6 @@ mat2 getRotationMatrix(float angle) {
     cos(angle), -sin(angle),
     sin(angle), cos(angle)
   );
-}
-
-float rand(vec2 p) {
-    vec2 k1 = vec2(
-        23.14069263277926, // e^pi (Gelfond's constant)
-        2.665144142690225 // 2^sqrt(2) (Gelfond–Schneider constant)
-    );
-    return fract(
-        cos(dot(p, k1)) * 12345.6789
-    );
 }
 
 void main() {
@@ -78,7 +70,7 @@ void main() {
   float secondPattern = lines(baseUv, 0.05, 15.0);
 
   vec3 firstColor = mix(_color3, _color2, firstPattern);
-  vec3 resColor = mix(firstColor, _color1, secondPattern);
+  vec3 resultingPattern = mix(firstColor, _color1, secondPattern);
 
   float grainStrength = 0.075;
   if (pixelRatio > 2.0) grainStrength = 0.135;
@@ -87,7 +79,9 @@ void main() {
   uvNoise.y *= rand(vec2(uvNoise.y, randomSeed));
   vec3 grain = vec3(rand(uvNoise) * grainStrength);
 
-  resColor += grain;
+  resultingPattern += grain;
 
-  gl_FragColor = vec4(resColor, 1.0) * objectOpacity;
+  vec3 resColor = mix(_color1, resultingPattern, objectOpacity);
+
+  gl_FragColor = vec4(resColor, 1);
 }
