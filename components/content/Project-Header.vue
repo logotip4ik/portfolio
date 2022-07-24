@@ -10,7 +10,7 @@ const revealInfoLinks = () =>
     stagger: { from: 'end', each: 0.075 },
     ease: 'expo.out',
     duration: 1,
-    delay: 0.275,
+    delay: 0.285,
   });
 
 emitter.once('overlay:hiding', revealInfoLinks);
@@ -31,10 +31,10 @@ emitter.once('overlay:hiding', revealInfoLinks);
               `project-header__info__links__item--${slot}`,
             ]"
             data-scroll
-            :data-scroll-speed="1.25 + 0.25 * key"
+            :data-scroll-speed="1.25 + 0.25 * (slots.length - key)"
           >
             <span class="project-header__info__links__item__content">
-              <slot :name="slot" />
+              <Markdown :use="$slots[slot]" :unwrap="true" />
             </span>
           </li>
         </template>
