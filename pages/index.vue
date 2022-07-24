@@ -1,4 +1,6 @@
 <script setup>
+import imagesLoaded from 'imagesloaded';
+
 useSeoHead({
   title: 'Front End Developer',
   description:
@@ -16,11 +18,15 @@ useHead({
 });
 
 const { gsap, ScrollTrigger } = useGsap();
-
+const emitter = useEmitter();
 const currentSection = useCurrentSection();
+
+const indexPage = ref(null);
 
 onMounted(() => {
   const triggers = [];
+
+  imagesLoaded(indexPage.value, () => emitter.emit('images:loaded'));
 
   // website parts, heading, sections and footer
   const parts = gsap.utils.toArray('header, section');
@@ -44,7 +50,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div ref="indexPage">
     <div class="smooth-scroll-fix">
       <VHeader />
       <main>
