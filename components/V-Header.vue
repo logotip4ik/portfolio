@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
   <header ref="header" class="header" data-scroll-section>
     <VHeaderBackground class="header__canvas" />
 
-    <div class="header__container">
+    <div class="header__container" data-scroll data-scroll-speed="-1.25">
       <h1 class="header__container__title">
         <span class="header__container__title__line">
           <span class="header__container__title__line__content">Bogdan</span>

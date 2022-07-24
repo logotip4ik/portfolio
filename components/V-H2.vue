@@ -42,7 +42,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <h2 ref="heading" class="heading" data-scroll data-scroll-speed="-1">
+  <h2 ref="heading" class="heading" data-scroll data-scroll-speed="-0.75">
     <slot />
   </h2>
 </template>
