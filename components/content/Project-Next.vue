@@ -18,6 +18,7 @@ useHead({
 <template>
   <NuxtLink v-hoverable.link :href="next._path" class="project-next">
     <img :src="next.image" :alt="next.title" class="project-next__image" />
+
     {{ next.title }}
   </NuxtLink>
 </template>
@@ -44,6 +45,8 @@ useHead({
   cursor: none;
 
   &__image {
+    display: block;
+
     position: absolute;
     top: 0;
     left: 0;

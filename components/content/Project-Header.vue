@@ -30,6 +30,8 @@ emitter.once('overlay:hiding', revealInfoLinks);
               'project-header__info__links__item',
               `project-header__info__links__item--${slot}`,
             ]"
+            data-scroll
+            :data-scroll-speed="1.25 + 0.25 * key"
           >
             <span class="project-header__info__links__item__content">
               <slot :name="slot" />

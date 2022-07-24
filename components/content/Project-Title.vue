@@ -47,7 +47,7 @@ emitter.once('overlay:hiding', showTitle);
 </script>
 
 <template>
-  <h1 ref="title" class="project-title">
+  <h1 ref="title" class="project-title" data-scroll data-scroll-speed="1">
     <Markdown :use="$slots.default" :unwrap="true" />
   </h1>
 </template>
