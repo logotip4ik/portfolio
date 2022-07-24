@@ -6,8 +6,6 @@ describe('Project portfolio page', () => {
   });
 
   it('Overlay hides', () => {
-    cy.visit('http://localhost:3000/project/portfolio');
-
     cy.get('.page-overlay').should('not.be.visible');
   });
 
@@ -16,7 +14,10 @@ describe('Project portfolio page', () => {
   });
 
   it('Title should have correct text', () => {
-    cy.get('.project-title').should('have.text', 'Portfolio Version 3');
+    cy.get('.project-title')
+      .should('include.text', 'Portfolio')
+      .and('include.text', 'Version')
+      .and('include.text', '3');
   });
 
   it('Should have source link', () => {
