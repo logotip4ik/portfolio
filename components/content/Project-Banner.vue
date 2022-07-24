@@ -18,21 +18,21 @@ emitter.once('overlay:hiding', showBanner);
 <template>
   <div
     ref="bannerRef"
-    :class="{ banner: true, 'banner--grid': $slots.icon }"
+    :class="{ 'project-banner': true, 'project-banner--grid': $slots.icon }"
     data-scroll-sticky
   >
-    <div v-if="$slots.icon" class="banner__icon">
+    <div v-if="$slots.icon" class="project-banner__icon">
       <Markdown :use="$slots.icon" />
     </div>
 
-    <p class="banner__text">
+    <p class="project-banner__text">
       <Markdown :use="$slots.default" :unwrap="true" />
     </p>
   </div>
 </template>
 
 <style lang="scss">
-.banner {
+.project-banner {
   position: fixed;
   bottom: 2rem;
   left: 50%;
