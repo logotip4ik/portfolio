@@ -164,7 +164,7 @@ watch(isShowingMenu, (bool) => {
     </div>
     <div class="menu__back-item">
       <div class="menu__back-item__content menu__back-item__content--no-anim">
-        <ul class="menu__back-item__content__links">
+        <ul v-if="social" class="menu__back-item__content__links">
           <li
             v-for="(link, key) in social.links"
             :key="key"
