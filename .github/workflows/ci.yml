@@ -3,6 +3,8 @@ name: ci
 on:
   push:
     branches: ['v5-nemo']
+  pull_request:
+    branches: ['v5-nemo']
 
 jobs:
   build:
@@ -77,6 +79,8 @@ jobs:
       - uses: cypress-io/github-action@v4
         env:
           NODE_ENV: 'production'
+          # re-enable PR comment bot
+          COMMIT_INFO_SHA: ${{ github.event.pull_request.head.sha }}
         with:
           install: false
           build: 'yarn generate'
