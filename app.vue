@@ -56,7 +56,12 @@ function enterPageAnim(pageEl, done) {
 
       const waitFor = 0.75;
       const emitAt = (tl.totalDuration() - waitFor) * 1000;
-      const refreshAt = (tl.totalDuration() - waitFor - 0.175) * 1000;
+      // For index page (especially going from project to index)
+      // refreshing time with delay messes the footer animation
+      const refreshAt =
+        route.name === 'index'
+          ? tl.totalDuration() * 1000
+          : (tl.totalDuration() - waitFor - 0.175) * 1000;
 
       setTimeout(() => emitter.emit('overlay:hiding'), emitAt);
       setTimeout(() => {
@@ -64,6 +69,7 @@ function enterPageAnim(pageEl, done) {
 
         $smoothScroll.enable();
 
+        // removes transform: matrix, so navbar has correct z-index ¯\_(ツ)_/¯
         gsap.set('#scroller', { clearProps: 'all' });
       }, refreshAt);
     },
@@ -100,9 +106,7 @@ function enterPageAnim(pageEl, done) {
     0
   );
 
-  if (route.name === 'project-slug')
-    emitter.once('images:loaded', () => tl.play());
-  else tl.play();
+  emitter.once('images:loaded', () => tl.play());
 }
 
 function setVh() {
