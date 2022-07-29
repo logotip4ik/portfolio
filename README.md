@@ -16,7 +16,7 @@ projects that i am using quite often
 
 - [GSAP](https://greensock.com/gsap/) - for smoooooth transitions
 
-- [Three.js](https://threejs.org/) - landing background. P.S. initially was using [metaballs.js](https://www.npmjs.com/package/metaballs-js) and [particles.js](https://vincentgarreau.com/particles.js/)
+- [OGL](https://github.com/oframe/ogl) - background on landing page (Later was using [Three.js](https://threejs.org/) - also really good tool, but decided to learn something new. Also you should definitely check out [metaballs.js](https://www.npmjs.com/package/metaballs-js) and [particles.js](https://vincentgarreau.com/particles.js/))
 
 - [LocomotiveScroll](https://github.com/locomotivemtl/locomotive-scroll) - this makes the page scroll really smoothly on PC
 
