@@ -24,7 +24,7 @@
     "cypress": "10.4.0",
     "eslint": "8.21.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.2.0",
+    "eslint-plugin-vue": "^9.3.0",
     "nuxt": "3.0.0-rc.6",
     "prettier": "^2.6.2",
     "sass": "1.54.3",
