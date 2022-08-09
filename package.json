@@ -18,7 +18,7 @@
     "@nuxt/content": "^2.0.0",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@nuxtjs/partytown": "^1.2.1",
-    "@typescript-eslint/eslint-plugin": "5.30.7",
+    "@typescript-eslint/eslint-plugin": "5.33.0",
     "@typescript-eslint/parser": "5.30.7",
     "consola": "^2.15.3",
     "cypress": "10.4.0",
