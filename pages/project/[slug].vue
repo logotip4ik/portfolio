@@ -15,7 +15,7 @@ useSeoHead({ title: project.value.title });
 const projectPage = ref(null);
 
 const showBackButton = () =>
-  gsap.to('.nav__back-link', { autoAlpha: 1, delay: 0.5 });
+  gsap.to('.nav__back-link', { autoAlpha: 1, delay: 0.7 });
 
 onMounted(() => {
   gsap.set('.nav__back-link', { autoAlpha: 0 });
