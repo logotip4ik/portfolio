@@ -27,7 +27,7 @@
     "eslint-plugin-vue": "^9.2.0",
     "nuxt": "3.0.0-rc.6",
     "prettier": "^2.6.2",
-    "sass": "1.54.0",
+    "sass": "1.54.3",
     "sitemap": "^7.1.1",
     "typescript": "^4.6.4",
     "vite-plugin-eslint": "1.7.0",
