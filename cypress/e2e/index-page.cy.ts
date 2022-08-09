@@ -41,12 +41,12 @@ describe('Index page', () => {
     cy.get('.nav__list__item').contains('Projects').click({ timeout: 8000 });
 
     cy.get('.project').should('be.visible');
-
-    cy.scrollTo('0%', '-5%');
   });
 
   it('Scrolling down to about me', () => {
-    cy.get('.nav__list__item').contains('About').click({ timeout: 8000 });
+    cy.get('.nav__list__item')
+      .contains('About')
+      .click({ timeout: 8000, force: true });
 
     const aboutMe = cy.get('.about-me__content');
 
