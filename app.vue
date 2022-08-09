@@ -7,7 +7,11 @@ const currentRoute = useCurrentRoute();
 
 nuxtApp.hook('page:finish', () => emitter.emit('shader:start'));
 
+const isRouteChanging = ref(false);
+
 function leavePageAnim(pageEl, done) {
+  isRouteChanging.value = true;
+
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
@@ -47,11 +51,14 @@ function leavePageAnim(pageEl, done) {
 }
 
 function enterPageAnim(pageEl, done) {
+  isRouteChanging.value = true;
+
   const tl = gsap.timeline({
     delay: 0.15,
     defaults: { ease: 'expo.out' },
     paused: true,
     onStart: () => {
+      isRouteChanging.value = false;
       emitter.emit('pointer:inactive');
 
       const waitFor = 0.75;
@@ -195,6 +202,6 @@ onBeforeUnmount(() => {
     <VPointer />
     <VLoader />
     <UkraineFlagStripe />
-    <VOverlay />
+    <VOverlay :is-route-changing="isRouteChanging" />
   </div>
 </template>

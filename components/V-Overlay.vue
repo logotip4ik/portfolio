@@ -1,15 +1,43 @@
+<script setup>
+defineProps({
+  isRouteChanging: { type: Boolean, required: true, default: false },
+});
+
+const numberOfLoadingPoints = 3;
+</script>
+
 <template>
   <div class="page-overlay">
     <div class="page-overlay__slide"></div>
     <div class="page-overlay__slide">
-      <p class="page-overlay__slide__text__wrapper">
-        <span
+      <div class="page-overlay__slide__text__wrapper">
+        <p
           class="page-overlay__slide__text"
           style="opacity: 0; visibility: hidden"
         >
           {{ $route.params.slug || 'index' }}
-        </span>
-      </p>
+        </p>
+
+        <div
+          :class="{
+            'page-overlay__slide__loading': true,
+            'page-overlay__slide__loading--animate': isRouteChanging,
+          }"
+        >
+          <svg
+            v-for="key in numberOfLoadingPoints"
+            :key="key"
+            viewBox="0 0 16 16"
+            :class="{
+              'page-overlay__slide__loading__circle': true,
+              'page-overlay__slide__loading__circle--animate': isRouteChanging,
+            }"
+            :style="{ '--circle-offset': `${key * 0.077}s` }"
+          >
+            <circle cx="8" cy="8" r="8" fill="currentColor" />
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -69,11 +97,66 @@
       opacity: 0.8;
 
       &__wrapper {
+        position: relative;
+
         overflow: hidden;
 
         max-width: 60vw;
       }
     }
+
+    &__loading {
+      --circle-size: 1rem;
+      --initial-delay: 2.5s;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: absolute;
+      top: calc(50% + 1.5rem);
+      left: 50%;
+
+      opacity: 0;
+
+      transition: opacity 0.4s;
+      transform: translateX(-50%);
+
+      &--animate {
+        opacity: 1;
+      }
+
+      &__circle {
+        display: block;
+
+        color: var(--ff-color);
+
+        width: var(--circle-size);
+        height: var(--circle-size);
+
+        opacity: 0;
+
+        &:nth-of-type(even) {
+          margin-inline: 25%;
+        }
+
+        &--animate {
+          animation: infinite 2.5s fade-in-out
+            calc(var(--initial-delay) + var(--circle-offset, 0s));
+        }
+      }
+    }
+  }
+}
+
+@keyframes fade-in-out {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.65;
   }
 }
 </style>
