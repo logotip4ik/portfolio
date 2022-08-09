@@ -22,7 +22,7 @@
     "@typescript-eslint/parser": "5.30.7",
     "consola": "^2.15.3",
     "cypress": "10.4.0",
-    "eslint": "8.20.0",
+    "eslint": "8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.2.0",
     "nuxt": "3.0.0-rc.6",
