@@ -13,6 +13,13 @@
   "browserslist": [
     "last 3 versions, not dead, not IE 11, Safari > 14"
   ],
+  "resolutions": {
+    "nuxt": "3.0.0-rc.6",
+    "nuxi": "3.0.0-rc.6",
+    "@nuxt/vite-builder": "3.0.0-rc.6",
+    "@nuxt/kit": "3.0.0-rc.6",
+    "@nuxt/schema": "3.0.0-rc.6"
+  },
   "devDependencies": {
     "@logotip4ik_/nuxt-cloudflare-headers": "^1.2.1",
     "@nuxt/content": "^2.0.1",
