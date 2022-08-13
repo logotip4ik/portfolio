@@ -1,5 +1,5 @@
 <script setup>
-import SplitType from 'split-type/lib/SplitType';
+import SplitType from 'split-type';
 
 const { data: aboutMeText } = await useAsyncData('about-me-text', () =>
   queryContent('about-me').findOne()
@@ -11,28 +11,26 @@ const { gsap } = useGsap();
 const aboutMeContent = ref(null);
 
 onMounted(() => {
-  setTimeout(() => {
-    const text = new SplitType(aboutMeContent.value.$el.firstChild, {
-      types: 'lines',
-      lineClass: 'about-me__content__line',
-    });
+  const text = new SplitType(aboutMeContent.value.$el.firstChild, {
+    types: 'lines',
+    lineClass: 'about-me__content__line',
+  });
 
-    gsap.fromTo(
-      text.lines,
-      { '--overlay-offset': '0%' },
-      {
-        '--overlay-offset': '100%',
-        stagger: 0.1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: aboutMeContent.value.$el,
-          start: 'top 80%',
-          end: 'bottom 85%',
-          scrub: window.innerWidth >= $smoothScrollBreakPoint ? true : 0.5,
-        },
-      }
-    );
-  }, 0);
+  gsap.fromTo(
+    text.lines,
+    { '--overlay-offset': '0%' },
+    {
+      '--overlay-offset': '100%',
+      stagger: 0.1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: aboutMeContent.value.$el,
+        start: 'top 80%',
+        end: 'bottom 85%',
+        scrub: window.innerWidth >= $smoothScrollBreakPoint ? true : 0.5,
+      },
+    }
+  );
 });
 </script>
 
@@ -94,7 +92,7 @@ onMounted(() => {
         inset: 0;
 
         background-color: var(--surface-color);
-        opacity: 0.9;
+        opacity: 0.825;
 
         transform: translateX(var(--overlay-offset, 0%));
       }

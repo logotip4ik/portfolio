@@ -14,8 +14,11 @@ svg's on the server and then client can use it vie its key(filename without exte
 /* NOTE: only svgs ending with .icon.svg will be imported
 and only them could be used in useIcons composable */
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
   const icons = useIcons();
+
+  const iconNames = [];
+  const iconPromises = [];
 
   for (const key of Object.keys(rawIcons)) {
     const filename = path.parse(key).name;
@@ -25,6 +28,14 @@ export default defineNuxtPlugin(() => {
       continue;
 
     const iconName = splittedFilename.at(0);
-    icons.value[iconName] = rawIcons[key];
+    const iconValue =
+      typeof rawIcons[key] === 'function' ? rawIcons[key]() : rawIcons[key];
+
+    iconNames.push(iconName);
+    iconPromises.push(iconValue);
   }
+
+  const iconValues = await Promise.all(iconPromises);
+
+  for (const idx in iconValues) icons.value[iconNames[idx]] = iconValues[idx];
 });
