@@ -17,26 +17,26 @@ const numberOfLoadingPoints = 3;
         >
           {{ $route.params.slug || 'index' }}
         </p>
+      </div>
 
-        <div
+      <div
+        :class="{
+          'page-overlay__slide__loading': true,
+          'page-overlay__slide__loading--animate': isRouteChanging,
+        }"
+      >
+        <svg
+          v-for="key in numberOfLoadingPoints"
+          :key="key"
+          viewBox="0 0 16 16"
           :class="{
-            'page-overlay__slide__loading': true,
-            'page-overlay__slide__loading--animate': isRouteChanging,
+            'page-overlay__slide__loading__circle': true,
+            'page-overlay__slide__loading__circle--animate': isRouteChanging,
           }"
+          :style="{ '--circle-offset': `${key * 0.077}s` }"
         >
-          <svg
-            v-for="key in numberOfLoadingPoints"
-            :key="key"
-            viewBox="0 0 16 16"
-            :class="{
-              'page-overlay__slide__loading__circle': true,
-              'page-overlay__slide__loading__circle--animate': isRouteChanging,
-            }"
-            :style="{ '--circle-offset': `${key * 0.077}s` }"
-          >
-            <circle cx="8" cy="8" r="8" fill="currentColor" />
-          </svg>
-        </div>
+          <circle cx="8" cy="8" r="8" fill="currentColor" />
+        </svg>
       </div>
     </div>
   </div>
@@ -94,6 +94,8 @@ const numberOfLoadingPoints = 3;
 
       font-size: var(--step-1);
 
+      margin: 0;
+
       opacity: 0.8;
 
       &__wrapper {
@@ -107,7 +109,7 @@ const numberOfLoadingPoints = 3;
 
     &__loading {
       --circle-size: 1rem;
-      --initial-delay: 2.5s;
+      --initial-delay: 2.25s;
 
       display: flex;
       justify-content: center;
@@ -123,7 +125,7 @@ const numberOfLoadingPoints = 3;
       transform: translateX(-50%);
 
       &--animate {
-        opacity: 1;
+        opacity: 0.65;
       }
 
       &__circle {
@@ -156,7 +158,7 @@ const numberOfLoadingPoints = 3;
   }
 
   50% {
-    opacity: 0.65;
+    opacity: 1;
   }
 }
 </style>
