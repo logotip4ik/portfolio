@@ -104,12 +104,12 @@ function enterPageAnim(pageEl, done) {
       stagger: { each: 0.1, from: 'end' },
       duration: 0.75,
     },
-    0.1
+    0.2
   );
   tl.fromTo(
     '.page-overlay__slide__text',
     { yPercent: 0, autoAlpha: 1 },
-    { yPercent: -105, ease: 'expo.out' },
+    { yPercent: -125, ease: 'expo.out' },
     0
   );
 
