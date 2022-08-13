@@ -45,7 +45,7 @@ function leavePageAnim(pageEl, done) {
   tl.fromTo(
     '.page-overlay__slide__text',
     { yPercent: 105, autoAlpha: 1 },
-    { yPercent: 0, onComplete: () => done() },
+    { yPercent: 0, onComplete: () => done(), ease: 'expo.out' },
     0.25
   );
 }
@@ -109,7 +109,7 @@ function enterPageAnim(pageEl, done) {
   tl.fromTo(
     '.page-overlay__slide__text',
     { yPercent: 0, autoAlpha: 1 },
-    { yPercent: -105 },
+    { yPercent: -105, ease: 'expo.out' },
     0
   );
 
