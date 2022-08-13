@@ -109,6 +109,10 @@ export default defineNuxtConfig({
     '~/assets/styles/global.css',
   ],
 
+  build: {
+    transpile: ['gsap'],
+  },
+
   modules: ['@nuxt/content', '@logotip4ik_/nuxt-cloudflare-headers'],
 
   cloudflareHeaders: {
