@@ -185,18 +185,18 @@ onBeforeUnmount(() => {
   <div>
     <div id="scroller">
       <VNavbar />
-      <Transition
-        :css="false"
-        mode="out-in"
-        @enter="enterPageAnim"
-        @leave="leavePageAnim"
-      >
-        <div :key="route.name + route.params.slug">
-          <KeepAlive>
+      <KeepAlive>
+        <Transition
+          :css="false"
+          mode="out-in"
+          @enter="enterPageAnim"
+          @leave="leavePageAnim"
+        >
+          <div :key="route.name + route.params.slug">
             <NuxtPage />
-          </KeepAlive>
-        </div>
-      </Transition>
+          </div>
+        </Transition>
+      </KeepAlive>
     </div>
 
     <VPointer />
