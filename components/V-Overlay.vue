@@ -1,7 +1,5 @@
 <script setup>
-defineProps({
-  isRouteChanging: { type: Boolean, required: true, default: false },
-});
+const routeChanging = useRouteChanging();
 
 const numberOfLoadingPoints = 3;
 </script>
@@ -22,7 +20,7 @@ const numberOfLoadingPoints = 3;
       <div
         :class="{
           'page-overlay__slide__loading': true,
-          'page-overlay__slide__loading--animate': isRouteChanging,
+          'page-overlay__slide__loading--animate': routeChanging,
         }"
       >
         <svg
@@ -31,7 +29,7 @@ const numberOfLoadingPoints = 3;
           viewBox="0 0 16 16"
           :class="{
             'page-overlay__slide__loading__circle': true,
-            'page-overlay__slide__loading__circle--animate': isRouteChanging,
+            'page-overlay__slide__loading__circle--animate': routeChanging,
           }"
           :style="{ '--circle-offset': `${key * 0.077}s` }"
         >

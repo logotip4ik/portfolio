@@ -4,13 +4,12 @@ const { $smoothScroll, ...nuxtApp } = useNuxtApp();
 const { gsap, ScrollTrigger } = useGsap();
 const emitter = useEmitter();
 const currentRoute = useCurrentRoute();
+const routeChanging = useRouteChanging();
 
 nuxtApp.hook('page:finish', () => emitter.emit('shader:start'));
 
-const isRouteChanging = ref(false);
-
 function leavePageAnim(pageEl, done) {
-  isRouteChanging.value = true;
+  routeChanging.value = true;
 
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
@@ -51,14 +50,14 @@ function leavePageAnim(pageEl, done) {
 }
 
 function enterPageAnim(pageEl, done) {
-  isRouteChanging.value = true;
+  routeChanging.value = true;
 
   const tl = gsap.timeline({
     delay: 0.15,
     defaults: { ease: 'expo.out' },
     paused: true,
     onStart: () => {
-      isRouteChanging.value = false;
+      routeChanging.value = false;
       emitter.emit('pointer:inactive');
 
       const waitFor = 0.75;
@@ -202,6 +201,6 @@ onBeforeUnmount(() => {
     <VPointer />
     <VLoader />
     <UkraineFlagStripe />
-    <VOverlay :is-route-changing="isRouteChanging" />
+    <VOverlay />
   </div>
 </template>
