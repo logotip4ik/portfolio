@@ -119,11 +119,12 @@ const numberOfLoadingPoints = 3;
 
       opacity: 0;
 
-      transition: opacity 0.4s;
+      transition: opacity 0.2s;
       transform: translateX(-50%);
 
       &--animate {
         opacity: 0.65;
+        transition: opacity 0.4s;
       }
 
       &__circle {
