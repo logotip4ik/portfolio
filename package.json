@@ -14,7 +14,7 @@
     "last 3 versions, not dead, not IE 11, Safari > 14"
   ],
   "resolutions": {
-    "nuxt": "3.0.0-rc.6",
+    "nuxt": "3.0.0-rc.8",
     "nuxi": "3.0.0-rc.6",
     "@nuxt/vite-builder": "3.0.0-rc.6",
     "@nuxt/kit": "3.0.0-rc.6",
@@ -31,7 +31,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-metafizzy": "^2.0.1",
     "eslint-plugin-vue": "^9.3.0",
-    "nuxt": "3.0.0-rc.6",
+    "nuxt": "3.0.0-rc.8",
     "prettier": "^2.7.1",
     "sass": "1.54.4",
     "sitemap": "^7.1.1",
