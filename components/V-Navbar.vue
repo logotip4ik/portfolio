@@ -4,9 +4,9 @@ import ArrowLeft from '~/assets/img/arrow-left.svg';
 
 const { $smoothScroll, $isDarkMode, $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
-const currentSection = useCurrentSection();
+const route = useRoute();
 const isMenuActive = useMenuToggle();
-const currentRoute = useCurrentRoute();
+const currentSection = useCurrentSection();
 
 const nav = ref(null);
 const navTitle = ref(null);
@@ -188,7 +188,7 @@ onMounted(() => {
 <template>
   <nav ref="nav" class="nav" data-scroll-sticky>
     <p
-      v-show="currentRoute === 'index'"
+      v-show="route.name === 'index'"
       ref="navTitle"
       v-hoverable.action
       tabindex="0"
@@ -199,7 +199,7 @@ onMounted(() => {
       BK
     </p>
 
-    <ul v-show="currentRoute === 'index'" ref="navList" class="nav__list">
+    <ul v-show="route.name === 'index'" ref="navList" class="nav__list">
       <li
         v-for="(link, key) in links"
         :key="key"
@@ -214,7 +214,7 @@ onMounted(() => {
     </ul>
 
     <button
-      v-show="currentRoute === 'index'"
+      v-show="route.name === 'index'"
       ref="navMenuButton"
       aria-label="menu button"
       class="nav__menu-button"
@@ -227,7 +227,7 @@ onMounted(() => {
     </button>
 
     <NuxtLink
-      v-show="currentRoute !== 'index'"
+      v-show="route.name !== 'index'"
       v-hoverable.action
       href="/"
       class="nav__back-link"

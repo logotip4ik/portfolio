@@ -1,12 +1,11 @@
 <script setup>
-const route = useRoute();
-const { $smoothScroll, ...nuxtApp } = useNuxtApp();
+const { $smoothScroll, hook } = useNuxtApp();
 const { gsap, ScrollTrigger } = useGsap();
+const route = useRoute();
 const emitter = useEmitter();
-const currentRoute = useCurrentRoute();
 const routeChanging = useRouteChanging();
 
-nuxtApp.hook('page:finish', () => emitter.emit('shader:start'));
+hook('page:finish', () => emitter.emit('shader:start'));
 
 function leavePageAnim(pageEl, done) {
   routeChanging.value = true;
@@ -33,9 +32,6 @@ function leavePageAnim(pageEl, done) {
       stagger: { each: 0.1 },
       duration: 0.75,
       onComplete: () => {
-        // need to set this myself because the route changes faster then overlay is hiding the page
-        currentRoute.value = route.name;
-
         $smoothScroll.scrollTo(0, 0);
       },
     },
@@ -184,6 +180,7 @@ onBeforeUnmount(() => {
   <div>
     <div id="scroller">
       <VNavbar />
+
       <KeepAlive>
         <Transition
           :css="false"
@@ -191,7 +188,7 @@ onBeforeUnmount(() => {
           @enter="enterPageAnim"
           @leave="leavePageAnim"
         >
-          <div :key="route.name + route.params.slug">
+          <div :key="$route.fullPath">
             <NuxtPage />
           </div>
         </Transition>
