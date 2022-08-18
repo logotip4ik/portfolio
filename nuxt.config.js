@@ -2,12 +2,13 @@ import { defineNuxtConfig } from 'nuxt';
 
 import GLSL from 'vite-plugin-glsl';
 import SVGLoader from 'vite-svg-loader';
-import Eslint from 'vite-plugin-eslint';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: true,
+
   target: 'static',
+
   sourcemap: false,
 
   // nighter head or vueMeta is not working, idk why,
@@ -126,7 +127,7 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [GLSL(), SVGLoader({ svgo: false }), Eslint()],
+    plugins: [GLSL(), SVGLoader({ svgo: false })],
   },
 
   nitro: { prerender: { routes: ['/sitemap.xml'] } },
