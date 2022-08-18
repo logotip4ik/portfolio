@@ -56,7 +56,7 @@ onMounted(() => {
       :width="type === 'fwidth' ? 1400 : 900"
       height="550"
       decoding="async"
-      fetch-priority="high"
+      fetchpriority="high"
     />
   </div>
 </template>
