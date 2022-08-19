@@ -36,7 +36,7 @@ useHead({
   color: currentColor;
   text-decoration: none;
 
-  min-height: min(20rem, 45vh);
+  min-height: min(23.5rem, 45vh);
 
   padding: 1rem 4rem;
   margin-top: 10rem;
