@@ -51,10 +51,11 @@ const typeClasses = computed(() => {
   }
 
   p {
+    opacity: 0.925;
     margin-block: 2.125rem;
 
-    @media (prefers-color-scheme: dark) {
-      opacity: 0.925;
+    @media (prefers-color-scheme: light) {
+      opacity: 1;
     }
   }
 
