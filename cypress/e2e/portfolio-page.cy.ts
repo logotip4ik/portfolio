@@ -35,15 +35,27 @@ describe('Project portfolio page', () => {
       .and('include', 'logotip4ik/portfolio');
   });
 
+  it('Should have one image', () => {
+    cy.get('img.project-image')
+      .should('have.length', 1)
+      .and('have.attr', 'fetchpriority');
+  });
+
+  it('Should have about portfolio text', () => {
+    cy.get('.project-section p')
+      .should('have.length', 3)
+      .and('include.text', 'already')
+      .and('include.text', 'ThreeJS')
+      .and('include.text', 'cutting-edge');
+
+    cy.get('.project-section ul').should('have.length', 1);
+  });
+
   it('Next project link should have correct link', () => {
     cy.get('.project-next').should('have.text', ' LPNU StudRecruit');
 
     cy.get('.project-next')
       .should('have.attr', 'href')
       .and('include', 'studrecruit');
-  });
-
-  it('Banner should be visible', () => {
-    cy.get('.project-banner').should('be.visible');
   });
 });
