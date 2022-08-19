@@ -23,7 +23,7 @@ Portfolio Version 3
 
 ::project-main
 :::project-section{type="fwidth"}
-::::project-image{type="fwidth" src="/img/portfolio-logo.png" alt="My Portfolio Website Logo"}
+::::project-image{type="fwidth" src="/img/portfolio-logo.webp" alt="My Portfolio Website Logo"}
 ::::
 :::
 
