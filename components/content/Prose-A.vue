@@ -31,7 +31,7 @@ defineProps({
   text-decoration: none;
   text-transform: lowercase;
 
-  opacity: 0.75;
+  opacity: 0.7;
   cursor: none;
 
   &__arrow-svg {
@@ -41,6 +41,22 @@ defineProps({
     margin-left: 0.5rem;
 
     transform: translateY(15%);
+  }
+
+  &[no-lowercase] {
+    text-transform: none;
+  }
+
+  &[size-inherit] {
+    display: inline-flex;
+
+    font-size: inherit;
+
+    height: min-content;
+
+    .project-link__arrow-svg {
+      transform: scale(1.125);
+    }
   }
 }
 </style>
