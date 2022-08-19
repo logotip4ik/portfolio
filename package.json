@@ -8,8 +8,7 @@
     "preview": "nuxt preview",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
-    "lint": "eslint --ext .vue,.ts,.js,.mjs .",
-    "lintfix": "prettier --write . && eslint --fix ."
+    "prettier:fix": "prettier --write ."
   },
   "browserslist": [
     "last 3 versions, not dead, not IE 11, Safari > 14"
