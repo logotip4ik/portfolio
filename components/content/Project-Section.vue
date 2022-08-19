@@ -23,7 +23,7 @@ const typeClasses = computed(() => {
 <style lang="scss">
 .project-section {
   font-size: var(--step-0);
-  line-height: 1.65;
+  line-height: 1.7;
 
   width: 100%;
 
@@ -47,6 +47,14 @@ const typeClasses = computed(() => {
       @supports (gap: 1rem) {
         margin: 0;
       }
+    }
+  }
+
+  p {
+    margin-block: 2.125rem;
+
+    @media (prefers-color-scheme: dark) {
+      opacity: 0.925;
     }
   }
 
