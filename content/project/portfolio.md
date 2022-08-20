@@ -43,7 +43,7 @@ While building this website, I faced a lot of different and exceptional issues. 
 Would love to hear from you :wink:
 :::
 
-:::project-section{type="fwidth"}
+:::project-section{type="fwidth" style="margin-bottom: 0"}
 ::::project-next
 :::
 ::
