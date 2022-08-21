@@ -108,14 +108,16 @@ onBeforeUnmount(() => {
   background-color: var(--surface-color);
 
   &::before {
+    --h: clamp(5rem, 10vh, 7.5rem);
+
     content: '';
 
     position: absolute;
-    bottom: 0;
+    top: calc(var(--100vh) - var(--h));
     left: 0;
     right: 0;
 
-    height: clamp(5rem, 10vh, 7.5rem);
+    height: var(--h);
 
     background: linear-gradient(
       to top,
