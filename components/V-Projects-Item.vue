@@ -220,7 +220,7 @@ onMounted(() => {
     transition: opacity 400ms, background-color 400ms;
 
     @media (prefers-color-scheme: light) {
-      background-color: rgba($color: #ebebeb, $alpha: 0.25);
+      background-color: rgba($color: #f7f8f7, $alpha: 0.25);
     }
 
     @media (hover: hover) {
