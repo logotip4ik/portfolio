@@ -39,8 +39,10 @@ This project was build exclusively for Student Recruiting Department. It is a st
 
 :::project-section{type="2-col" style="--gap: 2rem;--col-1: 75%"}
 ::::project-image{src="/img/studrecruit-fonts.webp" alt="student recruit website typography"}
+::::
 
 ::::project-image{src="/img/studrecruit-phone-frame.webp" alt="student recruit website in phone frame"}
+::::
 :::
 
 :::project-section
