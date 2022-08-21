@@ -24,7 +24,6 @@ Portfolio Version 3
 ::project-main
 :::project-section{type="fwidth"}
 ::::project-image{type="fwidth" src="/img/portfolio-logo.webp" alt="My Portfolio Website Logo"}
-::::
 :::
 
 :::project-section{type="text"}
@@ -43,7 +42,6 @@ While building this website, I faced a lot of different and exceptional issues. 
 Would love to hear from you :wink:
 :::
 
-:::project-section{type="fwidth" style="margin-bottom: 0"}
+:::project-section{type="project-next"}
 ::::project-next
-:::
 ::
