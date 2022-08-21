@@ -1,6 +1,12 @@
 <script setup>
 const props = defineProps({
-  type: { type: String, required: false, default: '' },
+  type: {
+    type: String,
+    required: false,
+    default: '',
+    validator: (type) =>
+      ['fwidth', '2-col', 'text', 'project-next', ''].includes(type),
+  },
 });
 
 const typeClasses = computed(() => {
@@ -83,6 +89,13 @@ const typeClasses = computed(() => {
       grid-template-columns: 1fr;
       grid-template-rows: repeat(2, auto);
     }
+  }
+
+  &--project-next {
+    height: auto;
+
+    padding: 0;
+    margin: 0;
   }
 }
 </style>
