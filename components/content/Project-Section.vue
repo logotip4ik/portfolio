@@ -22,7 +22,7 @@ const typeClasses = computed(() => {
     :class="['project-section', ...typeClasses]"
     data-scroll-section
   >
-    <Markdown :use="$slots.default" />
+    <ContentSlot :use="$slots.default" />
   </section>
 </template>
 

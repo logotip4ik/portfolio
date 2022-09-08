@@ -34,7 +34,7 @@ emitter.once('overlay:hiding', revealInfoLinks);
             :data-scroll-speed="1.25 + 0.25 * (slots.length - key)"
           >
             <span class="project-header__info__links__item__content">
-              <Markdown :use="$slots[slot]" :unwrap="true" />
+              <ContentSlot :use="$slots[slot]" :unwrap="true" />
             </span>
           </li>
         </template>

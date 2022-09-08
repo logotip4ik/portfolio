@@ -1,6 +1,6 @@
 <template>
   <main class="project-main">
-    <Markdown :use="$slots.default" />
+    <ContentSlot :use="$slots.default" />
   </main>
 </template>
 

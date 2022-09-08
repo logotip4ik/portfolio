@@ -13,7 +13,7 @@ defineProps({
     class="project-link"
     target="_blank"
   >
-    <Markdown :use="$slots.default" :unwrap="true" />
+    <ContentSlot :use="$slots.default" :unwrap="true" />
     <ArrowLink class="project-link__arrow-svg" />
   </NuxtLink>
 </template>

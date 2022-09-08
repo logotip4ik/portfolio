@@ -22,11 +22,11 @@ emitter.once('overlay:hiding', showBanner);
     data-scroll-sticky
   >
     <div v-if="$slots.icon" class="project-banner__icon">
-      <Markdown :use="$slots.icon" />
+      <ContentSlot :use="$slots.icon" />
     </div>
 
     <p class="project-banner__text">
-      <Markdown :use="$slots.default" :unwrap="true" />
+      <ContentSlot :use="$slots.default" :unwrap="true" />
     </p>
   </div>
 </template>
