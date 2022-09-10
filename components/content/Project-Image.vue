@@ -13,14 +13,15 @@ const { gsap } = useGsap();
 onMounted(() => {
   if (props.type !== 'fwidth') return;
 
-  const imageScale = 70;
+  const imageScaleInPercent = 150;
+  const speedDivider = 3.5;
 
-  gsap.set(imageRef.value, { scale: 1 + imageScale * 0.01 });
+  gsap.set(imageRef.value, { scale: imageScaleInPercent * 0.01 });
   const animation = gsap.fromTo(
     imageRef.value,
-    { yPercent: -imageScale / 2 },
+    { y: -imageRef.value.clientHeight / speedDivider },
     {
-      yPercent: imageScale / 2,
+      y: imageRef.value.clientHeight / speedDivider,
       ease: 'none',
       scrollTrigger: {
         trigger: imageWrapperRef.value,
