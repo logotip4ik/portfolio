@@ -17,8 +17,6 @@ export default defineNuxtPlugin(({ $ScrollTrigger }) => {
 
   $ScrollTrigger.scrollerProxy(locomotiveScroll.el, {
     scrollTop(value) {
-      if (arguments.length) console.log({ arguments });
-
       return arguments.length
         ? locomotiveScroll.scrollTo(value, { disableLerp: true, duration: 0 })
         : locomotiveScroll.scroll.instance.scroll.y;
