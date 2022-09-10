@@ -45,7 +45,9 @@ emitter.once('overlay:hiding', revealInfoLinks);
 
 <style lang="scss">
 .project-header {
-  padding: 30vh clamp(1rem, 7vw, 10rem) 7vh;
+  min-height: 75vh;
+
+  padding: 30vh clamp(1rem, 7vw, 10rem) 0;
 
   &__info {
     display: flex;
