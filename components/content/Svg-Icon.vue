@@ -5,9 +5,7 @@ const props = defineProps({
 
 const icons = useIcons();
 
-const icon = computed(() =>
-  icons.value[props.name] ? icons.value[props.name] : ''
-);
+const icon = computed(() => icons.value[props.name] || '');
 </script>
 
 <template>
