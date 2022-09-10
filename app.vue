@@ -1,11 +1,9 @@
 <script setup>
-const { $smoothScroll, hook } = useNuxtApp();
+const { $smoothScroll } = useNuxtApp();
 const { gsap, ScrollTrigger } = useGsap();
 const route = useRoute();
 const emitter = useEmitter();
 const routeChanging = useRouteChanging();
-
-hook('page:finish', () => emitter.emit('shader:start'));
 
 function leavePageAnim(pageEl, done) {
   routeChanging.value = true;
@@ -15,9 +13,12 @@ function leavePageAnim(pageEl, done) {
     onStart: () => {
       $smoothScroll.disable();
     },
+    onComplete: () => {
+      done();
+    },
   });
 
-  tl.to(pageEl, { y: -200, duration: 1 }, 0);
+  tl.to(pageEl, { y: -300, duration: 1, clearProps: 'y' }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -40,7 +41,7 @@ function leavePageAnim(pageEl, done) {
   tl.fromTo(
     '.page-overlay__slide__text',
     { yPercent: 105, autoAlpha: 1 },
-    { yPercent: 0, onComplete: () => done(), ease: 'expo.out' },
+    { yPercent: 0, ease: 'expo.out' },
     0.25
   );
 }
@@ -58,21 +59,20 @@ function enterPageAnim(pageEl, done) {
 
       const waitFor = 0.75;
       const emitAt = (tl.totalDuration() - waitFor) * 1000;
-      // For index page (especially going from project to index)
-      // refreshing time with delay messes the footer animation
-      const refreshAt =
-        route.name === 'index'
-          ? tl.totalDuration() * 1000
-          : (tl.totalDuration() - waitFor - 0.175) * 1000;
+      const refreshAt = (tl.totalDuration() - waitFor - 0.175) * 1000;
 
       setTimeout(() => emitter.emit('overlay:hiding'), emitAt);
       setTimeout(() => {
-        ScrollTrigger.refresh();
+        // just updating scroll trigger and smooth scroll
+        // is not enough going from project to index
+        if (route.name === 'index') {
+          ScrollTrigger.refresh(true);
+        } else {
+          $smoothScroll.update();
+          ScrollTrigger.update();
+        }
 
         $smoothScroll.enable();
-
-        // removes transform: matrix, so navbar has correct z-index ¯\_(ツ)_/¯
-        gsap.set('#scroller', { clearProps: 'all' });
       }, refreshAt);
     },
     onComplete: () => {
@@ -84,7 +84,7 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.fromTo(pageEl, { y: 200 }, { y: 0, duration: 1, clearProps: 'y' }, 0.2);
+  tl.fromTo(pageEl, { y: 300 }, { y: 0, duration: 1, clearProps: 'y' }, 0.2);
   tl.fromTo(
     '.page-overlay__slide',
     {
