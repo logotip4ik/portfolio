@@ -59,21 +59,16 @@ function enterPageAnim(pageEl, done) {
 
       const waitFor = 0.75;
       const emitAt = (tl.totalDuration() - waitFor) * 1000;
-      const refreshAt = (tl.totalDuration() - waitFor - 0.175) * 1000;
 
-      setTimeout(() => emitter.emit('overlay:hiding'), emitAt);
       setTimeout(() => {
-        // just updating scroll trigger and smooth scroll
-        // is not enough going from project to index
-        if (route.name === 'index') {
-          ScrollTrigger.refresh(true);
-        } else {
-          $smoothScroll.update();
-          ScrollTrigger.update();
-        }
+        const safeRefresh = route.name === 'index';
+
+        ScrollTrigger.refresh(safeRefresh);
 
         $smoothScroll.enable();
-      }, refreshAt);
+
+        emitter.emit('overlay:hiding');
+      }, emitAt);
     },
     onComplete: () => {
       done();
