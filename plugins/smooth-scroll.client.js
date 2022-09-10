@@ -76,6 +76,7 @@ function makeLocomotiveScrollAdaptor(locomotiveScroll) {
           duration: durationInSeconds * 1000,
           // https://easings.net/#easeOutExpo
           easing: [0.645, 0.045, 0.355, 1.0],
+          disableLerp: durationInSeconds * 1000 <= 100
         })
         : gsap.to(window, {
           scrollTo: { y: selectorOrNumber, autoKill: true },
