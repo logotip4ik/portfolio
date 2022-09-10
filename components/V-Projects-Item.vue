@@ -61,7 +61,11 @@ onMounted(() => {
       0
     );
 
-  onBeforeUnmount(() => imageResizeObserver.disconnect());
+  onBeforeUnmount(() => {
+    revealAnim.scrollTrigger?.kill();
+
+    imageResizeObserver.disconnect();
+  });
 });
 </script>
 

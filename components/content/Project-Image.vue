@@ -16,7 +16,7 @@ onMounted(() => {
   const imageScale = 70;
 
   gsap.set(imageRef.value, { scale: 1 + imageScale * 0.01 });
-  gsap.fromTo(
+  const animation = gsap.fromTo(
     imageRef.value,
     { yPercent: -imageScale / 2 },
     {
@@ -30,6 +30,10 @@ onMounted(() => {
       },
     }
   );
+
+  onBeforeUnmount(() => {
+    animation.scrollTrigger.kill();
+  });
 });
 </script>
 

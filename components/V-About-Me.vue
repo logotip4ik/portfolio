@@ -16,7 +16,7 @@ onMounted(() => {
     lineClass: 'about-me__content__line',
   });
 
-  gsap.fromTo(
+  const revealAnimation = gsap.fromTo(
     text.lines,
     { '--overlay-offset': '0%' },
     {
@@ -31,6 +31,10 @@ onMounted(() => {
       },
     }
   );
+
+  onBeforeUnmount(() => {
+    revealAnimation.scrollTrigger.kill();
+  });
 });
 </script>
 

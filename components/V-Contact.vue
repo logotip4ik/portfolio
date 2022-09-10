@@ -9,6 +9,8 @@ const contact = ref(null);
 const contactEmailRow = ref(null);
 
 onMounted(() => {
+  const animations = [];
+
   const scrollTriggerFactory = (trigger) => ({
     trigger,
     scrub: window.innerWidth >= $smoothScrollBreakPoint ? true : 0.5,
@@ -20,11 +22,17 @@ onMounted(() => {
     const sumWidth =
       item.offsetWidth + window.innerWidth / (window.innerWidth < 700 ? 2 : 4);
 
-    gsap.fromTo(
-      item,
-      { x: window.innerWidth },
-      { x: -sumWidth, scrollTrigger }
+    animations.push(
+      gsap.fromTo(
+        item,
+        { x: window.innerWidth },
+        { x: -sumWidth, scrollTrigger }
+      )
     );
+  });
+
+  onBeforeUnmount(() => {
+    animations.forEach((animation) => animation.scrollTrigger.kill());
   });
 });
 </script>

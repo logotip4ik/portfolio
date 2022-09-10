@@ -23,7 +23,7 @@ onMounted(() => {
     wrapper.appendChild(line);
   }
 
-  gsap.fromTo(
+  const animation = gsap.fromTo(
     text.words,
     { yPercent: -105 },
     {
@@ -38,6 +38,10 @@ onMounted(() => {
       },
     }
   );
+
+  onBeforeUnmount(() => {
+    animation.scrollTrigger?.kill();
+  });
 });
 </script>
 
