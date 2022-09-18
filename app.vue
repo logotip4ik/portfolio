@@ -55,20 +55,8 @@ function enterPageAnim(pageEl, done) {
     paused: true,
     onStart: () => {
       routeChanging.value = false;
+
       emitter.emit('pointer:inactive');
-
-      const waitFor = 0.75;
-      const emitAt = (tl.totalDuration() - waitFor) * 1000;
-
-      setTimeout(() => {
-        const safeRefresh = route.name === 'index';
-
-        ScrollTrigger.refresh(safeRefresh);
-
-        $smoothScroll.enable();
-
-        emitter.emit('overlay:hiding');
-      }, emitAt);
     },
     onComplete: () => {
       done();
@@ -80,6 +68,7 @@ function enterPageAnim(pageEl, done) {
   });
 
   tl.fromTo(pageEl, { y: 300 }, { y: 0, duration: 1, clearProps: 'y' }, 0.2);
+
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -96,6 +85,10 @@ function enterPageAnim(pageEl, done) {
     },
     0.2
   );
+  tl.add(() => ScrollTrigger.refresh(), '<+0.275');
+  tl.add(() => $smoothScroll.enable(), '<+0.275');
+  tl.add(() => emitter.emit('overlay:hiding'), '<-0.35');
+
   tl.fromTo(
     '.page-overlay__slide__text',
     { yPercent: 0, autoAlpha: 1 },
