@@ -1,25 +1,28 @@
 // import ASScroll from "@ashthornton/asscroll";
+// import LocomotiveScroll from 'locomotive-scroll';
 import { gsap } from 'gsap';
-import LocomotiveScroll from 'locomotive-scroll';
+import Lenis from '@studio-freight/lenis';
 
 const LOCOMOTIVE_SCROLL_BREAK_POINT = 1024;
 const SCROLL_TO_DURATION_IN_SECONDS = 1.5;
 
-export default defineNuxtPlugin(({ $ScrollTrigger }) => {
+export default defineNuxtPlugin(({ $gsap, $ScrollTrigger }) => {
   const scrollerEl = document.getElementById('scroller');
 
-  const locomotiveScroll = new LocomotiveScroll({
-    el: scrollerEl,
-    smooth: true,
+  const isTouchDevice = 'ontouchstart' in document;
+
+  window.scrollTo(0, 0);
+  const lenis = new Lenis({
+    smooth: !isTouchDevice,
+    direction: 'vertical',
+    content: scrollerEl,
   });
 
-  locomotiveScroll.on('scroll', $ScrollTrigger.update);
+  lenis.on('scroll', $ScrollTrigger.update);
 
-  $ScrollTrigger.scrollerProxy(locomotiveScroll.el, {
+  $ScrollTrigger.scrollerProxy(lenis.contentNode, {
     scrollTop(value) {
-      return arguments.length
-        ? locomotiveScroll.scrollTo(value, { disableLerp: true, duration: 0 })
-        : locomotiveScroll.scroll.instance.scroll.y;
+      return arguments.length ? lenis.setScroll(value) : lenis.scroll;
     },
     getBoundingClientRect() {
       return {
@@ -29,18 +32,69 @@ export default defineNuxtPlugin(({ $ScrollTrigger }) => {
         height: window.innerHeight,
       };
     },
-    pinType: locomotiveScroll.el.style.transform ? 'transform' : 'fixed',
   });
 
-  $ScrollTrigger.addEventListener('refresh', () => locomotiveScroll.update());
+  $ScrollTrigger.addEventListener('refresh', () => lenis.notify());
 
-  if (window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT)
-    $ScrollTrigger.defaults({ scroller: locomotiveScroll.el });
+  if (window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT) {
+    $ScrollTrigger.defaults({ scroller: lenis.contentNode });
+
+    // NOTE: default time in gsap is in seconds, but lenis accepts time in milliseconds
+    $gsap.ticker.add((time) => lenis.raf(time * 1000));
+  }
 
   return {
-    provide: { smoothScroll: makeLocomotiveScrollAdaptor(locomotiveScroll) },
+    provide: { smoothScroll: makeLenisSmoothScrollAdaptor(lenis) },
   };
 });
+
+function makeLenisSmoothScrollAdaptor(lenis) {
+  window.lenis = lenis;
+
+  return {
+    on: (evName, evCallback) =>
+      lenis.on(evName, ({ scroll }) => evCallback({ scroll: { x: scroll } })),
+    scrollY: () =>
+      window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
+        ? lenis.scroll
+        : window.scrollY,
+    update: () => lenis.notify(),
+    enable: () =>
+      window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
+        ? lenis.start()
+        : (document.body.style.overflow = 'auto'),
+    disable: () =>
+      window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
+        ? lenis.stop()
+        : (document.body.style.overflow = 'hidden'),
+    scrollTo: (
+      selectorOrNumber,
+      durationInSeconds = SCROLL_TO_DURATION_IN_SECONDS
+    ) => {
+      let target = selectorOrNumber;
+
+      if (typeof selectorOrNumber === 'string')
+        target = document.querySelector(selectorOrNumber).offsetTop;
+
+      const options = {};
+
+      if (durationInSeconds === 0) options.immediate = true;
+      else options.duration = durationInSeconds;
+
+      lenis.scrollTo(target, options);
+    },
+    // window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
+    //   ? lenis.scrollTo(selectorOrNumber, {
+    //       duration: durationInSeconds,
+    //       immediate: durationInSeconds === 0,
+    //     })
+    //   : gsap.to(window, {
+    //       scrollTo: { y: selectorOrNumber, autoKill: true },
+    //       duration: durationInSeconds,
+    //       ease: 'power3.inOut',
+    //     }),
+  };
+}
 
 function makeLocomotiveScrollAdaptor(locomotiveScroll) {
   const scroll = { x: 0, y: 0 };

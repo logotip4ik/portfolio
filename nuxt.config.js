@@ -105,7 +105,6 @@ export default defineNuxtConfig({
 
   css: [
     'normalize.css/normalize.css',
-    'locomotive-scroll/dist/locomotive-scroll.css',
     '~/assets/fonts/styles.css',
     '~/assets/styles/global.css',
   ],
