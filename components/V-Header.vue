@@ -43,7 +43,8 @@ function revealContent() {
   mainTl.to('.scroll-down', { opacity: 1 }, '<+0.5');
 
   mainTl.to(
-    '.nav__menu-button, .nav__list__item',
+    // breakpoint in navbar
+    window.innerWidth < 768 ? '.nav__menu-button' : '.nav__list__item',
     { opacity: 1, stagger: 0.125 },
     '-=0.75'
   );
