@@ -18,7 +18,7 @@ function leavePageAnim(pageEl, done) {
     },
   });
 
-  tl.to(pageEl, { y: -300, duration: 1, clearProps: 'y' }, 0);
+  tl.to(pageEl, { y: -300, duration: 1 }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -101,10 +101,8 @@ function enterPageAnim(pageEl, done) {
 
 function setVh() {
   const windowHeight = window.innerHeight;
-  document.documentElement.setAttribute(
-    'style',
-    `--vh: ${windowHeight / 100}px`
-  );
+
+  gsap.to(document.documentElement, { '--vh': `${windowHeight / 100}px` });
 }
 
 function logGreeting() {
