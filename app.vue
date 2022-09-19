@@ -102,7 +102,7 @@ function enterPageAnim(pageEl, done) {
 function setVh() {
   const windowHeight = window.innerHeight;
 
-  gsap.to(document.documentElement, { '--vh': `${windowHeight / 100}px` });
+  gsap.set(document.documentElement, { '--vh': `${windowHeight / 100}px` });
 }
 
 function logGreeting() {
