@@ -102,7 +102,7 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 1;
 
-  min-height: 100vh;
+  min-height: var(--100vh);
 
   overflow: hidden;
   background-color: var(--surface-color);
