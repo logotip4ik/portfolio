@@ -60,7 +60,9 @@ function showMenu() {
       { autoAlpha: 1 }
     ));
 
-  prevAnimation = gsap.timeline();
+  prevAnimation = gsap.timeline({
+    defaults: { ease: 'expo.out', duration: 1 },
+  });
 
   prevAnimation.set(menu.value, {
     autoAlpha: 1,
@@ -91,19 +93,17 @@ function showMenu() {
     menuBackItemLine.value,
     { transform: 'scaleX(0)', transformOrigin: 'left bottom' },
     { transform: 'scaleX(1)', stagger: 0.05 },
-    '<'
+    '<-0.75'
   );
   prevAnimation.fromTo(
     [...menuBackItemContentTitle.value, ...menuBackItemContentLinksItem.value],
-    { opacity: 0, yPercent: 100 },
+    { opacity: 0, yPercent: 50 },
     {
       opacity: 1,
       yPercent: 0,
-      duration: 1,
-      ease: 'power4.out',
-      stagger: 0.075,
+      stagger: 0.05,
     },
-    '<-0.125'
+    '<-0.1'
   );
 }
 
@@ -162,7 +162,7 @@ watch(isShowingMenu, (bool) => {
         class="menu__back-item__line"
       ></span>
     </div>
-    <div class="menu__back-item">
+    <div :ref="(el) => (menuBackItem[5] = el)" class="menu__back-item">
       <div class="menu__back-item__content menu__back-item__content--no-anim">
         <ul v-if="social" class="menu__back-item__content__links">
           <li
