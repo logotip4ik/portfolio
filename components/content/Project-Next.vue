@@ -17,7 +17,14 @@ useHead({
 
 <template>
   <NuxtLink v-hoverable.link :href="next._path" class="project-next">
-    <img :src="next.image" :alt="next.title" class="project-next__image" />
+    <img
+      :src="next.image"
+      :alt="next.title"
+      class="project-next__image"
+      data-scroll
+      data-scroll-speed="-4"
+      data-scroll-position="bottom"
+    />
 
     {{ next.title }}
   </NuxtLink>
