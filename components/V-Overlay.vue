@@ -106,12 +106,14 @@ const numberOfLoadingPoints = 3;
     }
 
     &__loading {
-      --circle-size: 1rem;
+      --circle-size: clamp(0.5rem, calc(var(--step--2) - 0.5rem), 0.95rem);
       --initial-delay: 2.25s;
+      --circles-number: 3;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(1fr, var(--circles-number));
+      grid-auto-flow: column;
+      gap: calc(var(--circle-size) / 1.25);
 
       position: absolute;
       top: calc(50% + 1.5rem);
@@ -136,10 +138,6 @@ const numberOfLoadingPoints = 3;
         height: var(--circle-size);
 
         opacity: 0;
-
-        &:nth-of-type(even) {
-          margin-inline: 25%;
-        }
 
         &--animate {
           animation: infinite 2.5s fade-in-out
