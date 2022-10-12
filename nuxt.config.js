@@ -1,7 +1,7 @@
-import { defineNuxtConfig } from 'nuxt';
-
 import GLSL from 'vite-plugin-glsl';
 import SVGLoader from 'vite-svg-loader';
+
+const isDev = process.env.NODE_ENV === 'development';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -127,7 +127,7 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [GLSL(), SVGLoader({ svgo: false })],
+    plugins: [GLSL({ compress: !isDev }), SVGLoader({ svgo: false })],
   },
 
   nitro: { prerender: { routes: ['/sitemap.xml'] } },
