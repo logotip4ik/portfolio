@@ -53,7 +53,7 @@ function render() {
 
   if (prefersReducedMotion) hasRunOnce = true;
 
-  object.program.uniforms.time.value += 0.015;
+  object.program.uniforms.time.value += 0.0085;
 
   renderer.render({ scene, camera });
 }
