@@ -8,4 +8,6 @@ links:
     href: 'https://github.com/logotip4ik'
   - label: 'email'
     href: 'mailto:contact@bogdankostyuk.xyz'
+  - label: 'blog'
+    href: 'https://blog.bogdankostyuk.xyz'
 ---
