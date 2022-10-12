@@ -14,7 +14,7 @@
     "last 3 versions, not dead, not IE 11, Safari > 14"
   ],
   "devDependencies": {
-    "@logotip4ik_/nuxt-cloudflare-headers": "^1.2.2",
+    "@logotip4ik_/nuxt-cloudflare-headers": "^1.2.3",
     "@nuxt/content": "^2.1.1",
     "cypress": "10.8.0",
     "nuxt": "^3.0.0-rc.11",
