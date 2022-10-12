@@ -392,10 +392,10 @@
     is-extendable "^0.1.1"
     lazy-cache "^0.2.3"
 
-"@logotip4ik_/nuxt-cloudflare-headers@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@logotip4ik_/nuxt-cloudflare-headers/-/nuxt-cloudflare-headers-1.2.1.tgz#bdcab4ddd4158f08592de02853d96b65006edb37"
-  integrity sha512-/MKK2bCnrD/MIDhCTPJSmY9Z9JynQeEt16qVUW9B3BuAaw0m43BFt9lZHlulnHE8p6f8lemQ/q8c69taH0YS2g==
+"@logotip4ik_/nuxt-cloudflare-headers@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@logotip4ik_/nuxt-cloudflare-headers/-/nuxt-cloudflare-headers-1.2.2.tgz#d03c339ee1af29ae5827da9c2effe4690b52dbfd"
+  integrity sha512-Naqndrazm9BD7Xh7LehMALhn5YUSAC3srDPEgzuIdsChbyNmKmMNLJrgxN2X81Wln3zpwpouaElwcvnYxRKbZg==
   dependencies:
     "@logotip4ik_/defaults-deep" "^0.1.2"
     "@nuxt/kit" "^3.0.0-rc.4"
@@ -2642,10 +2642,10 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, 
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
-gsap@^3.11.1:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.11.1.tgz#2d99acf9c9ad02f3b6668bfab7567d31f217a91e"
-  integrity sha512-UKuJ0UPhntFHMwT6URFQ4cTQv88xc7Kd9Dhxt7qX9IPhC+d+/a5wKW5E5Vn33hZ53nBI1JfApcEbzKgXkcuPZw==
+gsap@^3.11.3:
+  version "3.11.3"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.11.3.tgz#ca5be827f56fe8d5720e08343390f74fb89a05f3"
+  integrity sha512-xc/iIJy+LWiMbRa4IdMtdnnKa/7PXEK6NNzV71gdOYUVeTZN7UWnLU0fB7Hi1iwiz4ZZoYkBZPPYGg+2+zzFHA==
 
 gzip-size@^7.0.0:
   version "7.0.0"
@@ -4289,10 +4289,10 @@ object-assign@^4.0.1, object-assign@^4.1.1:
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==
 
-ogl@^0.0.99:
-  version "0.0.99"
-  resolved "https://registry.yarnpkg.com/ogl/-/ogl-0.0.99.tgz#f4647faefff0dafa2019ab56a757e948585604df"
-  integrity sha512-ENuWxkHGsUJeKNGLuBKjxDDGfLOb8FKxB1Tj/j1Gm9wAZHCFhHGKMgZ9C0UjMaRgE48/BZQ+ARQFhn5pl4QKbg==
+ogl@^0.0.102:
+  version "0.0.102"
+  resolved "https://registry.yarnpkg.com/ogl/-/ogl-0.0.102.tgz#1456270e9205dd09d85be4b87b53821d624c951e"
+  integrity sha512-w0Jik745nCynPReGW1dGDnpsPzB5R08FGNdFlYN9WV8A3qngZMkt+yfqPp4SeKchjuWB5L6IAaiT/yBcQB7tdA==
 
 ohash@^0.1.5:
   version "0.1.5"
@@ -5146,10 +5146,10 @@ safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass@1.54.9:
-  version "1.54.9"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.9.tgz#b05f14ed572869218d1a76961de60cd647221762"
-  integrity sha512-xb1hjASzEH+0L0WI9oFjqhRi51t/gagWnxLiwUNMltA0Ab6jIDkAacgKiGYKM9Jhy109osM7woEEai6SXeJo5Q==
+sass@1.55.0:
+  version "1.55.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.55.0.tgz#0c4d3c293cfe8f8a2e8d3b666e1cf1bff8065d1c"
+  integrity sha512-Pk+PMy7OGLs9WaxZGJMn7S96dvlyVBwwtToX895WmCpAOr5YiJYEUJfiJidMuKb613z2xNWcXCHEuOvjZbqC6A==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -5672,10 +5672,10 @@ type-fest@^2.11.2:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
   integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
 
-typescript@^4.8.3:
-  version "4.8.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
-  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
+typescript@^4.8.4:
+  version "4.8.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
+  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
 
 ufo@^0.8.3, ufo@^0.8.5:
   version "0.8.5"
