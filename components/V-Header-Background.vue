@@ -6,6 +6,7 @@ import fragmentShader from '~/assets/shaders/fragment.glsl';
 import vertexShader from '~/assets/shaders/vertex.glsl';
 
 import { WhitePinkGreen as pallet } from '~/assets/shaders/colors';
+import { MAX_DPR } from '~/lib/constants';
 
 const { gsap } = useGsap();
 const {
@@ -29,9 +30,6 @@ let object = null;
 let aspect = 16 / 9;
 
 const mouse = new Vec2(0, 0);
-// const mouse = { x: 0, y: 0 };
-
-const MAX_DPR = 2.2;
 
 function resize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
