@@ -6,6 +6,7 @@ uniform float objectOpacity;
 uniform float noisePower;
 uniform float pixelRatio;
 uniform vec2 resolution;
+uniform vec2 mouse;
 uniform vec3 color1;
 uniform vec3 color2;
 uniform vec3 color3;
@@ -64,7 +65,7 @@ void main() {
 
   float noise = snoise(vPosition + time * 0.175 + randomSeed * 100.0) * (noisePower * 0.55);
 
-  vec2 baseUv = getRotationMatrix(noise + -1.0) * vPosition.xy * shaderZoom;
+  vec2 baseUv = getRotationMatrix(noise + -1.0) * (vPosition.xy + mouse * vec2(0.175, 0.25)) * shaderZoom;
 
   float firstPattern = lines(baseUv, 0.5, 10.0);
   float secondPattern = lines(baseUv, 0.05, 15.0);

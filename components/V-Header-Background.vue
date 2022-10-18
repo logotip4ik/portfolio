@@ -28,6 +28,9 @@ let gl = null;
 let object = null;
 let aspect = 16 / 9;
 
+const mouse = new Vec2(0, 0);
+// const mouse = { x: 0, y: 0 };
+
 const MAX_DPR = 2.2;
 
 function resize() {
@@ -54,6 +57,9 @@ function render() {
   if (prefersReducedMotion) hasRunOnce = true;
 
   object.program.uniforms.time.value += 0.0085;
+  // object.program.uniforms.mouse.value.set(mouse)
+  // object.program.uniforms.mouseX.value = mouse.x;
+  // object.program.uniforms.mouseY.value = mouse.y;
 
   renderer.render({ scene, camera });
 }
@@ -120,6 +126,7 @@ function createBackground() {
           ? new Color(pallet.color3.dark)
           : new Color(pallet.color3.light),
       },
+      mouse: { value: mouse },
     },
   });
 
@@ -161,8 +168,26 @@ function createBackground() {
   onBeforeUnmount(() => gsap.ticker.remove(callbackTicker));
 }
 
+function handlePointerMove({ clientX, clientY }) {
+  const windowHeight = window.innerHeight;
+  const windowWidth = window.innerWidth;
+
+  gsap.to(mouse, {
+    x: (clientX / windowWidth - 0.5) * 2,
+    y: (clientY / windowHeight - 0.5) * -2,
+    ease: 'power1.out',
+    duration: 1,
+  });
+}
+
 onMounted(() => {
   createBackground();
+
+  window.addEventListener('pointermove', handlePointerMove, { passive: true });
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('pointermove', handlePointerMove);
 });
 </script>
 
