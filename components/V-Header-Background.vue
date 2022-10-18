@@ -174,7 +174,7 @@ function handlePointerMove({ clientX, clientY }) {
     x: (clientX / windowWidth - 0.5) * 2,
     y: (clientY / windowHeight - 0.5) * -2,
     ease: 'power1.out',
-    duration: 1,
+    duration: 1.25,
   });
 }
 
