@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   sitemap.write({ url: '/', ...defaults });
 
   for (const doc of docs)
-    if (doc._path.includes('projects'))
+    if (doc._path.includes('project'))
       sitemap.write({ url: doc._path, ...defaults });
 
   sitemap.end();
