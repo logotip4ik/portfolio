@@ -55,9 +55,7 @@ function render() {
   if (prefersReducedMotion) hasRunOnce = true;
 
   object.program.uniforms.time.value += 0.0085;
-  // object.program.uniforms.mouse.value.set(mouse)
-  // object.program.uniforms.mouseX.value = mouse.x;
-  // object.program.uniforms.mouseY.value = mouse.y;
+  object.program.uniforms.mouse.value.lerp(mouse, 0.1);
 
   renderer.render({ scene, camera });
 }
@@ -67,7 +65,9 @@ function createBackground() {
   prefersReducedMotion = $checkReducedMotion();
 
   const isDarkMode = $isDarkMode();
-  const clearColor = isDarkMode ? [3, 3, 3] : [235, 235, 235];
+  const clearColor = (isDarkMode ? [3, 3, 3] : [235, 235, 235]).map(
+    (number) => number / 255
+  );
 
   renderer = new Renderer({
     canvas: canvas.value,
@@ -124,7 +124,7 @@ function createBackground() {
           ? new Color(pallet.color3.dark)
           : new Color(pallet.color3.light),
       },
-      mouse: { value: mouse },
+      mouse: { value: new Vec2(0, 0) },
     },
   });
 
@@ -166,26 +166,74 @@ function createBackground() {
   onBeforeUnmount(() => gsap.ticker.remove(callbackTicker));
 }
 
-function handlePointerMove({ clientX, clientY }) {
-  const windowHeight = window.innerHeight;
-  const windowWidth = window.innerWidth;
+function mountDeviceOrientationHandler() {
+  const doe = DeviceOrientationEvent;
+  if (
+    doe &&
+    doe.requestPermission &&
+    typeof doe.requestPermission === 'function'
+  ) {
+    // after ios13
+    doe
+      .requestPermission()
+      .then((response) => {
+        if (response === 'granted')
+          window.addEventListener('deviceorientation', handleDeviceOrientation);
+      })
+      .catch(console.error);
+  } else {
+    // another
+    window.addEventListener('deviceorientation', handleDeviceOrientation);
+  }
 
-  gsap.to(mouse, {
-    x: (clientX / windowWidth - 0.5) * 2,
-    y: (clientY / windowHeight - 0.5) * -2,
-    ease: 'power1.out',
-    duration: 1.25,
-  });
+  onBeforeUnmount(() =>
+    window.removeEventListener('deviceorientation', handleDeviceOrientation)
+  );
+}
+
+let updateOffsetAngle = false;
+let prevOrientation;
+function handleDeviceOrientation(e) {
+  let angle;
+  let offsetAngle;
+
+  /** @see https://github.com/nemutas/sp-sensor2/blob/main/src/scripts/entry.ts */
+  const [alpha, beta, gamma] = [e.alpha ?? 0, e.beta ?? 0, e.gamma ?? 0];
+  const orientation = screen.orientation
+    ? screen.orientation.angle
+    : window.orientation;
+
+  if (!updateOffsetAngle) {
+    updateOffsetAngle = orientation !== prevOrientation;
+  }
+
+  if (orientation === 0) {
+    updateOffsetAngle && (offsetAngle = { x: beta, y: gamma, z: alpha });
+    angle = { x: beta, y: gamma, z: alpha };
+  } else if (orientation === 90) {
+    updateOffsetAngle && (offsetAngle = { x: gamma, y: alpha, z: beta });
+    angle = { x: gamma, y: alpha, z: beta };
+  } else if (orientation === -90 || orientation === 270) {
+    updateOffsetAngle && (offsetAngle = { x: gamma, y: alpha, z: beta });
+    angle = { x: gamma, y: alpha, z: beta };
+  }
+
+  if (offsetAngle) {
+    angle.x -= offsetAngle.x;
+    angle.y -= offsetAngle.y;
+    angle.z -= offsetAngle.z;
+  }
+
+  updateOffsetAngle = false;
+  prevOrientation = orientation;
+
+  mouse.y = gsap.utils.mapRange(-90, 90, 0, 2.5, angle.y);
 }
 
 onMounted(() => {
   createBackground();
 
-  window.addEventListener('pointermove', handlePointerMove, { passive: true });
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener('pointermove', handlePointerMove);
+  mountDeviceOrientationHandler();
 });
 </script>
 
