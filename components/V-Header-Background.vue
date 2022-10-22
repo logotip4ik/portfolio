@@ -227,7 +227,7 @@ function handleDeviceOrientation(e) {
   updateOffsetAngle = false;
   prevOrientation = orientation;
 
-  mouse.y = gsap.utils.mapRange(-90, 90, 0, 2.5, angle.y);
+  mouse.y = gsap.utils.mapRange(-90, 90, 0, 2, angle.y) + 2.5;
 }
 
 onMounted(() => {
