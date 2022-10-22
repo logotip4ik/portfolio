@@ -38,7 +38,7 @@ void main() {
   float shaderZoom = 0.0;
 
   if (resolution.x > 700.0) shaderZoom = 0.25;
-  else shaderZoom = 0.45;
+  else shaderZoom = 0.4;
 
   // vec3 color1 = vec3(0.0, 0.0, 0.0);
   // vec3 color2 = vec3(255.0, 230.0, 237.0);
@@ -65,16 +65,18 @@ void main() {
 
   float noise = snoise(vPosition + time * 0.175 + randomSeed * 100.0) * (noisePower * 0.55);
 
-  vec2 baseUv = getRotationMatrix(noise + -1.0) * (vPosition.xy + mouse * vec2(0.175, 0.25)) * shaderZoom;
+  vec2 baseUv = getRotationMatrix(noise + -1.0) * vPosition.xy * shaderZoom;
 
-  float firstPattern = lines(baseUv, 0.5, 10.0);
-  float secondPattern = lines(baseUv, 0.05, 15.0);
+  vec2 normalizedMouse = mouse * vec2(0.1);
+  
+  float firstPattern = lines(baseUv + normalizedMouse.y, 0.5, 10.0);
+  float secondPattern = lines(baseUv + normalizedMouse.y, 0.05, 15.0);
 
   vec3 firstColor = mix(_color3, _color2, firstPattern);
   vec3 resultingPattern = mix(firstColor, _color1, secondPattern);
 
   float grainStrength = 0.075;
-  if (pixelRatio > 2.0) grainStrength = 0.135;
+  if (pixelRatio > 1.8) grainStrength = 0.125;
 
   vec2 uvNoise = vPosition.xy;
   uvNoise.y *= rand(vec2(uvNoise.y, randomSeed));
