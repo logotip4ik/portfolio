@@ -114,7 +114,11 @@ export default defineNuxtConfig({
     transpile: ['gsap'],
   },
 
-  modules: ['@nuxt/content', '@logotip4ik_/nuxt-cloudflare-headers'],
+  modules: [
+    '@nuxt/content',
+    '@nuxtjs/fontaine',
+    '@logotip4ik_/nuxt-cloudflare-headers',
+  ],
 
   cloudflareHeaders: {
     '/*': [
