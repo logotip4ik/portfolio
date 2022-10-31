@@ -6495,12 +6495,12 @@ vite-plugin-checker@^0.5.1:
     vscode-languageserver-textdocument "^1.0.1"
     vscode-uri "^3.0.2"
 
-vite-plugin-glsl@0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/vite-plugin-glsl/-/vite-plugin-glsl-0.5.1.tgz#22b81ffd9fe3a5959cacdcb4312021a543c1f85a"
-  integrity sha512-r4zKN8dlOVIB30whl4rlGgiUTnDk4DHDpDMfUwAERkkoJVf7yXqiNCcGCe4SRgi/GLekAyP4ShW4dSyfycvwfA==
+vite-plugin-glsl@0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/vite-plugin-glsl/-/vite-plugin-glsl-0.5.3.tgz#14394e7b562640894b187edccd07df8933b2229a"
+  integrity sha512-BsMDK+kdZ2glR1R06KVLuYvsHnD/1mb9a8yZba/nsGViipsDJP6T5W8ChJfhtzAUhXf9V4lsCaq24NqhPVyQ8w==
   dependencies:
-    "@rollup/pluginutils" "^4.2.1"
+    "@rollup/pluginutils" "^5.0.1"
 
 vite-svg-loader@^3.6.0:
   version "3.6.0"
