@@ -3,21 +3,20 @@ defineProps({ error: { type: Object, required: true } });
 </script>
 
 <template>
-  <div>
-    <main id="scroller" class="error-page">
-      <p class="error-page__message">
-        <template v-if="error.statusCode == 404">
-          Oops, it's not what are you searching for.
-        </template>
-        <template v-else>
-          {{ error.message }}
-        </template>
-      </p>
+  <main id="scroller" class="error-page">
+    <p class="error-page__message">
+      <template v-if="error.statusCode == 404">
+        Oops, it's not what are you searching for.
+      </template>
+      <template v-else>
+        {{ error.message }}
+      </template>
+    </p>
 
-      <!-- not using nuxt link cuz smooth scroll needed scroller element -->
-      <a href="/" class="error-page__home-link">Maybe to home ?</a>
-    </main>
-  </div>
+    <!-- not using nuxt link cuz smooth scroll needed scroller element -->
+    <!-- NOTE: `clearError` doesn't reinitiate plugins, so smooth scroll stays broken -->
+    <a href="/" class="error-page__home-link"> Maybe to home ? </a>
+  </main>
 </template>
 
 <style lang="scss" scoped>
