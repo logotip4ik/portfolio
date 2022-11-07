@@ -19,7 +19,7 @@ function logGreeting() {
   );
   // eslint-disable-next-line
   console.log(
-    "%cHello😁 curios friend! Currently I am looking👀 for a job as a front end developer, so let's get in touch! If you are looking for a source📦 here you are: https://github.com/logotip4ik/portfolio",
+    "%cHello😁 curios friend! If you have any questions, let's get in touch at contact@bogdankostyuk.xyz! Or if you are looking for a source📦 here you are: https://github.com/logotip4ik/portfolio",
     'background-color: #030303;border-radius: 0.125rem;padding: 5px 10px;font-size:1rem;color: white;line-height:1.75'
   );
 }
