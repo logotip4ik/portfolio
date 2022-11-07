@@ -7,7 +7,7 @@ const LOCOMOTIVE_SCROLL_BREAK_POINT = 1024;
 const SCROLL_TO_DURATION_IN_SECONDS = 1.5;
 
 export default defineNuxtPlugin(({ $gsap, $ScrollTrigger }) => {
-  const scrollerEl = document.getElementById('scroller');
+  const scrollerEl = document.getElementById('__nuxt');
 
   const isTouchDevice = 'ontouchstart' in document;
 
@@ -16,6 +16,7 @@ export default defineNuxtPlugin(({ $gsap, $ScrollTrigger }) => {
     smooth: !isTouchDevice,
     direction: 'vertical',
     content: scrollerEl,
+    easing: (x) => (x === 1 ? 1 : 1 - Math.pow(2, -10 * x)),
   });
 
   lenis.on('scroll', $ScrollTrigger.update);
