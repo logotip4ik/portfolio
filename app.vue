@@ -11,12 +11,12 @@ function leavePageAnim(pageEl, done) {
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
     onStart: () => {
-      $smoothScroll.scrollTo(0, 0);
       $smoothScroll.disable();
     },
     onComplete: () => {
-      setTimeout(() => done(), 400);
-      // done();
+      $smoothScroll.scrollTo(0, 0);
+
+      done();
     },
   });
 
@@ -57,19 +57,6 @@ function enterPageAnim(pageEl, done) {
       routeChanging.value = false;
 
       emitter.emit('pointer:inactive');
-
-      const waitFor = 0.75;
-      const emitAt = (tl.totalDuration() - waitFor) * 1000;
-
-      setTimeout(() => {
-        const safeRefresh = route.name === 'index';
-
-        ScrollTrigger.refresh(safeRefresh);
-
-        $smoothScroll.enable();
-
-        emitter.emit('overlay:hiding');
-      }, emitAt);
     },
     onComplete: () => {
       done();
@@ -98,9 +85,9 @@ function enterPageAnim(pageEl, done) {
     },
     0.2
   );
+  tl.add(() => emitter.emit('overlay:hiding'), '<');
   tl.add(() => ScrollTrigger.refresh(), '<+0.275');
-  tl.add(() => $smoothScroll.enable(), '<+0.275');
-  tl.add(() => emitter.emit('overlay:hiding'), '<-0.35');
+  tl.add(() => $smoothScroll.enable(), '<');
 
   tl.fromTo(
     '.page-overlay__slide__text',
