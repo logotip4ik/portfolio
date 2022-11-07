@@ -3,8 +3,7 @@ import imagesLoaded from 'imagesloaded';
 
 useSeoHead({
   title: 'Front End Developer',
-  description:
-    'I will build you website as quick as possible and with high attention to details👌',
+  description: 'Perfection hides in details',
 });
 
 const { data: projects } = await useAsyncData('prerender-projects', () =>

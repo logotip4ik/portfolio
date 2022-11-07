@@ -1,5 +1,6 @@
 ---
 title: 'LPNU StudRecruit'
+description: This project was build exclusively for Student Recruiting Department. It is a student organization that consolidates the students' union and its government. The recruitment department is one of the
 live: 'https://studrecruit.lpnu.ua'
 tags:
   - 'Website'

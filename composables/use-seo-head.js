@@ -11,7 +11,7 @@ export default ({ title, description }) =>
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { 'http-equiv': 'Reply-to', content: 'contact@bogdankostyuk.xyz' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'description', content: description },
+      description ? { name: 'description', content: description } : {},
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'all' },
       { name: 'theme-color', content: 'var(--surface-color)' },
@@ -24,11 +24,13 @@ export default ({ title, description }) =>
         content: 'Bogdan Kostyuk',
       },
       { property: 'og:title', name: 'og:title', content: title },
-      {
-        property: 'og:description',
-        name: 'og:description',
-        content: description,
-      },
+      description
+        ? {
+            property: 'og:description',
+            name: 'og:description',
+            content: description,
+          }
+        : {},
       { property: 'og:locale', name: 'og:locale', content: 'en' },
       {
         property: 'og:url',
