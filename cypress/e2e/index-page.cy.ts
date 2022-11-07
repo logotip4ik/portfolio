@@ -1,9 +1,10 @@
-const menuSocialLinks = ['linkedin', 'telegram', 'github', 'email'];
+const menuSocialLinks = ['linkedin', 'telegram', 'github', 'email', 'blog'];
 const footerSocialLinks = [
   'linkedinlinkedin',
   'telegramtelegram',
   'githubgithub',
   'emailemail',
+  'blogblog',
 ];
 
 describe('Index page', () => {

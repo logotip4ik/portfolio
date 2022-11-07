@@ -43,7 +43,8 @@ function revealContent() {
   mainTl.to('.scroll-down', { opacity: 1 }, '<+0.5');
 
   mainTl.to(
-    '.nav__menu-button, .nav__list__item',
+    // breakpoint in navbar
+    window.innerWidth < 768 ? '.nav__menu-button' : '.nav__list__item',
     { opacity: 1, stagger: 0.125 },
     '-=0.75'
   );
@@ -102,7 +103,7 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 1;
 
-  min-height: 100vh;
+  min-height: var(--100vh);
 
   overflow: hidden;
   background-color: var(--surface-color);

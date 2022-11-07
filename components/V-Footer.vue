@@ -92,6 +92,7 @@ onMounted(() => {
       <button
         v-hoverable.action
         class="footer__arrow"
+        aria-label="to top"
         @click="() => $smoothScroll.scrollTo(0)"
       >
         <ArrowUpSVG />

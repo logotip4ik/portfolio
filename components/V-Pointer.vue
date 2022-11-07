@@ -97,7 +97,9 @@ onMounted(() => {
 
   window.addEventListener('pointermove', ({ x, y }) => {
     if (!firstMove)
-      gsap.to(pointer.value, { autoAlpha: 1 }).then(() => (firstMove = true));
+      gsap
+        .to(pointer.value, { autoAlpha: 1, clearProps: 'opacity' })
+        .then(() => (firstMove = true));
 
     toPointerX(x);
     toPointerY(y);
@@ -154,6 +156,7 @@ onMounted(() => {
   width: var(--size);
   height: var(--size);
 
+  opacity: 0;
   border-radius: 50%;
   background-color: #ffe6ed;
 
@@ -161,6 +164,8 @@ onMounted(() => {
 
   pointer-events: none;
   transform: translate(-50%, -50%);
+
+  transition: opacity 0.2s ease;
 
   &__svg {
     --size: 30%;
@@ -174,5 +179,9 @@ onMounted(() => {
 
     color: #030303;
   }
+}
+
+body:hover .pointer {
+  opacity: 1;
 }
 </style>

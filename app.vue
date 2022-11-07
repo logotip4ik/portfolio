@@ -20,7 +20,7 @@ function leavePageAnim(pageEl, done) {
     },
   });
 
-  tl.to(pageEl, { y: -300, duration: 1, clearProps: 'y' }, 0);
+  tl.to(pageEl, { y: -300, duration: 1 }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
@@ -57,6 +57,19 @@ function enterPageAnim(pageEl, done) {
       routeChanging.value = false;
 
       emitter.emit('pointer:inactive');
+
+      const waitFor = 0.75;
+      const emitAt = (tl.totalDuration() - waitFor) * 1000;
+
+      setTimeout(() => {
+        const safeRefresh = route.name === 'index';
+
+        ScrollTrigger.refresh(safeRefresh);
+
+        $smoothScroll.enable();
+
+        emitter.emit('overlay:hiding');
+      }, emitAt);
     },
     onComplete: () => {
       done();
@@ -85,12 +98,9 @@ function enterPageAnim(pageEl, done) {
     },
     0.2
   );
-  // tl.add(() => ScrollTrigger.refresh(), '<');
-  tl.add(() => {
-    $smoothScroll.enable();
-    // $smoothScroll.update();
-  }, '<+0.1');
-  tl.add(() => emitter.emit('overlay:hiding'), '<+0.25');
+  tl.add(() => ScrollTrigger.refresh(), '<+0.275');
+  tl.add(() => $smoothScroll.enable(), '<+0.275');
+  tl.add(() => emitter.emit('overlay:hiding'), '<-0.35');
 
   tl.fromTo(
     '.page-overlay__slide__text',
@@ -104,10 +114,8 @@ function enterPageAnim(pageEl, done) {
 
 function setVh() {
   const windowHeight = window.innerHeight;
-  document.documentElement.setAttribute(
-    'style',
-    `--vh: ${windowHeight / 100}px`
-  );
+
+  gsap.set(document.documentElement, { '--vh': `${windowHeight / 100}px` });
 }
 
 function logGreeting() {
