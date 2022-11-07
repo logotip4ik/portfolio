@@ -26,7 +26,7 @@
     "vite-svg-loader": "^3.6.0"
   },
   "dependencies": {
-    "@studio-freight/lenis": "^0.2.2",
+    "@studio-freight/lenis": "^0.2.20",
     "gsap": "^3.11.3",
     "imagesloaded": "^5.0.0",
     "locomotive-scroll": "^4.1.4",
