@@ -1,103 +1,9 @@
 <script setup>
 const { $smoothScroll } = useNuxtApp();
-const { gsap, ScrollTrigger } = useGsap();
+const { gsap } = useGsap();
 const route = useRoute();
-const emitter = useEmitter();
-const routeChanging = useRouteChanging();
 
-function leavePageAnim(pageEl, done) {
-  routeChanging.value = true;
-
-  const tl = gsap.timeline({
-    defaults: { ease: 'expo.out' },
-    onStart: () => {
-      $smoothScroll.disable();
-    },
-    onComplete: () => {
-      done();
-    },
-  });
-
-  tl.to(pageEl, { y: -300, duration: 1 }, 0);
-  tl.fromTo(
-    '.page-overlay__slide',
-    {
-      opacity: 1,
-      pointerEvents: 'all',
-      yPercent: 15,
-      clipPath: 'inset(85% 0% 0% 0%)',
-    },
-    {
-      yPercent: 0,
-      clipPath: 'inset(0% 0% 0% 0%)',
-      stagger: { each: 0.1 },
-      duration: 0.75,
-      onComplete: () => {
-        $smoothScroll.scrollTo(0, 0);
-      },
-    },
-    0
-  );
-  tl.fromTo(
-    '.page-overlay__slide__text',
-    { yPercent: 105, autoAlpha: 1 },
-    { yPercent: 0, ease: 'expo.out' },
-    0.25
-  );
-}
-
-function enterPageAnim(pageEl, done) {
-  routeChanging.value = true;
-
-  const tl = gsap.timeline({
-    delay: 0.15,
-    defaults: { ease: 'expo.out' },
-    paused: true,
-    onStart: () => {
-      routeChanging.value = false;
-
-      emitter.emit('pointer:inactive');
-    },
-    onComplete: () => {
-      done();
-
-      // when user was scrolling down, the nav will be hidden, but
-      // on a new page the nav should be visible
-      gsap.to('.nav', { autoAlpha: 1 });
-    },
-  });
-
-  tl.fromTo(pageEl, { y: 300 }, { y: 0, duration: 1, clearProps: 'y' }, 0.2);
-
-  tl.fromTo(
-    '.page-overlay__slide',
-    {
-      opacity: 1,
-      pointerEvents: 'all',
-      yPercent: 0,
-      clipPath: 'inset(0% 0% 0% 0%)',
-    },
-    {
-      yPercent: -15,
-      clipPath: 'inset(0% 0% 85% 0%)',
-      stagger: { each: 0.1, from: 'end' },
-      duration: 0.75,
-    },
-    0.2
-  );
-  tl.add(() => ScrollTrigger.refresh(), '<+0.275');
-  tl.add(() => $smoothScroll.enable(), '<+0.275');
-  tl.add(() => emitter.emit('overlay:hiding'), '<-0.35');
-
-  tl.fromTo(
-    '.page-overlay__slide__text',
-    { yPercent: 0, autoAlpha: 1 },
-    { yPercent: -125, ease: 'expo.out' },
-    0
-  );
-
-  emitter.once('images:loaded', () => tl.play());
-}
+const overlay = ref({});
 
 function setVh() {
   const windowHeight = window.innerHeight;
@@ -151,7 +57,7 @@ onMounted(() => {
       { yPercent: 0, delay: 0.075, ease: 'expo.out' }
     );
 
-    enterPageAnim('#scroller', () => null);
+    overlay.value.enterPageAnim('#scroller', () => null);
   }
 
   window.addEventListener('resize', setVh);
@@ -171,8 +77,8 @@ onBeforeUnmount(() => {
         <Transition
           :css="false"
           mode="out-in"
-          @enter="enterPageAnim"
-          @leave="leavePageAnim"
+          @enter="overlay.enterPageAnim"
+          @leave="overlay.leavePageAnim"
         >
           <div :key="$route.fullPath">
             <NuxtPage />
@@ -184,6 +90,6 @@ onBeforeUnmount(() => {
     <VPointer />
     <VLoader />
     <UkraineFlagStripe />
-    <VOverlay />
+    <VOverlay ref="overlay" />
   </div>
 </template>
