@@ -57,7 +57,7 @@ onMounted(() => {
       { yPercent: 0, delay: 0.075, ease: 'expo.out' }
     );
 
-    overlay.value.enterPageAnim('#scroller', () => null);
+    overlay.value.enterPageAnim('#__nuxt', () => null);
   }
 
   window.addEventListener('resize', setVh);
@@ -69,27 +69,23 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div>
-    <div id="scroller">
-      <VNavbar />
+  <VNavbar />
 
-      <KeepAlive>
-        <Transition
-          :css="false"
-          mode="out-in"
-          @enter="overlay.enterPageAnim"
-          @leave="overlay.leavePageAnim"
-        >
-          <div :key="$route.fullPath">
-            <NuxtPage />
-          </div>
-        </Transition>
-      </KeepAlive>
-    </div>
+  <KeepAlive>
+    <Transition
+      :css="false"
+      mode="out-in"
+      @enter="overlay.enterPageAnim"
+      @leave="overlay.leavePageAnim"
+    >
+      <div :key="$route.fullPath">
+        <NuxtPage />
+      </div>
+    </Transition>
+  </KeepAlive>
 
-    <VPointer />
-    <VLoader />
-    <UkraineFlagStripe />
-    <VOverlay ref="overlay" />
-  </div>
+  <VPointer />
+  <VLoader />
+  <UkraineFlagStripe />
+  <VOverlay ref="overlay" />
 </template>

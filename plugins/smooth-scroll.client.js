@@ -6,7 +6,7 @@ const LOCOMOTIVE_SCROLL_BREAK_POINT = 1024;
 const SCROLL_TO_DURATION_IN_SECONDS = 1.5;
 
 export default defineNuxtPlugin(({ $ScrollTrigger }) => {
-  const scrollerEl = document.getElementById('scroller');
+  const scrollerEl = document.getElementById('__nuxt');
 
   const locomotiveScroll = new LocomotiveScroll({
     el: scrollerEl,
