@@ -7,16 +7,20 @@ const LOCOMOTIVE_SCROLL_BREAK_POINT = 1024;
 const SCROLL_TO_DURATION_IN_SECONDS = 1.5;
 
 export default defineNuxtPlugin(({ $gsap, $ScrollTrigger }) => {
-  const scrollerEl = document.getElementById('__nuxt');
-
-  const isTouchDevice = 'ontouchstart' in document;
+  const scrollerEl = document.getElementById('scroller');
 
   window.scrollTo(0, 0);
   const lenis = new Lenis({
-    smooth: !isTouchDevice,
-    direction: 'vertical',
+    smooth: true,
+    smoothTouch: false,
     content: scrollerEl,
-    easing: (x) => (x === 1 ? 1 : 1 - Math.pow(2, -10 * x)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    mouseMultiplier: 1,
+    touchMultiplier: 2,
+    infinite: false,
   });
 
   lenis.on('scroll', $ScrollTrigger.update);
