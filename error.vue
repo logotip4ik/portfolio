@@ -1,5 +1,7 @@
 <script setup>
 defineProps({ error: { type: Object, required: true } });
+
+const handleError = () => clearError({ redirect: '/' });
 </script>
 
 <template>
@@ -13,9 +15,13 @@ defineProps({ error: { type: Object, required: true } });
       </template>
     </p>
 
-    <!-- not using nuxt link cuz smooth scroll needed scroller element -->
-    <!-- NOTE: `clearError` doesn't reinitiate plugins, so smooth scroll stays broken -->
-    <a href="/" class="error-page__home-link"> Maybe to home ? </a>
+    <NuxtLink
+      href="/"
+      class="error-page__home-link"
+      @click.native.prevent="handleError"
+    >
+      Maybe to home ?
+    </NuxtLink>
   </main>
 </template>
 
