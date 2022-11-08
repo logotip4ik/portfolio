@@ -57,7 +57,7 @@ onMounted(() => {
       { yPercent: 0, delay: 0.075, ease: 'expo.out' }
     );
 
-    overlay.value.enterPageAnim('#__nuxt', () => null);
+    overlay.value.enterPageAnim('div[page-content]', () => null);
   }
 
   window.addEventListener('resize', setVh);
@@ -78,7 +78,7 @@ onBeforeUnmount(() => {
       @enter="overlay.enterPageAnim"
       @leave="overlay.leavePageAnim"
     >
-      <div :key="$route.fullPath">
+      <div page-content :key="$route.fullPath">
         <NuxtPage />
       </div>
     </Transition>

@@ -14,29 +14,27 @@ function leavePageAnim(pageEl, done) {
 
   const tl = gsap.timeline({
     defaults: { ease: 'expo.out' },
-    onStart: () => {
-      $smoothScroll.disable();
-    },
     onComplete: () => {
       done();
     },
   });
 
-  tl.to(pageEl, { y: -300, duration: 1 }, 0);
+  tl.to(pageEl, { y: -300, duration: 1, ease: 'power2.out' }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
       opacity: 1,
       pointerEvents: 'all',
-      yPercent: 15,
-      clipPath: 'inset(85% 0% 0% 0%)',
+      yPercent: 75,
+      scaleY: 0.5,
     },
     {
       yPercent: 0,
-      clipPath: 'inset(0% 0% 0% 0%)',
-      stagger: { each: 0.1 },
+      scaleY: 1,
+      stagger: { each: 0.085 },
       duration: 0.75,
       onComplete: () => {
+        $smoothScroll.disable();
         $smoothScroll.scrollTo(0, 0);
       },
     },
@@ -46,7 +44,7 @@ function leavePageAnim(pageEl, done) {
     '.page-overlay__slide__text',
     { yPercent: 105, autoAlpha: 1 },
     { yPercent: 0, ease: 'expo.out' },
-    0.25
+    0.36
   );
 }
 
@@ -71,7 +69,7 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.fromTo(pageEl, { y: 300 }, { y: 0, duration: 1, clearProps: 'y' }, 0.2);
+  tl.fromTo(pageEl, { y: 300 }, { y: 0, duration: 1, ease: 'power3.out' }, 0.2);
 
   tl.fromTo(
     '.page-overlay__slide',
@@ -79,12 +77,12 @@ function enterPageAnim(pageEl, done) {
       opacity: 1,
       pointerEvents: 'all',
       yPercent: 0,
-      clipPath: 'inset(0% 0% 0% 0%)',
+      scaleY: 1,
     },
     {
-      yPercent: -15,
-      clipPath: 'inset(0% 0% 85% 0%)',
-      stagger: { each: 0.1, from: 'end' },
+      yPercent: -75,
+      scaleY: 0.5,
+      stagger: { each: 0.085, from: 'end' },
       duration: 0.75,
     },
     0.2
@@ -165,8 +163,8 @@ function enterPageAnim(pageEl, done) {
     &:nth-of-type(1) {
       z-index: 1;
 
-      background: #201d1e;
-      background: linear-gradient(0deg, #201d1e 0%, #605659 50%, #201d1e 100%);
+      background: #332e2f;
+      background: linear-gradient(0deg, #332e2f 0%, #665c5f 50%, #332e2f 100%);
 
       @media (prefers-color-scheme: light) {
         background-color: var(--primary-color);
