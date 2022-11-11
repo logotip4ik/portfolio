@@ -124,14 +124,14 @@ function enterPageAnim(pageEl, done) {
         <svg
           v-for="key in numberOfLoadingPoints"
           :key="key"
-          viewBox="0 0 16 16"
+          viewBox="0 0 17 16"
           :class="{
             'page-overlay__slide__loading__circle': true,
             'page-overlay__slide__loading__circle--animate': routeChanging,
           }"
-          :style="{ '--circle-offset': `${key * 0.077}s` }"
+          :style="{ '--circle-animation-offset': `${key * 0.08}s` }"
         >
-          <circle cx="8" cy="8" r="8" fill="currentColor" />
+          <circle cx="9" cy="8" r="8" fill="currentColor" />
         </svg>
       </div>
     </div>
@@ -139,6 +139,8 @@ function enterPageAnim(pageEl, done) {
 </template>
 
 <style lang="scss">
+@use 'sass:math';
+
 .page-overlay {
   position: fixed;
   top: 0;
@@ -211,7 +213,7 @@ function enterPageAnim(pageEl, done) {
       display: grid;
       grid-template-columns: repeat(1fr, var(--circles-number));
       grid-auto-flow: column;
-      gap: calc(var(--circle-size) / 1.25);
+      gap: calc(var(--circle-size) * 1.1);
 
       position: absolute;
       top: calc(50% + 1.5rem);
@@ -237,23 +239,32 @@ function enterPageAnim(pageEl, done) {
 
         opacity: 0;
 
-        &--animate {
-          animation: infinite 2.5s fade-in-out
-            calc(var(--initial-delay) + var(--circle-offset, 0s));
+        @for $i from 1 to 4 {
+          &--animate:nth-of-type(#{$i}) {
+            animation: infinite
+              2.5s
+              fade-in-out-#{$i}
+              calc(
+                var(--initial-delay) + calc(var(--circle-animation-offset, 0s))
+              );
+          }
         }
       }
     }
   }
 }
 
-@keyframes fade-in-out {
-  0%,
-  100% {
-    opacity: 0;
-  }
+@for $i from 0 to 3 {
+  @keyframes fade-in-out-#{$i + 1} {
+    0%,
+    #{100 - math.pow($i, 2.75) + '%'},
+    100% {
+      opacity: 0;
+    }
 
-  50% {
-    opacity: 1;
+    50% {
+      opacity: 1;
+    }
   }
 }
 </style>
