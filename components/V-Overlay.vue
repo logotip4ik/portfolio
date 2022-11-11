@@ -87,9 +87,9 @@ function enterPageAnim(pageEl, done) {
     },
     0.2
   );
-  tl.add(() => ScrollTrigger.refresh(), '<+0.275');
-  tl.add(() => $smoothScroll.enable(), '<+0.275');
-  tl.add(() => emitter.emit('overlay:hiding'), '<-0.4');
+  tl.add(() => ScrollTrigger.refresh(), '<+0.385');
+  tl.add(() => $smoothScroll.enable(), '<+0.1');
+  tl.add(() => emitter.emit('overlay:hiding'), '<-0.325');
 
   tl.fromTo(
     '.page-overlay__slide__text',
