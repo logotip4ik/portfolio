@@ -70,6 +70,7 @@ onBeforeUnmount(() => {
 
 <template>
   <VNavbar />
+  <UkraineFlagStripe />
 
   <KeepAlive>
     <Transition
@@ -86,6 +87,5 @@ onBeforeUnmount(() => {
 
   <VPointer />
   <VLoader />
-  <UkraineFlagStripe />
   <VOverlay ref="overlay" />
 </template>
