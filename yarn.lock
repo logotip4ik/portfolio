@@ -2833,9 +2833,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:10.8.0":
-  version: 10.8.0
-  resolution: "cypress@npm:10.8.0"
+"cypress@npm:11.2.0":
+  version: 11.2.0
+  resolution: "cypress@npm:11.2.0"
   dependencies:
     "@cypress/request": ^2.88.10
     "@cypress/xvfb": ^1.2.4
@@ -2881,7 +2881,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: c052690049980e7721e6fca563b724fde839d87d83c1478dfe26ce7d230992717c2c4028e7157bfb39ec274473e51929f49e5aab6a23c2b25cde2a439b1c3cf9
+  checksum: e13649fb4b62a3c9dff7cc571f4e01dba009d8179b05c4f885c5ceb4ed76b78a7323fec491d992da35527708b54e596bfc9edb1d702f788317889f794d8c1e76
   languageName: node
   linkType: hard
 
@@ -8358,7 +8358,7 @@ __metadata:
     "@logotip4ik_/nuxt-cloudflare-headers": ^1.2.3
     "@nuxt/content": ^2.2.2
     "@nuxtjs/fontaine": ^0.2.2
-    cypress: 10.8.0
+    cypress: 11.2.0
     gsap: ^3.11.3
     imagesloaded: ^5.0.0
     locomotive-scroll: ^4.1.4
