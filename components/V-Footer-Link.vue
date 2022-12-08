@@ -1,9 +1,9 @@
 <script setup>
 defineProps({ href: { type: String, required: true, default: '' } });
 
-const { $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
 const slots = useSlots();
+const prefersReducedMotion = useReducedMotion()
 
 const hoverChars = ref(null);
 const idleChars = ref(null);
@@ -11,7 +11,6 @@ const idleChars = ref(null);
 const linkText = computed(() => slots.default()[0].children);
 
 let prevAnim;
-let prefersReducedMotion;
 
 function makeTimeline(props) {
   return gsap.timeline({
@@ -25,7 +24,7 @@ function makeTimeline(props) {
 }
 
 function showHoverText() {
-  if (prefersReducedMotion) return;
+  if (prefersReducedMotion.value) return;
 
   if (prevAnim) prevAnim.kill();
 
@@ -36,7 +35,7 @@ function showHoverText() {
 }
 
 function hideHoverText() {
-  if (prefersReducedMotion) return;
+  if (prefersReducedMotion.value) return;
 
   if (prevAnim) prevAnim.kill();
 
@@ -45,10 +44,6 @@ function hideHoverText() {
   prevAnim.to(idleChars.value, { yPercent: 0 });
   prevAnim.to(hoverChars.value, { yPercent: 0 }, '<');
 }
-
-onMounted(() => {
-  prefersReducedMotion = $checkReducedMotion();
-});
 </script>
 
 <template>

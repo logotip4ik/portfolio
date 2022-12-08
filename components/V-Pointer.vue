@@ -13,9 +13,9 @@ const SVGComponents = {
   [pointerModifiersWhitelist[3]]: ActionSVG,
 };
 
-const { $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
 const emitter = useEmitter();
+const prefersReducedMotion = useReducedMotion();
 
 let firstMove = false;
 
@@ -75,9 +75,8 @@ onMounted(() => {
   });
 
   const isTouch = 'ontouchstart' in document.documentElement;
-  const prefersReducedMotion = $checkReducedMotion();
 
-  if (isTouch || prefersReducedMotion) return;
+  if (isTouch || prefersReducedMotion.value) return;
 
   const toPointerX = gsap.quickTo(pointer.value, 'x', {
     ease: 'expo.out',

@@ -13,15 +13,13 @@ const {
   $smoothScroll,
   $isDarkMode,
   $onColorSchemeChange,
-  $checkReducedMotion,
 } = useNuxtApp();
 const emitter = useEmitter();
+const prefersReducedMotion = useReducedMotion();
 
 const canvas = ref(null);
 
-let hasRunOnce = false;
 let isShaderRunning = false;
-let prefersReducedMotion = false;
 let camera = null;
 let scene = null;
 let renderer = null;
@@ -47,14 +45,13 @@ function resize() {
 function render() {
   if (
     $smoothScroll.scrollY() + 20 > window.innerHeight ||
-    !isShaderRunning ||
-    (prefersReducedMotion && hasRunOnce)
+    !isShaderRunning
   )
     return;
 
-  if (prefersReducedMotion) hasRunOnce = true;
-
-  object.program.uniforms.time.value += 0.0085;
+  const nextTime = prefersReducedMotion.value ? 0 : 0.0085;
+  
+  object.program.uniforms.time.value += nextTime;
   object.program.uniforms.mouse.value.lerp(mouse, 0.1);
 
   renderer.render({ scene, camera });
@@ -62,7 +59,6 @@ function render() {
 
 function createBackground() {
   aspect = window.innerWidth / window.innerHeight;
-  prefersReducedMotion = $checkReducedMotion();
 
   const isDarkMode = $isDarkMode();
   const clearColor = (isDarkMode ? [3, 3, 3] : [235, 235, 235]).map(
@@ -103,7 +99,7 @@ function createBackground() {
     uniforms: {
       time: { value: 0.0 },
       randomSeed: { value: Math.random() },
-      objectOpacity: { value: prefersReducedMotion ? 1.0 : 0.0 },
+      objectOpacity: { value: 0.0 },
       noisePower: { value: 1.0 },
       pixelRatio: { value: window.devicePixelRatio },
       resolution: {

@@ -2,11 +2,12 @@
 import MenuIconSVG from '~/assets/img/menu-icon.svg';
 import ArrowLeft from '~/assets/img/arrow-left.svg';
 
-const { $smoothScroll, $isDarkMode, $checkReducedMotion } = useNuxtApp();
+const { $smoothScroll, $isDarkMode } = useNuxtApp();
 const { gsap } = useGsap();
 const route = useRoute();
 const isMenuActive = useMenuToggle();
 const currentSection = useCurrentSection();
+const prefersReducedMotion = useReducedMotion();
 
 const nav = ref(null);
 const navTitle = ref(null);
@@ -39,7 +40,6 @@ function hoverAnimation() {
 }
 
 function closeAnimation() {
-  const prefersReducedMotion = $checkReducedMotion();
   const isDarkMode = $isDarkMode();
 
   const lines = navMenuButtonSVG.value.$el.children;
@@ -57,7 +57,7 @@ function closeAnimation() {
     x2: SVG_SIZE - SVG_LINES_PADDING,
     y2: SVG_SIZE - SVG_LINES_PADDING,
   };
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion.value) {
     tl.to(lines, { opacity: 0 });
     tl.set(lines[0], { attr: line0Attrs });
     tl.set(lines[1], { attr: line1Attrs });
@@ -79,7 +79,6 @@ function closeAnimation() {
 function idleAnimation() {
   if (isMenuActive.value) return;
 
-  const prefersReducedMotion = $checkReducedMotion();
   const isDarkMode = $isDarkMode();
 
   const lines = navMenuButtonSVG.value.$el.children;
@@ -88,7 +87,7 @@ function idleAnimation() {
   const line0Attrs = { x1: 0.25, y1: 7.75, x2: 19.75, y2: 7.75 };
   const line1Attrs = { x1: 5.25, y1: 11.75, x2: 19.75, y2: 11.75 };
   // NOTE: just reverting everything to default
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion.value) {
     tl.to(lines, { opacity: 0 });
     tl.set(lines[0], { attr: line0Attrs });
     tl.set(lines[1], { attr: line1Attrs });

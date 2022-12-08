@@ -1,8 +1,8 @@
 <script setup>
 import SourceSVG from '~/assets/img/source.svg';
 
-const { $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
+const prefersReducedMotion = useReducedMotion();
 
 const projectEl = ref(null);
 const projectImage = ref(null);
@@ -29,8 +29,6 @@ onMounted(() => {
 
   imageResizeObserver.observe(projectImage.value);
 
-  const prefersReducedMotion = $checkReducedMotion();
-
   const revealAnim = gsap.timeline({
     scrollTrigger: {
       trigger: projectEl.value,
@@ -39,14 +37,14 @@ onMounted(() => {
     },
   });
 
-  if (!prefersReducedMotion)
+  if (!prefersReducedMotion.value)
     revealAnim.fromTo(
       projectEl.value.children[0],
       { y: 100 },
       { y: 0, ease: 'expo.out', duration: 1.25 }
     );
 
-  if (prefersReducedMotion)
+  if (prefersReducedMotion.value)
     revealAnim.fromTo(
       projectImage.value,
       { opacity: 0.025 },

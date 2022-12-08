@@ -1,15 +1,13 @@
 <script setup>
-const { $checkReducedMotion } = useNuxtApp();
 const { gsap } = useGsap();
 const emitter = useEmitter();
+const prefersReducedMotion = useReducedMotion();
 
 const subtitleText = 'Front End Developer';
 
 const header = ref(null);
 
 function revealContent() {
-  const prefersReducedMotion = $checkReducedMotion();
-
   const mainTl = gsap.timeline({
     defaults: { ease: 'expo.out', duration: 1.25 },
     onStart: () => {
@@ -18,7 +16,7 @@ function revealContent() {
     },
   });
 
-  if (prefersReducedMotion)
+  if (prefersReducedMotion.value)
     mainTl.fromTo(
       '.header__container__title__line__content',
       { opacity: 0 },

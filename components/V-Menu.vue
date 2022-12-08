@@ -1,9 +1,10 @@
 <script setup>
-const { $smoothScroll, $isDarkMode, $checkReducedMotion } = useNuxtApp();
+const { $smoothScroll, $isDarkMode } = useNuxtApp();
 
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
 const isShowingMenu = useMenuToggle();
+const prefersReducedMotion = useReducedMotion();
 
 const navigationalLinks = [
   {
@@ -49,11 +50,9 @@ const menuBackItemContentLinksItem = ref([]);
 let prevAnimation;
 
 function showMenu() {
-  const prefersReducedMotion = $checkReducedMotion();
-
   if (prevAnimation) prevAnimation.kill();
 
-  if (prefersReducedMotion)
+  if (prefersReducedMotion.value)
     return (prevAnimation = gsap.fromTo(
       menu.value,
       { autoAlpha: 0 },
