@@ -25,8 +25,6 @@
   width: calc(var(--step-5) + 1.25rem);
   height: 100vh;
 
-  // background: linear-gradient(180deg, #2659ac 50%, #f8d447 50%);
-
   transform: translateX(calc(-100% + var(--step--2) - 0.075rem));
 
   transition: transform 400ms ease;
