@@ -1,5 +1,6 @@
 <script setup>
-const { $smoothScroll, $isDarkMode } = useNuxtApp();
+const { $smoothScroll } = useNuxtApp();
+const isDarkMode = useDarkMode()
 
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
@@ -86,7 +87,7 @@ function showMenu() {
   prevAnimation.fromTo(
     menu.value,
     { backgroundColor: 'transparent' },
-    { backgroundColor: $isDarkMode() ? '#030303' : '#ebebeb' }
+    { backgroundColor: isDarkMode.value ? '#030303' : '#ebebeb' }
   );
   prevAnimation.fromTo(
     menuBackItemLine.value,

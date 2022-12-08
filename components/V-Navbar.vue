@@ -2,9 +2,10 @@
 import MenuIconSVG from '~/assets/img/menu-icon.svg';
 import ArrowLeft from '~/assets/img/arrow-left.svg';
 
-const { $smoothScroll, $isDarkMode } = useNuxtApp();
+const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
 const route = useRoute();
+const isDarkMode = useDarkMode();
 const isMenuActive = useMenuToggle();
 const currentSection = useCurrentSection();
 const prefersReducedMotion = useReducedMotion();
@@ -40,8 +41,6 @@ function hoverAnimation() {
 }
 
 function closeAnimation() {
-  const isDarkMode = $isDarkMode();
-
   const lines = navMenuButtonSVG.value.$el.children;
 
   const tl = gsap.timeline({ defaults: { ease: 'back.out' } });
@@ -62,13 +61,13 @@ function closeAnimation() {
     tl.set(lines[0], { attr: line0Attrs });
     tl.set(lines[1], { attr: line1Attrs });
     tl.set(lines, {
-      color: isDarkMode ? svgColorActive.dark : svgColorActive.light,
+      color: isDarkMode.value ? svgColorActive.dark : svgColorActive.light,
     });
     tl.set(navMenuButton, { '--bg-scale': '1' }, 0);
     tl.to(lines, { opacity: 1 });
   } else {
     tl.to(lines, {
-      color: isDarkMode ? svgColorActive.dark : svgColorActive.light,
+      color: isDarkMode.value ? svgColorActive.dark : svgColorActive.light,
     });
     tl.to(lines[0], { attr: line0Attrs }, 0);
     tl.to(lines[1], { attr: line1Attrs }, '<');
@@ -78,8 +77,6 @@ function closeAnimation() {
 
 function idleAnimation() {
   if (isMenuActive.value) return;
-
-  const isDarkMode = $isDarkMode();
 
   const lines = navMenuButtonSVG.value.$el.children;
 
@@ -92,13 +89,13 @@ function idleAnimation() {
     tl.set(lines[0], { attr: line0Attrs });
     tl.set(lines[1], { attr: line1Attrs });
     tl.set(lines, {
-      color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
+      color: isDarkMode.value ? svgColorIdle.dark : svgColorIdle.light,
     });
     tl.set(navMenuButton, { '--bg-scale': '0' });
     tl.to(lines, { opacity: 1 });
   } else {
     tl.to(lines, {
-      color: isDarkMode ? svgColorIdle.dark : svgColorIdle.light,
+      color: isDarkMode.value ? svgColorIdle.dark : svgColorIdle.light,
     });
     tl.to(navMenuButton.value, { '--bg-scale': '0', ease: 'power2.out' }, 0);
     tl.to(lines[0], { attr: line0Attrs }, 0);

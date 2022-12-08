@@ -8,13 +8,10 @@ import vertexShader from '~/assets/shaders/vertex.glsl';
 import { WhitePinkGreen as pallet } from '~/assets/shaders/colors';
 import { MAX_DPR } from '~/lib/constants';
 
+const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
-const {
-  $smoothScroll,
-  $isDarkMode,
-  $onColorSchemeChange,
-} = useNuxtApp();
 const emitter = useEmitter();
+const isDarkMode = useDarkMode();
 const prefersReducedMotion = useReducedMotion();
 
 const canvas = ref(null);
@@ -60,8 +57,7 @@ function render() {
 function createBackground() {
   aspect = window.innerWidth / window.innerHeight;
 
-  const isDarkMode = $isDarkMode();
-  const clearColor = (isDarkMode ? [3, 3, 3] : [235, 235, 235]).map(
+  const clearColor = (isDarkMode.value ? [3, 3, 3] : [235, 235, 235]).map(
     (number) => number / 255
   );
 
@@ -106,17 +102,17 @@ function createBackground() {
         value: new Vec2(window.innerWidth, window.innerHeight),
       },
       color1: {
-        value: isDarkMode
+        value: isDarkMode.value
           ? new Color(pallet.color1.dark)
           : new Color(pallet.color1.light),
       },
       color2: {
-        value: isDarkMode
+        value: isDarkMode.value
           ? new Color(pallet.color2.dark)
           : new Color(pallet.color2.light),
       },
       color3: {
-        value: isDarkMode
+        value: isDarkMode.value
           ? new Color(pallet.color3.dark)
           : new Color(pallet.color3.light),
       },
@@ -147,16 +143,6 @@ function createBackground() {
     duration: 1,
     delay: 0.4,
     onComplete: () => emitter.emit('shader:running'),
-  });
-
-  $onColorSchemeChange((media) => {
-    const switchTo = media.matches ? 'light' : 'dark';
-
-    const tl = gsap.timeline();
-
-    tl.to(object.program.uniforms.color1.value, pallet.color1[switchTo], 0);
-    tl.to(object.program.uniforms.color2.value, pallet.color2[switchTo], 0);
-    tl.to(object.program.uniforms.color3.value, pallet.color3[switchTo], 0);
   });
 
   onBeforeUnmount(() => gsap.ticker.remove(callbackTicker));
@@ -225,6 +211,18 @@ function handleDeviceOrientation(e) {
 
   mouse.y = gsap.utils.mapRange(-90, 90, 0, 2, angle.y) + 2.5;
 }
+
+watch(isDarkMode, (value) => {
+  if (!object) return;
+  
+  const switchTo = value ? 'dark' : 'light';
+
+  const tl = gsap.timeline();
+
+  tl.to(object.program.uniforms.color1.value, pallet.color1[switchTo], 0);
+  tl.to(object.program.uniforms.color2.value, pallet.color2[switchTo], 0);
+  tl.to(object.program.uniforms.color3.value, pallet.color3[switchTo], 0);
+})
 
 onMounted(() => {
   createBackground();
