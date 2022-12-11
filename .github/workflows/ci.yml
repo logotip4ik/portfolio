@@ -54,7 +54,7 @@ jobs:
   #     - name: Install dependencies
   #       run: yarn --immutable
 
-  #     - uses: cypress-io/github-action@v4
+  #     - uses: cypress-io/github-action@v5
   #       env:
   #         NODE_ENV: 'production'
   #         # re-enable PR comment bot
