@@ -35,33 +35,33 @@ jobs:
           path: '.nuxt'
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-${{ github.sha }}
 
-  test:
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
+  # test:
+  #   runs-on: ${{ matrix.os }}
+  #   timeout-minutes: 10
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [16]
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
+  #       node: [16]
 
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'yarn'
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node }}
+  #         cache: 'yarn'
 
-      - name: Install dependencies
-        run: yarn --immutable
+  #     - name: Install dependencies
+  #       run: yarn --immutable
 
-      - uses: cypress-io/github-action@v4
-        env:
-          NODE_ENV: 'production'
-          # re-enable PR comment bot
-          COMMIT_INFO_SHA: ${{ github.event.pull_request.head.sha }}
-        with:
-          install: false
-          build: 'yarn generate'
-          start: 'yarn start'
-          wait-on: 'http://localhost:3000'
-          config: 'baseUrl=http://localhost:3000'
+  #     - uses: cypress-io/github-action@v4
+  #       env:
+  #         NODE_ENV: 'production'
+  #         # re-enable PR comment bot
+  #         COMMIT_INFO_SHA: ${{ github.event.pull_request.head.sha }}
+  #       with:
+  #         install: false
+  #         build: 'yarn generate'
+  #         start: 'yarn start'
+  #         wait-on: 'http://localhost:3000'
+  #         config: 'baseUrl=http://localhost:3000'
