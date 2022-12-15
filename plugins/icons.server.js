@@ -14,12 +14,11 @@ svg's on the server and then client can use it vie its key(filename without exte
 /* NOTE: only svgs ending with .icon.svg will be imported
 and only them could be used in useIcons composable */
 
-
 export default defineNuxtPlugin(async () => {
   // NOTE: none of icons is used on client side,
   // so this will make bundle size a bit smaller
   return;
-  
+
   const icons = useIcons();
 
   const iconNames = [];

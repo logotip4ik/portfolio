@@ -1,6 +1,6 @@
 <script setup>
 const { $smoothScroll } = useNuxtApp();
-const isDarkMode = useDarkMode()
+const isDarkMode = useDarkMode();
 
 const { gsap } = useGsap();
 const currentSection = useCurrentSection();
@@ -38,7 +38,7 @@ const navigationalLinks = [
   },
 ];
 
-const { data: social } = await useAsyncData('social-menu', () =>
+const { data: social } = await useAsyncData('social-links-menu', () =>
   queryContent('social').findOne()
 );
 

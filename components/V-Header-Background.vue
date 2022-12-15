@@ -40,14 +40,11 @@ function resize() {
 }
 
 function render() {
-  if (
-    $smoothScroll.scrollY() + 20 > window.innerHeight ||
-    !isShaderRunning
-  )
+  if ($smoothScroll.scrollY() + 20 > window.innerHeight || !isShaderRunning)
     return;
 
   const nextTime = prefersReducedMotion.value ? 0 : 0.0085;
-  
+
   object.program.uniforms.time.value += nextTime;
   object.program.uniforms.mouse.value.lerp(mouse, 0.1);
 
@@ -214,7 +211,7 @@ function handleDeviceOrientation(e) {
 
 watch(isDarkMode, (value) => {
   if (!object) return;
-  
+
   const switchTo = value ? 'dark' : 'light';
 
   const tl = gsap.timeline();
@@ -222,7 +219,7 @@ watch(isDarkMode, (value) => {
   tl.to(object.program.uniforms.color1.value, pallet.color1[switchTo], 0);
   tl.to(object.program.uniforms.color2.value, pallet.color2[switchTo], 0);
   tl.to(object.program.uniforms.color3.value, pallet.color3[switchTo], 0);
-})
+});
 
 onMounted(() => {
   createBackground();

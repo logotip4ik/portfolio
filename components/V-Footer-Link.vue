@@ -3,7 +3,7 @@ defineProps({ href: { type: String, required: true, default: '' } });
 
 const { gsap } = useGsap();
 const slots = useSlots();
-const prefersReducedMotion = useReducedMotion()
+const prefersReducedMotion = useReducedMotion();
 
 const hoverChars = ref(null);
 const idleChars = ref(null);

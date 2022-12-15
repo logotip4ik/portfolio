@@ -3,7 +3,7 @@ import ArrowUpSVG from '~/assets/img/arrow-up.svg';
 
 const { gsap } = useGsap();
 
-const { data: social } = await useAsyncData('social-footer', () =>
+const { data: social } = await useAsyncData('social-links-footer', () =>
   queryContent('social').findOne()
 );
 
