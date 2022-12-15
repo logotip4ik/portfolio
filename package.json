@@ -11,7 +11,7 @@
   "browserslist": "last 5 versions, not dead, Safari > 14, IOS > 14",
   "devDependencies": {
     "@logotip4ik_/nuxt-cloudflare-headers": "^1.2.3",
-    "@nuxt/content": "^2.2.2",
+    "@nuxt/content": "^2.3.0",
     "@nuxtjs/fontaine": "^0.2.3",
     "nuxt": "^3.0.0",
     "prettier": "^2.8.1",
