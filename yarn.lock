@@ -7558,7 +7558,7 @@ __metadata:
     sitemap: ^7.1.1
     split-type: 0.3.3
     typescript: ^4.9.4
-    vite-plugin-glsl: 1.0.0
+    vite-plugin-glsl: 1.0.1
     vite-svg-loader: ^3.6.0
   languageName: unknown
   linkType: soft
@@ -8846,14 +8846,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-glsl@npm:1.0.0":
-  version: 1.0.0
-  resolution: "vite-plugin-glsl@npm:1.0.0"
+"vite-plugin-glsl@npm:1.0.1":
+  version: 1.0.1
+  resolution: "vite-plugin-glsl@npm:1.0.1"
   dependencies:
     "@rollup/pluginutils": ^5.0.2
   peerDependencies:
     vite: ^3.0.0 || ^4.0.0
-  checksum: 3c50b93ff4d9ce7cb547d12ac77c04218f34c358fa75217262883031c9cba838c3c67f65e8ed2d9021178b810f4c46b2feb8ce74ac7cb53ba73a385de426a865
+  checksum: e74b29cf0ab5536f14bb8a4b820f034d021d3e892aca52bfc2a860883ed31177e7331427ed3c6cf5a1ceb35bfc9dff8d6f76a2b1f06d554bad84091e5a6c3f36
   languageName: node
   linkType: hard
 
