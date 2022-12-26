@@ -98,7 +98,7 @@ function enterPageAnim(pageEl, done) {
     0
   );
 
-  // emitter.once('images:loaded', () => tl.play());
+  emitter.once('images:loaded', () => tl.play());
 }
 </script>
 
