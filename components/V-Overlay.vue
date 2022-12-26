@@ -98,7 +98,7 @@ function enterPageAnim(pageEl, done) {
     0
   );
 
-  emitter.once('images:loaded', () => tl.play());
+  // emitter.once('images:loaded', () => tl.play());
 }
 </script>
 
@@ -124,14 +124,16 @@ function enterPageAnim(pageEl, done) {
         <svg
           v-for="key in numberOfLoadingPoints"
           :key="key"
-          viewBox="0 0 17 16"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
           :class="{
             'page-overlay__slide__loading__circle': true,
             'page-overlay__slide__loading__circle--animate': routeChanging,
           }"
-          :style="{ '--circle-animation-offset': `${key * 0.08}s` }"
+          :style="{ '--circle-animation-offset': `${key * 0.1}s` }"
         >
-          <circle cx="9" cy="8" r="8" fill="currentColor" />
+          <circle cx="8" cy="8"  r="8" fill="currentColor" />
         </svg>
       </div>
     </div>
@@ -257,7 +259,7 @@ function enterPageAnim(pageEl, done) {
 @for $i from 0 to 3 {
   @keyframes fade-in-out-#{$i + 1} {
     0%,
-    #{100 - math.pow($i, 2.75) + '%'},
+    #{100 - math.pow($i, 3) + '%'},
     100% {
       opacity: 0;
     }
