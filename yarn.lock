@@ -4001,10 +4001,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gsap@npm:^3.11.3":
-  version: 3.11.3
-  resolution: "gsap@npm:3.11.3"
-  checksum: b97d33ca1fa28dc3b4ce957fa49226f6dcdea39eddd4ffaf4af2b9fe681ff974731bdb8717e50110842267187064659e2f7874c6d1936de4162f8c7721c09676
+"gsap@npm:^3.11.4":
+  version: 3.11.4
+  resolution: "gsap@npm:3.11.4"
+  checksum: 1f8ef165c5bb35cdda785b31bb733357072e7efdc67297612b7c7b4b775e422d407bd91efad8a26bb07b686640d4f001d5f1c04abd0fe13c5a479dae1368a219
   languageName: node
   linkType: hard
 
@@ -7589,7 +7589,7 @@ __metadata:
     "@nuxt/content": ^2.3.0
     "@nuxtjs/fontaine": ^0.2.3
     cross-env: ^7.0.3
-    gsap: ^3.11.3
+    gsap: ^3.11.4
     imagesloaded: ^5.0.0
     locomotive-scroll: ^4.1.4
     mitt: ^3.0.0
