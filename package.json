@@ -19,7 +19,7 @@
     "sass": "1.57.0",
     "typescript": "^4.9.4",
     "vite-plugin-glsl": "1.0.1",
-    "vite-svg-loader": "^3.6.0"
+    "vite-svg-loader": "^4.0.0"
   },
   "dependencies": {
     "gsap": "^3.11.3",
