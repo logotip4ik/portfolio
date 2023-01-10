@@ -59,7 +59,10 @@ onMounted(() => {
       </main>
     </div>
     <VFooter />
-    <VMenu />
+
+    <Teleport to="body">
+      <VMenu />
+    </Teleport>
   </div>
 </template>
 
