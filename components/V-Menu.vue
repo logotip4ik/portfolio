@@ -1,4 +1,6 @@
 <script setup>
+import { socialLinks } from '~/lib/constants'
+
 const { $smoothScroll } = useNuxtApp();
 const isDarkMode = useDarkMode();
 
@@ -37,10 +39,6 @@ const navigationalLinks = [
     },
   },
 ];
-
-const { data: social } = await useAsyncData('social-links-menu', () =>
-  queryContent('social').findOne()
-);
 
 const menu = ref(null);
 const menuBackItem = ref([]);
@@ -164,9 +162,9 @@ watch(isShowingMenu, (bool) => {
     </div>
     <div :ref="(el) => (menuBackItem[5] = el)" class="menu__back-item">
       <div class="menu__back-item__content menu__back-item__content--no-anim">
-        <ul v-if="social" class="menu__back-item__content__links">
+        <ul class="menu__back-item__content__links">
           <li
-            v-for="(link, key) in social.links"
+            v-for="(link, key) in socialLinks"
             :key="key"
             :ref="(el) => (menuBackItemContentLinksItem[key] = el)"
             class="menu__back-item__content__links__item"

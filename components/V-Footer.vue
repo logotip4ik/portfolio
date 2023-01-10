@@ -1,11 +1,9 @@
 <script setup>
+import { socialLinks } from '~/lib/constants'
+
 import ArrowUpSVG from '~/assets/img/arrow-up.svg';
 
 const { gsap } = useGsap();
-
-const { data: social } = await useAsyncData('social-links-footer', () =>
-  queryContent('social').findOne()
-);
 
 const footer = ref(null);
 const footerWrapper = ref(null);
@@ -54,7 +52,7 @@ onMounted(() => {
         </p>
         <ul class="footer__content__social-links">
           <li
-            v-for="(link, key) in social.links"
+            v-for="(link, key) in socialLinks"
             :key="key"
             class="footer__content__social-links__link"
           >
