@@ -85,13 +85,14 @@ function showMenu() {
   prevAnimation.fromTo(
     menu.value,
     { backgroundColor: 'transparent' },
-    { backgroundColor: isDarkMode.value ? '#030303' : '#ebebeb' }
+    { backgroundColor: isDarkMode.value ? '#030303' : '#ebebeb', duration: 0.2 },
+    '-=0.65'
   );
   prevAnimation.fromTo(
     menuBackItemLine.value,
     { transform: 'scaleX(0)', transformOrigin: 'left bottom' },
     { transform: 'scaleX(1)', stagger: 0.05 },
-    '<-0.75'
+    '<-0.2'
   );
   prevAnimation.fromTo(
     [...menuBackItemContentTitle.value, ...menuBackItemContentLinksItem.value],
