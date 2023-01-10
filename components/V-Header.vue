@@ -101,7 +101,8 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 1;
 
-  min-height: var(--100vh);
+  height: var(--100vh);
+  height: 100svh;
 
   overflow: hidden;
   background-color: var(--surface-color);
@@ -113,16 +114,31 @@ onBeforeUnmount(() => {
 
     position: absolute;
     top: calc(var(--100vh) - var(--h));
+    top: calc(100svh - var(--h));
     left: 0;
     right: 0;
 
     height: var(--h);
 
+    // https://larsenwork.com/easing-gradients/
     background: linear-gradient(
       to top,
-      var(--surface-color) 0%,
-      var(--surface-color) 25%,
-      #00000000 100%
+      hsl(0, 0%, 0%) 0%,
+      hsla(0, 0%, 0%, 0.987) 8.1%,
+      hsla(0, 0%, 0%, 0.951) 15.5%,
+      hsla(0, 0%, 0%, 0.896) 22.5%,
+      hsla(0, 0%, 0%, 0.825) 29%,
+      hsla(0, 0%, 0%, 0.741) 35.3%,
+      hsla(0, 0%, 0%, 0.648) 41.2%,
+      hsla(0, 0%, 0%, 0.55) 47.1%,
+      hsla(0, 0%, 0%, 0.45) 52.9%,
+      hsla(0, 0%, 0%, 0.352) 58.8%,
+      hsla(0, 0%, 0%, 0.259) 64.7%,
+      hsla(0, 0%, 0%, 0.175) 71%,
+      hsla(0, 0%, 0%, 0.104) 77.5%,
+      hsla(0, 0%, 0%, 0.049) 84.5%,
+      hsla(0, 0%, 0%, 0.013) 91.9%,
+      hsla(0, 0%, 0%, 0) 100%
     );
   }
 
@@ -196,6 +212,7 @@ onBeforeUnmount(() => {
 
     position: absolute;
     top: calc(var(--100vh) - var(--step-2));
+    top: calc(100svh - var(--step-4));
     left: 50%;
 
     width: 95%;
