@@ -142,7 +142,11 @@ function createBackground() {
     onComplete: () => emitter.emit('shader:running'),
   });
 
-  onBeforeUnmount(() => gsap.ticker.remove(callbackTicker));
+  onBeforeUnmount(() => {
+    gsap.ticker.remove(callbackTicker);
+
+    window.removeEventListener('resize', resize);
+  });
 }
 
 function mountDeviceOrientationHandler() {
