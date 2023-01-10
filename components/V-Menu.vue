@@ -1,5 +1,5 @@
 <script setup>
-import { socialLinks } from '~/lib/constants'
+import { socialLinks } from '~/lib/constants';
 
 const { $smoothScroll } = useNuxtApp();
 const isDarkMode = useDarkMode();
