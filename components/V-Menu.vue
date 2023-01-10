@@ -125,7 +125,7 @@ watch(isShowingMenu, (bool) => {
 </script>
 
 <template>
-  <div ref="menu" class="menu" role="menu" data-scroll-sticky>
+  <div ref="menu" class="menu" role="menu">
     <div
       :ref="(el) => (menuBackItem[0] = el)"
       class="menu__back-item"
@@ -186,7 +186,7 @@ watch(isShowingMenu, (bool) => {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 6;
 
   width: 100%;
   height: 100%;
