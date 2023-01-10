@@ -1,5 +1,5 @@
 <script setup>
-import { socialLinks } from '~/lib/constants'
+import { socialLinks } from '~/lib/constants';
 
 import ArrowUpSVG from '~/assets/img/arrow-up.svg';
 
