@@ -603,7 +603,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/sourcemap-codec@npm:1.4.14, @jridgewell/sourcemap-codec@npm:^1.4.10":
+"@jridgewell/sourcemap-codec@npm:1.4.14, @jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.13":
   version: 1.4.14
   resolution: "@jridgewell/sourcemap-codec@npm:1.4.14"
   checksum: 61100637b6d173d3ba786a5dff019e1a74b1f394f323c1fee337ff390239f053b87266c7a948777f4b1ee68c01a8ad0ab61e5ff4abb5a012a0b091bec391ab97
@@ -935,16 +935,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/fontaine@npm:^0.2.3":
-  version: 0.2.3
-  resolution: "@nuxtjs/fontaine@npm:0.2.3"
+"@nuxtjs/fontaine@npm:^0.2.4":
+  version: 0.2.4
+  resolution: "@nuxtjs/fontaine@npm:0.2.4"
   dependencies:
     "@nuxt/kit": 3.0.0
     fontaine: ^0.2.3
-    magic-string: ^0.26.7
+    magic-string: ^0.27.0
     pathe: ^1.0.0
     ufo: ^1.0.0
-  checksum: 4d43b3e9398b74cc9f05796848c9b5e1e39ab88ca463014bee6c18a007e48e99fb1067dfb6bd127e92eb3dce9aab4d26cb434fac5d880cfac74be51afac946fa
+  checksum: f36a674b6970423d2b22403ee660ee298a002207bd2dc44b2dabe110bceb9fe24dd29a9353a24078cf410f408fd3ed5b9affdb83e7b59eadadd200f9ff11a2ba
   languageName: node
   linkType: hard
 
@@ -5286,6 +5286,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"magic-string@npm:^0.27.0":
+  version: 0.27.0
+  resolution: "magic-string@npm:0.27.0"
+  dependencies:
+    "@jridgewell/sourcemap-codec": ^1.4.13
+  checksum: 273faaa50baadb7a2df6e442eac34ad611304fc08fe16e24fe2e472fd944bfcb73ffb50d2dc972dc04e92784222002af46868cb9698b1be181c81830fd95a13e
+  languageName: node
+  linkType: hard
+
 "make-dir@npm:^3.1.0, make-dir@npm:~3.1.0":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
@@ -7189,12 +7198,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.1":
-  version: 2.8.1
-  resolution: "prettier@npm:2.8.1"
+"prettier@npm:^2.8.2":
+  version: 2.8.2
+  resolution: "prettier@npm:2.8.2"
   bin:
     prettier: bin-prettier.js
-  checksum: 4f21a0f1269f76fb36f54e9a8a1ea4c11e27478958bf860661fb4b6d7ac69aac1581f8724fa98ea3585e56d42a2ea317a17ff6e3324f40cb11ff9e20b73785cc
+  checksum: 740c56c2128d587d656ea1dde9bc9c3503dfc94db4f3ac387259215eeb2e216680bdad9d18a0c9feecc6b42cfa188d6fa777df4c36c1d00cedd4199074fbfbd2
   languageName: node
   linkType: hard
 
@@ -7681,7 +7690,7 @@ __metadata:
   dependencies:
     "@logotip4ik_/nuxt-cloudflare-headers": ^1.2.3
     "@nuxt/content": ^2.3.0
-    "@nuxtjs/fontaine": ^0.2.3
+    "@nuxtjs/fontaine": ^0.2.4
     cross-env: ^7.0.3
     gsap: ^3.11.4
     imagesloaded: ^5.0.0
@@ -7690,7 +7699,7 @@ __metadata:
     normalize.css: ^8.0.1
     nuxt: ^3.0.0
     ogl: ^0.0.103
-    prettier: ^2.8.1
+    prettier: ^2.8.2
     sass: 1.57.1
     sitemap: ^7.1.1
     split-type: 0.3.3
