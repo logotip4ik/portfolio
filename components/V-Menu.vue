@@ -85,7 +85,10 @@ function showMenu() {
   prevAnimation.fromTo(
     menu.value,
     { backgroundColor: 'transparent' },
-    { backgroundColor: isDarkMode.value ? '#030303' : '#ebebeb', duration: 0.2 },
+    {
+      backgroundColor: isDarkMode.value ? '#030303' : '#ebebeb',
+      duration: 0.2,
+    },
     '-=0.65'
   );
   prevAnimation.fromTo(
