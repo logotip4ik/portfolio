@@ -120,7 +120,8 @@ onBeforeUnmount(() => {
 
     height: var(--h);
 
-    // https://larsenwork.com/easing-gradients/
+    // https://larsenwork.com/easing-gradients
+    // https://non-boring-gradients.netlify.app
     background: linear-gradient(
       0deg,
       rgb(1.176% 1.176% 1.176%) 0%,
