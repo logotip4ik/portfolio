@@ -86,7 +86,7 @@ function showMenu() {
     menu.value,
     { backgroundColor: 'transparent' },
     {
-      backgroundColor: isDarkMode.value ? '#030303' : '#ebebeb',
+      backgroundColor: isDarkMode.value ? '#030303' : '#f7f7f7',
       duration: 0.2,
     },
     '-=0.65'
