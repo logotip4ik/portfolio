@@ -11,7 +11,7 @@
   --step-5: clamp(2.49rem, calc(1.37rem + 5.57vw), 5.34rem);
 
   --surface-color: #030303;
-  --ff-color: #f7f8f7;
+  --ff-color: #f7f7f7;
   --primary-color: #ffe6ed;
 
   color-scheme: light dark;
@@ -79,7 +79,7 @@ h5 {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --surface-color: #f7f8f7;
+    --surface-color: #f7f7f7;
     --ff-color: #030303;
   }
 
