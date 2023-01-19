@@ -21,10 +21,10 @@ const indexPage = ref(null);
 
 onMounted(() => {
   imagesLoaded(indexPage.value, () => emitter.emit('images:loaded'));
-  
+
   // website parts, heading, sections and footer
   const parts = gsap.utils.toArray('header, section');
-  
+
   const triggers = [];
 
   parts.forEach((part, key) => {
@@ -38,8 +38,6 @@ onMounted(() => {
       })
     );
   });
-
-  gsap.set(window, { scrollTo: { y: 0 }})
 
   onBeforeUnmount(() => {
     triggers.forEach((trigger) => trigger.kill());
