@@ -44,8 +44,10 @@ function scrollDown() {
     border-radius: 999999px;
     box-shadow: 0 0 2px 0px var(--ff-color);
 
-    animation: cubic-bezier(0.87, 0, 0.13, 1) infinite $anim-duration
-      scrollDownIndication;
+    @media (prefers-reduced-motion: no-preference) {
+      animation: cubic-bezier(0.87, 0, 0.13, 1) infinite $anim-duration
+        scrollDownIndication;
+    }
 
     @for $i from 0 to 1 {
       &:nth-of-type(#{$i + 1}) {
