@@ -6,7 +6,6 @@ uniform float objectOpacity;
 uniform float noisePower;
 uniform float pixelRatio;
 uniform vec2 resolution;
-uniform vec2 mouse;
 uniform vec3 color1;
 uniform vec3 color2;
 uniform vec3 color3;
@@ -15,7 +14,7 @@ varying vec3 vPosition;
 
 #include utils/noise;
 
-float lines(vec2 uv, float offset, float numberOfLines) {
+float lines(vec2 uv, float offset) {
   return smoothstep(
     0.0,
     0.5 + offset * 0.5,
@@ -67,10 +66,8 @@ void main() {
 
   vec2 baseUv = getRotationMatrix(noise + -1.0) * vPosition.xy * shaderZoom;
 
-  vec2 normalizedMouse = mouse * vec2(0.1);
-  
-  float firstPattern = lines(baseUv + normalizedMouse.y, 0.5, 10.0);
-  float secondPattern = lines(baseUv + normalizedMouse.y, 0.05, 15.0);
+  float firstPattern = lines(baseUv, 0.5);
+  float secondPattern = lines(baseUv, 0.05);
 
   vec3 firstColor = mix(_color3, _color2, firstPattern);
   vec3 resultingPattern = mix(firstColor, _color1, secondPattern);

@@ -24,8 +24,6 @@ let gl = null;
 let object = null;
 let aspect = 16 / 9;
 
-const mouse = new Vec2(0, 0);
-
 function resize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
@@ -44,9 +42,7 @@ function render() {
     return;
 
   const nextTime = prefersReducedMotion.value ? 0 : 0.0085;
-
   object.program.uniforms.time.value += nextTime;
-  object.program.uniforms.mouse.value.lerp(mouse, 0.1);
 
   renderer.render({ scene, camera });
 }
@@ -113,7 +109,6 @@ function createBackground() {
           ? new Color(pallet.color3.dark)
           : new Color(pallet.color3.light),
       },
-      mouse: { value: new Vec2(0, 0) },
     },
   });
 
@@ -149,70 +144,6 @@ function createBackground() {
   });
 }
 
-function mountDeviceOrientationHandler() {
-  const doe = DeviceOrientationEvent;
-  if (
-    doe &&
-    doe.requestPermission &&
-    typeof doe.requestPermission === 'function'
-  ) {
-    // after ios13
-    doe
-      .requestPermission()
-      .then((response) => {
-        if (response === 'granted')
-          window.addEventListener('deviceorientation', handleDeviceOrientation);
-      })
-      .catch(console.error);
-  } else {
-    // another
-    window.addEventListener('deviceorientation', handleDeviceOrientation);
-  }
-
-  onBeforeUnmount(() =>
-    window.removeEventListener('deviceorientation', handleDeviceOrientation)
-  );
-}
-
-let updateOffsetAngle = false;
-let prevOrientation;
-function handleDeviceOrientation(e) {
-  let angle;
-  let offsetAngle;
-
-  /** @see https://github.com/nemutas/sp-sensor2/blob/main/src/scripts/entry.ts */
-  const [alpha, beta, gamma] = [e.alpha ?? 0, e.beta ?? 0, e.gamma ?? 0];
-  const orientation = screen.orientation
-    ? screen.orientation.angle
-    : window.orientation;
-
-  if (!updateOffsetAngle) {
-    updateOffsetAngle = orientation !== prevOrientation;
-  }
-
-  if (orientation === 0) {
-    updateOffsetAngle && (offsetAngle = { x: beta, y: gamma, z: alpha });
-    angle = { x: beta, y: gamma, z: alpha };
-  } else if (orientation === 90) {
-    updateOffsetAngle && (offsetAngle = { x: gamma, y: alpha, z: beta });
-    angle = { x: gamma, y: alpha, z: beta };
-  } else if (orientation === -90 || orientation === 270) {
-    updateOffsetAngle && (offsetAngle = { x: gamma, y: alpha, z: beta });
-    angle = { x: gamma, y: alpha, z: beta };
-  }
-
-  if (offsetAngle) {
-    angle.x -= offsetAngle.x;
-    angle.y -= offsetAngle.y;
-    angle.z -= offsetAngle.z;
-  }
-
-  updateOffsetAngle = false;
-  prevOrientation = orientation;
-
-  mouse.y = gsap.utils.mapRange(-90, 90, 0, 2, angle.y) + 2.5;
-}
-
 watch(isDarkMode, (value) => {
   if (!object) return;
 
@@ -227,8 +158,6 @@ watch(isDarkMode, (value) => {
 
 onMounted(() => {
   createBackground();
-
-  mountDeviceOrientationHandler();
 });
 </script>
 
