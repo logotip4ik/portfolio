@@ -1,16 +1,13 @@
 <script setup>
 import imagesLoaded from 'imagesloaded';
 
-useSeoHead({
-  title: 'Front End Developer',
-  description: 'Perfection hides in details',
-});
-
 const { data: projects } = await useAsyncData('prerender-projects', () =>
   queryContent('project').only(['_path']).find()
 );
 
-useHead({
+useSeoHead({
+  title: 'Front End Developer',
+  description: 'Perfection hides in details',
   links: [
     ...projects.value.map(({ _path }) => ({ rel: 'prerender', href: _path })),
   ],
