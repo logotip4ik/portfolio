@@ -3,7 +3,7 @@ const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
 const route = useRoute();
 
-const overlay = ref({});
+const overlay = shallowRef({});
 
 function setVh() {
   const windowHeight = window.innerHeight;
@@ -34,12 +34,19 @@ function showFlagStripes() {
   });
 }
 
+function disableScrollRestoration() {
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
+}
+
 onMounted(() => {
   $smoothScroll.disable();
 
   logGreeting();
   setVh();
   showFlagStripes();
+  disableScrollRestoration();
 
   if (route.name === 'index')
     gsap.set('.page-overlay__slide', {
