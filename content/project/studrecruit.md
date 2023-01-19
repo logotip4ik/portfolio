@@ -24,7 +24,7 @@ LPNU Student Recruiting
 
 ::project-main
 :::project-section{type="fwidth"}
-::::project-image{type="fwidth" src="/img/studrecruit-logo.webp" alt="Student Recruiting Department Logo"}
+::::project-image{type="fwidth" src="/img/studrecruit-logo.webp" alt="Student Recruiting Department Logo" preload}
 :::
 
 :::project-section{type="text"}
