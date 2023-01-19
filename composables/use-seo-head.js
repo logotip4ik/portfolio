@@ -1,4 +1,4 @@
-export default ({ title, description }) =>
+export default ({ title, description, link = [], meta = [] }) =>
   useHead({
     title,
     titleTemplate: '%s | Bogdan Kostyuk',
@@ -45,6 +45,8 @@ export default ({ title, description }) =>
       },
       { property: 'og:image:width', name: 'og:image:width', content: '1440' },
       { property: 'og:image:height', name: 'og:image:height', content: '1440' },
+
+      ...meta,
     ],
     link: [
       { rel: 'canonical', href: 'https://bogdankostyuk.xyz/' },
@@ -68,5 +70,7 @@ export default ({ title, description }) =>
         href: '/apple-touch-icon.png',
       },
       { rel: 'manifest', href: '/site.webmanifest' },
+
+      ...link,
     ],
   });
