@@ -6,11 +6,9 @@ const isDev = process.env.NODE_ENV === 'development';
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   routeRules: {
-    // 2 days cache
-    '/**': { headers: { 'Cache-Control': 'private, max-age=172800' }},
     '/sitemap.xml': { prerender: true },
   },
-  
+
   sourcemap: false,
 
   css: [
@@ -41,6 +39,9 @@ export default defineNuxtConfig({
       { 'X-Content-Type-Options': 'nosniff' },
       { 'Referrer-Policy': 'no-referrer' },
       { 'Permissions-Policy': 'document-domain=()' },
+
+      // 2 days cache
+      { 'Cache-Control': 'private, max-age=172800' }
     ],
   },
 });
