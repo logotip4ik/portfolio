@@ -3,12 +3,19 @@ const props = defineProps({
   alt: { type: String, required: true, default: '' },
   src: { type: String, required: true, default: '' },
   type: { type: String, required: false, default: '' },
+  preload: { type: Boolean, required: false, default: false },
 });
 
 const imageRef = ref(null);
 const imageWrapperRef = ref(null);
 
 const { gsap } = useGsap();
+
+if (props.preload) {
+  useHead({
+    link: [{ rel: 'preload', as: 'image', href: props.src }],
+  });
+}
 
 onMounted(() => {
   if (props.type !== 'fwidth') return;
@@ -39,8 +46,24 @@ onMounted(() => {
 </script>
 
 <template>
+  <div
+    v-if="type === 'fwidth'"
+    ref="imageWrapperRef"
+    class="project-image__wrapper"
+  >
+    <img
+      ref="imageRef"
+      :src="src"
+      :alt="alt"
+      class="project-image project-image--fwidth"
+      :width="type === 'fwidth' ? 1400 : 900"
+      height="550"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
   <img
-    v-if="type !== 'fwidth'"
+    v-else
     ref="imageRef"
     :src="src"
     :alt="alt"
@@ -49,21 +72,6 @@ onMounted(() => {
     class="project-image"
     decoding="async"
   />
-  <div v-else ref="imageWrapperRef" class="project-image__wrapper">
-    <img
-      ref="imageRef"
-      :src="src"
-      :alt="alt"
-      :class="{
-        'project-image': true,
-        'project-image--fwidth': type === 'fwidth',
-      }"
-      :width="type === 'fwidth' ? 1400 : 900"
-      height="550"
-      decoding="async"
-      fetchpriority="high"
-    />
-  </div>
 </template>
 
 <style lang="scss">
