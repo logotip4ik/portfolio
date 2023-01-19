@@ -210,7 +210,7 @@ onMounted(() => {
     </ul>
 
     <button
-      v-show="route.name === 'index'"
+      v-if="route.name === 'index'"
       ref="navMenuButton"
       aria-label="menu button"
       class="nav__menu-button"
@@ -223,7 +223,7 @@ onMounted(() => {
     </button>
 
     <NuxtLink
-      v-show="route.name !== 'index'"
+      v-else
       v-hoverable.action
       href="/"
       class="nav__back-link"
