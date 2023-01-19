@@ -124,16 +124,16 @@ function enterPageAnim(pageEl, done) {
         <svg
           v-for="key in numberOfLoadingPoints"
           :key="key"
-          width="16"
+          width="17"
           height="16"
-          viewBox="0 0 16 16"
+          viewBox="0 0 17 16"
           :class="{
             'page-overlay__slide__loading__circle': true,
             'page-overlay__slide__loading__circle--animate': routeChanging,
           }"
           :style="{ '--circle-animation-offset': `${key * 0.1}s` }"
         >
-          <circle cx="8" cy="8"  r="8" fill="currentColor" />
+          <circle cx="8" cy="8" r="8" fill="currentColor" />
         </svg>
       </div>
     </div>

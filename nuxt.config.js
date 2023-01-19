@@ -41,7 +41,7 @@ export default defineNuxtConfig({
       { 'Permissions-Policy': 'document-domain=()' },
 
       // 2 days cache
-      { 'Cache-Control': 'private, max-age=172800' }
+      { 'Cache-Control': 'private, max-age=172800' },
     ],
   },
 });
