@@ -5,10 +5,12 @@ const isDev = process.env.NODE_ENV === 'development';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: true,
-
-  target: 'static',
-
+  routeRules: {
+    // 2 days cache
+    '/**': { headers: { 'Cache-Control': 'private, max-age=172800' }},
+    '/sitemap.xml': { prerender: true },
+  },
+  
   sourcemap: false,
 
   css: [
@@ -28,6 +30,10 @@ export default defineNuxtConfig({
     '@logotip4ik_/nuxt-cloudflare-headers',
   ],
 
+  vite: {
+    plugins: [GLSL({ compress: !isDev }), SVGLoader({ svgo: false })],
+  },
+
   cloudflareHeaders: {
     '/*': [
       { 'X-Robots-Tag': 'all' },
@@ -37,10 +43,4 @@ export default defineNuxtConfig({
       { 'Permissions-Policy': 'document-domain=()' },
     ],
   },
-
-  vite: {
-    plugins: [GLSL({ compress: !isDev }), SVGLoader({ svgo: false })],
-  },
-
-  nitro: { prerender: { routes: ['/sitemap.xml'] } },
 });
