@@ -7198,12 +7198,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.2":
-  version: 2.8.2
-  resolution: "prettier@npm:2.8.2"
+"prettier@npm:^2.8.3":
+  version: 2.8.3
+  resolution: "prettier@npm:2.8.3"
   bin:
     prettier: bin-prettier.js
-  checksum: 740c56c2128d587d656ea1dde9bc9c3503dfc94db4f3ac387259215eeb2e216680bdad9d18a0c9feecc6b42cfa188d6fa777df4c36c1d00cedd4199074fbfbd2
+  checksum: 92f2ceb522d454370e02082aa74ad27388672f7cee8975028b59517c069fe643bdc73e322675c8faf2ff173d7a626d1a6389f26b474000308e793aa25fff46e5
   languageName: node
   linkType: hard
 
@@ -7699,12 +7699,12 @@ __metadata:
     normalize.css: ^8.0.1
     nuxt: ^3.0.0
     ogl: ^0.0.103
-    prettier: ^2.8.2
+    prettier: ^2.8.3
     sass: 1.57.1
     sitemap: ^7.1.1
     split-type: 0.3.3
     typescript: ^4.9.4
-    vite-plugin-glsl: 1.0.2
+    vite-plugin-glsl: 1.1.0
     vite-svg-loader: ^4.0.0
   languageName: unknown
   linkType: soft
@@ -9015,14 +9015,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-glsl@npm:1.0.2":
-  version: 1.0.2
-  resolution: "vite-plugin-glsl@npm:1.0.2"
+"vite-plugin-glsl@npm:1.1.0":
+  version: 1.1.0
+  resolution: "vite-plugin-glsl@npm:1.1.0"
   dependencies:
     "@rollup/pluginutils": ^5.0.2
   peerDependencies:
     vite: ^3.0.0 || ^4.0.0
-  checksum: 5d55f2d214b60dae28ff4280397a0f1ae027a3688d53f1d721ee12f8cef2613765919925f9fd875910aba7dbcf10e720f9d79408eaec93b8a26bc9f2e892f405
+  checksum: 1a2be868aca5bb32f3dfb4d130201b7fc9ae65dc21a5787548d6206b5b8ba7e5215c6f5eacec2efa9489bfa1f510a13139607e2d9de8db02fa576b4bedcd03f2
   languageName: node
   linkType: hard
 

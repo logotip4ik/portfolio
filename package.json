@@ -14,10 +14,10 @@
     "@nuxtjs/fontaine": "^0.2.4",
     "cross-env": "^7.0.3",
     "nuxt": "^3.0.0",
-    "prettier": "^2.8.2",
+    "prettier": "^2.8.3",
     "sass": "1.57.1",
     "typescript": "^4.9.4",
-    "vite-plugin-glsl": "1.0.2",
+    "vite-plugin-glsl": "1.1.0",
     "vite-svg-loader": "^4.0.0"
   },
   "dependencies": {
