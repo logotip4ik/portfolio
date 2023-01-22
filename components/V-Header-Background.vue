@@ -25,6 +25,8 @@ let object = null;
 let aspect = 16 / 9;
 
 function resize() {
+  console.log('resize');
+
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
 
@@ -123,8 +125,8 @@ function createBackground() {
   object.matrixAutoUpdate = false;
   camera.matrixAutoUpdate = false;
 
-  resize();
-  window.addEventListener('resize', resize, false);
+  const observer = new ResizeObserver(resize);
+  observer.observe(canvas.value.parentElement);
 
   // NOTE: try to use only one requestAnimationFrame
   // this will improve overall performance
@@ -140,7 +142,7 @@ function createBackground() {
   onBeforeUnmount(() => {
     gsap.ticker.remove(callbackTicker);
 
-    window.removeEventListener('resize', resize);
+    observer.disconnect()
   });
 }
 
