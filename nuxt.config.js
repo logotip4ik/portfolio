@@ -40,8 +40,8 @@ export default defineNuxtConfig({
       { 'Referrer-Policy': 'no-referrer' },
       { 'Permissions-Policy': 'document-domain=()' },
 
-      // 1week cache and 6 month stale while revalidate
-      { 'Cache-Control': 'public, immutable, max-age=604800, style-while-revalidate=16070400' },
+      // 2 days cache and 6 months stale while revalidate
+      { 'Cache-Control': 'public, immutable, max-age=172800, style-while-revalidate=16070400' },
     ],
     '/': [{ 'Cache-Control': 'no-store' }],
     '/project/*': [{ 'Cache-Control': 'no-store' }],
