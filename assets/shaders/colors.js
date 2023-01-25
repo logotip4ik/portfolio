@@ -10,7 +10,7 @@
 export const WhitePinkGreen = {
   color1: {
     dark: [3, 3, 3],
-    light: [247, 248, 247],
+    light: [247, 247, 247],
   },
   color2: {
     dark: [255, 230, 237],

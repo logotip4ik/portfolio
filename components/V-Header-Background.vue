@@ -50,7 +50,8 @@ function render() {
 function createBackground() {
   aspect = window.innerWidth / window.innerHeight;
 
-  const clearColor = (isDarkMode.value ? [3, 3, 3] : [235, 235, 235]).map(
+  const backgroundColor = pallet.color1
+  const clearColor = (isDarkMode.value ? backgroundColor.dark : backgroundColor.light).map(
     (number) => number / 255
   );
 
