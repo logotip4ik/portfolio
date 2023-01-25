@@ -25,8 +25,6 @@ let object = null;
 let aspect = 16 / 9;
 
 function resize() {
-  console.log('resize');
-
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
 
