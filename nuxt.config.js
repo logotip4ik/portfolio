@@ -1,7 +1,6 @@
+import { isDevelopment } from 'std-env';
 import GLSL from 'vite-plugin-glsl';
 import SVGLoader from 'vite-svg-loader';
-
-const isDev = process.env.NODE_ENV === 'development';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -9,7 +8,7 @@ export default defineNuxtConfig({
     '/sitemap.xml': { prerender: true },
   },
 
-  sourcemap: false,
+  sourcemap: isDevelopment,
 
   css: [
     'normalize.css/normalize.css',
@@ -29,7 +28,7 @@ export default defineNuxtConfig({
   ],
 
   vite: {
-    plugins: [GLSL({ compress: !isDev }), SVGLoader({ svgo: false })],
+    plugins: [GLSL({ compress: !isDevelopment }), SVGLoader({ svgo: false })],
   },
 
   cloudflareHeaders: {
