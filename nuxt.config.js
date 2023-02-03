@@ -38,11 +38,11 @@ export default defineNuxtConfig({
       { 'X-Content-Type-Options': 'nosniff' },
       { 'Referrer-Policy': 'no-referrer' },
       { 'Permissions-Policy': 'document-domain=()' },
-
-      // 2 days cache and 6 months stale while revalidate
-      { 'Cache-Control': 'public, immutable, max-age=172800, style-while-revalidate=16070400' },
+      // no cache by default
+      { 'Cache-Control': 'private, must-revalidate, max-age=0' }
     ],
-    '/': [{ 'Cache-Control': 'no-store' }],
-    '/project/*': [{ 'Cache-Control': 'no-store' }],
+    // but long cache for assets with build hash
+    // week cache and 6 months stale while revalidate
+    '/_nuxt/*': { 'Cache-Control': 'public, immutable, max-age=604800, stale-while-revalidate=16070400' },
   },
 });
