@@ -7302,6 +7302,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rimraf@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "rimraf@npm:4.1.2"
+  bin:
+    rimraf: dist/cjs/src/bin.js
+  checksum: 480b8147fd9bcbef3ac118f88a7b1169c3872977a3411a0c84df838bfc30e175a394c0db6f9619fc8b8a886a18c6d779d5e74f380a0075ecc710afaf81b3f50c
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-visualizer@npm:^5.9.0":
   version: 5.9.0
   resolution: "rollup-plugin-visualizer@npm:5.9.0"
@@ -7365,6 +7374,7 @@ __metadata:
     nuxt: ^3.1.2
     ogl: ^0.0.107
     prettier: ^2.8.3
+    rimraf: ^4.1.2
     sass: 1.58.0
     sitemap: ^7.1.1
     split-type: 0.3.3

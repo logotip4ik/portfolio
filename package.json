@@ -4,9 +4,10 @@
     "start": "npx serve ./.output/public",
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "cross-env NODE_ENV=production nuxt generate",
+    "generate": "cross-env NODE_ENV=production nuxt generate; npm run postgenerate",
     "preview": "nuxt preview",
-    "prettier:fix": "prettier --write ."
+    "prettier:fix": "prettier --write .",
+    "postgenerate": "rimraf functions"
   },
   "devDependencies": {
     "@logotip4ik_/nuxt-cloudflare-headers": "^1.2.3",
@@ -27,6 +28,7 @@
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
     "ogl": "^0.0.107",
+    "rimraf": "^4.1.2",
     "sitemap": "^7.1.1",
     "split-type": "0.3.3"
   },

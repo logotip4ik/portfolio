@@ -41,8 +41,11 @@ export default defineNuxtConfig({
       // no cache by default
       { 'Cache-Control': 'private, must-revalidate, max-age=0' }
     ],
+    // NOTE: cache for images ?
     // but long cache for assets with build hash
     // week cache and 6 months stale while revalidate
-    '/_nuxt/*': { 'Cache-Control': 'public, immutable, max-age=604800, stale-while-revalidate=16070400' },
+    '/_nuxt/*': [
+      { 'Cache-Control': 'public, immutable, max-age=604800, stale-while-revalidate=16070400' }
+    ],
   },
 });
