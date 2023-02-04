@@ -9,8 +9,8 @@ tags:
   - three.js
   - gsap
   - SCSS
-image: '/img/portfolio.webp'
-logoImage: '/img/portfolio-logo.webp'
+image: '/img/portfolio-logo.webp'
+previewImage: '/img/portfolio.webp'
 createdAt: '2022-03-31T00:00:00+03:00'
 ---
 
@@ -25,7 +25,7 @@ Portfolio Version 3
 
 ::project-main
 :::project-section{type="fwidth"}
-::::project-image{type="fwidth" src="/img/portfolio-logo.webp" alt="My Portfolio Website Logo" preload}
+::::project-image{type="fwidth" :src="image" alt="My Portfolio Website Logo" preload}
 :::
 
 :::project-section{type="text"}

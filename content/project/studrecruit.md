@@ -8,8 +8,8 @@ tags:
   - 'Next.js'
   - 'gsap'
   - 'SCSS'
-image: '/img/studrecruit.webp'
-logoImage: '/img/studrecruit-logo.webp'
+image: '/img/studrecruit-logo.webp'
+previewImage: '/img/studrecruit.webp'
 createdAt: '2022-04-01T00:00:00+03:00'
 ---
 
@@ -24,7 +24,7 @@ LPNU Student Recruiting
 
 ::project-main
 :::project-section{type="fwidth"}
-::::project-image{type="fwidth" src="/img/studrecruit-logo.webp" alt="Student Recruiting Department Logo" preload}
+::::project-image{type="fwidth" :src="image" alt="Student Recruiting Department Logo" preload}
 :::
 
 :::project-section{type="text"}
