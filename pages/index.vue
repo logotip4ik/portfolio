@@ -1,6 +1,4 @@
 <script setup>
-import imagesLoaded from 'imagesloaded';
-
 const { data: projects } = await useAsyncData('prerender-projects', () =>
   queryContent('project').only(['_path']).find()
 );
@@ -20,8 +18,6 @@ const currentSection = useCurrentSection();
 const indexPage = ref(null);
 
 onMounted(() => {
-  imagesLoaded(indexPage.value, () => emitter.emit('images:loaded'));
-
   // website parts, heading, sections and footer
   const parts = gsap.utils.toArray('header, section');
 
@@ -43,6 +39,8 @@ onMounted(() => {
     triggers.forEach((trigger) => trigger.kill());
   });
 });
+
+useImagesLoaded(indexPage, () => emitter.emit('images:loaded'));
 </script>
 
 <template>

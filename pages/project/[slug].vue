@@ -1,6 +1,4 @@
 <script setup>
-import imagesLoaded from 'imagesloaded';
-
 const route = useRoute();
 const { gsap } = useGsap();
 const emitter = useEmitter();
@@ -21,9 +19,7 @@ const showBackButton = () =>
     { autoAlpha: 1, delay: 0.7 }
   );
 
-onMounted(() => {
-  imagesLoaded(projectPage.value, () => emitter.emit('images:loaded'));
-});
+useImagesLoaded(projectPage, () => emitter.emit('images:loaded'))
 
 emitter.once('overlay:hiding', showBackButton);
 </script>
