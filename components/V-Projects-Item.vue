@@ -78,7 +78,7 @@ onMounted(() => {
       <div ref="projectImageWrapper" class="project__image__wrapper">
         <img
           ref="projectImage"
-          :src="project.image"
+          :src="project.previewImage"
           :alt="project.title"
           class="project__image"
         />

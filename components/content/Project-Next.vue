@@ -10,7 +10,7 @@ const next = computed(() => surrounded.value[1] || surrounded.value[0]);
 useHead({
   link: [
     { rel: 'next', href: next.value._path },
-    { rel: 'prefetch', href: next.value.image },
+    { rel: 'prefetch', href: next.value.previewImage },
   ],
 });
 </script>
@@ -18,7 +18,7 @@ useHead({
 <template>
   <NuxtLink v-hoverable.link :href="next._path" class="project-next">
     <img
-      :src="next.image"
+      :src="next.previewImage"
       :alt="next.title"
       class="project-next__image"
       data-scroll
