@@ -1,37 +1,41 @@
-
 /**
  * @param {import('vue').Ref<HTMLElement | null>} refEl
  * @param { () => any } callback
  */
 export default (refEl, callback) => {
-  const stop = watch(() => unref(refEl), (el) => {
-    if (!el) return;
+  const stop = watch(
+    () => unref(refEl),
+    (el) => {
+      if (!el) return;
 
-    stop();
+      stop();
 
-    waitForImages(el).then(callback)
-  }, { immediate: true })
-}
+      waitForImages(el).then(callback);
+    },
+    { immediate: true }
+  );
+};
 
 /**
- * @param {HTMLElement} wrapper 
- * @return {Promise<void>} 
+ * @param {HTMLElement} wrapper
+ * @return {Promise<void>}
  */
 function waitForImages(wrapper) {
-  const images = wrapper.querySelectorAll('img')
+  const images = wrapper.querySelectorAll('img');
 
   return new Promise((resolve) => {
     let numberOfLoadedImages = 0;
 
     const loadListener = () => {
       if (images.length == ++numberOfLoadedImages) {
-        resolve()
+        resolve();
       }
-    }
-    
-    images.forEach(image => {
-      if (image.complete) { loadListener() }
-      image.addEventListener('load', loadListener)
-    })
-  })
+    };
+
+    images.forEach((image) => {
+      if (image.complete) loadListener();
+
+      image.addEventListener('load', loadListener);
+    });
+  });
 }

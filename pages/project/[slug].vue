@@ -19,7 +19,7 @@ const showBackButton = () =>
     { autoAlpha: 1, delay: 0.7 }
   );
 
-useImagesLoaded(projectPage, () => emitter.emit('images:loaded'))
+useImagesLoaded(projectPage, () => emitter.emit('images:loaded'));
 
 emitter.once('overlay:hiding', showBackButton);
 </script>
