@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "gsap": "^3.11.4",
-    "imagesloaded": "^5.0.0",
     "locomotive-scroll": "^4.1.4",
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
