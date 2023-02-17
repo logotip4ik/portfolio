@@ -10,6 +10,11 @@ projects that i am using quite often
 
 > BTW: [previous portfolio](https://next.portfolio-5iw.pages.dev/)
 
+## License
+
+- Code is under [MIT License](./LICENSE)
+- Images and projects contents are under [Creative Commons](./CC-BY-NC-SA-4.0)
+
 ## Build with
 
 - [Nuxt.js](https://v3.nuxtjs.org) - 3-nd version, this is like a core of the website.
