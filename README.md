@@ -12,8 +12,8 @@ projects that i am using quite often
 
 ## License
 
-- Code is under [MIT License](./LICENSE)
-- Images and projects contents are under [Creative Commons](./CC-BY-NC-SA-4.0)
+- Code is under [CC0 1.0](./LICENSE)
+- Images and projects contents are under [CC BY-NC-SA 4.0.](./CC-BY-NC-SA-4.0)
 
 ## Build with
 
