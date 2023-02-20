@@ -183,7 +183,7 @@ onMounted(() => {
 
   &__source {
     --pd: 0.5rem;
-    --size: calc(var(--step-4) * 1.125);
+    --size: max(calc(var(--step-4) * 1.125), 4rem);
 
     position: absolute;
     z-index: 1;
