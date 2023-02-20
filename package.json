@@ -25,7 +25,7 @@
     "locomotive-scroll": "^4.1.4",
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
-    "ogl": "^0.0.110",
+    "ogl": "^0.0.111",
     "sitemap": "^7.1.1",
     "split-type": "0.3.3"
   },
