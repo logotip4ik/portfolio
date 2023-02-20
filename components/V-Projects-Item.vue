@@ -190,7 +190,7 @@ onMounted(() => {
     top: calc(var(--image-height) - var(--pd));
     right: var(--pd);
 
-    color: #ebebeb;
+    color: rgba($color: #ebebeb, $alpha: 0.95);
     mix-blend-mode: screen;
 
     width: var(--size);
