@@ -13,9 +13,9 @@
     "@nuxt/content": "^2.4.3",
     "@nuxtjs/fontaine": "^0.2.4",
     "cross-env": "^7.0.3",
-    "nuxt": "^3.2.0",
+    "nuxt": "^3.2.2",
     "prettier": "^2.8.4",
-    "sass": "1.58.2",
+    "sass": "1.58.3",
     "typescript": "^4.9.5",
     "vite-plugin-glsl": "1.1.2",
     "vite-svg-loader": "^4.0.0"
@@ -25,7 +25,7 @@
     "locomotive-scroll": "^4.1.4",
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
-    "ogl": "^0.0.110",
+    "ogl": "^0.0.111",
     "sitemap": "^7.1.1",
     "split-type": "0.3.3"
   },
