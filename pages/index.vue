@@ -65,7 +65,7 @@ useImagesLoaded(indexPage, () => emitter.emit('images:loaded'));
 .smooth-scroll-fix {
   @media screen and (max-width: 1024px) {
     position: relative;
-    z-index: 5;
+    z-index: 4;
 
     pointer-events: all;
   }
