@@ -69,7 +69,12 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.fromTo(pageEl, { y: 300 }, { y: 0, duration: 1, ease: 'power3.out' }, 0.2);
+  tl.fromTo(
+    pageEl,
+    { y: 300 },
+    { y: 0, duration: 1, ease: 'power3.out', clearProps: 'y' },
+    0.2
+  );
 
   tl.fromTo(
     '.page-overlay__slide',
