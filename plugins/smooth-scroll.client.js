@@ -5,8 +5,10 @@ import LocomotiveScroll from 'locomotive-scroll';
 const LOCOMOTIVE_SCROLL_BREAK_POINT = 1024;
 const SCROLL_TO_DURATION_IN_SECONDS = 1.5;
 
-// NOTE: replace with lenis scroll
-// NOTE: will need to completely rework scroll related animation
+// NOTE: replace with lenis scroll,
+// will need to completely rework scroll related animation
+// NOTE: reinitializing smooth scroll after each route transition
+// could result in better ux (locomotive scroll only?)
 export default defineNuxtPlugin(({ $ScrollTrigger }) => {
   const scrollerEl = document.getElementById('__nuxt');
 
