@@ -11,10 +11,7 @@ const imageWrapperRef = ref(null);
 
 const { gsap } = useGsap();
 
-useHead(
-  { link: [{ rel: 'preload', as: 'image', href: props.src }] },
-  { mode: 'server' }
-);
+useHead({ link: [{ rel: 'preload', as: 'image', href: props.src }] });
 
 onMounted(() => {
   if (props.type !== 'fwidth') return;
