@@ -21,7 +21,7 @@
     "vite-svg-loader": "^4.0.0"
   },
   "dependencies": {
-    "gsap": "^3.11.4",
+    "gsap": "^3.11.5",
     "locomotive-scroll": "^4.1.4",
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
