@@ -1,16 +1,18 @@
-export default () => {
-  const nuxtApp = useNuxtApp();
+import mitt from 'mitt';
 
+const emitter = mitt();
+
+export default () => {
   return {
-    ...nuxtApp.$emitter,
+    ...emitter,
     once: (eventName, cb) => {
       const handler = () => {
         if (typeof cb === 'function') cb();
 
-        nuxtApp.$emitter.off(eventName, handler);
+        emitter.off(eventName, handler);
       };
 
-      nuxtApp.$emitter.on(eventName, handler);
+      emitter.on(eventName, handler);
     },
   };
 };
