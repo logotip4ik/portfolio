@@ -8,7 +8,10 @@ const { data: project } = await useAsyncData(
   () => queryContent(`project/${route.params.slug}`).findOne()
 );
 
-useSeoHead({ title: project.value.title });
+useSeoHead({
+  title: project.value.title,
+  htmlAttrs: { 'data-project-page': true },
+});
 
 const projectPage = ref(null);
 
@@ -31,6 +34,11 @@ emitter.once('overlay:hiding', showBackButton);
 </template>
 
 <style lang="scss">
+[data-project-page] .loader {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .projects-page {
   min-height: 100vh;
 }

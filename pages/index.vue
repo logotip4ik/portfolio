@@ -4,6 +4,7 @@ const { data: projects } = await useAsyncData('prerender-projects', () =>
 );
 
 useSeoHead({
+  htmlAttrs: { 'data-index-page': true },
   title: 'Front End Developer',
   description: 'Perfection hides in details',
   links: [
@@ -62,6 +63,11 @@ useImagesLoaded(indexPage, () => emitter.emit('images:loaded'));
 </template>
 
 <style lang="scss">
+[data-index-page] .page-overlay__slide {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .smooth-scroll-fix {
   @media screen and (max-width: 1024px) {
     position: relative;

@@ -1,5 +1,4 @@
 <script setup>
-const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
 const route = useRoute();
 
@@ -41,31 +40,13 @@ function disableScrollRestoration() {
 }
 
 onMounted(() => {
-  $smoothScroll.disable();
-
   logGreeting();
   setVh();
   showFlagStripes();
   disableScrollRestoration();
 
-  if (route.name === 'index')
-    gsap.set('.page-overlay__slide', {
-      opacity: 0,
-      pointerEvents: 'none',
-      onComplete: () => $smoothScroll.enable(),
-    });
-
-  if (route.name !== 'index') {
-    gsap.set('.loader', { autoAlpha: 0, display: 'none' });
-
-    gsap.fromTo(
-      '.page-overlay__slide__text',
-      { yPercent: 105, autoAlpha: 1 },
-      { yPercent: 0, delay: 0.075, ease: 'expo.out' }
-    );
-
+  if (route.name !== 'index')
     overlay.value.enterPageAnim('div[page-content]', () => null);
-  }
 
   window.addEventListener('resize', setVh);
 });
