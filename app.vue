@@ -60,18 +60,16 @@ onBeforeUnmount(() => {
   <VNavbar />
   <UkraineFlagStripe />
 
-  <KeepAlive>
-    <Transition
-      :css="false"
-      mode="out-in"
-      @enter="overlay.enterPageAnim"
-      @leave="overlay.leavePageAnim"
-    >
-      <div page-content :key="$route.fullPath">
-        <NuxtPage />
-      </div>
-    </Transition>
-  </KeepAlive>
+  <Transition
+    :css="false"
+    mode="out-in"
+    @enter="overlay.enterPageAnim"
+    @leave="overlay.leavePageAnim"
+  >
+    <div page-content :key="$route.fullPath">
+      <NuxtPage />
+    </div>
+  </Transition>
 
   <VPointer />
   <VLoader />
