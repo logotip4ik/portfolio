@@ -1,4 +1,11 @@
-export default ({ title, description, link = [], meta = [], mode }) => {
+export default ({
+  title,
+  description,
+  link = [],
+  meta = [],
+  htmlAttrs = {},
+  mode,
+}) => {
   const base = 'https://bogdankostyuk.xyz';
   const projectSlug = useRoute().params.slug ?? '';
   const url = projectSlug ? `${base}/project/${projectSlug}` : base;
@@ -79,6 +86,7 @@ export default ({ title, description, link = [], meta = [], mode }) => {
 
         ...link,
       ],
+      htmlAttrs: { ...htmlAttrs },
     },
     { mode: mode ?? 'server' }
   );
