@@ -31,12 +31,6 @@ function showFlagStripes() {
   });
 }
 
-function disableScrollRestoration() {
-  if (history.scrollRestoration) {
-    history.scrollRestoration = 'manual';
-  }
-}
-
 useHead({
   meta: [
     { property: 'url', name: 'url', content: () => currentURL.value },
@@ -49,7 +43,6 @@ useHead({
 onMounted(() => {
   setVh();
   showFlagStripes();
-  disableScrollRestoration();
 
   if (route.name !== 'index')
     overlay.value.enterPageAnim('div[page-content]', () => null);
