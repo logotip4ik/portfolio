@@ -29,5 +29,8 @@
     "sitemap": "^7.1.1",
     "split-type": "0.3.3"
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@3.2.4",
+  "resolutions": {
+    "vite": "^4.3.0-beta.6"
+  }
 }
