@@ -10,19 +10,6 @@ function setVh() {
   gsap.set(document.documentElement, { '--vh': `${windowHeight / 100}px` });
 }
 
-function logGreeting() {
-  // eslint-disable-next-line
-  console.log(
-    '%cBogdan Kostyuk',
-    'background-color: #030303;border-radius: 0.125rem;padding: 5px 10px;font-family: "Arial", sans-serif;font-size: 2rem;color: white'
-  );
-  // eslint-disable-next-line
-  console.log(
-    "%cHello😁 curios friend! If you have any questions, let's get in touch at contact@bogdankostyuk.xyz! Or if you are looking for a source📦 here you are: https://github.com/logotip4ik/portfolio",
-    'background-color: #030303;border-radius: 0.125rem;padding: 5px 10px;font-size:1rem;color: white;line-height:1.75'
-  );
-}
-
 function showFlagStripes() {
   gsap.from('.flag-stripe__line', {
     xPercent: -25,
@@ -40,7 +27,6 @@ function disableScrollRestoration() {
 }
 
 onMounted(() => {
-  logGreeting();
   setVh();
   showFlagStripes();
   disableScrollRestoration();
@@ -49,6 +35,10 @@ onMounted(() => {
     overlay.value.enterPageAnim('div[page-content]', () => null);
 
   window.addEventListener('resize', setVh);
+
+  window.requestIdleCallback(() =>
+    import('~/lib/greeting').then((module) => module.logGreeting())
+  );
 });
 
 onBeforeUnmount(() => {
