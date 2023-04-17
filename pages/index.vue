@@ -3,10 +3,20 @@ const { data: projects } = await useAsyncData('prerender-projects', () =>
   queryContent('project').only(['_path']).find()
 );
 
-useSeoHead({
-  htmlAttrs: { 'data-index-page': true },
+if (process.server) useHead({ htmlAttrs: { 'data-index-page': true } });
+
+useHead({
   title: 'Front End Developer',
-  description: 'Perfection hides in details',
+  meta: [
+    { property: 'og:title', name: 'og:title', content: 'Front End Developer' },
+    { name: 'description', content: 'Perfection hides in details' },
+    {
+      property: 'og:description',
+      name: 'og:description',
+      content: 'Perfection hides in details',
+    },
+  ],
+
   links: [
     ...projects.value.map(({ _path }) => ({ rel: 'prerender', href: _path })),
   ],

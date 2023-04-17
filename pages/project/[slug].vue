@@ -8,10 +8,9 @@ const { data: project } = await useAsyncData(
   () => queryContent(`project/${route.params.slug}`).findOne()
 );
 
-useSeoHead({
-  title: project.value.title,
-  htmlAttrs: { 'data-project-page': true },
-});
+if (process.server) useHead({ htmlAttrs: { 'data-project-page': true } });
+
+useHead({ title: project.value.title });
 
 const projectPage = ref(null);
 

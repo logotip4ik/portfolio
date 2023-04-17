@@ -1,8 +1,19 @@
 <script setup>
-const { gsap } = useGsap();
 const route = useRoute();
+const { gsap } = useGsap();
+const { base } = useRuntimeConfig().public;
 
 const overlay = shallowRef({});
+
+const projectSlug = computed(() => route.params.slug ?? '');
+const currentURL = computed(() =>
+  projectSlug.value ? `${base}/project/${projectSlug.value}` : base
+);
+const ogImageUrl = computed(() =>
+  projectSlug.value
+    ? `${base}/img/${projectSlug.value}-logo.webp`
+    : `${base}/logo.png`
+);
 
 function setVh() {
   const windowHeight = window.innerHeight;
@@ -25,6 +36,15 @@ function disableScrollRestoration() {
     history.scrollRestoration = 'manual';
   }
 }
+
+useHead({
+  meta: [
+    { property: 'url', name: 'url', content: () => currentURL.value },
+    { property: 'og:url', name: 'og:url', content: () => currentURL.value },
+    { property: 'og:image', name: 'og:image', content: () => ogImageUrl.value },
+  ],
+  link: [{ rel: 'canonical', href: () => `${currentURL.value}/` }],
+});
 
 onMounted(() => {
   setVh();
@@ -56,7 +76,7 @@ onBeforeUnmount(() => {
     @enter="overlay.enterPageAnim"
     @leave="overlay.leavePageAnim"
   >
-    <div page-content :key="$route.fullPath">
+    <div page-content :key="route.fullPath">
       <NuxtPage />
     </div>
   </Transition>
