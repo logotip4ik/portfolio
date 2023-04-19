@@ -33,11 +33,11 @@ function showFlagStripes() {
 
 useHead({
   meta: [
-    { property: 'url', name: 'url', content: () => currentURL.value },
-    { property: 'og:url', name: 'og:url', content: () => currentURL.value },
-    { property: 'og:image', name: 'og:image', content: () => ogImageUrl.value },
+    { property: 'url', name: 'url', content: currentURL },
+    { property: 'og:url', name: 'og:url', content: currentURL },
+    { property: 'og:image', name: 'og:image', content: ogImageUrl },
   ],
-  link: [{ rel: 'canonical', href: () => `${currentURL.value}/` }],
+  link: [{ rel: 'canonical', href: currentURL }],
 });
 
 onMounted(() => {
