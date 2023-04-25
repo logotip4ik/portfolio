@@ -65,11 +65,11 @@ function makeLocomotiveScrollAdaptor(locomotiveScroll) {
     enable: () =>
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
         ? locomotiveScroll.start()
-        : (document.body.style.overflow = 'auto'),
+        : enable(),
     disable: () =>
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT
         ? locomotiveScroll.stop()
-        : (document.body.style.overflow = 'hidden'),
+        : disable(),
     scrollTo: (
       selectorOrNumber,
       durationInSeconds = SCROLL_TO_DURATION_IN_SECONDS
@@ -106,4 +106,26 @@ function makeASScrollAdaptor(asscroll) {
         ? asscroll.disable()
         : (document.body.style.overflow = 'hidden'),
   };
+}
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+const wheelOpt = { passive: false };
+let wheelEvent = 'wheel';
+
+if (typeof window !== 'undefined') {
+  wheelEvent =
+    'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+}
+
+function disable() {
+  window.addEventListener(wheelEvent, preventDefault, wheelOpt);
+  window.addEventListener('touchmove', preventDefault, wheelOpt);
+}
+
+function enable() {
+  window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+  window.removeEventListener('touchmove', preventDefault, wheelOpt);
 }
