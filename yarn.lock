@@ -5848,7 +5848,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt@npm:^3.4.2":
+"nuxt@npm:3.4.2":
   version: 3.4.2
   resolution: "nuxt@npm:3.4.2"
   dependencies:
@@ -5908,6 +5908,69 @@ __metadata:
     nuxi: bin/nuxt.mjs
     nuxt: bin/nuxt.mjs
   checksum: e6b62b8ce79a125de546e5c8d4876c2d1e3a3b81bcf4feb77d0126132e3475ff0e6e83549efbeb2aeca05c7e86aea59c81982209f96fe52b2edd0a9ad454ed47
+  languageName: node
+  linkType: hard
+
+"nuxt@patch:nuxt@npm%3A3.4.2#./.yarn/patches/nuxt-npm-3.4.2-88b2a74c69.patch::locator=root-workspace-0b6124%40workspace%3A.":
+  version: 3.4.2
+  resolution: "nuxt@patch:nuxt@npm%3A3.4.2#./.yarn/patches/nuxt-npm-3.4.2-88b2a74c69.patch::version=3.4.2&hash=885409&locator=root-workspace-0b6124%40workspace%3A."
+  dependencies:
+    "@nuxt/devalue": ^2.0.0
+    "@nuxt/kit": 3.4.2
+    "@nuxt/schema": 3.4.2
+    "@nuxt/telemetry": ^2.2.0
+    "@nuxt/ui-templates": ^1.1.1
+    "@nuxt/vite-builder": 3.4.2
+    "@unhead/ssr": ^1.1.26
+    "@unhead/vue": ^1.1.26
+    "@vue/shared": ^3.2.47
+    chokidar: ^3.5.3
+    cookie-es: ^0.5.0
+    defu: ^6.1.2
+    destr: ^1.2.2
+    devalue: ^4.3.0
+    escape-string-regexp: ^5.0.0
+    estree-walker: ^3.0.3
+    fs-extra: ^11.1.1
+    globby: ^13.1.4
+    h3: ^1.6.4
+    hookable: ^5.5.3
+    jiti: ^1.18.2
+    klona: ^2.0.6
+    knitwork: ^1.0.0
+    local-pkg: ^0.4.3
+    magic-string: ^0.30.0
+    mlly: ^1.2.0
+    nitropack: ^2.3.3
+    nuxi: 3.4.2
+    nypm: ^0.2.0
+    ofetch: ^1.0.1
+    ohash: ^1.1.1
+    pathe: ^1.1.0
+    perfect-debounce: ^0.1.3
+    prompts: ^2.4.2
+    scule: ^1.0.0
+    strip-literal: ^1.0.1
+    ufo: ^1.1.1
+    unctx: ^2.3.0
+    unenv: ^1.4.1
+    unimport: ^3.0.6
+    unplugin: ^1.3.1
+    untyped: ^1.3.2
+    vue: ^3.2.47
+    vue-bundle-renderer: ^1.0.3
+    vue-devtools-stub: ^0.1.0
+    vue-router: ^4.1.6
+  peerDependencies:
+    "@parcel/watcher": ^2.1.0
+    "@types/node": ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@parcel/watcher":
+      optional: true
+  bin:
+    nuxi: bin/nuxt.mjs
+    nuxt: bin/nuxt.mjs
+  checksum: 92a5a32c6f91fefd1db668ca830b1303ad8dd9de99245553f34b584ba681ca197e17a3e41a64ac02adad7073d01b95a2bc03fd861aee99280054d61b8c32301f
   languageName: node
   linkType: hard
 
