@@ -5986,10 +5986,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ogl@npm:^0.0.116":
-  version: 0.0.116
-  resolution: "ogl@npm:0.0.116"
-  checksum: b4068f96fe9e18421b6c4741711f75810569628b7cf94f840d07f62600f1f6d54e96418687ff81abe7002b7c47873459af33a9d6794bb32a46dcddc4ce3ba93b
+"ogl@npm:^0.0.117":
+  version: 0.0.117
+  resolution: "ogl@npm:0.0.117"
+  checksum: ea32dd28a886a080b1fc393d0b7c5f911664aa72f1ba9c6e40b8d1889d35e1fe8c9f5e2b3211e215dad3f7d4fa234132a4716d36a04aeb104591fedafe900352
   languageName: node
   linkType: hard
 
@@ -7070,7 +7070,7 @@ __metadata:
     mitt: ^3.0.0
     normalize.css: ^8.0.1
     nuxt: ^3.4.3
-    ogl: ^0.0.116
+    ogl: ^0.0.117
     prettier: ^2.8.8
     sass: 1.62.1
     sitemap: ^7.1.1
