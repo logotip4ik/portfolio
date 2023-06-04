@@ -81,7 +81,7 @@ export default defineNuxtConfig({
   ],
 
   build: {
-    transpile: ['gsap'],
+    transpile: ['gsap', 'std-env'],
   },
 
   modules: [
