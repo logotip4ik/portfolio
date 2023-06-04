@@ -19,12 +19,11 @@ function leavePageAnim(pageEl, done) {
     },
   });
 
-  tl.to(pageEl, { y: -300, duration: 1, ease: 'power2.out' }, 0);
+  tl.to(pageEl, { y: -500, duration: 1.5, ease: 'power4.out' }, 0);
   tl.fromTo(
     '.page-overlay__slide',
     {
       opacity: 1,
-      pointerEvents: 'all',
       yPercent: 75,
       scaleY: 0.5,
     },
@@ -69,10 +68,9 @@ function enterPageAnim(pageEl, done) {
     },
   });
 
-  tl.fromTo(
+  tl.from(
     pageEl,
-    { y: 300 },
-    { y: 0, duration: 1, ease: 'power3.out', clearProps: 'y' },
+    { y: 500, duration: 1, ease: 'power3.out', clearProps: true },
     0.2
   );
 
@@ -80,7 +78,6 @@ function enterPageAnim(pageEl, done) {
     '.page-overlay__slide',
     {
       opacity: 1,
-      pointerEvents: 'all',
       yPercent: 0,
       scaleY: 1,
     },
@@ -92,9 +89,10 @@ function enterPageAnim(pageEl, done) {
     },
     0.2
   );
-  tl.add(() => ScrollTrigger.refresh(), '<+0.385');
-  tl.add(() => $smoothScroll.enable(), '<+0.1');
-  tl.add(() => emitter.emit('overlay:hiding'), '<-0.325');
+
+  tl.add(() => emitter.emit('overlay:hiding'), '-=0.725');
+  tl.add(() => ScrollTrigger.refresh(), 0.5125);
+  tl.add(() => $smoothScroll.enable(), 0.75);
 
   tl.fromTo(
     '.page-overlay__slide__text',

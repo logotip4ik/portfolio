@@ -1,5 +1,6 @@
 <script setup>
 const route = useRoute();
+const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
 const { base } = useRuntimeConfig().public;
 
@@ -44,8 +45,13 @@ onMounted(() => {
   setVh();
   showFlagStripes();
 
-  if (route.name !== 'index')
-    overlay.value.enterPageAnim('div[page-content]', () => null);
+  if (route.name !== 'index') {
+    $smoothScroll.disable();
+
+    const pageEl = document.querySelector('div[page-content]');
+
+    overlay.value.enterPageAnim(pageEl, () => null);
+  }
 
   window.addEventListener('resize', setVh);
 
