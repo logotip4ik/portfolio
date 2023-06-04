@@ -90,6 +90,15 @@ export default defineNuxtConfig({
     '@logotip4ik_/nuxt-cloudflare-headers',
   ],
 
+  fontMetrics: {
+    fonts: [
+      {
+        family: 'e-Ukraine',
+        src: '/fonts/e-Ukraine-Thin.woff2',
+        root: 'assets',
+      },
+    ],
+  },
   vite: {
     plugins: [GLSL({ compress: !isDevelopment }), SVGLoader({ svgo: false })],
   },
