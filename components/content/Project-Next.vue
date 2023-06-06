@@ -7,12 +7,17 @@ const { data: surrounded } = await useAsyncData(
 
 const next = computed(() => surrounded.value[1] || surrounded.value[0]);
 
-useHead({
-  link: [
-    { rel: 'next', href: next.value._path },
-    { rel: 'prefetch', href: next.value.previewImage },
-  ],
-});
+if (process.server) {
+  useHead(
+    {
+      link: [
+        { rel: 'next', href: next.value._path },
+        { rel: 'prefetch', href: next.value.previewImage },
+      ],
+    },
+    { mode: 'server' }
+  );
+}
 </script>
 
 <template>

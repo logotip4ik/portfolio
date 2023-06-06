@@ -8,9 +8,15 @@ const { data: project } = await useAsyncData(
   () => queryContent(`project/${route.params.slug}`).findOne()
 );
 
-if (process.server) useHead({ htmlAttrs: { 'data-project-page': true } });
-
-useHead({ title: project.value.title });
+if (process.server) {
+  useHead(
+    {
+      htmlAttrs: { 'data-project-page': true },
+      title: project.value.title,
+    },
+    { mode: 'server' }
+  );
+}
 
 const projectPage = ref(null);
 

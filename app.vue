@@ -34,11 +34,11 @@ function showFlagStripes() {
 
 useHead({
   meta: [
-    { property: 'url', name: 'url', content: currentURL },
-    { property: 'og:url', name: 'og:url', content: currentURL },
-    { property: 'og:image', name: 'og:image', content: ogImageUrl },
+    { property: 'url', name: 'url', content: () => currentURL.value },
+    { property: 'og:url', name: 'og:url', content: () => currentURL.value },
+    { property: 'og:image', name: 'og:image', content: () => ogImageUrl.value },
   ],
-  link: [{ rel: 'canonical', href: currentURL }],
+  link: [{ rel: 'canonical', href: () => currentURL.value }],
 });
 
 onMounted(() => {
