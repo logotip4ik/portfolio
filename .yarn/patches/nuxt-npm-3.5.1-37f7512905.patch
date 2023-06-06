@@ -1,0 +1,26 @@
+diff --git a/dist/head/runtime/plugins/unhead.js b/dist/head/runtime/plugins/unhead.js
+index cd263df22045e1da8da5a6b83b5a8af3538f25de..4d57491fc97bae12bde97a969c175027617fb547 100644
+--- a/dist/head/runtime/plugins/unhead.js
++++ b/dist/head/runtime/plugins/unhead.js
+@@ -6,7 +6,7 @@ export default defineNuxtPlugin({
+   name: "nuxt:head",
+   setup(nuxtApp) {
+     const createHead = process.server ? createServerHead : createClientHead;
+-    const head = createHead();
++    const head = createHead({ experimentalHashHydration: true });
+     head.push(appHead);
+     nuxtApp.vueApp.use(head);
+     if (process.client) {
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 4e0ebc606fab6a670b32454d4e9c28e6e9045826..a8b9b080396913d2602df7dae5943c774f56a0e9 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -2374,7 +2374,7 @@ async function initNitro(nuxt) {
+     }
+   });
+   nitroConfig.srcDir = resolve(nuxt.options.rootDir, nuxt.options.srcDir, nitroConfig.srcDir);
+-  const head = createHeadCore();
++  const head = createHeadCore({ experimentalHashHydration: true });
+   head.push(nuxt.options.app.head);
+   const headChunk = await renderSSRHead(head);
+   nitroConfig.virtual["#head-static"] = `export default ${JSON.stringify(headChunk)}`;

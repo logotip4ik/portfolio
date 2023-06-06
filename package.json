@@ -29,5 +29,8 @@
     "sitemap": "^7.1.1",
     "split-type": "0.3.3"
   },
-  "packageManager": "yarn@3.5.1"
+  "packageManager": "yarn@3.5.1",
+  "resolutions": {
+    "nuxt@^3.5.3": "patch:nuxt@npm%3A3.5.1#./.yarn/patches/nuxt-npm-3.5.1-37f7512905.patch"
+  }
 }
