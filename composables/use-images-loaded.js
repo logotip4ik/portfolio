@@ -26,9 +26,11 @@ function waitForImages(wrapper) {
   return new Promise((resolve) => {
     let numberOfLoadedImages = 0;
 
-    const loadListener = () => {
+    const loadListener = (image) => {
       if (images.length == ++numberOfLoadedImages) {
         resolve();
+
+        image.removeEventListener('load', loadListener, true);
       }
     };
 
@@ -36,8 +38,8 @@ function waitForImages(wrapper) {
       // In my case lazy images could be just ignored, but if needed you can create
       // `new Image` with appropriate src and wait for load event on this image
       if (image.complete || image.getAttribute('loading') === 'lazy')
-        loadListener();
-      else image.addEventListener('load', loadListener);
+        loadListener(image);
+      else image.addEventListener('load', loadListener, true);
     });
   });
 }
