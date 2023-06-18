@@ -9,41 +9,46 @@ const SCROLL_TO_DURATION_IN_SECONDS = 1.5;
 // will need to completely rework scroll related animation
 // NOTE: reinitializing smooth scroll after each route transition
 // could result in better ux (locomotive scroll only?)
-export default defineNuxtPlugin(({ $ScrollTrigger }) => {
-  const scrollerEl = document.getElementById('__nuxt');
+export default defineNuxtPlugin({
+  parallel: true,
+  setup(nuxtApp) {
+    const $ScrollTrigger = nuxtApp.$ScrollTrigger;
 
-  const locomotiveScroll = new LocomotiveScroll({
-    el: scrollerEl,
-    smooth: true,
-  });
+    const scrollerEl = document.getElementById('__nuxt');
 
-  locomotiveScroll.on('scroll', $ScrollTrigger.update);
+    const locomotiveScroll = new LocomotiveScroll({
+      el: scrollerEl,
+      smooth: true,
+    });
 
-  $ScrollTrigger.scrollerProxy(locomotiveScroll.el, {
-    scrollTop(value) {
-      return arguments.length
-        ? locomotiveScroll.scrollTo(value, { disableLerp: true, duration: 0 })
-        : locomotiveScroll.scroll.instance.scroll.y;
-    },
-    getBoundingClientRect() {
-      return {
-        top: 0,
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-    },
-    pinType: locomotiveScroll.el.style.transform ? 'transform' : 'fixed',
-  });
+    locomotiveScroll.on('scroll', $ScrollTrigger.update);
 
-  $ScrollTrigger.addEventListener('refresh', () => locomotiveScroll.update());
+    $ScrollTrigger.scrollerProxy(locomotiveScroll.el, {
+      scrollTop(value) {
+        return arguments.length
+          ? locomotiveScroll.scrollTo(value, { disableLerp: true, duration: 0 })
+          : locomotiveScroll.scroll.instance.scroll.y;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: locomotiveScroll.el.style.transform ? 'transform' : 'fixed',
+    });
 
-  if (window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT)
-    $ScrollTrigger.defaults({ scroller: locomotiveScroll.el });
+    $ScrollTrigger.addEventListener('refresh', () => locomotiveScroll.update());
 
-  return {
-    provide: { smoothScroll: makeLocomotiveScrollAdaptor(locomotiveScroll) },
-  };
+    if (window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT)
+      $ScrollTrigger.defaults({ scroller: locomotiveScroll.el });
+
+    return {
+      provide: { smoothScroll: makeLocomotiveScrollAdaptor(locomotiveScroll) },
+    };
+  },
 });
 
 function makeLocomotiveScrollAdaptor(locomotiveScroll) {
