@@ -10,12 +10,12 @@
   },
   "devDependencies": {
     "@logotip4ik_/nuxt-cloudflare-headers": "^1.3.3",
-    "@nuxt/content": "^2.6.0",
+    "@nuxt/content": "^2.7.0",
     "@nuxtjs/fontaine": "^0.4.0",
     "cross-env": "^7.0.3",
     "nuxt": "^3.5.3",
     "prettier": "^2.8.8",
-    "sass": "1.63.3",
+    "sass": "1.63.4",
     "typescript": "^5.1.3",
     "vite-plugin-glsl": "1.1.2",
     "vite-svg-loader": "^4.0.0"
@@ -34,4 +34,3 @@
     "nuxt@^3.5.3": "patch:nuxt@npm%3A3.5.3#./.yarn/patches/nuxt-npm-3.5.1-37f7512905.patch"
   }
 }
-
