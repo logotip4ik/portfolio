@@ -18,6 +18,7 @@ const emitter = useEmitter();
 const prefersReducedMotion = useReducedMotion();
 
 let firstMove = false;
+const minifiedScale = 0.175;
 
 const pointer = ref(null);
 const pointerState = ref('');
@@ -37,7 +38,7 @@ function svgEnterAnimation(svgEl, done) {
       scale: 1,
       rotate: 0,
       duration: 0.25,
-      delay: 0.15,
+      delay: 0.1,
       ease: 'back.out',
       onComplete: () => done(),
     }
@@ -61,8 +62,8 @@ watch(pointerState, (val) => {
     paused: true,
   });
 
-  if (val) pointerTl.to(pointer.value, { scale: 6 });
-  else pointerTl.to(pointer.value, { scale: 1 });
+  if (val) pointerTl.to(pointer.value, { scale: 1 });
+  else pointerTl.to(pointer.value, { scale: minifiedScale });
 
   pointerTl.play();
 });
@@ -72,6 +73,7 @@ onMounted(() => {
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
     autoAlpha: 0,
+    scale: minifiedScale,
   });
 
   const isTouch = 'ontouchstart' in document.documentElement;
@@ -88,7 +90,7 @@ onMounted(() => {
   });
 
   const pointerScaleTl = gsap.to(pointer.value, {
-    scale: '-=1',
+    scale: '-=0.15',
     ease: 'back.out',
     duration: 0.25,
     paused: true,
@@ -145,7 +147,7 @@ onMounted(() => {
 
 <style lang="scss">
 .pointer {
-  --size: 0.85rem;
+  --size: min(calc(5rem + 1vw), 6rem);
 
   position: fixed;
   top: 0;
