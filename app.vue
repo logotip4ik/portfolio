@@ -1,4 +1,6 @@
 <script setup>
+import { on } from 'rad-event-listener';
+
 const route = useRoute();
 const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
@@ -53,15 +55,15 @@ onMounted(() => {
     overlay.value.enterPageAnim(pageEl, () => null);
   }
 
-  window.addEventListener('resize', setVh);
+  const unregister = on(window, 'resize', setVh);
 
   window.requestIdleCallback(() =>
     import('~/lib/greeting').then((module) => module.logGreeting())
   );
-});
 
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', setVh);
+  onBeforeUnmount(() => {
+    unregister();
+  });
 });
 </script>
 

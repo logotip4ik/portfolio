@@ -1,3 +1,5 @@
+import { on } from 'rad-event-listener';
+
 /** @returns {import('vue').Ref<boolean>} */
 export default (defaultValue = true) => {
   if (typeof window === 'undefined') return ref(defaultValue);
@@ -6,12 +8,15 @@ export default (defaultValue = true) => {
 
   const isDarkMode = ref(media.matches);
 
-  const onMediaChange = (media) => (isDarkMode.value = media.matches);
-
-  media.addEventListener('change', onMediaChange, true);
+  const unregister = on(
+    media,
+    'change',
+    (media) => (isDarkMode.value = media.matches),
+    true
+  );
 
   onBeforeUnmount(() => {
-    media.removeEventListener('change', onMediaChange);
+    unregister();
   });
 
   return isDarkMode;

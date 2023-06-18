@@ -1,12 +1,24 @@
-import useEmitter from '~/composables/use-emitter';
+import { on } from 'rad-event-listener';
+
 import { pointerModifiersWhitelist } from '~/lib/constants';
 
 export default defineNuxtPlugin({
   parallel: true,
   setup(nuxtApp) {
-    const emitter = useEmitter();
+    const unregisterMap = new WeakMap();
 
-    nuxtApp.vueApp.directive('hoverable', (el, { modifiers }) => {
+    nuxtApp.vueApp.directive('hoverable', {
+      mounted: (...args) => addEventListeners(...args),
+      updated: (...args) => addEventListeners(...args),
+
+      beforeUnmount(el) {
+        unregisterMap[el].forEach((func) => func());
+
+        unregisterMap[el] = [];
+      },
+    });
+
+    function addEventListeners(el, { modifiers }) {
       const modifier = Object.keys(modifiers)[0] || 'link';
 
       if (!pointerModifiersWhitelist.includes(modifier))
@@ -14,13 +26,21 @@ export default defineNuxtPlugin({
 
       el.style.pointer = 'none';
 
-      el.addEventListener('pointerenter', () => {
-        emitter.emit(`pointer:${modifier}:active`);
-      });
+      const emitter = useEmitter();
 
-      el.addEventListener('pointerleave', () => {
-        emitter.emit(`pointer:${modifier}:inactive`);
-      });
-    });
+      unregisterMap[el] ||= [];
+
+      unregisterMap[el].push(
+        on(el, 'pointerenter', () => {
+          emitter.emit(`pointer:${modifier}:active`);
+        })
+      );
+
+      unregisterMap[el].push(
+        on(el, 'pointerleave', () => {
+          emitter.emit(`pointer:${modifier}:inactive`);
+        })
+      );
+    }
   },
 });

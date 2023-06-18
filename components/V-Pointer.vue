@@ -1,4 +1,6 @@
 <script setup>
+import { on } from 'rad-event-listener';
+
 import LinkSVG from '~/assets/img/arrow-link.svg';
 import OuterLinkSVG from '~/assets/img/arrow-outer-link.svg';
 import MailLinkSVG from '~/assets/img/mail-link.svg';
@@ -96,23 +98,31 @@ onMounted(() => {
     paused: true,
   });
 
-  window.addEventListener('pointermove', ({ x, y }) => {
-    if (!firstMove)
-      gsap
-        .to(pointer.value, { autoAlpha: 1, clearProps: 'opacity' })
-        .then(() => (firstMove = true));
+  const cleanups = [];
 
-    toPointerX(x);
-    toPointerY(y);
-  });
+  cleanups.push(
+    on(window, 'pointermove', ({ x, y }) => {
+      if (!firstMove)
+        gsap
+          .to(pointer.value, { autoAlpha: 1, clearProps: 'opacity' })
+          .then(() => (firstMove = true));
 
-  window.addEventListener('pointerdown', () => {
-    if (pointerState.value !== '') pointerScaleTl.play();
-  });
+      toPointerX(x);
+      toPointerY(y);
+    })
+  );
 
-  window.addEventListener('pointerup', () => {
-    if (pointerState.value !== '') pointerScaleTl.reverse();
-  });
+  cleanups.push(
+    on(window, 'pointerdown', () => {
+      if (pointerState.value !== '') pointerScaleTl.play();
+    })
+  );
+
+  cleanups.push(
+    on(window, 'pointerup', () => {
+      if (pointerState.value !== '') pointerScaleTl.reverse();
+    })
+  );
 
   for (const modifier of pointerModifiersWhitelist) {
     emitter.on(`pointer:${modifier}:active`, () => {
@@ -125,6 +135,10 @@ onMounted(() => {
 
   emitter.on('pointer:inactive', () => {
     pointerState.value = '';
+  });
+
+  onBeforeUnmount(() => {
+    cleanups.forEach((func) => func());
   });
 });
 </script>

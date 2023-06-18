@@ -1,3 +1,6 @@
+import { on } from 'rad-event-listener';
+
+// TODO: refactor this composable to accept media
 /** @returns {import('vue').Ref<boolean>} */
 export default () => {
   if (typeof window === 'undefined') return ref(false);
@@ -6,12 +9,15 @@ export default () => {
 
   const prefersReducedMotion = ref(media.matches);
 
-  const onMediaChange = (media) => (prefersReducedMotion.value = media.matches);
-
-  media.addEventListener('change', onMediaChange, true);
+  const unregister = on(
+    media,
+    'change',
+    (media) => (prefersReducedMotion.value = media.matches),
+    true
+  );
 
   onBeforeUnmount(() => {
-    media.removeEventListener('change', onMediaChange);
+    unregister();
   });
 
   return prefersReducedMotion;
