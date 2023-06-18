@@ -6396,6 +6396,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rad-event-listener@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "rad-event-listener@npm:0.2.3"
+  checksum: a0c782ffbbc8efe08bb22ed4ebee1d4f3efc42647007b1f7e9a3220ca542a5db81e912549de66755e2bbae00cc2130bc5f7487bef4f1c5da045ed98da30c997d
+  languageName: node
+  linkType: hard
+
 "radix3@npm:^1.0.1":
   version: 1.0.1
   resolution: "radix3@npm:1.0.1"
@@ -6779,6 +6786,7 @@ __metadata:
     nuxt: ^3.5.3
     ogl: ^0.0.117
     prettier: ^2.8.8
+    rad-event-listener: ^0.2.3
     sass: 1.63.4
     sitemap: ^7.1.1
     split-type: 0.3.3
