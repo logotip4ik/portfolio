@@ -26,9 +26,13 @@ function waitForImages(wrapper) {
   return new Promise((resolve) => {
     let numberOfLoadedImages = 0;
 
-    const loadListener = (image) => {
+    const loadListener = (imageOrLoadEvent) => {
       if (images.length == ++numberOfLoadedImages) {
         resolve();
+
+        const image = imageOrLoadEvent.removeEventListener
+          ? imageOrLoadEvent
+          : imageOrLoadEvent.target;
 
         image.removeEventListener('load', loadListener, true);
       }
