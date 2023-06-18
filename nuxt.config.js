@@ -99,6 +99,7 @@ export default defineNuxtConfig({
       },
     ],
   },
+
   vite: {
     plugins: [GLSL({ compress: !isDevelopment }), SVGLoader({ svgo: false })],
   },
