@@ -84,6 +84,13 @@ export default defineNuxtConfig({
     transpile: ['gsap', 'std-env'],
   },
 
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      concurrency: 4,
+    },
+  },
+
   modules: [
     '@nuxt/content',
     '@nuxtjs/fontaine',
