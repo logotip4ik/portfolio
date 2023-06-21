@@ -12,13 +12,16 @@ const SCROLL_TO_DURATION_IN_SECONDS = 1.5;
 export default defineNuxtPlugin({
   parallel: true,
   setup(nuxtApp) {
+    // not server rendered stuff means error, since wea are prerendering everything
+    const hasError = !nuxtApp.payload.serverRendered;
+
     const $ScrollTrigger = nuxtApp.$ScrollTrigger;
 
     const scrollerEl = document.getElementById('__nuxt');
 
     const locomotiveScroll = new LocomotiveScroll({
       el: scrollerEl,
-      smooth: true,
+      smooth: !hasError,
     });
 
     locomotiveScroll.on('scroll', $ScrollTrigger.update);
