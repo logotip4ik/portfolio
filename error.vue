@@ -1,7 +1,13 @@
 <script setup>
-defineProps({ error: { type: Object, required: true } });
+const props = defineProps({ error: { type: Object, required: true } });
 
-const handleError = () => clearError({ redirect: '/' });
+useHead({
+  title: () => props.error.statusCode.toString(),
+});
+
+function handleError() {
+  clearError({ redirect: '/' });
+}
 </script>
 
 <template>
