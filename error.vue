@@ -6,10 +6,11 @@ const handleError = () => clearError({ redirect: '/' });
 
 <template>
   <main id="scroller" class="error-page">
-    <p class="error-page__message">
-      <template v-if="error.statusCode == 404">
-        Oops, it's not what are you searching for.
-      </template>
+    <p
+      class="error-page__message"
+      :class="{ 'error-page__message--404': error.statusCode === 404 }"
+    >
+      <template v-if="error.statusCode == 404">404</template>
       <template v-else>
         {{ error.message }}
       </template>
@@ -41,7 +42,21 @@ const handleError = () => clearError({ redirect: '/' });
     width: calc(100% - 2rem);
     max-width: 35ch;
 
-    margin-bottom: 1rem;
+    transition: background-size 0.5s, color 0.5s, text-shadow 0.5s;
+
+    &--404 {
+      font-family: 'e-Ukraine Head';
+      font-size: min(calc(30vw + 1rem), 31rem);
+      font-variant-numeric: oldstyle-nums;
+      font-weight: 100;
+      font-style: italic;
+
+      text-shadow: 0 0 2rem #ccc;
+
+      margin-block: max(-10vw, -9rem) 1rem;
+
+      opacity: 0.25;
+    }
   }
 
   &__home-link {
@@ -60,7 +75,7 @@ const handleError = () => clearError({ redirect: '/' });
     background-size: 100% 1px;
     background-position: 100% 100%;
 
-    transition: background-size 0.3s ease, color 0.3s ease;
+    transition: background-size 0.3s ease, color 0.4s ease;
 
     &:is(:hover, :focus-visible) {
       color: var(--surface-color);
