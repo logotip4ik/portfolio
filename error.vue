@@ -4,10 +4,6 @@ const props = defineProps({ error: { type: Object, required: true } });
 useHead({
   title: () => props.error.statusCode.toString(),
 });
-
-function handleError() {
-  clearError({ redirect: '/' });
-}
 </script>
 
 <template>
@@ -22,13 +18,7 @@ function handleError() {
       </template>
     </p>
 
-    <NuxtLink
-      href="/"
-      class="error-page__home-link"
-      @click.native.prevent="handleError"
-    >
-      Maybe to home ?
-    </NuxtLink>
+    <a href="/" class="error-page__home-link">Maybe to home ?</a>
   </main>
 </template>
 
@@ -51,15 +41,14 @@ function handleError() {
     transition: background-size 0.5s, color 0.5s, text-shadow 0.5s;
 
     &--404 {
-      font-family: 'e-Ukraine Head';
-      font-size: min(calc(30vw + 1rem), 31rem);
+      font-size: min(calc(32vw + 1rem), 31rem);
+      font-weight: 600;
       font-variant-numeric: oldstyle-nums;
-      font-weight: 100;
       font-style: italic;
 
       text-shadow: 0 0 2rem #ccc;
 
-      margin-block: max(-10vw, -9rem) 1rem;
+      margin-block: max(-10vw, -9rem) calc(1rem + 1vw);
 
       opacity: 0.25;
     }
