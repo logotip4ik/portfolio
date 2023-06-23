@@ -76,7 +76,7 @@ export default defineNuxtConfig({
   css: [
     'normalize.css/normalize.css',
     'locomotive-scroll/dist/locomotive-scroll.css',
-    '~/assets/fonts/styles.css',
+    '~/assets/styles/fonts.css',
     '~/assets/styles/global.css',
   ],
 
@@ -98,13 +98,7 @@ export default defineNuxtConfig({
   ],
 
   fontMetrics: {
-    fonts: [
-      {
-        family: 'e-Ukraine',
-        src: '/fonts/e-Ukraine-Thin.woff2',
-        root: 'assets',
-      },
-    ],
+    fonts: [{ family: 'e-Ukraine', src: '/fonts/e-Ukraine-Thin.woff2' }],
   },
 
   vite: {
