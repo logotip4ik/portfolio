@@ -57,8 +57,9 @@ onMounted(() => {
 
   const unregister = on(window, 'resize', setVh);
 
-  window.requestIdleCallback(() =>
-    import('~/lib/greeting').then((module) => module.logGreeting())
+  setTimeout(
+    () => import('~/lib/greeting').then((module) => module.logGreeting()),
+    250
   );
 
   onBeforeUnmount(() => {
