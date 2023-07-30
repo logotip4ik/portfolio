@@ -67,6 +67,12 @@ export default defineNuxtConfig({
     },
   },
 
+  imports: {
+    imports: [
+      { name: "on", from: 'rad-event-listener' }
+    ]
+  },
+  
   routeRules: {
     '/sitemap.xml': { prerender: true },
   },

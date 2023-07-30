@@ -1,5 +1,3 @@
-import { on } from 'rad-event-listener';
-
 import { pointerModifiersWhitelist } from '~/lib/constants';
 
 export default defineNuxtPlugin({

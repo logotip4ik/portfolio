@@ -1,6 +1,4 @@
 <script setup>
-import { on } from 'rad-event-listener';
-
 import LinkSVG from '~/assets/img/arrow-link.svg';
 import OuterLinkSVG from '~/assets/img/arrow-outer-link.svg';
 import MailLinkSVG from '~/assets/img/mail-link.svg';

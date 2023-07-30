@@ -1,5 +1,3 @@
-import { on } from 'rad-event-listener';
-
 /** @returns {import('vue').Ref<boolean>} */
 export default (defaultValue = true) => {
   if (typeof window === 'undefined') return ref(defaultValue);

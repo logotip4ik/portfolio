@@ -1,5 +1,3 @@
-import { on } from 'rad-event-listener';
-
 // TODO: refactor this composable to accept media
 /** @returns {import('vue').Ref<boolean>} */
 export default () => {

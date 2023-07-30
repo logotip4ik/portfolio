@@ -1,6 +1,4 @@
 <script setup>
-import { on } from 'rad-event-listener';
-
 const route = useRoute();
 const { $smoothScroll } = useNuxtApp();
 const { gsap } = useGsap();
