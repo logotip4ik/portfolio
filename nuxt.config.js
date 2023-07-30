@@ -102,7 +102,13 @@ export default defineNuxtConfig({
   ],
 
   fontMetrics: {
-    fonts: [{ family: 'e-Ukraine', src: '/fonts/e-Ukraine-Thin.woff2' }],
+    fonts: [
+      {
+        family: 'e-Ukraine',
+        src: '/fonts/e-Ukraine-Thin.woff2',
+        fallbacks: ['Arial'],
+      },
+    ],
   },
 
   vite: {
