@@ -31,13 +31,13 @@ export default defineNuxtPlugin({
       unregisterMap[el].push(
         on(el, 'pointerenter', () => {
           emitter.emit(`pointer:${modifier}:active`);
-        })
+        }),
       );
 
       unregisterMap[el].push(
         on(el, 'pointerleave', () => {
           emitter.emit(`pointer:${modifier}:inactive`);
-        })
+        }),
       );
     }
   },

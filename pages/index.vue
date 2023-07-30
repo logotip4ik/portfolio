@@ -1,6 +1,6 @@
 <script setup>
 const { data: projects } = await useAsyncData('prerender-projects', () =>
-  queryContent('project').only(['_path']).find()
+  queryContent('project').only(['_path']).find(),
 );
 
 if (process.server) {
@@ -44,7 +44,7 @@ onMounted(() => {
         end: 'bottom 55%',
         onEnter: () => (currentSection.value = key),
         onEnterBack: () => (currentSection.value = key),
-      })
+      }),
     );
   });
 

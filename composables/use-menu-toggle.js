@@ -1,5 +1,5 @@
 const isMenuShowing = shallowRef(false);
 
 export function useMenuToggle() {
-  return isMenuShowing
+  return isMenuShowing;
 }

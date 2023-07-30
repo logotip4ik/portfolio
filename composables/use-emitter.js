@@ -15,5 +15,5 @@ export function useEmitter() {
 
       emitter.on(eventName, handler);
     },
-  }
+  };
 }

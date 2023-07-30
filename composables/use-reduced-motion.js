@@ -10,7 +10,7 @@ export function useReducedMotion() {
     media,
     'change',
     (media) => (prefersReducedMotion.value = media.matches),
-    true
+    true,
   );
 
   onBeforeUnmount(() => {

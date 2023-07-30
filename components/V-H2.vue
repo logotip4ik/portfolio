@@ -36,7 +36,7 @@ onMounted(() => {
         start: 'top 75%',
         once: true,
       },
-    }
+    },
   );
 
   onBeforeUnmount(() => {

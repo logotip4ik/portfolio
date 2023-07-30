@@ -80,7 +80,7 @@ function makeLocomotiveScrollAdaptor(locomotiveScroll) {
         : disable(),
     scrollTo: (
       selectorOrNumber,
-      durationInSeconds = SCROLL_TO_DURATION_IN_SECONDS
+      durationInSeconds = SCROLL_TO_DURATION_IN_SECONDS,
     ) =>
       // prettier-ignore
       window.innerWidth >= LOCOMOTIVE_SCROLL_BREAK_POINT

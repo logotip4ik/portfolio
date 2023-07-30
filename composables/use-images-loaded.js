@@ -12,7 +12,7 @@ export function useImagesLoaded(refEl, callback) {
 
       waitForImages(el).then(callback);
     },
-    { immediate: true }
+    { immediate: true },
   );
 }
 

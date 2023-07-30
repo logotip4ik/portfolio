@@ -155,8 +155,8 @@ onMounted(() => {
           end: `${window.innerHeight}px 5%`,
           toggleActions: 'play none reverse none',
         },
-      }
-    )
+      },
+    ),
   );
 
   animations.push(
@@ -171,8 +171,8 @@ onMounted(() => {
           end: `${window.innerHeight / 3}px 90px`,
           toggleActions: 'play none reverse none',
         },
-      }
-    )
+      },
+    ),
   );
 
   onBeforeUnmount(() => {
@@ -222,12 +222,7 @@ onMounted(() => {
       <MenuIconSVG ref="navMenuButtonSVG" />
     </button>
 
-    <NuxtLink
-      v-else
-      v-hoverable.action
-      href="/"
-      class="nav__back-link"
-    >
+    <NuxtLink v-else v-hoverable.action href="/" class="nav__back-link">
       <ArrowLeft />
     </NuxtLink>
   </nav>

@@ -38,7 +38,10 @@ useHead({
     width: calc(100% - 2rem);
     max-width: 35ch;
 
-    transition: background-size 0.5s, color 0.5s, text-shadow 0.5s;
+    transition:
+      background-size 0.5s,
+      color 0.5s,
+      text-shadow 0.5s;
 
     &--404 {
       font-size: min(calc(32vw + 1rem), 31rem);
@@ -70,7 +73,9 @@ useHead({
     background-size: 100% 1px;
     background-position: 100% 100%;
 
-    transition: background-size 0.3s ease, color 0.4s ease;
+    transition:
+      background-size 0.3s ease,
+      color 0.4s ease;
 
     &:is(:hover, :focus-visible) {
       color: var(--surface-color);

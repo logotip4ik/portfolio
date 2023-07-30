@@ -1,6 +1,6 @@
 <script setup>
 const { data: projects } = await useAsyncData('projects', () =>
-  queryContent('project').sort({ createdAt: -1 }).find()
+  queryContent('project').sort({ createdAt: -1 }).find(),
 );
 </script>
 

@@ -26,8 +26,8 @@ onMounted(() => {
       gsap.fromTo(
         item,
         { x: window.innerWidth },
-        { x: -sumWidth, scrollTrigger }
-      )
+        { x: -sumWidth, scrollTrigger },
+      ),
     );
   });
 

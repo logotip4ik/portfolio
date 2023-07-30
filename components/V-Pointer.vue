@@ -41,7 +41,7 @@ function svgEnterAnimation(svgEl, done) {
       delay: 0.1,
       ease: 'back.out',
       onComplete: () => done(),
-    }
+    },
   );
 }
 
@@ -107,19 +107,19 @@ onMounted(() => {
 
       toPointerX(x);
       toPointerY(y);
-    })
+    }),
   );
 
   cleanups.push(
     on(window, 'pointerdown', () => {
       if (pointerState.value !== '') pointerScaleTl.play();
-    })
+    }),
   );
 
   cleanups.push(
     on(window, 'pointerup', () => {
       if (pointerState.value !== '') pointerScaleTl.reverse();
-    })
+    }),
   );
 
   for (const modifier of pointerModifiersWhitelist) {

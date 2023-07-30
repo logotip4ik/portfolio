@@ -20,13 +20,13 @@ function revealContent() {
     mainTl.fromTo(
       '.header__container__title__line__content',
       { opacity: 0 },
-      { opacity: 1, stagger: 0.175 }
+      { opacity: 1, stagger: 0.175 },
     );
   else
     mainTl.fromTo(
       '.header__container__title__line__content',
       { yPercent: 100, opacity: 1 },
-      { yPercent: 0, duration: 1.5, stagger: 0.175 }
+      { yPercent: 0, duration: 1.5, stagger: 0.175 },
     );
 
   mainTl.to(
@@ -35,7 +35,7 @@ function revealContent() {
       opacity: 1,
       stagger: { from: 'center', amount: 0.35 },
     },
-    '-=0.75'
+    '-=0.75',
   );
 
   mainTl.to('.scroll-down', { opacity: 1 }, '<+0.5');
@@ -44,7 +44,7 @@ function revealContent() {
     // breakpoint in navbar
     window.innerWidth < 768 ? '.nav__menu-button' : '.nav__list__item',
     { opacity: 1, stagger: 0.125 },
-    '-=0.75'
+    '-=0.75',
   );
 }
 

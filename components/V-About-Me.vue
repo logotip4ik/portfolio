@@ -2,7 +2,7 @@
 import SplitType from 'split-type';
 
 const { data: aboutMeText } = await useAsyncData('about-me-text', () =>
-  queryContent('about-me').findOne()
+  queryContent('about-me').findOne(),
 );
 
 const { $smoothScrollBreakPoint } = useNuxtApp();
@@ -29,7 +29,7 @@ onMounted(() => {
         end: 'bottom 85%',
         scrub: window.innerWidth >= $smoothScrollBreakPoint ? true : 0.5,
       },
-    }
+    },
   );
 
   onBeforeUnmount(() => {

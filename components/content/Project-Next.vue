@@ -2,7 +2,7 @@
 const route = useRoute();
 const { data: surrounded } = await useAsyncData(
   `surround-project-${route.params.slug}`,
-  () => queryContent('project').findSurround(route.fullPath)
+  () => queryContent('project').findSurround(route.fullPath),
 );
 
 const next = computed(() => surrounded.value[1] || surrounded.value[0]);
@@ -15,7 +15,7 @@ if (process.server) {
         { rel: 'prefetch', href: next.value.previewImage },
       ],
     },
-    { mode: 'server' }
+    { mode: 'server' },
   );
 }
 </script>

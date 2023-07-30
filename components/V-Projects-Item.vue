@@ -15,7 +15,7 @@ const props = defineProps({
 });
 
 const tagsString = computed(() =>
-  props.project.tags.reduce((str, val) => `${str}, ${val}`)
+  props.project.tags.reduce((str, val) => `${str}, ${val}`),
 );
 
 onMounted(() => {
@@ -41,7 +41,7 @@ onMounted(() => {
     revealAnim.fromTo(
       projectEl.value.children[0],
       { y: 100 },
-      { y: 0, ease: 'expo.out', duration: 1.25 }
+      { y: 0, ease: 'expo.out', duration: 1.25 },
     );
 
   if (prefersReducedMotion.value)
@@ -49,14 +49,14 @@ onMounted(() => {
       projectImage.value,
       { opacity: 0.025 },
       { opacity: 1 },
-      0
+      0,
     );
   else
     revealAnim.fromTo(
       projectImage.value,
       { scale: 0.925, transformOrigin: 'bottom center', opacity: 0.025 },
       { scale: 1, opacity: 1 },
-      0
+      0,
     );
 
   onBeforeUnmount(() => {
@@ -219,7 +219,9 @@ onMounted(() => {
     background-color: rgba($color: #030303, $alpha: 0.45);
     pointer-events: none;
 
-    transition: opacity 400ms, background-color 400ms;
+    transition:
+      opacity 400ms,
+      background-color 400ms;
 
     @media (prefers-color-scheme: light) {
       background-color: rgba($color: #f7f8f7, $alpha: 0.25);

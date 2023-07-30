@@ -30,7 +30,7 @@ function resize() {
 
   object.program.uniforms.resolution.value.set(
     window.innerWidth,
-    window.innerHeight
+    window.innerHeight,
   );
 
   object.updateMatrix();
@@ -50,10 +50,10 @@ function render() {
 function createBackground() {
   aspect = window.innerWidth / window.innerHeight;
 
-  const backgroundColor = pallet.color1
-  const clearColor = (isDarkMode.value ? backgroundColor.dark : backgroundColor.light).map(
-    (number) => number / 255
-  );
+  const backgroundColor = pallet.color1;
+  const clearColor = (
+    isDarkMode.value ? backgroundColor.dark : backgroundColor.light
+  ).map((number) => number / 255);
 
   renderer = new Renderer({
     canvas: canvas.value,
@@ -141,7 +141,7 @@ function createBackground() {
   onBeforeUnmount(() => {
     gsap.ticker.remove(callbackTicker);
 
-    observer.disconnect()
+    observer.disconnect();
   });
 }
 

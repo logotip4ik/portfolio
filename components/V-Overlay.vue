@@ -37,13 +37,13 @@ function leavePageAnim(pageEl, done) {
         $smoothScroll.scrollTo(0, 0);
       },
     },
-    0
+    0,
   );
   tl.fromTo(
     '.page-overlay__slide__text',
     { yPercent: 105, autoAlpha: 0.8 },
     { yPercent: 0, ease: 'expo.out' },
-    0.36
+    0.36,
   );
 }
 
@@ -71,7 +71,7 @@ function enterPageAnim(pageEl, done) {
   tl.from(
     pageEl,
     { y: 500, duration: 1, ease: 'power3.out', clearProps: true },
-    0.2
+    0.2,
   );
 
   tl.fromTo(
@@ -87,7 +87,7 @@ function enterPageAnim(pageEl, done) {
       stagger: { each: 0.085, from: 'end' },
       duration: 0.75,
     },
-    0.2
+    0.2,
   );
 
   tl.add(() => emitter.emit('overlay:hiding'), '-=0.725');
@@ -98,7 +98,7 @@ function enterPageAnim(pageEl, done) {
     '.page-overlay__slide__text',
     { yPercent: 0, autoAlpha: 0.8 },
     { yPercent: -125, ease: 'expo.out' },
-    0
+    0,
   );
 
   emitter.once('images:loaded', () => tl.play());

@@ -5,7 +5,7 @@ const emitter = useEmitter();
 
 const { data: project } = await useAsyncData(
   `project-${route.params.slug}`,
-  () => queryContent(`project/${route.params.slug}`).findOne()
+  () => queryContent(`project/${route.params.slug}`).findOne(),
 );
 
 if (process.server) {
@@ -14,7 +14,7 @@ if (process.server) {
       htmlAttrs: { 'data-project-page': true },
       title: project.value.title,
     },
-    { mode: 'server' }
+    { mode: 'server' },
   );
 }
 
@@ -24,7 +24,7 @@ const showBackButton = () =>
   gsap.fromTo(
     '.nav__back-link',
     { autoAlpha: 0 },
-    { autoAlpha: 1, delay: 0.7 }
+    { autoAlpha: 1, delay: 0.7 },
   );
 
 useImagesLoaded(projectPage, () => emitter.emit('images:loaded'));

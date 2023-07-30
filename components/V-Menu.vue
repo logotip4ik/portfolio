@@ -55,7 +55,7 @@ function showMenu() {
     return (prevAnimation = gsap.fromTo(
       menu.value,
       { autoAlpha: 0 },
-      { autoAlpha: 1 }
+      { autoAlpha: 1 },
     ));
 
   prevAnimation = gsap.timeline({
@@ -80,7 +80,7 @@ function showMenu() {
       rotateX: 0,
       opacity: 1,
       stagger: 0.05,
-    }
+    },
   );
   prevAnimation.fromTo(
     menu.value,
@@ -89,13 +89,13 @@ function showMenu() {
       backgroundColor: isDarkMode.value ? '#030303' : '#f7f7f7',
       duration: 0.2,
     },
-    '-=0.65'
+    '-=0.65',
   );
   prevAnimation.fromTo(
     menuBackItemLine.value,
     { transform: 'scaleX(0)', transformOrigin: 'left bottom' },
     { transform: 'scaleX(1)', stagger: 0.05 },
-    '<-0.2'
+    '<-0.2',
   );
   prevAnimation.fromTo(
     [...menuBackItemContentTitle.value, ...menuBackItemContentLinksItem.value],
@@ -105,7 +105,7 @@ function showMenu() {
       yPercent: 0,
       stagger: 0.05,
     },
-    '<-0.1'
+    '<-0.1',
   );
 }
 
@@ -242,7 +242,9 @@ watch(isShowingMenu, (bool) => {
         span {
           display: inline-block;
           transform-origin: left center;
-          transition: color 200ms, transform 200ms var(--ease-back);
+          transition:
+            color 200ms,
+            transform 200ms var(--ease-back);
         }
 
         &::after {

@@ -16,7 +16,7 @@ onMounted(() => {
   const resizeObserver = new ResizeObserver(() =>
     gsap.set(footerWrapper.value, {
       '--footer-wrapper-height': `${footer.value.clientHeight}px`,
-    })
+    }),
   );
 
   resizeObserver.observe(footer.value);
@@ -137,7 +137,9 @@ onMounted(() => {
 
     padding: 3rem clamp(1rem, 4vw, 5rem) 2rem;
     background: var(--black-color);
-    transition: color 400ms, background-color 400ms;
+    transition:
+      color 400ms,
+      background-color 400ms;
 
     & > *:nth-child(even) {
       justify-self: end;
@@ -268,7 +270,8 @@ onMounted(() => {
 
       opacity: 0.65;
 
-      transition: opacity 400ms var(--ease-back),
+      transition:
+        opacity 400ms var(--ease-back),
         transform 400ms var(--ease-back);
 
       @media (max-width: 700px) {

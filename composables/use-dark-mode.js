@@ -3,8 +3,7 @@
  * @returns {import('vue').Ref<boolean>}
  * */
 export function useDarkMode(defaultValue = true) {
-  if (typeof window === 'undefined')
-    return ref(defaultValue);
+  if (typeof window === 'undefined') return ref(defaultValue);
 
   const media = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -14,7 +13,7 @@ export function useDarkMode(defaultValue = true) {
     media,
     'change',
     (media) => (isDarkMode.value = media.matches),
-    true
+    true,
   );
 
   onBeforeUnmount(() => {

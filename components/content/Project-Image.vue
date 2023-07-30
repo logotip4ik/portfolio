@@ -14,7 +14,7 @@ const { gsap } = useGsap();
 if (process.server) {
   useHead(
     { link: [{ rel: 'preload', as: 'image', href: props.src }] },
-    { mode: 'server' }
+    { mode: 'server' },
   );
 }
 
@@ -37,7 +37,7 @@ onMounted(() => {
         end: 'bottom top',
         scrub: 0.1,
       },
-    }
+    },
   );
 
   onBeforeUnmount(() => {

@@ -8,12 +8,12 @@ const overlay = shallowRef({});
 
 const projectSlug = computed(() => route.params.slug ?? '');
 const currentURL = computed(() =>
-  projectSlug.value ? `${base}/project/${projectSlug.value}` : base
+  projectSlug.value ? `${base}/project/${projectSlug.value}` : base,
 );
 const ogImageUrl = computed(() =>
   projectSlug.value
     ? `${base}/img/${projectSlug.value}-logo.webp`
-    : `${base}/logo.png`
+    : `${base}/logo.png`,
 );
 
 function setVh() {
@@ -57,7 +57,7 @@ onMounted(() => {
 
   setTimeout(
     () => import('~/lib/greeting').then((module) => module.logGreeting()),
-    250
+    250,
   );
 
   onBeforeUnmount(() => {
