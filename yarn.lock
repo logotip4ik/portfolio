@@ -620,23 +620,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@logotip4ik_/defaults-deep@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@logotip4ik_/defaults-deep@npm:0.1.3"
-  checksum: ba2fd9638d2d634621e933536779382611bb8634ff6fa5f8c2249678defceae912ff9e551e6719c56413ba4fe8bad1125a3592f298345d73701d20d59827ed53
-  languageName: node
-  linkType: hard
-
-"@logotip4ik_/nuxt-cloudflare-headers@npm:^1.3.3":
-  version: 1.3.3
-  resolution: "@logotip4ik_/nuxt-cloudflare-headers@npm:1.3.3"
-  dependencies:
-    "@logotip4ik_/defaults-deep": ^0.1.3
-    "@nuxt/kit": ^3.0.0-rc.4
-  checksum: 6e475345e125f422807c515c15771b2f0c440751082bef02f1772d0ff4313d47a1342410fd475c71077380a408ecb4f88ff69a03f751c07fa201af67d8e1a597
-  languageName: node
-  linkType: hard
-
 "@mapbox/node-pre-gyp@npm:^1.0.5":
   version: 1.0.11
   resolution: "@mapbox/node-pre-gyp@npm:1.0.11"
@@ -752,7 +735,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/kit@npm:3.6.5, @nuxt/kit@npm:^3.0.0-rc.4, @nuxt/kit@npm:^3.6.0, @nuxt/kit@npm:^3.6.3, @nuxt/kit@npm:^3.6.5":
+"@nuxt/kit@npm:3.6.5, @nuxt/kit@npm:^3.6.0, @nuxt/kit@npm:^3.6.3, @nuxt/kit@npm:^3.6.5":
   version: 3.6.5
   resolution: "@nuxt/kit@npm:3.6.5"
   dependencies:
@@ -6597,7 +6580,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@logotip4ik_/nuxt-cloudflare-headers": ^1.3.3
     "@nuxt/content": ^2.7.2
     "@nuxtjs/fontaine": ^0.4.1
     gsap: ^3.12.2
