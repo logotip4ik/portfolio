@@ -1,6 +1,10 @@
-/** @returns {import('vue').Ref<boolean>} */
-export default (defaultValue = true) => {
-  if (typeof window === 'undefined') return ref(defaultValue);
+/**
+ * @param {boolean} [defaultValue=true] what will be returned on server side
+ * @returns {import('vue').Ref<boolean>}
+ * */
+export function useDarkMode(defaultValue = true) {
+  if (typeof window === 'undefined')
+    return ref(defaultValue);
 
   const media = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -18,4 +22,4 @@ export default (defaultValue = true) => {
   });
 
   return isDarkMode;
-};
+}

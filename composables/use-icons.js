@@ -1,1 +1,3 @@
-export default () => useState('svg-icons', () => ({}));
+export function useIcons() {
+  return useState('svg-icons', () => ({}));
+}

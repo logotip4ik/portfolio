@@ -1,1 +1,5 @@
-export default () => useState('current-section', () => 0);
+const section = shallowRef(0);
+
+export function useCurrentSection() {
+  return section;
+}

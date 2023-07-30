@@ -1,1 +1,5 @@
-export default () => useState('is-menu-showing', () => false);
+const isMenuShowing = shallowRef(false);
+
+export function useMenuToggle() {
+  return isMenuShowing
+}

@@ -2,9 +2,10 @@ import mitt from 'mitt';
 
 const emitter = mitt();
 
-export default () => {
+export function useEmitter() {
   return {
     ...emitter,
+
     once: (eventName, cb) => {
       const handler = () => {
         if (typeof cb === 'function') cb();
@@ -14,5 +15,5 @@ export default () => {
 
       emitter.on(eventName, handler);
     },
-  };
-};
+  }
+}

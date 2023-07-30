@@ -2,7 +2,7 @@
  * @param {import('vue').Ref<HTMLElement | null>} refEl
  * @param { () => any } callback
  */
-export default (refEl, callback) => {
+export function useImagesLoaded(refEl, callback) {
   const stop = watch(
     () => unref(refEl),
     (el) => {
@@ -14,7 +14,7 @@ export default (refEl, callback) => {
     },
     { immediate: true }
   );
-};
+}
 
 /**
  * @param {HTMLElement} wrapper

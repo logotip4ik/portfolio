@@ -1,6 +1,5 @@
-// TODO: refactor this composable to accept media
 /** @returns {import('vue').Ref<boolean>} */
-export default () => {
+export function useReducedMotion() {
   if (typeof window === 'undefined') return ref(false);
 
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -19,4 +18,4 @@ export default () => {
   });
 
   return prefersReducedMotion;
-};
+}
