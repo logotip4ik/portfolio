@@ -31,7 +31,7 @@
   },
   "packageManager": "yarn@3.6.0",
   "resolutions": {
-    "nuxt@^3.6.0": "patch:nuxt@npm%3A3.6.0#./.yarn/patches/nuxt-npm-3.5.1-37f7512905.patch",
+    "nuxt@^3.6.5": "patch:nuxt@npm%3A3.6.5#./.yarn/patches/nuxt-npm-3.5.1-37f7512905.patch",
     "vite": "^4.4.0-beta.0"
   }
 }
