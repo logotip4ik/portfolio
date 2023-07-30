@@ -73,6 +73,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/sitemap.xml': { prerender: true },
+    '/_headers': { prerender: true },
   },
 
   sourcemap: isDevelopment,
@@ -95,11 +96,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@nuxt/content',
-    '@nuxtjs/fontaine',
-    '@logotip4ik_/nuxt-cloudflare-headers',
-  ],
+  modules: ['@nuxt/content', '@nuxtjs/fontaine'],
 
   fontMetrics: {
     fonts: [
@@ -112,24 +109,6 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [GLSL({ compress: !isDevelopment }), SVGLoader({ svgo: false })],
-  },
-
-  cloudflareHeaders: {
-    '/*': [
-      { 'X-Robots-Tag': 'all' },
-      { 'X-Frame-Options': 'DENY' },
-      { 'X-Content-Type-Options': 'nosniff' },
-      { 'Referrer-Policy': 'no-referrer' },
-      { 'Permissions-Policy': 'document-domain=()' },
-      // no cache by default
-      { 'Cache-Control': 'private, must-revalidate, max-age=0' },
-    ],
-    // but long cache for assets with build hash
-    // week cache and 6 months stale while revalidate
-    '/_nuxt/*': {
-      'Cache-Control':
-        'public, immutable, max-age=604800, stale-while-revalidate=16070400',
-    },
+    plugins: [SVGLoader({ svgo: false }), GLSL({ compress: !isDevelopment })],
   },
 });
